@@ -168,27 +168,23 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
             }
           </Geographies>
 
-          {/* Country name + score labels — only at zoom ≥ 2 */}
+          {/* Country name labels — only at zoom ≥ 2 */}
           {zoom >= 2 &&
             Object.entries(countryLabelCoords).map(([iso2, coords]) => {
               const r = scoreByAlpha2.get(iso2);
               const fontSize = 10 / zoom;
-              const scoreSize = 9 / zoom;
-              // Choose fill based on country color brightness
-              const fill = (() => {
-                if (!r) return "rgba(255,255,255,0.55)";
-                const s = r.finalScore;
-                if (s >= 50) return "rgba(0,0,0,0.75)";
-                return "rgba(255,255,255,0.75)";
-              })();
+              const fill = r
+                ? r.finalScore >= 50
+                  ? "rgba(0,0,0,0.75)"
+                  : "rgba(255,255,255,0.75)"
+                : "rgba(255,255,255,0.45)";
               const name = r?.country.name ?? iso2;
-              // Abbreviate long names
               const displayName = name.length > 14 ? name.split(" ")[0] : name;
               return (
                 <Marker key={iso2} coordinates={coords}>
                   <text
                     textAnchor="middle"
-                    dy="-0.2em"
+                    dy="0.35em"
                     style={{
                       fontSize,
                       fontWeight: 600,
@@ -200,22 +196,6 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
                   >
                     {displayName}
                   </text>
-                  {r && (
-                    <text
-                      textAnchor="middle"
-                      dy={`${fontSize * 1.4}px`}
-                      style={{
-                        fontSize: scoreSize,
-                        fill,
-                        opacity: 0.8,
-                        pointerEvents: "none",
-                        userSelect: "none",
-                        fontFamily: "system-ui, sans-serif",
-                      }}
-                    >
-                      {r.finalScore.toFixed(1)}
-                    </text>
-                  )}
                 </Marker>
               );
             })}

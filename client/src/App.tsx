@@ -39,6 +39,7 @@ export default function App() {
   const [region, setRegion] = useState("");
   const [view, setView] = useState<"list" | "map">("list");
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
+  const [showWeights, setShowWeights] = useState(false);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
@@ -107,6 +108,23 @@ export default function App() {
             </button>
           ))}
         </div>
+
+        {/* Weights toggle — only in map view */}
+        {view === "map" && (
+          <button
+            onClick={() => setShowWeights((p) => !p)}
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl border text-sm font-medium transition-colors ${
+              showWeights
+                ? "bg-sky-600 border-sky-500 text-white"
+                : "bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200"
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+            Parameters
+          </button>
+        )}
         <input
           type="search"
           placeholder="Search countries..."
@@ -129,7 +147,18 @@ export default function App() {
       </div>
 
       {view === "map" ? (
-        <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
+        <div className={`grid gap-6 ${
+          showWeights ? "grid-cols-1 lg:grid-cols-[300px_1fr]" : "grid-cols-1"
+        }`}>
+          {showWeights && (
+            <WeightPanel
+              weights={weights}
+              onChange={handleWeightChange}
+              onReset={handleReset}
+            />
+          )}
+          <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
+        </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6">
           <WeightPanel
