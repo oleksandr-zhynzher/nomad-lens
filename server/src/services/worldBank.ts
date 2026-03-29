@@ -16,6 +16,13 @@ export const WB_INDICATORS = {
   pm25: 'EN.ATM.PM25.MC.M3',
   internetUsers: 'IT.NET.USER.ZS',
   electricityAccess: 'EG.ELC.ACCS.ZS',
+  // ── Worldwide Governance Indicators (WGI) ─────────────────────────────────
+  controlOfCorruption: 'CC.EST',
+  ruleOfLaw: 'RL.EST',
+  politicalStability: 'PV.EST',
+  govEffectiveness: 'GE.EST',
+  regulatoryQuality: 'RQ.EST',
+  voiceAccountability: 'VA.EST',
 } as const;
 
 type IndicatorCode = (typeof WB_INDICATORS)[keyof typeof WB_INDICATORS];

@@ -23,7 +23,8 @@ export type CategoryKey =
   | "safety"
   | "infrastructure"
   | "happiness"
-  | "humanDevelopment";
+  | "humanDevelopment"
+  | "governance";
 
 // ─── Country ──────────────────────────────────────────────────────────────────
 
@@ -67,6 +68,14 @@ export interface CrimeEntry {
   code: string;
   name: string;
   homicideRate: number; // per 100,000 population
+  year: number;
+}
+
+export interface CpiEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  score: number; // 0-100, higher = less corrupt
+  rank: number;
   year: number;
 }
 

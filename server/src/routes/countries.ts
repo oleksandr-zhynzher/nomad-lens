@@ -191,6 +191,36 @@ countriesRouter.get('/', async (_req, res, next) => {
         },
       };
 
+      // ── Governance ─────────────────────────────────────────────────────────
+      const cpi = localData.getCpi(iso2);
+      const corruption = wb?.[WB_INDICATORS.controlOfCorruption];
+      const ruleLaw = wb?.[WB_INDICATORS.ruleOfLaw];
+      const polStab = wb?.[WB_INDICATORS.politicalStability];
+      const govEff = wb?.[WB_INDICATORS.govEffectiveness];
+      const regQual = wb?.[WB_INDICATORS.regulatoryQuality];
+      const voiceAcc = wb?.[WB_INDICATORS.voiceAccountability];
+
+      const governance: CategoryScore = {
+        value: average([
+          minMax(corruption?.value ?? null, -2.5, 2.5),
+          minMax(ruleLaw?.value ?? null, -2.5, 2.5),
+          minMax(polStab?.value ?? null, -2.5, 2.5),
+          minMax(govEff?.value ?? null, -2.5, 2.5),
+          minMax(regQual?.value ?? null, -2.5, 2.5),
+          minMax(voiceAcc?.value ?? null, -2.5, 2.5),
+          minMax(cpi?.score ?? null, 0, 100),
+        ]),
+        indicators: {
+          ...(corruption?.value != null ? { controlOfCorruption: ind(corruption.value, 'WGI', corruption.year) } : {}),
+          ...(ruleLaw?.value != null ? { ruleOfLaw: ind(ruleLaw.value, 'WGI', ruleLaw.year) } : {}),
+          ...(polStab?.value != null ? { politicalStability: ind(polStab.value, 'WGI', polStab.year) } : {}),
+          ...(govEff?.value != null ? { govEffectiveness: ind(govEff.value, 'WGI', govEff.year) } : {}),
+          ...(regQual?.value != null ? { regulatoryQuality: ind(regQual.value, 'WGI', regQual.year) } : {}),
+          ...(voiceAcc?.value != null ? { voiceAccountability: ind(voiceAcc.value, 'WGI', voiceAcc.year) } : {}),
+          ...(cpi ? { cpiScore: ind(cpi.score, 'score', cpi.year) } : {}),
+        },
+      };
+
       // Drop countries that have fewer than 3 non-null category scores
       const scores = {
         economy,
@@ -202,6 +232,7 @@ countriesRouter.get('/', async (_req, res, next) => {
         infrastructure,
         happiness,
         humanDevelopment,
+        governance,
       };
       const nonNull = Object.values(scores).filter((s) => s.value !== null).length;
       if (nonNull < 3) continue;
