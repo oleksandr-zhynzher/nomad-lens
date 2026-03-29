@@ -6,9 +6,12 @@ import {
   ZoomableGroup,
   Sphere,
   Graticule,
+  Marker,
 } from "react-simple-maps";
 import type { RankedCountry } from "../utils/types";
 import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
+import { countryLabelCoords } from "../utils/countryLabelCoords";
+import { CountryDetailPanel } from "./CountryDetailPanel";
 
 const GEO_URL =
   "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
@@ -29,6 +32,7 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState<[number, number]>([0, 20]);
+  const [selectedCode, setSelectedCode] = useState<string | null>(null);
 
   // Build alpha2 → ranked country map for fast lookup
   const scoreByAlpha2: Map<string, RankedCountry> = new Map(
@@ -68,9 +72,12 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
 
   function handleClick(geo: { id?: unknown; properties: Record<string, unknown> }) {
     const alpha2 = geoToAlpha2(geo);
-    const r = scoreByAlpha2.get(alpha2);
-    if (r) onCountryClick(r.country.code);
+    if (!alpha2) return;
+    setHover(null);
+    setSelectedCode(alpha2);
   }
+
+  const selectedCountry = selectedCode ? (scoreByAlpha2.get(selectedCode) ?? null) : null;
 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
@@ -139,15 +146,16 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
             {({ geographies }) =>
               geographies.map((geo) => {
                 const alpha2 = geoToAlpha2(geo);
+                const isSelected = alpha2 === selectedCode;
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
                     fill={fillColour(alpha2)}
                     stroke="#0f172a"
-                    strokeWidth={0.4}
+                    strokeWidth={isSelected ? 0 : 0.4}
                     style={{
-                      default: { outline: "none" },
+                      default: { outline: isSelected ? "2px solid #38bdf8" : "none" },
                       hover: { outline: "none", filter: "brightness(1.25)", cursor: "pointer" },
                       pressed: { outline: "none" },
                     }}
@@ -159,6 +167,58 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
               })
             }
           </Geographies>
+
+          {/* Country name + score labels — only at zoom ≥ 2 */}
+          {zoom >= 2 &&
+            Object.entries(countryLabelCoords).map(([iso2, coords]) => {
+              const r = scoreByAlpha2.get(iso2);
+              const fontSize = 10 / zoom;
+              const scoreSize = 9 / zoom;
+              // Choose fill based on country color brightness
+              const fill = (() => {
+                if (!r) return "rgba(255,255,255,0.55)";
+                const s = r.finalScore;
+                if (s >= 50) return "rgba(0,0,0,0.75)";
+                return "rgba(255,255,255,0.75)";
+              })();
+              const name = r?.country.name ?? iso2;
+              // Abbreviate long names
+              const displayName = name.length > 14 ? name.split(" ")[0] : name;
+              return (
+                <Marker key={iso2} coordinates={coords}>
+                  <text
+                    textAnchor="middle"
+                    dy="-0.2em"
+                    style={{
+                      fontSize,
+                      fontWeight: 600,
+                      fill,
+                      pointerEvents: "none",
+                      userSelect: "none",
+                      fontFamily: "system-ui, sans-serif",
+                    }}
+                  >
+                    {displayName}
+                  </text>
+                  {r && (
+                    <text
+                      textAnchor="middle"
+                      dy={`${fontSize * 1.4}px`}
+                      style={{
+                        fontSize: scoreSize,
+                        fill,
+                        opacity: 0.8,
+                        pointerEvents: "none",
+                        userSelect: "none",
+                        fontFamily: "system-ui, sans-serif",
+                      }}
+                    >
+                      {r.finalScore.toFixed(1)}
+                    </text>
+                  )}
+                </Marker>
+              );
+            })}
         </ZoomableGroup>
       </ComposableMap>
 
@@ -182,8 +242,17 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
 
       {/* Ranked count */}
       <p className="text-xs text-slate-600 text-right mt-1 pr-1">
-        {ranked.length} countries scored · click a country to find it in the list
+        {ranked.length} countries scored · click a country for details
       </p>
+
+      {/* Country detail panel */}
+      {selectedCountry && (
+        <CountryDetailPanel
+          country={selectedCountry}
+          onClose={() => setSelectedCode(null)}
+          onViewInList={() => onCountryClick(selectedCountry.country.code)}
+        />
+      )}
     </div>
   );
 }

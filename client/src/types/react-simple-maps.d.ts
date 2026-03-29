@@ -55,4 +55,11 @@ declare module "react-simple-maps" {
 
   export function Sphere(props: { id?: string; fill?: string; stroke?: string; strokeWidth?: number }): JSX.Element;
   export function Graticule(props: { fill?: string; stroke?: string; strokeWidth?: number }): JSX.Element;
+
+  export interface MarkerProps {
+    coordinates: [number, number];
+    children?: ReactNode;
+    className?: string;
+  }
+  export function Marker(props: MarkerProps): JSX.Element;
 }
