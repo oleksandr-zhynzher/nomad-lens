@@ -201,6 +201,16 @@ countriesRouter.get('/', async (_req, res, next) => {
         },
       };
 
+      // ── English Proficiency ─────────────────────────────────────────────────
+      const epiEntry = localData.getEpi(iso2);
+
+      const englishProficiency: CategoryScore = {
+        value: minMax(epiEntry?.score ?? null, 390, 624),
+        indicators: {
+          ...(epiEntry ? { epiScore: ind(epiEntry.score, 'score', epiEntry.year) } : {}),
+        },
+      };
+
       // ── Governance ─────────────────────────────────────────────────────────
       const cpi = localData.getCpi(iso2);
       const corruption = wb?.[WB_INDICATORS.controlOfCorruption];
@@ -244,6 +254,7 @@ countriesRouter.get('/', async (_req, res, next) => {
         happiness,
         humanDevelopment,
         governance,
+        englishProficiency,
       };
       const nonNull = Object.values(scores).filter((s) => s.value !== null).length;
       if (nonNull < 3) continue;

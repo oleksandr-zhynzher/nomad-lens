@@ -25,7 +25,8 @@ export type CategoryKey =
   | "infrastructure"
   | "happiness"
   | "humanDevelopment"
-  | "governance";
+  | "governance"
+  | "englishProficiency";
 
 // ─── Country ──────────────────────────────────────────────────────────────────
 
@@ -76,6 +77,14 @@ export interface CpiEntry {
   code: string; // ISO alpha-2
   name: string;
   score: number; // 0-100, higher = less corrupt
+  rank: number;
+  year: number;
+}
+
+export interface EpiEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  score: number; // 200-800, higher = better proficiency
   rank: number;
   year: number;
 }
