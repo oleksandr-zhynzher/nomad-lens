@@ -128,8 +128,6 @@ export default function App() {
         </select>
       </div>
 
-      </div>
-
       {view === "map" ? (
         <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
       ) : (
