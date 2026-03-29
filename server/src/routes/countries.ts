@@ -179,15 +179,18 @@ countriesRouter.get('/', async (_req, res, next) => {
       // ── Infrastructure ─────────────────────────────────────────────────────
       const internet = wb?.[WB_INDICATORS.internetUsers];
       const elec = wb?.[WB_INDICATORS.electricityAccess];
+      const bb = wb?.[WB_INDICATORS.broadband];
 
       const infrastructure: CategoryScore = {
         value: average([
           minMax(internet?.value ?? null, 0, 100),
           minMax(elec?.value ?? null, 0, 100),
+          minMax(bb?.value ?? null, 0, 50),
         ]),
         indicators: {
           ...(internet?.value != null ? { internetUsers: ind(internet.value, '%', internet.year) } : {}),
           ...(elec?.value != null ? { electricityAccess: ind(elec.value, '%', elec.year) } : {}),
+          ...(bb?.value != null ? { broadband: ind(bb.value, 'subs/100', bb.year) } : {}),
         },
       };
 

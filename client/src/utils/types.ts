@@ -70,7 +70,7 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   environment: "Air pollution (PM2.5), CO₂ emissions per capita",
   climate: "Average temperature & precipitation comfort range",
   safety: "Homicide rate, global peace index",
-  infrastructure: "Internet penetration, electricity access",
+  infrastructure: "Internet penetration, electricity access, fixed broadband density",
   happiness: "World Happiness Report ladder score",
   humanDevelopment: "UNDP Human Development Index (HDI)",
   governance: "Corruption control, rule of law, political stability, government effectiveness",
