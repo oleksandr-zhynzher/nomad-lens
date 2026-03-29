@@ -159,9 +159,9 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
                       hover: { outline: "none", filter: "brightness(1.25)", cursor: "pointer" },
                       pressed: { outline: "none" },
                     }}
-                    onMouseEnter={(g: { id?: unknown; properties: Record<string, unknown> }, e: React.MouseEvent) => handleMouseEnter(g, e)}
+                    onMouseEnter={(e: React.MouseEvent) => handleMouseEnter(geo, e)}
                     onMouseLeave={() => handleMouseLeave()}
-                    onClick={(g: { id?: unknown; properties: Record<string, unknown> }) => handleClick(g)}
+                    onClick={() => handleClick(geo)}
                   />
                 );
               })

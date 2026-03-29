@@ -46,10 +46,11 @@ declare module "react-simple-maps" {
     fill?: string;
     stroke?: string;
     strokeWidth?: number;
-    onClick?: (geo: Geography, e: React.MouseEvent) => void;
-    onMouseEnter?: (geo: Geography, e: React.MouseEvent) => void;
-    onMouseLeave?: (geo: Geography, e: React.MouseEvent) => void;
+    onClick?: (e: React.MouseEvent<Element>) => void;
+    onMouseEnter?: (e: React.MouseEvent<Element>) => void;
+    onMouseLeave?: (e: React.MouseEvent<Element>) => void;
     className?: string;
+    [key: string]: unknown;
   }
   export function Geography(props: GeographyProps): JSX.Element;
 
