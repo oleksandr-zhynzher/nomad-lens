@@ -77,6 +77,16 @@ countriesRouter.get('/', async (_req, res, next) => {
         },
       };
 
+      // ── Affordability ──────────────────────────────────────────────────────
+      const gdpPpp = wb?.[WB_INDICATORS.gdpPerCapitaPPP];
+
+      const affordability: CategoryScore = {
+        value: invertMinMax(gdpPpp?.value ?? null, 1_000, 100_000),
+        indicators: {
+          ...(gdpPpp?.value != null ? { gdpPerCapitaPPP: ind(gdpPpp.value, 'PPP $', gdpPpp.year) } : {}),
+        },
+      };
+
       // ── Healthcare ─────────────────────────────────────────────────────────
       const beds = wb?.[WB_INDICATORS.hospitalBeds];
       const phys = wb?.[WB_INDICATORS.physicians];
@@ -224,6 +234,7 @@ countriesRouter.get('/', async (_req, res, next) => {
       // Drop countries that have fewer than 3 non-null category scores
       const scores = {
         economy,
+        affordability,
         healthcare,
         education,
         environment,

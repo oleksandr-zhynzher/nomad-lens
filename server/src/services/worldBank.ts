@@ -16,6 +16,7 @@ export const WB_INDICATORS = {
   pm25: 'EN.ATM.PM25.MC.M3',
   internetUsers: 'IT.NET.USER.ZS',
   electricityAccess: 'EG.ELC.ACCS.ZS',
+  gdpPerCapitaPPP: 'NY.GDP.PCAP.PP.CD',
   // ── Worldwide Governance Indicators (WGI) ─────────────────────────────────
   controlOfCorruption: 'CC.EST',
   ruleOfLaw: 'RL.EST',
