@@ -8,7 +8,7 @@ import {
   Graticule,
 } from "react-simple-maps";
 import type { RankedCountry } from "../utils/types";
-import { iso2to3 } from "../utils/iso2to3";
+import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
 
 const GEO_URL =
   "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
@@ -30,16 +30,18 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState<[number, number]>([0, 20]);
 
-  // Build iso3 → ranked country map for fast lookup
-  const scoreByIso3: Map<string, RankedCountry> = new Map(
-    ranked.map((r) => {
-      const iso3 = iso2to3[r.country.code];
-      return [iso3, r];
-    }),
+  // Build alpha2 → ranked country map for fast lookup
+  const scoreByAlpha2: Map<string, RankedCountry> = new Map(
+    ranked.map((r) => [r.country.code, r]),
   );
 
-  function fillColour(iso3: string): string {
-    const r = scoreByIso3.get(iso3);
+  function geoToAlpha2(geo: { id?: unknown; properties: Record<string, unknown> }): string {
+    const numeric = String(geo.id ?? "").padStart(3, "0");
+    return isoNumericToAlpha2[numeric] ?? "";
+  }
+
+  function fillColour(alpha2: string): string {
+    const r = scoreByAlpha2.get(alpha2);
     if (!r) return "#334155"; // slate-700, no data
     const s = r.finalScore;
     if (s >= 75) return "#4ade80"; // green-400
@@ -49,10 +51,10 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
     return "#f87171"; // red-400
   }
 
-  function handleMouseEnter(geo: { properties: Record<string, unknown> }, e: React.MouseEvent) {
-    const iso3 = String(geo.properties["a3"] ?? geo.properties["ADM0_A3_IS"] ?? "");
-    const r = scoreByIso3.get(iso3);
-    const name = String(geo.properties["name"] ?? iso3);
+  function handleMouseEnter(geo: { id?: unknown; properties: Record<string, unknown> }, e: React.MouseEvent) {
+    const alpha2 = geoToAlpha2(geo);
+    const r = scoreByAlpha2.get(alpha2);
+    const name = String(geo.properties["name"] ?? alpha2);
     setHover({ name, score: r?.finalScore ?? null, x: e.clientX, y: e.clientY });
   }
 
@@ -64,10 +66,9 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
     setHover(null);
   }
 
-  function handleClick(geo: { properties: Record<string, unknown> }) {
-    const iso3 = String(geo.properties["a3"] ?? geo.properties["ADM0_A3_IS"] ?? "");
-    // Find iso2 from the scoreByIso3 map
-    const r = scoreByIso3.get(iso3);
+  function handleClick(geo: { id?: unknown; properties: Record<string, unknown> }) {
+    const alpha2 = geoToAlpha2(geo);
+    const r = scoreByAlpha2.get(alpha2);
     if (r) onCountryClick(r.country.code);
   }
 
@@ -137,14 +138,12 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
           <Geographies geography={GEO_URL}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                const iso3 = String(
-                  geo.properties["a3"] ?? geo.properties["ADM0_A3_IS"] ?? ""
-                );
+                const alpha2 = geoToAlpha2(geo);
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={fillColour(iso3)}
+                    fill={fillColour(alpha2)}
                     stroke="#0f172a"
                     strokeWidth={0.4}
                     style={{
@@ -152,9 +151,9 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
                       hover: { outline: "none", filter: "brightness(1.25)", cursor: "pointer" },
                       pressed: { outline: "none" },
                     }}
-                    onMouseEnter={(g: { properties: Record<string, unknown> }, e: React.MouseEvent) => handleMouseEnter(g, e)}
+                    onMouseEnter={(g: { id?: unknown; properties: Record<string, unknown> }, e: React.MouseEvent) => handleMouseEnter(g, e)}
                     onMouseLeave={() => handleMouseLeave()}
-                    onClick={(g: { properties: Record<string, unknown> }) => handleClick(g)}
+                    onClick={(g: { id?: unknown; properties: Record<string, unknown> }) => handleClick(g)}
                   />
                 );
               })
