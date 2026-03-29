@@ -6,11 +6,9 @@ import {
   ZoomableGroup,
   Sphere,
   Graticule,
-  Marker,
 } from "react-simple-maps";
 import type { RankedCountry } from "../utils/types";
 import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
-import { countryLabelCoords } from "../utils/countryLabelCoords";
 import { CountryDetailPanel } from "./CountryDetailPanel";
 
 const GEO_URL =
@@ -152,10 +150,10 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
                     key={geo.rsmKey}
                     geography={geo}
                     fill={fillColour(alpha2)}
-                    stroke="#0f172a"
-                    strokeWidth={isSelected ? 0 : 0.4}
+                    stroke={isSelected ? "#38bdf8" : "#0f172a"}
+                    strokeWidth={isSelected ? 1.5 / zoom : 0.4}
                     style={{
-                      default: { outline: isSelected ? "2px solid #38bdf8" : "none" },
+                      default: { outline: "none" },
                       hover: { outline: "none", filter: "brightness(1.25)", cursor: "pointer" },
                       pressed: { outline: "none" },
                     }}
@@ -168,37 +166,6 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
             }
           </Geographies>
 
-          {/* Country name labels — only at zoom ≥ 2 */}
-          {zoom >= 2 &&
-            Object.entries(countryLabelCoords).map(([iso2, coords]) => {
-              const r = scoreByAlpha2.get(iso2);
-              const fontSize = 10 / zoom;
-              const fill = r
-                ? r.finalScore >= 50
-                  ? "rgba(0,0,0,0.75)"
-                  : "rgba(255,255,255,0.75)"
-                : "rgba(255,255,255,0.45)";
-              const name = r?.country.name ?? iso2;
-              const displayName = name.length > 14 ? name.split(" ")[0] : name;
-              return (
-                <Marker key={iso2} coordinates={coords}>
-                  <text
-                    textAnchor="middle"
-                    dy="0.35em"
-                    style={{
-                      fontSize,
-                      fontWeight: 600,
-                      fill,
-                      pointerEvents: "none",
-                      userSelect: "none",
-                      fontFamily: "system-ui, sans-serif",
-                    }}
-                  >
-                    {displayName}
-                  </text>
-                </Marker>
-              );
-            })}
         </ZoomableGroup>
       </ComposableMap>
 
