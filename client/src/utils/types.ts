@@ -23,7 +23,8 @@ export type CategoryKey =
   | "safety"
   | "infrastructure"
   | "happiness"
-  | "humanDevelopment";
+  | "humanDevelopment"
+  | "governance";
 
 export const CATEGORY_KEYS: CategoryKey[] = [
   "economy",
@@ -35,6 +36,7 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   "infrastructure",
   "happiness",
   "humanDevelopment",
+  "governance",
 ];
 
 export const CATEGORY_LABELS: Record<CategoryKey, string> = {
@@ -47,6 +49,7 @@ export const CATEGORY_LABELS: Record<CategoryKey, string> = {
   infrastructure: "Internet & Infra",
   happiness: "Happiness",
   humanDevelopment: "Human Development",
+  governance: "Governance",
 };
 
 export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
@@ -59,6 +62,7 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   infrastructure: "Internet penetration, electricity access",
   happiness: "World Happiness Report ladder score",
   humanDevelopment: "UNDP Human Development Index (HDI)",
+  governance: "Corruption control, rule of law, political stability, government effectiveness",
 };
 
 // ─── Country ──────────────────────────────────────────────────────────────────
