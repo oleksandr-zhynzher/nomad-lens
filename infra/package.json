@@ -1,0 +1,23 @@
+{
+  "name": "infra",
+  "version": "1.0.0",
+  "description": "AWS CDK infrastructure for Nomad Lens",
+  "scripts": {
+    "build": "tsc",
+    "synth": "cdk synth",
+    "deploy": "cdk deploy --require-approval never",
+    "diff": "cdk diff",
+    "destroy": "cdk destroy"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "aws-cdk": "^2.1114.1",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.245.0",
+    "constructs": "^10.6.0"
+  }
+}
