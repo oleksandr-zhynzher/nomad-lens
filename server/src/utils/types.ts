@@ -82,6 +82,7 @@ export interface WorldBankIndicatorMap {
 
 export interface RestCountry {
   cca2: string;
+  cca3?: string;
   name: { common: string };
   region: string;
   population: number;
