@@ -22,6 +22,11 @@ function ind(value: number, unit: string, year: number) {
   return { raw: value, unit, year };
 }
 
+function deriveRegion(region: string, subregion?: string): string {
+  if (subregion === 'Western Asia') return 'Middle East';
+  return region;
+}
+
 countriesRouter.get('/', async (_req, res, next) => {
   try {
     const cached = cache.get<CountryData[]>(CACHE_KEY);
@@ -276,7 +281,7 @@ countriesRouter.get('/', async (_req, res, next) => {
       data.push({
         code: iso2,
         name: rc.name.common,
-        region: rc.region,
+        region: deriveRegion(rc.region, rc.subregion),
         population: rc.population,
         flagUrl: rc.flags.svg || rc.flags.png,
         capital: rc.capital?.[0] ?? '',

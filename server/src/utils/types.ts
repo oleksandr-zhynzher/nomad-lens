@@ -105,6 +105,7 @@ export interface RestCountry {
   cca3?: string;
   name: { common: string };
   region: string;
+  subregion?: string;
   population: number;
   flags: { svg: string; png: string };
   capital?: string[];
