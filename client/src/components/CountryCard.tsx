@@ -13,14 +13,20 @@ import { Tooltip } from "./Tooltip";
 
 interface CountryCardProps {
   ranked: RankedCountry;
+  highlighted?: boolean;
 }
 
-export function CountryCard({ ranked }: CountryCardProps) {
+export function CountryCard({ ranked, highlighted = false }: CountryCardProps) {
   const [expanded, setExpanded] = useState(false);
   const { country, finalScore, rank } = ranked;
 
   return (
-    <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden">
+    <div
+      data-country-code={country.code}
+      className={`bg-slate-800 border rounded-xl overflow-hidden transition-all duration-700 ${
+        highlighted ? "border-sky-400 ring-2 ring-sky-400" : "border-slate-700"
+      }`}
+    >
       {/* Main row */}
       <button
         className="w-full flex items-center gap-4 px-4 py-3 hover:bg-slate-750 transition-colors text-left"

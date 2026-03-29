@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
 import { CountryList } from "./components/CountryList";
+import { WorldMap } from "./components/WorldMap";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { defaultWeights } from "./utils/scoring";
@@ -36,6 +37,9 @@ export default function App() {
   );
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
+  const [view, setView] = useState<"list" | "map">("list");
+  const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
+  const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
   const ranked = useScoring(countries, weights, search, region);
@@ -57,6 +61,18 @@ export default function App() {
     setWeights(defaultWeights());
   }, []);
 
+  const handleCountryClick = useCallback((iso2: string) => {
+    setView("list");
+    if (highlightTimer.current) clearTimeout(highlightTimer.current);
+    setHighlightedCode(iso2);
+    // Scroll after React re-renders
+    setTimeout(() => {
+      const el = document.querySelector(`[data-country-code="${iso2}"]`);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+      highlightTimer.current = setTimeout(() => setHighlightedCode(null), 2500);
+    }, 80);
+  }, []);
+
   const regions = useMemo(
     () => [...new Set(countries.map((c) => c.region))].sort(),
     [countries],
@@ -75,6 +91,22 @@ export default function App() {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
+        {/* View toggle */}
+        <div className="flex rounded-xl border border-slate-700 p-0.5 bg-slate-800 w-fit">
+          {(["list", "map"] as const).map((v) => (
+            <button
+              key={v}
+              onClick={() => setView(v)}
+              className={`px-4 py-1.5 rounded-[10px] text-sm font-medium transition-colors ${
+                view === v
+                  ? "bg-sky-600 text-white"
+                  : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              {v === "list" ? "🗂 List" : "🗺 Map"}
+            </button>
+          ))}
+        </div>
         <input
           type="search"
           placeholder="Search countries..."
@@ -96,19 +128,26 @@ export default function App() {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6">
-        <WeightPanel
-          weights={weights}
-          onChange={handleWeightChange}
-          onReset={handleReset}
-        />
-        <CountryList
-          ranked={ranked}
-          loading={loading}
-          error={error}
-          onRetry={refresh}
-        />
       </div>
+
+      {view === "map" ? (
+        <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6">
+          <WeightPanel
+            weights={weights}
+            onChange={handleWeightChange}
+            onReset={handleReset}
+          />
+          <CountryList
+            ranked={ranked}
+            loading={loading}
+            error={error}
+            onRetry={refresh}
+            highlightedCode={highlightedCode}
+          />
+        </div>
+      )}
     </Layout>
   );
 }

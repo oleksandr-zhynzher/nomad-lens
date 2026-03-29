@@ -6,9 +6,10 @@ interface CountryListProps {
   loading: boolean;
   error: string | null;
   onRetry: () => void;
+  highlightedCode?: string | null;
 }
 
-export function CountryList({ ranked, loading, error, onRetry }: CountryListProps) {
+export function CountryList({ ranked, loading, error, onRetry, highlightedCode }: CountryListProps) {
   if (loading) {
     return (
       <div className="flex flex-col gap-3">
@@ -50,7 +51,11 @@ export function CountryList({ ranked, loading, error, onRetry }: CountryListProp
         {ranked.length} countries
       </p>
       {ranked.map((r) => (
-        <CountryCard key={r.country.code} ranked={r} />
+        <CountryCard
+          key={r.country.code}
+          ranked={r}
+          highlighted={r.country.code === highlightedCode}
+        />
       ))}
     </div>
   );
