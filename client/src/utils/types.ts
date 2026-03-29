@@ -77,6 +77,38 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   englishProficiency: "EF English Proficiency Index 2025 — language accessibility for nomads (123 countries)",
 };
 
+export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
+  economy: "World Bank (GDP per capita, unemployment, Gini)",
+  affordability: "World Bank — NY.GDP.PCAP.PP.CD (PPP GDP per capita)",
+  foodSecurity: "FAO via World Bank — SN.ITK.DEFC.ZS (undernourishment %)",
+  healthcare: "WHO · World Bank (life expectancy, hospital beds, physicians)",
+  education: "World Bank (literacy rate, school enrollment)",
+  environment: "World Bank (PM2.5 air pollution, CO₂ per capita)",
+  climate: "Open-Meteo (30-year climate normals — temperature & precipitation)",
+  safety: "UNODC (homicide rate) · IEP Global Peace Index",
+  infrastructure: "World Bank (internet users %, electricity access %, broadband subs/100)",
+  happiness: "UN World Happiness Report (Cantril ladder score)",
+  humanDevelopment: "UNDP Human Development Index (HDI)",
+  governance: "World Bank WGI · Transparency International CPI",
+  englishProficiency: "EF English Proficiency Index 2025 (EF Education First)",
+};
+
+export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
+  economy: "ECO",
+  affordability: "AFF",
+  foodSecurity: "FOOD",
+  healthcare: "HLT",
+  education: "EDU",
+  environment: "ENV",
+  climate: "CLM",
+  safety: "SAF",
+  infrastructure: "INF",
+  happiness: "HAP",
+  humanDevelopment: "HDI",
+  governance: "GOV",
+  englishProficiency: "EPI",
+};
+
 // ─── Country ──────────────────────────────────────────────────────────────────
 
 export interface CountryData {

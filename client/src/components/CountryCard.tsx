@@ -1,8 +1,15 @@
 import { useState } from "react";
 import type { RankedCountry } from "../utils/types";
-import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
+import {
+  CATEGORY_ABBREVS,
+  CATEGORY_DATA_SOURCES,
+  CATEGORY_DESCRIPTIONS,
+  CATEGORY_KEYS,
+  CATEGORY_LABELS,
+} from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
+import { Tooltip } from "./Tooltip";
 
 interface CountryCardProps {
   ranked: RankedCountry;
@@ -40,15 +47,34 @@ export function CountryCard({ ranked }: CountryCardProps) {
         </div>
 
         {/* Mini category dots */}
-        <div className="hidden sm:flex gap-1 items-center">
+        <div className="hidden sm:flex gap-1 items-end" onClick={(e) => e.stopPropagation()}>
           {CATEGORY_KEYS.map((key) => {
             const val = country.scores[key]?.value ?? null;
             return (
-              <span
+              <Tooltip
                 key={key}
-                title={`${CATEGORY_LABELS[key]}: ${val !== null ? val.toFixed(0) : "N/A"}`}
-                className={`w-2 h-2 rounded-full ${dotColour(val)}`}
-              />
+                side="bottom"
+                content={
+                  <>
+                    <p className="font-medium text-slate-100 mb-0.5">{CATEGORY_LABELS[key]}</p>
+                    <p className={`text-base font-bold mb-1.5 ${scoreColour(val)}`}>
+                      {val !== null ? val.toFixed(0) : "N/A"}
+                      <span className="text-xs font-normal text-slate-500"> / 100</span>
+                    </p>
+                    <p className="text-slate-400 mb-1.5">{CATEGORY_DESCRIPTIONS[key]}</p>
+                    <p className="text-slate-600 border-t border-slate-700 pt-1.5">
+                      <span className="text-slate-700">Source: </span>{CATEGORY_DATA_SOURCES[key]}
+                    </p>
+                  </>
+                }
+              >
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className={`w-2 h-2 rounded-full ${dotColour(val)}`} />
+                  <span className="hidden lg:block text-[8px] text-slate-600 font-mono leading-none">
+                    {CATEGORY_ABBREVS[key]}
+                  </span>
+                </div>
+              </Tooltip>
             );
           })}
         </div>

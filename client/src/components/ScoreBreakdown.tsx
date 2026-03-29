@@ -1,6 +1,13 @@
+import { InformationCircleIcon } from "@heroicons/react/16/solid";
 import type { CountryData } from "../utils/types";
-import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
+import {
+  CATEGORY_DATA_SOURCES,
+  CATEGORY_DESCRIPTIONS,
+  CATEGORY_KEYS,
+  CATEGORY_LABELS,
+} from "../utils/types";
 import { scoreColour } from "../utils/scoring";
+import { Tooltip } from "./Tooltip";
 
 interface ScoreBreakdownProps {
   country: CountryData;
@@ -16,9 +23,25 @@ export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
         return (
           <div key={key} className="bg-slate-900 rounded-lg p-3">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-medium text-slate-400">
-                {CATEGORY_LABELS[key]}
-              </span>
+              <div className="flex items-center gap-1">
+                <span className="text-xs font-medium text-slate-400">
+                  {CATEGORY_LABELS[key]}
+                </span>
+                <Tooltip
+                  side="bottom"
+                  content={
+                    <>
+                      <p className="font-medium text-slate-100 mb-1">{CATEGORY_LABELS[key]}</p>
+                      <p className="text-slate-400 mb-2">{CATEGORY_DESCRIPTIONS[key]}</p>
+                      <p className="text-slate-500 border-t border-slate-700 pt-1.5">
+                        <span className="text-slate-600">Source: </span>{CATEGORY_DATA_SOURCES[key]}
+                      </p>
+                    </>
+                  }
+                >
+                  <InformationCircleIcon className="w-3 h-3 text-slate-700 hover:text-slate-500 transition-colors cursor-default" />
+                </Tooltip>
+              </div>
               <span className={`text-sm font-bold ${scoreColour(value)}`}>
                 {value !== null ? value.toFixed(0) : "N/A"}
               </span>
