@@ -3,7 +3,7 @@ WORKDIR /app
 
 # ── Dev stage ──────────────────────────────────────────────────────────────────
 FROM base AS dev
-COPY package*.json ./
+COPY .npmrc package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 5173
@@ -11,8 +11,8 @@ CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 # ── Build stage ────────────────────────────────────────────────────────────────
 FROM base AS build
-COPY package*.json ./
-RUN npm ci
+COPY .npmrc package*.json ./
+RUN npm install
 COPY . .
 RUN npm run build
 
