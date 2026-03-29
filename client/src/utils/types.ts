@@ -17,6 +17,7 @@ export interface CategoryScore {
 export type CategoryKey =
   | "economy"
   | "affordability"
+  | "foodSecurity"
   | "healthcare"
   | "education"
   | "environment"
@@ -31,6 +32,7 @@ export type CategoryKey =
 export const CATEGORY_KEYS: CategoryKey[] = [
   "economy",
   "affordability",
+  "foodSecurity",
   "healthcare",
   "education",
   "environment",
@@ -46,6 +48,7 @@ export const CATEGORY_KEYS: CategoryKey[] = [
 export const CATEGORY_LABELS: Record<CategoryKey, string> = {
   economy: "Economy",
   affordability: "Affordability",
+  foodSecurity: "Food Security",
   healthcare: "Healthcare",
   education: "Education",
   environment: "Environment",
@@ -61,6 +64,7 @@ export const CATEGORY_LABELS: Record<CategoryKey, string> = {
 export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   economy: "GDP per capita, unemployment rate, income equality (Gini)",
   affordability: "Cost of living proxy: GDP per capita (PPP, inverted) — lower-income countries tend to offer better value for nomads",
+  foodSecurity: "Prevalence of undernourishment % (FAO via World Bank, inverted) — lower rates indicate better food security",
   healthcare: "Life expectancy, hospital beds, physicians per 1,000",
   education: "Adult literacy rate, primary school enrollment",
   environment: "Air pollution (PM2.5), CO₂ emissions per capita",

@@ -87,6 +87,16 @@ countriesRouter.get('/', async (_req, res, next) => {
         },
       };
 
+      // ── Food Security ────────────────────────────────────────────────────
+      const undrnrsh = wb?.[WB_INDICATORS.undernourishment];
+
+      const foodSecurity: CategoryScore = {
+        value: invertMinMax(undrnrsh?.value ?? null, 0, 55),
+        indicators: {
+          ...(undrnrsh?.value != null ? { undernourishment: ind(undrnrsh.value, '%', undrnrsh.year) } : {}),
+        },
+      };
+
       // ── Healthcare ─────────────────────────────────────────────────────────
       const beds = wb?.[WB_INDICATORS.hospitalBeds];
       const phys = wb?.[WB_INDICATORS.physicians];
@@ -245,6 +255,7 @@ countriesRouter.get('/', async (_req, res, next) => {
       const scores = {
         economy,
         affordability,
+        foodSecurity,
         healthcare,
         education,
         environment,

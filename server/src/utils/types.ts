@@ -17,6 +17,7 @@ export interface CategoryScore {
 export type CategoryKey =
   | "economy"
   | "affordability"
+  | "foodSecurity"
   | "healthcare"
   | "education"
   | "environment"

@@ -17,6 +17,7 @@ export const WB_INDICATORS = {
   internetUsers: 'IT.NET.USER.ZS',
   electricityAccess: 'EG.ELC.ACCS.ZS',
   gdpPerCapitaPPP: 'NY.GDP.PCAP.PP.CD',
+  undernourishment: 'SN.ITK.DEFC.ZS',
   // ── Worldwide Governance Indicators (WGI) ─────────────────────────────────
   controlOfCorruption: 'CC.EST',
   ruleOfLaw: 'RL.EST',
