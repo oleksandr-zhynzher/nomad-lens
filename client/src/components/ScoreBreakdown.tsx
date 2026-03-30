@@ -31,7 +31,7 @@ export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
               <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#CCCCCC" }}>
                 {CATEGORY_LABELS[key]}
               </span>
-              <span className={scoreColour(value)} style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "12px", fontWeight: 600 }}>
+              <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "12px", fontWeight: 600, color: scoreColour(value) }}>
                 {value !== null ? value.toFixed(0) : "N/A"}
               </span>
             </div>

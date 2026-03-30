@@ -71,14 +71,15 @@ export function defaultWeights(): WeightMap {
 }
 
 /**
- * Determine a colour class for a 0–100 score value.
+ * Determine a colour for a 0–100 score value.
+ * Returns hex color string for the 4-tier system.
  */
 export function scoreColour(value: number | null): string {
-  if (value === null) return "text-slate-500";
-  if (value >= 75) return "text-green-400";
-  if (value >= 50) return "text-yellow-400";
-  if (value >= 25) return "text-orange-400";
-  return "text-red-400";
+  if (value === null) return "#3A3A3A";
+  if (value >= 75) return "#4CAF50"; // Excellent - green
+  if (value >= 60) return "#8BC34A"; // Good - light green
+  if (value >= 50) return "#FFC107"; // Moderate - amber
+  return "#FF5722"; // Low - red-orange
 }
 
 /**

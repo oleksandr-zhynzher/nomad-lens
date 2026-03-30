@@ -98,7 +98,7 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
 
         {/* Final score */}
         <div className="shrink-0">
-          <span className={scoreColour(finalScore)} style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 700 }}>
+          <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 700, color: scoreColour(finalScore) }}>
             {finalScore.toFixed(1)}
           </span>
         </div>
@@ -110,52 +110,6 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
       {/* Expanded breakdown */}
       {expanded && (
         <div className="px-4 py-4" style={{ borderTop: `1px solid ${borderColor}` }}>
-          <ScoreBreakdown country={country} />
-        </div>
-      )}
-    </div>
-  );
-}
-                    <p className="text-slate-400 mb-1.5">{CATEGORY_DESCRIPTIONS[key]}</p>
-                    <p className="text-slate-600 border-t border-slate-700 pt-1.5">
-                      <span className="text-slate-700">Source: </span>{CATEGORY_DATA_SOURCES[key]}
-                    </p>
-                  </>
-                }
-              >
-                <div className="flex flex-col items-center gap-0.5">
-                  <span className={`w-2 h-2 rounded-full ${dotColour(val)}`} />
-                  <span className="hidden lg:block text-[8px] text-slate-600 font-mono leading-none">
-                    {CATEGORY_ABBREVS[key]}
-                  </span>
-                </div>
-              </Tooltip>
-            );
-          })}
-        </div>
-
-        {/* Final score */}
-        <div className="text-right shrink-0 w-14">
-          <span className={`text-lg font-bold ${scoreColour(finalScore)}`}>
-            {finalScore.toFixed(1)}
-          </span>
-          <p className="text-xs text-slate-500">/ 100</p>
-        </div>
-
-        {/* Chevron */}
-        <svg
-          className={`w-4 h-4 text-slate-500 shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {/* Expanded breakdown */}
-      {expanded && (
-        <div className="border-t border-slate-700 px-4 py-4">
           <ScoreBreakdown country={country} />
         </div>
       )}
