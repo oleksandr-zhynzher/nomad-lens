@@ -125,16 +125,19 @@ countriesRouter.get('/', async (_req, res, next) => {
 
       // ── Education ──────────────────────────────────────────────────────────
       const lit = wb?.[WB_INDICATORS.literacy];
-      const enroll = wb?.[WB_INDICATORS.schoolEnrollment];
+      const enroll = wb?.[WB_INDICATORS.schoolEnrollment];  // gross secondary
+      const tertiary = wb?.[WB_INDICATORS.tertiaryEnrollment]; // gross tertiary
 
       const education: CategoryScore = {
         value: average([
           minMax(lit?.value ?? null, 40, 100),
-          minMax(enroll?.value ?? null, 30, 100),
+          minMax(enroll?.value ?? null, 30, 120), // gross can exceed 100
+          minMax(tertiary?.value ?? null, 0, 100),
         ]),
         indicators: {
           ...(lit?.value != null ? { literacy: ind(lit.value, '%', lit.year) } : {}),
-          ...(enroll?.value != null ? { schoolEnrollment: ind(enroll.value, '%', enroll.year) } : {}),
+          ...(enroll?.value != null ? { secondaryEnrollment: ind(enroll.value, '%', enroll.year) } : {}),
+          ...(tertiary?.value != null ? { tertiaryEnrollment: ind(tertiary.value, '%', tertiary.year) } : {}),
         },
       };
 
