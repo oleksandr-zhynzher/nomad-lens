@@ -38,7 +38,10 @@ interface WbDataPoint {
 }
 
 async function fetchIndicator(code: IndicatorCode): Promise<WbDataPoint[]> {
-  const url = `https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&mrv=1&per_page=300`;
+  // mrv=5: fetch up to 5 most-recent years so sparse indicators (education,
+  // climate proxies) still resolve to the most recently available non-null year.
+  // per_page=2000 covers 250+ countries × 5 years in a single request.
+  const url = `https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&mrv=5&per_page=2000`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`World Bank ${code} returned ${res.status}`);
 
@@ -68,8 +71,11 @@ export async function fetchWorldBankIndicators(): Promise<WorldBankIndicatorMap>
       if (!iso3 || point.value === null) continue;
 
       if (!map[iso3]) map[iso3] = {};
-      // mrv=1 returns one row per country; safe to overwrite
-      map[iso3][code] = { value: point.value, year: parseInt(point.date, 10) };
+      // WB returns rows newest-first; only store the first (most recent) non-null
+      // value per country+indicator — subsequent rows are older fallbacks.
+      if (!map[iso3][code]) {
+        map[iso3][code] = { value: point.value, year: parseInt(point.date, 10) };
+      }
     }
   }
 
