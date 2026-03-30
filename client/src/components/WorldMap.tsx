@@ -44,13 +44,11 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
 
   function fillColour(alpha2: string): string {
     const r = scoreByAlpha2.get(alpha2);
-    if (!r) return "#334155"; // slate-700, no data
+    if (!r) return "#3A3A3A"; // No data
     const s = r.finalScore;
-    if (s >= 75) return "#4ade80"; // green-400
-    if (s >= 60) return "#86efac"; // green-300
-    if (s >= 50) return "#facc15"; // yellow-400
-    if (s >= 38) return "#fb923c"; // orange-400
-    return "#f87171"; // red-400
+    if (s >= 75) return "#4CAF50"; // Excellent - green
+    if (s >= 50) return "#FFC107"; // Moderate - amber
+    return "#FF5722"; // Low - red-orange
   }
 
   function handleMouseEnter(geo: { id?: unknown; properties: Record<string, unknown> }, e: React.MouseEvent) {
@@ -80,44 +78,50 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
       {/* Zoom controls */}
-      <div className="absolute top-3 right-3 z-10 flex flex-col gap-1">
+      <div className="absolute top-3 left-3 z-10 flex flex-col overflow-hidden" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
         <button
           onClick={() => setZoom((z) => Math.min(z * 1.5, 12))}
-          className="w-8 h-8 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 hover:text-sky-400 hover:border-sky-500 transition-colors text-lg font-bold leading-none flex items-center justify-center"
+          className="w-10 h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
+          style={{ color: "#999999", borderBottom: "1px solid #333333" }}
           aria-label="Zoom in"
         >
           +
         </button>
         <button
           onClick={() => setZoom((z) => Math.max(z / 1.5, 1))}
-          className="w-8 h-8 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 hover:text-sky-400 hover:border-sky-500 transition-colors text-lg font-bold leading-none flex items-center justify-center"
+          className="w-10 h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
+          style={{ color: "#999999", borderBottom: "1px solid #333333" }}
           aria-label="Zoom out"
         >
           −
         </button>
         <button
           onClick={() => { setZoom(1); setCenter([0, 20]); }}
-          className="w-8 h-8 bg-slate-800 border border-slate-700 rounded-lg text-slate-300 hover:text-sky-400 hover:border-sky-500 transition-colors text-xs flex items-center justify-center"
+          className="w-10 h-10 text-base flex items-center justify-center transition-colors"
+          style={{ color: "#999999" }}
           aria-label="Reset view"
         >
-          ↺
+          ⌂
         </button>
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-3 left-3 z-10 bg-slate-900/80 border border-slate-700 rounded-lg px-3 py-2 flex flex-col gap-1">
-        <p className="text-[10px] text-slate-500 font-medium mb-0.5">Score</p>
+      <div className="absolute bottom-3 left-3 z-10 px-3 py-2 flex flex-col gap-1.5" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
+        <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#666666", marginBottom: "4px" }}>SCORE</p>
         {[
-          { color: "#4ade80", label: "75–100" },
-          { color: "#86efac", label: "60–74" },
-          { color: "#facc15", label: "50–59" },
-          { color: "#fb923c", label: "38–49" },
-          { color: "#f87171", label: "< 38" },
-          { color: "#334155", label: "No data" },
-        ].map(({ color, label }) => (
+          { color: "#4CAF50", label: "Excellent", range: "(75–100)" },
+          { color: "#FFC107", label: "Moderate", range: "(50–74)" },
+          { color: "#FF5722", label: "Low", range: "(0–49)" },
+          { color: "#3A3A3A", label: "No data", range: "" },
+        ].map(({ color, label, range }) => (
           <div key={label} className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-sm shrink-0" style={{ background: color }} />
-            <span className="text-[10px] text-slate-400">{label}</span>
+            <span className="w-3 h-3 shrink-0" style={{ background: color, borderRadius: "2px" }} />
+            <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#CCCCCC" }}>
+              {label} <span style={{ color: "#666666" }}>{range}</span>
+            </span>
+          </div>
+        ))}
+      </div>
           </div>
         ))}
       </div>
@@ -127,7 +131,7 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
         projectionConfig={{ scale: 160 }}
         width={900}
         height={460}
-        style={{ width: "100%", height: "auto", background: "#0f172a" }}
+        style={{ width: "100%", height: "auto", background: "#0F1114" }}
       >
         <ZoomableGroup
           zoom={zoom}
@@ -138,8 +142,8 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
             setZoom(p.zoom);
           }}
         >
-          <Sphere fill="#0f172a" stroke="#1e293b" strokeWidth={0.5} />
-          <Graticule stroke="#1e293b" strokeWidth={0.3} />
+          <Sphere fill="#0F1114" stroke="#1A1A1A" strokeWidth={0.5} />
+          <Graticule stroke="#1A1A1A" strokeWidth={0.3} />
           <Geographies geography={GEO_URL}>
             {({ geographies }) =>
               geographies.map((geo) => {
@@ -150,7 +154,7 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
                     key={geo.rsmKey}
                     geography={geo}
                     fill={fillColour(alpha2)}
-                    stroke={isSelected ? "#38bdf8" : "#0f172a"}
+                    stroke={isSelected ? "var(--color-accent)" : "#0F1114"}
                     strokeWidth={isSelected ? 1.5 / zoom : 0.4}
                     style={{
                       default: { outline: "none" },
@@ -172,23 +176,23 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
       {/* Hover tooltip */}
       {hover && (
         <div
-          className="pointer-events-none fixed z-50 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 shadow-xl text-xs"
-          style={{ left: hover.x + 12, top: hover.y - 10 }}
+          className="pointer-events-none fixed z-50 px-3 py-2 shadow-xl rounded"
+          style={{ left: hover.x + 12, top: hover.y - 10, backgroundColor: "#1A1A1A", borderRadius: "4px" }}
         >
-          <p className="font-medium text-slate-100">{hover.name}</p>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", fontWeight: 600, color: "#FFFFFF" }}>{hover.name}</p>
           {hover.score !== null ? (
-            <p className={`font-bold mt-0.5 ${scoreTextColour(hover.score)}`}>
+            <p style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "13px", fontWeight: 600, marginTop: "2px", color: scoreTextColour(hover.score) }}>
               {hover.score.toFixed(1)}{" "}
-              <span className="font-normal text-slate-500">/ 100</span>
+              <span style={{ fontWeight: 400, color: "#666666" }}>/ 100</span>
             </p>
           ) : (
-            <p className="text-slate-500 mt-0.5">No data</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "#666666", marginTop: "2px" }}>No data</p>
           )}
         </div>
       )}
 
       {/* Ranked count */}
-      <p className="text-xs text-slate-600 text-right mt-1 pr-1">
+      <p style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555", textAlign: "right", marginTop: "8px", paddingRight: "4px" }}>
         {ranked.length} countries scored · click a country for details
       </p>
 
@@ -205,8 +209,8 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
 }
 
 function scoreTextColour(s: number): string {
-  if (s >= 75) return "text-green-400";
-  if (s >= 50) return "text-yellow-400";
-  if (s >= 25) return "text-orange-400";
-  return "text-red-400";
+  if (s >= 75) return "#4CAF50";
+  if (s >= 60) return "#8BC34A";
+  if (s >= 50) return "#FFC107";
+  return "#FF5722";
 }
