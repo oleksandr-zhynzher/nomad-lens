@@ -1,5 +1,6 @@
-import { createPortal } from "react-dom";
-import type { RankedCountry } from "../utils/types";
+import { createPortal } from "react";
+import { X } from "lucide-react";
+import type { RankedCountry, SeasonType } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 
@@ -8,6 +9,14 @@ interface CountryDetailPanelProps {
   onClose: () => void;
   onViewInList: () => void;
 }
+
+const DRAWER_SEASON_BADGE: Record<SeasonType, { label: string; icon: string; bg: string; text: string }> = {
+  four_seasons: { label: "Four Seasons", icon: "◑", bg: "#8F5A3C", text: "#FFFFFF" },
+  mild_seasons: { label: "Mild", icon: "◑", bg: "#1A3A5C", text: "#60A5FA" },
+  tropical: { label: "Tropical", icon: "◑", bg: "#1A4A2A", text: "#44CC66" },
+  arid: { label: "Arid", icon: "◑", bg: "#4A3A1A", text: "#AA7733" },
+  polar: { label: "Polar", icon: "◑", bg: "#2A2A2A", text: "#999999" },
+};
 
 export function CountryDetailPanel({
   country,
@@ -19,64 +28,93 @@ export function CountryDetailPanel({
   return createPortal(
     <div className="fixed inset-0 z-40 flex" onClick={onClose}>
       {/* Backdrop */}
-      <div className="flex-1 bg-slate-950/40" />
+      <div className="flex-1" style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }} />
 
       {/* Drawer */}
       <div
-        className="w-full sm:w-[480px] bg-slate-900 border-l border-slate-700 shadow-2xl flex flex-col overflow-hidden"
+        className="w-full flex flex-col overflow-hidden"
+        style={{ maxWidth: "380px", backgroundColor: "#1A1A1A" }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-start gap-4 px-5 pt-5 pb-4 border-b border-slate-800 shrink-0">
+        <div className="flex items-start gap-3 px-5 pt-5 pb-4 shrink-0" style={{ backgroundColor: "#222222" }}>
           <img
             src={c.flagUrl}
             alt={`${c.name} flag`}
-            className="w-14 h-9 object-cover rounded shrink-0 mt-0.5"
+            className="object-cover shrink-0"
+            style={{ width: "36px", height: "24px", borderRadius: "4px", marginTop: "2px" }}
             loading="eager"
           />
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-xl font-bold text-slate-100 truncate">
-                {c.name}
-              </h2>
-              <span className="text-xs font-mono bg-slate-800 border border-slate-700 text-slate-400 px-1.5 py-0.5 rounded">
-                #{rank}
-              </span>
-            </div>
-            <p className="text-sm text-slate-500 mt-0.5">{c.region}</p>
-            <div className="mt-2 flex items-baseline gap-1">
-              <span className={`text-2xl font-bold ${scoreColour(finalScore)}`}>
-                {finalScore.toFixed(1)}
-              </span>
-              <span className="text-sm text-slate-500">/ 100</span>
-            </div>
+            <h2 style={{ fontFamily: "Anton, sans-serif", fontSize: "22px", fontWeight: 400, color: "#FFFFFF", lineHeight: "1.2" }}>
+              {c.name}
+            </h2>
+            <p style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#999999", marginTop: "4px" }}>{c.region}</p>
           </div>
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-slate-300 transition-colors shrink-0 mt-0.5"
+            className="shrink-0 flex items-center justify-center transition-colors"
+            style={{ width: "32px", height: "32px", backgroundColor: "#333333", borderRadius: "4px", color: "#999999" }}
             aria-label="Close panel"
           >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X size={18} />
           </button>
         </div>
 
-        {/* Scrollable body */}
-        <div className="flex-1 overflow-y-auto px-4 py-4">
+        {/* Score Row - split RANK | COMPOSITE SCORE */}
+        <div className="flex items-stretch px-5 py-4 shrink-0" style={{ backgroundColor: "#1E1E1E", gap: "16px" }}>
+          <div className="flex-1 flex flex-col">
+            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#666666", marginBottom: "4px" }}>
+              RANK
+            </span>
+            <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "28px", fontWeight: 600, color: "var(--color-accent)", lineHeight: "1" }}>
+              #{rank}
+            </span>
+          </div>
+          <div style={{ width: "1px", backgroundColor: "#333333" }} />
+          <div className="flex-1 flex flex-col">
+            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#666666", marginBottom: "4px" }}>
+              COMPOSITE SCORE
+            </span>
+            <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "28px", fontWeight: 600, color: scoreColour(finalScore), lineHeight: "1" }}>
+              {finalScore.toFixed(1)}
+            </span>
+          </div>
+        </div>
+
+        {/* Badge Row */}
+        <div className="flex items-center gap-2 px-5 py-3 shrink-0" style={{ backgroundColor: "#1A1A1A" }}>
+          {c.hasNomadVisa && (
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full" style={{ backgroundColor: "var(--color-accent)", fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 500, color: "#FFFFFF" }}>
+              ✈ Nomad Visa
+            </span>
+          )}
+          {c.climateData && (() => {
+            const badge = DRAWER_SEASON_BADGE[c.climateData.seasonType];
+            return (
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full" style={{ backgroundColor: badge.bg, fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 500, color: badge.text }}>
+                {badge.icon} {badge.label}
+              </span>
+            );
+          })()}
+        </div>
+
+        {/* Breakdown section */}
+        <div className="flex-1 overflow-y-auto px-5 py-4">
+          <h3 style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#666666", marginBottom: "12px" }}>
+            SCORE BREAKDOWN
+          </h3>
           <ScoreBreakdown country={c} />
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-4 border-t border-slate-800 shrink-0">
+        <div className="px-5 py-4 shrink-0" style={{ borderTop: "1px solid #333333" }}>
           <button
             onClick={() => { onViewInList(); onClose(); }}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 transition-colors text-sm font-medium text-white"
+            className="w-full flex items-center justify-center gap-2 transition-colors"
+            style={{ height: "44px", backgroundColor: "var(--color-accent)", borderRadius: "4px", fontFamily: "Inter, sans-serif", fontSize: "14px", fontWeight: 600, color: "#FFFFFF" }}
           >
-            View in list
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
+            View in List →
           </button>
         </div>
       </div>
