@@ -1,5 +1,5 @@
 import { cache } from '../middleware/cache';
-import type { OpenMeteoClimate } from '../utils/types';
+import type { OpenMeteoClimate, SeasonType } from '../utils/types';
 
 const CACHE_NS = 'openmeteo:climate:';
 
@@ -14,6 +14,32 @@ function meanOf(values: (number | null)[]): number | null {
   const valid = values.filter((v): v is number => v !== null && !isNaN(v));
   if (valid.length === 0) return null;
   return valid.reduce((a, b) => a + b, 0) / valid.length;
+}
+
+const DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 2023 non-leap
+
+function monthlyMeansOf(values: (number | null)[]): number[] {
+  const means: number[] = [];
+  let dayIdx = 0;
+  for (const daysInMonth of DAYS_PER_MONTH) {
+    const slice = values.slice(dayIdx, dayIdx + daysInMonth);
+    const valid = slice.filter((v): v is number => v !== null && !isNaN(v));
+    means.push(valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : NaN);
+    dayIdx += daysInMonth;
+  }
+  return means;
+}
+
+function classifySeasonType(
+  annualMean: number,
+  annualPrecip: number,
+  tempRange: number,
+): SeasonType {
+  if (annualPrecip < 250) return 'arid';
+  if (annualMean < 3) return 'polar';
+  if (tempRange >= 20) return 'four_seasons';
+  if (annualMean >= 18) return 'tropical';
+  return 'mild_seasons';
 }
 
 /**
@@ -45,16 +71,34 @@ export async function fetchClimate(
   const daily = json.daily;
   if (!daily) return null;
 
-  const annualMeanTemp = meanOf(daily.temperature_2m_mean ?? []);
+  const tempRaw = daily.temperature_2m_mean ?? [];
+  const annualMeanTemp = meanOf(tempRaw);
+  const monthlyMeans = monthlyMeansOf(tempRaw);
+  const validMonthly = monthlyMeans.filter((v) => !isNaN(v));
+
   const precipValues = (daily.precipitation_sum ?? []).filter(
     (v): v is number => v !== null && !isNaN(v),
   );
   const annualPrecipitation =
     precipValues.length > 0 ? precipValues.reduce((a, b) => a + b, 0) : null;
 
-  if (annualMeanTemp === null || annualPrecipitation === null) return null;
+  if (annualMeanTemp === null || annualPrecipitation === null || validMonthly.length < 12) return null;
 
-  const result: OpenMeteoClimate = { annualMeanTemp, annualPrecipitation };
+  const maxMonthTemp = Math.max(...monthlyMeans);
+  const minMonthTemp = Math.min(...monthlyMeans);
+  const tempRange = maxMonthTemp - minMonthTemp;
+  const hottestMonth = monthlyMeans.indexOf(maxMonthTemp);
+  const coldestMonth = monthlyMeans.indexOf(minMonthTemp);
+  const seasonType = classifySeasonType(annualMeanTemp, annualPrecipitation, tempRange);
+
+  const result: OpenMeteoClimate = {
+    annualMeanTemp,
+    annualPrecipitation,
+    tempRange,
+    hottestMonth,
+    coldestMonth,
+    seasonType,
+  };
   cache.set(key, result);
   return result;
 }

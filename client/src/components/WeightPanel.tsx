@@ -1,5 +1,6 @@
+import React from "react";
 import { InformationCircleIcon } from "@heroicons/react/16/solid";
-import type { CategoryKey, WeightMap } from "../utils/types";
+import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap } from "../utils/types";
 import {
   CATEGORY_DATA_SOURCES,
   CATEGORY_DESCRIPTIONS,
@@ -60,9 +61,20 @@ interface WeightPanelProps {
   weights: WeightMap;
   onChange: (key: CategoryKey, value: number) => void;
   onReset: () => void;
+  climatePrefs: ClimatePreferences;
+  onClimatePrefsChange: (prefs: ClimatePreferences) => void;
 }
 
-export function WeightPanel({ weights, onChange, onReset }: WeightPanelProps) {
+const SEASON_OPTIONS: Array<{ value: SeasonType | 'any'; label: string }> = [
+  { value: 'any', label: 'Any' },
+  { value: 'four_seasons', label: '\uD83C\uDF42 Four Seasons' },
+  { value: 'mild_seasons', label: '\uD83C\uDF0A Mild' },
+  { value: 'tropical', label: '\uD83C\uDF34 Tropical' },
+  { value: 'arid', label: '\uD83C\uDFDC Arid' },
+  { value: 'polar', label: '\u2744\uFE0F Polar' },
+];
+
+export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange }: WeightPanelProps) {
   return (
     <aside className="flex flex-col bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden sticky top-14 h-[calc(100vh-3.5rem-1.5rem)]">
       {/* Fixed header */}
@@ -85,13 +97,80 @@ export function WeightPanel({ weights, onChange, onReset }: WeightPanelProps) {
       <div className="flex-1 overflow-y-auto px-5 pb-3">
         <div className="flex flex-col gap-4 py-1">
           {CATEGORY_KEYS.map((key) => (
-            <WeightSlider
-              key={key}
-              categoryKey={key}
-              value={weights[key]}
-              onChange={onChange}
-              weights={weights}
-            />
+            <React.Fragment key={key}>
+              <WeightSlider
+                categoryKey={key}
+                value={weights[key]}
+                onChange={onChange}
+                weights={weights}
+              />
+              {key === 'climate' && (
+                <div className="flex flex-col gap-3 pl-1 border-l-2 border-slate-700">
+                  {/* Season type pills */}
+                  <div>
+                    <p className="text-xs text-slate-500 mb-1.5">Season type</p>
+                    <div className="flex flex-wrap gap-1">
+                      {SEASON_OPTIONS.map((opt) => (
+                        <button
+                          key={opt.value}
+                          onClick={() => onClimatePrefsChange({ ...climatePrefs, seasonType: opt.value })}
+                          className={`text-xs px-2 py-0.5 rounded-full border transition-colors ${
+                            climatePrefs.seasonType === opt.value
+                              ? 'bg-sky-600 border-sky-500 text-white'
+                              : 'bg-slate-700 border-slate-600 text-slate-300 hover:border-slate-500'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Temperature range */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <p className="text-xs text-slate-500">Preferred temp range</p>
+                      <span className="text-xs font-mono text-sky-400">
+                        {climatePrefs.minTemp}\u00b0 \u2013 {climatePrefs.maxTemp}\u00b0C
+                      </span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-slate-500 w-6">Min</span>
+                        <input
+                          type="range"
+                          min={-10}
+                          max={45}
+                          value={climatePrefs.minTemp}
+                          onChange={(e) => {
+                            const v = Number(e.target.value);
+                            onClimatePrefsChange({ ...climatePrefs, minTemp: Math.min(v, climatePrefs.maxTemp - 1) });
+                          }}
+                          className="flex-1 h-1.5 rounded-full appearance-none bg-slate-700 accent-sky-400 cursor-pointer"
+                          aria-label="Minimum preferred temperature"
+                        />
+                        <span className="text-xs font-mono text-slate-400 w-8 text-right">{climatePrefs.minTemp}\u00b0</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-slate-500 w-6">Max</span>
+                        <input
+                          type="range"
+                          min={-10}
+                          max={45}
+                          value={climatePrefs.maxTemp}
+                          onChange={(e) => {
+                            const v = Number(e.target.value);
+                            onClimatePrefsChange({ ...climatePrefs, maxTemp: Math.max(v, climatePrefs.minTemp + 1) });
+                          }}
+                          className="flex-1 h-1.5 rounded-full appearance-none bg-slate-700 accent-sky-400 cursor-pointer"
+                          aria-label="Maximum preferred temperature"
+                        />
+                        <span className="text-xs font-mono text-slate-400 w-8 text-right">{climatePrefs.maxTemp}\u00b0</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { RankedCountry } from "../utils/types";
+import type { RankedCountry, SeasonType } from "../utils/types";
 import {
   CATEGORY_ABBREVS,
   CATEGORY_DATA_SOURCES,
@@ -54,8 +54,14 @@ export function CountryCard({ ranked, highlighted = false }: CountryCardProps) {
             <span className="inline-block text-xs px-1.5 py-0.5 rounded bg-sky-900 text-sky-300 font-medium leading-tight mt-0.5">
               🛂 Nomad Visa
             </span>
-          )}
-        </div>
+          )}          {country.climateData && (() => {
+            const badge = SEASON_BADGE[country.climateData.seasonType];
+            return (
+              <span className={`inline-block text-xs px-1.5 py-0.5 rounded font-medium leading-tight mt-0.5 ${badge.className}`}>
+                {badge.label}
+              </span>
+            );
+          })()}        </div>
 
         {/* Mini category dots */}
         <div className="hidden sm:flex gap-1 items-end" onClick={(e) => e.stopPropagation()}>
@@ -126,3 +132,11 @@ function dotColour(value: number | null): string {
   if (value >= 25) return "bg-orange-400";
   return "bg-red-400";
 }
+
+const SEASON_BADGE: Record<SeasonType, { label: string; className: string }> = {
+  four_seasons: { label: "🍂 Four Seasons", className: "bg-amber-900 text-amber-300" },
+  mild_seasons: { label: "🌊 Mild", className: "bg-blue-900 text-blue-300" },
+  tropical: { label: "🌴 Tropical", className: "bg-green-900 text-green-300" },
+  arid: { label: "🏜 Arid", className: "bg-orange-900 text-orange-300" },
+  polar: { label: "❄️ Polar", className: "bg-slate-700 text-slate-300" },
+};

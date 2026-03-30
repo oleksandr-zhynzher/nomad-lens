@@ -1,7 +1,10 @@
 import type {
   CategoryKey,
+  ClimateData,
+  ClimatePreferences,
   CountryData,
   RankedCountry,
+  SeasonType,
   WeightMap,
 } from "./types";
 import { CATEGORY_KEYS } from "./types";
@@ -86,4 +89,53 @@ export function weightPercent(key: CategoryKey, weights: WeightMap): string {
   const total = (Object.values(weights) as number[]).reduce((s, v) => s + v, 0);
   if (total === 0) return "0%";
   return `${Math.round((weights[key] / total) * 100)}%`;
+}
+
+// ─── Climate Preferences Scoring ──────────────────────────────────────────────
+
+const ADJACENT: Record<SeasonType, SeasonType[]> = {
+  four_seasons: ['mild_seasons'],
+  mild_seasons: ['four_seasons', 'tropical'],
+  tropical: ['mild_seasons', 'arid'],
+  arid: ['tropical'],
+  polar: ['four_seasons'],
+};
+
+/**
+ * Compute a preference-based climate score (0–100).
+ * 70% temperature match + 30% season type match.
+ */
+export function computeClimateScore(
+  climateData: ClimateData,
+  prefs: ClimatePreferences,
+): number {
+  const { annualMeanTemp, seasonType } = climateData;
+
+  let tempScore: number;
+  if (annualMeanTemp >= prefs.minTemp && annualMeanTemp <= prefs.maxTemp) {
+    tempScore = 100;
+  } else {
+    const dev = Math.min(
+      Math.abs(annualMeanTemp - prefs.minTemp),
+      Math.abs(annualMeanTemp - prefs.maxTemp),
+    );
+    tempScore = Math.max(0, 100 - dev * 5);
+  }
+
+  let seasonScore: number;
+  if (prefs.seasonType === 'any') {
+    seasonScore = 100;
+  } else if (prefs.seasonType === seasonType) {
+    seasonScore = 100;
+  } else if (ADJACENT[prefs.seasonType as SeasonType]?.includes(seasonType)) {
+    seasonScore = 60;
+  } else {
+    seasonScore = 20;
+  }
+
+  return Math.round((tempScore * 0.7 + seasonScore * 0.3) * 10) / 10;
+}
+
+export function defaultClimatePreferences(): ClimatePreferences {
+  return { seasonType: 'any', minTemp: 15, maxTemp: 25 };
 }

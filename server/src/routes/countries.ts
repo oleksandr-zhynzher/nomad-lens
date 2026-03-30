@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import type { CountryData, CategoryScore, RestCountry } from '../utils/types';
+import type { CountryData, CategoryScore, ClimateData, RestCountry } from '../utils/types';
 import { cache } from '../middleware/cache';
 import { fetchRestCountries } from '../services/restCountries';
 import { fetchWorldBankIndicators, WB_INDICATORS } from '../services/worldBank';
@@ -45,7 +45,7 @@ countriesRouter.get('/', async (_req, res, next) => {
     }
 
     // Fetch climate for all capitals in parallel
-    const climateMap = new Map<string, { annualMeanTemp: number; annualPrecipitation: number }>();
+    const climateMap = new Map<string, ClimateData>();
     await Promise.all(
       countries.map(async (c) => {
         const latLng = c.capitalInfo?.latlng ?? c.latlng;
@@ -291,6 +291,7 @@ countriesRouter.get('/', async (_req, res, next) => {
         lat: rc.capitalInfo?.latlng?.[0] ?? rc.latlng?.[0] ?? 0,
         lng: rc.capitalInfo?.latlng?.[1] ?? rc.latlng?.[1] ?? 0,
         hasNomadVisa: localData.hasNomadVisa(iso2),
+        climateData: clim ?? undefined,
         scores,
       });
     }

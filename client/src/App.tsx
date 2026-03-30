@@ -5,8 +5,8 @@ import { CountryList } from "./components/CountryList";
 import { WorldMap } from "./components/WorldMap";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
-import { defaultWeights } from "./utils/scoring";
-import type { CategoryKey, WeightMap } from "./utils/types";
+import { defaultClimatePreferences, defaultWeights } from "./utils/scoring";
+import type { CategoryKey, ClimatePreferences, WeightMap } from "./utils/types";
 import { CATEGORY_KEYS } from "./utils/types";
 import "./index.css";
 
@@ -41,10 +41,11 @@ export default function App() {
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
+  const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(defaultClimatePreferences);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
-  const ranked = useScoring(countries, weights, search, region, nomadVisaOnly);
+  const ranked = useScoring(countries, weights, search, region, nomadVisaOnly, climatePrefs);
 
   // Sync weights to URL for shareable links
   useEffect(() => {
@@ -166,6 +167,8 @@ export default function App() {
               weights={weights}
               onChange={handleWeightChange}
               onReset={handleReset}
+              climatePrefs={climatePrefs}
+              onClimatePrefsChange={setClimatePrefs}
             />
           )}
           <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
@@ -176,6 +179,8 @@ export default function App() {
             weights={weights}
             onChange={handleWeightChange}
             onReset={handleReset}
+            climatePrefs={climatePrefs}
+            onClimatePrefsChange={setClimatePrefs}
           />
           <CountryList
             ranked={ranked}

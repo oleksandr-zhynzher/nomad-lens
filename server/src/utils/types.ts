@@ -29,6 +29,19 @@ export type CategoryKey =
   | "governance"
   | "englishProficiency";
 
+// ─── Climate ─────────────────────────────────────────────────────────────────
+
+export type SeasonType = 'four_seasons' | 'mild_seasons' | 'tropical' | 'arid' | 'polar';
+
+export interface ClimateData {
+  annualMeanTemp: number;
+  annualPrecipitation: number;
+  tempRange: number;
+  hottestMonth: number;  // 0–11
+  coldestMonth: number;  // 0–11
+  seasonType: SeasonType;
+}
+
 // ─── Country ──────────────────────────────────────────────────────────────────
 
 export interface CountryData {
@@ -41,6 +54,7 @@ export interface CountryData {
   lat: number;
   lng: number;
   hasNomadVisa: boolean;
+  climateData?: ClimateData;
   scores: Record<CategoryKey, CategoryScore>;
 }
 
@@ -91,6 +105,11 @@ export interface EpiEntry {
   year: number;
 }
 
+// ─── Open-Meteo ──────────────────────────────────────────────────────────────
+
+/** Alias so openMeteo.ts can use the same shape */
+export type OpenMeteoClimate = ClimateData;
+
 // ─── World Bank ───────────────────────────────────────────────────────────────
 
 export interface WorldBankIndicatorMap {
@@ -112,13 +131,6 @@ export interface RestCountry {
   capital?: string[];
   capitalInfo?: { latlng?: [number, number] };
   latlng?: [number, number];
-}
-
-// ─── Open-Meteo ───────────────────────────────────────────────────────────────
-
-export interface OpenMeteoClimate {
-  annualMeanTemp: number; // °C
-  annualPrecipitation: number; // mm
 }
 
 // ─── WHO GHO ─────────────────────────────────────────────────────────────────

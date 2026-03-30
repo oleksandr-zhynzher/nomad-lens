@@ -109,6 +109,25 @@ export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
   englishProficiency: "EPI",
 };
 
+// ─── Climate ─────────────────────────────────────────────────────────────────
+
+export type SeasonType = 'four_seasons' | 'mild_seasons' | 'tropical' | 'arid' | 'polar';
+
+export interface ClimateData {
+  annualMeanTemp: number;
+  annualPrecipitation: number;
+  tempRange: number;
+  hottestMonth: number;
+  coldestMonth: number;
+  seasonType: SeasonType;
+}
+
+export interface ClimatePreferences {
+  seasonType: SeasonType | 'any';
+  minTemp: number;
+  maxTemp: number;
+}
+
 // ─── Country ──────────────────────────────────────────────────────────────────
 
 export interface CountryData {
@@ -119,6 +138,7 @@ export interface CountryData {
   flagUrl: string;
   capital: string;
   hasNomadVisa?: boolean;
+  climateData?: ClimateData;
   scores: Record<CategoryKey, CategoryScore>;
 }
 
