@@ -30,9 +30,9 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
     <div
       data-country-code={country.code}
       className={`overflow-hidden transition-all duration-700 ${
-        highlighted ? "ring-2 ring-sky-400" : ""
+        highlighted ? "ring-2" : ""
       }`}
-      style={{ backgroundColor: bgColor, borderTop: `1px solid ${borderColor}` }}
+      style={{ backgroundColor: bgColor, borderTop: `1px solid ${borderColor}`, ...(highlighted && { borderColor: "var(--color-accent)", boxShadow: `0 0 0 2px var(--color-accent)` }) }}
     >
       {/* Main row */}
       <button

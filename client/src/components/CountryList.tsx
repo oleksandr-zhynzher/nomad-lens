@@ -12,11 +12,12 @@ interface CountryListProps {
 export function CountryList({ ranked, loading, error, onRetry, highlightedCode }: CountryListProps) {
   if (loading) {
     return (
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
         {Array.from({ length: 8 }).map((_, i) => (
           <div
             key={i}
-            className="h-14 rounded-xl bg-slate-800 animate-pulse border border-slate-700"
+            className="h-14 animate-pulse"
+            style={{ backgroundColor: "#1A1A1A", borderTop: "1px solid #333333" }}
           />
         ))}
       </div>
@@ -26,10 +27,11 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode }
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
-        <p className="text-red-400">{error}</p>
+        <p style={{ color: "var(--color-danger)", fontFamily: "Inter, sans-serif" }}>{error}</p>
         <button
           onClick={onRetry}
-          className="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-sm transition-colors"
+          className="px-4 py-2 rounded text-sm transition-colors"
+          style={{ backgroundColor: "var(--color-accent)", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontWeight: 500 }}
         >
           Retry
         </button>
@@ -39,7 +41,7 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode }
 
   if (ranked.length === 0) {
     return (
-      <p className="text-center text-slate-500 py-20">
+      <p className="text-center py-20" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "#666666" }}>
         No countries match your search.
       </p>
     );

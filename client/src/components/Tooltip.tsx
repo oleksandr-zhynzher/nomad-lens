@@ -58,7 +58,8 @@ export function Tooltip({ content, children, side = "top" }: TooltipProps) {
           <div
             role="tooltip"
             style={style}
-            className="pointer-events-none w-56 rounded-lg border border-slate-700 bg-slate-900 p-2.5 shadow-xl text-xs leading-relaxed text-slate-300"
+            className="pointer-events-none w-56 rounded p-2.5 shadow-xl text-xs leading-relaxed"
+            style={{ backgroundColor: "#1A1A1A", border: "1px solid #333333", color: "#CCCCCC", fontFamily: "Inter, sans-serif" }}
           >
             {content}
           </div>,

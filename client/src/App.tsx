@@ -161,11 +161,13 @@ export default function App() {
         {view === "map" && (
           <button
             onClick={() => setShowWeights((p) => !p)}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-xl border text-sm font-medium transition-colors ${
-              showWeights
-                ? "bg-sky-600 border-sky-500 text-white"
-                : "bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200"
-            }`}
+            className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: showWeights ? "var(--color-accent)" : "#1A1A1A",
+              borderColor: showWeights ? "var(--color-accent)" : "#333333",
+              color: showWeights ? "#FFFFFF" : "#999999",
+              fontFamily: "Inter, sans-serif"
+            }}
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
