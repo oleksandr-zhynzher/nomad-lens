@@ -82,7 +82,7 @@ export default function App() {
   );
 
   return (
-    <Layout>
+    <Layout view={view} onViewChange={setView}>
       <div className="mb-8 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">
           Find Your Ideal Country
@@ -94,23 +94,6 @@ export default function App() {
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
-        {/* View toggle */}
-        <div className="flex rounded-xl border border-slate-700 p-0.5 bg-slate-800 w-fit">
-          {(["list", "map"] as const).map((v) => (
-            <button
-              key={v}
-              onClick={() => setView(v)}
-              className={`px-4 py-1.5 rounded-[10px] text-sm font-medium transition-colors ${
-                view === v
-                  ? "bg-sky-600 text-white"
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              {v === "list" ? "🗂 List" : "🗺 Map"}
-            </button>
-          ))}
-        </div>
-
         {/* Weights toggle — only in map view */}
         {view === "map" && (
           <button
