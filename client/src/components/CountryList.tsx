@@ -46,15 +46,16 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode }
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <p className="text-xs text-slate-500 text-right pr-1">
+    <div className="flex flex-col">
+      <p className="text-xs text-right pr-1 mb-2" style={{ fontFamily: "Geist, sans-serif", color: "#666666" }}>
         {ranked.length} countries
       </p>
-      {ranked.map((r) => (
+      {ranked.map((r, index) => (
         <CountryCard
           key={r.country.code}
           ranked={r}
           highlighted={r.country.code === highlightedCode}
+          index={index}
         />
       ))}
     </div>
