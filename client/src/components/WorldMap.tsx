@@ -122,9 +122,6 @@ export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
           </div>
         ))}
       </div>
-          </div>
-        ))}
-      </div>
 
       <ComposableMap
         projection="geoNaturalEarth1"
