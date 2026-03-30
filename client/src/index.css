@@ -2,23 +2,29 @@
 
 @layer base {
   :root {
-    --color-bg: #0f172a;
-    --color-surface: #1e293b;
-    --color-surface-2: #334155;
-    --color-border: #475569;
-    --color-text: #f1f5f9;
-    --color-text-muted: #94a3b8;
-    --color-accent: #38bdf8;
-    --color-accent-dim: #0ea5e9;
-    --color-success: #4ade80;
-    --color-warn: #facc15;
-    --color-danger: #f87171;
+    --color-bg: #0F1114;
+    --color-surface: #1A1A1A;
+    --color-surface-2: #222222;
+    --color-surface-3: #141414;
+    --color-border: #333333;
+    --color-text: #FFFFFF;
+    --color-text-secondary: #CCCCCC;
+    --color-text-muted: #999999;
+    --color-text-dim: #666666;
+    --color-text-dimmer: #555555;
+    --color-text-dimmest: #444444;
+    --color-accent: #8F5A3C;
+    --color-accent-dim: #C2956A;
+    --color-success: #4CAF50;
+    --color-success-light: #8BC34A;
+    --color-warn: #FFC107;
+    --color-danger: #FF5722;
   }
 
   body {
     background-color: var(--color-bg);
     color: var(--color-text);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 
   * {

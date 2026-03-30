@@ -130,7 +130,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                     <div className="flex items-center justify-between mb-1">
                       <p className="text-xs text-slate-500">Preferred temp range</p>
                       <span className="text-xs font-mono text-sky-400">
-                        {climatePrefs.minTemp}\u00b0 \u2013 {climatePrefs.maxTemp}\u00b0C
+                        {climatePrefs.minTemp}° – {climatePrefs.maxTemp}°C
                       </span>
                     </div>
                     <div className="flex flex-col gap-2">
@@ -148,7 +148,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                           className="flex-1 h-1.5 rounded-full appearance-none bg-slate-700 accent-sky-400 cursor-pointer"
                           aria-label="Minimum preferred temperature"
                         />
-                        <span className="text-xs font-mono text-slate-400 w-8 text-right">{climatePrefs.minTemp}\u00b0</span>
+                        <span className="text-xs font-mono text-slate-400 w-8 text-right">{climatePrefs.minTemp}°</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-slate-500 w-6">Max</span>
@@ -164,7 +164,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                           className="flex-1 h-1.5 rounded-full appearance-none bg-slate-700 accent-sky-400 cursor-pointer"
                           aria-label="Maximum preferred temperature"
                         />
-                        <span className="text-xs font-mono text-slate-400 w-8 text-right">{climatePrefs.maxTemp}\u00b0</span>
+                        <span className="text-xs font-mono text-slate-400 w-8 text-right">{climatePrefs.maxTemp}°</span>
                       </div>
                     </div>
                   </div>
