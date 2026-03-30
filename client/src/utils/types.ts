@@ -118,6 +118,7 @@ export interface CountryData {
   population: number;
   flagUrl: string;
   capital: string;
+  hasNomadVisa?: boolean;
   scores: Record<CategoryKey, CategoryScore>;
 }
 

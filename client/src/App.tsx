@@ -40,10 +40,11 @@ export default function App() {
   const [view, setView] = useState<"list" | "map">("list");
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
+  const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
-  const ranked = useScoring(countries, weights, search, region);
+  const ranked = useScoring(countries, weights, search, region, nomadVisaOnly);
 
   // Sync weights to URL for shareable links
   useEffect(() => {
@@ -144,6 +145,16 @@ export default function App() {
             </option>
           ))}
         </select>
+        <button
+          onClick={() => setNomadVisaOnly((p) => !p)}
+          className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl border text-sm font-medium transition-colors ${
+            nomadVisaOnly
+              ? "bg-sky-600 border-sky-500 text-white"
+              : "bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200"
+          }`}
+        >
+          🛂 Nomad Visa
+        </button>
       </div>
 
       {view === "map" ? (

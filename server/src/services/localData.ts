@@ -4,6 +4,7 @@ import peaceJson from '../data/peace.json';
 import crimeJson from '../data/crime.json';
 import cpiJson from '../data/cpi.json';
 import epiJson from '../data/epi.json';
+import nomadVisaJson from '../data/nomadVisa.json';
 import type { HdiEntry, HappinessEntry, PeaceEntry, CrimeEntry, CpiEntry, EpiEntry } from '../utils/types';
 
 type JsonFile<T> = { data: T[] };
@@ -14,6 +15,8 @@ const peaceMap = new Map<string, PeaceEntry>();
 const crimeMap = new Map<string, CrimeEntry>();
 const cpiMap = new Map<string, CpiEntry>();
 const epiMap = new Map<string, EpiEntry>();
+
+const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
 
 (hdiJson as unknown as JsonFile<HdiEntry>).data.forEach((e) => hdiMap.set(e.code, e));
 (happinessJson as unknown as JsonFile<HappinessEntry>).data.forEach((e) => happinessMap.set(e.code, e));
@@ -29,4 +32,5 @@ export const localData = {
   getCrime: (code: string): CrimeEntry | undefined => crimeMap.get(code),
   getCpi: (code: string): CpiEntry | undefined => cpiMap.get(code),
   getEpi: (code: string): EpiEntry | undefined => epiMap.get(code),
+  hasNomadVisa: (code: string): boolean => nomadVisaSet.has(code.toUpperCase()),
 };

@@ -50,6 +50,11 @@ export function CountryCard({ ranked, highlighted = false }: CountryCardProps) {
         <div className="flex-1 min-w-0">
           <p className="font-medium text-slate-100 truncate">{country.name}</p>
           <p className="text-xs text-slate-500">{country.region}</p>
+          {country.hasNomadVisa && (
+            <span className="inline-block text-xs px-1.5 py-0.5 rounded bg-sky-900 text-sky-300 font-medium leading-tight mt-0.5">
+              🛂 Nomad Visa
+            </span>
+          )}
         </div>
 
         {/* Mini category dots */}

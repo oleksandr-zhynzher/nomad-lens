@@ -40,6 +40,7 @@ export interface CountryData {
   capital: string;
   lat: number;
   lng: number;
+  hasNomadVisa: boolean;
   scores: Record<CategoryKey, CategoryScore>;
 }
 

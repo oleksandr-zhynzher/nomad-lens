@@ -1,0 +1,11 @@
+{
+  "countries": [
+    "PT", "DE", "EE", "HR", "ES", "GR", "HU", "ME", "CZ", "IS",
+    "MT", "RO", "IT", "LV", "LT", "CY", "AL", "GE", "NO", "RS",
+    "BA", "SK",
+    "BB", "BM", "KY", "AG", "DM", "CV", "AI", "GD", "CW",
+    "CR", "PA", "EC", "CO", "AR", "BR",
+    "AE", "MU", "SC", "KE", "ZA",
+    "MY", "TH", "ID", "TW"
+  ]
+}

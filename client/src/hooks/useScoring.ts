@@ -7,6 +7,7 @@ export function useScoring(
   weights: WeightMap,
   searchQuery: string,
   regionFilter: string,
+  nomadVisaOnly: boolean,
 ): RankedCountry[] {
   return useMemo(() => {
     const filtered = countries.filter((c) => {
@@ -18,9 +19,11 @@ export function useScoring(
       const matchesRegion =
         regionFilter === "" || c.region === regionFilter;
 
-      return matchesSearch && matchesRegion;
+      const matchesNomadVisa = !nomadVisaOnly || c.hasNomadVisa === true;
+
+      return matchesSearch && matchesRegion && matchesNomadVisa;
     });
 
     return rankCountries(filtered, weights);
-  }, [countries, weights, searchQuery, regionFilter]);
+  }, [countries, weights, searchQuery, regionFilter, nomadVisaOnly]);
 }

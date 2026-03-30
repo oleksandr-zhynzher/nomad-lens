@@ -290,6 +290,7 @@ countriesRouter.get('/', async (_req, res, next) => {
         capital: rc.capital?.[0] ?? '',
         lat: rc.capitalInfo?.latlng?.[0] ?? rc.latlng?.[0] ?? 0,
         lng: rc.capitalInfo?.latlng?.[1] ?? rc.latlng?.[1] ?? 0,
+        hasNomadVisa: localData.hasNomadVisa(iso2),
         scores,
       });
     }
