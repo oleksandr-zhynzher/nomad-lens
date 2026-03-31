@@ -1,7 +1,24 @@
 import { useMemo, useState } from "react";
+import {
+  CirclePlus,
+  X,
+  TrendingUp,
+  Coins,
+  Wheat,
+  HeartPulse,
+  GraduationCap,
+  Leaf,
+  CloudSun,
+  Shield,
+  Wifi,
+  Smile,
+  Users,
+  Landmark,
+  Languages,
+  Globe,
+} from "lucide-react";
 import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { scoreColour } from "../utils/scoring";
 
 interface RegionComparisonProps {
   countries: CountryData[];
@@ -18,6 +35,24 @@ const REGION_COLORS: Record<string, string> = {
   Oceania: "#00CEC9",
 };
 
+const SLOT_COLORS = ["#8F5A3C", "#5B8FA8", "#6B9E6B", "#B07CC6", "#E07C4F", "#4EA8B0"] as const;
+
+const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
+  economy: TrendingUp,
+  affordability: Coins,
+  foodSecurity: Wheat,
+  healthcare: HeartPulse,
+  education: GraduationCap,
+  environment: Leaf,
+  climate: CloudSun,
+  safety: Shield,
+  infrastructure: Wifi,
+  happiness: Smile,
+  humanDevelopment: Users,
+  governance: Landmark,
+  englishProficiency: Languages,
+};
+
 interface RegionStats {
   name: string;
   count: number;
@@ -32,14 +67,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
     [countries],
   );
 
-  const [selected, setSelected] = useState<Set<string>>(() => new Set(allRegions));
-
-  // Recompute selected when regions change (e.g. data loads)
-  useMemo(() => {
-    if (allRegions.length > 0 && selected.size === 0) {
-      setSelected(new Set(allRegions));
-    }
-  }, [allRegions]);
+  const [selectedRegions, setSelectedRegions] = useState<(string | null)[]>([null, null, null, null, null, null]);
 
   const regionStats = useMemo(() => {
     const grouped: Record<string, CountryData[]> = {};
@@ -66,7 +94,6 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
         }
       }
 
-      // Weighted overall using same logic as scoring.ts
       let numerator = 0;
       let denominator = 0;
       for (const key of CATEGORY_KEYS) {
@@ -91,179 +118,321 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
     return stats;
   }, [countries, weights, allRegions]);
 
-  const selectedStats = regionStats.filter((r) => selected.has(r.name));
+  const statsMap = useMemo(() => {
+    const map: Record<string, RegionStats> = {};
+    for (const r of regionStats) map[r.name] = r;
+    return map;
+  }, [regionStats]);
 
-  const toggleRegion = (name: string) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(name)) {
-        next.delete(name);
-      } else {
-        next.add(name);
-      }
+  const handleRemove = (index: number) => {
+    setSelectedRegions((prev) => {
+      const next = [...prev];
+      next[index] = null;
       return next;
     });
   };
 
-  const toggleAll = () => {
-    if (selected.size === allRegions.length) {
-      setSelected(new Set());
-    } else {
-      setSelected(new Set(allRegions));
-    }
-  };
+  const activeSlots = selectedRegions
+    .map((name, i) => {
+      if (!name || !statsMap[name]) return null;
+      return { region: statsMap[name], color: SLOT_COLORS[i], index: i };
+    })
+    .filter(Boolean) as { region: RegionStats; color: string; index: number }[];
 
   return (
-    <div style={{ fontFamily: "Inter, sans-serif" }}>
-      {/* Region selector chips */}
-      <div style={{ marginBottom: "24px" }}>
-        <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#444444", marginBottom: "12px" }}>
-          COMPARE REGIONS
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
-          <button
-            onClick={toggleAll}
-            style={{
-              fontFamily: "Geist, sans-serif",
-              fontSize: "12px",
-              padding: "6px 12px",
-              borderRadius: "9999px",
-              backgroundColor: selected.size === allRegions.length ? "var(--color-accent)" : "#1C1C1C",
-              color: selected.size === allRegions.length ? "#FFFFFF" : "#666666",
-              border: selected.size === allRegions.length ? "none" : "1px solid #2C2C2C",
-              cursor: "pointer",
-            }}
-          >
-            All Regions
-          </button>
-          {regionStats.map((r) => (
-            <button
-              key={r.name}
-              onClick={() => toggleRegion(r.name)}
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "12px",
-                padding: "6px 12px",
-                borderRadius: "9999px",
-                backgroundColor: selected.has(r.name) ? r.color + "22" : "#1C1C1C",
-                color: selected.has(r.name) ? r.color : "#666666",
-                border: selected.has(r.name) ? `1px solid ${r.color}55` : "1px solid #2C2C2C",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
+    <div>
+      {/* Region selector slots */}
+      <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))" }}>
+        {selectedRegions.map((name, i) => {
+          const region = name ? statsMap[name] : null;
+          const color = SLOT_COLORS[i];
+
+          if (region) {
+            return (
+              <FilledRegionSlot
+                key={i}
+                region={region}
+                color={color}
+                onRemove={() => handleRemove(i)}
+              />
+            );
+          }
+
+          return (
+            <EmptyRegionSlot
+              key={i}
+              color={color}
+              allRegions={regionStats}
+              excludedNames={selectedRegions.filter(Boolean) as string[]}
+              onSelect={(r) => {
+                setSelectedRegions((prev) => {
+                  const next = [...prev];
+                  next[i] = r;
+                  return next;
+                });
               }}
-            >
-              <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: r.color, display: "inline-block" }} />
-              {r.name}
-              <span style={{ color: "#555555", fontSize: "10px" }}>({r.count})</span>
-            </button>
-          ))}
-        </div>
+            />
+          );
+        })}
       </div>
 
-      {/* Overall Score section */}
-      <BarSection
-        title="OVERALL SCORE"
-        regions={selectedStats
-          .map((r) => ({ name: r.name, count: r.count, color: r.color, value: r.overall }))
-          .sort((a, b) => b.value - a.value)}
-      />
+      {/* Indicator grid */}
+      {activeSlots.length > 0 && (
+        <div className="mt-8">
+          {/* Separator */}
+          <div style={{ height: "1px", backgroundColor: "#1C1C1C", marginBottom: "0" }} />
 
-      {/* Per-category sections */}
-      {CATEGORY_KEYS.map((key) => (
-        <BarSection
-          key={key}
-          title={CATEGORY_LABELS[key].toUpperCase()}
-          regions={selectedStats
-            .map((r) => ({
-              name: r.name,
-              count: r.count,
-              color: r.color,
-              value: r.categories[key].avg,
-            }))
-            .sort((a, b) => (b.value ?? -1) - (a.value ?? -1))}
-        />
-      ))}
+          {/* Column header */}
+          <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
+            <div style={{ width: "240px", flexShrink: 0 }}>
+              <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
+                Indicator
+              </span>
+            </div>
+            {activeSlots.map((slot) => (
+              <div key={slot.index} className="flex-1 flex items-center justify-center gap-1.5">
+                <div className="rounded-full" style={{ width: "8px", height: "8px", backgroundColor: slot.color }} />
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: slot.color }}>
+                  {slot.region.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Indicator rows */}
+          {CATEGORY_KEYS.map((key) => {
+            const Icon = CATEGORY_ICONS[key];
+            return (
+              <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>
+                <div className="flex items-center gap-2.5" style={{ width: "240px", flexShrink: 0 }}>
+                  <Icon size={16} style={{ color: "#555555" }} />
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#777777" }}>
+                    {CATEGORY_LABELS[key]}
+                  </span>
+                </div>
+                {activeSlots.map((slot) => {
+                  const val = slot.region.categories[key].avg;
+                  return (
+                    <div key={slot.index} className="flex-1 text-center">
+                      <span
+                        style={{
+                          fontFamily: "IBM Plex Mono, monospace",
+                          fontSize: "22px",
+                          fontWeight: 600,
+                          color: val != null ? slot.color : "#333333",
+                        }}
+                      >
+                        {val != null ? val.toFixed(1) : "—"}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
 
-interface BarRegion {
-  name: string;
-  count: number;
+/* ─── Filled region slot ────────────────────────────────────────────────────── */
+
+function FilledRegionSlot({
+  region,
+  color,
+  onRemove,
+}: {
+  region: RegionStats;
   color: string;
-  value: number | null;
+  onRemove: () => void;
+}) {
+  return (
+    <div
+      className="relative rounded-lg p-5 flex flex-col items-center gap-3"
+      style={{
+        backgroundColor: `${color}18`,
+        border: `1px solid ${color}33`,
+      }}
+    >
+      {/* Remove button */}
+      <button
+        onClick={onRemove}
+        className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
+        style={{ opacity: 0.5, color: "#999999", fontFamily: "Geist, sans-serif", fontSize: "11px" }}
+      >
+        <X size={14} />
+      </button>
+
+      {/* Region icon */}
+      <div
+        className="rounded-full flex items-center justify-center"
+        style={{ width: "48px", height: "48px", backgroundColor: `${region.color}22`, border: `1px solid ${region.color}44` }}
+      >
+        <Globe size={24} style={{ color: region.color }} />
+      </div>
+
+      {/* Name */}
+      <span
+        style={{
+          fontFamily: "Inter, sans-serif",
+          fontSize: "15px",
+          fontWeight: 600,
+          color: "#E8E9EB",
+          textAlign: "center",
+        }}
+      >
+        {region.name}
+      </span>
+
+      {/* Score */}
+      <div className="flex items-baseline gap-1">
+        <span
+          style={{
+            fontFamily: "Anton, sans-serif",
+            fontSize: "32px",
+            color,
+            lineHeight: 1,
+          }}
+        >
+          {region.overall.toFixed(1)}
+        </span>
+        <span
+          style={{
+            fontFamily: "Geist, sans-serif",
+            fontSize: "12px",
+            color: "#555555",
+          }}
+        >
+          /100
+        </span>
+      </div>
+
+      {/* Country count badge */}
+      <span
+        className="px-2 py-0.5 rounded-full"
+        style={{
+          fontFamily: "Geist, sans-serif",
+          fontSize: "10px",
+          color: "#999999",
+          backgroundColor: "#1C1C1C",
+          border: "1px solid #2C2C2C",
+        }}
+      >
+        {region.count} countries
+      </span>
+    </div>
+  );
 }
 
-function BarSection({ title, regions }: { title: string; regions: BarRegion[] }) {
-  if (regions.length === 0) return null;
+/* ─── Empty region slot ─────────────────────────────────────────────────────── */
+
+function EmptyRegionSlot({
+  color,
+  allRegions,
+  excludedNames,
+  onSelect,
+}: {
+  color: string;
+  allRegions: RegionStats[];
+  excludedNames: string[];
+  onSelect: (name: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  const available = allRegions.filter((r) => !excludedNames.includes(r.name));
 
   return (
-    <div style={{ marginBottom: "20px" }}>
-      <div style={{
-        fontFamily: "Geist, sans-serif",
-        fontSize: "10px",
-        fontWeight: 600,
-        letterSpacing: "2px",
-        textTransform: "uppercase",
-        color: "#555555",
-        marginBottom: "10px",
-      }}>
-        {title}
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-        {regions.map((r) => (
-          <div key={r.name} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            {/* Region label */}
-            <div style={{
-              width: "120px",
-              flexShrink: 0,
-              fontFamily: "Geist, sans-serif",
-              fontSize: "12px",
-              color: r.color,
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-            }}>
-              <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: r.color, flexShrink: 0 }} />
-              {r.name}
-            </div>
+    <div className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full rounded-lg p-5 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
+        style={{
+          backgroundColor: "#141416",
+          border: "1px dashed #252525",
+          minHeight: "180px",
+          cursor: "pointer",
+        }}
+      >
+        <CirclePlus size={28} style={{ color: "#444444" }} />
+        <span
+          style={{
+            fontFamily: "Geist, sans-serif",
+            fontSize: "12px",
+            color: "#555555",
+          }}
+        >
+          Add Region
+        </span>
+      </button>
 
-            {/* Bar track */}
-            <div style={{
-              flex: 1,
-              height: "28px",
-              backgroundColor: "#1E1E1E",
-              borderRadius: "4px",
-              position: "relative",
-              overflow: "hidden",
-            }}>
-              <div style={{
-                height: "100%",
-                width: r.value !== null ? `${r.value}%` : "0%",
-                backgroundColor: r.color + "44",
-                borderRadius: "4px",
-                transition: "width 0.4s ease",
-                borderRight: r.value !== null && r.value > 0 ? `2px solid ${r.color}` : "none",
-              }} />
+      {open && (
+        <div
+          className="absolute left-0 right-0 z-20 mt-1 rounded-lg overflow-hidden"
+          style={{
+            backgroundColor: "#1A1A1C",
+            border: "1px solid #2A2A2A",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+          }}
+        >
+          {available.map((r) => (
+            <button
+              key={r.name}
+              className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors text-left"
+              onClick={() => {
+                onSelect(r.name);
+                setOpen(false);
+              }}
+            >
+              <div
+                className="rounded-full"
+                style={{ width: "10px", height: "10px", backgroundColor: r.color, flexShrink: 0 }}
+              />
+              <span
+                className="flex-1"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  color: "#E8E9EB",
+                }}
+              >
+                {r.name}
+              </span>
+              <span
+                style={{
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "11px",
+                  color: "#555555",
+                }}
+              >
+                {r.count} countries
+              </span>
+              <span
+                style={{
+                  fontFamily: "IBM Plex Mono, monospace",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  color,
+                }}
+              >
+                {r.overall.toFixed(1)}
+              </span>
+            </button>
+          ))}
+          {available.length === 0 && (
+            <div
+              className="px-3 py-4 text-center"
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "13px",
+                color: "#555555",
+              }}
+            >
+              All regions added
             </div>
-
-            {/* Score value */}
-            <div style={{
-              width: "48px",
-              textAlign: "right",
-              flexShrink: 0,
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "13px",
-              fontWeight: 600,
-              color: r.value !== null ? scoreColour(r.value) : "#3A3A3A",
-            }}>
-              {r.value !== null ? r.value.toFixed(1) : "N/A"}
-            </div>
-          </div>
-        ))}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
