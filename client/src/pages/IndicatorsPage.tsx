@@ -14,7 +14,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
-import { InfoPageHeader } from "../components/InfoPageHeader";
+import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
 
 interface IndicatorCardProps {
@@ -233,10 +233,9 @@ const INDICATORS: IndicatorRow[] = [
 
 export function IndicatorsPage() {
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#0D0D0F" }}>
-      <InfoPageHeader activePage="indicators" />
+    <Layout activePage="indicators">
       <HeroSection
-        backgroundImage="/images/generated-1774980841973.png"
+        backgroundImage="/hero-map.png"
         eyebrow="REFERENCE"
         title="INDICATORS"
         subtitle="How each score is calculated — data sources, methodology, and weighting."
@@ -271,6 +270,6 @@ export function IndicatorsPage() {
           </div>
         ))}
       </div>
-    </div>
+    </Layout>
   );
 }

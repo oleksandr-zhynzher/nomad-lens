@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
-  view: "list" | "map" | "compare";
-  onViewChange: (view: "list" | "map" | "compare") => void;
+  view?: "list" | "map" | "compare";
+  onViewChange?: (view: "list" | "map" | "compare") => void;
+  activePage?: "data-sources" | "indicators";
 }
 
-export function Layout({ children, view, onViewChange }: LayoutProps) {
+export function Layout({ children, view, onViewChange, activePage }: LayoutProps) {
   return (
     <div className="min-h-screen text-slate-100" style={{ backgroundColor: "var(--color-bg)" }}>
       <header className="border-b sticky top-0 z-10" style={{ backgroundColor: "#0D0E10", borderColor: "#252525", height: "56px" }}>
@@ -52,7 +53,8 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
                 style={{
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
-                  color: "#666666",
+                  fontWeight: activePage === "indicators" ? 600 : "normal",
+                  color: activePage === "indicators" ? "#C2956A" : "#666666",
                   textDecoration: "none",
                 }}
               >
@@ -63,7 +65,8 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
                 style={{
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
-                  color: "#666666",
+                  fontWeight: activePage === "data-sources" ? 600 : "normal",
+                  color: activePage === "data-sources" ? "#C2956A" : "#666666",
                   textDecoration: "none",
                 }}
               >
@@ -73,6 +76,7 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
             {/* Divider */}
             <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
             {/* View toggle - segmented control */}
+            {view && onViewChange && (<>
             <div className="flex rounded-md p-1" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
               <button
                 onClick={() => onViewChange("list")}
@@ -120,6 +124,7 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
 
             {/* Divider */}
             <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
+            </>)}
 
             {/* GitHub link */}
             <a
@@ -138,7 +143,7 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
         </div>
       </header>
 
-      <main className={view === "compare" ? "" : "max-w-7xl mx-auto px-4 sm:px-6 py-6"}>{children}</main>
+      <main className={view === "compare" ? "" : view ? "max-w-7xl mx-auto px-4 sm:px-6 py-6" : ""}>{children}</main>
 
       <footer className="border-t mt-16 py-6 text-center text-xs" style={{ borderColor: "#333333", color: "#666666" }}>
         Data: World Bank · WHO · Open-Meteo · REST Countries · UNDP · World Happiness Report · Global Peace Index · UNODC

@@ -1,4 +1,4 @@
-import { InfoPageHeader } from "../components/InfoPageHeader";
+import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
 
 interface DataSourceCardProps {
@@ -180,10 +180,9 @@ const DATA_SOURCES: DataSourceCardProps[][] = [
 
 export function DataSourcesPage() {
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#0D0D0F" }}>
-      <InfoPageHeader activePage="data-sources" />
+    <Layout activePage="data-sources">
       <HeroSection
-        backgroundImage="/images/generated-1774980841973.png"
+        backgroundImage="/hero-map.png"
         eyebrow="REFERENCE"
         title="DATA SOURCES"
         subtitle="Transparent methodology — every score is traceable to its origin."
@@ -214,6 +213,6 @@ export function DataSourcesPage() {
           </div>
         ))}
       </div>
-    </div>
+    </Layout>
   );
 }
