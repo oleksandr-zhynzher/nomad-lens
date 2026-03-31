@@ -87,7 +87,7 @@ export function CountryComparison({ countries, weights }: Props) {
     <div>
       {/* Country selector — horizontal scroll */}
       <div
-        className="flex gap-4 pb-2"
+        className="flex items-stretch gap-4 pb-2"
         style={{ overflowX: "auto", scrollbarWidth: "thin" }}
       >
         {selectedCountries.map((slot) => {
@@ -99,6 +99,7 @@ export function CountryComparison({ countries, weights }: Props) {
                 style={{
                   backgroundColor: `${slot.color}18`,
                   border: `1px solid ${slot.color}33`,
+                  height: "100%",
                 }}
               >
                 <button
