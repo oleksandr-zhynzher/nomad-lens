@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
 import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { computeScore } from "../utils/scoring";
+import { computeScore, scoreColour } from "../utils/scoring";
 
 const SLOT_COLORS = [
   "#8F5A3C", "#5B8FA8", "#6B9E6B", "#B07CC6",
@@ -114,13 +114,14 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
       >
         {selectedCountries.map((slot) => {
           const score = computeScore(slot.country, weights);
+          const sColor = scoreColour(score);
           return (
             <div key={slot.country.code} style={{ flexShrink: 0, width: "180px" }}>
               <div
                 className="relative rounded-lg p-5 flex flex-col items-center gap-3"
                 style={{
-                  backgroundColor: `${slot.color}18`,
-                  border: `1px solid ${slot.color}33`,
+                  backgroundColor: `${sColor}18`,
+                  border: `1px solid ${sColor}33`,
                   height: "100%",
                 }}
               >
@@ -152,7 +153,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                 </span>
 
                 <div className="flex items-baseline gap-1">
-                  <span style={{ fontFamily: "Anton, sans-serif", fontSize: "32px", color: slot.color, lineHeight: 1 }}>
+                  <span style={{ fontFamily: "Anton, sans-serif", fontSize: "32px", color: sColor, lineHeight: 1 }}>
                     {score.toFixed(1)}
                   </span>
                   <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>/100</span>
@@ -229,7 +230,6 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
           <div style={{ maxHeight: "320px", overflowY: "auto" }}>
             {filtered.map((c) => {
               const score = computeScore(c, weights);
-              const nextColor = getSlotColor(selectedCodes.length);
               return (
                 <button
                   key={c.code}
@@ -241,7 +241,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                     {c.name}
                   </span>
                   <span style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>{c.region}</span>
-                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "13px", fontWeight: 600, color: nextColor }}>
+                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "13px", fontWeight: 600, color: scoreColour(score) }}>
                     {score.toFixed(1)}
                   </span>
                 </button>
@@ -272,8 +272,8 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
               </div>
               {selectedCountries.map((slot) => (
                 <div key={slot.index} className="flex-1 flex items-center justify-center gap-1.5" style={{ minWidth: "120px" }}>
-                  <div className="rounded-full" style={{ width: "8px", height: "8px", backgroundColor: slot.color }} />
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: slot.color }}>
+                  <img src={slot.country.flagUrl} alt={slot.country.name} className="rounded-full object-cover" style={{ width: "18px", height: "18px" }} />
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#AAAAAA" }}>
                     {slot.country.name}
                   </span>
                 </div>
@@ -300,7 +300,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "22px",
                             fontWeight: 600,
-                            color: val != null ? slot.color : "#333333",
+                            color: val != null ? scoreColour(val) : "#333333",
                           }}
                         >
                           {val != null ? val.toFixed(1) : "—"}
