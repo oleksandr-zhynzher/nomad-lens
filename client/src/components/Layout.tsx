@@ -1,119 +1,83 @@
 import type { ReactNode } from "react";
 import { List, Map } from "lucide-react";
-import type { AppView } from "../App";
 
 interface LayoutProps {
   children: ReactNode;
-  view: AppView;
-  onViewChange: (view: AppView) => void;
+  view: "list" | "map";
+  onViewChange: (view: "list" | "map") => void;
 }
 
 export function Layout({ children, view, onViewChange }: LayoutProps) {
-  const isReference = view === "data-sources" || view === "indicators";
-
   return (
     <div className="min-h-screen text-slate-100" style={{ backgroundColor: "var(--color-bg)" }}>
       <header className="border-b sticky top-0 z-10" style={{ backgroundColor: "#0D0E10", borderColor: "#252525", height: "56px" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
-          {/* Logo — clicking returns to main */}
-          <button
-            onClick={() => onViewChange("list")}
-            className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
-            style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
-          >
+          {/* Logo */}
+          <div className="flex items-center gap-2.5">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Outer compass circle */}
               <circle cx="16" cy="16" r="15" stroke="#8F5A3C" strokeWidth="1.5" fill="none" opacity="0.6" />
+              
+              {/* Compass needle - North (pointing up) */}
               <path d="M16 4 L20 16 L16 14 L12 16 Z" fill="#C2956A" />
+              
+              {/* Compass needle - South (pointing down) */}
               <path d="M16 28 L12 16 L16 18 L20 16 Z" fill="#8F5A3C" opacity="0.7" />
+              
+              {/* Center pivot point */}
               <circle cx="16" cy="16" r="2.5" fill="#C8B89A" />
               <circle cx="16" cy="16" r="1" fill="#0D0E10" />
+              
+              {/* Cardinal direction markers */}
               <line x1="16" y1="1" x2="16" y2="3" stroke="#C2956A" strokeWidth="1.5" strokeLinecap="round" />
               <line x1="16" y1="29" x2="16" y2="31" stroke="#C2956A" strokeWidth="1.5" strokeLinecap="round" />
               <line x1="1" y1="16" x2="3" y2="16" stroke="#C2956A" strokeWidth="1.5" strokeLinecap="round" />
               <line x1="29" y1="16" x2="31" y2="16" stroke="#C2956A" strokeWidth="1.5" strokeLinecap="round" />
+              
+              {/* Subtle path/journey arc */}
               <path d="M 8 24 Q 12 20, 16 16 Q 20 12, 24 8" stroke="#C8B89A" strokeWidth="1" fill="none" opacity="0.4" strokeDasharray="2 2" />
             </svg>
-            <span style={{ fontFamily: "Anton, sans-serif", fontSize: "20px", letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF" }}>
+            <span style={{ fontFamily: "Anton, sans-serif", fontSize: "20px", letterSpacing: "2px", textTransform: "uppercase" }}>
               NOMAD LENS
             </span>
-          </button>
+          </div>
 
-          {/* Right side */}
+          {/* Right side: View toggle + divider + GitHub */}
           <div className="flex items-center gap-4">
-            {isReference ? (
-              /* Reference page nav links */
-              <nav className="flex items-center gap-6">
-                <button
-                  onClick={() => onViewChange("data-sources")}
-                  className="transition-colors"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "0 0 2px 0",
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: view === "data-sources" ? 500 : 400,
-                    color: view === "data-sources" ? "var(--color-accent-dim)" : "#999999",
-                    borderBottom: view === "data-sources" ? "1px solid var(--color-accent-dim)" : "1px solid transparent",
-                  }}
-                >
-                  Data Sources
-                </button>
-                <button
-                  onClick={() => onViewChange("indicators")}
-                  className="transition-colors"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    cursor: "pointer",
-                    padding: "0 0 2px 0",
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: view === "indicators" ? 500 : 400,
-                    color: view === "indicators" ? "var(--color-accent-dim)" : "#999999",
-                    borderBottom: view === "indicators" ? "1px solid var(--color-accent-dim)" : "1px solid transparent",
-                  }}
-                >
-                  Indicators
-                </button>
-              </nav>
-            ) : (
-              /* Main view toggle — segmented control */
-              <div className="flex rounded-md p-1" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
-                <button
-                  onClick={() => onViewChange("list")}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
-                  style={{
-                    backgroundColor: view === "list" ? "var(--color-accent)" : "transparent",
-                    color: view === "list" ? "#FFFFFF" : "#999999",
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: view === "list" ? 500 : 400,
-                  }}
-                >
-                  <List size={16} />
-                  List
-                </button>
-                <button
-                  onClick={() => onViewChange("map")}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
-                  style={{
-                    backgroundColor: view === "map" ? "var(--color-accent)" : "transparent",
-                    color: view === "map" ? "#FFFFFF" : "#999999",
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: view === "map" ? 500 : 400,
-                  }}
-                >
-                  <Map size={16} />
-                  Map
-                </button>
-              </div>
-            )}
+            {/* View toggle - segmented control */}
+            <div className="flex rounded-md p-1" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
+              <button
+                onClick={() => onViewChange("list")}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor: view === "list" ? "var(--color-accent)" : "transparent",
+                  color: view === "list" ? "#FFFFFF" : "#999999",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: view === "list" ? 500 : 400,
+                }}
+              >
+                <List size={16} />
+                List
+              </button>
+              <button
+                onClick={() => onViewChange("map")}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor: view === "map" ? "var(--color-accent)" : "transparent",
+                  color: view === "map" ? "#FFFFFF" : "#999999",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: view === "map" ? 500 : 400,
+                }}
+              >
+                <Map size={16} />
+                Map
+              </button>
+            </div>
 
             {/* Divider */}
-            <div className="h-5 w-px" style={{ backgroundColor: "#252525" }} />
+            <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
 
             {/* GitHub link */}
             <a
@@ -132,7 +96,7 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
         </div>
       </header>
 
-      <main>{children}</main>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6">{children}</main>
 
       <footer className="border-t mt-16 py-6 text-center text-xs" style={{ borderColor: "#333333", color: "#666666" }}>
         Data: World Bank · WHO · Open-Meteo · REST Countries · UNDP · World Happiness Report · Global Peace Index · UNODC
@@ -140,4 +104,3 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
     </div>
   );
 }
-
