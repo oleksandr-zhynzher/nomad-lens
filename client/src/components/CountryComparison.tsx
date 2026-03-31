@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import {
   CirclePlus,
   X,
+  ArrowDownWideNarrow,
   TrendingUp,
   Coins,
   Wheat,
@@ -75,6 +76,18 @@ export function CountryComparison({ countries, weights }: Props) {
     setQuery("");
   };
 
+  const handleSortByScore = () => {
+    setSelectedCodes((prev) => {
+      const sorted = [...prev].sort((a, b) => {
+        const countryA = countries.find((c) => c.code === a);
+        const countryB = countries.find((c) => c.code === b);
+        if (!countryA || !countryB) return 0;
+        return computeScore(countryB, weights) - computeScore(countryA, weights);
+      });
+      return sorted;
+    });
+  };
+
   const filtered = countries
     .filter(
       (c) =>
@@ -85,6 +98,27 @@ export function CountryComparison({ countries, weights }: Props) {
 
   return (
     <div>
+      {/* Sort button — visible when 2+ countries selected */}
+      {selectedCodes.length > 1 && (
+        <div className="flex justify-end mb-3">
+          <button
+            onClick={handleSortByScore}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded border transition-colors hover:border-[#555555]"
+            style={{
+              backgroundColor: "#1A1A1A",
+              borderColor: "#333333",
+              color: "#999999",
+              fontFamily: "Geist, sans-serif",
+              fontSize: "12px",
+              cursor: "pointer",
+            }}
+          >
+            <ArrowDownWideNarrow size={14} />
+            Sort by Score
+          </button>
+        </div>
+      )}
+
       {/* Country selector — horizontal scroll */}
       <div
         className="flex items-stretch gap-4 pb-2"
