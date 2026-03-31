@@ -238,7 +238,7 @@ export default function App() {
                 onNomadVisaOnlyChange={setNomadVisaOnly}
               />
             )}
-            <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
+            <WorldMap ranked={ranked} onCountryClick={handleCountryClick} onToggleWeights={() => setShowWeights((p) => !p)} showWeights={showWeights} />
           </div>
         </div>
       ) : (

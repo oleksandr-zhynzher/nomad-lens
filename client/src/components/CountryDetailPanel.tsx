@@ -1,4 +1,4 @@
-import { createPortal } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import type { RankedCountry, SeasonType } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
