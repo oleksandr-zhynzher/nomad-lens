@@ -81,7 +81,7 @@ export function CountryComparison({ countries, weights }: Props) {
         !selectedCodes.includes(c.code) &&
         c.name.toLowerCase().includes(query.toLowerCase()),
     )
-    .slice(0, 8);
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div>

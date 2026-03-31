@@ -295,7 +295,7 @@ export default function App() {
                 }}
               >
                 {compareMode === "countries"
-                  ? "Select up to 4 countries to compare across all indicators"
+                  ? "Select countries to compare across all indicators"
                   : "Compare average scores across world regions"}
               </p>
             </div>
