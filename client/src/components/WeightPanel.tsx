@@ -245,21 +245,23 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
         <div className="flex flex-col gap-2" style={{ padding: "12px 16px" }}>
           <button
             onClick={onReset}
-            className="w-full rounded transition-colors"
+            className="w-full flex items-center justify-center gap-2 rounded transition-colors"
             style={{ 
-              backgroundColor: "#222222", 
-              color: "#999999", 
+              backgroundColor: "transparent", 
+              color: "var(--color-accent-dim)", 
               fontFamily: "Inter, sans-serif", 
               fontSize: "13px", 
               fontWeight: 500,
-              height: "36px",
-              border: "1px solid #3A3A3A"
+              height: "40px",
+              border: "1px solid #333333",
+              borderRadius: "6px",
             }}
           >
-            Reset Weights
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
+            Reset to defaults
           </button>
-          <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#555555", lineHeight: "1.4" }}>
-            Percentages shown are relative shares of all active weights.
+          <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#555555", lineHeight: "1.4", textAlign: "center" }}>
+            Percentages are relative shares of active weights
           </p>
         </div>
       </div>
