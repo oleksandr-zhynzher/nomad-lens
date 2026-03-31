@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Search, ArrowDownWideNarrow } from "lucide-react";
+import { Search, ArrowDownWideNarrow, Flag, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
@@ -310,7 +310,7 @@ export default function App() {
             <div className="flex rounded-md p-1" style={{ backgroundColor: "#1A1A1A", border: "1px solid #252525" }}>
               <button
                 onClick={() => setCompareMode("countries")}
-                className="px-4 py-1.5 rounded transition-colors"
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                 style={{
                   backgroundColor: compareMode === "countries" ? "var(--color-accent)" : "transparent",
                   color: compareMode === "countries" ? "#FFFFFF" : "#777777",
@@ -319,11 +319,12 @@ export default function App() {
                   fontWeight: compareMode === "countries" ? 500 : 400,
                 }}
               >
+                <Flag size={14} />
                 Countries
               </button>
               <button
                 onClick={() => setCompareMode("regions")}
-                className="px-4 py-1.5 rounded transition-colors"
+                className="flex items-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                 style={{
                   backgroundColor: compareMode === "regions" ? "var(--color-accent)" : "transparent",
                   color: compareMode === "regions" ? "#FFFFFF" : "#777777",
@@ -332,6 +333,7 @@ export default function App() {
                   fontWeight: compareMode === "regions" ? 500 : 400,
                 }}
               >
+                <Globe size={14} />
                 Regions
               </button>
             </div>
