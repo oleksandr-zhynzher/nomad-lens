@@ -157,7 +157,7 @@ export function CountryComparison({ countries, weights }: Props) {
         })}
 
         {/* Add button */}
-        <div ref={addBtnRef} style={{ flexShrink: 0, width: "180px", position: "relative" }}>
+        <div ref={addBtnRef} style={{ flexShrink: 0, width: "180px" }}>
           <button
             onClick={() => setDropdownOpen((p) => !p)}
             className="w-full rounded-lg p-5 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
@@ -173,64 +173,65 @@ export function CountryComparison({ countries, weights }: Props) {
               Add Country
             </span>
           </button>
-
-          {dropdownOpen && (
-            <div
-              className="absolute left-0 z-20 mt-1 rounded-lg overflow-hidden"
-              style={{
-                width: "280px",
-                backgroundColor: "#1A1A1C",
-                border: "1px solid #2A2A2A",
-                boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-              }}
-            >
-              <input
-                type="text"
-                autoFocus
-                placeholder="Search country…"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="w-full px-3 py-2.5 focus:outline-none"
-                style={{
-                  backgroundColor: "#141416",
-                  border: "none",
-                  borderBottom: "1px solid #252525",
-                  color: "#FFFFFF",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                }}
-              />
-              <div style={{ maxHeight: "320px", overflowY: "auto" }}>
-                {filtered.map((c) => {
-                  const score = computeScore(c, weights);
-                  const nextColor = getSlotColor(selectedCodes.length);
-                  return (
-                    <button
-                      key={c.code}
-                      className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors text-left"
-                      onClick={() => handleAdd(c.code)}
-                    >
-                      <img src={c.flagUrl} alt={c.name} className="rounded-full object-cover" style={{ width: "24px", height: "24px" }} />
-                      <span className="flex-1 truncate" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#E8E9EB" }}>
-                        {c.name}
-                      </span>
-                      <span style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>{c.region}</span>
-                      <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "13px", fontWeight: 600, color: nextColor }}>
-                        {score.toFixed(1)}
-                      </span>
-                    </button>
-                  );
-                })}
-                {filtered.length === 0 && (
-                  <div className="px-3 py-4 text-center" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#555555" }}>
-                    No countries found
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
         </div>
       </div>
+
+      {/* Dropdown — rendered outside the overflow container */}
+      {dropdownOpen && (
+        <div
+          className="z-20 mt-1 rounded-lg overflow-hidden"
+          style={{
+            width: "320px",
+            backgroundColor: "#1A1A1C",
+            border: "1px solid #2A2A2A",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+          }}
+        >
+          <input
+            type="text"
+            autoFocus
+            placeholder="Search country…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full px-3 py-2.5 focus:outline-none"
+            style={{
+              backgroundColor: "#141416",
+              border: "none",
+              borderBottom: "1px solid #252525",
+              color: "#FFFFFF",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "13px",
+            }}
+          />
+          <div style={{ maxHeight: "320px", overflowY: "auto" }}>
+            {filtered.map((c) => {
+              const score = computeScore(c, weights);
+              const nextColor = getSlotColor(selectedCodes.length);
+              return (
+                <button
+                  key={c.code}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors text-left"
+                  onClick={() => handleAdd(c.code)}
+                >
+                  <img src={c.flagUrl} alt={c.name} className="rounded-full object-cover" style={{ width: "24px", height: "24px" }} />
+                  <span className="flex-1 truncate" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#E8E9EB" }}>
+                    {c.name}
+                  </span>
+                  <span style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>{c.region}</span>
+                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "13px", fontWeight: 600, color: nextColor }}>
+                    {score.toFixed(1)}
+                  </span>
+                </button>
+              );
+            })}
+            {filtered.length === 0 && (
+              <div className="px-3 py-4 text-center" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#555555" }}>
+                No countries found
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Indicator grid */}
       {selectedCountries.length > 0 && (
