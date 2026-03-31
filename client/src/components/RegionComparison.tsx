@@ -14,6 +14,12 @@ import {
   Landmark,
   Languages,
   Globe,
+  Sun,
+  Mountain,
+  Tent,
+  Castle,
+  Lamp,
+  Waves,
 } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
@@ -31,6 +37,15 @@ const REGION_COLORS: Record<string, string> = {
   Europe: "#6C5CE7",
   "Middle East": "#FD79A8",
   Oceania: "#00CEC9",
+};
+
+const REGION_ICONS: Record<string, typeof Globe> = {
+  Africa: Sun,
+  Americas: Mountain,
+  Asia: Tent,
+  Europe: Castle,
+  "Middle East": Lamp,
+  Oceania: Waves,
 };
 
 const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
@@ -145,47 +160,73 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
 
   return (
     <div>
-      {/* Region toggle chips */}
-      <div style={{ marginBottom: "24px" }}>
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={toggleAll}
-            className="px-3 py-1.5 rounded-full transition-colors"
-            style={{
-              fontFamily: "Geist, sans-serif",
-              fontSize: "12px",
-              backgroundColor: enabled.size === allRegions.length ? "var(--color-accent)" : "#1C1C1C",
-              color: enabled.size === allRegions.length ? "#FFFFFF" : "#666666",
-              border: enabled.size === allRegions.length ? "none" : "1px solid #2C2C2C",
-              cursor: "pointer",
-            }}
-          >
-            All Regions
-          </button>
-          {regionStats.map((r) => {
-            const active = enabled.has(r.name);
-            return (
+      {/* Region cards — horizontal scroll, click to toggle */}
+      <div
+        className="flex gap-4 pb-2"
+        style={{ overflowX: "auto", scrollbarWidth: "thin" }}
+      >
+        {regionStats.map((r) => {
+          const active = enabled.has(r.name);
+          const RegionIcon = REGION_ICONS[r.name] || Globe;
+          return (
+            <div key={r.name} style={{ flexShrink: 0, width: "180px" }}>
               <button
-                key={r.name}
                 onClick={() => toggleRegion(r.name)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-colors"
+                className="w-full rounded-lg p-5 flex flex-col items-center gap-3 transition-all"
                 style={{
-                  fontFamily: "Geist, sans-serif",
-                  fontSize: "12px",
-                  backgroundColor: active ? `${r.color}22` : "#1C1C1C",
-                  color: active ? r.color : "#555555",
-                  border: active ? `1px solid ${r.color}55` : "1px solid #2C2C2C",
+                  backgroundColor: active ? `${r.color}18` : "#141416",
+                  border: active ? `1px solid ${r.color}33` : "1px solid #1C1C1C",
+                  opacity: active ? 1 : 0.4,
                   cursor: "pointer",
-                  opacity: active ? 1 : 0.6,
                 }}
               >
-                <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: r.color, display: "inline-block" }} />
-                {r.name}
-                <span style={{ fontSize: "10px", color: active ? `${r.color}99` : "#444444" }}>({r.count})</span>
+                <RegionIcon
+                  size={36}
+                  style={{ color: active ? r.color : "#555555" }}
+                />
+
+                <span
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "15px",
+                    fontWeight: 600,
+                    color: active ? "#E8E9EB" : "#555555",
+                    textAlign: "center",
+                  }}
+                >
+                  {r.name}
+                </span>
+
+                <div className="flex items-baseline gap-1">
+                  <span
+                    style={{
+                      fontFamily: "Anton, sans-serif",
+                      fontSize: "32px",
+                      color: active ? r.color : "#333333",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {r.overall.toFixed(1)}
+                  </span>
+                  <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>/100</span>
+                </div>
+
+                <span
+                  className="px-2 py-0.5 rounded-full"
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "10px",
+                    color: active ? "#999999" : "#444444",
+                    backgroundColor: "#1C1C1C",
+                    border: "1px solid #2C2C2C",
+                  }}
+                >
+                  {r.count} countries
+                </span>
               </button>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Indicator grid */}
