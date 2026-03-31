@@ -1,9 +1,42 @@
 import { useState } from "react";
-import { CirclePlus, X } from "lucide-react";
-import type { CountryData, WeightMap, ClimatePreferences } from "../utils/types";
+import {
+  CirclePlus,
+  X,
+  TrendingUp,
+  Coins,
+  Wheat,
+  HeartPulse,
+  GraduationCap,
+  Leaf,
+  CloudSun,
+  Shield,
+  Wifi,
+  Smile,
+  Users,
+  Landmark,
+  Languages,
+} from "lucide-react";
+import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
+import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { computeScore } from "../utils/scoring";
 
 const SLOT_COLORS = ["#8F5A3C", "#5B8FA8", "#6B9E6B", "#B07CC6"] as const;
+
+const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
+  economy: TrendingUp,
+  affordability: Coins,
+  foodSecurity: Wheat,
+  healthcare: HeartPulse,
+  education: GraduationCap,
+  environment: Leaf,
+  climate: CloudSun,
+  safety: Shield,
+  infrastructure: Wifi,
+  happiness: Smile,
+  humanDevelopment: Users,
+  governance: Landmark,
+  englishProficiency: Languages,
+};
 
 interface Props {
   countries: CountryData[];
@@ -25,6 +58,11 @@ export function CountryComparison({ countries, weights }: Props) {
       return next;
     });
   };
+
+  // Active selections for the grid
+  const activeSlots = selectedCodes
+    .map((code, i) => (code && selectedCountries[i] ? { country: selectedCountries[i]!, color: SLOT_COLORS[i], index: i } : null))
+    .filter(Boolean) as { country: CountryData; color: string; index: number }[];
 
   return (
     <div>
@@ -65,6 +103,63 @@ export function CountryComparison({ countries, weights }: Props) {
           );
         })}
       </div>
+
+      {/* Indicator grid */}
+      {activeSlots.length > 0 && (
+        <div className="mt-8">
+          {/* Separator */}
+          <div style={{ height: "1px", backgroundColor: "#1C1C1C", marginBottom: "0" }} />
+
+          {/* Column header */}
+          <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
+            <div style={{ width: "240px", flexShrink: 0 }}>
+              <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
+                Indicator
+              </span>
+            </div>
+            {activeSlots.map((slot) => (
+              <div key={slot.index} className="flex-1 flex items-center justify-center gap-1.5">
+                <div className="rounded-full" style={{ width: "8px", height: "8px", backgroundColor: slot.color }} />
+                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: slot.color }}>
+                  {slot.country.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Indicator rows */}
+          {CATEGORY_KEYS.map((key) => {
+            const Icon = CATEGORY_ICONS[key];
+            return (
+              <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>
+                <div className="flex items-center gap-2.5" style={{ width: "240px", flexShrink: 0 }}>
+                  <Icon size={16} style={{ color: "#555555" }} />
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#777777" }}>
+                    {CATEGORY_LABELS[key]}
+                  </span>
+                </div>
+                {activeSlots.map((slot) => {
+                  const val = slot.country.scores[key]?.value;
+                  return (
+                    <div key={slot.index} className="flex-1 text-center">
+                      <span
+                        style={{
+                          fontFamily: "IBM Plex Mono, monospace",
+                          fontSize: "22px",
+                          fontWeight: 600,
+                          color: val != null ? slot.color : "#333333",
+                        }}
+                      >
+                        {val != null ? val.toFixed(1) : "—"}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
