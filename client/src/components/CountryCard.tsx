@@ -21,10 +21,10 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
   const [expanded, setExpanded] = useState(false);
   const { country, finalScore, rank } = ranked;
   
-  // Alternating backgrounds
+  // Alternating backgrounds - lighter for better readability
   const isEven = index % 2 === 0;
-  const bgColor = isEven ? "#0F1012" : "#0C0D0E";
-  const borderColor = isEven ? "#1C1D1F" : "#161718";
+  const bgColor = isEven ? "#1A1A1C" : "#161618";
+  const borderColor = isEven ? "#252527" : "#1F1F21";
 
   return (
     <div
@@ -90,7 +90,7 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
               <div
                 key={key}
                 className="rounded-full"
-                style={{ width: "6px", height: "6px", backgroundColor: dotColour(val) }}
+                style={{ width: "12px", height: "12px", backgroundColor: dotColour(val) }}
               />
             );
           })}

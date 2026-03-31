@@ -3781,7 +3781,8 @@
                         "enabled": true,
                         "url": "./images/generated-1774902392352.png",
                         "mode": "fill"
-                      }
+                      },
+                      "layout": "none"
                     },
                     {
                       "type": "frame",

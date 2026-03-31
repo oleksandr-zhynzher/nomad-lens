@@ -11,7 +11,7 @@ interface ScoreBreakdownProps {
 
 export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="grid grid-cols-3 gap-3">
       {CATEGORY_KEYS.map((key) => {
         const category = country.scores[key];
         const value = category?.value ?? null;

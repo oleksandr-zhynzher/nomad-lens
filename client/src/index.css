@@ -30,4 +30,24 @@
   * {
     box-sizing: border-box;
   }
+
+  /* Range slider thumb styling */
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #C8B89A;
+    cursor: pointer;
+    border: none;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #C8B89A;
+    cursor: pointer;
+    border: none;
+  }
 }

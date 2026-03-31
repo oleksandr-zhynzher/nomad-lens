@@ -1,4 +1,5 @@
 import React from "react";
+import { Info } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap } from "../utils/types";
 import {
   CATEGORY_DATA_SOURCES,
@@ -7,6 +8,7 @@ import {
   CATEGORY_LABELS,
 } from "../utils/types";
 import { defaultWeights, weightPercent } from "../utils/scoring";
+import { Tooltip } from "./Tooltip";
 
 interface WeightSliderProps {
   categoryKey: CategoryKey;
@@ -18,13 +20,29 @@ interface WeightSliderProps {
 function WeightSlider({ categoryKey, value, onChange, weights }: WeightSliderProps) {
   const label = CATEGORY_LABELS[categoryKey];
   const pct = weightPercent(categoryKey, weights);
+  const description = CATEGORY_DESCRIPTIONS[categoryKey];
+  const dataSource = CATEGORY_DATA_SOURCES[categoryKey];
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col" style={{ gap: "5px" }}>
       <div className="flex items-center justify-between">
-        <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 400, color: "#FFFFFF" }}>
-          {label}
-        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 400, color: "#FFFFFF" }}>
+            {label}
+          </span>
+          <Tooltip
+            content={
+              <div>
+                <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>{label}</div>
+                <div style={{ marginBottom: "8px" }}>{description}</div>
+                <div style={{ fontSize: "10px", color: "#888888" }}>Source: {dataSource}</div>
+              </div>
+            }
+            side="top"
+          >
+            <Info size={14} color="#FFFFFF" style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }} />
+          </Tooltip>
+        </div>
         <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "var(--color-accent-dim)" }}>
           {pct}
         </span>
@@ -51,6 +69,8 @@ interface WeightPanelProps {
   onReset: () => void;
   climatePrefs: ClimatePreferences;
   onClimatePrefsChange: (prefs: ClimatePreferences) => void;
+  nomadVisaOnly: boolean;
+  onNomadVisaOnlyChange: (value: boolean) => void;
 }
 
 const SEASON_OPTIONS: Array<{ value: SeasonType | 'any'; label: string }> = [
@@ -62,29 +82,61 @@ const SEASON_OPTIONS: Array<{ value: SeasonType | 'any'; label: string }> = [
   { value: 'polar', label: 'Polar' },
 ];
 
-export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange }: WeightPanelProps) {
+export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange }: WeightPanelProps) {
   return (
-    <aside className="flex flex-col overflow-hidden sticky h-[calc(100vh-3.5rem-1.5rem)]" style={{ backgroundColor: "var(--color-surface)", top: "72px", width: "320px", borderRadius: "0" }}>
+    <aside className="flex flex-col overflow-hidden" style={{ backgroundColor: "#1A1A1A", width: "320px", height: "100vh" }}>
       {/* Fixed header */}
-      <div className="flex-shrink-0 px-5 pt-5 pb-3" style={{ borderBottom: "1px solid #333333" }}>
+      <div className="flex-shrink-0" style={{ padding: "14px 16px", borderBottom: "1px solid #333333" }}>
         <h2 style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF" }}>
           WEIGHTS & PREFERENCES
         </h2>
       </div>
 
       {/* Scrollable sliders */}
-      <div className="flex-1 overflow-y-auto px-5 pb-3">
-        <div className="flex flex-col gap-4 py-4">
+      <div className="flex-1 overflow-y-auto">
+        <div className="flex flex-col">
           {CATEGORY_KEYS.map((key) => (
             <React.Fragment key={key}>
-              <WeightSlider
+              <div style={{ padding: "8px 16px" }}>
+                <WeightSlider
                 categoryKey={key}
                 value={weights[key]}
                 onChange={onChange}
                 weights={weights}
               />
+              </div>
+              {key === 'englishProficiency' && (
+                <div className="flex items-center justify-between" style={{ padding: "8px 16px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 400, color: "#FFFFFF" }}>
+                      Nomad Visa Only
+                    </span>
+                    <Tooltip
+                      content={
+                        <div>
+                          <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Nomad Visa Filter</div>
+                          <div>When enabled, only shows countries that offer digital nomad visas or long-term remote work permits, making it easier to legally stay and work remotely for extended periods.</div>
+                        </div>
+                      }
+                      side="top"
+                    >
+                      <Info size={14} color="#FFFFFF" style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }} />
+                    </Tooltip>
+                  </div>
+                  <button
+                    onClick={() => onNomadVisaOnlyChange(!nomadVisaOnly)}
+                    className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
+                    style={{ backgroundColor: nomadVisaOnly ? "var(--color-accent)" : "#333333" }}
+                  >
+                    <span
+                      className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
+                      style={{ transform: nomadVisaOnly ? "translateX(26px)" : "translateX(4px)" }}
+                    />
+                  </button>
+                </div>
+              )}
               {key === 'climate' && (
-                <div className="flex flex-col gap-3 p-3 rounded" style={{ backgroundColor: "var(--color-surface-3)" }}>
+                <div className="flex flex-col gap-3" style={{ backgroundColor: "#141414", padding: "14px 20px 16px 20px" }}>
                   <div style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: "#888888" }}>
                     CLIMATE PREFERENCES
                   </div>
@@ -189,17 +241,27 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
       </div>
 
       {/* Fixed footer */}
-      <div className="flex-shrink-0 px-5 py-3 flex flex-col gap-2" style={{ borderTop: "1px solid #333333" }}>
-        <button
-          onClick={onReset}
-          className="w-full py-2 rounded transition-colors"
-          style={{ backgroundColor: "#222222", color: "#999999", fontFamily: "Inter, sans-serif", fontSize: "13px", fontWeight: 500 }}
-        >
-          Reset Weights
-        </button>
-        <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#555555", lineHeight: "1.4" }}>
-          Percentages shown are relative shares of all active weights.
-        </p>
+      <div className="flex-shrink-0" style={{ borderTop: "1px solid #333333", backgroundColor: "#1A1A1A" }}>
+        <div className="flex flex-col gap-2" style={{ padding: "12px 16px" }}>
+          <button
+            onClick={onReset}
+            className="w-full rounded transition-colors"
+            style={{ 
+              backgroundColor: "#222222", 
+              color: "#999999", 
+              fontFamily: "Inter, sans-serif", 
+              fontSize: "13px", 
+              fontWeight: 500,
+              height: "36px",
+              border: "1px solid #3A3A3A"
+            }}
+          >
+            Reset Weights
+          </button>
+          <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#555555", lineHeight: "1.4" }}>
+            Percentages shown are relative shares of all active weights.
+          </p>
+        </div>
       </div>
     </aside>
   );

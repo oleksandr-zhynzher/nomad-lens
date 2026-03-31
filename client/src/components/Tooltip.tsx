@@ -14,6 +14,7 @@ interface Coords {
 
 export function Tooltip({ content, children, side = "top" }: TooltipProps) {
   const [coords, setCoords] = useState<Coords | null>(null);
+  const [actualSide, setActualSide] = useState<"top" | "bottom">(side);
   const triggerRef = useRef<HTMLSpanElement>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -23,7 +24,19 @@ export function Tooltip({ content, children, side = "top" }: TooltipProps) {
     if (hideTimer.current) clearTimeout(hideTimer.current);
     if (triggerRef.current) {
       const r = triggerRef.current.getBoundingClientRect();
-      setCoords({ x: r.left + r.width / 2, y: side === "bottom" ? r.bottom : r.top });
+      
+      // Auto-flip to bottom if not enough space on top
+      const tooltipHeight = 200; // approximate max height with padding
+      const spaceAbove = r.top;
+      
+      let finalSide = side;
+      if (side === "top" && spaceAbove < tooltipHeight) {
+        // Not enough space above, flip to bottom
+        finalSide = "bottom";
+      }
+      
+      setActualSide(finalSide);
+      setCoords({ x: r.left + r.width / 2, y: finalSide === "bottom" ? r.bottom : r.top });
     }
   }
 
@@ -36,10 +49,10 @@ export function Tooltip({ content, children, side = "top" }: TooltipProps) {
         position: "fixed",
         left: coords.x,
         zIndex: 9999,
-        ...(side === "bottom"
+        ...(actualSide === "bottom"
           ? { top: coords.y + 8 }
           : { top: coords.y - 8, transform: "translateX(-50%) translateY(-100%)" }),
-        ...(side === "bottom" ? { transform: "translateX(-50%)" } : {}),
+        ...(actualSide === "bottom" ? { transform: "translateX(-50%)" } : {}),
       }
     : {};
 
@@ -57,9 +70,14 @@ export function Tooltip({ content, children, side = "top" }: TooltipProps) {
         createPortal(
           <div
             role="tooltip"
-            style={style}
             className="pointer-events-none w-56 rounded p-2.5 shadow-xl text-xs leading-relaxed"
-            style={{ backgroundColor: "#1A1A1A", border: "1px solid #333333", color: "#CCCCCC", fontFamily: "Inter, sans-serif" }}
+            style={{ 
+              ...style, 
+              backgroundColor: "#1A1A1A", 
+              border: "1px solid #333333", 
+              color: "#FFFFFF", 
+              fontFamily: "Inter, sans-serif" 
+            }}
           >
             {content}
           </div>,
