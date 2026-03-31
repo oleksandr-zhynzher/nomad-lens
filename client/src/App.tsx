@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Search } from "lucide-react";
+import { Search, ArrowDownWideNarrow } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
@@ -43,6 +43,8 @@ export default function App() {
   const [region, setRegion] = useState("");
   const [view, setView] = useState<"list" | "map" | "compare">("list");
   const [compareMode, setCompareMode] = useState<"regions" | "countries">("countries");
+  const [sortTrigger, setSortTrigger] = useState(0);
+  const [countrySelectionCount, setCountrySelectionCount] = useState(0);
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
@@ -350,6 +352,24 @@ export default function App() {
               </svg>
               Parameters
             </button>
+
+            {/* Sort button — visible when 2+ countries in country mode */}
+            {compareMode === "countries" && countrySelectionCount > 1 && (
+              <button
+                onClick={() => setSortTrigger((p) => p + 1)}
+                className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors hover:border-[#555555]"
+                style={{
+                  backgroundColor: "#1A1A1A",
+                  borderColor: "#333333",
+                  color: "#999999",
+                  fontFamily: "Inter, sans-serif",
+                  cursor: "pointer",
+                }}
+              >
+                <ArrowDownWideNarrow size={16} />
+                Sort by Score
+              </button>
+            )}
           </div>
 
           <div className={`grid gap-6 ${
@@ -369,7 +389,7 @@ export default function App() {
             {compareMode === "regions" ? (
               <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
             ) : (
-              <CountryComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
+              <CountryComparison countries={countries} weights={weights} climatePrefs={climatePrefs} sortTrigger={sortTrigger} onSelectionCount={setCountrySelectionCount} />
             )}
           </div>
         </div>
