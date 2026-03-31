@@ -17,8 +17,6 @@ const GEO_URL =
 interface WorldMapProps {
   ranked: RankedCountry[];
   onCountryClick: (iso2: string) => void;
-  onToggleWeights?: () => void;
-  showWeights?: boolean;
 }
 
 interface HoverInfo {
@@ -28,7 +26,7 @@ interface HoverInfo {
   y: number;
 }
 
-export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights }: WorldMapProps) {
+export function WorldMap({ ranked, onCountryClick }: WorldMapProps) {
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState<[number, number]>([0, 20]);
@@ -100,23 +98,11 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         <button
           onClick={() => { setZoom(1); setCenter([0, 20]); }}
           className="w-10 h-10 text-base flex items-center justify-center transition-colors"
-          style={{ color: "#999999", borderBottom: onToggleWeights ? "1px solid #333333" : undefined }}
+          style={{ color: "#999999" }}
           aria-label="Reset view"
         >
           ⌂
         </button>
-        {onToggleWeights && (
-          <button
-            onClick={onToggleWeights}
-            className="w-10 h-10 flex items-center justify-center transition-colors"
-            style={{ color: showWeights ? "var(--color-accent-dim)" : "#999999" }}
-            aria-label="Toggle parameters"
-          >
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
-          </button>
-        )}
       </div>
 
       {/* Legend */}
