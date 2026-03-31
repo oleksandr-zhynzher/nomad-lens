@@ -6,6 +6,7 @@ import { WeightPanel } from "./components/WeightPanel";
 import { CountryList } from "./components/CountryList";
 import { WorldMap } from "./components/WorldMap";
 import { RegionComparison } from "./components/RegionComparison";
+import { CountryComparison } from "./components/CountryComparison";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { defaultClimatePreferences, defaultWeights } from "./utils/scoring";
@@ -311,9 +312,7 @@ export default function App() {
             {compareMode === "regions" ? (
               <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
             ) : (
-              <div style={{ color: "#666666", fontFamily: "Inter, sans-serif", fontSize: "14px", padding: "48px 0", textAlign: "center" }}>
-                Country comparison coming soon…
-              </div>
+              <CountryComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
             )}
           </div>
         </div>
