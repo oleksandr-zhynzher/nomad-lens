@@ -244,7 +244,64 @@ export default function App() {
           </div>
         </div>
       ) : (
-        <div className="px-6 py-6">
+        <div>
+          {/* Hero band */}
+          <div
+            className="relative overflow-hidden"
+            style={{
+              height: "120px",
+              backgroundColor: "#141416",
+            }}
+          >
+            {/* Gradient overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(135deg, #0D0D0FCC 0%, transparent 60%)",
+              }}
+            />
+            <div className="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
+              <span
+                style={{
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  letterSpacing: "2.5px",
+                  textTransform: "uppercase",
+                  color: "var(--color-accent)",
+                  marginBottom: "6px",
+                }}
+              >
+                COMPARE
+              </span>
+              <h2
+                style={{
+                  fontFamily: "Anton, sans-serif",
+                  fontSize: "42px",
+                  fontWeight: 400,
+                  lineHeight: 1,
+                  color: "#E8E9EB",
+                  margin: 0,
+                }}
+              >
+                {compareMode === "countries" ? "COUNTRY COMPARISON" : "REGION COMPARISON"}
+              </h2>
+              <p
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "14px",
+                  color: "#666666",
+                  marginTop: "8px",
+                }}
+              >
+                {compareMode === "countries"
+                  ? "Select up to 4 countries to compare across all indicators"
+                  : "Compare average scores across world regions"}
+              </p>
+            </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
           {/* Mode toggle + Filters row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
             {/* Compare mode toggle pills */}
@@ -315,6 +372,7 @@ export default function App() {
               <CountryComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
             )}
           </div>
+        </div>
         </div>
       )}
     </Layout>
