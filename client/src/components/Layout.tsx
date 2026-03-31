@@ -150,7 +150,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
         </div>
       </header>
 
-      <main className={view === "compare" ? "" : view ? "max-w-7xl mx-auto px-4 sm:px-6 py-6" : ""}>{children}</main>
+      <main className={view === "compare" ? "" : "max-w-7xl mx-auto px-4 sm:px-6 py-6"}>{children}</main>
 
       <footer className="border-t mt-16 py-6 text-center text-xs" style={{ borderColor: "#333333", color: "#666666" }}>
         Data: World Bank · WHO · Open-Meteo · REST Countries · UNDP · World Happiness Report · Global Peace Index · UNODC
