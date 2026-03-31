@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
-import { List, Map } from "lucide-react";
+import { BarChart3, List, Map } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
-  view: "list" | "map";
-  onViewChange: (view: "list" | "map") => void;
+  view: "list" | "map" | "regions";
+  onViewChange: (view: "list" | "map" | "regions") => void;
 }
 
 export function Layout({ children, view, onViewChange }: LayoutProps) {
@@ -101,6 +101,20 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
               >
                 <Map size={16} />
                 Map
+              </button>
+              <button
+                onClick={() => onViewChange("regions")}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor: view === "regions" ? "var(--color-accent)" : "transparent",
+                  color: view === "regions" ? "#FFFFFF" : "#999999",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: view === "regions" ? 500 : 400,
+                }}
+              >
+                <BarChart3 size={16} />
+                Regions
               </button>
             </div>
 

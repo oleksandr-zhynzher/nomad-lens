@@ -5,6 +5,7 @@ import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
 import { CountryList } from "./components/CountryList";
 import { WorldMap } from "./components/WorldMap";
+import { RegionComparison } from "./components/RegionComparison";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { defaultClimatePreferences, defaultWeights } from "./utils/scoring";
@@ -39,7 +40,7 @@ export default function App() {
   );
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
-  const [view, setView] = useState<"list" | "map">("list");
+  const [view, setView] = useState<"list" | "map" | "regions">("list");
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
@@ -221,7 +222,7 @@ export default function App() {
             </div>
           </main>
         </div>
-      ) : (
+      ) : view === "map" ? (
         <div className="px-6 py-6">
           {/* Filters row */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -258,6 +259,45 @@ export default function App() {
               />
             )}
             <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
+          </div>
+        </div>
+      ) : (
+        <div className="px-6 py-6">
+          {/* Filters row */}
+          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+            {/* Weights toggle */}
+            <button
+              onClick={() => setShowWeights((p) => !p)}
+              className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors"
+              style={{
+                backgroundColor: showWeights ? "var(--color-accent)" : "#1A1A1A",
+                borderColor: showWeights ? "var(--color-accent)" : "#333333",
+                color: showWeights ? "#FFFFFF" : "#999999",
+                fontFamily: "Inter, sans-serif"
+              }}
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+              Parameters
+            </button>
+          </div>
+
+          <div className={`grid gap-6 ${
+            showWeights ? "grid-cols-1 lg:grid-cols-[300px_1fr]" : "grid-cols-1"
+          }`}>
+            {showWeights && (
+              <WeightPanel
+                weights={weights}
+                onChange={handleWeightChange}
+                onReset={handleReset}
+                climatePrefs={climatePrefs}
+                onClimatePrefsChange={setClimatePrefs}
+                nomadVisaOnly={nomadVisaOnly}
+                onNomadVisaOnlyChange={setNomadVisaOnly}
+              />
+            )}
+            <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
           </div>
         </div>
       )}
