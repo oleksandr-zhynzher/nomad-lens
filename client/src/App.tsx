@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Search, ArrowDownWideNarrow, Flag, Globe } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
 import { CountryList } from "./components/CountryList";
@@ -36,12 +36,17 @@ function weightsToSearch(weights: WeightMap): string {
 }
 
 export default function App() {
+  const [searchParams] = useSearchParams();
   const [weights, setWeights] = useState<WeightMap>(() =>
     weightsFromSearch(window.location.search),
   );
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
-  const [view, setView] = useState<"list" | "map" | "compare">("list");
+  const [view, setView] = useState<"list" | "map" | "compare">(() => {
+    const v = searchParams.get("view");
+    if (v === "list" || v === "map" || v === "compare") return v;
+    return "list";
+  });
   const [compareMode, setCompareMode] = useState<"regions" | "countries">("countries");
   const [sortTrigger, setSortTrigger] = useState(0);
   const [countrySelectionCount, setCountrySelectionCount] = useState(0);

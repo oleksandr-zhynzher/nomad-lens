@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { BarChart3, List, Map } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,6 +10,15 @@ interface LayoutProps {
 }
 
 export function Layout({ children, view, onViewChange, activePage }: LayoutProps) {
+  const navigate = useNavigate();
+
+  const handleViewClick = (v: "list" | "map" | "compare") => {
+    if (onViewChange) {
+      onViewChange(v);
+    } else {
+      navigate(`/?view=${v}`);
+    }
+  };
   return (
     <div className="min-h-screen text-slate-100" style={{ backgroundColor: "var(--color-bg)" }}>
       <header className="border-b sticky top-0 z-10" style={{ backgroundColor: "#0D0E10", borderColor: "#252525", height: "56px" }}>
@@ -76,10 +85,9 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
             {/* Divider */}
             <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
             {/* View toggle - segmented control */}
-            {view && onViewChange && (<>
             <div className="flex rounded-md p-1" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
               <button
-                onClick={() => onViewChange("list")}
+                onClick={() => handleViewClick("list")}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
                 style={{
                   backgroundColor: view === "list" ? "var(--color-accent)" : "transparent",
@@ -93,7 +101,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
                 List
               </button>
               <button
-                onClick={() => onViewChange("map")}
+                onClick={() => handleViewClick("map")}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
                 style={{
                   backgroundColor: view === "map" ? "var(--color-accent)" : "transparent",
@@ -107,7 +115,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
                 Map
               </button>
               <button
-                onClick={() => onViewChange("compare")}
+                onClick={() => handleViewClick("compare")}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
                 style={{
                   backgroundColor: view === "compare" ? "var(--color-accent)" : "transparent",
@@ -124,7 +132,6 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
 
             {/* Divider */}
             <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
-            </>)}
 
             {/* GitHub link */}
             <a
