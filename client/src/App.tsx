@@ -4,12 +4,28 @@ import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
 import { CountryList } from "./components/CountryList";
 import { WorldMap } from "./components/WorldMap";
+import { DataSourcesPage } from "./pages/DataSourcesPage";
+import { IndicatorsPage } from "./pages/IndicatorsPage";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { defaultClimatePreferences, defaultWeights } from "./utils/scoring";
 import type { CategoryKey, ClimatePreferences, WeightMap } from "./utils/types";
 import { CATEGORY_KEYS } from "./utils/types";
 import "./index.css";
+
+export type AppView = "list" | "map" | "data-sources" | "indicators";
+
+function viewFromPathname(pathname: string): AppView {
+  if (pathname === "/data-sources") return "data-sources";
+  if (pathname === "/indicators") return "indicators";
+  return "list";
+}
+
+function pathnameFromView(view: AppView): string {
+  if (view === "data-sources") return "/data-sources";
+  if (view === "indicators") return "/indicators";
+  return "/";
+}
 
 function weightsFromSearch(search: string): WeightMap {
   const params = new URLSearchParams(search);
@@ -38,7 +54,9 @@ export default function App() {
   );
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
-  const [view, setView] = useState<"list" | "map">("list");
+  const [view, setView] = useState<AppView>(() =>
+    viewFromPathname(window.location.pathname),
+  );
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
@@ -48,11 +66,24 @@ export default function App() {
   const { countries, loading, error, refresh } = useCountries();
   const ranked = useScoring(countries, weights, search, region, nomadVisaOnly, climatePrefs);
 
-  // Sync weights to URL for shareable links
+  // Sync weights to URL for shareable links (only on main views)
   useEffect(() => {
+    if (view !== "list" && view !== "map") return;
     const qs = weightsToSearch(weights);
     window.history.replaceState(null, "", "?" + qs);
-  }, [weights]);
+  }, [weights, view]);
+
+  // Sync view to URL pathname and handle browser back/forward
+  const handleViewChange = useCallback((next: AppView) => {
+    setView(next);
+    window.history.pushState(null, "", pathnameFromView(next));
+  }, []);
+
+  useEffect(() => {
+    const onPop = () => setView(viewFromPathname(window.location.pathname));
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   const handleWeightChange = useCallback(
     (key: CategoryKey, value: number) => {
@@ -66,7 +97,7 @@ export default function App() {
   }, []);
 
   const handleCountryClick = useCallback((iso2: string) => {
-    setView("list");
+    handleViewChange("list");
     if (highlightTimer.current) clearTimeout(highlightTimer.current);
     setHighlightedCode(iso2);
     // Scroll after React re-renders
@@ -75,7 +106,7 @@ export default function App() {
       if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
       highlightTimer.current = setTimeout(() => setHighlightedCode(null), 2500);
     }, 80);
-  }, []);
+  }, [handleViewChange]);
 
   const regions = useMemo(
     () => [...new Set(countries.map((c) => c.region))].sort(),
@@ -83,8 +114,12 @@ export default function App() {
   );
 
   return (
-    <Layout view={view} onViewChange={setView}>
-      {view === "list" ? (
+    <Layout view={view} onViewChange={handleViewChange}>
+      {view === "data-sources" ? (
+        <DataSourcesPage />
+      ) : view === "indicators" ? (
+        <IndicatorsPage />
+      ) : view === "list" ? (
         <div className="flex">
           {/* Left sidebar - Weight Panel */}
           <aside className="sticky top-14 self-start" style={{ width: "320px", height: "calc(100vh - 56px)", overflowY: "auto" }}>
@@ -216,7 +251,7 @@ export default function App() {
             </div>
           </main>
         </div>
-      ) : (
+      ) : view === "map" ? (
         <div className="px-6 py-6">
           {/* Filters row */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -255,7 +290,7 @@ export default function App() {
             <WorldMap ranked={ranked} onCountryClick={handleCountryClick} />
           </div>
         </div>
-      )}
+      ) : null}
     </Layout>
   );
 }
