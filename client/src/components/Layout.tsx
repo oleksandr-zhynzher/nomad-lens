@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
-  view: "list" | "map" | "regions";
-  onViewChange: (view: "list" | "map" | "regions") => void;
+  view: "list" | "map" | "compare";
+  onViewChange: (view: "list" | "map" | "compare") => void;
 }
 
 export function Layout({ children, view, onViewChange }: LayoutProps) {
@@ -103,18 +103,18 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
                 Map
               </button>
               <button
-                onClick={() => onViewChange("regions")}
+                onClick={() => onViewChange("compare")}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
                 style={{
-                  backgroundColor: view === "regions" ? "var(--color-accent)" : "transparent",
-                  color: view === "regions" ? "#FFFFFF" : "#999999",
+                  backgroundColor: view === "compare" ? "var(--color-accent)" : "transparent",
+                  color: view === "compare" ? "#FFFFFF" : "#999999",
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
-                  fontWeight: view === "regions" ? 500 : 400,
+                  fontWeight: view === "compare" ? 500 : 400,
                 }}
               >
                 <BarChart3 size={16} />
-                Regions
+                Compare
               </button>
             </div>
 

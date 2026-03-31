@@ -40,7 +40,8 @@ export default function App() {
   );
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
-  const [view, setView] = useState<"list" | "map" | "regions">("list");
+  const [view, setView] = useState<"list" | "map" | "compare">("list");
+  const [compareMode, setCompareMode] = useState<"regions" | "countries">("countries");
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
@@ -243,8 +244,38 @@ export default function App() {
         </div>
       ) : (
         <div className="px-6 py-6">
-          {/* Filters row */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          {/* Mode toggle + Filters row */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+            {/* Compare mode toggle pills */}
+            <div className="flex rounded-md p-1" style={{ backgroundColor: "#1A1A1A", border: "1px solid #252525" }}>
+              <button
+                onClick={() => setCompareMode("countries")}
+                className="px-4 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor: compareMode === "countries" ? "var(--color-accent)" : "transparent",
+                  color: compareMode === "countries" ? "#FFFFFF" : "#777777",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: compareMode === "countries" ? 500 : 400,
+                }}
+              >
+                Countries
+              </button>
+              <button
+                onClick={() => setCompareMode("regions")}
+                className="px-4 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor: compareMode === "regions" ? "var(--color-accent)" : "transparent",
+                  color: compareMode === "regions" ? "#FFFFFF" : "#777777",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: compareMode === "regions" ? 500 : 400,
+                }}
+              >
+                Regions
+              </button>
+            </div>
+
             {/* Weights toggle */}
             <button
               onClick={() => setShowWeights((p) => !p)}
@@ -277,7 +308,13 @@ export default function App() {
                 onNomadVisaOnlyChange={setNomadVisaOnly}
               />
             )}
-            <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
+            {compareMode === "regions" ? (
+              <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
+            ) : (
+              <div style={{ color: "#666666", fontFamily: "Inter, sans-serif", fontSize: "14px", padding: "48px 0", textAlign: "center" }}>
+                Country comparison coming soon…
+              </div>
+            )}
           </div>
         </div>
       )}
