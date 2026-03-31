@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
 import { CountryList } from "./components/CountryList";
@@ -141,15 +142,19 @@ export default function App() {
                 <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Countries</div>
               </div>
               <div className="w-px h-8" style={{ backgroundColor: "#333333" }} />
-              <div>
-                <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>13</div>
-                <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Indicators</div>
-              </div>
+              <Link to="/indicators" style={{ textDecoration: "none" }}>
+                <div>
+                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>13</div>
+                  <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Indicators</div>
+                </div>
+              </Link>
               <div className="w-px h-8" style={{ backgroundColor: "#333333" }} />
-              <div>
-                <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>8</div>
-                <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Data Sources</div>
-              </div>
+              <Link to="/data-sources" style={{ textDecoration: "none" }}>
+                <div>
+                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>8</div>
+                  <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Data Sources</div>
+                </div>
+              </Link>
             </div>
                 </div>
               </div>

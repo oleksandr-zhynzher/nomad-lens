@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { List, Map } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode;
@@ -42,8 +43,35 @@ export function Layout({ children, view, onViewChange }: LayoutProps) {
             </span>
           </div>
 
-          {/* Right side: View toggle + divider + GitHub */}
+          {/* Right side: nav links + divider + view toggle + divider + GitHub */}
           <div className="flex items-center gap-4">
+            {/* Info page nav links */}
+            <nav style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+              <Link
+                to="/indicators"
+                style={{
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  color: "#666666",
+                  textDecoration: "none",
+                }}
+              >
+                Indicators
+              </Link>
+              <Link
+                to="/data-sources"
+                style={{
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  color: "#666666",
+                  textDecoration: "none",
+                }}
+              >
+                Data Sources
+              </Link>
+            </nav>
+            {/* Divider */}
+            <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
             {/* View toggle - segmented control */}
             <div className="flex rounded-md p-1" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
               <button
