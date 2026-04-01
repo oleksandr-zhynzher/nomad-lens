@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Search, ArrowDownWideNarrow, Flag, Globe } from "lucide-react";
+import { Search, ArrowDownWideNarrow, Flag, Globe, SlidersHorizontal, X } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
@@ -54,6 +54,7 @@ export default function App() {
   const [showWeights, setShowWeights] = useState(false);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
   const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(defaultClimatePreferences);
+  const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
@@ -97,8 +98,8 @@ export default function App() {
     <Layout view={view} onViewChange={setView}>
       {view === "list" ? (
         <div className="flex">
-          {/* Left sidebar - Weight Panel */}
-          <aside className="sticky top-14 self-start" style={{ width: "320px", height: "calc(100vh - 56px)", overflowY: "auto" }}>
+          {/* Left sidebar - Weight Panel (hidden on mobile) */}
+          <aside className="hidden md:block sticky top-14 self-start" style={{ width: "320px", height: "calc(100vh - 56px)", overflowY: "auto" }}>
             <WeightPanel
               weights={weights}
               onChange={handleWeightChange}
@@ -110,12 +111,77 @@ export default function App() {
             />
           </aside>
 
+          {/* Mobile parameters bottom sheet */}
+          {mobileParamsOpen && (
+            <div className="md:hidden fixed inset-0 z-50 flex flex-col" onClick={() => setMobileParamsOpen(false)}>
+              <div className="flex-1" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />
+              <div
+                className="relative flex flex-col"
+                style={{ height: "85vh", backgroundColor: "#1A1A1A", borderTopLeftRadius: "12px", borderTopRightRadius: "12px" }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Drag handle */}
+                <div className="flex justify-center pt-3 pb-1 shrink-0">
+                  <div style={{ width: "36px", height: "4px", borderRadius: "2px", backgroundColor: "#444444" }} />
+                </div>
+                {/* Close button */}
+                <div className="flex items-center justify-between px-4 pb-2 shrink-0">
+                  <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: "#999999" }}>
+                    Weights & Preferences
+                  </span>
+                  <button
+                    onClick={() => setMobileParamsOpen(false)}
+                    className="flex items-center justify-center"
+                    style={{ width: "32px", height: "32px", borderRadius: "4px", backgroundColor: "#333333", color: "#999999" }}
+                    aria-label="Close parameters"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+                <div className="flex-1 overflow-y-auto">
+                  <WeightPanel
+                    weights={weights}
+                    onChange={handleWeightChange}
+                    onReset={handleReset}
+                    climatePrefs={climatePrefs}
+                    onClimatePrefsChange={setClimatePrefs}
+                    nomadVisaOnly={nomadVisaOnly}
+                    onNomadVisaOnlyChange={setNomadVisaOnly}
+                    mobile
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Mobile FAB - Parameters button */}
+          <button
+            className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg"
+            style={{
+              bottom: "24px",
+              right: "16px",
+              height: "48px",
+              paddingLeft: "16px",
+              paddingRight: "18px",
+              borderRadius: "24px",
+              backgroundColor: "var(--color-accent)",
+              color: "#FFFFFF",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "14px",
+              fontWeight: 600,
+            }}
+            onClick={() => setMobileParamsOpen(true)}
+            aria-label="Open parameters"
+          >
+            <SlidersHorizontal size={18} />
+            Parameters
+          </button>
+
           {/* Right content area */}
-          <main className="flex-1" style={{ backgroundColor: "#0F1114" }}>
-            <div className="px-6 py-6">
+          <main className="flex-1 min-w-0" style={{ backgroundColor: "#0F1114" }}>
+            <div className="px-4 py-4 md:px-6 md:py-6">
               {/* Hero section */}
-              <div className="relative mb-12 rounded-lg overflow-hidden" style={{ 
-                height: "320px", 
+              <div className="relative mb-6 md:mb-12 rounded-lg overflow-hidden" style={{ 
                 background: "#0A0D12",
                 backgroundImage: `url('/hero-map.png')`,
                 backgroundSize: "cover",
@@ -127,41 +193,41 @@ export default function App() {
                   background: "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)"
                 }} />
                 
-                <div className="relative h-full flex flex-col justify-end px-12 pb-12">
+                <div className="relative flex flex-col justify-end px-4 pb-4 md:px-12 md:pb-12" style={{ minHeight: "160px" }}>
             {/* Eyebrow */}
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-2 md:mb-3">
               <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--color-accent)" }} />
               <span style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", fontWeight: 500, letterSpacing: "2.5px", textTransform: "uppercase", color: "var(--color-accent-dim)" }}>
                 DISCOVER · COMPARE · DECIDE
               </span>
             </div>
-            {/* H1 */}
-            <h1 style={{ fontFamily: "Anton, sans-serif", fontSize: "64px", fontWeight: 400, lineHeight: "0.95", color: "#FFFFFF", marginBottom: "12px" }}>
+            {/* H1 — responsive font */}
+            <h1 className="text-3xl md:text-6xl" style={{ fontFamily: "Anton, sans-serif", fontWeight: 400, lineHeight: "0.95", color: "#FFFFFF", marginBottom: "8px" }}>
               FIND YOUR NEXT COUNTRY
             </h1>
             {/* Tagline */}
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "#777777", maxWidth: "580px", marginBottom: "20px" }}>
+            <p className="hidden md:block" style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "#777777", maxWidth: "580px", marginBottom: "20px" }}>
               Personalised rankings for digital nomads — live data from 8 global sources.
             </p>
             {/* Copper rule */}
-            <div style={{ width: "128px", height: "2px", backgroundColor: "var(--color-accent)", marginBottom: "16px" }} />
+            <div className="hidden md:block" style={{ width: "128px", height: "2px", backgroundColor: "var(--color-accent)", marginBottom: "16px" }} />
             {/* Stats row */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 md:gap-6">
               <div>
-                <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>180</div>
+                <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>180</div>
                 <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Countries</div>
               </div>
-              <div className="w-px h-8" style={{ backgroundColor: "#333333" }} />
+              <div className="w-px h-6 md:h-8" style={{ backgroundColor: "#333333" }} />
               <Link to="/indicators" style={{ textDecoration: "none" }}>
                 <div>
-                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>13</div>
+                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>13</div>
                   <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Indicators</div>
                 </div>
               </Link>
-              <div className="w-px h-8" style={{ backgroundColor: "#333333" }} />
+              <div className="w-px h-6 md:h-8" style={{ backgroundColor: "#333333" }} />
               <Link to="/data-sources" style={{ textDecoration: "none" }}>
                 <div>
-                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>8</div>
+                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>8</div>
                   <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Data Sources</div>
                 </div>
               </Link>
@@ -232,20 +298,22 @@ export default function App() {
           </main>
         </div>
       ) : view === "map" ? (
-        <div className="px-6 py-6">
-          <div className={`grid gap-6 ${
+        <div className="px-2 py-2 md:px-6 md:py-6">
+          <div className={`grid gap-4 md:gap-6 ${
             showWeights ? "grid-cols-1 lg:grid-cols-[300px_1fr]" : "grid-cols-1"
           }`}>
             {showWeights && (
-              <WeightPanel
-                weights={weights}
-                onChange={handleWeightChange}
-                onReset={handleReset}
-                climatePrefs={climatePrefs}
-                onClimatePrefsChange={setClimatePrefs}
-                nomadVisaOnly={nomadVisaOnly}
-                onNomadVisaOnlyChange={setNomadVisaOnly}
-              />
+              <div className="hidden md:block">
+                <WeightPanel
+                  weights={weights}
+                  onChange={handleWeightChange}
+                  onReset={handleReset}
+                  climatePrefs={climatePrefs}
+                  onClimatePrefsChange={setClimatePrefs}
+                  nomadVisaOnly={nomadVisaOnly}
+                  onNomadVisaOnlyChange={setNomadVisaOnly}
+                />
+              </div>
             )}
             <WorldMap ranked={ranked} onCountryClick={handleCountryClick} onToggleWeights={() => setShowWeights((p) => !p)} showWeights={showWeights} />
           </div>
@@ -256,7 +324,6 @@ export default function App() {
           <div
             className="relative overflow-hidden"
             style={{
-              height: "120px",
               backgroundColor: "#141416",
             }}
           >
@@ -267,7 +334,7 @@ export default function App() {
                 background: "linear-gradient(135deg, #0D0D0FCC 0%, transparent 60%)",
               }}
             />
-            <div className="relative h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
+            <div className="relative h-full max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-col justify-center" style={{ minHeight: "80px" }}>
               <span
                 style={{
                   fontFamily: "Geist, sans-serif",
@@ -282,9 +349,9 @@ export default function App() {
                 COMPARE
               </span>
               <h2
+                className="text-2xl md:text-4xl"
                 style={{
                   fontFamily: "Anton, sans-serif",
-                  fontSize: "42px",
                   fontWeight: 400,
                   lineHeight: 1,
                   color: "#E8E9EB",
@@ -293,7 +360,7 @@ export default function App() {
               >
                 {compareMode === "countries" ? "COUNTRY COMPARISON" : "REGION COMPARISON"}
               </h2>
-              <p
+              <p className="hidden md:block"
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: "14px",
@@ -308,14 +375,14 @@ export default function App() {
             </div>
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-          {/* Mode toggle + Filters row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+          <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
+          {/* Mode toggle + Parameters row */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
             {/* Compare mode toggle pills */}
-            <div className="flex rounded-md p-1" style={{ backgroundColor: "#1A1A1A", border: "1px solid #252525" }}>
+            <div className="flex w-full sm:w-auto rounded-md p-1" style={{ backgroundColor: "#1A1A1A", border: "1px solid #252525" }}>
               <button
                 onClick={() => setCompareMode("countries")}
-                className="flex items-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                 style={{
                   backgroundColor: compareMode === "countries" ? "var(--color-accent)" : "transparent",
                   color: compareMode === "countries" ? "#FFFFFF" : "#777777",
@@ -329,7 +396,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => setCompareMode("regions")}
-                className="flex items-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                 style={{
                   backgroundColor: compareMode === "regions" ? "var(--color-accent)" : "transparent",
                   color: compareMode === "regions" ? "#FFFFFF" : "#777777",
@@ -379,19 +446,21 @@ export default function App() {
             )}
           </div>
 
-          <div className={`grid gap-6 ${
+          <div className={`grid gap-4 md:gap-6 ${
             showWeights ? "grid-cols-1 lg:grid-cols-[300px_1fr]" : "grid-cols-1"
           }`}>
             {showWeights && (
-              <WeightPanel
-                weights={weights}
-                onChange={handleWeightChange}
-                onReset={handleReset}
-                climatePrefs={climatePrefs}
-                onClimatePrefsChange={setClimatePrefs}
-                nomadVisaOnly={nomadVisaOnly}
-                onNomadVisaOnlyChange={setNomadVisaOnly}
-              />
+              <div className="hidden md:block">
+                <WeightPanel
+                  weights={weights}
+                  onChange={handleWeightChange}
+                  onReset={handleReset}
+                  climatePrefs={climatePrefs}
+                  onClimatePrefsChange={setClimatePrefs}
+                  nomadVisaOnly={nomadVisaOnly}
+                  onNomadVisaOnlyChange={setNomadVisaOnly}
+                />
+              </div>
             )}
             {compareMode === "regions" ? (
               <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />

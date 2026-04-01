@@ -190,22 +190,18 @@ export function DataSourcesPage() {
 
       {/* Content zone */}
       <div
+        className="px-4 py-6 md:px-12 md:py-8"
         style={{
           backgroundColor: "#0D0D0F",
           display: "flex",
           flexDirection: "column",
           gap: "16px",
-          padding: "32px 48px",
         }}
       >
         {DATA_SOURCES.map((row, rowIdx) => (
           <div
             key={rowIdx}
-            style={{
-              display: "flex",
-              gap: "16px",
-              width: "100%",
-            }}
+            className="flex flex-col md:flex-row gap-4 w-full"
           >
             {row.map((card) => (
               <DataSourceCard key={card.name} {...card} />

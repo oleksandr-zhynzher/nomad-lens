@@ -71,6 +71,7 @@ interface WeightPanelProps {
   onClimatePrefsChange: (prefs: ClimatePreferences) => void;
   nomadVisaOnly: boolean;
   onNomadVisaOnlyChange: (value: boolean) => void;
+  mobile?: boolean;
 }
 
 const SEASON_OPTIONS: Array<{ value: SeasonType | 'any'; label: string }> = [
@@ -82,15 +83,17 @@ const SEASON_OPTIONS: Array<{ value: SeasonType | 'any'; label: string }> = [
   { value: 'polar', label: 'Polar' },
 ];
 
-export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange }: WeightPanelProps) {
+export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange, mobile }: WeightPanelProps) {
   return (
-    <aside className="flex flex-col overflow-hidden" style={{ backgroundColor: "#1A1A1A", width: "320px", height: "100vh" }}>
-      {/* Fixed header */}
-      <div className="flex-shrink-0" style={{ padding: "14px 16px", borderBottom: "1px solid #333333" }}>
-        <h2 style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF" }}>
-          WEIGHTS & PREFERENCES
-        </h2>
-      </div>
+    <aside className="flex flex-col overflow-hidden" style={{ backgroundColor: "#1A1A1A", width: mobile ? "100%" : "320px", height: mobile ? "auto" : "100vh" }}>
+      {/* Fixed header (hidden in mobile bottom sheet mode) */}
+      {!mobile && (
+        <div className="flex-shrink-0" style={{ padding: "14px 16px", borderBottom: "1px solid #333333" }}>
+          <h2 style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF" }}>
+            WEIGHTS & PREFERENCES
+          </h2>
+        </div>
+      )}
 
       {/* Scrollable sliders */}
       <div className="flex-1 overflow-y-auto">
@@ -114,7 +117,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                     <Tooltip
                       content={
                         <div>
-                          <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Nomad Visa Filter</div>
+                          <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Nomad Visa Parameter</div>
                           <div>When enabled, only shows countries that offer digital nomad visas or long-term remote work permits, making it easier to legally stay and work remotely for extended periods.</div>
                         </div>
                       }

@@ -36,13 +36,13 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
     >
       {/* Main row */}
       <button
-        className="w-full flex items-center gap-4 px-4 py-3 hover:brightness-110 transition-all text-left"
-        style={{ height: "64px" }}
+        className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 hover:brightness-110 transition-all text-left"
+        style={{ minHeight: "56px" }}
         onClick={() => setExpanded((p) => !p)}
         aria-expanded={expanded}
       >
         {/* Rank */}
-        <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 700, color: "var(--color-accent)", width: "32px", textAlign: "center" }}>
+        <span className="text-base md:text-lg" style={{ fontFamily: "IBM Plex Mono, monospace", fontWeight: 700, color: "var(--color-accent)", width: "28px", textAlign: "center", flexShrink: 0 }}>
           {rank}
         </span>
 
@@ -51,17 +51,17 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
           src={country.flagUrl}
           alt={`${country.name} flag`}
           className="object-cover shrink-0"
-          style={{ width: "28px", height: "19px", borderRadius: "2px" }}
+          style={{ width: "24px", height: "16px", borderRadius: "2px" }}
           loading="lazy"
         />
 
         {/* Name + region + badges */}
-        <div className="flex-1 min-w-0 flex flex-col gap-1">
-          <div className="flex items-center gap-2">
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", fontWeight: 600, color: "#FFFFFF" }}>
+        <div className="flex-1 min-w-0 flex flex-col gap-0.5">
+          <div className="flex items-center gap-2 min-w-0">
+            <p className="truncate" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", fontWeight: 600, color: "#FFFFFF" }}>
               {country.name}
             </p>
-            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>
+            <span className="hidden sm:inline shrink-0" style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>
               {country.region}
             </span>
           </div>
@@ -98,7 +98,7 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
 
         {/* Final score */}
         <div className="shrink-0">
-          <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 700, color: scoreColour(finalScore) }}>
+          <span className="text-lg md:text-xl" style={{ fontFamily: "IBM Plex Mono, monospace", fontWeight: 700, color: scoreColour(finalScore) }}>
             {finalScore.toFixed(1)}
           </span>
         </div>

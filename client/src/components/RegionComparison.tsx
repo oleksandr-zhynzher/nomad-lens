@@ -169,7 +169,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
           const active = enabled.has(r.name);
           const RegionIcon = REGION_ICONS[r.name] || Globe;
           return (
-            <div key={r.name} style={{ flexShrink: 0, width: "180px" }}>
+            <div key={r.name} className="shrink-0 w-[140px] md:w-[180px]">
               <button
                 onClick={() => toggleRegion(r.name)}
                 className="w-full rounded-lg p-5 flex flex-col items-center gap-3 transition-all"
@@ -232,13 +232,13 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
       {/* Indicator grid */}
       {activeRegions.length > 0 && (
         <div style={{ overflowX: "auto" }}>
-          <div style={{ minWidth: `${240 + activeRegions.length * 140}px` }}>
+          <div style={{ minWidth: `${160 + activeRegions.length * 120}px` }}>
             {/* Separator */}
             <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
             {/* Column header */}
             <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
-              <div style={{ width: "240px", flexShrink: 0 }}>
+              <div className="w-[160px] md:w-[240px] shrink-0">
                 <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
                   Indicator
                 </span>
@@ -255,7 +255,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
 
             {/* Overall row */}
             <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0", backgroundColor: "#0D0D0F" }}>
-              <div className="flex items-center gap-2.5" style={{ width: "240px", flexShrink: 0 }}>
+              <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
                 <TrendingUp size={16} style={{ color: "#888888" }} />
                 <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", fontWeight: 600, color: "#AAAAAA" }}>
                   Overall Score
@@ -275,7 +275,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
               const Icon = CATEGORY_ICONS[key];
               return (
                 <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>
-                  <div className="flex items-center gap-2.5" style={{ width: "240px", flexShrink: 0 }}>
+                  <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
                     <Icon size={16} style={{ color: "#555555" }} />
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#777777" }}>
                       {CATEGORY_LABELS[key]}

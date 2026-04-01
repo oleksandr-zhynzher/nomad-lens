@@ -80,10 +80,10 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
       {/* Zoom controls */}
-      <div className="absolute top-3 left-3 z-10 flex flex-col overflow-hidden" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
+      <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10 flex flex-col overflow-hidden" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
         <button
           onClick={() => setZoom((z) => Math.min(z * 1.5, 12))}
-          className="w-10 h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
+          className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
           style={{ color: "#999999", borderBottom: "1px solid #333333" }}
           aria-label="Zoom in"
         >
@@ -91,7 +91,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         </button>
         <button
           onClick={() => setZoom((z) => Math.max(z / 1.5, 1))}
-          className="w-10 h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
+          className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
           style={{ color: "#999999", borderBottom: onToggleWeights ? "1px solid #333333" : undefined }}
           aria-label="Zoom out"
         >
@@ -100,7 +100,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         {onToggleWeights && (
           <button
             onClick={onToggleWeights}
-            className="w-10 h-10 flex items-center justify-center transition-colors"
+            className="hidden md:flex w-10 h-10 items-center justify-center transition-colors"
             style={{ color: showWeights ? "var(--color-accent-dim)" : "#999999" }}
             aria-label="Toggle parameters"
           >
@@ -112,8 +112,8 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-3 left-3 z-10 px-3 py-2 flex flex-col gap-1.5" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
-        <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#666666", marginBottom: "4px" }}>SCORE</p>
+      <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 z-10 px-2 py-1.5 md:px-3 md:py-2 flex flex-col gap-1 md:gap-1.5" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
+        <p style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#666666", marginBottom: "2px" }}>SCORE</p>
         {[
           { color: "#4CAF50", label: "Excellent", range: "(75–100)" },
           { color: "#FFC107", label: "Moderate", range: "(50–74)" },

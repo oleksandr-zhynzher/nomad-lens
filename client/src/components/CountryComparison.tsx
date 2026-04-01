@@ -116,7 +116,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
           const score = computeScore(slot.country, weights);
           const sColor = scoreColour(score);
           return (
-            <div key={slot.country.code} style={{ flexShrink: 0, width: "180px" }}>
+            <div key={slot.country.code} className="shrink-0 w-[140px] md:w-[180px]">
               <div
                 className="relative rounded-lg p-5 flex flex-col items-center gap-3"
                 style={{
@@ -136,8 +136,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                 <img
                   src={slot.country.flagUrl}
                   alt={slot.country.name}
-                  className="rounded-full object-cover"
-                  style={{ width: "48px", height: "48px" }}
+                  className="rounded-full object-cover w-10 h-10 md:w-12 md:h-12"
                 />
 
                 <span
@@ -153,7 +152,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                 </span>
 
                 <div className="flex items-baseline gap-1">
-                  <span style={{ fontFamily: "Anton, sans-serif", fontSize: "32px", color: sColor, lineHeight: 1 }}>
+                  <span className="text-2xl md:text-[32px]" style={{ fontFamily: "Anton, sans-serif", color: sColor, lineHeight: 1 }}>
                     {score.toFixed(1)}
                   </span>
                   <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>/100</span>
@@ -181,7 +180,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
         })}
 
         {/* Add button */}
-        <div ref={addBtnRef} style={{ flexShrink: 0, width: "180px" }}>
+        <div ref={addBtnRef} className="shrink-0 w-[140px] md:w-[180px]">
           <button
             onClick={() => setDropdownOpen((p) => !p)}
             className="w-full rounded-lg p-5 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
@@ -203,9 +202,8 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
       {/* Dropdown — rendered outside the overflow container */}
       {dropdownOpen && (
         <div
-          className="z-20 mt-1 rounded-lg overflow-hidden"
+          className="z-20 mt-1 rounded-lg overflow-hidden w-full md:w-[320px]"
           style={{
-            width: "320px",
             backgroundColor: "#1A1A1C",
             border: "1px solid #2A2A2A",
             boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
@@ -259,13 +257,13 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
       {/* Indicator grid */}
       {selectedCountries.length > 0 && (
         <div className="mt-8" style={{ overflowX: "auto" }}>
-          <div style={{ minWidth: `${240 + selectedCountries.length * 140}px` }}>
+          <div style={{ minWidth: `${160 + selectedCountries.length * 120}px` }}>
             {/* Separator */}
             <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
             {/* Column header */}
             <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
-              <div style={{ width: "240px", flexShrink: 0 }}>
+              <div className="w-[160px] md:w-[240px] shrink-0">
                 <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
                   Indicator
                 </span>
@@ -285,7 +283,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
               const Icon = CATEGORY_ICONS[key];
               return (
                 <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>
-                  <div className="flex items-center gap-2.5" style={{ width: "240px", flexShrink: 0 }}>
+                  <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
                     <Icon size={16} style={{ color: "#555555" }} />
                     <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#777777" }}>
                       {CATEGORY_LABELS[key]}

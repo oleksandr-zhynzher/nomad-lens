@@ -26,16 +26,23 @@ export function CountryDetailPanel({
   const { country: c, finalScore, rank } = country;
 
   return createPortal(
-    <div className="fixed inset-0 z-40 flex" onClick={onClose}>
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-40 flex flex-col md:flex-row" onClick={onClose}>
+      {/* Backdrop — on desktop fills left side, on mobile fills top */}
       <div className="flex-1" style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }} />
 
-      {/* Drawer */}
+      {/* Drawer — right panel on desktop, bottom sheet on mobile */}
       <div
-        className="w-full flex flex-col overflow-hidden"
-        style={{ maxWidth: "380px", backgroundColor: "#1A1A1A" }}
+        className="w-full md:w-auto md:h-full flex flex-col overflow-hidden"
+        style={{ maxWidth: "100%", maxHeight: "90vh", backgroundColor: "#1A1A1A" }}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Mobile drag handle */}
+        <div className="flex md:hidden justify-center pt-2 pb-1 shrink-0">
+          <div style={{ width: "36px", height: "4px", borderRadius: "2px", backgroundColor: "#444444" }} />
+        </div>
+
+        {/* Desktop width constraint wrapper */}
+        <div className="flex flex-col flex-1 overflow-hidden md:w-[380px]">
         {/* Header */}
         <div className="flex items-start gap-3 px-5 pt-5 pb-4 shrink-0" style={{ backgroundColor: "#222222" }}>
           <img
@@ -116,6 +123,7 @@ export function CountryDetailPanel({
           >
             View in List →
           </button>
+        </div>
         </div>
       </div>
     </div>,

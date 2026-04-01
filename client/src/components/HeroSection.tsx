@@ -11,10 +11,10 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
       style={{
         position: "relative",
         width: "100%",
-        height: "180px",
         backgroundColor: "#0F1114",
         overflow: "hidden",
       }}
+      className="h-[120px] md:h-[180px]"
     >
       {/* Background image */}
       <div
@@ -39,6 +39,7 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
 
       {/* Text content */}
       <div
+        className="px-4 md:px-12"
         style={{
           position: "absolute",
           inset: 0,
@@ -46,7 +47,6 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
           flexDirection: "column",
           justifyContent: "center",
           gap: "10px",
-          padding: "0 48px",
         }}
       >
         <span
@@ -62,9 +62,9 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
           {eyebrow}
         </span>
         <h1
+          className="text-3xl md:text-[56px]"
           style={{
             fontFamily: "Anton, sans-serif",
-            fontSize: "56px",
             fontWeight: "normal",
             color: "#E8E9EB",
             margin: 0,
@@ -74,6 +74,7 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
           {title}
         </h1>
         <p
+          className="hidden md:block"
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: "15px",

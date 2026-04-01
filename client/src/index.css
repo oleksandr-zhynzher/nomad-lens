@@ -50,4 +50,21 @@
     cursor: pointer;
     border: none;
   }
+
+  /* Mobile touch optimizations */
+  @media (max-width: 767px) {
+    input[type="range"]::-webkit-slider-thumb {
+      width: 22px;
+      height: 22px;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  /* Prevent text selection on interactive elements */
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
