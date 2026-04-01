@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { computeClimateScore, rankCountries } from "../utils/scoring";
+import { applyClimatePrefs, rankCountries } from "../utils/scoring";
 import type { ClimatePreferences, CountryData, RankedCountry, WeightMap } from "../utils/types";
 
 export function useScoring(
@@ -26,19 +26,7 @@ export function useScoring(
     });
 
     // Override climate score with preference-based dynamic score
-    const withClimate = filtered.map((c) => {
-      if (!c.climateData) return c;
-      return {
-        ...c,
-        scores: {
-          ...c.scores,
-          climate: {
-            ...c.scores.climate,
-            value: computeClimateScore(c.climateData, climatePrefs),
-          },
-        },
-      };
-    });
+    const withClimate = applyClimatePrefs(filtered, climatePrefs);
 
     return rankCountries(withClimate, weights);
   }, [countries, weights, searchQuery, regionFilter, nomadVisaOnly, climatePrefs]);
