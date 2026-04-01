@@ -4,7 +4,7 @@ import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap } from "../
 import {
   CATEGORY_DATA_SOURCES,
   CATEGORY_DESCRIPTIONS,
-  CATEGORY_KEYS,
+  VISIBLE_CATEGORY_KEYS,
   CATEGORY_LABELS,
 } from "../utils/types";
 import { defaultWeights, weightPercent } from "../utils/scoring";
@@ -98,7 +98,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
       {/* Scrollable sliders */}
       <div className="flex-1 overflow-y-auto">
         <div className="flex flex-col">
-          {CATEGORY_KEYS.map((key) => (
+          {VISIBLE_CATEGORY_KEYS.map((key) => (
             <React.Fragment key={key}>
               <div style={{ padding: "8px 16px" }}>
                 <WeightSlider

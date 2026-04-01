@@ -17,7 +17,7 @@ import {
   Languages,
 } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
-import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
+import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { computeScore, scoreColour } from "../utils/scoring";
 
 const SLOT_COLORS = [
@@ -279,7 +279,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
             </div>
 
             {/* Indicator rows */}
-            {CATEGORY_KEYS.map((key) => {
+            {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];
               return (
                 <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>

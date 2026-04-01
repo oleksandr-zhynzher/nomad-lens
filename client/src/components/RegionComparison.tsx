@@ -22,7 +22,7 @@ import {
   Waves,
 } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
-import { CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
+import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 
 interface RegionComparisonProps {
   countries: CountryData[];
@@ -99,7 +99,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
       const regionCountries = grouped[regionName] || [];
       const categories = {} as RegionStats["categories"];
 
-      for (const key of CATEGORY_KEYS) {
+      for (const key of VISIBLE_CATEGORY_KEYS) {
         const values = regionCountries
           .map((c) => c.scores[key]?.value)
           .filter((v): v is number => v !== null && v !== undefined);
@@ -114,7 +114,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
 
       let numerator = 0;
       let denominator = 0;
-      for (const key of CATEGORY_KEYS) {
+      for (const key of VISIBLE_CATEGORY_KEYS) {
         const w = weights[key];
         if (w <= 0) continue;
         const avg = categories[key].avg;
@@ -271,7 +271,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
             </div>
 
             {/* Indicator rows */}
-            {CATEGORY_KEYS.map((key) => {
+            {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];
               return (
                 <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>

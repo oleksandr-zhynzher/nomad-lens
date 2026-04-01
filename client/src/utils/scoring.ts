@@ -7,7 +7,7 @@ import type {
   SeasonType,
   WeightMap,
 } from "./types";
-import { CATEGORY_KEYS } from "./types";
+import { CATEGORY_KEYS, HIDDEN_CATEGORIES } from "./types";
 
 /**
  * Compute a weighted composite score for a single country.
@@ -67,7 +67,9 @@ export function rankCountries(
  */
 export function defaultWeights(): WeightMap {
   const w = 50; // default slider position (out of 100)
-  return Object.fromEntries(CATEGORY_KEYS.map((k) => [k, w])) as WeightMap;
+  return Object.fromEntries(
+    CATEGORY_KEYS.map((k) => [k, HIDDEN_CATEGORIES.has(k) ? 0 : w]),
+  ) as WeightMap;
 }
 
 /**

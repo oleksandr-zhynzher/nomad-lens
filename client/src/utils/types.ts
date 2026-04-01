@@ -65,6 +65,16 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   "healthcareCost",
 ];
 
+/** Categories computed by the server but hidden from the UI. */
+export const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
+  "culturalHeritage",
+]);
+
+/** Only the categories visible in the UI (weights, breakdowns, comparisons). */
+export const VISIBLE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
+  (k) => !HIDDEN_CATEGORIES.has(k),
+);
+
 export const CATEGORY_LABELS: Record<CategoryKey, string> = {
   economy: "Economy",
   affordability: "Affordability",

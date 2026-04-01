@@ -20,7 +20,6 @@ import {
   Receipt,
   Briefcase,
   Plane,
-  Landmark,
   Stethoscope,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
@@ -307,27 +306,16 @@ const INDICATORS: IndicatorRow[] = [
       description:
         "Air passengers carried (World Bank) and number of countries reachable via direct flights (OpenFlights) — route connectivity for frequent-flying digital nomads.",
       source: "World Bank · OpenFlights",
-      weight: "Default weight 4%",
+      weight: "Default weight 5%",
     },
-    {
-      Icon: Landmark,
-      name: "Cultural Heritage",
-      description:
-        "Composite of UNESCO World Heritage Sites (tangible), UNESCO Intangible Cultural Heritage elements (traditions, cuisine, craftsmanship), and international tourism arrivals (World Bank) — cultural richness for nomads seeking immersive experiences.",
-      source: "UNESCO · World Bank",
-      weight: "Default weight 4%",
-    },
-  ],
-  [
     {
       Icon: Stethoscope,
       name: "Healthcare Cost",
       description:
         "Out-of-pocket health expenditure as percentage of total health spending — lower out-of-pocket costs mean more accessible and affordable healthcare.",
       source: "World Bank",
-      weight: "Default weight 4%",
+      weight: "Default weight 5%",
     },
-    null,
   ],
 ];
 

@@ -5,7 +5,7 @@ import {
   CATEGORY_ABBREVS,
   CATEGORY_DATA_SOURCES,
   CATEGORY_DESCRIPTIONS,
-  CATEGORY_KEYS,
+  VISIBLE_CATEGORY_KEYS,
   CATEGORY_LABELS,
 } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
@@ -84,7 +84,7 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
 
         {/* Sparkline dots */}
         <div className="hidden sm:flex gap-1 items-center">
-          {CATEGORY_KEYS.map((key) => {
+          {VISIBLE_CATEGORY_KEYS.map((key) => {
             const val = country.scores[key]?.value ?? null;
             return (
               <div

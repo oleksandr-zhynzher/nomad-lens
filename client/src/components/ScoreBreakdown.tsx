@@ -1,6 +1,6 @@
 import type { CountryData } from "../utils/types";
 import {
-  CATEGORY_KEYS,
+  VISIBLE_CATEGORY_KEYS,
   CATEGORY_LABELS,
 } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
@@ -12,7 +12,7 @@ interface ScoreBreakdownProps {
 export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
-      {CATEGORY_KEYS.map((key) => {
+      {VISIBLE_CATEGORY_KEYS.map((key) => {
         const category = country.scores[key];
         const value = category?.value ?? null;
 
