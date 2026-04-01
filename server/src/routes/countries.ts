@@ -349,11 +349,11 @@ countriesRouter.get('/', async (_req, res, next) => {
       const airConnectivity: CategoryScore = {
         value: average([
           logMinMax(airPax?.value ?? null, 100_000, 200_000_000),
-          logMinMax(airport?.largeAirports ?? null, 1, 200),
+          logMinMax(airport?.destinationCountries ?? null, 5, 110),
         ]),
         indicators: {
           ...(airPax?.value != null ? { airPassengers: ind(airPax.value, 'passengers', airPax.year) } : {}),
-          ...(airport ? { largeAirports: ind(airport.largeAirports, 'airports', airport.year) } : {}),
+          ...(airport ? { destinationCountries: ind(airport.destinationCountries, 'countries', airport.year) } : {}),
         },
       };
 

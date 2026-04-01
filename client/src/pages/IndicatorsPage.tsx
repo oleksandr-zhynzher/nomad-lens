@@ -305,8 +305,8 @@ const INDICATORS: IndicatorRow[] = [
       Icon: Plane,
       name: "Air Connectivity",
       description:
-        "Air passengers carried (World Bank) and large airport count (OurAirports) — hub connectivity for frequent-flying digital nomads.",
-      source: "World Bank · OurAirports",
+        "Air passengers carried (World Bank) and number of countries reachable via direct flights (OpenFlights) — route connectivity for frequent-flying digital nomads.",
+      source: "World Bank · OpenFlights",
       weight: "Default weight 4%",
     },
     {

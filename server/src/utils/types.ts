@@ -153,7 +153,7 @@ export interface StartupEntry {
 export interface AirportEntry {
   code: string; // ISO alpha-2
   name: string;
-  largeAirports: number;
+  destinationCountries: number;
   year: number;
 }
 
