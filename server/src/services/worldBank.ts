@@ -27,6 +27,13 @@ export const WB_INDICATORS = {
   govEffectiveness: 'GE.EST',
   regulatoryQuality: 'RQ.EST',
   voiceAccountability: 'VA.EST',
+  // ── New metrics ────────────────────────────────────────────────────────────
+  logistics: 'LP.LPI.OVRL.XQ',
+  protectedLand: 'ER.LND.PTLD.ZS',
+  forestArea: 'AG.LND.FRST.ZS',
+  taxRevenue: 'GC.TAX.TOTL.GD.ZS',
+  airPassengers: 'IS.AIR.PSGR',
+  healthExpendOOP: 'SH.XPD.OOPC.CH.ZS',
 } as const;
 
 type IndicatorCode = (typeof WB_INDICATORS)[keyof typeof WB_INDICATORS];

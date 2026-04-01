@@ -27,7 +27,17 @@ export type CategoryKey =
   | "happiness"
   | "humanDevelopment"
   | "governance"
-  | "englishProficiency";
+  | "englishProficiency"
+  | "digitalFreedom"
+  | "personalFreedom"
+  | "logistics"
+  | "biodiversity"
+  | "socialTolerance"
+  | "taxFriendliness"
+  | "startupEnvironment"
+  | "airConnectivity"
+  | "culturalHeritage"
+  | "healthcareCost";
 
 export const CATEGORY_KEYS: CategoryKey[] = [
   "economy",
@@ -43,6 +53,16 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   "humanDevelopment",
   "governance",
   "englishProficiency",
+  "digitalFreedom",
+  "personalFreedom",
+  "logistics",
+  "biodiversity",
+  "socialTolerance",
+  "taxFriendliness",
+  "startupEnvironment",
+  "airConnectivity",
+  "culturalHeritage",
+  "healthcareCost",
 ];
 
 export const CATEGORY_LABELS: Record<CategoryKey, string> = {
@@ -59,6 +79,16 @@ export const CATEGORY_LABELS: Record<CategoryKey, string> = {
   humanDevelopment: "Human Development",
   governance: "Governance",
   englishProficiency: "English Proficiency",
+  digitalFreedom: "Digital Freedom",
+  personalFreedom: "Personal Freedom",
+  logistics: "Logistics & Transport",
+  biodiversity: "Biodiversity & Nature",
+  socialTolerance: "Social Tolerance",
+  taxFriendliness: "Tax Friendliness",
+  startupEnvironment: "Startup Environment",
+  airConnectivity: "Air Connectivity",
+  culturalHeritage: "Cultural Heritage",
+  healthcareCost: "Healthcare Cost",
 };
 
 export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
@@ -75,6 +105,16 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   humanDevelopment: "UNDP Human Development Index (HDI)",
   governance: "Corruption control, rule of law, political stability, government effectiveness",
   englishProficiency: "EF English Proficiency Index 2025 — language accessibility for nomads (123 countries)",
+  digitalFreedom: "Freedom House Internet Freedom score — censorship, surveillance, and content restrictions",
+  personalFreedom: "CATO Human Freedom Index personal sub-index — movement, expression, and association",
+  logistics: "World Bank Logistics Performance Index — customs, infrastructure, and shipping efficiency",
+  biodiversity: "Protected land area and forest coverage — nature access for nomads",
+  socialTolerance: "LGBTQ+ rights composite — marriage equality, anti-discrimination protections, and legal status",
+  taxFriendliness: "Heritage Foundation Tax Burden and tax revenue as % of GDP — lighter-tax countries score higher",
+  startupEnvironment: "Heritage Foundation Business Freedom — ease of starting and running a business",
+  airConnectivity: "Air passengers carried and number of large airports — hub connectivity for nomads",
+  culturalHeritage: "UNESCO World Heritage Sites — cultural richness and tourism appeal",
+  healthcareCost: "Out-of-pocket health expenditure as % of total — lower costs mean more accessible care",
 };
 
 export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
@@ -91,6 +131,16 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   humanDevelopment: "UNDP Human Development Index (HDI)",
   governance: "World Bank WGI · Transparency International CPI",
   englishProficiency: "EF English Proficiency Index 2025 (EF Education First)",
+  digitalFreedom: "Freedom House — Freedom on the Net 2024",
+  personalFreedom: "CATO Institute — Human Freedom Index 2024",
+  logistics: "World Bank — Logistics Performance Index (LP.LPI.OVRL.XQ)",
+  biodiversity: "World Bank (ER.LND.PTLD.ZS protected land, AG.LND.FRST.ZS forest area)",
+  socialTolerance: "ILGA World Database · Equaldex",
+  taxFriendliness: "Heritage Foundation Tax Burden · World Bank (GC.TAX.TOTL.GD.ZS)",
+  startupEnvironment: "Heritage Foundation — Business Freedom 2025",
+  airConnectivity: "World Bank (IS.AIR.PSGR) · OurAirports (large airports)",
+  culturalHeritage: "UNESCO World Heritage Centre",
+  healthcareCost: "World Bank — SH.XPD.OOPC.CH.ZS (out-of-pocket expenditure)",
 };
 
 export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
@@ -107,6 +157,16 @@ export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
   humanDevelopment: "HDI",
   governance: "GOV",
   englishProficiency: "EPI",
+  digitalFreedom: "DIG",
+  personalFreedom: "PER",
+  logistics: "LOG",
+  biodiversity: "BIO",
+  socialTolerance: "SOC",
+  taxFriendliness: "TAX",
+  startupEnvironment: "BIZ",
+  airConnectivity: "AIR",
+  culturalHeritage: "CUL",
+  healthcareCost: "OOP",
 };
 
 // ─── Climate ─────────────────────────────────────────────────────────────────

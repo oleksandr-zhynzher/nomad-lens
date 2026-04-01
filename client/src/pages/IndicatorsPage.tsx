@@ -12,6 +12,16 @@ import {
   Users,
   Scale,
   MessageCircle,
+  Globe,
+  UserCheck,
+  Truck,
+  TreePine,
+  Heart,
+  Receipt,
+  Briefcase,
+  Plane,
+  Landmark,
+  Stethoscope,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { Layout } from "../components/Layout";
@@ -225,7 +235,97 @@ const INDICATORS: IndicatorRow[] = [
       description:
         "English language fluency measured by the EF English Proficiency Index — the world's largest ranking based on tests taken by 2.2 million adults in 113 countries.",
       source: "EF EPI",
-      weight: "Default weight 7%",
+      weight: "Default weight 4%",
+    },
+    {
+      Icon: Globe,
+      name: "Digital Freedom",
+      description:
+        "Internet freedom measured by Freedom House's Freedom on the Net report — covering censorship, surveillance, content restrictions, and access to VPNs.",
+      source: "Freedom House",
+      weight: "Default weight 4%",
+    },
+  ],
+  [
+    {
+      Icon: UserCheck,
+      name: "Personal Freedom",
+      description:
+        "CATO Institute's Human Freedom Index personal sub-index — freedom of movement, expression, association, religion, and personal autonomy.",
+      source: "CATO HFI",
+      weight: "Default weight 4%",
+    },
+    {
+      Icon: Truck,
+      name: "Logistics & Transport",
+      description:
+        "World Bank Logistics Performance Index — customs efficiency, infrastructure quality, timeliness, and international shipping capability.",
+      source: "World Bank LPI",
+      weight: "Default weight 4%",
+    },
+  ],
+  [
+    {
+      Icon: TreePine,
+      name: "Biodiversity & Nature",
+      description:
+        "Protected land area and forest coverage from World Bank data — access to natural parks, green spaces, and outdoor activities for nomads.",
+      source: "World Bank",
+      weight: "Default weight 4%",
+    },
+    {
+      Icon: Heart,
+      name: "Social Tolerance",
+      description:
+        "LGBTQ+ rights composite score — marriage equality, civil unions, anti-discrimination protections, and legal status from ILGA and Equaldex databases.",
+      source: "ILGA · Equaldex",
+      weight: "Default weight 4%",
+    },
+  ],
+  [
+    {
+      Icon: Receipt,
+      name: "Tax Friendliness",
+      description:
+        "Heritage Foundation Tax Burden score combined with tax revenue as % of GDP — lighter-tax countries score higher, relevant for nomad tax planning.",
+      source: "Heritage Foundation · World Bank",
+      weight: "Default weight 4%",
+    },
+    {
+      Icon: Briefcase,
+      name: "Startup Environment",
+      description:
+        "Heritage Foundation Business Freedom score — ease of starting, operating, and closing a business. Covers regulatory burden and licensing requirements.",
+      source: "Heritage Foundation",
+      weight: "Default weight 4%",
+    },
+  ],
+  [
+    {
+      Icon: Plane,
+      name: "Air Connectivity",
+      description:
+        "Air passengers carried (World Bank) and large airport count (OurAirports) — hub connectivity for frequent-flying digital nomads.",
+      source: "World Bank · OurAirports",
+      weight: "Default weight 4%",
+    },
+    {
+      Icon: Landmark,
+      name: "Cultural Heritage",
+      description:
+        "UNESCO World Heritage Sites count — cultural richness, historical significance, and tourism appeal for nomads seeking cultural experiences.",
+      source: "UNESCO",
+      weight: "Default weight 4%",
+    },
+  ],
+  [
+    {
+      Icon: Stethoscope,
+      name: "Healthcare Cost",
+      description:
+        "Out-of-pocket health expenditure as percentage of total health spending — lower out-of-pocket costs mean more accessible and affordable healthcare.",
+      source: "World Bank",
+      weight: "Default weight 4%",
     },
     null,
   ],

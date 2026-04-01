@@ -27,7 +27,17 @@ export type CategoryKey =
   | "happiness"
   | "humanDevelopment"
   | "governance"
-  | "englishProficiency";
+  | "englishProficiency"
+  | "digitalFreedom"
+  | "personalFreedom"
+  | "logistics"
+  | "biodiversity"
+  | "socialTolerance"
+  | "taxFriendliness"
+  | "startupEnvironment"
+  | "airConnectivity"
+  | "culturalHeritage"
+  | "healthcareCost";
 
 // ─── Climate ─────────────────────────────────────────────────────────────────
 
@@ -102,6 +112,55 @@ export interface EpiEntry {
   name: string;
   score: number; // 200-800, higher = better proficiency
   rank: number;
+  year: number;
+}
+
+export interface DigitalFreedomEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  score: number; // 0-100, higher = more free
+  year: number;
+}
+
+export interface PersonalFreedomEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  score: number; // 0-10, higher = more free
+  year: number;
+}
+
+export interface SocialToleranceEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  score: number; // 0-100, higher = more tolerant
+  year: number;
+}
+
+export interface TaxBurdenEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  score: number; // 0-100, higher = lighter tax burden
+  year: number;
+}
+
+export interface StartupEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  score: number; // 0-100, higher = better business environment
+  year: number;
+}
+
+export interface AirportEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  largeAirports: number;
+  year: number;
+}
+
+export interface HeritageEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  sites: number; // UNESCO World Heritage site count
   year: number;
 }
 

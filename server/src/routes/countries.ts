@@ -262,7 +262,122 @@ countriesRouter.get('/', async (_req, res, next) => {
         },
       };
 
-      // Drop countries that have fewer than 3 non-null category scores
+      // ── Digital Freedom ────────────────────────────────────────────────────
+      const digFree = localData.getDigitalFreedom(iso2);
+
+      const digitalFreedom: CategoryScore = {
+        value: minMax(digFree?.score ?? null, 0, 100),
+        indicators: {
+          ...(digFree ? { freedomOnNet: ind(digFree.score, 'score', digFree.year) } : {}),
+        },
+      };
+
+      // ── Personal Freedom ───────────────────────────────────────────────────
+      const persFree = localData.getPersonalFreedom(iso2);
+
+      const personalFreedom: CategoryScore = {
+        value: minMax(persFree?.score ?? null, 0, 10),
+        indicators: {
+          ...(persFree ? { hfiPersonal: ind(persFree.score, 'score', persFree.year) } : {}),
+        },
+      };
+
+      // ── Logistics & Transport ──────────────────────────────────────────────
+      const lpi = wb?.[WB_INDICATORS.logistics];
+
+      const logistics: CategoryScore = {
+        value: minMax(lpi?.value ?? null, 1, 5),
+        indicators: {
+          ...(lpi?.value != null ? { lpiScore: ind(lpi.value, 'score', lpi.year) } : {}),
+        },
+      };
+
+      // ── Biodiversity & Nature ──────────────────────────────────────────────
+      const protLand = wb?.[WB_INDICATORS.protectedLand];
+      const forest = wb?.[WB_INDICATORS.forestArea];
+
+      const biodiversity: CategoryScore = {
+        value: average([
+          minMax(protLand?.value ?? null, 0, 50),
+          minMax(forest?.value ?? null, 0, 80),
+        ]),
+        indicators: {
+          ...(protLand?.value != null ? { protectedLand: ind(protLand.value, '%', protLand.year) } : {}),
+          ...(forest?.value != null ? { forestArea: ind(forest.value, '%', forest.year) } : {}),
+        },
+      };
+
+      // ── Social Tolerance / LGBTQ+ Rights ───────────────────────────────────
+      const socTol = localData.getSocialTolerance(iso2);
+
+      const socialTolerance: CategoryScore = {
+        value: minMax(socTol?.score ?? null, 0, 100),
+        indicators: {
+          ...(socTol ? { lgbtqRights: ind(socTol.score, 'score', socTol.year) } : {}),
+        },
+      };
+
+      // ── Tax Friendliness ───────────────────────────────────────────────────
+      const taxRev = wb?.[WB_INDICATORS.taxRevenue];
+      const taxBurden = localData.getTaxBurden(iso2);
+
+      const taxFriendliness: CategoryScore = {
+        value: average([
+          invertMinMax(taxRev?.value ?? null, 0, 50),
+          minMax(taxBurden?.score ?? null, 0, 100),
+        ]),
+        indicators: {
+          ...(taxRev?.value != null ? { taxRevenueGDP: ind(taxRev.value, '% GDP', taxRev.year) } : {}),
+          ...(taxBurden ? { taxBurdenScore: ind(taxBurden.score, 'score', taxBurden.year) } : {}),
+        },
+      };
+
+      // ── Startup / Business Environment ─────────────────────────────────────
+      const startup = localData.getStartup(iso2);
+
+      const startupEnvironment: CategoryScore = {
+        value: minMax(startup?.score ?? null, 0, 100),
+        indicators: {
+          ...(startup ? { businessFreedom: ind(startup.score, 'score', startup.year) } : {}),
+        },
+      };
+
+      // ── Air Connectivity ───────────────────────────────────────────────────
+      const airPax = wb?.[WB_INDICATORS.airPassengers];
+      const airport = localData.getAirport(iso2);
+
+      const airConnectivity: CategoryScore = {
+        value: average([
+          logMinMax(airPax?.value ?? null, 100_000, 200_000_000),
+          logMinMax(airport?.largeAirports ?? null, 1, 200),
+        ]),
+        indicators: {
+          ...(airPax?.value != null ? { airPassengers: ind(airPax.value, 'passengers', airPax.year) } : {}),
+          ...(airport ? { largeAirports: ind(airport.largeAirports, 'airports', airport.year) } : {}),
+        },
+      };
+
+      // ── Cultural Heritage & Tourism ────────────────────────────────────────
+      const heritage = localData.getHeritage(iso2);
+
+      const culturalHeritage: CategoryScore = {
+        value: logMinMax(heritage?.sites ?? null, 1, 60),
+        indicators: {
+          ...(heritage ? { worldHeritageSites: ind(heritage.sites, 'sites', heritage.year) } : {}),
+        },
+      };
+
+      // ── Cost of Healthcare ─────────────────────────────────────────────────
+      const oopExp = wb?.[WB_INDICATORS.healthExpendOOP];
+
+      const healthcareCost: CategoryScore = {
+        value: invertMinMax(oopExp?.value ?? null, 0, 80),
+        indicators: {
+          ...(oopExp?.value != null ? { outOfPocketExpend: ind(oopExp.value, '% health exp', oopExp.year) } : {}),
+        },
+      };
+
+      // Drop countries that have fewer than 5 non-null category scores
       const scores = {
         economy,
         affordability,
@@ -277,9 +392,19 @@ countriesRouter.get('/', async (_req, res, next) => {
         humanDevelopment,
         governance,
         englishProficiency,
+        digitalFreedom,
+        personalFreedom,
+        logistics,
+        biodiversity,
+        socialTolerance,
+        taxFriendliness,
+        startupEnvironment,
+        airConnectivity,
+        culturalHeritage,
+        healthcareCost,
       };
       const nonNull = Object.values(scores).filter((s) => s.value !== null).length;
-      if (nonNull < 3) continue;
+      if (nonNull < 5) continue;
 
       data.push({
         code: iso2,
