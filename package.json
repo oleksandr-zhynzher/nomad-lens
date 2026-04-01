@@ -10,8 +10,6 @@
   "scripts": {
     "dev": "concurrently -n client,server -c cyan,yellow \"npm run dev -w client\" \"npm run dev -w server\"",
     "build": "npm run build -w client && npm run build -w server",
-    "generate-data": "tsx scripts/generate-data.ts",
-    "build:standalone": "npm run generate-data && npm run build:standalone -w client",
     "lint": "npm run lint -w client && npm run lint -w server",
     "prepare": "husky",
     "commit": "cz"

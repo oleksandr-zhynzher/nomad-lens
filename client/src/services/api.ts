@@ -12,9 +12,6 @@ async function get<T>(path: string): Promise<T> {
 
 export const api = {
   getCountries(): Promise<CountryData[]> {
-    if (window.__NOMAD_LENS_DATA__) {
-      return Promise.resolve(window.__NOMAD_LENS_DATA__);
-    }
     return get<CountryData[]>("/api/countries");
   },
 
