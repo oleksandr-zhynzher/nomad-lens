@@ -33,15 +33,15 @@ export class NomadLensStack extends cdk.Stack {
             [
               'npm ci --omit=dev',
               'npx tsc --project tsconfig.json',
+              'cp -r src/data dist/data',
               'cp -rT /asset-input /asset-output',
             ].join(' && '),
           ],
           environment: { NODE_ENV: 'production' },
         },
-        exclude: ['src', '*.ts', 'node_modules'],
       }),
       memorySize: 512,
-      timeout: cdk.Duration.seconds(30),
+      timeout: cdk.Duration.seconds(90),
       environment: { NODE_ENV: 'production' },
     });
 
