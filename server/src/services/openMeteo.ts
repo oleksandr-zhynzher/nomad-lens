@@ -64,8 +64,19 @@ export async function fetchClimate(
   });
   const url = `https://archive-api.open-meteo.com/v1/archive?${params}`;
 
-  const res = await fetch(url);
-  if (!res.ok) return null;
+  let res: Response | null = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    res = await fetch(url);
+    if (res.ok) break;
+    // Retry on rate-limit (429) or server errors (5xx)
+    if (res.status === 429 || res.status >= 500) {
+      await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+      res = null;
+      continue;
+    }
+    return null; // Non-retryable error
+  }
+  if (!res || !res.ok) return null;
 
   const json = (await res.json()) as ArchiveResponse;
   const daily = json.daily;

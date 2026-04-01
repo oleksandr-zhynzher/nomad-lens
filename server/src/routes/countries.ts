@@ -46,8 +46,8 @@ countriesRouter.get('/', async (_req, res, next) => {
 
     // Fetch climate for all capitals in throttled batches to avoid rate-limiting
     const climateMap = new Map<string, ClimateData>();
-    const BATCH_SIZE = 10;
-    const BATCH_DELAY = 250; // ms between batches
+    const BATCH_SIZE = 5;
+    const BATCH_DELAY = 300; // ms between batches
     for (let i = 0; i < countries.length; i += BATCH_SIZE) {
       const batch = countries.slice(i, i + BATCH_SIZE);
       await Promise.all(
