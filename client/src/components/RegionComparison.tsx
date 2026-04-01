@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { applyClimatePrefs } from "../utils/scoring";
 
 interface RegionComparisonProps {
   countries: CountryData[];
@@ -73,11 +72,10 @@ interface RegionStats {
   categories: Record<CategoryKey, { avg: number | null; count: number }>;
 }
 
-export function RegionComparison({ countries, weights, climatePrefs }: RegionComparisonProps) {
-  const countriesWithClimate = useMemo(() => applyClimatePrefs(countries, climatePrefs), [countries, climatePrefs]);
+export function RegionComparison({ countries, weights }: RegionComparisonProps) {
   const allRegions = useMemo(
-    () => [...new Set(countriesWithClimate.map((c) => c.region))].sort(),
-    [countriesWithClimate],
+    () => [...new Set(countries.map((c) => c.region))].sort(),
+    [countries],
   );
 
   const [enabled, setEnabled] = useState<Set<string>>(new Set());
@@ -91,7 +89,7 @@ export function RegionComparison({ countries, weights, climatePrefs }: RegionCom
 
   const regionStats = useMemo(() => {
     const grouped: Record<string, CountryData[]> = {};
-    for (const c of countriesWithClimate) {
+    for (const c of countries) {
       if (!grouped[c.region]) grouped[c.region] = [];
       grouped[c.region].push(c);
     }

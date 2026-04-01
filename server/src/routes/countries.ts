@@ -44,24 +44,16 @@ countriesRouter.get('/', async (_req, res, next) => {
       if (c.cca3 && c.cca2) iso3ToIso2.set(c.cca3.toUpperCase(), c.cca2.toUpperCase());
     }
 
-    // Fetch climate for all capitals in throttled batches to avoid rate-limiting
+    // Fetch climate for all capitals in parallel
     const climateMap = new Map<string, ClimateData>();
-    const BATCH_SIZE = 5;
-    const BATCH_DELAY = 300; // ms between batches
-    for (let i = 0; i < countries.length; i += BATCH_SIZE) {
-      const batch = countries.slice(i, i + BATCH_SIZE);
-      await Promise.all(
-        batch.map(async (c) => {
-          const latLng = c.capitalInfo?.latlng ?? c.latlng;
-          if (!latLng) return;
-          const result = await fetchClimate(latLng[0], latLng[1]).catch(() => null);
-          if (result) climateMap.set(c.cca2.toUpperCase(), result);
-        }),
-      );
-      if (i + BATCH_SIZE < countries.length) {
-        await new Promise((r) => setTimeout(r, BATCH_DELAY));
-      }
-    }
+    await Promise.all(
+      countries.map(async (c) => {
+        const latLng = c.capitalInfo?.latlng ?? c.latlng;
+        if (!latLng) return;
+        const result = await fetchClimate(latLng[0], latLng[1]).catch(() => null);
+        if (result) climateMap.set(c.cca2.toUpperCase(), result);
+      }),
+    );
 
     const data: CountryData[] = [];
 

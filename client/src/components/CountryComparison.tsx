@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   CirclePlus,
   X,
@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { applyClimatePrefs, computeScore, scoreColour } from "../utils/scoring";
+import { computeScore, scoreColour } from "../utils/scoring";
 
 const SLOT_COLORS = [
   "#8F5A3C", "#5B8FA8", "#6B9E6B", "#B07CC6",
@@ -54,18 +54,15 @@ interface Props {
   onSelectionCount?: (count: number) => void;
 }
 
-export function CountryComparison({ countries, weights, climatePrefs, sortTrigger = 0, onSelectionCount }: Props) {
+export function CountryComparison({ countries, weights, sortTrigger = 0, onSelectionCount }: Props) {
   const [selectedCodes, setSelectedCodes] = useState<string[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [query, setQuery] = useState("");
   const addBtnRef = useRef<HTMLDivElement>(null);
 
-  // Apply climate preferences to country scores
-  const countriesWithClimate = useMemo(() => applyClimatePrefs(countries, climatePrefs), [countries, climatePrefs]);
-
   const selectedCountries = selectedCodes
     .map((code, i) => {
-      const country = countriesWithClimate.find((c) => c.code === code);
+      const country = countries.find((c) => c.code === code);
       return country ? { country, color: getSlotColor(i), index: i } : null;
     })
     .filter(Boolean) as { country: CountryData; color: string; index: number }[];
@@ -85,8 +82,8 @@ export function CountryComparison({ countries, weights, climatePrefs, sortTrigge
     if (sortTrigger > 0) {
       setSelectedCodes((prev) => {
         const sorted = [...prev].sort((a, b) => {
-          const countryA = countriesWithClimate.find((c) => c.code === a);
-          const countryB = countriesWithClimate.find((c) => c.code === b);
+          const countryA = countries.find((c) => c.code === a);
+          const countryB = countries.find((c) => c.code === b);
           if (!countryA || !countryB) return 0;
           return computeScore(countryB, weights) - computeScore(countryA, weights);
         });
@@ -100,7 +97,7 @@ export function CountryComparison({ countries, weights, climatePrefs, sortTrigge
     onSelectionCount?.(selectedCodes.length);
   }, [selectedCodes.length, onSelectionCount]);
 
-  const filtered = countriesWithClimate
+  const filtered = countries
     .filter(
       (c) =>
         !selectedCodes.includes(c.code) &&

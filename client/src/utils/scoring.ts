@@ -139,28 +139,6 @@ export function computeClimateScore(
   return Math.round((tempScore * 0.7 + seasonScore * 0.3) * 10) / 10;
 }
 
-/**
- * Return a copy of countries with climate scores overridden by user preferences.
- */
-export function applyClimatePrefs(
-  countries: CountryData[],
-  prefs: ClimatePreferences,
-): CountryData[] {
-  return countries.map((c) => {
-    if (!c.climateData) return c;
-    return {
-      ...c,
-      scores: {
-        ...c.scores,
-        climate: {
-          ...c.scores.climate,
-          value: computeClimateScore(c.climateData, prefs),
-        },
-      },
-    };
-  });
-}
-
 export function defaultClimatePreferences(): ClimatePreferences {
   return { seasonType: 'any', minTemp: 15, maxTemp: 25 };
 }
