@@ -11,8 +11,13 @@ import type { RankedCountry } from "../utils/types";
 import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
 import { CountryDetailPanel } from "./CountryDetailPanel";
 
-const GEO_URL =
-  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const CDN_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+
+// Eagerly import local TopoJSON when present (standalone build).
+// import.meta.glob returns {} if the file doesn't exist, so normal dev/build is unaffected.
+const localGeoModules = import.meta.glob("../data/countries-110m.json", { eager: true }) as Record<string, { default: object }>;
+const localGeo = Object.values(localGeoModules)[0]?.default;
+const GEO_DATA: string | object = localGeo ?? CDN_URL;
 
 interface WorldMapProps {
   ranked: RankedCountry[];
@@ -147,7 +152,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         >
           <Sphere fill="#0F1114" stroke="#1A1A1A" strokeWidth={0.5} />
           <Graticule stroke="#1A1A1A" strokeWidth={0.3} />
-          <Geographies geography={GEO_URL}>
+          <Geographies geography={GEO_DATA}>
             {({ geographies }) =>
               geographies.map((geo) => {
                 const alpha2 = geoToAlpha2(geo);

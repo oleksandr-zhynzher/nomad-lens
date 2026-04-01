@@ -4,9 +4,14 @@ node_modules/
 
 # Build outputs
 dist/
+dist-standalone/
 build/
 .next/
 out/
+
+# Generated data (re-create with: npm run generate-data)
+client/src/data/countries.json
+client/src/data/countries-110m.json
 
 # Environment
 .env
