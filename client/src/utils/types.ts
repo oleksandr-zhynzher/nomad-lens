@@ -113,7 +113,7 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   taxFriendliness: "Heritage Foundation Tax Burden and tax revenue as % of GDP — lighter-tax countries score higher",
   startupEnvironment: "Heritage Foundation Business Freedom — ease of starting and running a business",
   airConnectivity: "Air passengers carried and destination countries reachable via direct flights — route connectivity for nomads",
-  culturalHeritage: "UNESCO World Heritage Sites — cultural richness and tourism appeal",
+  culturalHeritage: "UNESCO World Heritage Sites, Intangible Cultural Heritage elements, and international tourism arrivals",
   healthcareCost: "Out-of-pocket health expenditure as % of total — lower costs mean more accessible care",
 };
 
@@ -139,7 +139,7 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   taxFriendliness: "Heritage Foundation Tax Burden · World Bank (GC.TAX.TOTL.GD.ZS)",
   startupEnvironment: "Heritage Foundation — Business Freedom 2025",
   airConnectivity: "World Bank (IS.AIR.PSGR) · OpenFlights (destination countries)",
-  culturalHeritage: "UNESCO World Heritage Centre",
+  culturalHeritage: "UNESCO World Heritage Centre · UNESCO ICH · World Bank (ST.INT.ARVL)",
   healthcareCost: "World Bank — SH.XPD.OOPC.CH.ZS (out-of-pocket expenditure)",
 };
 

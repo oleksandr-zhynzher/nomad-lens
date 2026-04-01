@@ -313,8 +313,8 @@ const INDICATORS: IndicatorRow[] = [
       Icon: Landmark,
       name: "Cultural Heritage",
       description:
-        "UNESCO World Heritage Sites count — cultural richness, historical significance, and tourism appeal for nomads seeking cultural experiences.",
-      source: "UNESCO",
+        "Composite of UNESCO World Heritage Sites (tangible), UNESCO Intangible Cultural Heritage elements (traditions, cuisine, craftsmanship), and international tourism arrivals (World Bank) — cultural richness for nomads seeking immersive experiences.",
+      source: "UNESCO · World Bank",
       weight: "Default weight 4%",
     },
   ],

@@ -164,6 +164,13 @@ export interface HeritageEntry {
   year: number;
 }
 
+export interface IntangibleHeritageEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  elements: number; // UNESCO Intangible Cultural Heritage elements
+  year: number;
+}
+
 // ─── Open-Meteo ──────────────────────────────────────────────────────────────
 
 /** Alias so openMeteo.ts can use the same shape */

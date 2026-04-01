@@ -34,6 +34,7 @@ export const WB_INDICATORS = {
   taxRevenue: 'GC.TAX.TOTL.GD.ZS',
   airPassengers: 'IS.AIR.PSGR',
   healthExpendOOP: 'SH.XPD.OOPC.CH.ZS',
+  tourismArrivals: 'ST.INT.ARVL',
 } as const;
 
 type IndicatorCode = (typeof WB_INDICATORS)[keyof typeof WB_INDICATORS];

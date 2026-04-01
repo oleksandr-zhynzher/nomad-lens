@@ -12,10 +12,11 @@ import taxBurdenJson from '../data/taxBurden.json';
 import startupEnvironmentJson from '../data/startupEnvironment.json';
 import airportsJson from '../data/airports.json';
 import culturalHeritageJson from '../data/culturalHeritage.json';
+import intangibleHeritageJson from '../data/intangibleHeritage.json';
 import type {
   HdiEntry, HappinessEntry, PeaceEntry, CrimeEntry, CpiEntry, EpiEntry,
   DigitalFreedomEntry, PersonalFreedomEntry, SocialToleranceEntry,
-  TaxBurdenEntry, StartupEntry, AirportEntry, HeritageEntry,
+  TaxBurdenEntry, StartupEntry, AirportEntry, HeritageEntry, IntangibleHeritageEntry,
 } from '../utils/types';
 
 type JsonFile<T> = { data: T[] };
@@ -33,6 +34,7 @@ const taxBurdenMap = new Map<string, TaxBurdenEntry>();
 const startupMap = new Map<string, StartupEntry>();
 const airportMap = new Map<string, AirportEntry>();
 const heritageMap = new Map<string, HeritageEntry>();
+const intangibleHeritageMap = new Map<string, IntangibleHeritageEntry>();
 
 const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
 
@@ -49,6 +51,7 @@ const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
 (startupEnvironmentJson as unknown as JsonFile<StartupEntry>).data.forEach((e) => startupMap.set(e.code, e));
 (airportsJson as unknown as JsonFile<AirportEntry>).data.forEach((e) => airportMap.set(e.code, e));
 (culturalHeritageJson as unknown as JsonFile<HeritageEntry>).data.forEach((e) => heritageMap.set(e.code, e));
+(intangibleHeritageJson as unknown as JsonFile<IntangibleHeritageEntry>).data.forEach((e) => intangibleHeritageMap.set(e.code, e));
 
 export const localData = {
   getHdi: (code: string): HdiEntry | undefined => hdiMap.get(code),
@@ -64,5 +67,6 @@ export const localData = {
   getStartup: (code: string): StartupEntry | undefined => startupMap.get(code),
   getAirport: (code: string): AirportEntry | undefined => airportMap.get(code),
   getHeritage: (code: string): HeritageEntry | undefined => heritageMap.get(code),
+  getIntangibleHeritage: (code: string): IntangibleHeritageEntry | undefined => intangibleHeritageMap.get(code),
   hasNomadVisa: (code: string): boolean => nomadVisaSet.has(code.toUpperCase()),
 };

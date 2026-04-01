@@ -359,11 +359,19 @@ countriesRouter.get('/', async (_req, res, next) => {
 
       // ── Cultural Heritage & Tourism ────────────────────────────────────────
       const heritage = localData.getHeritage(iso2);
+      const intangible = localData.getIntangibleHeritage(iso2);
+      const tourismArr = wb?.[WB_INDICATORS.tourismArrivals];
 
       const culturalHeritage: CategoryScore = {
-        value: logMinMax(heritage?.sites ?? null, 1, 60),
+        value: average([
+          logMinMax(heritage?.sites ?? null, 1, 60),
+          logMinMax(intangible?.elements ?? null, 1, 45),
+          logMinMax(tourismArr?.value ?? null, 50_000, 100_000_000),
+        ]),
         indicators: {
           ...(heritage ? { worldHeritageSites: ind(heritage.sites, 'sites', heritage.year) } : {}),
+          ...(intangible ? { intangibleHeritage: ind(intangible.elements, 'elements', intangible.year) } : {}),
+          ...(tourismArr?.value != null ? { tourismArrivals: ind(tourismArr.value, 'arrivals', tourismArr.year) } : {}),
         },
       };
 
