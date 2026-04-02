@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Info, ChevronDown } from "lucide-react";
+import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Wifi } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap } from "../utils/types";
 import {
   CATEGORY_DATA_SOURCES,
@@ -83,26 +83,36 @@ const SEASON_OPTIONS: Array<{ value: SeasonType | 'any'; label: string }> = [
 ];
 
 /** Logical groups for the weight panel. Order here = render order. */
-const WEIGHT_GROUPS: Array<{ label: string; keys: CategoryKey[] }> = [
+const WEIGHT_GROUPS: Array<{ label: string; icon: React.ReactElement; keys: CategoryKey[] }> = [
   {
-    label: "Finance",
+    label: "ECONOMIC",
+    icon: <Briefcase size={16} color="#8F5A3C" />,
     keys: ["economy", "affordability", "taxFriendliness", "startupEnvironment"],
   },
   {
-    label: "Health & Safety",
-    keys: ["healthcare", "healthcareCost", "foodSecurity", "safety"],
+    label: "HEALTH & WELLBEING",
+    icon: <HeartPulse size={16} color="#C2956A" />,
+    keys: ["healthcare", "healthcareCost", "foodSecurity", "happiness"],
   },
   {
-    label: "Freedom & Society",
-    keys: ["digitalFreedom", "personalFreedom", "socialTolerance", "governance", "humanDevelopment"],
+    label: "SAFETY & GOVERNANCE",
+    icon: <ShieldCheck size={16} color="#6B9E6B" />,
+    keys: ["safety", "governance", "digitalFreedom", "personalFreedom", "socialTolerance"],
   },
   {
-    label: "Quality of Life",
-    keys: ["happiness", "climate", "environment", "biodiversity"],
+    label: "EDUCATION & DEVELOPMENT",
+    icon: <GraduationCap size={16} color="#5B8FA8" />,
+    keys: ["education", "humanDevelopment"],
   },
   {
-    label: "Connectivity",
-    keys: ["infrastructure", "logistics", "airConnectivity", "englishProficiency", "education"],
+    label: "ENVIRONMENT & CLIMATE",
+    icon: <Leaf size={16} color="#7A9B6B" />,
+    keys: ["climate", "environment", "biodiversity"],
+  },
+  {
+    label: "CONNECTIVITY",
+    icon: <Wifi size={16} color="#8B7BAD" />,
+    keys: ["infrastructure", "logistics", "airConnectivity", "englishProficiency"],
   },
 ];
 
@@ -133,27 +143,28 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
             <div key={group.label} style={{ borderBottom: "1px solid #242424" }}>
               {/* Group header */}
               <button
-                className="w-full flex items-center justify-between"
-                style={{ padding: "9px 16px", backgroundColor: "#141414" }}
+                className="w-full flex items-center"
+                style={{ height: "40px", padding: "0 14px", gap: "8px", backgroundColor: "#1A1A1A" }}
                 onClick={() => toggleGroup(group.label)}
               >
-                <div className="flex items-center gap-2">
-                  <ChevronDown
-                    size={13}
-                    style={{
-                      color: "#666666",
-                      transform: isOpen ? "rotate(0deg)" : "rotate(-90deg)",
-                      transition: "transform 0.15s ease",
-                      flexShrink: 0,
-                    }}
-                  />
-                  <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: "#AAAAAA" }}>
-                    {group.label}
+                {group.icon}
+                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#888888", flex: 1, textAlign: "left" }}>
+                  {group.label}
+                </span>
+                <div style={{ display: "flex", alignItems: "center", backgroundColor: "#291608", borderRadius: "3px", padding: "3px 8px" }}>
+                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#C2956A" }}>
+                    {groupTotal}%
                   </span>
                 </div>
-                <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: groupTotal > 0 ? "var(--color-accent-dim)" : "#555555" }}>
-                  {groupTotal}%
-                </span>
+                <ChevronDown
+                  size={14}
+                  style={{
+                    color: "#555555",
+                    transform: isOpen ? "rotate(0deg)" : "rotate(-90deg)",
+                    transition: "transform 0.15s ease",
+                    flexShrink: 0,
+                  }}
+                />
               </button>
 
               {/* Sliders */}
