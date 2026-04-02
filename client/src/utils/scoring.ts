@@ -7,7 +7,7 @@ import type {
   SeasonType,
   WeightMap,
 } from "./types";
-import { CATEGORY_KEYS, HIDDEN_CATEGORIES, VISIBLE_CATEGORY_KEYS } from "./types";
+import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "./types";
 
 /**
  * Compute a weighted composite score for a single country.
