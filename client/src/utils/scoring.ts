@@ -7,7 +7,7 @@ import type {
   SeasonType,
   WeightMap,
 } from "./types";
-import { CATEGORY_KEYS, HIDDEN_CATEGORIES } from "./types";
+import { CATEGORY_KEYS, HIDDEN_CATEGORIES, VISIBLE_CATEGORY_KEYS } from "./types";
 
 /**
  * Compute a weighted composite score for a single country.
@@ -69,13 +69,62 @@ export function rankCountries(
 }
 
 /**
- * Default equal weights for all categories.
+ * Default equal weights for all visible categories, summing to exactly 100.
  */
 export function defaultWeights(): WeightMap {
-  const w = 50; // default slider position (out of 100)
-  return Object.fromEntries(
-    CATEGORY_KEYS.map((k) => [k, HIDDEN_CATEGORIES.has(k) ? 0 : w]),
-  ) as WeightMap;
+  const visible = VISIBLE_CATEGORY_KEYS;
+  const base = Math.floor(100 / visible.length);
+  const leftover = 100 - base * visible.length;
+  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
+  visible.forEach((k, i) => {
+    result[k] = base + (i < leftover ? 1 : 0);
+  });
+  return result;
+}
+
+/**
+ * Redistribute weights so all visible categories sum to exactly 100,
+ * after the user changes one slider to a new value.
+ * Others are scaled proportionally using the largest-remainder method.
+ */
+export function redistributeWeights(
+  changedKey: CategoryKey,
+  newValue: number,
+  weights: WeightMap,
+): WeightMap {
+  const clamped = Math.max(0, Math.min(100, Math.round(newValue)));
+  const result = { ...weights, [changedKey]: clamped };
+  const others = VISIBLE_CATEGORY_KEYS.filter((k) => k !== changedKey);
+  const remaining = 100 - clamped;
+
+  if (others.length === 0) return result;
+
+  if (remaining === 0) {
+    others.forEach((k) => { result[k] = 0; });
+    return result;
+  }
+
+  const currentOthersSum = others.reduce((s, k) => s + weights[k], 0);
+
+  // Exact shares as floats (proportional, or equal if all others are 0)
+  const exactShares = others.map((k) =>
+    currentOthersSum > 0
+      ? (weights[k] / currentOthersSum) * remaining
+      : remaining / others.length,
+  );
+
+  // Largest-remainder method for integer allocation
+  const floors = exactShares.map((s) => Math.floor(s));
+  const floorSum = floors.reduce((a, b) => a + b, 0);
+  let leftover = remaining - floorSum;
+  const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
+  remainders.sort((a, b) => b.r - a.r);
+  remainders.forEach(({ i }) => {
+    if (leftover > 0) { floors[i]++; leftover--; }
+  });
+
+  others.forEach((k, i) => { result[k] = floors[i]; });
+  return result;
 }
 
 /**
@@ -102,12 +151,12 @@ export function weightPercent(key: CategoryKey, weights: WeightMap): string {
 
 /**
  * Return a human-readable label for a slider value.
- * Shows "Off" when weight is 0, otherwise the raw 0–100 value.
+ * Shows "Off" when weight is 0, otherwise the percentage contribution.
  */
 export function weightLabel(key: CategoryKey, weights: WeightMap): string {
   const v = weights[key];
   if (v === 0) return "Off";
-  return String(v);
+  return `${v}%`;
 }
 
 // ─── Climate Preferences Scoring ──────────────────────────────────────────────

@@ -264,7 +264,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
             Reset to defaults
           </button>
           <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#555555", lineHeight: "1.4", textAlign: "center" }}>
-            Priority 0–100 — higher = more influence on your score
+            All indicators share 100% — raising one lowers the others
           </p>
         </div>
       </div>

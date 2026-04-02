@@ -9,7 +9,7 @@ import { RegionComparison } from "./components/RegionComparison";
 import { CountryComparison } from "./components/CountryComparison";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
-import { defaultClimatePreferences, defaultWeights } from "./utils/scoring";
+import { defaultClimatePreferences, defaultWeights, redistributeWeights } from "./utils/scoring";
 import type { CategoryKey, ClimatePreferences, WeightMap } from "./utils/types";
 import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "./utils/types";
 import "./index.css";
@@ -17,13 +17,27 @@ import "./index.css";
 function weightsFromSearch(search: string): WeightMap {
   const params = new URLSearchParams(search);
   const base = defaultWeights();
+  let hasParams = false;
   for (const key of CATEGORY_KEYS) {
     const v = params.get(key);
     if (v !== null) {
       const n = Number(v);
-      if (!isNaN(n)) base[key] = Math.max(0, Math.min(100, n));
+      if (!isNaN(n)) { base[key] = Math.max(0, Math.min(100, n)); hasParams = true; }
     }
   }
+  if (!hasParams) return base;
+  // Normalize visible weights to exactly 100
+  const visibleSum = VISIBLE_CATEGORY_KEYS.reduce((s, k) => s + base[k], 0);
+  if (visibleSum === 0 || visibleSum === 100) return base;
+  const scale = 100 / visibleSum;
+  const exactShares = VISIBLE_CATEGORY_KEYS.map((k) => base[k] * scale);
+  const floors = exactShares.map((s) => Math.floor(s));
+  const floorSum = floors.reduce((a, b) => a + b, 0);
+  let leftover = 100 - floorSum;
+  const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
+  remainders.sort((a, b) => b.r - a.r);
+  remainders.forEach(({ i }) => { if (leftover > 0) { floors[i]++; leftover--; } });
+  VISIBLE_CATEGORY_KEYS.forEach((k, i) => { base[k] = floors[i]; });
   return base;
 }
 
@@ -68,7 +82,7 @@ export default function App() {
 
   const handleWeightChange = useCallback(
     (key: CategoryKey, value: number) => {
-      setWeights((prev) => ({ ...prev, [key]: value }));
+      setWeights((prev) => redistributeWeights(key, value, prev));
     },
     [],
   );
