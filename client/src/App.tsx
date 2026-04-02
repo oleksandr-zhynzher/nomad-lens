@@ -266,7 +266,7 @@ export default function App() {
   // Search navigation
   const matchingCodes = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return [];
+    if (q.length < 2) return [];
     return ranked
       .filter((r) => r.country.name.toLowerCase().includes(q) || r.country.code.toLowerCase().includes(q))
       .map((r) => r.country.code);
@@ -300,7 +300,7 @@ export default function App() {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
       e.preventDefault();
-      if (search.trim()) {
+      if (search.trim().length >= 2) {
         // Navigate within search matches
         if (e.key === "ArrowDown") goNext();
         else goPrev();
@@ -318,7 +318,7 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [search, goNext, goPrev, allCodes]);
 
-  const activeHighlight = search.trim()
+  const activeHighlight = search.trim().length >= 2
     ? (matchingCodes[matchCursor] ?? null)
     : (navCursor !== null ? (allCodes[navCursor] ?? null) : highlightedCode);
 
@@ -486,7 +486,7 @@ export default function App() {
                   className="w-full pl-12 py-3 rounded-md focus:outline-none"
                   style={{ paddingRight: search.trim() ? "96px" : "16px", backgroundColor: "#161616", border: "1px solid #1E1E22", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: "14px" }}
                 />
-                {search.trim() && (
+                {search.trim().length >= 2 && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
                     <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#666666", minWidth: "36px", textAlign: "right" }}>
                       {matchingCodes.length > 0 ? `${matchCursor + 1}/${matchingCodes.length}` : "0/0"}
@@ -515,7 +515,7 @@ export default function App() {
 
               {/* Region chips */}
               <div className="mb-0">
-                <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#444444", marginBottom: "12px" }}>
+                <div style={{ fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#888888", marginBottom: "12px" }}>
                   REGIONS
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -523,13 +523,14 @@ export default function App() {
                     onClick={() => setSelectedRegions(new Set())}
                     style={{
                       fontFamily: "Geist, sans-serif",
-                      fontSize: "12px",
-                      padding: "5px 10px",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      padding: "5px 12px",
                       borderRadius: "3px",
                       border: "none",
                       cursor: "pointer",
                       backgroundColor: selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
-                      color: selectedRegions.size === 0 ? "#FFFFFF" : "#666666",
+                      color: selectedRegions.size === 0 ? "#FFFFFF" : "#999999",
                     }}
                   >
                     All
@@ -545,13 +546,14 @@ export default function App() {
                       })}
                       style={{
                         fontFamily: "Geist, sans-serif",
-                        fontSize: "12px",
-                        padding: "5px 10px",
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        padding: "5px 12px",
                         borderRadius: "3px",
                         border: "none",
                         cursor: "pointer",
                         backgroundColor: selectedRegions.has(r) ? "#8F5A3C" : "#2A2A2A",
-                        color: selectedRegions.has(r) ? "#FFFFFF" : "#666666",
+                        color: selectedRegions.has(r) ? "#FFFFFF" : "#999999",
                       }}
                     >
                       {r}

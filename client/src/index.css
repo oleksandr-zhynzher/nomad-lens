@@ -31,6 +31,10 @@
     box-sizing: border-box;
   }
 
+  .country-row:hover {
+    background-color: var(--row-hover-bg) !important;
+  }
+
   /* Range slider thumb styling */
   input[type="range"]::-webkit-slider-thumb {
     appearance: none;
