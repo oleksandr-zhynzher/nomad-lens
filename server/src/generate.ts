@@ -276,12 +276,23 @@ async function generate(): Promise<void> {
     // ── English Proficiency ──────────────────────────────────────────────
     const epiEntry = localData.getEpi(iso2);
 
-    const englishProficiency: CategoryScore = {
-      value: minMax(epiEntry?.score ?? null, 390, 624),
-      indicators: {
-        ...(epiEntry ? { epiScore: ind(epiEntry.score, 'score', epiEntry.year) } : {}),
-      },
-    };
+    // Native English-speaking countries are excluded from the EPI survey.
+    // We assign them a perfect score of 100 when no EPI data is available.
+    const NATIVE_ENGLISH_ISO2 = new Set([
+      'AU','NZ','GB','IE','US','CA','JM','TT','BB','BZ','GY','AG','BS','DM','GD','KN','LC','VC',
+      'SB','PG','FJ','VU','WS','TO','NR','TV','KI','MH','FM','PW','ZW','SL','NG','GH','KE','UG',
+      'TZ','ZM','MW','BW','LS','SZ','NA','CM','RW','SS','SD','ET','ER','SO','LR','GM','SL',
+    ]);
+    const isNativeEnglish = NATIVE_ENGLISH_ISO2.has(iso2);
+
+    const englishProficiency: CategoryScore = isNativeEnglish && !epiEntry
+      ? { value: 100, indicators: { nativeSpeaker: ind(100, 'score', new Date().getFullYear()) } }
+      : {
+          value: minMax(epiEntry?.score ?? null, 390, 624),
+          indicators: {
+            ...(epiEntry ? { epiScore: ind(epiEntry.score, 'score', epiEntry.year) } : {}),
+          },
+        };
 
     // ── Governance ───────────────────────────────────────────────────────
     const cpi = localData.getCpi(iso2);

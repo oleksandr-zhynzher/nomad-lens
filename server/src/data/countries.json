@@ -2728,8 +2728,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -6553,8 +6559,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -7881,8 +7893,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -8306,8 +8324,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -9480,8 +9504,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -10712,8 +10742,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -13863,8 +13899,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -16001,8 +16043,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -18491,8 +18539,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -20080,8 +20134,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -20341,8 +20401,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -21169,8 +21235,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -22618,8 +22690,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -22901,8 +22979,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -23551,8 +23635,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -23844,8 +23934,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -24456,8 +24552,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -25733,8 +25835,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -26635,8 +26743,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -26890,8 +27004,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -27513,8 +27633,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -28489,8 +28615,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": 78,
@@ -30321,8 +30453,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -32169,8 +32307,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -33845,8 +33989,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -35024,8 +35174,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": 74,
@@ -35346,8 +35502,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -40372,8 +40534,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -40623,8 +40791,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -41987,8 +42161,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -44357,8 +44537,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -44862,8 +45048,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -45167,8 +45359,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": 76,
@@ -49349,8 +49547,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -51034,8 +51238,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": 87,
@@ -53381,8 +53591,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -54552,8 +54768,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -55775,8 +55997,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
@@ -60752,8 +60980,14 @@
         }
       },
       "englishProficiency": {
-        "value": null,
-        "indicators": {}
+        "value": 100,
+        "indicators": {
+          "nativeSpeaker": {
+            "raw": 100,
+            "unit": "score",
+            "year": 2026
+          }
+        }
       },
       "digitalFreedom": {
         "value": null,
