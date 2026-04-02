@@ -175,6 +175,7 @@ export default function App() {
   const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(() => _initialFilters.climatePrefs);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const { countries, loading, error, refresh } = useCountries();
   const ranked = useScoring(countries, weights, selectedRegions, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
@@ -297,15 +298,16 @@ export default function App() {
   // Arrow key handler
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+      const isSearchInput = e.target === searchInputRef.current;
+      if (!isSearchInput && (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) return;
       e.preventDefault();
       if (search.trim().length >= 2) {
         // Navigate within search matches
         if (e.key === "ArrowDown") goNext();
         else goPrev();
-      } else {
-        // Navigate full list
+      } else if (!isSearchInput) {
+        // Navigate full list (only when not typing in search)
         setNavCursor((c) => {
           const len = allCodes.length;
           if (!len) return null;
@@ -479,36 +481,49 @@ export default function App() {
               <div className="relative mb-4">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2" size={18} style={{ color: "#666666" }} />
                 <input
-                  type="search"
+                  ref={searchInputRef}
+                  type="text"
                   placeholder="Search by country name or ISO code…"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="w-full pl-12 py-3 rounded-md focus:outline-none"
-                  style={{ paddingRight: search.trim() ? "96px" : "16px", backgroundColor: "#161616", border: "1px solid #1E1E22", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: "14px" }}
+                  style={{ paddingRight: search.length === 0 ? "16px" : search.trim().length >= 2 ? "128px" : "44px", backgroundColor: "#161616", border: "1px solid #1E1E22", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: "14px" }}
                 />
-                {search.trim().length >= 2 && (
+                {search.length > 0 && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                    <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#666666", minWidth: "36px", textAlign: "right" }}>
-                      {matchingCodes.length > 0 ? `${matchCursor + 1}/${matchingCodes.length}` : "0/0"}
-                    </span>
                     <button
-                      onClick={goPrev}
-                      disabled={matchingCodes.length === 0}
+                      onClick={() => setSearch("")}
                       className="flex items-center justify-center"
-                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: matchingCodes.length ? "pointer" : "default", backgroundColor: "#2A2A2A", color: matchingCodes.length ? "#CCCCCC" : "#444444" }}
-                      aria-label="Previous match"
+                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: "#2A2A2A", color: "#CCCCCC" }}
+                      aria-label="Clear search"
                     >
-                      <ChevronUp size={14} />
+                      <X size={14} />
                     </button>
-                    <button
-                      onClick={goNext}
-                      disabled={matchingCodes.length === 0}
-                      className="flex items-center justify-center"
-                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: matchingCodes.length ? "pointer" : "default", backgroundColor: "#2A2A2A", color: matchingCodes.length ? "#CCCCCC" : "#444444" }}
-                      aria-label="Next match"
-                    >
-                      <ChevronDown size={14} />
-                    </button>
+                    {search.trim().length >= 2 && (
+                      <>
+                        <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#666666", minWidth: "36px", textAlign: "right" }}>
+                          {matchingCodes.length > 0 ? `${matchCursor + 1}/${matchingCodes.length}` : "0/0"}
+                        </span>
+                        <button
+                          onClick={goPrev}
+                          disabled={matchingCodes.length === 0}
+                          className="flex items-center justify-center"
+                          style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: matchingCodes.length ? "pointer" : "default", backgroundColor: "#2A2A2A", color: matchingCodes.length ? "#CCCCCC" : "#444444" }}
+                          aria-label="Previous match"
+                        >
+                          <ChevronUp size={14} />
+                        </button>
+                        <button
+                          onClick={goNext}
+                          disabled={matchingCodes.length === 0}
+                          className="flex items-center justify-center"
+                          style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: matchingCodes.length ? "pointer" : "default", backgroundColor: "#2A2A2A", color: matchingCodes.length ? "#CCCCCC" : "#444444" }}
+                          aria-label="Next match"
+                        >
+                          <ChevronDown size={14} />
+                        </button>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
