@@ -49,11 +49,31 @@ function weightsToSearch(weights: WeightMap): string {
   return params.toString();
 }
 
+const LS_WEIGHTS_KEY = "nomad-lens:weights";
+
+function loadWeightsFromStorage(): WeightMap {
+  try {
+    const raw = localStorage.getItem(LS_WEIGHTS_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as Record<string, unknown>;
+      const base = defaultWeights();
+      for (const key of CATEGORY_KEYS) {
+        const v = parsed[key];
+        if (typeof v === "number" && !isNaN(v)) {
+          base[key] = Math.max(0, Math.min(100, Math.round(v)));
+        }
+      }
+      return base;
+    }
+  } catch {
+    // ignore malformed data
+  }
+  return defaultWeights();
+}
+
 export default function App() {
   const [searchParams] = useSearchParams();
-  const [weights, setWeights] = useState<WeightMap>(() =>
-    weightsFromSearch(window.location.search),
-  );
+  const [weights, setWeights] = useState<WeightMap>(loadWeightsFromStorage);
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
   const [view, setView] = useState<"list" | "map" | "compare">(() => {
@@ -76,10 +96,9 @@ export default function App() {
   const { countries, loading, error, refresh } = useCountries();
   const ranked = useScoring(countries, weights, search, region, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
 
-  // Sync weights to URL for shareable links
+  // Persist weights to localStorage
   useEffect(() => {
-    const qs = weightsToSearch(weights);
-    window.history.replaceState(null, "", "?" + qs);
+    localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(weights));
   }, [weights]);
 
   const handleWeightChange = useCallback(
