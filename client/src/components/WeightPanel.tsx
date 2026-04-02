@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Wifi } from "lucide-react";
+import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Globe } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap } from "../utils/types";
 import {
   CATEGORY_DATA_SOURCES,
@@ -111,7 +111,7 @@ const WEIGHT_GROUPS: Array<{ label: string; icon: React.ReactElement; keys: Cate
   },
   {
     label: "CONNECTIVITY",
-    icon: <Wifi size={16} color="#8B7BAD" />,
+    icon: <Globe size={16} color="#8B7BAD" />,
     keys: ["infrastructure", "logistics", "airConnectivity", "englishProficiency"],
   },
 ];
@@ -169,7 +169,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
 
               {/* Sliders */}
               {isOpen && (
-                <div>
+                <div style={{ paddingTop: "6px", paddingBottom: "6px" }}>
                   {group.keys.map((key) => (
                     <React.Fragment key={key}>
                       <div style={{ padding: "8px 16px" }}>
