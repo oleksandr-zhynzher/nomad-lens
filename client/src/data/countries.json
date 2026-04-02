@@ -87,7 +87,7 @@
         "indicators": {
           "pm25": {
             "raw": 43.7674450148382,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -97,7 +97,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -247,7 +247,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "TG",
@@ -255,7 +257,7 @@
     "region": "Africa",
     "population": 8095498,
     "flagUrl": "https://flagcdn.com/tg.svg",
-    "capital": "Lomé",
+    "capital": "Lom\u00e9",
     "lat": 6.14,
     "lng": 1.21,
     "hasNomadVisa": false,
@@ -358,7 +360,7 @@
         "indicators": {
           "pm25": {
             "raw": 51.6661369398223,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -368,7 +370,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -536,7 +538,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "TW",
@@ -586,7 +590,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -719,7 +723,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "KG",
@@ -830,7 +836,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.3817252281764,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -840,7 +846,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -1014,7 +1020,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "SR",
@@ -1125,7 +1133,7 @@
         "indicators": {
           "pm25": {
             "raw": 27.3059698425997,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -1135,7 +1143,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -1285,7 +1293,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "DO",
@@ -1401,7 +1411,7 @@
         "indicators": {
           "pm25": {
             "raw": 19.8267440369685,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -1411,7 +1421,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -1605,7 +1615,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "GT",
@@ -1721,7 +1733,7 @@
         "indicators": {
           "pm25": {
             "raw": 21.6357355920496,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -1731,7 +1743,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -1915,7 +1927,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "DZ",
@@ -2016,7 +2030,7 @@
         "indicators": {
           "pm25": {
             "raw": 25.5526558310447,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -2026,7 +2040,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -2194,7 +2208,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "UA",
@@ -2305,7 +2321,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.90010098879,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -2315,7 +2331,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 10.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -2555,7 +2571,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "KN",
@@ -2640,7 +2658,7 @@
         "indicators": {
           "pm25": {
             "raw": 8.5943079884613,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -2650,7 +2668,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -2795,7 +2813,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "HR",
@@ -2906,7 +2926,7 @@
         "indicators": {
           "pm25": {
             "raw": 16.1208592960264,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -2916,7 +2936,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -3127,7 +3147,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "GQ",
@@ -3216,7 +3238,7 @@
         "indicators": {
           "pm25": {
             "raw": 35.3790521811967,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -3226,7 +3248,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -3382,7 +3404,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "PA",
@@ -3493,7 +3517,7 @@
         "indicators": {
           "pm25": {
             "raw": 11.4700607490209,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -3503,7 +3527,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -3708,7 +3732,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 180
   },
   {
     "code": "BE",
@@ -3819,7 +3845,7 @@
         "indicators": {
           "pm25": {
             "raw": 11.2160664677018,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -3829,7 +3855,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -4063,7 +4089,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "RW",
@@ -4179,7 +4207,7 @@
         "indicators": {
           "pm25": {
             "raw": 31.2882654917538,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -4189,7 +4217,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 20.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -4380,7 +4408,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "CV",
@@ -4486,7 +4516,7 @@
         "indicators": {
           "pm25": {
             "raw": 42.3225220905558,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -4496,7 +4526,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -4647,7 +4677,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "KR",
@@ -4758,7 +4790,7 @@
         "indicators": {
           "pm25": {
             "raw": 25.9439899531653,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -4768,7 +4800,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -5008,7 +5040,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "GU",
@@ -5016,7 +5050,7 @@
     "region": "Oceania",
     "population": 153836,
     "flagUrl": "https://flagcdn.com/gu.svg",
-    "capital": "Hagåtña",
+    "capital": "Hag\u00e5t\u00f1a",
     "lat": 13.48,
     "lng": 144.75,
     "hasNomadVisa": false,
@@ -5071,7 +5105,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.57510553293178,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -5081,7 +5115,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -5209,7 +5243,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "AD",
@@ -5294,7 +5330,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.08028059086901,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -5304,7 +5340,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -5449,7 +5485,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "SN",
@@ -5565,7 +5603,7 @@
         "indicators": {
           "pm25": {
             "raw": 63.7402211262202,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -5575,7 +5613,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -5754,7 +5792,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "UY",
@@ -5870,7 +5910,7 @@
         "indicators": {
           "pm25": {
             "raw": 10.5717923259135,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -5880,7 +5920,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 17.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -6086,7 +6126,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "CG",
@@ -6182,7 +6224,7 @@
         "indicators": {
           "pm25": {
             "raw": 28.5737499496554,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -6192,7 +6234,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -6354,7 +6396,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "NA",
@@ -6460,7 +6504,7 @@
         "indicators": {
           "pm25": {
             "raw": 19.9945355710926,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -6470,7 +6514,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 20.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -6643,7 +6687,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "SG",
@@ -6748,7 +6794,7 @@
         "indicators": {
           "pm25": {
             "raw": 13.8691955865476,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -6758,7 +6804,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -6992,7 +7038,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "FI",
@@ -7103,7 +7151,7 @@
         "indicators": {
           "pm25": {
             "raw": 4.89518090216668,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -7113,7 +7161,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 6.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -7347,7 +7395,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "EG",
@@ -7463,7 +7513,7 @@
         "indicators": {
           "pm25": {
             "raw": 54.8587056496436,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -7473,7 +7523,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 23.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -7708,7 +7758,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "PW",
@@ -7798,7 +7850,7 @@
         "indicators": {
           "pm25": {
             "raw": 7.32770979431049,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -7808,7 +7860,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -7948,7 +8000,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "AS",
@@ -8006,7 +8060,7 @@
         "indicators": {
           "pm25": {
             "raw": 6.71514739512663,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -8016,7 +8070,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -8133,7 +8187,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "AG",
@@ -8218,7 +8274,7 @@
         "indicators": {
           "pm25": {
             "raw": 19.6982695582914,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -8228,7 +8284,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -8379,7 +8435,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 180
   },
   {
     "code": "SC",
@@ -8480,7 +8538,7 @@
         "indicators": {
           "pm25": {
             "raw": 8.49983857722866,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -8490,7 +8548,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -8640,7 +8698,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "KW",
@@ -8741,7 +8801,7 @@
         "indicators": {
           "pm25": {
             "raw": 53.7151434413218,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -8751,7 +8811,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -8946,7 +9006,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "GR",
@@ -9057,7 +9119,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.4089280374361,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -9067,7 +9129,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -9301,7 +9363,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "KI",
@@ -9392,7 +9456,7 @@
         "indicators": {
           "pm25": {
             "raw": 11.2568272545112,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -9402,7 +9466,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -9553,7 +9617,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "CY",
@@ -9664,7 +9730,7 @@
         "indicators": {
           "pm25": {
             "raw": 13.508701890821,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -9674,7 +9740,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 20.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -9863,7 +9929,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "ML",
@@ -9964,7 +10032,7 @@
         "indicators": {
           "pm25": {
             "raw": 56.7830489222988,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -9974,7 +10042,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -10136,7 +10204,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "BM",
@@ -10216,7 +10286,7 @@
         "indicators": {
           "pm25": {
             "raw": 7.33600052500811,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -10226,7 +10296,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -10349,7 +10419,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "GL",
@@ -10418,7 +10490,7 @@
         "indicators": {
           "pm25": {
             "raw": 6.55624754182179,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -10428,7 +10500,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": -0.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -10550,7 +10622,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "ER",
@@ -10624,7 +10698,7 @@
         "indicators": {
           "pm25": {
             "raw": 32.3515206386852,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -10634,7 +10708,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -10790,7 +10864,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "TZ",
@@ -10901,7 +10977,7 @@
         "indicators": {
           "pm25": {
             "raw": 25.081431153535,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -10911,7 +10987,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -11111,7 +11187,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "VN",
@@ -11222,7 +11300,7 @@
         "indicators": {
           "pm25": {
             "raw": 20.8010641731194,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -11232,7 +11310,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -11467,7 +11545,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 45
   },
   {
     "code": "TD",
@@ -11573,7 +11653,7 @@
         "indicators": {
           "pm25": {
             "raw": 49.1388484128027,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -11583,7 +11663,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 29.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -11733,7 +11813,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "CI",
@@ -11844,7 +11926,7 @@
         "indicators": {
           "pm25": {
             "raw": 49.4977827339493,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -11854,7 +11936,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -12022,7 +12104,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "GE",
@@ -12138,7 +12222,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.0438421058507,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -12148,7 +12232,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 14.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -12365,7 +12449,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 365
   },
   {
     "code": "IM",
@@ -12427,7 +12513,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 10.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -12513,7 +12599,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "BO",
@@ -12624,7 +12712,7 @@
         "indicators": {
           "pm25": {
             "raw": 22.879459074231,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -12634,7 +12722,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 14.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -12807,7 +12895,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "DK",
@@ -12918,7 +13008,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.06983927345931,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -12928,7 +13018,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 9.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -13157,7 +13247,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "TM",
@@ -13263,7 +13355,7 @@
         "indicators": {
           "pm25": {
             "raw": 19.5997611438189,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -13273,7 +13365,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -13424,7 +13516,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "NE",
@@ -13535,7 +13629,7 @@
         "indicators": {
           "pm25": {
             "raw": 85.1223455605238,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -13545,7 +13639,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 30,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -13701,7 +13795,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "FM",
@@ -13780,7 +13876,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.1144203347628,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -13790,7 +13886,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -13930,7 +14026,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "KY",
@@ -14009,7 +14107,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -14137,7 +14235,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "LI",
@@ -14210,7 +14310,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -14355,7 +14455,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "BA",
@@ -14461,7 +14563,7 @@
         "indicators": {
           "pm25": {
             "raw": 26.6019532713554,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -14471,7 +14573,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -14659,7 +14761,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "FR",
@@ -14770,7 +14874,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.60038144780495,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -14780,7 +14884,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -15020,7 +15124,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "PF",
@@ -15028,7 +15134,7 @@
     "region": "Oceania",
     "population": 279500,
     "flagUrl": "https://flagcdn.com/pf.svg",
-    "capital": "Papeetē",
+    "capital": "Papeet\u0113",
     "lat": -17.53,
     "lng": -149.56,
     "hasNomadVisa": false,
@@ -15093,7 +15199,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -15190,7 +15296,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "KZ",
@@ -15301,7 +15409,7 @@
         "indicators": {
           "pm25": {
             "raw": 20.0278724259165,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -15311,7 +15419,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 5.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -15495,7 +15603,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "AO",
@@ -15601,7 +15711,7 @@
         "indicators": {
           "pm25": {
             "raw": 25.1452381976267,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -15611,7 +15721,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -15779,7 +15889,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "NZ",
@@ -15885,7 +15997,7 @@
         "indicators": {
           "pm25": {
             "raw": 6.48591499675774,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -15895,7 +16007,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -16123,7 +16235,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "PR",
@@ -16208,7 +16322,7 @@
         "indicators": {
           "pm25": {
             "raw": 7.18841521712249,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -16218,7 +16332,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -16351,7 +16465,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "SA",
@@ -16462,7 +16578,7 @@
         "indicators": {
           "pm25": {
             "raw": 53.1486013629285,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -16472,7 +16588,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -16712,7 +16828,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "ME",
@@ -16823,7 +16941,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.9824100566499,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -16833,7 +16951,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -17021,7 +17139,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "ZA",
@@ -17127,7 +17247,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.753069242361,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -17137,7 +17257,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -17377,7 +17497,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "PK",
@@ -17488,7 +17610,7 @@
         "indicators": {
           "pm25": {
             "raw": 42.9981734249878,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -17498,7 +17620,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 21,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -17699,7 +17821,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "LK",
@@ -17810,7 +17934,7 @@
         "indicators": {
           "pm25": {
             "raw": 19.9644408635608,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -17820,7 +17944,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -18019,7 +18143,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "CM",
@@ -18027,7 +18153,7 @@
     "region": "Africa",
     "population": 29442327,
     "flagUrl": "https://flagcdn.com/cm.svg",
-    "capital": "Yaoundé",
+    "capital": "Yaound\u00e9",
     "lat": 3.85,
     "lng": 11.5,
     "hasNomadVisa": false,
@@ -18125,7 +18251,7 @@
         "indicators": {
           "pm25": {
             "raw": 39.8126251004519,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -18135,7 +18261,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 23.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -18308,7 +18434,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "LR",
@@ -18403,7 +18531,7 @@
         "indicators": {
           "pm25": {
             "raw": 42.3616590279287,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -18413,7 +18541,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -18557,7 +18685,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "AE",
@@ -18668,7 +18798,7 @@
         "indicators": {
           "pm25": {
             "raw": 36.3055030826594,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -18678,7 +18808,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -18918,7 +19048,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "CH",
@@ -19029,7 +19161,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.06104968621636,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -19039,7 +19171,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 10.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -19267,7 +19399,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "HU",
@@ -19373,7 +19507,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.1364995764273,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -19383,7 +19517,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -19617,7 +19751,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "LY",
@@ -19707,7 +19843,7 @@
         "indicators": {
           "pm25": {
             "raw": 32.9707065002742,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -19717,7 +19853,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 20.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -19891,7 +20027,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "VU",
@@ -19992,7 +20130,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.0824115364695,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -20002,7 +20140,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -20153,7 +20291,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "LC",
@@ -20253,7 +20393,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.7585855502375,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -20263,7 +20403,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -20402,7 +20542,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 42
   },
   {
     "code": "CF",
@@ -20497,7 +20639,7 @@
         "indicators": {
           "pm25": {
             "raw": 34.4334184466457,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -20507,7 +20649,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -20658,7 +20800,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "TJ",
@@ -20764,7 +20908,7 @@
         "indicators": {
           "pm25": {
             "raw": 37.0534062306267,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -20774,7 +20918,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -20942,7 +21086,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "IE",
@@ -21053,7 +21199,7 @@
         "indicators": {
           "pm25": {
             "raw": 8.17058601306707,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -21063,7 +21209,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -21291,7 +21437,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "NC",
@@ -21299,7 +21447,7 @@
     "region": "Oceania",
     "population": 264596,
     "flagUrl": "https://flagcdn.com/nc.svg",
-    "capital": "Nouméa",
+    "capital": "Noum\u00e9a",
     "lat": -22.27,
     "lng": 166.45,
     "hasNomadVisa": false,
@@ -21364,7 +21512,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -21461,7 +21609,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "YE",
@@ -21529,7 +21679,7 @@
         "indicators": {
           "pm25": {
             "raw": 34.8323598356099,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -21539,7 +21689,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -21691,7 +21841,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "FO",
@@ -21699,7 +21851,7 @@
     "region": "Europe",
     "population": 54885,
     "flagUrl": "https://flagcdn.com/fo.svg",
-    "capital": "Tórshavn",
+    "capital": "T\u00f3rshavn",
     "lat": 62.01,
     "lng": -6.77,
     "hasNomadVisa": false,
@@ -21764,7 +21916,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 6.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -21855,7 +22007,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "CU",
@@ -21939,7 +22093,7 @@
         "indicators": {
           "pm25": {
             "raw": 21.2367242811561,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -21949,7 +22103,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -22134,7 +22288,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "AZ",
@@ -22245,7 +22401,7 @@
         "indicators": {
           "pm25": {
             "raw": 21.7269999756599,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -22255,7 +22411,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -22440,7 +22596,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "SB",
@@ -22530,7 +22688,7 @@
         "indicators": {
           "pm25": {
             "raw": 13.9542830081778,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -22540,7 +22698,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -22702,7 +22860,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "JM",
@@ -22808,7 +22968,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.413637041591,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -22818,7 +22978,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -23001,7 +23161,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "MA",
@@ -23107,7 +23269,7 @@
         "indicators": {
           "pm25": {
             "raw": 21.3212642117301,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -23117,7 +23279,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -23357,7 +23519,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "TT",
@@ -23458,7 +23622,7 @@
         "indicators": {
           "pm25": {
             "raw": 25.6022583642289,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -23468,7 +23632,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -23650,7 +23814,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "BZ",
@@ -23756,7 +23922,7 @@
         "indicators": {
           "pm25": {
             "raw": 28.6518070195516,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -23766,7 +23932,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -23916,7 +24082,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "CN",
@@ -24022,7 +24190,7 @@
         "indicators": {
           "pm25": {
             "raw": 34.8105237153218,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -24032,7 +24200,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -24272,7 +24440,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 15
   },
   {
     "code": "WS",
@@ -24368,7 +24538,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.5518952802963,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -24378,7 +24548,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -24529,7 +24699,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 60
   },
   {
     "code": "VG",
@@ -24596,7 +24768,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -24693,7 +24865,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "SD",
@@ -24783,7 +24957,7 @@
         "indicators": {
           "pm25": {
             "raw": 45.8349025581217,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -24793,7 +24967,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 31,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -24967,7 +25141,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "SK",
@@ -25078,7 +25254,7 @@
         "indicators": {
           "pm25": {
             "raw": 15.3916194257365,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -25088,7 +25264,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -25299,7 +25475,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "BI",
@@ -25394,7 +25572,7 @@
         "indicators": {
           "pm25": {
             "raw": 29.6541345084659,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -25404,7 +25582,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -25560,7 +25738,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "MH",
@@ -25645,7 +25825,7 @@
         "indicators": {
           "pm25": {
             "raw": 10.7256194470999,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -25655,7 +25835,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -25806,7 +25986,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "AT",
@@ -25917,7 +26099,7 @@
         "indicators": {
           "pm25": {
             "raw": 10.9335136815146,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -25927,7 +26109,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -26161,7 +26343,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "MZ",
@@ -26267,7 +26451,7 @@
         "indicators": {
           "pm25": {
             "raw": 20.0802484321177,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -26277,7 +26461,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 23.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -26451,7 +26635,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "VC",
@@ -26547,7 +26733,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.9262758481858,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -26557,7 +26743,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -26696,7 +26882,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "PG",
@@ -26802,7 +26990,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.3105425567239,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -26812,7 +27000,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -26974,7 +27162,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 60
   },
   {
     "code": "TR",
@@ -27090,7 +27280,7 @@
         "indicators": {
           "pm25": {
             "raw": 21.6120469179783,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -27100,7 +27290,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -27340,7 +27530,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "GD",
@@ -27425,7 +27617,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.6572416056476,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -27435,7 +27627,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -27580,7 +27772,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "KH",
@@ -27686,7 +27880,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.1436022803452,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -27696,7 +27890,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -27907,7 +28101,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "PT",
@@ -28018,7 +28214,7 @@
         "indicators": {
           "pm25": {
             "raw": 8.45242266236737,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -28028,7 +28224,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 17.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -28262,7 +28458,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "GB",
@@ -28373,7 +28571,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.91288560282114,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -28383,7 +28581,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -28617,7 +28815,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 180
   },
   {
     "code": "NG",
@@ -28723,7 +28923,7 @@
         "indicators": {
           "pm25": {
             "raw": 56.5313287289257,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -28733,7 +28933,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -28968,7 +29168,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "MP",
@@ -29026,7 +29228,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.71463085081006,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -29036,7 +29238,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -29128,7 +29330,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "IL",
@@ -29239,7 +29443,7 @@
         "indicators": {
           "pm25": {
             "raw": 18.5982756348314,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -29249,7 +29453,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -29472,7 +29676,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "LB",
@@ -29583,7 +29789,7 @@
         "indicators": {
           "pm25": {
             "raw": 19.2310172881236,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -29593,7 +29799,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 21.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -29767,7 +29973,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "JP",
@@ -29872,7 +30080,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.835201662985,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -29882,7 +30090,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -30117,7 +30325,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "GM",
@@ -30233,7 +30443,7 @@
         "indicators": {
           "pm25": {
             "raw": 58.3640402179659,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -30243,7 +30453,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -30399,7 +30609,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "MF",
@@ -30461,7 +30673,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -30547,7 +30759,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "GW",
@@ -30648,7 +30862,7 @@
         "indicators": {
           "pm25": {
             "raw": 50.2127655060307,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -30658,7 +30872,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -30809,7 +31023,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "LA",
@@ -30914,7 +31130,7 @@
         "indicators": {
           "pm25": {
             "raw": 22.3176670505669,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -30924,7 +31140,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -31092,7 +31308,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "MK",
@@ -31198,7 +31416,7 @@
         "indicators": {
           "pm25": {
             "raw": 26.118651401474,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -31208,7 +31426,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 14.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -31375,7 +31593,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "QA",
@@ -31475,7 +31695,7 @@
         "indicators": {
           "pm25": {
             "raw": 75.6630329481338,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -31485,7 +31705,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -31685,7 +31905,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "ZM",
@@ -31791,7 +32013,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.3085919008655,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -31801,7 +32023,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 21.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -31975,7 +32197,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "BB",
@@ -32081,7 +32305,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.7309657842996,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -32091,7 +32315,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -32246,7 +32470,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 180
   },
   {
     "code": "IT",
@@ -32357,7 +32583,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.6586386239905,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -32367,7 +32593,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -32607,7 +32833,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "KM",
@@ -32703,7 +32931,7 @@
         "indicators": {
           "pm25": {
             "raw": 11.9332724091044,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -32713,7 +32941,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -32858,7 +33086,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 45
   },
   {
     "code": "AL",
@@ -32974,7 +33204,7 @@
         "indicators": {
           "pm25": {
             "raw": 15.7070036417042,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -32984,7 +33214,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -33184,7 +33414,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "GI",
@@ -33246,7 +33478,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -33337,7 +33569,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "MN",
@@ -33453,7 +33687,7 @@
         "indicators": {
           "pm25": {
             "raw": 29.6547866481682,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -33463,7 +33697,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 0.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -33657,7 +33891,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "TO",
@@ -33757,7 +33993,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.4784129504796,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -33767,7 +34003,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -33912,7 +34148,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 31
   },
   {
     "code": "MG",
@@ -34023,7 +34261,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.7535199510191,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -34033,7 +34271,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -34207,7 +34445,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "MC",
@@ -34281,7 +34521,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.5810695715317,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -34291,7 +34531,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -34436,7 +34676,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "BR",
@@ -34444,7 +34686,7 @@
     "region": "Americas",
     "population": 213421037,
     "flagUrl": "https://flagcdn.com/br.svg",
-    "capital": "Brasília",
+    "capital": "Bras\u00edlia",
     "lat": -15.79,
     "lng": -47.88,
     "hasNomadVisa": true,
@@ -34552,7 +34794,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.1793252040724,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -34562,7 +34804,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -34802,7 +35044,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "AU",
@@ -34908,7 +35152,7 @@
         "indicators": {
           "pm25": {
             "raw": 8.25171746070811,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -34918,7 +35162,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -35152,7 +35396,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "GY",
@@ -35258,7 +35504,7 @@
         "indicators": {
           "pm25": {
             "raw": 25.460668047299,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -35268,7 +35514,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -35424,7 +35670,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "SI",
@@ -35535,7 +35783,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.2911527506818,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -35545,7 +35793,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -35745,7 +35993,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "SM",
@@ -35840,7 +36090,7 @@
         "indicators": {
           "pm25": {
             "raw": 10.6908983278922,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -35850,7 +36100,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -35989,7 +36239,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "PS",
@@ -36094,7 +36346,7 @@
         "indicators": {
           "pm25": {
             "raw": 26.3636264444046,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -36104,7 +36356,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 17.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -36249,7 +36501,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "BT",
@@ -36359,7 +36613,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.9456576369223,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -36369,7 +36623,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -36537,7 +36791,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "SX",
@@ -36616,7 +36872,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -36708,7 +36964,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "PH",
@@ -36819,7 +37077,7 @@
         "indicators": {
           "pm25": {
             "raw": 20.2887417122616,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -36829,7 +37087,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -37069,7 +37327,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "CL",
@@ -37180,7 +37440,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.2750668049145,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -37190,7 +37450,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 16.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -37424,7 +37684,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "HT",
@@ -37519,7 +37781,7 @@
         "indicators": {
           "pm25": {
             "raw": 21.3502554448061,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -37529,7 +37791,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -37691,15 +37953,17 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "ST",
-    "name": "São Tomé and Príncipe",
+    "name": "S\u00e3o Tom\u00e9 and Pr\u00edncipe",
     "region": "Africa",
     "population": 209607,
     "flagUrl": "https://flagcdn.com/st.svg",
-    "capital": "São Tomé",
+    "capital": "S\u00e3o Tom\u00e9",
     "lat": 0.34,
     "lng": 6.73,
     "hasNomadVisa": false,
@@ -37786,7 +38050,7 @@
         "indicators": {
           "pm25": {
             "raw": 27.3357522767854,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -37796,7 +38060,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -37947,7 +38211,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "MO",
@@ -38167,7 +38433,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "MU",
@@ -38278,7 +38546,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.15296880580014,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -38288,7 +38556,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -38471,7 +38739,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 60
   },
   {
     "code": "BH",
@@ -38576,7 +38846,7 @@
         "indicators": {
           "pm25": {
             "raw": 58.4950629834781,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -38586,7 +38856,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -38786,7 +39056,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "MX",
@@ -38902,7 +39174,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.9923440243315,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -38912,7 +39184,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 17.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -39152,7 +39424,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 180
   },
   {
     "code": "AR",
@@ -39263,7 +39537,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.9081737974407,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -39273,7 +39547,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 17.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -39513,7 +39787,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "NP",
@@ -39624,7 +39900,7 @@
         "indicators": {
           "pm25": {
             "raw": 45.7207706412594,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -39634,7 +39910,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 17.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -39833,7 +40109,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "SE",
@@ -39944,7 +40222,7 @@
         "indicators": {
           "pm25": {
             "raw": 5.63670790600148,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -39954,7 +40232,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 7.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -40188,7 +40466,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "SL",
@@ -40284,7 +40564,7 @@
         "indicators": {
           "pm25": {
             "raw": 43.2210935036927,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -40294,7 +40574,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -40439,7 +40719,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "SZ",
@@ -40535,7 +40817,7 @@
         "indicators": {
           "pm25": {
             "raw": 18.7831211422857,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -40545,7 +40827,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 17,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -40701,7 +40983,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "ES",
@@ -40817,7 +41101,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.58105460690675,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -40827,7 +41111,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 15.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -41061,7 +41345,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "CO",
@@ -41069,7 +41355,7 @@
     "region": "Americas",
     "population": 53057212,
     "flagUrl": "https://flagcdn.com/co.svg",
-    "capital": "Bogotá",
+    "capital": "Bogot\u00e1",
     "lat": 4.71,
     "lng": -74.07,
     "hasNomadVisa": true,
@@ -41177,7 +41463,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.1832514905064,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -41187,7 +41473,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -41404,7 +41690,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "TC",
@@ -41488,7 +41776,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -41580,7 +41868,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "DJ",
@@ -41670,7 +41960,7 @@
         "indicators": {
           "pm25": {
             "raw": 35.9243304831101,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -41680,7 +41970,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 30.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -41824,7 +42114,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "NR",
@@ -41904,7 +42196,7 @@
         "indicators": {
           "pm25": {
             "raw": 6.06435493209495,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -41914,7 +42206,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -42054,7 +42346,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "SV",
@@ -42170,7 +42464,7 @@
         "indicators": {
           "pm25": {
             "raw": 20.0287144500145,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -42180,7 +42474,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -42353,7 +42647,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "HN",
@@ -42464,7 +42760,7 @@
         "indicators": {
           "pm25": {
             "raw": 20.3136833896573,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -42474,7 +42770,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 22.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -42653,7 +42949,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "KE",
@@ -42764,7 +43062,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.3917906517518,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -42774,7 +43072,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -42991,7 +43289,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "MT",
@@ -43102,7 +43402,7 @@
         "indicators": {
           "pm25": {
             "raw": 11.7226648774147,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -43112,7 +43412,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 20.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -43301,7 +43601,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "LV",
@@ -43412,7 +43714,7 @@
         "indicators": {
           "pm25": {
             "raw": 11.6020322023647,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -43422,7 +43724,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 8.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -43633,7 +43935,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "GA",
@@ -43729,7 +44033,7 @@
         "indicators": {
           "pm25": {
             "raw": 29.9548734558765,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -43739,7 +44043,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -43889,7 +44193,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "HK",
@@ -43989,7 +44295,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 23,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -44179,7 +44485,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "TV",
@@ -44269,7 +44577,7 @@
         "indicators": {
           "pm25": {
             "raw": 5.91780105591262,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -44279,7 +44587,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -44418,7 +44726,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "TL",
@@ -44524,7 +44834,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.4104661970888,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -44534,7 +44844,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -44684,7 +44994,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "LS",
@@ -44774,7 +45086,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.4391013240086,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -44784,7 +45096,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 14.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -44940,7 +45252,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "US",
@@ -45051,7 +45365,7 @@
         "indicators": {
           "pm25": {
             "raw": 7.81485752365112,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -45061,7 +45375,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 14.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -45295,7 +45609,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "TH",
@@ -45411,7 +45727,7 @@
         "indicators": {
           "pm25": {
             "raw": 31.0072016277159,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -45421,7 +45737,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -45661,7 +45977,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 60
   },
   {
     "code": "IN",
@@ -45777,7 +46095,7 @@
         "indicators": {
           "pm25": {
             "raw": 48.3948115195574,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -45787,7 +46105,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -46027,7 +46345,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "LT",
@@ -46138,7 +46458,7 @@
         "indicators": {
           "pm25": {
             "raw": 9.21893860360944,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -46148,7 +46468,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 8.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -46359,7 +46679,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "ZW",
@@ -46455,7 +46777,7 @@
         "indicators": {
           "pm25": {
             "raw": 19.4941796611344,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -46465,7 +46787,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -46633,7 +46955,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "MV",
@@ -46641,7 +46965,7 @@
     "region": "Asia",
     "population": 515132,
     "flagUrl": "https://flagcdn.com/mv.svg",
-    "capital": "Malé",
+    "capital": "Mal\u00e9",
     "lat": 4.17,
     "lng": 73.51,
     "hasNomadVisa": false,
@@ -46733,7 +47057,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.0123911668511,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -46743,7 +47067,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -46900,7 +47224,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "TN",
@@ -47011,7 +47337,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.1829826735327,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -47021,7 +47347,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -47250,7 +47576,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "EE",
@@ -47361,7 +47689,7 @@
         "indicators": {
           "pm25": {
             "raw": 6.14573290973003,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -47371,7 +47699,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 6.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -47588,7 +47916,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "BD",
@@ -47704,7 +48034,7 @@
         "indicators": {
           "pm25": {
             "raw": 42.3813762359965,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -47714,7 +48044,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -47931,7 +48261,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "UZ",
@@ -48047,7 +48379,7 @@
         "indicators": {
           "pm25": {
             "raw": 31.9604294559849,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -48057,7 +48389,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 15.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -48236,7 +48568,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "GH",
@@ -48342,7 +48676,7 @@
         "indicators": {
           "pm25": {
             "raw": 54.2427873097724,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -48352,7 +48686,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -48553,7 +48887,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "NO",
@@ -48664,7 +49000,7 @@
         "indicators": {
           "pm25": {
             "raw": 6.05589724673443,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -48674,7 +49010,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 6.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -48903,7 +49239,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "SO",
@@ -48999,7 +49337,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.525108218562,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -49009,7 +49347,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -49137,7 +49475,7 @@
         "value": 100,
         "indicators": {
           "taxRevenueGDP": {
-            "raw": 0.0000796182509481436,
+            "raw": 7.96182509481436e-05,
             "unit": "% GDP",
             "year": 2024
           }
@@ -49171,7 +49509,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "BS",
@@ -49261,7 +49601,7 @@
         "indicators": {
           "pm25": {
             "raw": 18.9393918728687,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -49271,7 +49611,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -49428,7 +49768,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "OM",
@@ -49539,7 +49881,7 @@
         "indicators": {
           "pm25": {
             "raw": 39.5835768902765,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -49549,7 +49891,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 29.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -49732,7 +50074,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "LU",
@@ -49838,7 +50182,7 @@
         "indicators": {
           "pm25": {
             "raw": 8.67476189540246,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -49848,7 +50192,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 10.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -50065,7 +50409,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "IQ",
@@ -50166,7 +50512,7 @@
         "indicators": {
           "pm25": {
             "raw": 38.1750699787954,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -50176,7 +50522,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -50350,7 +50696,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "VI",
@@ -50424,7 +50772,7 @@
         "indicators": {
           "pm25": {
             "raw": 8.63342756669479,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -50434,7 +50782,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -50557,7 +50905,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "MR",
@@ -50647,7 +50997,7 @@
         "indicators": {
           "pm25": {
             "raw": 70.8224442103687,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -50657,7 +51007,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -50807,7 +51157,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "CA",
@@ -50918,7 +51270,7 @@
         "indicators": {
           "pm25": {
             "raw": 6.56566994375263,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -50928,7 +51280,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 7.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -51162,7 +51514,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 180
   },
   {
     "code": "MM",
@@ -51252,7 +51606,7 @@
         "indicators": {
           "pm25": {
             "raw": 32.3150340028667,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -51262,7 +51616,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -51447,7 +51801,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 28
   },
   {
     "code": "MY",
@@ -51563,7 +51919,7 @@
         "indicators": {
           "pm25": {
             "raw": 16.1938532237922,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -51573,7 +51929,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -51784,7 +52140,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "UG",
@@ -51880,7 +52238,7 @@
         "indicators": {
           "pm25": {
             "raw": 33.8077192571642,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -51890,7 +52248,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 21.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -52075,7 +52433,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "IR",
@@ -52186,7 +52546,7 @@
         "indicators": {
           "pm25": {
             "raw": 32.2873733599003,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -52196,7 +52556,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -52387,11 +52747,13 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "CW",
-    "name": "Curaçao",
+    "name": "Cura\u00e7ao",
     "region": "Americas",
     "population": 156115,
     "flagUrl": "https://flagcdn.com/cw.svg",
@@ -52466,7 +52828,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -52563,7 +52925,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "RO",
@@ -52679,7 +53043,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.8501731264834,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -52689,7 +53053,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -52923,7 +53287,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "SY",
@@ -53029,7 +53395,7 @@
         "indicators": {
           "pm25": {
             "raw": 24.7058382627422,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -53039,7 +53405,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 19.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -53197,7 +53563,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "FJ",
@@ -53293,7 +53661,7 @@
         "indicators": {
           "pm25": {
             "raw": 12.4187981716598,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -53303,7 +53671,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -53465,7 +53833,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 120
   },
   {
     "code": "AW",
@@ -53549,7 +53919,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -53677,7 +54047,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "NL",
@@ -53788,7 +54160,7 @@
         "indicators": {
           "pm25": {
             "raw": 10.8892498470498,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -53798,7 +54170,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -54027,7 +54399,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "PE",
@@ -54138,7 +54512,7 @@
         "indicators": {
           "pm25": {
             "raw": 27.0356284968814,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -54148,7 +54522,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 20.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -54353,7 +54727,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "BW",
@@ -54459,7 +54835,7 @@
         "indicators": {
           "pm25": {
             "raw": 18.9057549925814,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -54469,7 +54845,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 21.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -54642,7 +55018,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "AF",
@@ -54743,7 +55121,7 @@
         "indicators": {
           "pm25": {
             "raw": 46.0870936659706,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -54753,7 +55131,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -54909,7 +55287,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "RS",
@@ -55025,7 +55405,7 @@
         "indicators": {
           "pm25": {
             "raw": 22.5075355689004,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -55035,7 +55415,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 13.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -55241,7 +55621,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "CZ",
@@ -55352,7 +55734,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.1110711384133,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -55362,7 +55744,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.4,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -55596,7 +55978,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "DM",
@@ -55687,7 +56071,7 @@
         "indicators": {
           "pm25": {
             "raw": 20.6672998234563,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -55697,7 +56081,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -55836,7 +56220,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 21
   },
   {
     "code": "PL",
@@ -55947,7 +56333,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.9583314936851,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -55957,7 +56343,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 10.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -56191,7 +56577,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "BJ",
@@ -56307,7 +56695,7 @@
         "indicators": {
           "pm25": {
             "raw": 51.0478241974862,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -56317,7 +56705,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -56473,7 +56861,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "MD",
@@ -56481,7 +56871,7 @@
     "region": "Europe",
     "population": 2749076,
     "flagUrl": "https://flagcdn.com/md.svg",
-    "capital": "Chișinău",
+    "capital": "Chi\u0219in\u0103u",
     "lat": 47.01,
     "lng": 28.9,
     "hasNomadVisa": false,
@@ -56584,7 +56974,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.7583463021422,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -56594,7 +56984,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -56767,7 +57157,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "RU",
@@ -56883,7 +57275,7 @@
         "indicators": {
           "pm25": {
             "raw": 11.2727775886895,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -56893,7 +57285,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 6.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -57110,7 +57502,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "ID",
@@ -57221,7 +57615,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.8814994983985,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -57231,7 +57625,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -57466,7 +57860,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "NI",
@@ -57567,7 +57963,7 @@
         "indicators": {
           "pm25": {
             "raw": 16.809772538789,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -57577,7 +57973,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 27.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -57744,7 +58140,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "AM",
@@ -57860,7 +58258,7 @@
         "indicators": {
           "pm25": {
             "raw": 30.5796334750125,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -57870,7 +58268,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 14,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -58049,7 +58447,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 180
   },
   {
     "code": "BY",
@@ -58160,7 +58560,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.6089903841381,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -58170,7 +58570,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 8.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -58355,7 +58755,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "ET",
@@ -58456,7 +58858,7 @@
         "indicators": {
           "pm25": {
             "raw": 27.3053276470482,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -58466,7 +58868,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 15.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -58678,7 +59080,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "CR",
@@ -58686,7 +59090,7 @@
     "region": "Americas",
     "population": 5309625,
     "flagUrl": "https://flagcdn.com/cr.svg",
-    "capital": "San José",
+    "capital": "San Jos\u00e9",
     "lat": 9.93,
     "lng": -84.09,
     "hasNomadVisa": true,
@@ -58784,7 +59188,7 @@
         "indicators": {
           "pm25": {
             "raw": 14.3075712471404,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -58794,7 +59198,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 20.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -59011,7 +59415,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "JO",
@@ -59122,7 +59528,7 @@
         "indicators": {
           "pm25": {
             "raw": 28.7737639174179,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -59132,7 +59538,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 18.5,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -59349,7 +59755,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "DE",
@@ -59460,7 +59868,7 @@
         "indicators": {
           "pm25": {
             "raw": 10.2876894329414,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -59470,7 +59878,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -59710,7 +60118,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "EC",
@@ -59826,7 +60236,7 @@
         "indicators": {
           "pm25": {
             "raw": 16.6570210758922,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -59836,7 +60246,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -60047,7 +60457,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "KP",
@@ -60105,7 +60517,7 @@
         "indicators": {
           "pm25": {
             "raw": 29.9291062464217,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -60115,7 +60527,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 11.7,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -60238,7 +60650,9 @@
         "value": null,
         "indicators": {}
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "IS",
@@ -60344,7 +60758,7 @@
         "indicators": {
           "pm25": {
             "raw": 5.10554827500189,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -60354,7 +60768,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 4.8,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -60588,7 +61002,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   },
   {
     "code": "SS",
@@ -60669,7 +61085,7 @@
         "indicators": {
           "pm25": {
             "raw": 30.7373478613476,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -60679,7 +61095,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -60812,7 +61228,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "MW",
@@ -60913,7 +61331,7 @@
         "indicators": {
           "pm25": {
             "raw": 23.6983194353464,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -60923,7 +61341,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 21,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -61097,7 +61515,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 30
   },
   {
     "code": "BF",
@@ -61213,7 +61633,7 @@
         "indicators": {
           "pm25": {
             "raw": 58.4706762025055,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -61223,7 +61643,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 28.2,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -61385,7 +61805,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "CD",
@@ -61481,7 +61903,7 @@
         "indicators": {
           "pm25": {
             "raw": 26.6494833206385,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -61491,7 +61913,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 25.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -61664,7 +62086,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": null
   },
   {
     "code": "VE",
@@ -61744,7 +62168,7 @@
         "indicators": {
           "pm25": {
             "raw": 15.2565796212874,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -61754,7 +62178,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 21.9,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -61934,7 +62358,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "BN",
@@ -62034,7 +62460,7 @@
         "indicators": {
           "pm25": {
             "raw": 7.59726503432135,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -62044,7 +62470,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 26.6,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -62206,7 +62632,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "PY",
@@ -62214,7 +62642,7 @@
     "region": "Americas",
     "population": 6109644,
     "flagUrl": "https://flagcdn.com/py.svg",
-    "capital": "Asunción",
+    "capital": "Asunci\u00f3n",
     "lat": -25.28,
     "lng": -57.57,
     "hasNomadVisa": false,
@@ -62317,7 +62745,7 @@
         "indicators": {
           "pm25": {
             "raw": 10.0891599097852,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -62327,7 +62755,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 24.1,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -62505,7 +62933,9 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": false,
+    "touristVisaDays": 90
   },
   {
     "code": "BG",
@@ -62616,7 +63046,7 @@
         "indicators": {
           "pm25": {
             "raw": 17.1474236131426,
-            "unit": "μg/m³",
+            "unit": "\u03bcg/m\u00b3",
             "year": 2020
           }
         }
@@ -62626,7 +63056,7 @@
         "indicators": {
           "annualMeanTemp": {
             "raw": 12.3,
-            "unit": "°C",
+            "unit": "\u00b0C",
             "year": 2023
           },
           "annualPrecipitation": {
@@ -62837,6 +63267,8 @@
           }
         }
       }
-    }
+    },
+    "isSchengen": true,
+    "touristVisaDays": 90
   }
 ]

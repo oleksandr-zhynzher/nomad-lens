@@ -5,6 +5,7 @@ import crimeJson from '../data/crime.json';
 import cpiJson from '../data/cpi.json';
 import epiJson from '../data/epi.json';
 import nomadVisaJson from '../data/nomadVisa.json';
+import visasJson from '../data/visas.json';
 import digitalFreedomJson from '../data/digitalFreedom.json';
 import personalFreedomJson from '../data/personalFreedom.json';
 import socialToleranceJson from '../data/socialTolerance.json';
@@ -40,6 +41,8 @@ const intangibleHeritageMap = new Map<string, IntangibleHeritageEntry>();
 const biodiversityMap = new Map<string, BiodiversityEntry>();
 
 const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
+const schengenSet = new Set<string>(visasJson.schengen);
+const touristVisaDaysMap = visasJson.touristVisaDays as Record<string, number | null>;
 
 (hdiJson as unknown as JsonFile<HdiEntry>).data.forEach((e) => hdiMap.set(e.code, e));
 (happinessJson as unknown as JsonFile<HappinessEntry>).data.forEach((e) => happinessMap.set(e.code, e));
@@ -74,4 +77,9 @@ export const localData = {
   getIntangibleHeritage: (code: string): IntangibleHeritageEntry | undefined => intangibleHeritageMap.get(code),
   getBiodiversity: (code: string): BiodiversityEntry | undefined => biodiversityMap.get(code),
   hasNomadVisa: (code: string): boolean => nomadVisaSet.has(code.toUpperCase()),
+  isSchengen: (code: string): boolean => schengenSet.has(code.toUpperCase()),
+  getTouristVisaDays: (code: string): number | null => {
+    const val = touristVisaDaysMap[code.toUpperCase()];
+    return val === undefined ? null : val;
+  },
 };

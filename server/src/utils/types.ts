@@ -64,6 +64,8 @@ export interface CountryData {
   lat: number;
   lng: number;
   hasNomadVisa: boolean;
+  isSchengen: boolean;
+  touristVisaDays: number | null;
   climateData?: ClimateData;
   scores: Record<CategoryKey, CategoryScore>;
 }

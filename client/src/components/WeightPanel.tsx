@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Globe } from "lucide-react";
+import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Globe, Plane } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap } from "../utils/types";
 import {
   CATEGORY_DATA_SOURCES,
@@ -70,6 +70,10 @@ interface WeightPanelProps {
   onClimatePrefsChange: (prefs: ClimatePreferences) => void;
   nomadVisaOnly: boolean;
   onNomadVisaOnlyChange: (value: boolean) => void;
+  schengenOnly: boolean;
+  onSchengenOnlyChange: (value: boolean) => void;
+  minTouristDays: number | null;
+  onMinTouristDaysChange: (value: number | null) => void;
   mobile?: boolean;
 }
 
@@ -118,7 +122,7 @@ const WEIGHT_GROUPS: Array<{ label: string; icon: React.ReactElement; keys: Cate
   },
 ];
 
-export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange, mobile }: WeightPanelProps) {
+export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange, schengenOnly, onSchengenOnlyChange, minTouristDays, onMinTouristDaysChange, mobile }: WeightPanelProps) {
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
 
   const toggleGroup = (label: string) =>
@@ -177,36 +181,6 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                       <div style={{ padding: "10px 16px" }}>
                         <WeightSlider categoryKey={key} value={weights[key]} onChange={onChange} weights={weights} />
                       </div>
-                      {key === "englishProficiency" && (
-                        <div className="flex items-center justify-between" style={{ padding: "8px 16px" }}>
-                          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                            <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 400, color: "#FFFFFF" }}>
-                              Nomad Visa Only
-                            </span>
-                            <Tooltip
-                              content={
-                                <div>
-                                  <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Nomad Visa Parameter</div>
-                                  <div>When enabled, only shows countries that offer digital nomad visas or long-term remote work permits, making it easier to legally stay and work remotely for extended periods.</div>
-                                </div>
-                              }
-                              side="top"
-                            >
-                              <Info size={14} color="#FFFFFF" style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }} />
-                            </Tooltip>
-                          </div>
-                          <button
-                            onClick={() => onNomadVisaOnlyChange(!nomadVisaOnly)}
-                            className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
-                            style={{ backgroundColor: nomadVisaOnly ? "var(--color-accent)" : "#333333" }}
-                          >
-                            <span
-                              className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
-                              style={{ transform: nomadVisaOnly ? "translateX(26px)" : "translateX(4px)" }}
-                            />
-                          </button>
-                        </div>
-                      )}
                       {key === "climate" && (
                         <div className="flex flex-col" style={{ backgroundColor: "#141414", padding: "10px 20px", gap: "8px" }}>
                           {/* Season rows — 3 equal-width buttons per row */}
@@ -265,6 +239,127 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
             </div>
           );
         })}
+
+        {/* ── VISA & STAY section (collapsible, at bottom) ─── */}
+        {(() => {
+          const isOpen = !collapsed["VISA & STAY"];
+          const hasActiveFilter = nomadVisaOnly || schengenOnly || minTouristDays !== null;
+          return (
+            <div style={{ borderBottom: "1px solid #242424" }}>
+              <button
+                className="w-full flex items-center"
+                style={{ height: "40px", padding: "0 14px", gap: "8px", backgroundColor: "#1A1A1A" }}
+                onClick={() => toggleGroup("VISA & STAY")}
+              >
+                <Plane size={16} color="#7A9BAD" />
+                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#888888", flex: 1, textAlign: "left" }}>
+                  VISA &amp; STAY
+                </span>
+                {hasActiveFilter && (
+                  <div style={{ display: "flex", alignItems: "center", backgroundColor: "#0E1E26", borderRadius: "3px", padding: "3px 8px" }}>
+                    <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#7AADBD" }}>ON</span>
+                  </div>
+                )}
+                <ChevronDown
+                  size={14}
+                  style={{
+                    color: "#555555",
+                    transform: isOpen ? "rotate(0deg)" : "rotate(-90deg)",
+                    transition: "transform 0.15s ease",
+                    flexShrink: 0,
+                  }}
+                />
+              </button>
+
+              {isOpen && (
+                <div style={{ backgroundColor: "#141414", padding: "12px 16px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                  {/* Nomad Visa toggle */}
+                  <div className="flex items-center justify-between">
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#CCCCCC" }}>Nomad Visa Only</span>
+                      <Tooltip
+                        content={
+                          <div>
+                            <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Digital Nomad Visa</div>
+                            <div>Show only countries that offer digital nomad visas or long-term remote work permits.</div>
+                          </div>
+                        }
+                        side="top"
+                      >
+                        <Info size={14} color="#FFFFFF" style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }} />
+                      </Tooltip>
+                    </div>
+                    <button
+                      onClick={() => onNomadVisaOnlyChange(!nomadVisaOnly)}
+                      className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
+                      style={{ backgroundColor: nomadVisaOnly ? "var(--color-accent)" : "#333333", flexShrink: 0 }}
+                    >
+                      <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform" style={{ transform: nomadVisaOnly ? "translateX(26px)" : "translateX(4px)" }} />
+                    </button>
+                  </div>
+
+                  {/* Schengen toggle */}
+                  <div className="flex items-center justify-between">
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#CCCCCC" }}>Schengen Area</span>
+                      <Tooltip
+                        content={
+                          <div>
+                            <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Schengen Zone</div>
+                            <div>Show only countries within the Schengen Area — 29 European countries with passport-free travel between them.</div>
+                          </div>
+                        }
+                        side="top"
+                      >
+                        <Info size={14} color="#FFFFFF" style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }} />
+                      </Tooltip>
+                    </div>
+                    <button
+                      onClick={() => onSchengenOnlyChange(!schengenOnly)}
+                      className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
+                      style={{ backgroundColor: schengenOnly ? "var(--color-accent)" : "#333333", flexShrink: 0 }}
+                    >
+                      <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform" style={{ transform: schengenOnly ? "translateX(26px)" : "translateX(4px)" }} />
+                    </button>
+                  </div>
+
+                  {/* Min Tourist Stay */}
+                  <div className="flex flex-col" style={{ gap: "6px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                      <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#CCCCCC" }}>Min. Tourist Stay</span>
+                      <Tooltip
+                        content={
+                          <div>
+                            <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Tourist Visa Length</div>
+                            <div>Filter by the minimum visa-free or visa-on-arrival stay available for most Western passports. Countries requiring advance visa applications are excluded.</div>
+                          </div>
+                        }
+                        side="top"
+                      >
+                        <Info size={14} color="#FFFFFF" style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }} />
+                      </Tooltip>
+                    </div>
+                    <div className="flex" style={{ gap: "4px" }}>
+                      {([null, 30, 60, 90, 180] as const).map((days) => {
+                        const active = minTouristDays === days;
+                        const label = days === null ? "Any" : `${days}+`;
+                        return (
+                          <button
+                            key={label}
+                            onClick={() => onMinTouristDaysChange(days)}
+                            style={{ flex: 1, padding: "5px 0", borderRadius: "3px", border: "none", cursor: "pointer", fontFamily: "Geist, sans-serif", fontSize: "10px", backgroundColor: active ? "#8F5A3C" : "#2A2A2A", color: active ? "#FFFFFF" : "#666666", textAlign: "center" }}
+                          >
+                            {label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })()}
       </div>
 
       {/* Fixed footer */}

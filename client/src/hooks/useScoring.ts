@@ -8,6 +8,8 @@ export function useScoring(
   searchQuery: string,
   regionFilter: string,
   nomadVisaOnly: boolean,
+  schengenOnly: boolean,
+  minTouristDays: number | null,
   climatePrefs: ClimatePreferences,
 ): RankedCountry[] {
   return useMemo(() => {
@@ -21,8 +23,12 @@ export function useScoring(
         regionFilter === "" || c.region === regionFilter;
 
       const matchesNomadVisa = !nomadVisaOnly || c.hasNomadVisa === true;
+      const matchesSchengen = !schengenOnly || c.isSchengen === true;
+      const matchesTouristDays =
+        minTouristDays === null ||
+        (c.touristVisaDays != null && c.touristVisaDays >= minTouristDays);
 
-      return matchesSearch && matchesRegion && matchesNomadVisa;
+      return matchesSearch && matchesRegion && matchesNomadVisa && matchesSchengen && matchesTouristDays;
     });
 
     // Override climate score with preference-based dynamic score
@@ -41,5 +47,5 @@ export function useScoring(
     });
 
     return rankCountries(withClimate, weights);
-  }, [countries, weights, searchQuery, regionFilter, nomadVisaOnly, climatePrefs]);
+  }, [countries, weights, searchQuery, regionFilter, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs]);
 }

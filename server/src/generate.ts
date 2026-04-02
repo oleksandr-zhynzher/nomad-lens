@@ -486,6 +486,8 @@ async function generate(): Promise<void> {
       lat: rc.capitalInfo?.latlng?.[0] ?? rc.latlng?.[0] ?? 0,
       lng: rc.capitalInfo?.latlng?.[1] ?? rc.latlng?.[1] ?? 0,
       hasNomadVisa: localData.hasNomadVisa(iso2),
+      isSchengen: localData.isSchengen(iso2),
+      touristVisaDays: localData.getTouristVisaDays(iso2),
       climateData: clim ?? undefined,
       scores,
     });

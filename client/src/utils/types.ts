@@ -210,6 +210,8 @@ export interface CountryData {
   flagUrl: string;
   capital: string;
   hasNomadVisa?: boolean;
+  isSchengen?: boolean;
+  touristVisaDays?: number | null;
   climateData?: ClimateData;
   scores: Record<CategoryKey, CategoryScore>;
 }

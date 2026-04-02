@@ -67,12 +67,14 @@ export default function App() {
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
+  const [schengenOnly, setSchengenOnly] = useState(false);
+  const [minTouristDays, setMinTouristDays] = useState<number | null>(null);
   const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(defaultClimatePreferences);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
-  const ranked = useScoring(countries, weights, search, region, nomadVisaOnly, climatePrefs);
+  const ranked = useScoring(countries, weights, search, region, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
 
   // Sync weights to URL for shareable links
   useEffect(() => {
@@ -122,6 +124,10 @@ export default function App() {
               onClimatePrefsChange={setClimatePrefs}
               nomadVisaOnly={nomadVisaOnly}
               onNomadVisaOnlyChange={setNomadVisaOnly}
+              schengenOnly={schengenOnly}
+              onSchengenOnlyChange={setSchengenOnly}
+              minTouristDays={minTouristDays}
+              onMinTouristDaysChange={setMinTouristDays}
             />
           </aside>
 
@@ -160,6 +166,10 @@ export default function App() {
                   onClimatePrefsChange={setClimatePrefs}
                   nomadVisaOnly={nomadVisaOnly}
                   onNomadVisaOnlyChange={setNomadVisaOnly}
+                  schengenOnly={schengenOnly}
+                  onSchengenOnlyChange={setSchengenOnly}
+                  minTouristDays={minTouristDays}
+                  onMinTouristDaysChange={setMinTouristDays}
                   mobile
                 />
               </div>
@@ -324,6 +334,10 @@ export default function App() {
                   onClimatePrefsChange={setClimatePrefs}
                   nomadVisaOnly={nomadVisaOnly}
                   onNomadVisaOnlyChange={setNomadVisaOnly}
+                  schengenOnly={schengenOnly}
+                  onSchengenOnlyChange={setSchengenOnly}
+                  minTouristDays={minTouristDays}
+                  onMinTouristDaysChange={setMinTouristDays}
                 />
               </div>
             )}
@@ -471,6 +485,10 @@ export default function App() {
                   onClimatePrefsChange={setClimatePrefs}
                   nomadVisaOnly={nomadVisaOnly}
                   onNomadVisaOnlyChange={setNomadVisaOnly}
+                  schengenOnly={schengenOnly}
+                  onSchengenOnlyChange={setSchengenOnly}
+                  minTouristDays={minTouristDays}
+                  onMinTouristDaysChange={setMinTouristDays}
                 />
               </div>
             )}
