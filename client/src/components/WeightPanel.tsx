@@ -228,32 +228,32 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                           ))}
                           {/* Temperature header */}
                           <div className="flex items-center justify-between">
-                            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#777777" }}>Temperature Range</span>
-                            <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#C2956A" }}>
+                            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#777777" }}>Temperature Range</span>
+                            <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "12px", color: "#C2956A" }}>
                               {climatePrefs.minTemp}°C — {climatePrefs.maxTemp}°C
                             </span>
                           </div>
                           {/* Min/Max sliders */}
                           <div className="flex flex-col gap-2">
                               <div className="flex items-center gap-2">
-                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", color: "#555555", width: "28px" }}>Min</span>
+                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555", width: "32px" }}>Min</span>
                                 <input type="range" min={-10} max={45} value={climatePrefs.minTemp}
                                   onChange={(e) => { const v = Number(e.target.value); onClimatePrefsChange({ ...climatePrefs, minTemp: Math.min(v, climatePrefs.maxTemp - 1) }); }}
                                   className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
                                   style={{ background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((climatePrefs.minTemp + 10) / 55) * 100}%, #333333 ${((climatePrefs.minTemp + 10) / 55) * 100}%, #333333 100%)` }}
                                   aria-label="Minimum preferred temperature"
                                 />
-                                <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#999999", width: "32px", textAlign: "right" }}>{climatePrefs.minTemp}°</span>
+                                <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "12px", color: "#999999", width: "36px", textAlign: "right" }}>{climatePrefs.minTemp}°</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", color: "#555555", width: "28px" }}>Max</span>
+                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555", width: "32px" }}>Max</span>
                                 <input type="range" min={-10} max={45} value={climatePrefs.maxTemp}
                                   onChange={(e) => { const v = Number(e.target.value); onClimatePrefsChange({ ...climatePrefs, maxTemp: Math.max(v, climatePrefs.minTemp + 1) }); }}
                                   className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
                                   style={{ background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((climatePrefs.maxTemp + 10) / 55) * 100}%, #333333 ${((climatePrefs.maxTemp + 10) / 55) * 100}%, #333333 100%)` }}
                                   aria-label="Maximum preferred temperature"
                                 />
-                                <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#999999", width: "32px", textAlign: "right" }}>{climatePrefs.maxTemp}°</span>
+                                <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "12px", color: "#999999", width: "36px", textAlign: "right" }}>{climatePrefs.maxTemp}°</span>
                               </div>
                           </div>
                         </div>
