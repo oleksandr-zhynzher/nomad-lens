@@ -27,7 +27,7 @@ export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
 
         return (
           <div key={key} className="flex flex-col gap-1 p-3 rounded" style={{ backgroundColor: "#222222" }}>
-            <div className="flex items-baseline justify-between">
+            <div className="flex items-center justify-between gap-2">
               <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#CCCCCC" }}>
                 {CATEGORY_LABELS[key]}
               </span>

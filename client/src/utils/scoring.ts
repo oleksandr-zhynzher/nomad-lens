@@ -12,10 +12,11 @@ import { CATEGORY_KEYS, HIDDEN_CATEGORIES } from "./types";
 /**
  * Compute a weighted composite score for a single country.
  *
- * finalScore = Σ(weight_i × score_i) / Σ(weight_i)
+ * finalScore = Σ(weight_i × score_i) / Σ(weight_i)  −  (missingActiveCategories × 2)
  *
- * Categories with null scores are skipped — they do not reduce
- * the denominator, so missing data doesn't unfairly penalise a country.
+ * Categories with null scores are skipped from the weighted average but apply
+ * a −2 pt penalty each, so countries with sparse data rank lower than data-rich
+ * countries with similar weighted averages.
  */
 export function computeScore(
   country: CountryData,
@@ -23,20 +24,25 @@ export function computeScore(
 ): number {
   let numerator = 0;
   let denominator = 0;
+  let missingCount = 0;
 
   for (const key of CATEGORY_KEYS) {
     const w = weights[key];
     if (w <= 0) continue;
 
     const score = country.scores[key]?.value;
-    if (score === null || score === undefined) continue;
+    if (score === null || score === undefined) {
+      missingCount++;
+      continue;
+    }
 
     numerator += w * score;
     denominator += w;
   }
 
   if (denominator === 0) return 0;
-  return Math.round((numerator / denominator) * 10) / 10;
+  const base = (numerator / denominator) - (missingCount * 2);
+  return Math.round(Math.max(0, base) * 10) / 10;
 }
 
 /**
@@ -92,6 +98,16 @@ export function weightPercent(key: CategoryKey, weights: WeightMap): string {
   const total = (Object.values(weights) as number[]).reduce((s, v) => s + v, 0);
   if (total === 0) return "0%";
   return `${Math.round((weights[key] / total) * 100)}%`;
+}
+
+/**
+ * Return a human-readable label for a slider value.
+ * Shows "Off" when weight is 0, otherwise the raw 0–100 value.
+ */
+export function weightLabel(key: CategoryKey, weights: WeightMap): string {
+  const v = weights[key];
+  if (v === 0) return "Off";
+  return String(v);
 }
 
 // ─── Climate Preferences Scoring ──────────────────────────────────────────────

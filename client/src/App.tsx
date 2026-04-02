@@ -11,7 +11,7 @@ import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { defaultClimatePreferences, defaultWeights } from "./utils/scoring";
 import type { CategoryKey, ClimatePreferences, WeightMap } from "./utils/types";
-import { CATEGORY_KEYS } from "./utils/types";
+import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "./utils/types";
 import "./index.css";
 
 function weightsFromSearch(search: string): WeightMap {
@@ -207,27 +207,27 @@ export default function App() {
             </h1>
             {/* Tagline */}
             <p className="hidden md:block" style={{ fontFamily: "Inter, sans-serif", fontSize: "15px", color: "#777777", maxWidth: "580px", marginBottom: "20px" }}>
-              Personalised rankings for digital nomads — live data from 8 global sources.
+              Personalised rankings for digital nomads — live data from 10 global sources.
             </p>
             {/* Copper rule */}
             <div className="hidden md:block" style={{ width: "128px", height: "2px", backgroundColor: "var(--color-accent)", marginBottom: "16px" }} />
             {/* Stats row */}
             <div className="flex items-center gap-4 md:gap-6">
               <div>
-                <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>180</div>
+                <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>{countries.length}</div>
                 <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Countries</div>
               </div>
               <div className="w-px h-6 md:h-8" style={{ backgroundColor: "#333333" }} />
               <Link to="/indicators" style={{ textDecoration: "none" }}>
                 <div>
-                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>13</div>
+                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>{VISIBLE_CATEGORY_KEYS.length}</div>
                   <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Indicators</div>
                 </div>
               </Link>
               <div className="w-px h-6 md:h-8" style={{ backgroundColor: "#333333" }} />
               <Link to="/data-sources" style={{ textDecoration: "none" }}>
                 <div>
-                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>8</div>
+                  <div style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "18px", fontWeight: 600, color: "var(--color-accent-dim)", lineHeight: "1" }}>10</div>
                   <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#444444", textTransform: "uppercase", letterSpacing: "1px", marginTop: "4px" }}>Data Sources</div>
                 </div>
               </Link>

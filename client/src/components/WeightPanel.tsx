@@ -7,7 +7,7 @@ import {
   VISIBLE_CATEGORY_KEYS,
   CATEGORY_LABELS,
 } from "../utils/types";
-import { defaultWeights, weightPercent } from "../utils/scoring";
+import { defaultWeights, weightLabel } from "../utils/scoring";
 import { Tooltip } from "./Tooltip";
 
 interface WeightSliderProps {
@@ -19,7 +19,7 @@ interface WeightSliderProps {
 
 function WeightSlider({ categoryKey, value, onChange, weights }: WeightSliderProps) {
   const label = CATEGORY_LABELS[categoryKey];
-  const pct = weightPercent(categoryKey, weights);
+  const wLabel = weightLabel(categoryKey, weights);
   const description = CATEGORY_DESCRIPTIONS[categoryKey];
   const dataSource = CATEGORY_DATA_SOURCES[categoryKey];
 
@@ -44,7 +44,7 @@ function WeightSlider({ categoryKey, value, onChange, weights }: WeightSliderPro
           </Tooltip>
         </div>
         <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "var(--color-accent-dim)" }}>
-          {pct}
+          {wLabel}
         </span>
       </div>
       <input
@@ -244,7 +244,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
       </div>
 
       {/* Fixed footer */}
-      <div className="flex-shrink-0" style={{ borderTop: "1px solid #333333", backgroundColor: "#1A1A1A" }}>
+      <div className="flex-shrink-0 sticky bottom-0" style={{ borderTop: "1px solid #333333", backgroundColor: "#1A1A1A" }}>
         <div className="flex flex-col gap-2" style={{ padding: "12px 16px" }}>
           <button
             onClick={onReset}
@@ -264,7 +264,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
             Reset to defaults
           </button>
           <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#555555", lineHeight: "1.4", textAlign: "center" }}>
-            Percentages are relative shares of active weights
+            Priority 0–100 — higher = more influence on your score
           </p>
         </div>
       </div>
