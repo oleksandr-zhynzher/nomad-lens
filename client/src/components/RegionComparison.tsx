@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
+import { scoreColour } from "../utils/scoring";
 
 interface RegionComparisonProps {
   countries: CountryData[];
@@ -275,7 +276,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
               </div>
               {activeRegions.map((r) => (
                 <div key={r.name} className="flex-1 text-center" style={{ minWidth: "120px" }}>
-                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: r.color }}>
+                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: scoreColour(r.overall) }}>
                     {r.overall.toFixed(1)}
                   </span>
                 </div>
@@ -302,7 +303,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "22px",
                             fontWeight: 600,
-                            color: val != null ? r.color : "#333333",
+                            color: val != null ? scoreColour(val) : "#333333",
                           }}
                         >
                           {val != null ? val.toFixed(1) : "—"}
