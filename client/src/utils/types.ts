@@ -69,6 +69,7 @@ export const CATEGORY_KEYS: CategoryKey[] = [
 export const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
   "culturalHeritage",
   "biodiversity",
+  "digitalFreedom",
 ]);
 
 /** Only the categories visible in the UI (weights, breakdowns, comparisons). */

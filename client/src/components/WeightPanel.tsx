@@ -99,7 +99,7 @@ const WEIGHT_GROUPS: Array<{ label: string; icon: React.ReactElement; keys: Cate
   {
     label: "SAFETY & GOVERNANCE",
     icon: <ShieldCheck size={16} color="#6B9E6B" />,
-    keys: ["safety", "governance", "digitalFreedom", "personalFreedom", "socialTolerance"],
+    keys: ["safety", "governance", "personalFreedom", "socialTolerance"],
   },
   {
     label: "EDUCATION & DEVELOPMENT",
