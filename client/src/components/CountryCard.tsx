@@ -2,11 +2,7 @@ import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 import type { RankedCountry, SeasonType } from "../utils/types";
 import {
-  CATEGORY_ABBREVS,
-  CATEGORY_DATA_SOURCES,
-  CATEGORY_DESCRIPTIONS,
   VISIBLE_CATEGORY_KEYS,
-  CATEGORY_LABELS,
 } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";

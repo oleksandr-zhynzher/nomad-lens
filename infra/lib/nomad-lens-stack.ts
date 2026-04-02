@@ -21,27 +21,32 @@ export class NomadLensStack extends cdk.Stack {
     });
 
     // ── Lambda (Express API) ───────────────────────────────────────────────
+    const serverDir = path.join(__dirname, '../../server');
+
     const apiFn = new lambda.Function(this, 'ApiFunction', {
       runtime: lambda.Runtime.NODEJS_22_X,
       handler: 'dist/lambda.handler',
-      code: lambda.Code.fromAsset(path.join(__dirname, '../../server'), {
+      code: lambda.Code.fromAsset(serverDir, {
         bundling: {
           image: lambda.Runtime.NODEJS_22_X.bundlingImage,
-          command: [
-            'bash',
-            '-c',
-            [
-              'npm ci --omit=dev',
-              'npx tsc --project tsconfig.json',
-              'cp -r src/data dist/data',
-              'cp -rT /asset-input /asset-output',
-            ].join(' && '),
-          ],
-          environment: { NODE_ENV: 'production' },
+          command: ['bash', '-c', 'echo "Docker fallback"'],
+          local: {
+            tryBundle(outputDir: string) {
+              const { execSync } = require('child_process');
+              const opts = { cwd: serverDir, stdio: 'inherit' as const };
+              // server is already built (tsc) by the deploy script; copy artifacts
+              execSync(`cp -r dist/ "${outputDir}/dist/"`, opts);
+              execSync(`cp -r src/data/ "${outputDir}/dist/data/"`, opts);
+              execSync(`cp package.json "${outputDir}/package.json"`, opts);
+              // Install production deps into the output dir
+              execSync(`npm install --omit=dev --ignore-scripts --prefix "${outputDir}"`);
+              return true;
+            },
+          },
         },
       }),
-      memorySize: 512,
-      timeout: cdk.Duration.seconds(90),
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
       environment: { NODE_ENV: 'production' },
     });
 

@@ -13,10 +13,12 @@ import startupEnvironmentJson from '../data/startupEnvironment.json';
 import airportsJson from '../data/airports.json';
 import culturalHeritageJson from '../data/culturalHeritage.json';
 import intangibleHeritageJson from '../data/intangibleHeritage.json';
+import biodiversityJson from '../data/biodiversity.json';
 import type {
   HdiEntry, HappinessEntry, PeaceEntry, CrimeEntry, CpiEntry, EpiEntry,
   DigitalFreedomEntry, PersonalFreedomEntry, SocialToleranceEntry,
   TaxBurdenEntry, StartupEntry, AirportEntry, HeritageEntry, IntangibleHeritageEntry,
+  BiodiversityEntry,
 } from '../utils/types';
 
 type JsonFile<T> = { data: T[] };
@@ -35,6 +37,7 @@ const startupMap = new Map<string, StartupEntry>();
 const airportMap = new Map<string, AirportEntry>();
 const heritageMap = new Map<string, HeritageEntry>();
 const intangibleHeritageMap = new Map<string, IntangibleHeritageEntry>();
+const biodiversityMap = new Map<string, BiodiversityEntry>();
 
 const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
 
@@ -52,6 +55,7 @@ const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
 (airportsJson as unknown as JsonFile<AirportEntry>).data.forEach((e) => airportMap.set(e.code, e));
 (culturalHeritageJson as unknown as JsonFile<HeritageEntry>).data.forEach((e) => heritageMap.set(e.code, e));
 (intangibleHeritageJson as unknown as JsonFile<IntangibleHeritageEntry>).data.forEach((e) => intangibleHeritageMap.set(e.code, e));
+(biodiversityJson as unknown as JsonFile<BiodiversityEntry>).data.forEach((e) => biodiversityMap.set(e.code, e));
 
 export const localData = {
   getHdi: (code: string): HdiEntry | undefined => hdiMap.get(code),
@@ -68,5 +72,6 @@ export const localData = {
   getAirport: (code: string): AirportEntry | undefined => airportMap.get(code),
   getHeritage: (code: string): HeritageEntry | undefined => heritageMap.get(code),
   getIntangibleHeritage: (code: string): IntangibleHeritageEntry | undefined => intangibleHeritageMap.get(code),
+  getBiodiversity: (code: string): BiodiversityEntry | undefined => biodiversityMap.get(code),
   hasNomadVisa: (code: string): boolean => nomadVisaSet.has(code.toUpperCase()),
 };

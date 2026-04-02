@@ -171,6 +171,13 @@ export interface IntangibleHeritageEntry {
   year: number;
 }
 
+export interface BiodiversityEntry {
+  code: string; // ISO alpha-2
+  name: string;
+  nbi: number; // National Biodiversity Index 0–1
+  year: number;
+}
+
 // ─── Open-Meteo ──────────────────────────────────────────────────────────────
 
 /** Alias so openMeteo.ts can use the same shape */

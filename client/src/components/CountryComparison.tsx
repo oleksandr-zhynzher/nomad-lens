@@ -15,6 +15,16 @@ import {
   Users,
   Landmark,
   Languages,
+  ShieldCheck,
+  UserCheck,
+  Truck,
+  Trees,
+  Heart,
+  Receipt,
+  Rocket,
+  Plane,
+  Theater,
+  Stethoscope,
 } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
@@ -44,6 +54,16 @@ const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
   humanDevelopment: Users,
   governance: Landmark,
   englishProficiency: Languages,
+  digitalFreedom: ShieldCheck,
+  personalFreedom: UserCheck,
+  logistics: Truck,
+  biodiversity: Trees,
+  socialTolerance: Heart,
+  taxFriendliness: Receipt,
+  startupEnvironment: Rocket,
+  airConnectivity: Plane,
+  culturalHeritage: Theater,
+  healthcareCost: Stethoscope,
 };
 
 interface Props {
