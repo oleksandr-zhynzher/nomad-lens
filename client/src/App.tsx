@@ -126,6 +126,24 @@ export default function App() {
     setWeights(defaultWeights());
   }, []);
 
+  const weightsAreDefault = useMemo(() => {
+    const def = defaultWeights();
+    return CATEGORY_KEYS.every((k) => weights[k] === def[k]);
+  }, [weights]);
+
+  const handleShare = useCallback(() => {
+    const url = window.location.origin + window.location.pathname + "?" + weightsToSearch(weights);
+    navigator.clipboard.writeText(url).catch(() => {
+      // fallback: select a temporary textarea
+      const el = document.createElement("textarea");
+      el.value = url;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    });
+  }, [weights]);
+
   const handleCountryClick = useCallback((iso2: string) => {
     setView("list");
     if (highlightTimer.current) clearTimeout(highlightTimer.current);
@@ -153,6 +171,8 @@ export default function App() {
               weights={weights}
               onChange={handleWeightChange}
               onReset={handleReset}
+              weightsAreDefault={weightsAreDefault}
+              onShare={handleShare}
               climatePrefs={climatePrefs}
               onClimatePrefsChange={setClimatePrefs}
               nomadVisaOnly={nomadVisaOnly}
@@ -195,6 +215,8 @@ export default function App() {
                   weights={weights}
                   onChange={handleWeightChange}
                   onReset={handleReset}
+                  weightsAreDefault={weightsAreDefault}
+                  onShare={handleShare}
                   climatePrefs={climatePrefs}
                   onClimatePrefsChange={setClimatePrefs}
                   nomadVisaOnly={nomadVisaOnly}
@@ -363,6 +385,8 @@ export default function App() {
                   weights={weights}
                   onChange={handleWeightChange}
                   onReset={handleReset}
+                  weightsAreDefault={weightsAreDefault}
+                  onShare={handleShare}
                   climatePrefs={climatePrefs}
                   onClimatePrefsChange={setClimatePrefs}
                   nomadVisaOnly={nomadVisaOnly}
@@ -514,6 +538,8 @@ export default function App() {
                   weights={weights}
                   onChange={handleWeightChange}
                   onReset={handleReset}
+                  weightsAreDefault={weightsAreDefault}
+                  onShare={handleShare}
                   climatePrefs={climatePrefs}
                   onClimatePrefsChange={setClimatePrefs}
                   nomadVisaOnly={nomadVisaOnly}

@@ -66,6 +66,8 @@ interface WeightPanelProps {
   weights: WeightMap;
   onChange: (key: CategoryKey, value: number) => void;
   onReset: () => void;
+  weightsAreDefault: boolean;
+  onShare: () => void;
   climatePrefs: ClimatePreferences;
   onClimatePrefsChange: (prefs: ClimatePreferences) => void;
   nomadVisaOnly: boolean;
@@ -122,8 +124,18 @@ const WEIGHT_GROUPS: Array<{ label: string; icon: React.ReactElement; keys: Cate
   },
 ];
 
-export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange, schengenOnly, onSchengenOnlyChange, minTouristDays, onMinTouristDaysChange, mobile }: WeightPanelProps) {
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({});
+export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onShare, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange, schengenOnly, onSchengenOnlyChange, minTouristDays, onMinTouristDaysChange, mobile }: WeightPanelProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = () => {
+    onShare();
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries([...WEIGHT_GROUPS.map((g) => g.label), "VISA & STAY"].map((l) => [l, true]))
+  );
 
   const toggleGroup = (label: string) =>
     setCollapsed((prev) => ({ ...prev, [label]: !prev[label] }));
@@ -365,6 +377,25 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
       {/* Fixed footer */}
       <div className="flex-shrink-0 sticky bottom-0" style={{ borderTop: "1px solid #333333", backgroundColor: "#1A1A1A" }}>
         <div className="flex flex-col gap-2" style={{ padding: "12px 16px" }}>
+          {!weightsAreDefault && (
+            <button
+              onClick={handleShare}
+              className="w-full flex items-center justify-center gap-2 rounded transition-colors"
+              style={{ backgroundColor: copied ? "#2A4A2A" : "#1A2A1A", color: copied ? "#88CC88" : "#6B9E6B", fontFamily: "Inter, sans-serif", fontSize: "13px", fontWeight: 500, height: "40px", border: `1px solid ${copied ? "#4A8A4A" : "#2A4A2A"}`, borderRadius: "6px", transition: "all 0.15s ease" }}
+            >
+              {copied ? (
+                <>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                  Link copied!
+                </>
+              ) : (
+                <>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" /><polyline points="16 6 12 2 8 6" /><line x1="12" y1="2" x2="12" y2="15" /></svg>
+                  Share weights
+                </>
+              )}
+            </button>
+          )}
           <button
             onClick={onReset}
             className="w-full flex items-center justify-center gap-2 rounded transition-colors"
