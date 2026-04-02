@@ -6,7 +6,7 @@ export function useScoring(
   countries: CountryData[],
   weights: WeightMap,
   searchQuery: string,
-  regionFilter: string,
+  regionFilter: Set<string>,
   nomadVisaOnly: boolean,
   schengenOnly: boolean,
   minTouristDays: number | null,
@@ -20,7 +20,7 @@ export function useScoring(
         c.code.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesRegion =
-        regionFilter === "" || c.region === regionFilter;
+        regionFilter.size === 0 || regionFilter.has(c.region);
 
       const matchesNomadVisa = !nomadVisaOnly || c.hasNomadVisa === true;
       const matchesSchengen = !schengenOnly || c.isSchengen === true;

@@ -50,19 +50,24 @@ function weightsToSearch(weights: WeightMap): string {
 }
 
 const LS_WEIGHTS_KEY = "nomad-lens:weights";
+const LS_FILTERS_KEY = "nomad-lens:filters";
+const FILTER_URL_KEYS = ["nomadVisa", "schengen", "minDays", "regions", "climateSeason", "climateMin", "climateMax"];
+
+// Parse the URL once at module load, clean it, and share the params with both loaders.
+const _sharedParams = (() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasShared = CATEGORY_KEYS.some((k) => urlParams.has(k)) || FILTER_URL_KEYS.some((k) => urlParams.has(k));
+  if (hasShared) {
+    window.history.replaceState(null, "", window.location.pathname);
+    return urlParams;
+  }
+  return null;
+})();
 
 function loadWeightsFromStorage(): WeightMap {
-  // Check if the URL contains a shared weight link (any CATEGORY_KEY present)
-  const urlParams = new URLSearchParams(window.location.search);
-  const hasSharedWeights = CATEGORY_KEYS.some((k) => urlParams.has(k));
-  if (hasSharedWeights) {
-    const imported = weightsFromSearch(window.location.search);
-    // Save to localStorage so the weights persist after URL is cleaned
-    try {
-      localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(imported));
-    } catch { /* ignore */ }
-    // Strip weight params from URL without triggering a navigation
-    window.history.replaceState(null, "", window.location.pathname);
+  if (_sharedParams && CATEGORY_KEYS.some((k) => _sharedParams.has(k))) {
+    const imported = weightsFromSearch(_sharedParams.toString());
+    try { localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(imported)); } catch { /* ignore */ }
     return imported;
   }
 
@@ -79,17 +84,81 @@ function loadWeightsFromStorage(): WeightMap {
       }
       return base;
     }
-  } catch {
-    // ignore malformed data
-  }
+  } catch { /* ignore malformed data */ }
   return defaultWeights();
 }
+
+type LoadedFilters = {
+  nomadVisaOnly: boolean;
+  schengenOnly: boolean;
+  minTouristDays: number | null;
+  selectedRegions: Set<string>;
+  climatePrefs: ClimatePreferences;
+};
+
+function filtersToStorable(f: LoadedFilters) {
+  return {
+    nomadVisa: f.nomadVisaOnly,
+    schengen: f.schengenOnly,
+    minDays: f.minTouristDays,
+    regions: [...f.selectedRegions],
+    climateSeason: f.climatePrefs.seasonType,
+    climateMin: f.climatePrefs.minTemp,
+    climateMax: f.climatePrefs.maxTemp,
+  };
+}
+
+function loadFiltersFromStorage(): LoadedFilters {
+  const def = defaultClimatePreferences();
+
+  if (_sharedParams) {
+    const minDaysStr = _sharedParams.get("minDays");
+    const regionsStr = _sharedParams.get("regions");
+    const loaded: LoadedFilters = {
+      nomadVisaOnly: _sharedParams.get("nomadVisa") === "1",
+      schengenOnly: _sharedParams.get("schengen") === "1",
+      minTouristDays: minDaysStr !== null && !isNaN(Number(minDaysStr)) ? Number(minDaysStr) : null,
+      selectedRegions: regionsStr ? new Set(regionsStr.split(",").filter(Boolean)) : new Set<string>(),
+      climatePrefs: {
+        seasonType: (_sharedParams.get("climateSeason") ?? def.seasonType) as ClimatePreferences["seasonType"],
+        minTemp: _sharedParams.has("climateMin") && !isNaN(Number(_sharedParams.get("climateMin"))) ? Number(_sharedParams.get("climateMin")) : def.minTemp,
+        maxTemp: _sharedParams.has("climateMax") && !isNaN(Number(_sharedParams.get("climateMax"))) ? Number(_sharedParams.get("climateMax")) : def.maxTemp,
+      },
+    };
+    try { localStorage.setItem(LS_FILTERS_KEY, JSON.stringify(filtersToStorable(loaded))); } catch { /* ignore */ }
+    return loaded;
+  }
+
+  try {
+    const raw = localStorage.getItem(LS_FILTERS_KEY);
+    if (raw) {
+      const p = JSON.parse(raw) as Record<string, unknown>;
+      return {
+        nomadVisaOnly: p.nomadVisa === true,
+        schengenOnly: p.schengen === true,
+        minTouristDays: typeof p.minDays === "number" ? p.minDays : null,
+        selectedRegions: Array.isArray(p.regions)
+          ? new Set(p.regions.filter((r): r is string => typeof r === "string"))
+          : new Set<string>(),
+        climatePrefs: {
+          seasonType: typeof p.climateSeason === "string" ? p.climateSeason as ClimatePreferences["seasonType"] : def.seasonType,
+          minTemp: typeof p.climateMin === "number" ? p.climateMin : def.minTemp,
+          maxTemp: typeof p.climateMax === "number" ? p.climateMax : def.maxTemp,
+        },
+      };
+    }
+  } catch { /* ignore */ }
+
+  return { nomadVisaOnly: false, schengenOnly: false, minTouristDays: null, selectedRegions: new Set<string>(), climatePrefs: def };
+}
+
+const _initialFilters = loadFiltersFromStorage();
 
 export default function App() {
   const [searchParams] = useSearchParams();
   const [weights, setWeights] = useState<WeightMap>(loadWeightsFromStorage);
   const [search, setSearch] = useState("");
-  const [region, setRegion] = useState("");
+  const [selectedRegions, setSelectedRegions] = useState<Set<string>>(() => _initialFilters.selectedRegions);
   const [view, setView] = useState<"list" | "map" | "compare">(() => {
     const v = searchParams.get("view");
     if (v === "list" || v === "map" || v === "compare") return v;
@@ -100,20 +169,31 @@ export default function App() {
   const [countrySelectionCount, setCountrySelectionCount] = useState(0);
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [showWeights, setShowWeights] = useState(false);
-  const [nomadVisaOnly, setNomadVisaOnly] = useState(false);
-  const [schengenOnly, setSchengenOnly] = useState(false);
-  const [minTouristDays, setMinTouristDays] = useState<number | null>(null);
-  const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(defaultClimatePreferences);
+  const [nomadVisaOnly, setNomadVisaOnly] = useState(() => _initialFilters.nomadVisaOnly);
+  const [schengenOnly, setSchengenOnly] = useState(() => _initialFilters.schengenOnly);
+  const [minTouristDays, setMinTouristDays] = useState<number | null>(() => _initialFilters.minTouristDays);
+  const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(() => _initialFilters.climatePrefs);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
-  const ranked = useScoring(countries, weights, search, region, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
+  const ranked = useScoring(countries, weights, search, selectedRegions, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
 
   // Persist weights to localStorage
   useEffect(() => {
     localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(weights));
   }, [weights]);
+
+  // Persist filter state to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(LS_FILTERS_KEY, JSON.stringify({
+        nomadVisa: nomadVisaOnly, schengen: schengenOnly, minDays: minTouristDays,
+        regions: [...selectedRegions], climateSeason: climatePrefs.seasonType,
+        climateMin: climatePrefs.minTemp, climateMax: climatePrefs.maxTemp,
+      }));
+    } catch { /* ignore */ }
+  }, [nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
 
   const handleWeightChange = useCallback(
     (key: CategoryKey, value: number) => {
@@ -124,15 +204,37 @@ export default function App() {
 
   const handleReset = useCallback(() => {
     setWeights(defaultWeights());
+    setNomadVisaOnly(false);
+    setSchengenOnly(false);
+    setMinTouristDays(null);
+    setSelectedRegions(new Set());
+    setClimatePrefs(defaultClimatePreferences());
   }, []);
 
   const weightsAreDefault = useMemo(() => {
     const def = defaultWeights();
-    return CATEGORY_KEYS.every((k) => weights[k] === def[k]);
-  }, [weights]);
+    const defClimate = defaultClimatePreferences();
+    return (
+      CATEGORY_KEYS.every((k) => weights[k] === def[k]) &&
+      !nomadVisaOnly && !schengenOnly && minTouristDays === null &&
+      selectedRegions.size === 0 &&
+      climatePrefs.seasonType === defClimate.seasonType &&
+      climatePrefs.minTemp === defClimate.minTemp &&
+      climatePrefs.maxTemp === defClimate.maxTemp
+    );
+  }, [weights, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
 
   const handleShare = useCallback(() => {
-    const url = window.location.origin + window.location.pathname + "?" + weightsToSearch(weights);
+    const params = new URLSearchParams(weightsToSearch(weights));
+    if (nomadVisaOnly) params.set("nomadVisa", "1");
+    if (schengenOnly) params.set("schengen", "1");
+    if (minTouristDays !== null) params.set("minDays", String(minTouristDays));
+    if (selectedRegions.size > 0) params.set("regions", [...selectedRegions].join(","));
+    const defClimate = defaultClimatePreferences();
+    if (climatePrefs.seasonType !== defClimate.seasonType) params.set("climateSeason", climatePrefs.seasonType);
+    if (climatePrefs.minTemp !== defClimate.minTemp) params.set("climateMin", String(climatePrefs.minTemp));
+    if (climatePrefs.maxTemp !== defClimate.maxTemp) params.set("climateMax", String(climatePrefs.maxTemp));
+    const url = window.location.origin + window.location.pathname + "?" + params.toString();
     navigator.clipboard.writeText(url).catch(() => {
       // fallback: select a temporary textarea
       const el = document.createElement("textarea");
@@ -142,7 +244,7 @@ export default function App() {
       document.execCommand("copy");
       document.body.removeChild(el);
     });
-  }, [weights]);
+  }, [weights, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
 
   const handleCountryClick = useCallback((iso2: string) => {
     setView("list");
@@ -332,29 +434,38 @@ export default function App() {
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
-                    onClick={() => setRegion("")}
-                    className="px-3 py-1.5 rounded-full transition-colors"
+                    onClick={() => setSelectedRegions(new Set())}
                     style={{
                       fontFamily: "Geist, sans-serif",
                       fontSize: "12px",
-                      backgroundColor: region === "" ? "var(--color-accent)" : "#1C1C1C",
-                      color: region === "" ? "#FFFFFF" : "#666666",
-                      border: region === "" ? "none" : "1px solid #2C2C2C",
+                      padding: "5px 10px",
+                      borderRadius: "3px",
+                      border: "none",
+                      cursor: "pointer",
+                      backgroundColor: selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
+                      color: selectedRegions.size === 0 ? "#FFFFFF" : "#666666",
                     }}
                   >
-                    All Regions
+                    All
                   </button>
                   {regions.map((r) => (
                     <button
                       key={r}
-                      onClick={() => setRegion(r)}
-                      className="px-3 py-1.5 rounded-full transition-colors"
+                      onClick={() => setSelectedRegions((prev) => {
+                        const next = new Set(prev);
+                        if (next.has(r)) next.delete(r);
+                        else next.add(r);
+                        return next;
+                      })}
                       style={{
                         fontFamily: "Geist, sans-serif",
                         fontSize: "12px",
-                        backgroundColor: region === r ? "var(--color-accent)" : "#1C1C1C",
-                        color: region === r ? "#FFFFFF" : "#666666",
-                        border: region === r ? "none" : "1px solid #2C2C2C",
+                        padding: "5px 10px",
+                        borderRadius: "3px",
+                        border: "none",
+                        cursor: "pointer",
+                        backgroundColor: selectedRegions.has(r) ? "#8F5A3C" : "#2A2A2A",
+                        color: selectedRegions.has(r) ? "#FFFFFF" : "#666666",
                       }}
                     >
                       {r}

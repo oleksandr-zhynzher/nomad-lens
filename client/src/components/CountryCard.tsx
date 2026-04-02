@@ -34,7 +34,7 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
     >
       {/* Main row */}
       <button
-        className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 hover:brightness-110 transition-all text-left"
+        className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 hover:brightness-110 transition-all text-left cursor-pointer"
         style={{ minHeight: "56px" }}
         onClick={() => setExpanded((p) => !p)}
         aria-expanded={expanded}
@@ -102,7 +102,7 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
         </div>
 
         {/* Chevron */}
-        <ChevronRight size={20} style={{ color: "#333333" }} className="shrink-0" />
+        <ChevronRight size={20} style={{ color: "#333333", transition: "transform 0.2s", transform: expanded ? "rotate(90deg)" : "rotate(0deg)" }} className="shrink-0" />
       </button>
 
       {/* Expanded breakdown */}
