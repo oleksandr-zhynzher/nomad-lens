@@ -23,7 +23,7 @@ function WeightSlider({ categoryKey, value, onChange, weights }: WeightSliderPro
   const dataSource = CATEGORY_DATA_SOURCES[categoryKey];
 
   return (
-    <div className="flex flex-col" style={{ gap: "5px" }}>
+    <div className="flex flex-col" style={{ gap: "9px" }}>
       <div className="flex items-center justify-between">
         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
           <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 400, color: "#FFFFFF" }}>
@@ -169,10 +169,10 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
 
               {/* Sliders */}
               {isOpen && (
-                <div style={{ paddingTop: "6px", paddingBottom: "6px" }}>
+                <div style={{ paddingTop: "4px", paddingBottom: "4px" }}>
                   {group.keys.map((key) => (
                     <React.Fragment key={key}>
-                      <div style={{ padding: "8px 16px" }}>
+                      <div style={{ padding: "10px 16px" }}>
                         <WeightSlider categoryKey={key} value={weights[key]} onChange={onChange} weights={weights} />
                       </div>
                       {key === "englishProficiency" && (
