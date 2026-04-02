@@ -109,7 +109,7 @@ const WEIGHT_GROUPS: Array<{ label: string; icon: React.ReactElement; keys: Cate
   {
     label: "ENVIRONMENT & CLIMATE",
     icon: <Leaf size={16} color="#7A9B6B" />,
-    keys: ["climate", "environment", "biodiversity"],
+    keys: ["climate", "environment"],
   },
   {
     label: "CONNECTIVITY",
