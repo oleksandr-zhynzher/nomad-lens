@@ -174,6 +174,7 @@ export default function App() {
   const [minTouristDays, setMinTouristDays] = useState<number | null>(() => _initialFilters.minTouristDays);
   const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(() => _initialFilters.climatePrefs);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
+  const [expandedCode, setExpandedCode] = useState<string | null>(null);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -298,8 +299,20 @@ export default function App() {
   // Arrow key handler
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
       const isSearchInput = e.target === searchInputRef.current;
+
+      if (e.key === "Enter") {
+        const highlighted = search.trim().length >= 2
+          ? (matchingCodes[matchCursor] ?? null)
+          : (navCursor !== null ? (allCodes[navCursor] ?? null) : null);
+        if (highlighted) {
+          e.preventDefault();
+          setExpandedCode((c) => (c === highlighted ? null : highlighted));
+        }
+        return;
+      }
+
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
       if (!isSearchInput && (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) return;
       e.preventDefault();
       if (search.trim().length >= 2) {
@@ -318,7 +331,7 @@ export default function App() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [search, goNext, goPrev, allCodes]);
+  }, [search, goNext, goPrev, allCodes, matchingCodes, matchCursor, navCursor]);
 
   const activeHighlight = search.trim().length >= 2
     ? (matchingCodes[matchCursor] ?? null)
@@ -586,6 +599,8 @@ export default function App() {
                 error={error}
                 onRetry={refresh}
                 highlightedCode={activeHighlight}
+                expandedCode={expandedCode}
+                onToggleExpanded={(code) => setExpandedCode((c) => (c === code ? null : code))}
               />
             </div>
           </main>

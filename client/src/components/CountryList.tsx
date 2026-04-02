@@ -7,9 +7,11 @@ interface CountryListProps {
   error: string | null;
   onRetry: () => void;
   highlightedCode?: string | null;
+  expandedCode?: string | null;
+  onToggleExpanded?: (code: string) => void;
 }
 
-export function CountryList({ ranked, loading, error, onRetry, highlightedCode }: CountryListProps) {
+export function CountryList({ ranked, loading, error, onRetry, highlightedCode, expandedCode, onToggleExpanded }: CountryListProps) {
   if (loading) {
     return (
       <div className="flex flex-col gap-2">
@@ -58,6 +60,8 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode }
           ranked={r}
           highlighted={r.country.code === highlightedCode}
           index={index}
+          expanded={expandedCode === r.country.code}
+          onToggle={() => onToggleExpanded?.(r.country.code)}
         />
       ))}
     </div>

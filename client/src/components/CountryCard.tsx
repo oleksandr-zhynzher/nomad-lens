@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ChevronRight, Plane } from "lucide-react";
 import type { RankedCountry } from "../utils/types";
 import {
@@ -13,10 +12,11 @@ interface CountryCardProps {
   ranked: RankedCountry;
   highlighted?: boolean;
   index: number;
+  expanded?: boolean;
+  onToggle?: () => void;
 }
 
-export function CountryCard({ ranked, highlighted = false, index }: CountryCardProps) {
-  const [expanded, setExpanded] = useState(false);
+export function CountryCard({ ranked, highlighted = false, index, expanded = false, onToggle }: CountryCardProps) {
   const { country, finalScore, rank } = ranked;
   
   // Alternating backgrounds
@@ -40,7 +40,7 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
       <button
         className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 transition-all text-left cursor-pointer"
         style={{ minHeight: "56px", backgroundColor: "transparent", border: "none" }}
-        onClick={() => setExpanded((p) => !p)}
+        onClick={onToggle}
         aria-expanded={expanded}
       >
         {/* Rank */}
