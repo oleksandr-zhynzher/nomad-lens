@@ -270,15 +270,7 @@ export default function App() {
     const q = search.trim().toLowerCase();
     if (q.length < 2) return [];
     return ranked
-      .filter((r) => {
-        const name = r.country.name.toLowerCase();
-        const code = r.country.code.toLowerCase();
-        // Exact ISO code match
-        if (code === q) return true;
-        // Name match: for short queries use word-start, for longer use contains
-        if (q.length <= 3) return name.split(" ").some((word) => word.startsWith(q));
-        return name.includes(q);
-      })
+      .filter((r) => r.country.name.toLowerCase().includes(q) || r.country.code.toLowerCase() === q)
       .map((r) => r.country.code);
   }, [ranked, search]);
   const [matchCursor, setMatchCursor] = useState(0);
