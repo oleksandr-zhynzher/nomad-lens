@@ -105,13 +105,21 @@ export function redistributeWeights(
   }
 
   const currentOthersSum = others.reduce((s, k) => s + weights[k], 0);
+  const freed = remaining - currentOthersSum; // positive = freed, negative = taken
 
-  // Exact shares as floats (proportional, or equal if all others are 0)
-  const exactShares = others.map((k) =>
-    currentOthersSum > 0
-      ? (weights[k] / currentOthersSum) * remaining
-      : remaining / others.length,
-  );
+  let exactShares: number[];
+  if (freed >= 0) {
+    // Decreasing: spread the freed budget equally across every other slider
+    const equalDelta = freed / others.length;
+    exactShares = others.map((k) => weights[k] + equalDelta);
+  } else {
+    // Increasing: take proportionally from others (biggest give back the most)
+    exactShares = others.map((k) =>
+      currentOthersSum > 0
+        ? (weights[k] / currentOthersSum) * remaining
+        : remaining / others.length,
+    );
+  }
 
   // Largest-remainder method for integer allocation
   const floors = exactShares.map((s) => Math.floor(s));

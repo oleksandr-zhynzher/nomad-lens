@@ -10,12 +10,12 @@ interface CountryDetailPanelProps {
   onViewInList: () => void;
 }
 
-const DRAWER_SEASON_BADGE: Record<SeasonType, { label: string; icon: string; bg: string; text: string }> = {
-  four_seasons: { label: "Four Seasons", icon: "◑", bg: "#8F5A3C", text: "#FFFFFF" },
-  mild_seasons: { label: "Mild", icon: "◑", bg: "#1A3A5C", text: "#60A5FA" },
-  tropical: { label: "Tropical", icon: "◑", bg: "#1A4A2A", text: "#44CC66" },
-  arid: { label: "Arid", icon: "◑", bg: "#4A3A1A", text: "#AA7733" },
-  polar: { label: "Polar", icon: "◑", bg: "#2A2A2A", text: "#999999" },
+const DRAWER_SEASON_BADGE: Record<SeasonType, { label: string; bg: string; text: string }> = {
+  four_seasons: { label: "Four Seasons", bg: "#8F5A3C", text: "#FFFFFF" },
+  mild_seasons: { label: "Mild", bg: "#1A3A5C", text: "#60A5FA" },
+  tropical: { label: "Tropical", bg: "#1A4A2A", text: "#44CC66" },
+  arid: { label: "Arid", bg: "#4A3A1A", text: "#AA7733" },
+  polar: { label: "Polar", bg: "#2A2A2A", text: "#999999" },
 };
 
 export function CountryDetailPanel({
@@ -100,7 +100,7 @@ export function CountryDetailPanel({
             const badge = DRAWER_SEASON_BADGE[c.climateData.seasonType];
             return (
               <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full" style={{ backgroundColor: badge.bg, fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 500, color: badge.text }}>
-                {badge.icon} {badge.label}
+                {badge.label}
               </span>
             );
           })()}

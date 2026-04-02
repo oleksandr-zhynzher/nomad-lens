@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { ChevronRight } from "lucide-react";
-import type { RankedCountry, SeasonType } from "../utils/types";
+import { ChevronRight, Plane } from "lucide-react";
+import type { RankedCountry } from "../utils/types";
 import {
   VISIBLE_CATEGORY_KEYS,
 } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
+import { Tooltip } from "./Tooltip";
+import { CATEGORY_LABELS } from "../utils/types";
 
 interface CountryCardProps {
   ranked: RankedCountry;
@@ -51,43 +53,43 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
           loading="lazy"
         />
 
-        {/* Name + region + badges */}
-        <div className="flex-1 min-w-0 flex flex-col gap-0.5">
-          <div className="flex items-center gap-2 min-w-0">
+{/* Name + region + visa icon */}
+          <div className="flex-1 min-w-0 flex items-center gap-2 min-w-0">
             <p className="truncate" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", fontWeight: 600, color: "#FFFFFF" }}>
               {country.name}
             </p>
             <span className="hidden sm:inline shrink-0" style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>
               {country.region}
             </span>
-          </div>
-          <div className="flex items-center gap-2">
             {country.hasNomadVisa && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ backgroundColor: "#2A1A0E", border: "1px solid #5A3010", fontFamily: "Geist, sans-serif", fontSize: "10px", color: "var(--color-accent-dim)" }}>
-                ✈ Nomad Visa
-              </span>
-            )}
-            {country.climateData && (() => {
-              const badge = SEASON_BADGE[country.climateData.seasonType];
-              return (
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ backgroundColor: badge.bg, border: `1px solid ${badge.stroke}`, fontFamily: "Geist, sans-serif", fontSize: "10px", color: badge.text }}>
-                  {badge.icon} {badge.label}
+              <Tooltip content="Nomad Visa Available" side="top">
+                <span className="shrink-0 inline-flex items-center justify-center" style={{ color: "var(--color-accent-dim)", lineHeight: 1 }}>
+                  <Plane size={13} />
                 </span>
-              );
-            })()}
-          </div>
+              </Tooltip>
+            )}
         </div>
 
         {/* Sparkline dots */}
         <div className="hidden sm:flex gap-1 items-center">
           {VISIBLE_CATEGORY_KEYS.map((key) => {
             const val = country.scores[key]?.value ?? null;
+            const label = CATEGORY_LABELS[key];
+            const tooltipContent = (
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", whiteSpace: "nowrap" }}>
+                <span style={{ fontSize: "11px", color: "#CCCCCC", fontFamily: "Geist, sans-serif" }}>{label}</span>
+                <span style={{ fontSize: "11px", fontWeight: 700, fontFamily: "IBM Plex Mono, monospace", color: dotColour(val) }}>
+                  {val !== null ? val.toFixed(1) : "—"}
+                </span>
+              </div>
+            );
             return (
-              <div
-                key={key}
-                className="rounded-full"
-                style={{ width: "12px", height: "12px", backgroundColor: dotColour(val) }}
-              />
+              <Tooltip key={key} content={tooltipContent} side="top">
+                <div
+                  className="rounded-full cursor-default"
+                  style={{ width: "12px", height: "12px", backgroundColor: dotColour(val) }}
+                />
+              </Tooltip>
             );
           })}
         </div>
@@ -120,11 +122,3 @@ function dotColour(value: number | null): string {
   if (value >= 50) return "#FFC107";
   return "#FF5722";
 }
-
-const SEASON_BADGE: Record<SeasonType, { label: string; icon: string; bg: string; stroke: string; text: string }> = {
-  four_seasons: { label: "Four Seasons", icon: "◑", bg: "#1A1206", stroke: "#332810", text: "#CC9944" },
-  mild_seasons: { label: "Mild", icon: "◑", bg: "#0E1A2A", stroke: "#103050", text: "#5599CC" },
-  tropical: { label: "Tropical", icon: "◑", bg: "#0D1A10", stroke: "#1A3A20", text: "#44CC66" },
-  arid: { label: "Arid", icon: "◑", bg: "#1A1200", stroke: "#332200", text: "#AA7733" },
-  polar: { label: "Polar", icon: "◑", bg: "#1A1A1A", stroke: "#333333", text: "#999999" },
-};

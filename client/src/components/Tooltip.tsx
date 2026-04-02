@@ -70,13 +70,16 @@ export function Tooltip({ content, children, side = "top" }: TooltipProps) {
         createPortal(
           <div
             role="tooltip"
-            className="pointer-events-none w-56 rounded p-2.5 shadow-xl text-xs leading-relaxed"
+            className="pointer-events-none rounded shadow-xl text-xs leading-relaxed"
             style={{ 
               ...style, 
-              backgroundColor: "#1A1A1A", 
-              border: "1px solid #333333", 
+              backgroundColor: "#1E1E1E", 
+              border: "1px solid #2E2E2E",
+              borderRadius: "6px",
+              padding: "5px 9px",
               color: "#FFFFFF", 
-              fontFamily: "Inter, sans-serif" 
+              fontFamily: "Inter, sans-serif",
+              maxWidth: "220px",
             }}
           >
             {content}

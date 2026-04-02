@@ -113,7 +113,7 @@ export default function App() {
       {view === "list" ? (
         <div className="flex">
           {/* Left sidebar - Weight Panel (hidden on mobile) */}
-          <aside className="hidden md:block sticky top-14 self-start" style={{ width: "320px", height: "calc(100vh - 56px)", overflowY: "auto" }}>
+          <aside className="hidden md:block sticky top-14 self-start" style={{ width: "320px", height: "calc(100vh - 56px)" }}>
             <WeightPanel
               weights={weights}
               onChange={handleWeightChange}
@@ -152,18 +152,16 @@ export default function App() {
                     <X size={18} />
                   </button>
                 </div>
-                <div className="flex-1 overflow-y-auto">
-                  <WeightPanel
-                    weights={weights}
-                    onChange={handleWeightChange}
-                    onReset={handleReset}
-                    climatePrefs={climatePrefs}
-                    onClimatePrefsChange={setClimatePrefs}
-                    nomadVisaOnly={nomadVisaOnly}
-                    onNomadVisaOnlyChange={setNomadVisaOnly}
-                    mobile
-                  />
-                </div>
+                <WeightPanel
+                  weights={weights}
+                  onChange={handleWeightChange}
+                  onReset={handleReset}
+                  climatePrefs={climatePrefs}
+                  onClimatePrefsChange={setClimatePrefs}
+                  nomadVisaOnly={nomadVisaOnly}
+                  onNomadVisaOnlyChange={setNomadVisaOnly}
+                  mobile
+                />
               </div>
             </div>
           )}
