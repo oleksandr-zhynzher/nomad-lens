@@ -73,10 +73,12 @@ interface WeightPanelProps {
   mobile?: boolean;
 }
 
-const SEASON_OPTIONS: Array<{ value: SeasonType | 'any'; label: string }> = [
+const SEASON_ROW1: Array<{ value: SeasonType | 'any'; label: string }> = [
   { value: 'any', label: 'Any' },
-  { value: 'four_seasons', label: 'Four Seasons' },
+  { value: 'four_seasons', label: '4 Seasons' },
   { value: 'mild_seasons', label: 'Mild' },
+];
+const SEASON_ROW2: Array<{ value: SeasonType | 'any'; label: string }> = [
   { value: 'tropical', label: 'Tropical' },
   { value: 'arid', label: 'Arid' },
   { value: 'polar', label: 'Polar' },
@@ -206,49 +208,35 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                         </div>
                       )}
                       {key === "climate" && (
-                        <div className="flex flex-col gap-3" style={{ backgroundColor: "#111111", padding: "14px 20px 16px 20px" }}>
-                          <div style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", color: "#888888" }}>
-                            CLIMATE PREFERENCES
-                          </div>
-                          <div>
-                            <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#999999", marginBottom: "6px" }}>Season type</p>
-                            <div className="flex flex-col gap-1.5">
-                              <div className="flex flex-wrap gap-1.5">
-                                {SEASON_OPTIONS.slice(0, 4).map((opt) => (
+                        <div className="flex flex-col" style={{ backgroundColor: "#141414", padding: "10px 20px", gap: "8px" }}>
+                          {/* Season rows — 3 equal-width buttons per row */}
+                          {[SEASON_ROW1, SEASON_ROW2].map((row, ri) => (
+                            <div key={ri} className="flex" style={{ gap: "4px" }}>
+                              {row.map((opt) => {
+                                const active = climatePrefs.seasonType === opt.value;
+                                return (
                                   <button
                                     key={opt.value}
                                     onClick={() => onClimatePrefsChange({ ...climatePrefs, seasonType: opt.value })}
-                                    className="text-xs px-2.5 py-1 rounded-full transition-colors"
-                                    style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", backgroundColor: climatePrefs.seasonType === opt.value ? "var(--color-accent)" : "#2A2A2A", color: climatePrefs.seasonType === opt.value ? "#FFFFFF" : "#666666", border: "none" }}
+                                    style={{ flex: 1, padding: "5px 0", borderRadius: "3px", border: "none", cursor: "pointer", fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: "normal", backgroundColor: active ? "#8F5A3C" : "#2A2A2A", color: active ? "#FFFFFF" : "#666666", textAlign: "center" }}
                                   >
                                     {opt.label}
                                   </button>
-                                ))}
-                              </div>
-                              <div className="flex flex-wrap gap-1.5">
-                                {SEASON_OPTIONS.slice(4).map((opt) => (
-                                  <button
-                                    key={opt.value}
-                                    onClick={() => onClimatePrefsChange({ ...climatePrefs, seasonType: opt.value })}
-                                    className="text-xs px-2.5 py-1 rounded-full transition-colors"
-                                    style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", backgroundColor: climatePrefs.seasonType === opt.value ? "var(--color-accent)" : "#2A2A2A", color: climatePrefs.seasonType === opt.value ? "#FFFFFF" : "#666666", border: "none" }}
-                                  >
-                                    {opt.label}
-                                  </button>
-                                ))}
-                              </div>
+                                );
+                              })}
                             </div>
+                          ))}
+                          {/* Temperature header */}
+                          <div className="flex items-center justify-between">
+                            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#777777" }}>Temperature Range</span>
+                            <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#C2956A" }}>
+                              {climatePrefs.minTemp}°C — {climatePrefs.maxTemp}°C
+                            </span>
                           </div>
-                          <div>
-                            <div className="flex items-center justify-between mb-2">
-                              <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#999999" }}>Temperature Range</p>
-                              <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "var(--color-accent-dim)" }}>
-                                {climatePrefs.minTemp}° – {climatePrefs.maxTemp}°C
-                              </span>
-                            </div>
-                            <div className="flex flex-col gap-2">
+                          {/* Min/Max sliders */}
+                          <div className="flex flex-col gap-2">
                               <div className="flex items-center gap-2">
-                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#999999", width: "32px" }}>Min</span>
+                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", color: "#555555", width: "28px" }}>Min</span>
                                 <input type="range" min={-10} max={45} value={climatePrefs.minTemp}
                                   onChange={(e) => { const v = Number(e.target.value); onClimatePrefsChange({ ...climatePrefs, minTemp: Math.min(v, climatePrefs.maxTemp - 1) }); }}
                                   className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
@@ -258,7 +246,7 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                                 <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#999999", width: "32px", textAlign: "right" }}>{climatePrefs.minTemp}°</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#999999", width: "32px" }}>Max</span>
+                                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", color: "#555555", width: "28px" }}>Max</span>
                                 <input type="range" min={-10} max={45} value={climatePrefs.maxTemp}
                                   onChange={(e) => { const v = Number(e.target.value); onClimatePrefsChange({ ...climatePrefs, maxTemp: Math.max(v, climatePrefs.minTemp + 1) }); }}
                                   className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
@@ -267,7 +255,6 @@ export function WeightPanel({ weights, onChange, onReset, climatePrefs, onClimat
                                 />
                                 <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#999999", width: "32px", textAlign: "right" }}>{climatePrefs.maxTemp}°</span>
                               </div>
-                            </div>
                           </div>
                         </div>
                       )}
