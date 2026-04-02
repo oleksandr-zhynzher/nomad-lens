@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Search, ArrowDownWideNarrow, Flag, Globe, SlidersHorizontal, X } from "lucide-react";
+import { Search, ArrowDownWideNarrow, Flag, Globe, SlidersHorizontal, X, ChevronUp, ChevronDown } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
@@ -177,7 +177,7 @@ export default function App() {
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { countries, loading, error, refresh } = useCountries();
-  const ranked = useScoring(countries, weights, search, selectedRegions, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
+  const ranked = useScoring(countries, weights, selectedRegions, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
 
   // Persist weights to localStorage
   useEffect(() => {
@@ -262,6 +262,65 @@ export default function App() {
     () => [...new Set(countries.map((c) => c.region))].sort(),
     [countries],
   );
+
+  // Search navigation
+  const matchingCodes = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return [];
+    return ranked
+      .filter((r) => r.country.name.toLowerCase().includes(q) || r.country.code.toLowerCase().includes(q))
+      .map((r) => r.country.code);
+  }, [ranked, search]);
+  const [matchCursor, setMatchCursor] = useState(0);
+  useEffect(() => { setMatchCursor(0); }, [search]);
+  useEffect(() => {
+    const code = matchingCodes[matchCursor];
+    if (!code) return;
+    const el = document.querySelector(`[data-country-code="${code}"]`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [matchCursor, matchingCodes]);
+  const goNext = useCallback(() => setMatchCursor((c) => matchingCodes.length ? (c + 1) % matchingCodes.length : 0), [matchingCodes]);
+  const goPrev = useCallback(() => setMatchCursor((c) => matchingCodes.length ? (c - 1 + matchingCodes.length) % matchingCodes.length : 0), [matchingCodes]);
+
+  // Free keyboard navigation (no search active)
+  const [navCursor, setNavCursor] = useState<number | null>(null);
+  const allCodes = useMemo(() => ranked.map((r) => r.country.code), [ranked]);
+  useEffect(() => { setNavCursor(null); }, [ranked]);
+  useEffect(() => {
+    if (navCursor === null) return;
+    const code = allCodes[navCursor];
+    if (!code) return;
+    const el = document.querySelector(`[data-country-code="${code}"]`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [navCursor, allCodes]);
+
+  // Arrow key handler
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
+      e.preventDefault();
+      if (search.trim()) {
+        // Navigate within search matches
+        if (e.key === "ArrowDown") goNext();
+        else goPrev();
+      } else {
+        // Navigate full list
+        setNavCursor((c) => {
+          const len = allCodes.length;
+          if (!len) return null;
+          if (c === null) return e.key === "ArrowDown" ? 0 : len - 1;
+          return e.key === "ArrowDown" ? (c + 1) % len : (c - 1 + len) % len;
+        });
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [search, goNext, goPrev, allCodes]);
+
+  const activeHighlight = search.trim()
+    ? (matchingCodes[matchCursor] ?? null)
+    : (navCursor !== null ? (allCodes[navCursor] ?? null) : highlightedCode);
 
   return (
     <Layout view={view} onViewChange={setView}>
@@ -414,6 +473,8 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Search bar + Region chips — sticky below header */}
+              <div className="sticky z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-4" style={{ top: "56px", backgroundColor: "#0F1114", borderBottom: "1px solid #1a1a1a" }}>
               {/* Search bar */}
               <div className="relative mb-4">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2" size={18} style={{ color: "#666666" }} />
@@ -422,13 +483,38 @@ export default function App() {
                   placeholder="Search by country name or ISO code…"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 rounded-md focus:outline-none"
-                  style={{ backgroundColor: "#161616", border: "1px solid #1E1E22", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: "14px" }}
+                  className="w-full pl-12 py-3 rounded-md focus:outline-none"
+                  style={{ paddingRight: search.trim() ? "96px" : "16px", backgroundColor: "#161616", border: "1px solid #1E1E22", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: "14px" }}
                 />
+                {search.trim() && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                    <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#666666", minWidth: "36px", textAlign: "right" }}>
+                      {matchingCodes.length > 0 ? `${matchCursor + 1}/${matchingCodes.length}` : "0/0"}
+                    </span>
+                    <button
+                      onClick={goPrev}
+                      disabled={matchingCodes.length === 0}
+                      className="flex items-center justify-center"
+                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: matchingCodes.length ? "pointer" : "default", backgroundColor: "#2A2A2A", color: matchingCodes.length ? "#CCCCCC" : "#444444" }}
+                      aria-label="Previous match"
+                    >
+                      <ChevronUp size={14} />
+                    </button>
+                    <button
+                      onClick={goNext}
+                      disabled={matchingCodes.length === 0}
+                      className="flex items-center justify-center"
+                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: matchingCodes.length ? "pointer" : "default", backgroundColor: "#2A2A2A", color: matchingCodes.length ? "#CCCCCC" : "#444444" }}
+                      aria-label="Next match"
+                    >
+                      <ChevronDown size={14} />
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Region chips */}
-              <div className="mb-6">
+              <div className="mb-0">
                 <div style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", color: "#444444", marginBottom: "12px" }}>
                   REGIONS
                 </div>
@@ -474,13 +560,15 @@ export default function App() {
                 </div>
               </div>
 
+              </div>
+
               {/* Country list */}
               <CountryList
                 ranked={ranked}
                 loading={loading}
                 error={error}
                 onRetry={refresh}
-                highlightedCode={highlightedCode}
+                highlightedCode={activeHighlight}
               />
             </div>
           </main>

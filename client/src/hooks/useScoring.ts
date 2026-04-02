@@ -5,7 +5,6 @@ import type { ClimatePreferences, CountryData, RankedCountry, WeightMap } from "
 export function useScoring(
   countries: CountryData[],
   weights: WeightMap,
-  searchQuery: string,
   regionFilter: Set<string>,
   nomadVisaOnly: boolean,
   schengenOnly: boolean,
@@ -14,11 +13,6 @@ export function useScoring(
 ): RankedCountry[] {
   return useMemo(() => {
     const filtered = countries.filter((c) => {
-      const matchesSearch =
-        searchQuery.trim() === "" ||
-        c.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        c.code.toLowerCase().includes(searchQuery.toLowerCase());
-
       const matchesRegion =
         regionFilter.size === 0 || regionFilter.has(c.region);
 
@@ -28,7 +22,7 @@ export function useScoring(
         minTouristDays === null ||
         (c.touristVisaDays != null && c.touristVisaDays >= minTouristDays);
 
-      return matchesSearch && matchesRegion && matchesNomadVisa && matchesSchengen && matchesTouristDays;
+      return matchesRegion && matchesNomadVisa && matchesSchengen && matchesTouristDays;
     });
 
     // Override climate score with preference-based dynamic score
@@ -47,5 +41,5 @@ export function useScoring(
     });
 
     return rankCountries(withClimate, weights);
-  }, [countries, weights, searchQuery, regionFilter, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs]);
+  }, [countries, weights, regionFilter, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs]);
 }

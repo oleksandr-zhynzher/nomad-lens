@@ -17,24 +17,30 @@ interface CountryCardProps {
 
 export function CountryCard({ ranked, highlighted = false, index }: CountryCardProps) {
   const [expanded, setExpanded] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const { country, finalScore, rank } = ranked;
   
   // Alternating backgrounds - lighter for better readability
   const isEven = index % 2 === 0;
   const bgColor = isEven ? "#1A1A1C" : "#161618";
+  const hoverBg = isEven ? "#232325" : "#1E1E20";
   const borderColor = isEven ? "#252527" : "#1F1F21";
 
   return (
     <div
       data-country-code={country.code}
-      className={`overflow-hidden transition-all duration-700 ${
-        highlighted ? "ring-2" : ""
-      }`}
-      style={{ backgroundColor: bgColor, borderTop: `1px solid ${borderColor}`, ...(highlighted && { borderColor: "var(--color-accent)", boxShadow: `0 0 0 2px var(--color-accent)` }) }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`overflow-hidden transition-all duration-150 ${highlighted ? "ring-2" : ""}`}
+      style={{
+        backgroundColor: highlighted ? bgColor : hovered ? hoverBg : bgColor,
+        borderTop: `1px solid ${highlighted ? "var(--color-accent)" : hovered ? "#3A3A3A" : borderColor}`,
+        ...(highlighted && { boxShadow: `0 0 0 2px var(--color-accent)` }),
+      }}
     >
       {/* Main row */}
       <button
-        className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 hover:brightness-110 transition-all text-left cursor-pointer"
+        className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 transition-all text-left cursor-pointer"
         style={{ minHeight: "56px" }}
         onClick={() => setExpanded((p) => !p)}
         aria-expanded={expanded}
