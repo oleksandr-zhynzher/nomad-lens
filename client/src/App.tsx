@@ -52,6 +52,20 @@ function weightsToSearch(weights: WeightMap): string {
 const LS_WEIGHTS_KEY = "nomad-lens:weights";
 
 function loadWeightsFromStorage(): WeightMap {
+  // Check if the URL contains a shared weight link (any CATEGORY_KEY present)
+  const urlParams = new URLSearchParams(window.location.search);
+  const hasSharedWeights = CATEGORY_KEYS.some((k) => urlParams.has(k));
+  if (hasSharedWeights) {
+    const imported = weightsFromSearch(window.location.search);
+    // Save to localStorage so the weights persist after URL is cleaned
+    try {
+      localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(imported));
+    } catch { /* ignore */ }
+    // Strip weight params from URL without triggering a navigation
+    window.history.replaceState(null, "", window.location.pathname);
+    return imported;
+  }
+
   try {
     const raw = localStorage.getItem(LS_WEIGHTS_KEY);
     if (raw) {
