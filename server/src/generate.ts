@@ -102,12 +102,44 @@ async function generate(): Promise<void> {
     };
 
     // ── Affordability ────────────────────────────────────────────────────
+    // Price Level Ratio = nominal GDP per capita / PPP GDP per capita.
+    // PLR < 1 → country is cheap (your USD goes further than at home).
+    // PLR > 1 → country is expensive.
+    // We score it 0-100 with low PLR = high score (better for nomads).
     const gdpPpp = wb?.[WB_INDICATORS.gdpPerCapitaPPP];
+    const inflation = wb?.[WB_INDICATORS.inflation];
+
+    const plrRaw =
+      gdp?.value != null && gdpPpp?.value != null && gdpPpp.value > 0
+        ? gdp.value / gdpPpp.value
+        : null;
+
+    // PLR: 0.10 (ultra-cheap) → 100 … 2.00 (ultra-expensive) → 0
+    const plrScore = invertMinMax(plrRaw, 0.1, 2.0);
+
+    // Inflation: cap at 50 % to dampen hyperinflation outliers;
+    // 0 % → 100, 30 % → 0
+    const inflRaw = inflation?.value != null ? Math.min(inflation.value, 50) : null;
+    const inflScore = invertMinMax(inflRaw, 0, 30);
+
+    // Final score: PLR carries 70 %, inflation 30 %; gracefully degrades if one is missing
+    const affordScore: number | null =
+      plrScore !== null && inflScore !== null
+        ? Math.round((plrScore * 0.7 + inflScore * 0.3) * 10) / 10
+        : plrScore ?? inflScore ?? null;
 
     const affordability: CategoryScore = {
-      value: invertMinMax(gdpPpp?.value ?? null, 1_000, 100_000),
+      value: affordScore,
       indicators: {
-        ...(gdpPpp?.value != null ? { gdpPerCapitaPPP: ind(gdpPpp.value, 'PPP $', gdpPpp.year) } : {}),
+        ...(plrRaw != null
+          ? { priceLevelRatio: ind(Math.round(plrRaw * 100) / 100, 'vs intl avg', gdp!.year) }
+          : {}),
+        ...(gdpPpp?.value != null
+          ? { gdpPerCapitaPPP: ind(gdpPpp.value, 'PPP $', gdpPpp.year) }
+          : {}),
+        ...(inflation?.value != null
+          ? { inflation: ind(inflation.value, '% YoY', inflation.year) }
+          : {}),
       },
     };
 

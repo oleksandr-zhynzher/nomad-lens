@@ -34,11 +34,21 @@
         }
       },
       "affordability": {
-        "value": 96.4,
+        "value": 81.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.37,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4565.3007888456,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 8.12313914948596,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -279,11 +289,21 @@
         }
       },
       "affordability": {
-        "value": 97.6,
+        "value": 88.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3365.45809007306,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.86262074089801,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -741,12 +761,22 @@
         }
       },
       "affordability": {
-        "value": 92.9,
+        "value": 81.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.3,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 8012.45464442194,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 10.7532770416742,
+            "unit": "% YoY",
+            "year": 2023
           }
         }
       },
@@ -1026,11 +1056,21 @@
         }
       },
       "affordability": {
-        "value": 79,
+        "value": 75.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.32,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 21800.5265989822,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 16.2296159130279,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -1287,11 +1327,21 @@
         }
       },
       "affordability": {
-        "value": 73.2,
+        "value": 85.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.39,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 27541.6625283384,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.30223338951227,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -1597,11 +1647,21 @@
         }
       },
       "affordability": {
-        "value": 86.5,
+        "value": 85,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.43,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 14368.6605681815,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.86992752918294,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -1892,11 +1952,21 @@
         }
       },
       "affordability": {
-        "value": 83.2,
+        "value": 87.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 17620.7423956126,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.04611455313434,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -2166,11 +2236,21 @@
         }
       },
       "affordability": {
-        "value": 82.3,
+        "value": 86.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.29,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 18550.462890625,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 6.50198464669254,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -2507,12 +2587,22 @@
         }
       },
       "affordability": {
-        "value": 65.8,
+        "value": 74.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.69,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 34846.6035342828,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 3.55711230848243,
+            "unit": "% YoY",
+            "year": 2023
           }
         }
       },
@@ -2747,11 +2837,21 @@
         }
       },
       "affordability": {
-        "value": 51,
+        "value": 82.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.49,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 49550.7921506017,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.97200477643618,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -3069,11 +3169,21 @@
         }
       },
       "affordability": {
-        "value": 83.3,
+        "value": 86.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.38,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 17566.7600284073,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.92140227309103,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -3314,11 +3424,21 @@
         }
       },
       "affordability": {
-        "value": 59.2,
+        "value": 85.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 41369.422541499,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.693225551004538,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -3630,11 +3750,21 @@
         }
       },
       "affordability": {
-        "value": 26.8,
+        "value": 72.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.77,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 73514.4831045258,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.14349136500041,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -3975,11 +4105,21 @@
         }
       },
       "affordability": {
-        "value": 97.3,
+        "value": 92,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.27,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3710.86040434596,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.77029240198635,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -4277,11 +4417,21 @@
         }
       },
       "affordability": {
-        "value": 89.7,
+        "value": 85.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 11195.1205312923,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.04817001091965,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -4539,11 +4689,21 @@
         }
       },
       "affordability": {
-        "value": 39.3,
+        "value": 79.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.59,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 61051.3492502498,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.32174328643542,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -5081,8 +5241,13 @@
         }
       },
       "affordability": {
-        "value": 25.3,
+        "value": 70.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.66,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 74939.4746038578,
             "unit": "PPP $",
@@ -5326,11 +5491,21 @@
         }
       },
       "affordability": {
-        "value": 95.9,
+        "value": 90,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 5070.6486207418,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.804503298792438,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -5621,11 +5796,21 @@
         }
       },
       "affordability": {
-        "value": 64.2,
+        "value": 74.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.66,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 36417.874162496,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.84914366613156,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -5938,11 +6123,21 @@
         }
       },
       "affordability": {
-        "value": 93.9,
+        "value": 87.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 7026.36223281494,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.09143630919166,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -6196,11 +6391,21 @@
         }
       },
       "affordability": {
-        "value": 89.2,
+        "value": 85.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.38,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 11686.6020661881,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.23903922877036,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -6475,11 +6680,21 @@
         }
       },
       "affordability": {
-        "value": 0,
+        "value": 79.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.6,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 150689.301625826,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.38951123595017,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -6819,11 +7034,21 @@
         }
       },
       "affordability": {
-        "value": 35,
+        "value": 72.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.81,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 65378.3841859721,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.56568906231616,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -7164,11 +7389,21 @@
         }
       },
       "affordability": {
-        "value": 81.7,
+        "value": 69,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.17,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 19094.1449444111,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 28.2705899322083,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -7505,12 +7740,22 @@
         }
       },
       "affordability": {
-        "value": 82.6,
+        "value": 69.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.86,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 18230.2698627414,
             "unit": "PPP $",
             "year": 2023
+          },
+          "inflation": {
+            "raw": 2.23172772921704,
+            "unit": "% YoY",
+            "year": 2024
           }
         }
       },
@@ -7920,11 +8165,21 @@
         }
       },
       "affordability": {
-        "value": 67.3,
+        "value": 71.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.71,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 33386.1917127894,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 6.19886698842116,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -8156,11 +8411,21 @@
         }
       },
       "affordability": {
-        "value": 67.4,
+        "value": 83.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.54,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 33238.5800343754,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.311726050919668,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -8412,11 +8677,21 @@
         }
       },
       "affordability": {
-        "value": 48,
+        "value": 77.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.62,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 52443.5969223626,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.89855072463762,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -8713,11 +8988,21 @@
         }
       },
       "affordability": {
-        "value": 56.2,
+        "value": 80.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.56,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 44327.2097808276,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.74149045788606,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -9048,11 +9333,21 @@
         }
       },
       "affordability": {
-        "value": 97.3,
+        "value": 78.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.62,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3702.32594703115,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.45545072159028,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -9300,11 +9595,21 @@
         }
       },
       "affordability": {
-        "value": 37.4,
+        "value": 79.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.61,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 63006.61328125,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.80023018624815,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -9600,11 +9905,21 @@
         }
       },
       "affordability": {
-        "value": 97.7,
+        "value": 88.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3314.77332231959,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.2063986409966,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -9853,8 +10168,13 @@
         }
       },
       "affordability": {
-        "value": 0,
+        "value": 44.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 1.15,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 124252.835702586,
             "unit": "PPP $",
@@ -10061,8 +10381,13 @@
         }
       },
       "affordability": {
-        "value": 21.4,
+        "value": 66.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.74,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 78840.5978395988,
             "unit": "PPP $",
@@ -10502,11 +10827,21 @@
         }
       },
       "affordability": {
-        "value": 96.7,
+        "value": 90.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.28,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4220.79638671875,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.05694676312373,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -10818,11 +11153,21 @@
         }
       },
       "affordability": {
-        "value": 84.5,
+        "value": 89.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.29,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 16385.5065565458,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.62109273885843,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -11164,11 +11509,21 @@
         }
       },
       "affordability": {
-        "value": 98.2,
+        "value": 81.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 2742.65952183613,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 8.89950732263754,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -11420,11 +11775,21 @@
         }
       },
       "affordability": {
-        "value": 93.3,
+        "value": 87.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.36,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 7669.23195715687,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.45053028131019,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -11699,11 +12064,21 @@
         }
       },
       "affordability": {
-        "value": 72.4,
+        "value": 90.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 28285.0732802982,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.10971758022096,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -12180,11 +12555,21 @@
         }
       },
       "affordability": {
-        "value": 88,
+        "value": 85.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.34,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 12877.6351184372,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 5.09976568317427,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -12464,11 +12849,21 @@
         }
       },
       "affordability": {
-        "value": 18.3,
+        "value": 70.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.87,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 81878.2349849181,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.37220049768918,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -12799,8 +13194,13 @@
         }
       },
       "affordability": {
-        "value": 79.6,
+        "value": 88.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.32,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 21213.0862501953,
             "unit": "PPP $",
@@ -13066,11 +13466,21 @@
         }
       },
       "affordability": {
-        "value": 98.9,
+        "value": 81.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.36,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 2049.93305251019,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 9.07151997725013,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -13323,12 +13733,22 @@
         }
       },
       "affordability": {
-        "value": 96.6,
+        "value": 63,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.96,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4346.84249671875,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 5.40874375479067,
+            "unit": "% YoY",
+            "year": 2022
           }
         }
       },
@@ -13542,8 +13962,13 @@
         }
       },
       "affordability": {
-        "value": 11.7,
+        "value": 46.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 1.12,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 88427.7866712691,
             "unit": "PPP $",
@@ -13967,11 +14392,21 @@
         }
       },
       "affordability": {
-        "value": 75.7,
+        "value": 88.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.37,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 25043.0886396127,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.69212733599724,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -14266,11 +14701,21 @@
         }
       },
       "affordability": {
-        "value": 37.8,
+        "value": 74.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.74,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 62556.91810454,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.99904942291463,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -14787,11 +15232,21 @@
         }
       },
       "affordability": {
-        "value": 59.7,
+        "value": 82.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 40890.9317694408,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 8.83943897452672,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -15077,11 +15532,21 @@
         }
       },
       "affordability": {
-        "value": 90.8,
+        "value": 65.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.26,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 10118.6089945408,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 28.2404948915772,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -15351,11 +15816,21 @@
         }
       },
       "affordability": {
-        "value": 44.9,
+        "value": 68.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.89,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 55551.143658637,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.92279782301957,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -15685,8 +16160,13 @@
         }
       },
       "affordability": {
-        "value": 50.3,
+        "value": 64.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.78,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 50247.8492461676,
             "unit": "PPP $",
@@ -15908,11 +16388,21 @@
         }
       },
       "affordability": {
-        "value": 28.9,
+        "value": 83.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.49,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 71375.3727890285,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.68792112375809,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -16264,11 +16754,21 @@
         }
       },
       "affordability": {
-        "value": 66.6,
+        "value": 86,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.39,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 34062.7577672706,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.33675009282281,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -16558,11 +17058,21 @@
         }
       },
       "affordability": {
-        "value": 85.4,
+        "value": 84.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.41,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 15456.1989933658,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.36115246518962,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -16904,11 +17414,21 @@
         }
       },
       "affordability": {
-        "value": 94.7,
+        "value": 82.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.24,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 6252.11543199559,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 12.6325318530452,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -17216,11 +17736,21 @@
         }
       },
       "affordability": {
-        "value": 85.2,
+        "value": 93.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.29,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 15632.5924849848,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": -0.42936004906973,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -17531,11 +18061,21 @@
         }
       },
       "affordability": {
-        "value": 95.4,
+        "value": 87.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 5588.98645861945,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.53331349711606,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -17805,11 +18345,21 @@
         }
       },
       "affordability": {
-        "value": 99.1,
+        "value": 78.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1871.04406164262,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 8.21497439118964,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -18044,11 +18594,21 @@
         }
       },
       "affordability": {
-        "value": 21,
+        "value": 78.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.63,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 79228.738801276,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.66336510224894,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -18400,11 +18960,21 @@
         }
       },
       "affordability": {
-        "value": 3.5,
+        "value": 62.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 1.08,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 96497.6947971323,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.06234041976595,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -18734,11 +19304,21 @@
         }
       },
       "affordability": {
-        "value": 52,
+        "value": 82.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.48,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 48552.4708092529,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.70370370370369,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -19074,11 +19654,21 @@
         }
       },
       "affordability": {
-        "value": 86.6,
+        "value": 84.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 14303.8087736988,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.12615766885025,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -19338,12 +19928,22 @@
         }
       },
       "affordability": {
-        "value": 97.4,
+        "value": 57.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.95,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3605.60736691735,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 11.1825017088175,
+            "unit": "% YoY",
+            "year": 2023
           }
         }
       },
@@ -19590,11 +20190,21 @@
         }
       },
       "affordability": {
-        "value": 73.2,
+        "value": 84.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.51,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 27567.3280779839,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": -0.110283575834694,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -19834,11 +20444,21 @@
         }
       },
       "affordability": {
-        "value": 99.7,
+        "value": 87.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.41,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1263.10234213699,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.47733600718744,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -20080,8 +20700,13 @@
         }
       },
       "affordability": {
-        "value": 95.5,
+        "value": 92.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.25,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 5405.98011619139,
             "unit": "PPP $",
@@ -20359,11 +20984,21 @@
         }
       },
       "affordability": {
-        "value": 0,
+        "value": 70.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.85,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 133437.470117019,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.11344999577317,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -21088,8 +21723,13 @@
         }
       },
       "affordability": {
-        "value": 18.3,
+        "value": 57.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.9,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 81908.7781785018,
             "unit": "PPP $",
@@ -21531,11 +22171,21 @@
         }
       },
       "affordability": {
-        "value": 75.7,
+        "value": 90.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.29,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 25088.9993757134,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.21217188919901,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -21827,11 +22477,21 @@
         }
       },
       "affordability": {
-        "value": 98.3,
+        "value": 72.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.72,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 2674.89311339831,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.32183948388033,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -22084,11 +22744,21 @@
         }
       },
       "affordability": {
-        "value": 88,
+        "value": 76.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.6,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 12890.2660051472,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 5.41194447981659,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -22368,11 +23038,21 @@
         }
       },
       "affordability": {
-        "value": 90.5,
+        "value": 88,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.4,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 10415.1240234375,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.985256592004507,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -22714,11 +23394,21 @@
         }
       },
       "affordability": {
-        "value": 64.3,
+        "value": 84.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.52,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 36328.5130065685,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.526884625776839,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -22997,11 +23687,21 @@
         }
       },
       "affordability": {
-        "value": 86.5,
+        "value": 80.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.54,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 14346.5188049737,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.28955985952768,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -23258,11 +23958,21 @@
         }
       },
       "affordability": {
-        "value": 73.6,
+        "value": 85.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.49,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 27104.8702677463,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.218128938439177,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -23599,11 +24309,21 @@
         }
       },
       "affordability": {
-        "value": 92.2,
+        "value": 78.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.62,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 8736.81606772538,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.17245530514377,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -24010,12 +24730,22 @@
         }
       },
       "affordability": {
-        "value": 98.9,
+        "value": 56.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.47,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 2115.81616210938,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 138.80846024176,
+            "unit": "% YoY",
+            "year": 2022
           }
         }
       },
@@ -24279,11 +25009,21 @@
         }
       },
       "affordability": {
-        "value": 52.4,
+        "value": 81,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.54,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 48132.356430543,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.75760909424272,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -24601,11 +25341,21 @@
         }
       },
       "affordability": {
-        "value": 99.8,
+        "value": 76.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.18,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1194.94681370387,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 20.2124925027847,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -24842,8 +25592,13 @@
         }
       },
       "affordability": {
-        "value": 92.7,
+        "value": 55.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.94,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 8194.63854758403,
             "unit": "PPP $",
@@ -25093,11 +25848,21 @@
         }
       },
       "affordability": {
-        "value": 26.4,
+        "value": 71.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.79,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 73911.439663136,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.93791574279383,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -25438,11 +26203,21 @@
         }
       },
       "affordability": {
-        "value": 99.3,
+        "value": 85.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.39,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1705.37919520416,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.07856834812022,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -25713,11 +26488,21 @@
         }
       },
       "affordability": {
-        "value": 79.5,
+        "value": 80.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.54,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 21272.0800673662,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.62770736940927,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -25948,11 +26733,21 @@
         }
       },
       "affordability": {
-        "value": 96.1,
+        "value": 80.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.62,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4874.6899553589,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.602403921107917,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -26221,11 +27016,21 @@
         }
       },
       "affordability": {
-        "value": 54.9,
+        "value": 60.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 45639.0192735944,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 58.5064507300343,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -26567,11 +27372,21 @@
         }
       },
       "affordability": {
-        "value": 80.6,
+        "value": 81.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.58,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 20177.8094927386,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.08615365134737,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -26802,11 +27617,21 @@
         }
       },
       "affordability": {
-        "value": 93,
+        "value": 90.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 7966.87352428705,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.808042016536654,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -27124,11 +27949,21 @@
         }
       },
       "affordability": {
-        "value": 48.8,
+        "value": 80.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.57,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 51679.8883807527,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.41613187791884,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -27469,11 +28304,21 @@
         }
       },
       "affordability": {
-        "value": 38.4,
+        "value": 68.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.86,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 62009.4907765366,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.2715729463592,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -27814,11 +28659,21 @@
         }
       },
       "affordability": {
-        "value": 91.8,
+        "value": 69.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.12,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 9086.87550609627,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 33.2420966545406,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -28315,11 +29170,21 @@
         }
       },
       "affordability": {
-        "value": 43.2,
+        "value": 65.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.95,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 57235.7763244136,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.07480889805025,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -28649,12 +29514,22 @@
         }
       },
       "affordability": {
-        "value": 88.3,
+        "value": 63.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.28,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 12574.8329116403,
             "unit": "PPP $",
             "year": 2023
+          },
+          "inflation": {
+            "raw": 45.2430422716718,
+            "unit": "% YoY",
+            "year": 2024
           }
         }
       },
@@ -28934,11 +29809,21 @@
         }
       },
       "affordability": {
-        "value": 48.4,
+        "value": 78,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.62,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 52039.1716551611,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.73853681635241,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -29274,11 +30159,21 @@
         }
       },
       "affordability": {
-        "value": 97.5,
+        "value": 82.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.25,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3475.61245701341,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 11.5610532897511,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -29694,11 +30589,21 @@
         }
       },
       "affordability": {
-        "value": 97.9,
+        "value": 88,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.32,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3119.37157047437,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.76555825770114,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -29941,11 +30846,21 @@
         }
       },
       "affordability": {
-        "value": 91.1,
+        "value": 72.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.22,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 9775.82817381023,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 23.1305695942588,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -30214,11 +31129,21 @@
         }
       },
       "affordability": {
-        "value": 73.7,
+        "value": 87.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.34,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 26995.4292563497,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.48974086026947,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -30487,11 +31412,21 @@
         }
       },
       "affordability": {
-        "value": 0,
+        "value": 80,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.61,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 126046.354855612,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.26734310292375,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -30792,11 +31727,21 @@
         }
       },
       "affordability": {
-        "value": 96.8,
+        "value": 78.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.28,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4214.89277804799,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 14.9856262747939,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -31067,11 +32012,21 @@
         }
       },
       "affordability": {
-        "value": 75.9,
+        "value": 64.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 1.07,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 24822.5343309908,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": -0.440112940205204,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -31333,11 +32288,21 @@
         }
       },
       "affordability": {
-        "value": 38.4,
+        "value": 78.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.65,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 62014.2675153689,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.982373023061417,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -31679,11 +32644,21 @@
         }
       },
       "affordability": {
-        "value": 97,
+        "value": 83.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.42,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3958.53228789687,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 5.05192609588218,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -31925,11 +32900,21 @@
         }
       },
       "affordability": {
-        "value": 74,
+        "value": 85.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.43,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 26701.6749563776,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.21587375089999,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -32394,11 +33379,21 @@
         }
       },
       "affordability": {
-        "value": 81.7,
+        "value": 84.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 19144.7261368498,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 6.20713301510303,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -32704,12 +33699,22 @@
         }
       },
       "affordability": {
-        "value": 93.1,
+        "value": 73.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.72,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 7802.66986206107,
             "unit": "PPP $",
             "year": 2023
+          },
+          "inflation": {
+            "raw": 3.18364611260051,
+            "unit": "% YoY",
+            "year": 2024
           }
         }
       },
@@ -32949,12 +33954,22 @@
         }
       },
       "affordability": {
-        "value": 99.1,
+        "value": 83.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.29,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1883.5374311384,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 9.87432675044888,
+            "unit": "% YoY",
+            "year": 2023
           }
         }
       },
@@ -33463,11 +34478,21 @@
         }
       },
       "affordability": {
-        "value": 78.4,
+        "value": 82.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 22338.4765640635,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.36746407652337,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -33819,11 +34844,21 @@
         }
       },
       "affordability": {
-        "value": 28.2,
+        "value": 67.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.9,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 72111.1844628126,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.1616142830575,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -34154,11 +35189,21 @@
         }
       },
       "affordability": {
-        "value": 20,
+        "value": 87.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.37,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 80155.03939277,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.90395226446373,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -34421,11 +35466,21 @@
         }
       },
       "affordability": {
-        "value": 43.2,
+        "value": 79.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.6,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 57186.3713538174,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.96562656432512,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -34722,12 +35777,22 @@
         }
       },
       "affordability": {
-        "value": 21.5,
+        "value": 74.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.76,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 78745.4313299335,
             "unit": "PPP $",
             "year": 2023
+          },
+          "inflation": {
+            "raw": 1.24216507945569,
+            "unit": "% YoY",
+            "year": 2024
           }
         }
       },
@@ -34966,11 +36031,21 @@
         }
       },
       "affordability": {
-        "value": 96.6,
+        "value": 51.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.59,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4371.11135857265,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 53.6691458303782,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -35216,12 +36291,22 @@
         }
       },
       "affordability": {
-        "value": 84.6,
+        "value": 92.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.24,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 16215.1520073153,
             "unit": "PPP $",
             "year": 2023
+          },
+          "inflation": {
+            "raw": 2.76131569624098,
+            "unit": "% YoY",
+            "year": 2024
           }
         }
       },
@@ -35484,8 +36569,13 @@
         }
       },
       "affordability": {
-        "value": 46.7,
+        "value": 64.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.77,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 53768.6573945662,
             "unit": "PPP $",
@@ -35660,11 +36750,21 @@
         }
       },
       "affordability": {
-        "value": 89.1,
+        "value": 88,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.34,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 11794.1375488492,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.21260487006347,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -36011,11 +37111,21 @@
         }
       },
       "affordability": {
-        "value": 64.5,
+        "value": 82.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 36181.156616977,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.29763891572524,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -36351,11 +37461,21 @@
         }
       },
       "affordability": {
-        "value": 97.8,
+        "value": 52.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.67,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3193.67136419915,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 26.9490564091987,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -36608,11 +37728,21 @@
         }
       },
       "affordability": {
-        "value": 94.7,
+        "value": 68.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.56,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 6241.85614464638,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 14.3519273571008,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -36846,12 +37976,22 @@
         }
       },
       "affordability": {
-        "value": 0,
+        "value": 82.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.57,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 126959.917138906,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 0.476384495788075,
+            "unit": "% YoY",
+            "year": 2023
           }
         }
       },
@@ -37064,11 +38204,21 @@
         }
       },
       "affordability": {
-        "value": 68.8,
+        "value": 86.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.38,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 31839.7597535524,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.6045220384796,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -37358,11 +38508,21 @@
         }
       },
       "affordability": {
-        "value": 33.4,
+        "value": 86.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.44,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 66941.2430367989,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.919635459817651,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -37668,11 +38828,21 @@
         }
       },
       "affordability": {
-        "value": 74.6,
+        "value": 79.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.54,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 26185.3564713253,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.72225588452932,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -38024,11 +39194,21 @@
         }
       },
       "affordability": {
-        "value": 70.3,
+        "value": 56.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 30431.1931223693,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 219.883929014578,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -38375,11 +39555,21 @@
         }
       },
       "affordability": {
-        "value": 95.2,
+        "value": 89.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.25,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 5736.62134332704,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.6850965426577,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -38685,11 +39875,21 @@
         }
       },
       "affordability": {
-        "value": 28.4,
+        "value": 71.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.8,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 71844.9129880579,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.83581658224034,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -39025,11 +40225,21 @@
         }
       },
       "affordability": {
-        "value": 97.5,
+        "value": 66.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.23,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3522.30588009119,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 28.6337500014115,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -39266,8 +40476,13 @@
         }
       },
       "affordability": {
-        "value": 89.1,
+        "value": 87.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 11799.2028793201,
             "unit": "PPP $",
@@ -39528,11 +40743,21 @@
         }
       },
       "affordability": {
-        "value": 42.5,
+        "value": 78.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.61,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 57965.2948138837,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.77417826534772,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -39878,11 +41103,21 @@
         }
       },
       "affordability": {
-        "value": 78.4,
+        "value": 84,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 22349.436440123,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 6.60908593728228,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -40201,8 +41436,13 @@
         }
       },
       "affordability": {
-        "value": 62.7,
+        "value": 53.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.99,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 37954.3876543471,
             "unit": "PPP $",
@@ -40377,11 +41617,21 @@
         }
       },
       "affordability": {
-        "value": 93.1,
+        "value": 84.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.45,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 7810.27869066792,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.07655387954199,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -40606,8 +41856,13 @@
         }
       },
       "affordability": {
-        "value": 86.7,
+        "value": 54.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.96,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 14173.0081043154,
             "unit": "PPP $",
@@ -40841,11 +42096,21 @@
         }
       },
       "affordability": {
-        "value": 87.6,
+        "value": 87.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.42,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 13264.027090968,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.853782292567288,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -41130,11 +42395,21 @@
         }
       },
       "affordability": {
-        "value": 93.4,
+        "value": 82.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.46,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 7486.01869616445,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.60621098127107,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -41420,11 +42695,21 @@
         }
       },
       "affordability": {
-        "value": 94.3,
+        "value": 87.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.32,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 6644.13093243895,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.48978854243448,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -41748,11 +43033,21 @@
         }
       },
       "affordability": {
-        "value": 30.4,
+        "value": 78.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.63,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 69863.7461313457,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.65079469283109,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -42048,11 +43343,21 @@
         }
       },
       "affordability": {
-        "value": 57.2,
+        "value": 82.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.54,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 43394.2732822314,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.26579885828729,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -42365,11 +43670,21 @@
         }
       },
       "affordability": {
-        "value": 79.3,
+        "value": 88.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.38,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 21510.1725307344,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.17311998381218,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -42611,11 +43926,21 @@
         }
       },
       "affordability": {
-        "value": 25.1,
+        "value": 75.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.72,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 75195.9865970615,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.72972119105914,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -42886,8 +44211,13 @@
         }
       },
       "affordability": {
-        "value": 94.8,
+        "value": 51,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 1.03,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 6151.01047041608,
             "unit": "PPP $",
@@ -43125,11 +44455,21 @@
         }
       },
       "affordability": {
-        "value": 96.5,
+        "value": 90.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.3,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4422.77882172399,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.06284153005468,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -43381,11 +44721,21 @@
         }
       },
       "affordability": {
-        "value": 98,
+        "value": 85.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.32,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3001.16311951334,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 6.10544624245032,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -43632,11 +44982,21 @@
         }
       },
       "affordability": {
-        "value": 14.3,
+        "value": 64.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.99,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 85809.9003846359,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.94952520485207,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -43977,11 +45337,21 @@
         }
       },
       "affordability": {
-        "value": 76,
+        "value": 91.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.3,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 24712.0658575135,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.36580540798037,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -44333,11 +45703,21 @@
         }
       },
       "affordability": {
-        "value": 89.7,
+        "value": 89.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.24,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 11159.9856476091,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.95303550973656,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -44689,11 +46069,21 @@
         }
       },
       "affordability": {
-        "value": 45.2,
+        "value": 83.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.53,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 55285.8991934304,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.715735835228723,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -45006,12 +46396,22 @@
         }
       },
       "affordability": {
-        "value": 95,
+        "value": 58.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.42,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 5928.0806252756,
             "unit": "PPP $",
             "year": 2024
+          },
+          "inflation": {
+            "raw": 104.705170628667,
+            "unit": "% YoY",
+            "year": 2022
           }
         }
       },
@@ -45270,11 +46670,21 @@
         }
       },
       "affordability": {
-        "value": 74.6,
+        "value": 83.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.51,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 26182.7831570917,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.39979779674928,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -45532,11 +46942,21 @@
         }
       },
       "affordability": {
-        "value": 86.3,
+        "value": 85.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.29,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 14521.0080937638,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 7.20661657168794,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -45872,11 +47292,21 @@
         }
       },
       "affordability": {
-        "value": 50.5,
+        "value": 77,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.63,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 49968.7108278373,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.52056053296586,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -46200,11 +47630,21 @@
         }
       },
       "affordability": {
-        "value": 91.3,
+        "value": 83.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.27,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 9646.76984383255,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 10.4657482763412,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -46533,11 +47973,21 @@
         }
       },
       "affordability": {
-        "value": 89,
+        "value": 84.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.27,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 11878.5528706848,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 9.62825465956682,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -46823,11 +48273,21 @@
         }
       },
       "affordability": {
-        "value": 92.9,
+        "value": 69.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.3,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 8019.99702389611,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 22.8483281157842,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -47135,11 +48595,21 @@
         }
       },
       "affordability": {
-        "value": 0,
+        "value": 69.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.85,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 102037.526800237,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.14530134431073,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -47470,8 +48940,13 @@
         }
       },
       "affordability": {
-        "value": 99.4,
+        "value": 84.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.39,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1601.96466602339,
             "unit": "PPP $",
@@ -47733,11 +49208,21 @@
         }
       },
       "affordability": {
-        "value": 59.4,
+        "value": 68,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.96,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 41197.9342548477,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.409162489083286,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -47980,11 +49465,21 @@
         }
       },
       "affordability": {
-        "value": 58.8,
+        "value": 85.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.49,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 41740.1658530012,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.593589236248469,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -48279,11 +49774,21 @@
         }
       },
       "affordability": {
-        "value": 0,
+        "value": 69.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.88,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 155941.288210791,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.05113269954859,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -48602,11 +50107,21 @@
         }
       },
       "affordability": {
-        "value": 86.4,
+        "value": 88.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.42,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 14464.3186928173,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": -12.2969837587007,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -48872,8 +50387,13 @@
         }
       },
       "affordability": {
-        "value": 50.7,
+        "value": 58.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.89,
+            "unit": "vs intl avg",
+            "year": 2022
+          },
           "gdpPerCapitaPPP": {
             "raw": 49793.0324395716,
             "unit": "PPP $",
@@ -49074,11 +50594,21 @@
         }
       },
       "affordability": {
-        "value": 93.6,
+        "value": 90.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.29,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 7368.75275290214,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.49164347481972,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -49319,11 +50849,21 @@
         }
       },
       "affordability": {
-        "value": 35.7,
+        "value": 70.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.84,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 64610.3795171971,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.38158383281173,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -49659,8 +51199,13 @@
         }
       },
       "affordability": {
-        "value": 95,
+        "value": 93.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.23,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 5997.46516323715,
             "unit": "PPP $",
@@ -49944,11 +51489,21 @@
         }
       },
       "affordability": {
-        "value": 61.8,
+        "value": 90.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.31,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 38779.2830442253,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.834100204499,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -50266,11 +51821,21 @@
         }
       },
       "affordability": {
-        "value": 97.7,
+        "value": 88.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3273.2671741364,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.3233806708656,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -50552,11 +52117,21 @@
         }
       },
       "affordability": {
-        "value": 80.9,
+        "value": 64.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.26,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 19873.8860853805,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 32.455871402917,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -50844,8 +52419,13 @@
         }
       },
       "affordability": {
-        "value": 68,
+        "value": 68.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.7,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 32693.2939764893,
             "unit": "PPP $",
@@ -51025,11 +52605,21 @@
         }
       },
       "affordability": {
-        "value": 51.4,
+        "value": 82.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.41,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 49076.5399383138,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 5.72140574354439,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -51375,8 +52965,13 @@
         }
       },
       "affordability": {
-        "value": 96.2,
+        "value": 93.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.22,
+            "unit": "vs intl avg",
+            "year": 2022
+          },
           "gdpPerCapitaPPP": {
             "raw": 4772.4616766716,
             "unit": "PPP $",
@@ -51639,11 +53234,21 @@
         }
       },
       "affordability": {
-        "value": 85.4,
+        "value": 83.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.42,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 15450.2993265388,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.51138256524155,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -51892,8 +53497,13 @@
         }
       },
       "affordability": {
-        "value": 49.8,
+        "value": 64.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.78,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 50649.3015232212,
             "unit": "PPP $",
@@ -52109,11 +53719,21 @@
         }
       },
       "affordability": {
-        "value": 14,
+        "value": 71.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.78,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 86173.6290841738,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.34754304219953,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -52449,11 +54069,21 @@
         }
       },
       "affordability": {
-        "value": 83,
+        "value": 84.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.47,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 17802.4182498972,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.00770739412712,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -52760,11 +54390,21 @@
         }
       },
       "affordability": {
-        "value": 80.3,
+        "value": 87,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.37,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 20538.1320178889,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.81835131676251,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -53039,12 +54679,22 @@
         }
       },
       "affordability": {
-        "value": 98.8,
+        "value": 96.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.19,
+            "unit": "vs intl avg",
+            "year": 2023
+          },
           "gdpPerCapitaPPP": {
             "raw": 2201.72290691677,
             "unit": "PPP $",
             "year": 2023
+          },
+          "inflation": {
+            "raw": -6.60118564073726,
+            "unit": "% YoY",
+            "year": 2024
           }
         }
       },
@@ -53301,11 +54951,21 @@
         }
       },
       "affordability": {
-        "value": 67.8,
+        "value": 83.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.42,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 32832.1763221005,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.6705297488997,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -53623,11 +55283,21 @@
         }
       },
       "affordability": {
-        "value": 43.1,
+        "value": 80.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.56,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 57285.4237001379,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.43531202435314,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -53958,11 +55628,21 @@
         }
       },
       "affordability": {
-        "value": 79.5,
+        "value": 83.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.49,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 21300.6848698089,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.56921890367726,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -54198,11 +55878,21 @@
         }
       },
       "affordability": {
-        "value": 49.2,
+        "value": 81.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.49,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 51262.5105756884,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.7842600751287,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -54543,11 +56233,21 @@
         }
       },
       "affordability": {
-        "value": 96.5,
+        "value": 90.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 4434.5642184028,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.16093089640415,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -54815,11 +56515,21 @@
         }
       },
       "affordability": {
-        "value": 82.2,
+        "value": 84,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.41,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 18614.9880691203,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.67773516007052,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -55099,11 +56809,21 @@
         }
       },
       "affordability": {
-        "value": 53.1,
+        "value": 83.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.31,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 47404.96484375,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 8.43486410496723,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -55432,11 +57152,21 @@
         }
       },
       "affordability": {
-        "value": 84.4,
+        "value": 90.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.3,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 16448.2755179559,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.18151273615189,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -55773,11 +57503,21 @@
         }
       },
       "affordability": {
-        "value": 92.2,
+        "value": 87.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.33,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 8708.79983051626,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.62473841057141,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -56046,11 +57786,21 @@
         }
       },
       "affordability": {
-        "value": 78,
+        "value": 89.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.37,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 22823.1795255693,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 0.269511978259125,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -56341,11 +58091,21 @@
         }
       },
       "affordability": {
-        "value": 67.7,
+        "value": 88.6,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.25,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 33010.3307605357,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 5.78531910427999,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -56637,11 +58397,21 @@
         }
       },
       "affordability": {
-        "value": 97.7,
+        "value": 69.9,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.34,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 3287.53492158893,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 21.0377460577711,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -56950,11 +58720,21 @@
         }
       },
       "affordability": {
-        "value": 69.6,
+        "value": 81.7,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.6,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 31106.7643556729,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": -0.412853001047069,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -57268,11 +59048,21 @@
         }
       },
       "affordability": {
-        "value": 90.1,
+        "value": 86.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.43,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 10821.4909765317,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.55659611283953,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -57601,11 +59391,21 @@
         }
       },
       "affordability": {
-        "value": 26.7,
+        "value": 73.3,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.76,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 73551.9347696836,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.2564981433876,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -57952,11 +59752,21 @@
         }
       },
       "affordability": {
-        "value": 85,
+        "value": 86.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.43,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 15840.2668567412,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 1.54732515615369,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -58465,11 +60275,21 @@
         }
       },
       "affordability": {
-        "value": 15.9,
+        "value": 60.2,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 1.02,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 84256.8454573112,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 5.85683849970066,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -58800,8 +60620,14 @@
         }
       },
       "affordability": {
-        "value": null,
-        "indicators": {}
+        "value": 0,
+        "indicators": {
+          "inflation": {
+            "raw": 91.4408220769046,
+            "unit": "% YoY",
+            "year": 2024
+          }
+        }
       },
       "foodSecurity": {
         "value": 59.5,
@@ -59023,11 +60849,21 @@
         }
       },
       "affordability": {
-        "value": 99.1,
+        "value": 63.4,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.28,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1857.61756950305,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 32.1796504225025,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -59303,11 +61139,21 @@
         }
       },
       "affordability": {
-        "value": 98.1,
+        "value": 87,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.34,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 2895.89152033665,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 4.19081721344523,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -59581,8 +61427,13 @@
         }
       },
       "affordability": {
-        "value": 99.2,
+        "value": 86.5,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.36,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 1821.04868718058,
             "unit": "PPP $",
@@ -60120,11 +61971,21 @@
         }
       },
       "affordability": {
-        "value": 10.2,
+        "value": 90.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.37,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 89879.3614980758,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": -0.388674165036461,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -60387,11 +62248,21 @@
         }
       },
       "affordability": {
-        "value": 82.3,
+        "value": 87.1,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.35,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 18523.6810153,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 3.83540271728533,
+            "unit": "% YoY",
             "year": 2024
           }
         }
@@ -60676,11 +62547,21 @@
         }
       },
       "affordability": {
-        "value": 58.6,
+        "value": 85.8,
         "indicators": {
+          "priceLevelRatio": {
+            "raw": 0.42,
+            "unit": "vs intl avg",
+            "year": 2024
+          },
           "gdpPerCapitaPPP": {
             "raw": 41969.4515718999,
             "unit": "PPP $",
+            "year": 2024
+          },
+          "inflation": {
+            "raw": 2.44651943006079,
+            "unit": "% YoY",
             "year": 2024
           }
         }

@@ -35,6 +35,7 @@ export const WB_INDICATORS = {
   airPassengers: 'IS.AIR.PSGR',
   healthExpendOOP: 'SH.XPD.OOPC.CH.ZS',
   tourismArrivals: 'ST.INT.ARVL',
+  inflation: 'FP.CPI.TOTL.ZG',
 } as const;
 
 type IndicatorCode = (typeof WB_INDICATORS)[keyof typeof WB_INDICATORS];
