@@ -28,12 +28,12 @@ export function CountryCard({ ranked, highlighted = false, index }: CountryCardP
   return (
     <div
       data-country-code={country.code}
-      className={`country-row overflow-hidden transition-colors duration-150 ${highlighted ? "ring-2" : ""}`}
+      className={`country-row overflow-hidden transition-colors duration-150`}
       style={{
         backgroundColor: bgColor,
         borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
         ['--row-hover-bg' as string]: hoverBg,
-        ...(highlighted && { boxShadow: `0 0 0 2px var(--color-accent)` }),
+        ...(highlighted && { outline: `2px solid var(--color-accent)`, outlineOffset: "-1px" }),
       }}
     >
       {/* Main row */}

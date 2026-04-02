@@ -215,7 +215,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                     style={{
                       fontFamily: "Anton, sans-serif",
                       fontSize: "32px",
-                      color: active ? r.color : "#333333",
+                      color: active ? scoreColour(r.overall) : "#333333",
                       lineHeight: 1,
                     }}
                   >
