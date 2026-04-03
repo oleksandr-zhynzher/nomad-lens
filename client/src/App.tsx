@@ -10,8 +10,8 @@ import { CountryComparison } from "./components/CountryComparison";
 import { Tooltip } from "./components/Tooltip";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
-import { defaultClimatePreferences, defaultWeights, redistributeWeights } from "./utils/scoring";
-import type { CategoryKey, ClimatePreferences, WeightMap } from "./utils/types";
+import { defaultClimatePreferences, defaultIndependentWeights, defaultWeights, redistributeWeights } from "./utils/scoring";
+import type { CategoryKey, ClimatePreferences, WeightMap, WeightMode } from "./utils/types";
 import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "./utils/types";
 import "./index.css";
 
@@ -51,6 +51,7 @@ function weightsToSearch(weights: WeightMap): string {
 }
 
 const LS_WEIGHTS_KEY = "nomad-lens:weights";
+const LS_WEIGHT_MODE_KEY = "nomad-lens:weight-mode";
 const LS_FILTERS_KEY = "nomad-lens:filters";
 const FILTER_URL_KEYS = ["nomadVisa", "schengen", "minDays", "regions", "climateSeason", "climateMin", "climateMax"];
 
@@ -65,6 +66,16 @@ const _sharedParams = (() => {
   return null;
 })();
 
+function loadWeightModeFromStorage(): WeightMode {
+  if (_sharedParams?.get("weightMode") === "balanced") return "balanced";
+  if (_sharedParams?.get("weightMode") === "independent") return "independent";
+  try {
+    const raw = localStorage.getItem(LS_WEIGHT_MODE_KEY);
+    if (raw === "balanced" || raw === "independent") return raw;
+  } catch { /* ignore */ }
+  return "independent";
+}
+
 function loadWeightsFromStorage(): WeightMap {
   if (_sharedParams && CATEGORY_KEYS.some((k) => _sharedParams.has(k))) {
     const imported = weightsFromSearch(_sharedParams.toString());
@@ -76,7 +87,8 @@ function loadWeightsFromStorage(): WeightMap {
     const raw = localStorage.getItem(LS_WEIGHTS_KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as Record<string, unknown>;
-      const base = defaultWeights();
+      const mode = loadWeightModeFromStorage();
+      const base = mode === "independent" ? defaultIndependentWeights() : defaultWeights();
       for (const key of CATEGORY_KEYS) {
         const v = parsed[key];
         if (typeof v === "number" && !isNaN(v)) {
@@ -86,7 +98,8 @@ function loadWeightsFromStorage(): WeightMap {
       return base;
     }
   } catch { /* ignore malformed data */ }
-  return defaultWeights();
+  const mode = loadWeightModeFromStorage();
+  return mode === "independent" ? defaultIndependentWeights() : defaultWeights();
 }
 
 type LoadedFilters = {
@@ -158,6 +171,7 @@ const _initialFilters = loadFiltersFromStorage();
 export default function App() {
   const [searchParams] = useSearchParams();
   const [weights, setWeights] = useState<WeightMap>(loadWeightsFromStorage);
+  const [weightMode, setWeightMode] = useState<WeightMode>(loadWeightModeFromStorage);
   const [search, setSearch] = useState("");
   const [selectedRegions, setSelectedRegions] = useState<Set<string>>(() => _initialFilters.selectedRegions);
   const [view, setView] = useState<"list" | "map" | "compare">(() => {
@@ -193,10 +207,13 @@ export default function App() {
     return ranked;
   }, [ranked, search, searchMode]);
 
-  // Persist weights to localStorage
+  // Persist weights and mode to localStorage
   useEffect(() => {
     localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(weights));
   }, [weights]);
+  useEffect(() => {
+    localStorage.setItem(LS_WEIGHT_MODE_KEY, weightMode);
+  }, [weightMode]);
 
   // Persist filter state to localStorage
   useEffect(() => {
@@ -211,22 +228,32 @@ export default function App() {
 
   const handleWeightChange = useCallback(
     (key: CategoryKey, value: number) => {
-      setWeights((prev) => redistributeWeights(key, value, prev));
+      setWeights((prev) => {
+        if (weightMode === "independent") {
+          return { ...prev, [key]: Math.max(0, Math.min(100, Math.round(value))) };
+        }
+        return redistributeWeights(key, value, prev);
+      });
     },
-    [],
+    [weightMode],
   );
 
   const handleReset = useCallback(() => {
-    setWeights(defaultWeights());
+    setWeights(weightMode === "independent" ? defaultIndependentWeights() : defaultWeights());
     setNomadVisaOnly(false);
     setSchengenOnly(false);
     setMinTouristDays(null);
     setSelectedRegions(new Set());
     setClimatePrefs(defaultClimatePreferences());
+  }, [weightMode]);
+
+  const handleWeightModeChange = useCallback((mode: WeightMode) => {
+    setWeightMode(mode);
+    setWeights(mode === "independent" ? defaultIndependentWeights() : defaultWeights());
   }, []);
 
   const weightsAreDefault = useMemo(() => {
-    const def = defaultWeights();
+    const def = weightMode === "independent" ? defaultIndependentWeights() : defaultWeights();
     const defClimate = defaultClimatePreferences();
     return (
       CATEGORY_KEYS.every((k) => weights[k] === def[k]) &&
@@ -236,7 +263,7 @@ export default function App() {
       climatePrefs.minTemp === defClimate.minTemp &&
       climatePrefs.maxTemp === defClimate.maxTemp
     );
-  }, [weights, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
+  }, [weights, weightMode, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
 
   const handleShare = useCallback(() => {
     const params = new URLSearchParams(weightsToSearch(weights));
@@ -372,6 +399,8 @@ export default function App() {
               onSchengenOnlyChange={setSchengenOnly}
               minTouristDays={minTouristDays}
               onMinTouristDaysChange={setMinTouristDays}
+              weightMode={weightMode}
+              onWeightModeChange={handleWeightModeChange}
             />
           </aside>
 
@@ -416,6 +445,8 @@ export default function App() {
                   onSchengenOnlyChange={setSchengenOnly}
                   minTouristDays={minTouristDays}
                   onMinTouristDaysChange={setMinTouristDays}
+                  weightMode={weightMode}
+                  onWeightModeChange={handleWeightModeChange}
                   mobile
                 />
               </div>
@@ -661,6 +692,8 @@ export default function App() {
                   onSchengenOnlyChange={setSchengenOnly}
                   minTouristDays={minTouristDays}
                   onMinTouristDaysChange={setMinTouristDays}
+                  weightMode={weightMode}
+                  onWeightModeChange={handleWeightModeChange}
                 />
               </div>
             )}
@@ -814,6 +847,8 @@ export default function App() {
                   onSchengenOnlyChange={setSchengenOnly}
                   minTouristDays={minTouristDays}
                   onMinTouristDaysChange={setMinTouristDays}
+                  weightMode={weightMode}
+                  onWeightModeChange={handleWeightModeChange}
                 />
               </div>
             )}

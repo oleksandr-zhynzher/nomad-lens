@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Globe, Plane } from "lucide-react";
-import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap } from "../utils/types";
+import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap, WeightMode } from "../utils/types";
 import {
   CATEGORY_DATA_SOURCES,
   CATEGORY_DESCRIPTIONS,
@@ -76,6 +76,8 @@ interface WeightPanelProps {
   onSchengenOnlyChange: (value: boolean) => void;
   minTouristDays: number | null;
   onMinTouristDaysChange: (value: number | null) => void;
+  weightMode: WeightMode;
+  onWeightModeChange: (mode: WeightMode) => void;
   mobile?: boolean;
 }
 
@@ -124,7 +126,7 @@ const WEIGHT_GROUPS: Array<{ label: string; icon: React.ReactElement; keys: Cate
   },
 ];
 
-export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onShare, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange, schengenOnly, onSchengenOnlyChange, minTouristDays, onMinTouristDaysChange, mobile }: WeightPanelProps) {
+export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onShare, climatePrefs, onClimatePrefsChange, nomadVisaOnly, onNomadVisaOnlyChange, schengenOnly, onSchengenOnlyChange, minTouristDays, onMinTouristDaysChange, weightMode, onWeightModeChange, mobile }: WeightPanelProps) {
   const [copied, setCopied] = useState(false);
 
   const handleShare = () => {
