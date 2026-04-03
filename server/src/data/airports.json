@@ -3,97 +3,773 @@
   "_updated": "2025",
   "_note": "Number of unique destination countries reachable via direct scheduled flights from each country. ISO alpha-2 codes.",
   "data": [
-    { "code": "US", "name": "United States", "destinationCountries": 102, "year": 2025 },
-    { "code": "GB", "name": "United Kingdom", "destinationCountries": 98, "year": 2025 },
-    { "code": "DE", "name": "Germany", "destinationCountries": 95, "year": 2025 },
-    { "code": "FR", "name": "France", "destinationCountries": 93, "year": 2025 },
-    { "code": "AE", "name": "United Arab Emirates", "destinationCountries": 92, "year": 2025 },
-    { "code": "TR", "name": "Turkey", "destinationCountries": 90, "year": 2025 },
-    { "code": "NL", "name": "Netherlands", "destinationCountries": 88, "year": 2025 },
-    { "code": "IT", "name": "Italy", "destinationCountries": 85, "year": 2025 },
-    { "code": "ES", "name": "Spain", "destinationCountries": 84, "year": 2025 },
-    { "code": "QA", "name": "Qatar", "destinationCountries": 82, "year": 2025 },
-    { "code": "CN", "name": "China", "destinationCountries": 80, "year": 2025 },
-    { "code": "RU", "name": "Russia", "destinationCountries": 75, "year": 2025 },
-    { "code": "CH", "name": "Switzerland", "destinationCountries": 74, "year": 2025 },
-    { "code": "IN", "name": "India", "destinationCountries": 72, "year": 2025 },
-    { "code": "SA", "name": "Saudi Arabia", "destinationCountries": 70, "year": 2025 },
-    { "code": "SG", "name": "Singapore", "destinationCountries": 68, "year": 2025 },
-    { "code": "KR", "name": "South Korea", "destinationCountries": 65, "year": 2025 },
-    { "code": "PT", "name": "Portugal", "destinationCountries": 64, "year": 2025 },
-    { "code": "BE", "name": "Belgium", "destinationCountries": 63, "year": 2025 },
-    { "code": "PL", "name": "Poland", "destinationCountries": 62, "year": 2025 },
-    { "code": "GR", "name": "Greece", "destinationCountries": 61, "year": 2025 },
-    { "code": "ET", "name": "Ethiopia", "destinationCountries": 60, "year": 2025 },
-    { "code": "EG", "name": "Egypt", "destinationCountries": 58, "year": 2025 },
-    { "code": "JP", "name": "Japan", "destinationCountries": 57, "year": 2025 },
-    { "code": "TH", "name": "Thailand", "destinationCountries": 56, "year": 2025 },
-    { "code": "AT", "name": "Austria", "destinationCountries": 55, "year": 2025 },
-    { "code": "MY", "name": "Malaysia", "destinationCountries": 54, "year": 2025 },
-    { "code": "CA", "name": "Canada", "destinationCountries": 54, "year": 2025 },
-    { "code": "NO", "name": "Norway", "destinationCountries": 52, "year": 2025 },
-    { "code": "SE", "name": "Sweden", "destinationCountries": 51, "year": 2025 },
-    { "code": "IE", "name": "Ireland", "destinationCountries": 50, "year": 2025 },
-    { "code": "DK", "name": "Denmark", "destinationCountries": 49, "year": 2025 },
-    { "code": "CZ", "name": "Czechia", "destinationCountries": 48, "year": 2025 },
-    { "code": "FI", "name": "Finland", "destinationCountries": 47, "year": 2025 },
-    { "code": "KE", "name": "Kenya", "destinationCountries": 46, "year": 2025 },
-    { "code": "RO", "name": "Romania", "destinationCountries": 45, "year": 2025 },
-    { "code": "MA", "name": "Morocco", "destinationCountries": 44, "year": 2025 },
-    { "code": "AU", "name": "Australia", "destinationCountries": 43, "year": 2025 },
-    { "code": "IL", "name": "Israel", "destinationCountries": 43, "year": 2025 },
-    { "code": "ZA", "name": "South Africa", "destinationCountries": 42, "year": 2025 },
-    { "code": "BR", "name": "Brazil", "destinationCountries": 41, "year": 2025 },
-    { "code": "HU", "name": "Hungary", "destinationCountries": 40, "year": 2025 },
-    { "code": "MX", "name": "Mexico", "destinationCountries": 39, "year": 2025 },
-    { "code": "BG", "name": "Bulgaria", "destinationCountries": 38, "year": 2025 },
-    { "code": "BH", "name": "Bahrain", "destinationCountries": 38, "year": 2025 },
-    { "code": "NG", "name": "Nigeria", "destinationCountries": 37, "year": 2025 },
-    { "code": "PA", "name": "Panama", "destinationCountries": 37, "year": 2025 },
-    { "code": "ID", "name": "Indonesia", "destinationCountries": 36, "year": 2025 },
-    { "code": "HR", "name": "Croatia", "destinationCountries": 36, "year": 2025 },
-    { "code": "KW", "name": "Kuwait", "destinationCountries": 35, "year": 2025 },
-    { "code": "OM", "name": "Oman", "destinationCountries": 35, "year": 2025 },
-    { "code": "JO", "name": "Jordan", "destinationCountries": 34, "year": 2025 },
-    { "code": "RS", "name": "Serbia", "destinationCountries": 34, "year": 2025 },
-    { "code": "CO", "name": "Colombia", "destinationCountries": 33, "year": 2025 },
-    { "code": "TW", "name": "Taiwan", "destinationCountries": 33, "year": 2025 },
-    { "code": "PH", "name": "Philippines", "destinationCountries": 32, "year": 2025 },
-    { "code": "AR", "name": "Argentina", "destinationCountries": 31, "year": 2025 },
-    { "code": "VN", "name": "Vietnam", "destinationCountries": 31, "year": 2025 },
-    { "code": "PK", "name": "Pakistan", "destinationCountries": 30, "year": 2025 },
-    { "code": "CL", "name": "Chile", "destinationCountries": 28, "year": 2025 },
-    { "code": "TN", "name": "Tunisia", "destinationCountries": 28, "year": 2025 },
-    { "code": "IS", "name": "Iceland", "destinationCountries": 27, "year": 2025 },
-    { "code": "PE", "name": "Peru", "destinationCountries": 26, "year": 2025 },
-    { "code": "LT", "name": "Lithuania", "destinationCountries": 26, "year": 2025 },
-    { "code": "LV", "name": "Latvia", "destinationCountries": 25, "year": 2025 },
-    { "code": "EE", "name": "Estonia", "destinationCountries": 24, "year": 2025 },
-    { "code": "GE", "name": "Georgia", "destinationCountries": 24, "year": 2025 },
-    { "code": "CY", "name": "Cyprus", "destinationCountries": 24, "year": 2025 },
-    { "code": "MT", "name": "Malta", "destinationCountries": 23, "year": 2025 },
-    { "code": "NZ", "name": "New Zealand", "destinationCountries": 22, "year": 2025 },
-    { "code": "SK", "name": "Slovakia", "destinationCountries": 22, "year": 2025 },
-    { "code": "SI", "name": "Slovenia", "destinationCountries": 21, "year": 2025 },
-    { "code": "EC", "name": "Ecuador", "destinationCountries": 20, "year": 2025 },
-    { "code": "DO", "name": "Dominican Republic", "destinationCountries": 20, "year": 2025 },
-    { "code": "LK", "name": "Sri Lanka", "destinationCountries": 19, "year": 2025 },
-    { "code": "CR", "name": "Costa Rica", "destinationCountries": 19, "year": 2025 },
-    { "code": "AL", "name": "Albania", "destinationCountries": 18, "year": 2025 },
-    { "code": "BD", "name": "Bangladesh", "destinationCountries": 18, "year": 2025 },
-    { "code": "ME", "name": "Montenegro", "destinationCountries": 17, "year": 2025 },
-    { "code": "GH", "name": "Ghana", "destinationCountries": 17, "year": 2025 },
-    { "code": "UA", "name": "Ukraine", "destinationCountries": 16, "year": 2025 },
-    { "code": "LU", "name": "Luxembourg", "destinationCountries": 16, "year": 2025 },
-    { "code": "MU", "name": "Mauritius", "destinationCountries": 16, "year": 2025 },
-    { "code": "BA", "name": "Bosnia and Herzegovina", "destinationCountries": 15, "year": 2025 },
-    { "code": "KH", "name": "Cambodia", "destinationCountries": 15, "year": 2025 },
-    { "code": "TZ", "name": "Tanzania", "destinationCountries": 15, "year": 2025 },
-    { "code": "NP", "name": "Nepal", "destinationCountries": 12, "year": 2025 },
-    { "code": "JM", "name": "Jamaica", "destinationCountries": 12, "year": 2025 },
-    { "code": "UY", "name": "Uruguay", "destinationCountries": 10, "year": 2025 },
-    { "code": "MN", "name": "Mongolia", "destinationCountries": 9, "year": 2025 },
-    { "code": "TT", "name": "Trinidad and Tobago", "destinationCountries": 9, "year": 2025 },
-    { "code": "BB", "name": "Barbados", "destinationCountries": 8, "year": 2025 }
+    {
+      "code": "US",
+      "name": "United States",
+      "destinationCountries": 102,
+      "year": 2025
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "destinationCountries": 98,
+      "year": 2025
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "destinationCountries": 95,
+      "year": 2025
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "destinationCountries": 93,
+      "year": 2025
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "destinationCountries": 92,
+      "year": 2025
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "destinationCountries": 90,
+      "year": 2025
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "destinationCountries": 88,
+      "year": 2025
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "destinationCountries": 85,
+      "year": 2025
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "destinationCountries": 84,
+      "year": 2025
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "destinationCountries": 82,
+      "year": 2025
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "destinationCountries": 80,
+      "year": 2025
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "destinationCountries": 75,
+      "year": 2025
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "destinationCountries": 74,
+      "year": 2025
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "destinationCountries": 72,
+      "year": 2025
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "destinationCountries": 70,
+      "year": 2025
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "destinationCountries": 68,
+      "year": 2025
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "destinationCountries": 65,
+      "year": 2025
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "destinationCountries": 64,
+      "year": 2025
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "destinationCountries": 63,
+      "year": 2025
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "destinationCountries": 62,
+      "year": 2025
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "destinationCountries": 61,
+      "year": 2025
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "destinationCountries": 60,
+      "year": 2025
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "destinationCountries": 58,
+      "year": 2025
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "destinationCountries": 57,
+      "year": 2025
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "destinationCountries": 56,
+      "year": 2025
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "destinationCountries": 55,
+      "year": 2025
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "destinationCountries": 54,
+      "year": 2025
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "destinationCountries": 54,
+      "year": 2025
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "destinationCountries": 52,
+      "year": 2025
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "destinationCountries": 51,
+      "year": 2025
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "destinationCountries": 50,
+      "year": 2025
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "destinationCountries": 49,
+      "year": 2025
+    },
+    {
+      "code": "CZ",
+      "name": "Czechia",
+      "destinationCountries": 48,
+      "year": 2025
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "destinationCountries": 47,
+      "year": 2025
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "destinationCountries": 46,
+      "year": 2025
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "destinationCountries": 45,
+      "year": 2025
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "destinationCountries": 44,
+      "year": 2025
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "destinationCountries": 43,
+      "year": 2025
+    },
+    {
+      "code": "IL",
+      "name": "Israel",
+      "destinationCountries": 43,
+      "year": 2025
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "destinationCountries": 42,
+      "year": 2025
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "destinationCountries": 41,
+      "year": 2025
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "destinationCountries": 40,
+      "year": 2025
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "destinationCountries": 39,
+      "year": 2025
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "destinationCountries": 38,
+      "year": 2025
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "destinationCountries": 38,
+      "year": 2025
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "destinationCountries": 37,
+      "year": 2025
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "destinationCountries": 37,
+      "year": 2025
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "destinationCountries": 36,
+      "year": 2025
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "destinationCountries": 36,
+      "year": 2025
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "destinationCountries": 35,
+      "year": 2025
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "destinationCountries": 35,
+      "year": 2025
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "destinationCountries": 34,
+      "year": 2025
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "destinationCountries": 34,
+      "year": 2025
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "destinationCountries": 33,
+      "year": 2025
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "destinationCountries": 33,
+      "year": 2025
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "destinationCountries": 32,
+      "year": 2025
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "destinationCountries": 31,
+      "year": 2025
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "destinationCountries": 31,
+      "year": 2025
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "destinationCountries": 30,
+      "year": 2025
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "destinationCountries": 28,
+      "year": 2025
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "destinationCountries": 28,
+      "year": 2025
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "destinationCountries": 27,
+      "year": 2025
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "destinationCountries": 26,
+      "year": 2025
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "destinationCountries": 26,
+      "year": 2025
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "destinationCountries": 25,
+      "year": 2025
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "destinationCountries": 24,
+      "year": 2025
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "destinationCountries": 24,
+      "year": 2025
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "destinationCountries": 24,
+      "year": 2025
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "destinationCountries": 23,
+      "year": 2025
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "destinationCountries": 22,
+      "year": 2025
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "destinationCountries": 22,
+      "year": 2025
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "destinationCountries": 21,
+      "year": 2025
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "destinationCountries": 20,
+      "year": 2025
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "destinationCountries": 20,
+      "year": 2025
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "destinationCountries": 19,
+      "year": 2025
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "destinationCountries": 19,
+      "year": 2025
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "destinationCountries": 18,
+      "year": 2025
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "destinationCountries": 18,
+      "year": 2025
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "destinationCountries": 17,
+      "year": 2025
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "destinationCountries": 17,
+      "year": 2025
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "destinationCountries": 16,
+      "year": 2025
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "destinationCountries": 16,
+      "year": 2025
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "destinationCountries": 16,
+      "year": 2025
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "destinationCountries": 15,
+      "year": 2025
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "destinationCountries": 15,
+      "year": 2025
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania",
+      "destinationCountries": 15,
+      "year": 2025
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "destinationCountries": 12,
+      "year": 2025
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "destinationCountries": 12,
+      "year": 2025
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "destinationCountries": 9,
+      "year": 2025
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "destinationCountries": 9,
+      "year": 2025
+    },
+    {
+      "code": "BB",
+      "name": "Barbados",
+      "destinationCountries": 8,
+      "year": 2025
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "LA",
+      "name": "Laos",
+      "destinationCountries": 8,
+      "year": 2025
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "destinationCountries": 24,
+      "year": 2025
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "destinationCountries": 7,
+      "year": 2025
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "destinationCountries": 18,
+      "year": 2025
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "destinationCountries": 24,
+      "year": 2025
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "destinationCountries": 14,
+      "year": 2025
+    },
+    {
+      "code": "MD",
+      "name": "Moldova",
+      "destinationCountries": 12,
+      "year": 2025
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "destinationCountries": 30,
+      "year": 2025
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "destinationCountries": 20,
+      "year": 2025
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "destinationCountries": 6,
+      "year": 2025
+    },
+    {
+      "code": "LY",
+      "name": "Libya",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "destinationCountries": 12,
+      "year": 2025
+    },
+    {
+      "code": "UG",
+      "name": "Uganda",
+      "destinationCountries": 12,
+      "year": 2025
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "destinationCountries": 14,
+      "year": 2025
+    },
+    {
+      "code": "CD",
+      "name": "DR Congo",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "destinationCountries": 12,
+      "year": 2025
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "destinationCountries": 8,
+      "year": 2025
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "destinationCountries": 8,
+      "year": 2025
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "destinationCountries": 6,
+      "year": 2025
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "destinationCountries": 6,
+      "year": 2025
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "destinationCountries": 22,
+      "year": 2025
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast",
+      "destinationCountries": 18,
+      "year": 2025
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "destinationCountries": 12,
+      "year": 2025
+    },
+    {
+      "code": "PS",
+      "name": "Palestine",
+      "destinationCountries": 0,
+      "year": 2025
+    },
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "destinationCountries": 6,
+      "year": 2025
+    },
+    {
+      "code": "SY",
+      "name": "Syria",
+      "destinationCountries": 6,
+      "year": 2025
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "destinationCountries": 14,
+      "year": 2025
+    },
+    {
+      "code": "CU",
+      "name": "Cuba",
+      "destinationCountries": 18,
+      "year": 2025
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "destinationCountries": 6,
+      "year": 2025
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji",
+      "destinationCountries": 10,
+      "year": 2025
+    },
+    {
+      "code": "PG",
+      "name": "Papua New Guinea",
+      "destinationCountries": 6,
+      "year": 2025
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "destinationCountries": 28,
+      "year": 2025
+    }
   ]
 }

@@ -3,55 +3,941 @@
   "_updated": "2023",
   "_note": "Intentional homicide rate per 100,000 population. Lower = safer.",
   "data": [
-    { "code": "SG", "name": "Singapore", "homicideRate": 0.16, "year": 2022 },
-    { "code": "JP", "name": "Japan", "homicideRate": 0.23, "year": 2022 },
-    { "code": "NO", "name": "Norway", "homicideRate": 0.47, "year": 2022 },
-    { "code": "IS", "name": "Iceland", "homicideRate": 0.55, "year": 2022 },
-    { "code": "AT", "name": "Austria", "homicideRate": 0.57, "year": 2022 },
-    { "code": "CH", "name": "Switzerland", "homicideRate": 0.60, "year": 2022 },
-    { "code": "IE", "name": "Ireland", "homicideRate": 0.63, "year": 2022 },
-    { "code": "DE", "name": "Germany", "homicideRate": 0.78, "year": 2022 },
-    { "code": "IT", "name": "Italy", "homicideRate": 0.53, "year": 2022 },
-    { "code": "NL", "name": "Netherlands", "homicideRate": 0.69, "year": 2022 },
-    { "code": "DK", "name": "Denmark", "homicideRate": 0.81, "year": 2022 },
-    { "code": "FI", "name": "Finland", "homicideRate": 1.55, "year": 2022 },
-    { "code": "SE", "name": "Sweden", "homicideRate": 1.08, "year": 2022 },
-    { "code": "PT", "name": "Portugal", "homicideRate": 0.80, "year": 2022 },
-    { "code": "GR", "name": "Greece", "homicideRate": 0.86, "year": 2022 },
-    { "code": "ES", "name": "Spain", "homicideRate": 0.58, "year": 2022 },
-    { "code": "FR", "name": "France", "homicideRate": 1.38, "year": 2022 },
-    { "code": "GB", "name": "United Kingdom", "homicideRate": 1.04, "year": 2022 },
-    { "code": "BE", "name": "Belgium", "homicideRate": 1.41, "year": 2022 },
-    { "code": "CZ", "name": "Czech Republic", "homicideRate": 0.68, "year": 2022 },
-    { "code": "HU", "name": "Hungary", "homicideRate": 1.22, "year": 2022 },
-    { "code": "PL", "name": "Poland", "homicideRate": 0.71, "year": 2022 },
-    { "code": "RO", "name": "Romania", "homicideRate": 1.67, "year": 2022 },
-    { "code": "LU", "name": "Luxembourg", "homicideRate": 0.65, "year": 2022 },
-    { "code": "CA", "name": "Canada", "homicideRate": 2.25, "year": 2022 },
-    { "code": "AU", "name": "Australia", "homicideRate": 0.89, "year": 2022 },
-    { "code": "NZ", "name": "New Zealand", "homicideRate": 0.95, "year": 2022 },
-    { "code": "US", "name": "United States", "homicideRate": 6.30, "year": 2022 },
-    { "code": "KR", "name": "South Korea", "homicideRate": 0.60, "year": 2022 },
-    { "code": "HK", "name": "Hong Kong", "homicideRate": 0.27, "year": 2022 },
-    { "code": "CN", "name": "China", "homicideRate": 0.53, "year": 2022 },
-    { "code": "IN", "name": "India", "homicideRate": 2.80, "year": 2022 },
-    { "code": "ID", "name": "Indonesia", "homicideRate": 0.40, "year": 2022 },
-    { "code": "PH", "name": "Philippines", "homicideRate": 5.30, "year": 2022 },
-    { "code": "TH", "name": "Thailand", "homicideRate": 2.80, "year": 2022 },
-    { "code": "VN", "name": "Vietnam", "homicideRate": 1.50, "year": 2022 },
-    { "code": "TR", "name": "Turkey", "homicideRate": 2.97, "year": 2022 },
-    { "code": "IL", "name": "Israel", "homicideRate": 1.30, "year": 2022 },
-    { "code": "SA", "name": "Saudi Arabia", "homicideRate": 1.35, "year": 2022 },
-    { "code": "AE", "name": "United Arab Emirates", "homicideRate": 0.50, "year": 2022 },
-    { "code": "EG", "name": "Egypt", "homicideRate": 2.17, "year": 2022 },
-    { "code": "MA", "name": "Morocco", "homicideRate": 0.50, "year": 2022 },
-    { "code": "TN", "name": "Tunisia", "homicideRate": 2.20, "year": 2022 },
-    { "code": "ZA", "name": "South Africa", "homicideRate": 41.87, "year": 2022 },
-    { "code": "NG", "name": "Nigeria", "homicideRate": 13.18, "year": 2022 },
-    { "code": "BR", "name": "Brazil", "homicideRate": 22.38, "year": 2022 },
-    { "code": "MX", "name": "Mexico", "homicideRate": 25.63, "year": 2022 },
-    { "code": "AR", "name": "Argentina", "homicideRate": 4.87, "year": 2022 },
-    { "code": "CL", "name": "Chile", "homicideRate": 4.52, "year": 2022 },
-    { "code": "UA", "name": "Ukraine", "homicideRate": 4.20, "year": 2022 }
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "homicideRate": 0.16,
+      "year": 2022
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "homicideRate": 0.23,
+      "year": 2022
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "homicideRate": 0.47,
+      "year": 2022
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "homicideRate": 0.55,
+      "year": 2022
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "homicideRate": 0.57,
+      "year": 2022
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "homicideRate": 0.6,
+      "year": 2022
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "homicideRate": 0.63,
+      "year": 2022
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "homicideRate": 0.78,
+      "year": 2022
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "homicideRate": 0.53,
+      "year": 2022
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "homicideRate": 0.69,
+      "year": 2022
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "homicideRate": 0.81,
+      "year": 2022
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "homicideRate": 1.55,
+      "year": 2022
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "homicideRate": 1.08,
+      "year": 2022
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "homicideRate": 0.8,
+      "year": 2022
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "homicideRate": 0.86,
+      "year": 2022
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "homicideRate": 0.58,
+      "year": 2022
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "homicideRate": 1.38,
+      "year": 2022
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "homicideRate": 1.04,
+      "year": 2022
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "homicideRate": 1.41,
+      "year": 2022
+    },
+    {
+      "code": "CZ",
+      "name": "Czech Republic",
+      "homicideRate": 0.68,
+      "year": 2022
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "homicideRate": 1.22,
+      "year": 2022
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "homicideRate": 0.71,
+      "year": 2022
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "homicideRate": 1.67,
+      "year": 2022
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "homicideRate": 0.65,
+      "year": 2022
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "homicideRate": 2.25,
+      "year": 2022
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "homicideRate": 0.89,
+      "year": 2022
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "homicideRate": 0.95,
+      "year": 2022
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "homicideRate": 6.3,
+      "year": 2022
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "homicideRate": 0.6,
+      "year": 2022
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong",
+      "homicideRate": 0.27,
+      "year": 2022
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "homicideRate": 0.53,
+      "year": 2022
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "homicideRate": 2.8,
+      "year": 2022
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "homicideRate": 0.4,
+      "year": 2022
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "homicideRate": 5.3,
+      "year": 2022
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "homicideRate": 2.8,
+      "year": 2022
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "homicideRate": 1.5,
+      "year": 2022
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "homicideRate": 2.97,
+      "year": 2022
+    },
+    {
+      "code": "IL",
+      "name": "Israel",
+      "homicideRate": 1.3,
+      "year": 2022
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "homicideRate": 1.35,
+      "year": 2022
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "homicideRate": 0.5,
+      "year": 2022
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "homicideRate": 2.17,
+      "year": 2022
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "homicideRate": 0.5,
+      "year": 2022
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "homicideRate": 2.2,
+      "year": 2022
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "homicideRate": 41.87,
+      "year": 2022
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "homicideRate": 13.18,
+      "year": 2022
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "homicideRate": 22.38,
+      "year": 2022
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "homicideRate": 25.63,
+      "year": 2022
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "homicideRate": 4.87,
+      "year": 2022
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "homicideRate": 4.52,
+      "year": 2022
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "homicideRate": 4.2,
+      "year": 2022
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "homicideRate": 6.8,
+      "year": 2022
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "homicideRate": 25.3,
+      "year": 2022
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "homicideRate": 1.82,
+      "year": 2022
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "homicideRate": 0.82,
+      "year": 2022
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "homicideRate": 4.72,
+      "year": 2022
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "homicideRate": 26.8,
+      "year": 2022
+    },
+    {
+      "code": "HN",
+      "name": "Honduras",
+      "homicideRate": 35.8,
+      "year": 2022
+    },
+    {
+      "code": "SV",
+      "name": "El Salvador",
+      "homicideRate": 7.8,
+      "year": 2022
+    },
+    {
+      "code": "GT",
+      "name": "Guatemala",
+      "homicideRate": 17.3,
+      "year": 2022
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "homicideRate": 38.6,
+      "year": 2022
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "homicideRate": 52.9,
+      "year": 2022
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "homicideRate": 11.6,
+      "year": 2022
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "homicideRate": 11.3,
+      "year": 2022
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "homicideRate": 11.5,
+      "year": 2022
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "homicideRate": 25.9,
+      "year": 2022
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "homicideRate": 7.1,
+      "year": 2022
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "homicideRate": 11.2,
+      "year": 2022
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "homicideRate": 6.8,
+      "year": 2022
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia",
+      "homicideRate": 6.4,
+      "year": 2022
+    },
+    {
+      "code": "NI",
+      "name": "Nicaragua",
+      "homicideRate": 5.2,
+      "year": 2022
+    },
+    {
+      "code": "BZ",
+      "name": "Belize",
+      "homicideRate": 24.4,
+      "year": 2022
+    },
+    {
+      "code": "GY",
+      "name": "Guyana",
+      "homicideRate": 14.2,
+      "year": 2022
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "homicideRate": 3.07,
+      "year": 2022
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "homicideRate": 2.51,
+      "year": 2022
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "homicideRate": 2.18,
+      "year": 2022
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "homicideRate": 2.08,
+      "year": 2022
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "homicideRate": 2.3,
+      "year": 2022
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "homicideRate": 1.84,
+      "year": 2022
+    },
+    {
+      "code": "LA",
+      "name": "Laos",
+      "homicideRate": 6.9,
+      "year": 2022
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "homicideRate": 5.4,
+      "year": 2022
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "homicideRate": 4.2,
+      "year": 2022
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "homicideRate": 1.6,
+      "year": 2022
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "homicideRate": 3.7,
+      "year": 2022
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "homicideRate": 1.4,
+      "year": 2022
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "homicideRate": 2.54,
+      "year": 2022
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "homicideRate": 1.48,
+      "year": 2022
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "homicideRate": 2.1,
+      "year": 2022
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "homicideRate": 2.4,
+      "year": 2022
+    },
+    {
+      "code": "MD",
+      "name": "Moldova",
+      "homicideRate": 3.3,
+      "year": 2022
+    },
+    {
+      "code": "DZ",
+      "name": "Algeria",
+      "homicideRate": 1.36,
+      "year": 2022
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "homicideRate": 2.1,
+      "year": 2022
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "homicideRate": 7.6,
+      "year": 2022
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania",
+      "homicideRate": 6.2,
+      "year": 2022
+    },
+    {
+      "code": "UG",
+      "name": "Uganda",
+      "homicideRate": 9.3,
+      "year": 2022
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "homicideRate": 4.2,
+      "year": 2022
+    },
+    {
+      "code": "CD",
+      "name": "DR Congo",
+      "homicideRate": 13.5,
+      "year": 2022
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "homicideRate": 7.4,
+      "year": 2022
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast",
+      "homicideRate": 3.7,
+      "year": 2022
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "homicideRate": 3.4,
+      "year": 2022
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "homicideRate": 7.1,
+      "year": 2022
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "homicideRate": 4.8,
+      "year": 2022
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia",
+      "homicideRate": 5.1,
+      "year": 2022
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "homicideRate": 6.8,
+      "year": 2022
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "homicideRate": 15.2,
+      "year": 2022
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "homicideRate": 13.4,
+      "year": 2022
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "homicideRate": 2.5,
+      "year": 2022
+    },
+    {
+      "code": "MW",
+      "name": "Malawi",
+      "homicideRate": 1.7,
+      "year": 2022
+    },
+    {
+      "code": "LS",
+      "name": "Lesotho",
+      "homicideRate": 43.6,
+      "year": 2022
+    },
+    {
+      "code": "SZ",
+      "name": "Eswatini",
+      "homicideRate": 16.3,
+      "year": 2022
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "homicideRate": 5.2,
+      "year": 2022
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "homicideRate": 9.7,
+      "year": 2022
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "homicideRate": 1.16,
+      "year": 2022
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "homicideRate": 4.4,
+      "year": 2022
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "homicideRate": 0.68,
+      "year": 2022
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "homicideRate": 0.38,
+      "year": 2022
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "homicideRate": 1.8,
+      "year": 2022
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "homicideRate": 0.5,
+      "year": 2022
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "homicideRate": 2.5,
+      "year": 2022
+    },
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "homicideRate": 6.6,
+      "year": 2022
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "homicideRate": 6.7,
+      "year": 2022
+    },
+    {
+      "code": "LY",
+      "name": "Libya",
+      "homicideRate": 5.3,
+      "year": 2022
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "homicideRate": 1.1,
+      "year": 2022
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "homicideRate": 1.3,
+      "year": 2022
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "homicideRate": 0.8,
+      "year": 2022
+    },
+    {
+      "code": "MK",
+      "name": "North Macedonia",
+      "homicideRate": 1.5,
+      "year": 2022
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "homicideRate": 2.4,
+      "year": 2022
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "homicideRate": 2.28,
+      "year": 2022
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "homicideRate": 1.1,
+      "year": 2022
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "homicideRate": 0.88,
+      "year": 2022
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "homicideRate": 2.7,
+      "year": 2022
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "homicideRate": 2.88,
+      "year": 2022
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "homicideRate": 1.97,
+      "year": 2022
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "homicideRate": 0.75,
+      "year": 2022
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "homicideRate": 0.9,
+      "year": 2022
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "homicideRate": 2.1,
+      "year": 2022
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji",
+      "homicideRate": 2.4,
+      "year": 2022
+    },
+    {
+      "code": "PS",
+      "name": "Palestine",
+      "homicideRate": 3.4,
+      "year": 2022
+    },
+    {
+      "code": "SY",
+      "name": "Syria",
+      "homicideRate": 2.2,
+      "year": 2022
+    },
+    {
+      "code": "SO",
+      "name": "Somalia",
+      "homicideRate": 4.6,
+      "year": 2022
+    },
+    {
+      "code": "ML",
+      "name": "Mali",
+      "homicideRate": 8,
+      "year": 2022
+    },
+    {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "homicideRate": 2.6,
+      "year": 2022
+    },
+    {
+      "code": "NE",
+      "name": "Niger",
+      "homicideRate": 4.6,
+      "year": 2022
+    },
+    {
+      "code": "TD",
+      "name": "Chad",
+      "homicideRate": 9,
+      "year": 2022
+    },
+    {
+      "code": "CF",
+      "name": "Central African Republic",
+      "homicideRate": 19.5,
+      "year": 2022
+    },
+    {
+      "code": "SS",
+      "name": "South Sudan",
+      "homicideRate": 13.9,
+      "year": 2022
+    },
+    {
+      "code": "CG",
+      "name": "Republic of the Congo",
+      "homicideRate": 8.5,
+      "year": 2022
+    },
+    {
+      "code": "BJ",
+      "name": "Benin",
+      "homicideRate": 1.1,
+      "year": 2022
+    },
+    {
+      "code": "TG",
+      "name": "Togo",
+      "homicideRate": 9.3,
+      "year": 2022
+    },
+    {
+      "code": "SL",
+      "name": "Sierra Leone",
+      "homicideRate": 2.1,
+      "year": 2022
+    },
+    {
+      "code": "LR",
+      "name": "Liberia",
+      "homicideRate": 3.2,
+      "year": 2022
+    },
+    {
+      "code": "GN",
+      "name": "Guinea",
+      "homicideRate": 3.8,
+      "year": 2022
+    },
+    {
+      "code": "GM",
+      "name": "Gambia",
+      "homicideRate": 2.3,
+      "year": 2022
+    },
+    {
+      "code": "MR",
+      "name": "Mauritania",
+      "homicideRate": 2.8,
+      "year": 2022
+    },
+    {
+      "code": "BI",
+      "name": "Burundi",
+      "homicideRate": 6,
+      "year": 2022
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "homicideRate": 40.9,
+      "year": 2022
+    },
+    {
+      "code": "SR",
+      "name": "Suriname",
+      "homicideRate": 10.5,
+      "year": 2022
+    }
   ]
 }

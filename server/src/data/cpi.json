@@ -1,118 +1,1282 @@
 {
-  "_source": "https://www.transparency.org/en/cpi/2023",
-  "_download": "https://images.transparencycdn.org/images/CPI-2023-Full-Data-Results-and-Sources.zip",
-  "_updated": "2023",
-  "_note": "Corruption Perceptions Index 2023. Score 0-100, higher = less corrupt. CC BY-ND 4.0.",
+  "_source": "https://www.transparency.org/en/cpi/2025",
+  "_download": "https://images.transparencycdn.org/images/CPI-2025-Full-Data-Results-and-Sources.zip",
+  "_updated": "2025",
+  "_note": "Corruption Perceptions Index 2025. Score 0-100, higher = less corrupt.",
   "data": [
-    { "code": "DK", "name": "Denmark", "score": 90, "rank": 1, "year": 2023 },
-    { "code": "FI", "name": "Finland", "score": 87, "rank": 2, "year": 2023 },
-    { "code": "NZ", "name": "New Zealand", "score": 85, "rank": 3, "year": 2023 },
-    { "code": "NO", "name": "Norway", "score": 84, "rank": 4, "year": 2023 },
-    { "code": "SG", "name": "Singapore", "score": 83, "rank": 5, "year": 2023 },
-    { "code": "SE", "name": "Sweden", "score": 82, "rank": 6, "year": 2023 },
-    { "code": "CH", "name": "Switzerland", "score": 82, "rank": 6, "year": 2023 },
-    { "code": "NL", "name": "Netherlands", "score": 79, "rank": 8, "year": 2023 },
-    { "code": "DE", "name": "Germany", "score": 78, "rank": 9, "year": 2023 },
-    { "code": "LU", "name": "Luxembourg", "score": 78, "rank": 9, "year": 2023 },
-    { "code": "AU", "name": "Australia", "score": 75, "rank": 13, "year": 2023 },
-    { "code": "CA", "name": "Canada", "score": 76, "rank": 12, "year": 2023 },
-    { "code": "HK", "name": "Hong Kong", "score": 75, "rank": 13, "year": 2023 },
-    { "code": "AT", "name": "Austria", "score": 71, "rank": 16, "year": 2023 },
-    { "code": "IS", "name": "Iceland", "score": 72, "rank": 15, "year": 2023 },
-    { "code": "BE", "name": "Belgium", "score": 73, "rank": 14, "year": 2023 },
-    { "code": "IE", "name": "Ireland", "score": 77, "rank": 11, "year": 2023 },
-    { "code": "GB", "name": "United Kingdom", "score": 71, "rank": 16, "year": 2023 },
-    { "code": "EE", "name": "Estonia", "score": 76, "rank": 12, "year": 2023 },
-    { "code": "JP", "name": "Japan", "score": 73, "rank": 14, "year": 2023 },
-    { "code": "FR", "name": "France", "score": 71, "rank": 16, "year": 2023 },
-    { "code": "US", "name": "United States", "score": 69, "rank": 24, "year": 2023 },
-    { "code": "PT", "name": "Portugal", "score": 67, "rank": 26, "year": 2023 },
-    { "code": "UY", "name": "Uruguay", "score": 73, "rank": 14, "year": 2023 },
-    { "code": "CL", "name": "Chile", "score": 66, "rank": 27, "year": 2023 },
-    { "code": "CZ", "name": "Czech Republic", "score": 57, "rank": 37, "year": 2023 },
-    { "code": "ES", "name": "Spain", "score": 60, "rank": 34, "year": 2023 },
-    { "code": "PL", "name": "Poland", "score": 54, "rank": 45, "year": 2023 },
-    { "code": "LT", "name": "Lithuania", "score": 61, "rank": 33, "year": 2023 },
-    { "code": "LV", "name": "Latvia", "score": 55, "rank": 42, "year": 2023 },
-    { "code": "SK", "name": "Slovakia", "score": 50, "rank": 52, "year": 2023 },
-    { "code": "HR", "name": "Croatia", "score": 50, "rank": 52, "year": 2023 },
-    { "code": "IT", "name": "Italy", "score": 56, "rank": 41, "year": 2023 },
-    { "code": "GR", "name": "Greece", "score": 49, "rank": 55, "year": 2023 },
-    { "code": "HU", "name": "Hungary", "score": 42, "rank": 76, "year": 2023 },
-    { "code": "RO", "name": "Romania", "score": 46, "rank": 63, "year": 2023 },
-    { "code": "BG", "name": "Bulgaria", "score": 45, "rank": 67, "year": 2023 },
-    { "code": "RS", "name": "Serbia", "score": 36, "rank": 104, "year": 2023 },
-    { "code": "AL", "name": "Albania", "score": 37, "rank": 99, "year": 2023 },
-    { "code": "BA", "name": "Bosnia and Herzegovina", "score": 34, "rank": 111, "year": 2023 },
-    { "code": "MK", "name": "North Macedonia", "score": 39, "rank": 87, "year": 2023 },
-    { "code": "ME", "name": "Montenegro", "score": 45, "rank": 67, "year": 2023 },
-    { "code": "KR", "name": "South Korea", "score": 63, "rank": 32, "year": 2023 },
-    { "code": "TW", "name": "Taiwan", "score": 67, "rank": 26, "year": 2023 },
-    { "code": "IL", "name": "Israel", "score": 62, "rank": 33, "year": 2023 },
-    { "code": "AE", "name": "United Arab Emirates", "score": 68, "rank": 25, "year": 2023 },
-    { "code": "QA", "name": "Qatar", "score": 58, "rank": 36, "year": 2023 },
-    { "code": "SA", "name": "Saudi Arabia", "score": 52, "rank": 49, "year": 2023 },
-    { "code": "JO", "name": "Jordan", "score": 49, "rank": 55, "year": 2023 },
-    { "code": "MA", "name": "Morocco", "score": 38, "rank": 94, "year": 2023 },
-    { "code": "TN", "name": "Tunisia", "score": 40, "rank": 83, "year": 2023 },
-    { "code": "EG", "name": "Egypt", "score": 35, "rank": 108, "year": 2023 },
-    { "code": "GH", "name": "Ghana", "score": 43, "rank": 73, "year": 2023 },
-    { "code": "SN", "name": "Senegal", "score": 43, "rank": 73, "year": 2023 },
-    { "code": "ZA", "name": "South Africa", "score": 41, "rank": 83, "year": 2023 },
-    { "code": "NA", "name": "Namibia", "score": 51, "rank": 51, "year": 2023 },
-    { "code": "BW", "name": "Botswana", "score": 59, "rank": 35, "year": 2023 },
-    { "code": "RW", "name": "Rwanda", "score": 53, "rank": 47, "year": 2023 },
-    { "code": "NG", "name": "Nigeria", "score": 25, "rank": 145, "year": 2023 },
-    { "code": "KE", "name": "Kenya", "score": 31, "rank": 126, "year": 2023 },
-    { "code": "TZ", "name": "Tanzania", "score": 38, "rank": 94, "year": 2023 },
-    { "code": "UG", "name": "Uganda", "score": 26, "rank": 142, "year": 2023 },
-    { "code": "ET", "name": "Ethiopia", "score": 37, "rank": 99, "year": 2023 },
-    { "code": "CM", "name": "Cameroon", "score": 27, "rank": 140, "year": 2023 },
-    { "code": "CD", "name": "DR Congo", "score": 20, "rank": 162, "year": 2023 },
-    { "code": "SD", "name": "Sudan", "score": 20, "rank": 162, "year": 2023 },
-    { "code": "IN", "name": "India", "score": 39, "rank": 93, "year": 2023 },
-    { "code": "BD", "name": "Bangladesh", "score": 24, "rank": 149, "year": 2023 },
-    { "code": "PK", "name": "Pakistan", "score": 29, "rank": 133, "year": 2023 },
-    { "code": "LK", "name": "Sri Lanka", "score": 34, "rank": 111, "year": 2023 },
-    { "code": "NP", "name": "Nepal", "score": 35, "rank": 108, "year": 2023 },
-    { "code": "MM", "name": "Myanmar", "score": 20, "rank": 162, "year": 2023 },
-    { "code": "KH", "name": "Cambodia", "score": 22, "rank": 158, "year": 2023 },
-    { "code": "VN", "name": "Vietnam", "score": 41, "rank": 83, "year": 2023 },
-    { "code": "TH", "name": "Thailand", "score": 35, "rank": 108, "year": 2023 },
-    { "code": "ID", "name": "Indonesia", "score": 34, "rank": 115, "year": 2023 },
-    { "code": "PH", "name": "Philippines", "score": 34, "rank": 115, "year": 2023 },
-    { "code": "MY", "name": "Malaysia", "score": 50, "rank": 52, "year": 2023 },
-    { "code": "CN", "name": "China", "score": 42, "rank": 76, "year": 2023 },
-    { "code": "MN", "name": "Mongolia", "score": 35, "rank": 108, "year": 2023 },
-    { "code": "KZ", "name": "Kazakhstan", "score": 39, "rank": 93, "year": 2023 },
-    { "code": "UZ", "name": "Uzbekistan", "score": 33, "rank": 121, "year": 2023 },
-    { "code": "GE", "name": "Georgia", "score": 53, "rank": 47, "year": 2023 },
-    { "code": "AM", "name": "Armenia", "score": 47, "rank": 62, "year": 2023 },
-    { "code": "AZ", "name": "Azerbaijan", "score": 23, "rank": 154, "year": 2023 },
-    { "code": "BY", "name": "Belarus", "score": 36, "rank": 104, "year": 2023 },
-    { "code": "UA", "name": "Ukraine", "score": 33, "rank": 104, "year": 2023 },
-    { "code": "MD", "name": "Moldova", "score": 42, "rank": 76, "year": 2023 },
-    { "code": "RU", "name": "Russia", "score": 26, "rank": 141, "year": 2023 },
-    { "code": "TR", "name": "Turkey", "score": 34, "rank": 115, "year": 2023 },
-    { "code": "BR", "name": "Brazil", "score": 36, "rank": 104, "year": 2023 },
-    { "code": "AR", "name": "Argentina", "score": 37, "rank": 99, "year": 2023 },
-    { "code": "CO", "name": "Colombia", "score": 39, "rank": 93, "year": 2023 },
-    { "code": "PE", "name": "Peru", "score": 41, "rank": 83, "year": 2023 },
-    { "code": "EC", "name": "Ecuador", "score": 31, "rank": 126, "year": 2023 },
-    { "code": "BO", "name": "Bolivia", "score": 29, "rank": 133, "year": 2023 },
-    { "code": "PY", "name": "Paraguay", "score": 25, "rank": 145, "year": 2023 },
-    { "code": "VE", "name": "Venezuela", "score": 13, "rank": 177, "year": 2023 },
-    { "code": "MX", "name": "Mexico", "score": 31, "rank": 126, "year": 2023 },
-    { "code": "GT", "name": "Guatemala", "score": 23, "rank": 154, "year": 2023 },
-    { "code": "HN", "name": "Honduras", "score": 23, "rank": 154, "year": 2023 },
-    { "code": "SV", "name": "El Salvador", "score": 31, "rank": 126, "year": 2023 },
-    { "code": "NI", "name": "Nicaragua", "score": 17, "rank": 169, "year": 2023 },
-    { "code": "CR", "name": "Costa Rica", "score": 54, "rank": 45, "year": 2023 },
-    { "code": "PA", "name": "Panama", "score": 35, "rank": 108, "year": 2023 },
-    { "code": "CU", "name": "Cuba", "score": 44, "rank": 71, "year": 2023 },
-    { "code": "JM", "name": "Jamaica", "score": 44, "rank": 71, "year": 2023 },
-    { "code": "TT", "name": "Trinidad and Tobago", "score": 40, "rank": 83, "year": 2023 },
-    { "code": "DO", "name": "Dominican Republic", "score": 29, "rank": 133, "year": 2023 },
-    { "code": "HT", "name": "Haiti", "score": 17, "rank": 169, "year": 2023 }
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "score": 89,
+      "rank": 1,
+      "year": 2025
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "score": 88,
+      "rank": 2,
+      "year": 2025
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "score": 84,
+      "rank": 3,
+      "year": 2025
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "score": 81,
+      "rank": 4,
+      "year": 2025
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "score": 81,
+      "rank": 4,
+      "year": 2025
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "score": 80,
+      "rank": 6,
+      "year": 2025
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "score": 80,
+      "rank": 6,
+      "year": 2025
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "score": 78,
+      "rank": 8,
+      "year": 2025
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "score": 78,
+      "rank": 8,
+      "year": 2025
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "score": 77,
+      "rank": 10,
+      "year": 2025
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "score": 77,
+      "rank": 10,
+      "year": 2025
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "score": 76,
+      "rank": 12,
+      "year": 2025
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "score": 76,
+      "rank": 12,
+      "year": 2025
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong",
+      "score": 76,
+      "rank": 12,
+      "year": 2025
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "score": 76,
+      "rank": 12,
+      "year": 2025
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "score": 75,
+      "rank": 16,
+      "year": 2025
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "score": 73,
+      "rank": 17,
+      "year": 2025
+    },
+    {
+      "code": "BT",
+      "name": "Bhutan",
+      "score": 71,
+      "rank": 18,
+      "year": 2025
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "score": 71,
+      "rank": 18,
+      "year": 2025
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "score": 70,
+      "rank": 20,
+      "year": 2025
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "score": 69,
+      "rank": 21,
+      "year": 2025
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "score": 69,
+      "rank": 21,
+      "year": 2025
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "score": 69,
+      "rank": 21,
+      "year": 2025
+    },
+    {
+      "code": "BB",
+      "name": "Barbados",
+      "score": 68,
+      "rank": 24,
+      "year": 2025
+    },
+    {
+      "code": "SC",
+      "name": "Seychelles",
+      "score": 68,
+      "rank": 24,
+      "year": 2025
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "score": 68,
+      "rank": 24,
+      "year": 2025
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "score": 66,
+      "rank": 27,
+      "year": 2025
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "score": 65,
+      "rank": 28,
+      "year": 2025
+    },
+    {
+      "code": "BS",
+      "name": "Bahamas",
+      "score": 64,
+      "rank": 29,
+      "year": 2025
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "score": 64,
+      "rank": 29,
+      "year": 2025
+    },
+    {
+      "code": "BN",
+      "name": "Brunei Darussalam",
+      "score": 63,
+      "rank": 31,
+      "year": 2025
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "score": 63,
+      "rank": 31,
+      "year": 2025
+    },
+    {
+      "code": "VC",
+      "name": "Saint Vincent and the Grenadines",
+      "score": 63,
+      "rank": 31,
+      "year": 2025
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "score": 63,
+      "rank": 31,
+      "year": 2025
+    },
+    {
+      "code": "CV",
+      "name": "Cape Verde",
+      "score": 62,
+      "rank": 35,
+      "year": 2025
+    },
+    {
+      "code": "IL",
+      "name": "Israel",
+      "score": 62,
+      "rank": 35,
+      "year": 2025
+    },
+    {
+      "code": "DM",
+      "name": "Dominica",
+      "score": 60,
+      "rank": 37,
+      "year": 2025
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "score": 60,
+      "rank": 37,
+      "year": 2025
+    },
+    {
+      "code": "CZ",
+      "name": "Czech Republic",
+      "score": 59,
+      "rank": 39,
+      "year": 2025
+    },
+    {
+      "code": "LC",
+      "name": "Saint Lucia",
+      "score": 59,
+      "rank": 39,
+      "year": 2025
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "score": 58,
+      "rank": 41,
+      "year": 2025
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "score": 58,
+      "rank": 41,
+      "year": 2025
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "score": 58,
+      "rank": 41,
+      "year": 2025
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "score": 58,
+      "rank": 41,
+      "year": 2025
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "score": 57,
+      "rank": 45,
+      "year": 2025
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "score": 56,
+      "rank": 46,
+      "year": 2025
+    },
+    {
+      "code": "GD",
+      "name": "Grenada",
+      "score": 56,
+      "rank": 46,
+      "year": 2025
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "score": 56,
+      "rank": 46,
+      "year": 2025
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "score": 55,
+      "rank": 49,
+      "year": 2025
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji",
+      "score": 55,
+      "rank": 49,
+      "year": 2025
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "score": 55,
+      "rank": 49,
+      "year": 2025
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "score": 53,
+      "rank": 52,
+      "year": 2025
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "score": 52,
+      "rank": 53,
+      "year": 2025
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "score": 52,
+      "rank": 54,
+      "year": 2025
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "score": 52,
+      "rank": 54,
+      "year": 2025
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "score": 50,
+      "rank": 56,
+      "year": 2025
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "score": 50,
+      "rank": 56,
+      "year": 2025
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "score": 50,
+      "rank": 56,
+      "year": 2025
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "score": 50,
+      "rank": 56,
+      "year": 2025
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "score": 49,
+      "rank": 60,
+      "year": 2025
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "score": 48,
+      "rank": 61,
+      "year": 2025
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "score": 48,
+      "rank": 61,
+      "year": 2025
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "score": 47,
+      "rank": 63,
+      "year": 2025
+    },
+    {
+      "code": "VU",
+      "name": "Vanuatu",
+      "score": 47,
+      "rank": 63,
+      "year": 2025
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "score": 46,
+      "rank": 65,
+      "year": 2025
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "score": 46,
+      "rank": 65,
+      "year": 2025
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "score": 46,
+      "rank": 65,
+      "year": 2025
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "score": 46,
+      "rank": 65,
+      "year": 2025
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "score": 46,
+      "rank": 65,
+      "year": 2025
+    },
+    {
+      "code": "BJ",
+      "name": "Benin",
+      "score": 45,
+      "rank": 70,
+      "year": 2025
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "score": 45,
+      "rank": 70,
+      "year": 2025
+    },
+    {
+      "code": "ST",
+      "name": "São Tomé and Príncipe",
+      "score": 45,
+      "rank": 70,
+      "year": 2025
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "score": 44,
+      "rank": 73,
+      "year": 2025
+    },
+    {
+      "code": "SB",
+      "name": "Solomon Islands",
+      "score": 44,
+      "rank": 73,
+      "year": 2025
+    },
+    {
+      "code": "TL",
+      "name": "Timor-Leste",
+      "score": 44,
+      "rank": 73,
+      "year": 2025
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "score": 43,
+      "rank": 76,
+      "year": 2025
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "score": 43,
+      "rank": 76,
+      "year": 2025
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast",
+      "score": 43,
+      "rank": 76,
+      "year": 2025
+    },
+    {
+      "code": "XK",
+      "name": "Kosovo",
+      "score": 43,
+      "rank": 76,
+      "year": 2025
+    },
+    {
+      "code": "MD",
+      "name": "Moldova",
+      "score": 42,
+      "rank": 80,
+      "year": 2025
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "score": 41,
+      "rank": 81,
+      "year": 2025
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "score": 41,
+      "rank": 81,
+      "year": 2025
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "score": 41,
+      "rank": 81,
+      "year": 2025
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "score": 40,
+      "rank": 84,
+      "year": 2025
+    },
+    {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "score": 40,
+      "rank": 84,
+      "year": 2025
+    },
+    {
+      "code": "CU",
+      "name": "Cuba",
+      "score": 40,
+      "rank": 84,
+      "year": 2025
+    },
+    {
+      "code": "GY",
+      "name": "Guyana",
+      "score": 40,
+      "rank": 84,
+      "year": 2025
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "score": 40,
+      "rank": 84,
+      "year": 2025
+    },
+    {
+      "code": "MK",
+      "name": "North Macedonia",
+      "score": 40,
+      "rank": 84,
+      "year": 2025
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania",
+      "score": 40,
+      "rank": 84,
+      "year": 2025
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "score": 39,
+      "rank": 91,
+      "year": 2025
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "score": 39,
+      "rank": 91,
+      "year": 2025
+    },
+    {
+      "code": "MV",
+      "name": "Maldives",
+      "score": 39,
+      "rank": 91,
+      "year": 2025
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "score": 39,
+      "rank": 91,
+      "year": 2025
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "score": 39,
+      "rank": 91,
+      "year": 2025
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "score": 38,
+      "rank": 96,
+      "year": 2025
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "score": 38,
+      "rank": 96,
+      "year": 2025
+    },
+    {
+      "code": "SR",
+      "name": "Suriname",
+      "score": 38,
+      "rank": 96,
+      "year": 2025
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "score": 37,
+      "rank": 99,
+      "year": 2025
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "score": 37,
+      "rank": 99,
+      "year": 2025
+    },
+    {
+      "code": "GM",
+      "name": "Gambia",
+      "score": 37,
+      "rank": 99,
+      "year": 2025
+    },
+    {
+      "code": "LS",
+      "name": "Lesotho",
+      "score": 37,
+      "rank": 99,
+      "year": 2025
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia",
+      "score": 37,
+      "rank": 99,
+      "year": 2025
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "score": 36,
+      "rank": 104,
+      "year": 2025
+    },
+    {
+      "code": "BZ",
+      "name": "Belize",
+      "score": 36,
+      "rank": 104,
+      "year": 2025
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "score": 36,
+      "rank": 104,
+      "year": 2025
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "score": 35,
+      "rank": 107,
+      "year": 2025
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "score": 35,
+      "rank": 107,
+      "year": 2025
+    },
+    {
+      "code": "DZ",
+      "name": "Algeria",
+      "score": 34,
+      "rank": 109,
+      "year": 2025
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "score": 34,
+      "rank": 109,
+      "year": 2025
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "score": 34,
+      "rank": 109,
+      "year": 2025
+    },
+    {
+      "code": "LA",
+      "name": "Laos",
+      "score": 34,
+      "rank": 109,
+      "year": 2025
+    },
+    {
+      "code": "MW",
+      "name": "Malawi",
+      "score": 34,
+      "rank": 109,
+      "year": 2025
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "score": 34,
+      "rank": 109,
+      "year": 2025
+    },
+    {
+      "code": "SL",
+      "name": "Sierra Leone",
+      "score": 34,
+      "rank": 109,
+      "year": 2025
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "score": 33,
+      "rank": 116,
+      "year": 2025
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "score": 33,
+      "rank": 116,
+      "year": 2025
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "score": 33,
+      "rank": 116,
+      "year": 2025
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "score": 33,
+      "rank": 116,
+      "year": 2025
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "score": 32,
+      "rank": 120,
+      "year": 2025
+    },
+    {
+      "code": "SV",
+      "name": "El Salvador",
+      "score": 32,
+      "rank": 120,
+      "year": 2025
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "score": 32,
+      "rank": 120,
+      "year": 2025
+    },
+    {
+      "code": "TG",
+      "name": "Togo",
+      "score": 32,
+      "rank": 120,
+      "year": 2025
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "score": 31,
+      "rank": 124,
+      "year": 2025
+    },
+    {
+      "code": "DJ",
+      "name": "Djibouti",
+      "score": 31,
+      "rank": 124,
+      "year": 2025
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "score": 31,
+      "rank": 124,
+      "year": 2025
+    },
+    {
+      "code": "NE",
+      "name": "Niger",
+      "score": 31,
+      "rank": 124,
+      "year": 2025
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "score": 31,
+      "rank": 124,
+      "year": 2025
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "score": 31,
+      "rank": 124,
+      "year": 2025
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "score": 30,
+      "rank": 130,
+      "year": 2025
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "score": 30,
+      "rank": 130,
+      "year": 2025
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "score": 30,
+      "rank": 130,
+      "year": 2025
+    },
+    {
+      "code": "MR",
+      "name": "Mauritania",
+      "score": 30,
+      "rank": 130,
+      "year": 2025
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "score": 30,
+      "rank": 130,
+      "year": 2025
+    },
+    {
+      "code": "GA",
+      "name": "Gabon",
+      "score": 29,
+      "rank": 135,
+      "year": 2025
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia",
+      "score": 28,
+      "rank": 136,
+      "year": 2025
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "score": 28,
+      "rank": 136,
+      "year": 2025
+    },
+    {
+      "code": "LR",
+      "name": "Liberia",
+      "score": 28,
+      "rank": 136,
+      "year": 2025
+    },
+    {
+      "code": "ML",
+      "name": "Mali",
+      "score": 28,
+      "rank": 136,
+      "year": 2025
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "score": 28,
+      "rank": 136,
+      "year": 2025
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "score": 27,
+      "rank": 141,
+      "year": 2025
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "score": 26,
+      "rank": 142,
+      "year": 2025
+    },
+    {
+      "code": "GT",
+      "name": "Guatemala",
+      "score": 26,
+      "rank": 142,
+      "year": 2025
+    },
+    {
+      "code": "GN",
+      "name": "Guinea",
+      "score": 26,
+      "rank": 142,
+      "year": 2025
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "score": 26,
+      "rank": 142,
+      "year": 2025
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "score": 26,
+      "rank": 142,
+      "year": 2025
+    },
+    {
+      "code": "PG",
+      "name": "Papua New Guinea",
+      "score": 26,
+      "rank": 142,
+      "year": 2025
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "score": 25,
+      "rank": 148,
+      "year": 2025
+    },
+    {
+      "code": "UG",
+      "name": "Uganda",
+      "score": 25,
+      "rank": 148,
+      "year": 2025
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "score": 24,
+      "rank": 150,
+      "year": 2025
+    },
+    {
+      "code": "CF",
+      "name": "Central African Republic",
+      "score": 24,
+      "rank": 150,
+      "year": 2025
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "score": 24,
+      "rank": 150,
+      "year": 2025
+    },
+    {
+      "code": "CG",
+      "name": "Congo",
+      "score": 23,
+      "rank": 153,
+      "year": 2025
+    },
+    {
+      "code": "SZ",
+      "name": "Eswatini",
+      "score": 23,
+      "rank": 153,
+      "year": 2025
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "score": 23,
+      "rank": 153,
+      "year": 2025
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "score": 23,
+      "rank": 153,
+      "year": 2025
+    },
+    {
+      "code": "TD",
+      "name": "Chad",
+      "score": 22,
+      "rank": 157,
+      "year": 2025
+    },
+    {
+      "code": "HN",
+      "name": "Honduras",
+      "score": 22,
+      "rank": 157,
+      "year": 2025
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "score": 22,
+      "rank": 157,
+      "year": 2025
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "score": 22,
+      "rank": 157,
+      "year": 2025
+    },
+    {
+      "code": "GW",
+      "name": "Guinea-Bissau",
+      "score": 21,
+      "rank": 161,
+      "year": 2025
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "score": 21,
+      "rank": 161,
+      "year": 2025
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "score": 20,
+      "rank": 163,
+      "year": 2025
+    },
+    {
+      "code": "KM",
+      "name": "Comoros",
+      "score": 20,
+      "rank": 163,
+      "year": 2025
+    },
+    {
+      "code": "CD",
+      "name": "Democratic Republic of the Congo",
+      "score": 20,
+      "rank": 163,
+      "year": 2025
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "score": 19,
+      "rank": 166,
+      "year": 2025
+    },
+    {
+      "code": "BI",
+      "name": "Burundi",
+      "score": 17,
+      "rank": 167,
+      "year": 2025
+    },
+    {
+      "code": "TM",
+      "name": "Turkmenistan",
+      "score": 17,
+      "rank": 167,
+      "year": 2025
+    },
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "score": 16,
+      "rank": 169,
+      "year": 2025
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "score": 16,
+      "rank": 169,
+      "year": 2025
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "score": 16,
+      "rank": 169,
+      "year": 2025
+    },
+    {
+      "code": "GQ",
+      "name": "Equatorial Guinea",
+      "score": 15,
+      "rank": 172,
+      "year": 2025
+    },
+    {
+      "code": "KP",
+      "name": "North Korea",
+      "score": 15,
+      "rank": 172,
+      "year": 2025
+    },
+    {
+      "code": "SY",
+      "name": "Syria",
+      "score": 15,
+      "rank": 172,
+      "year": 2025
+    },
+    {
+      "code": "NI",
+      "name": "Nicaragua",
+      "score": 14,
+      "rank": 175,
+      "year": 2025
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "score": 14,
+      "rank": 175,
+      "year": 2025
+    },
+    {
+      "code": "ER",
+      "name": "Eritrea",
+      "score": 13,
+      "rank": 177,
+      "year": 2025
+    },
+    {
+      "code": "LY",
+      "name": "Libya",
+      "score": 13,
+      "rank": 177,
+      "year": 2025
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "score": 13,
+      "rank": 177,
+      "year": 2025
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "score": 10,
+      "rank": 180,
+      "year": 2025
+    },
+    {
+      "code": "SO",
+      "name": "Somalia",
+      "score": 9,
+      "rank": 181,
+      "year": 2025
+    },
+    {
+      "code": "SS",
+      "name": "South Sudan",
+      "score": 9,
+      "rank": 181,
+      "year": 2025
+    }
   ]
 }

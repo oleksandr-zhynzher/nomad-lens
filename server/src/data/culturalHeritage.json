@@ -3,98 +3,899 @@
   "_updated": "2025",
   "_note": "UNESCO World Heritage Sites count per country (cultural + natural + mixed). Data from the official World Heritage List. ISO alpha-2 codes.",
   "data": [
-    { "code": "IT", "name": "Italy", "sites": 60, "year": 2025 },
-    { "code": "CN", "name": "China", "sites": 59, "year": 2025 },
-    { "code": "DE", "name": "Germany", "sites": 54, "year": 2025 },
-    { "code": "FR", "name": "France", "sites": 53, "year": 2025 },
-    { "code": "ES", "name": "Spain", "sites": 50, "year": 2025 },
-    { "code": "IN", "name": "India", "sites": 43, "year": 2025 },
-    { "code": "MX", "name": "Mexico", "sites": 35, "year": 2025 },
-    { "code": "GB", "name": "United Kingdom", "sites": 35, "year": 2025 },
-    { "code": "RU", "name": "Russia", "sites": 32, "year": 2025 },
-    { "code": "IR", "name": "Iran", "sites": 28, "year": 2025 },
-    { "code": "JP", "name": "Japan", "sites": 26, "year": 2025 },
-    { "code": "US", "name": "United States", "sites": 25, "year": 2025 },
-    { "code": "BR", "name": "Brazil", "sites": 24, "year": 2025 },
-    { "code": "CA", "name": "Canada", "sites": 22, "year": 2025 },
-    { "code": "AU", "name": "Australia", "sites": 20, "year": 2025 },
-    { "code": "TR", "name": "Turkey", "sites": 21, "year": 2025 },
-    { "code": "GR", "name": "Greece", "sites": 19, "year": 2025 },
-    { "code": "PT", "name": "Portugal", "sites": 18, "year": 2025 },
-    { "code": "PL", "name": "Poland", "sites": 17, "year": 2025 },
-    { "code": "CZ", "name": "Czechia", "sites": 17, "year": 2025 },
-    { "code": "KR", "name": "South Korea", "sites": 16, "year": 2025 },
-    { "code": "SE", "name": "Sweden", "sites": 15, "year": 2025 },
-    { "code": "BE", "name": "Belgium", "sites": 16, "year": 2025 },
-    { "code": "PE", "name": "Peru", "sites": 13, "year": 2025 },
-    { "code": "AT", "name": "Austria", "sites": 12, "year": 2025 },
-    { "code": "NL", "name": "Netherlands", "sites": 13, "year": 2025 },
-    { "code": "CH", "name": "Switzerland", "sites": 13, "year": 2025 },
-    { "code": "ID", "name": "Indonesia", "sites": 10, "year": 2025 },
-    { "code": "ZA", "name": "South Africa", "sites": 10, "year": 2025 },
-    { "code": "RO", "name": "Romania", "sites": 9, "year": 2025 },
-    { "code": "CO", "name": "Colombia", "sites": 9, "year": 2025 },
-    { "code": "AR", "name": "Argentina", "sites": 12, "year": 2025 },
-    { "code": "EG", "name": "Egypt", "sites": 7, "year": 2025 },
-    { "code": "ET", "name": "Ethiopia", "sites": 11, "year": 2025 },
-    { "code": "DK", "name": "Denmark", "sites": 10, "year": 2025 },
-    { "code": "IL", "name": "Israel", "sites": 9, "year": 2025 },
-    { "code": "NO", "name": "Norway", "sites": 8, "year": 2025 },
-    { "code": "FI", "name": "Finland", "sites": 7, "year": 2025 },
-    { "code": "CL", "name": "Chile", "sites": 7, "year": 2025 },
-    { "code": "HR", "name": "Croatia", "sites": 10, "year": 2025 },
-    { "code": "MA", "name": "Morocco", "sites": 9, "year": 2025 },
-    { "code": "HU", "name": "Hungary", "sites": 8, "year": 2025 },
-    { "code": "BG", "name": "Bulgaria", "sites": 10, "year": 2025 },
-    { "code": "PH", "name": "Philippines", "sites": 6, "year": 2025 },
-    { "code": "TH", "name": "Thailand", "sites": 7, "year": 2025 },
-    { "code": "VN", "name": "Vietnam", "sites": 8, "year": 2025 },
-    { "code": "NZ", "name": "New Zealand", "sites": 3, "year": 2025 },
-    { "code": "MY", "name": "Malaysia", "sites": 4, "year": 2025 },
-    { "code": "PK", "name": "Pakistan", "sites": 6, "year": 2025 },
-    { "code": "SA", "name": "Saudi Arabia", "sites": 7, "year": 2025 },
-    { "code": "NG", "name": "Nigeria", "sites": 2, "year": 2025 },
-    { "code": "IE", "name": "Ireland", "sites": 2, "year": 2025 },
-    { "code": "LK", "name": "Sri Lanka", "sites": 8, "year": 2025 },
-    { "code": "RS", "name": "Serbia", "sites": 5, "year": 2025 },
-    { "code": "GE", "name": "Georgia", "sites": 4, "year": 2025 },
-    { "code": "PA", "name": "Panama", "sites": 5, "year": 2025 },
-    { "code": "CR", "name": "Costa Rica", "sites": 4, "year": 2025 },
-    { "code": "EC", "name": "Ecuador", "sites": 5, "year": 2025 },
-    { "code": "UY", "name": "Uruguay", "sites": 3, "year": 2025 },
-    { "code": "NP", "name": "Nepal", "sites": 4, "year": 2025 },
-    { "code": "KH", "name": "Cambodia", "sites": 4, "year": 2025 },
-    { "code": "TN", "name": "Tunisia", "sites": 9, "year": 2025 },
-    { "code": "JO", "name": "Jordan", "sites": 6, "year": 2025 },
-    { "code": "CY", "name": "Cyprus", "sites": 3, "year": 2025 },
-    { "code": "AE", "name": "United Arab Emirates", "sites": 1, "year": 2025 },
-    { "code": "MT", "name": "Malta", "sites": 3, "year": 2025 },
-    { "code": "EE", "name": "Estonia", "sites": 2, "year": 2025 },
-    { "code": "LT", "name": "Lithuania", "sites": 4, "year": 2025 },
-    { "code": "LV", "name": "Latvia", "sites": 3, "year": 2025 },
-    { "code": "SK", "name": "Slovakia", "sites": 8, "year": 2025 },
-    { "code": "SI", "name": "Slovenia", "sites": 5, "year": 2025 },
-    { "code": "AL", "name": "Albania", "sites": 4, "year": 2025 },
-    { "code": "ME", "name": "Montenegro", "sites": 4, "year": 2025 },
-    { "code": "BA", "name": "Bosnia and Herzegovina", "sites": 4, "year": 2025 },
-    { "code": "UA", "name": "Ukraine", "sites": 8, "year": 2025 },
-    { "code": "BD", "name": "Bangladesh", "sites": 3, "year": 2025 },
-    { "code": "KE", "name": "Kenya", "sites": 7, "year": 2025 },
-    { "code": "TZ", "name": "Tanzania", "sites": 7, "year": 2025 },
-    { "code": "GH", "name": "Ghana", "sites": 2, "year": 2025 },
-    { "code": "MN", "name": "Mongolia", "sites": 5, "year": 2025 },
-    { "code": "IS", "name": "Iceland", "sites": 3, "year": 2025 },
-    { "code": "LU", "name": "Luxembourg", "sites": 1, "year": 2025 },
-    { "code": "MU", "name": "Mauritius", "sites": 2, "year": 2025 },
-    { "code": "DO", "name": "Dominican Republic", "sites": 1, "year": 2025 },
-    { "code": "JM", "name": "Jamaica", "sites": 1, "year": 2025 },
-    { "code": "QA", "name": "Qatar", "sites": 1, "year": 2025 },
-    { "code": "SG", "name": "Singapore", "sites": 1, "year": 2025 },
-    { "code": "TW", "name": "Taiwan", "sites": 0, "year": 2025 },
-    { "code": "BB", "name": "Barbados", "sites": 1, "year": 2025 },
-    { "code": "TT", "name": "Trinidad and Tobago", "sites": 0, "year": 2025 },
-    { "code": "BH", "name": "Bahrain", "sites": 3, "year": 2025 },
-    { "code": "OM", "name": "Oman", "sites": 5, "year": 2025 },
-    { "code": "KW", "name": "Kuwait", "sites": 0, "year": 2025 }
+    {
+      "code": "IT",
+      "name": "Italy",
+      "sites": 60,
+      "year": 2025
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "sites": 59,
+      "year": 2025
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "sites": 54,
+      "year": 2025
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "sites": 53,
+      "year": 2025
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "sites": 50,
+      "year": 2025
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "sites": 43,
+      "year": 2025
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "sites": 35,
+      "year": 2025
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "sites": 35,
+      "year": 2025
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "sites": 32,
+      "year": 2025
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "sites": 28,
+      "year": 2025
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "sites": 26,
+      "year": 2025
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "sites": 25,
+      "year": 2025
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "sites": 24,
+      "year": 2025
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "sites": 22,
+      "year": 2025
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "sites": 20,
+      "year": 2025
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "sites": 21,
+      "year": 2025
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "sites": 19,
+      "year": 2025
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "sites": 18,
+      "year": 2025
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "sites": 17,
+      "year": 2025
+    },
+    {
+      "code": "CZ",
+      "name": "Czechia",
+      "sites": 17,
+      "year": 2025
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "sites": 16,
+      "year": 2025
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "sites": 15,
+      "year": 2025
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "sites": 16,
+      "year": 2025
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "sites": 13,
+      "year": 2025
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "sites": 12,
+      "year": 2025
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "sites": 13,
+      "year": 2025
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "sites": 13,
+      "year": 2025
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "sites": 10,
+      "year": 2025
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "sites": 10,
+      "year": 2025
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "sites": 9,
+      "year": 2025
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "sites": 9,
+      "year": 2025
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "sites": 12,
+      "year": 2025
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "sites": 11,
+      "year": 2025
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "sites": 10,
+      "year": 2025
+    },
+    {
+      "code": "IL",
+      "name": "Israel",
+      "sites": 9,
+      "year": 2025
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "sites": 8,
+      "year": 2025
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "sites": 10,
+      "year": 2025
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "sites": 9,
+      "year": 2025
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "sites": 8,
+      "year": 2025
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "sites": 10,
+      "year": 2025
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "sites": 6,
+      "year": 2025
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "sites": 8,
+      "year": 2025
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "sites": 6,
+      "year": 2025
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "sites": 8,
+      "year": 2025
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "sites": 9,
+      "year": 2025
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "sites": 6,
+      "year": 2025
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "sites": 8,
+      "year": 2025
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "sites": 8,
+      "year": 2025
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "BB",
+      "name": "Barbados",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "LA",
+      "name": "Laos",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "sites": 6,
+      "year": 2025
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "SY",
+      "name": "Syria",
+      "sites": 6,
+      "year": 2025
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "LY",
+      "name": "Libya",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "UG",
+      "name": "Uganda",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "CD",
+      "name": "DR Congo",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "sites": 7,
+      "year": 2025
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast",
+      "sites": 5,
+      "year": 2025
+    },
+    {
+      "code": "ML",
+      "name": "Mali",
+      "sites": 4,
+      "year": 2025
+    },
+    {
+      "code": "NE",
+      "name": "Niger",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "TD",
+      "name": "Chad",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "CF",
+      "name": "Central African Republic",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "CG",
+      "name": "Republic of the Congo",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "GA",
+      "name": "Gabon",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "MW",
+      "name": "Malawi",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "LS",
+      "name": "Lesotho",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "SZ",
+      "name": "Eswatini",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "GM",
+      "name": "Gambia",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "GN",
+      "name": "Guinea",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "SL",
+      "name": "Sierra Leone",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "LR",
+      "name": "Liberia",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "MR",
+      "name": "Mauritania",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "BJ",
+      "name": "Benin",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "TG",
+      "name": "Togo",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "ER",
+      "name": "Eritrea",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "DJ",
+      "name": "Djibouti",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "SO",
+      "name": "Somalia",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "SS",
+      "name": "South Sudan",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "BI",
+      "name": "Burundi",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "PG",
+      "name": "Papua New Guinea",
+      "sites": 1,
+      "year": 2025
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "sites": 3,
+      "year": 2025
+    },
+    {
+      "code": "SR",
+      "name": "Suriname",
+      "sites": 2,
+      "year": 2025
+    },
+    {
+      "code": "GY",
+      "name": "Guyana",
+      "sites": 0,
+      "year": 2025
+    },
+    {
+      "code": "BZ",
+      "name": "Belize",
+      "sites": 1,
+      "year": 2025
+    }
   ]
 }

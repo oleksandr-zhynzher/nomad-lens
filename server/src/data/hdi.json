@@ -2,57 +2,1165 @@
   "_source": "https://hdr.undp.org/data-center/human-development-index",
   "_download": "https://hdr.undp.org/sites/default/files/2025_HDR/HDR25_Statistical_Annex_HDI_Table.xlsx",
   "_updated": "2025",
-  "_note": "HDI score 0–1, higher is better. Add/update entries from the Excel download above.",
+  "_note": "HDI score 0–1, higher is better. Data year 2023, published 2025.",
   "data": [
-    { "code": "NO", "name": "Norway", "hdi": 0.966, "year": 2023 },
-    { "code": "IS", "name": "Iceland", "hdi": 0.959, "year": 2023 },
-    { "code": "HK", "name": "Hong Kong", "hdi": 0.956, "year": 2023 },
-    { "code": "AU", "name": "Australia", "hdi": 0.946, "year": 2023 },
-    { "code": "DK", "name": "Denmark", "hdi": 0.952, "year": 2023 },
-    { "code": "SE", "name": "Sweden", "hdi": 0.952, "year": 2023 },
-    { "code": "IE", "name": "Ireland", "hdi": 0.950, "year": 2023 },
-    { "code": "DE", "name": "Germany", "hdi": 0.942, "year": 2023 },
-    { "code": "NL", "name": "Netherlands", "hdi": 0.946, "year": 2023 },
-    { "code": "FI", "name": "Finland", "hdi": 0.940, "year": 2023 },
-    { "code": "SG", "name": "Singapore", "hdi": 0.949, "year": 2023 },
-    { "code": "BE", "name": "Belgium", "hdi": 0.942, "year": 2023 },
-    { "code": "NZ", "name": "New Zealand", "hdi": 0.939, "year": 2023 },
-    { "code": "CA", "name": "Canada", "hdi": 0.936, "year": 2023 },
-    { "code": "LI", "name": "Liechtenstein", "hdi": 0.935, "year": 2023 },
-    { "code": "LU", "name": "Luxembourg", "hdi": 0.939, "year": 2023 },
-    { "code": "GB", "name": "United Kingdom", "hdi": 0.929, "year": 2023 },
-    { "code": "JP", "name": "Japan", "hdi": 0.925, "year": 2023 },
-    { "code": "KR", "name": "South Korea", "hdi": 0.929, "year": 2023 },
-    { "code": "US", "name": "United States", "hdi": 0.927, "year": 2023 },
-    { "code": "IL", "name": "Israel", "hdi": 0.919, "year": 2023 },
-    { "code": "AT", "name": "Austria", "hdi": 0.926, "year": 2023 },
-    { "code": "FR", "name": "France", "hdi": 0.910, "year": 2023 },
-    { "code": "ES", "name": "Spain", "hdi": 0.911, "year": 2023 },
-    { "code": "IT", "name": "Italy", "hdi": 0.895, "year": 2023 },
-    { "code": "CZ", "name": "Czech Republic", "hdi": 0.900, "year": 2023 },
-    { "code": "GR", "name": "Greece", "hdi": 0.893, "year": 2023 },
-    { "code": "PL", "name": "Poland", "hdi": 0.881, "year": 2023 },
-    { "code": "PT", "name": "Portugal", "hdi": 0.874, "year": 2023 },
-    { "code": "HU", "name": "Hungary", "hdi": 0.851, "year": 2023 },
-    { "code": "RO", "name": "Romania", "hdi": 0.827, "year": 2023 },
-    { "code": "MX", "name": "Mexico", "hdi": 0.781, "year": 2023 },
-    { "code": "BR", "name": "Brazil", "hdi": 0.760, "year": 2023 },
-    { "code": "AR", "name": "Argentina", "hdi": 0.849, "year": 2023 },
-    { "code": "CL", "name": "Chile", "hdi": 0.860, "year": 2023 },
-    { "code": "CN", "name": "China", "hdi": 0.788, "year": 2023 },
-    { "code": "TH", "name": "Thailand", "hdi": 0.803, "year": 2023 },
-    { "code": "TN", "name": "Tunisia", "hdi": 0.732, "year": 2023 },
-    { "code": "ZA", "name": "South Africa", "hdi": 0.717, "year": 2023 },
-    { "code": "NG", "name": "Nigeria", "hdi": 0.548, "year": 2023 },
-    { "code": "IN", "name": "India", "hdi": 0.644, "year": 2023 },
-    { "code": "ID", "name": "Indonesia", "hdi": 0.713, "year": 2023 },
-    { "code": "PH", "name": "Philippines", "hdi": 0.710, "year": 2023 },
-    { "code": "VN", "name": "Vietnam", "hdi": 0.726, "year": 2023 },
-    { "code": "UA", "name": "Ukraine", "hdi": 0.773, "year": 2023 },
-    { "code": "TR", "name": "Turkey", "hdi": 0.855, "year": 2023 },
-    { "code": "SA", "name": "Saudi Arabia", "hdi": 0.875, "year": 2023 },
-    { "code": "AE", "name": "United Arab Emirates", "hdi": 0.937, "year": 2023 },
-    { "code": "EG", "name": "Egypt", "hdi": 0.728, "year": 2023 },
-    { "code": "MA", "name": "Morocco", "hdi": 0.698, "year": 2023 }
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "hdi": 0.972,
+      "year": 2023
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "hdi": 0.97,
+      "year": 2023
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "hdi": 0.97,
+      "year": 2023
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "hdi": 0.962,
+      "year": 2023
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "hdi": 0.959,
+      "year": 2023
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "hdi": 0.959,
+      "year": 2023
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "hdi": 0.958,
+      "year": 2023
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong",
+      "hdi": 0.955,
+      "year": 2023
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "hdi": 0.955,
+      "year": 2023
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "hdi": 0.951,
+      "year": 2023
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "hdi": 0.949,
+      "year": 2023
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "hdi": 0.948,
+      "year": 2023
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "hdi": 0.946,
+      "year": 2023
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "hdi": 0.946,
+      "year": 2023
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "hdi": 0.94,
+      "year": 2023
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "hdi": 0.939,
+      "year": 2023
+    },
+    {
+      "code": "LI",
+      "name": "Liechtenstein",
+      "hdi": 0.938,
+      "year": 2023
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "hdi": 0.938,
+      "year": 2023
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "hdi": 0.938,
+      "year": 2023
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "hdi": 0.937,
+      "year": 2023
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "hdi": 0.931,
+      "year": 2023
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "hdi": 0.93,
+      "year": 2023
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "hdi": 0.925,
+      "year": 2023
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "hdi": 0.924,
+      "year": 2023
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "hdi": 0.922,
+      "year": 2023
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "hdi": 0.92,
+      "year": 2023
+    },
+    {
+      "code": "IL",
+      "name": "Israel",
+      "hdi": 0.919,
+      "year": 2023
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "hdi": 0.918,
+      "year": 2023
+    },
+    {
+      "code": "CZ",
+      "name": "Czech Republic",
+      "hdi": 0.915,
+      "year": 2023
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "hdi": 0.915,
+      "year": 2023
+    },
+    {
+      "code": "SM",
+      "name": "San Marino",
+      "hdi": 0.915,
+      "year": 2023
+    },
+    {
+      "code": "AD",
+      "name": "Andorra",
+      "hdi": 0.913,
+      "year": 2023
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "hdi": 0.913,
+      "year": 2023
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "hdi": 0.908,
+      "year": 2023
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "hdi": 0.906,
+      "year": 2023
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "hdi": 0.905,
+      "year": 2023
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "hdi": 0.9,
+      "year": 2023
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "hdi": 0.899,
+      "year": 2023
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "hdi": 0.895,
+      "year": 2023
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "hdi": 0.89,
+      "year": 2023
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "hdi": 0.889,
+      "year": 2023
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "hdi": 0.889,
+      "year": 2023
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "hdi": 0.886,
+      "year": 2023
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "hdi": 0.88,
+      "year": 2023
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "hdi": 0.878,
+      "year": 2023
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "hdi": 0.87,
+      "year": 2023
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "hdi": 0.865,
+      "year": 2023
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "hdi": 0.862,
+      "year": 2023
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "hdi": 0.862,
+      "year": 2023
+    },
+    {
+      "code": "OM",
+      "name": "Oman",
+      "hdi": 0.858,
+      "year": 2023
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "hdi": 0.853,
+      "year": 2023
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "hdi": 0.852,
+      "year": 2023
+    },
+    {
+      "code": "AG",
+      "name": "Antigua and Barbuda",
+      "hdi": 0.851,
+      "year": 2023
+    },
+    {
+      "code": "SC",
+      "name": "Seychelles",
+      "hdi": 0.848,
+      "year": 2023
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "hdi": 0.845,
+      "year": 2023
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "hdi": 0.845,
+      "year": 2023
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "hdi": 0.844,
+      "year": 2023
+    },
+    {
+      "code": "KN",
+      "name": "Saint Kitts and Nevis",
+      "hdi": 0.84,
+      "year": 2023
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "hdi": 0.839,
+      "year": 2023
+    },
+    {
+      "code": "BN",
+      "name": "Brunei",
+      "hdi": 0.837,
+      "year": 2023
+    },
+    {
+      "code": "KZ",
+      "name": "Kazakhstan",
+      "hdi": 0.837,
+      "year": 2023
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "hdi": 0.833,
+      "year": 2023
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "hdi": 0.833,
+      "year": 2023
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "hdi": 0.832,
+      "year": 2023
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "hdi": 0.824,
+      "year": 2023
+    },
+    {
+      "code": "BS",
+      "name": "Bahamas",
+      "hdi": 0.82,
+      "year": 2023
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "hdi": 0.819,
+      "year": 2023
+    },
+    {
+      "code": "MK",
+      "name": "North Macedonia",
+      "hdi": 0.815,
+      "year": 2023
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "hdi": 0.811,
+      "year": 2023
+    },
+    {
+      "code": "BB",
+      "name": "Barbados",
+      "hdi": 0.811,
+      "year": 2023
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "hdi": 0.81,
+      "year": 2023
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "hdi": 0.807,
+      "year": 2023
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "hdi": 0.806,
+      "year": 2023
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "hdi": 0.804,
+      "year": 2023
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "hdi": 0.799,
+      "year": 2023
+    },
+    {
+      "code": "VC",
+      "name": "Saint Vincent and the Grenadines",
+      "hdi": 0.798,
+      "year": 2023
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "hdi": 0.798,
+      "year": 2023
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "hdi": 0.797,
+      "year": 2023
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "hdi": 0.794,
+      "year": 2023
+    },
+    {
+      "code": "GD",
+      "name": "Grenada",
+      "hdi": 0.791,
+      "year": 2023
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "hdi": 0.789,
+      "year": 2023
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "hdi": 0.789,
+      "year": 2023
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "hdi": 0.788,
+      "year": 2023
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "hdi": 0.786,
+      "year": 2023
+    },
+    {
+      "code": "PW",
+      "name": "Palau",
+      "hdi": 0.786,
+      "year": 2023
+    },
+    {
+      "code": "MD",
+      "name": "Moldova",
+      "hdi": 0.785,
+      "year": 2023
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "hdi": 0.779,
+      "year": 2023
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "hdi": 0.777,
+      "year": 2023
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "hdi": 0.776,
+      "year": 2023
+    },
+    {
+      "code": "GY",
+      "name": "Guyana",
+      "hdi": 0.776,
+      "year": 2023
+    },
+    {
+      "code": "LK",
+      "name": "Sri Lanka",
+      "hdi": 0.776,
+      "year": 2023
+    },
+    {
+      "code": "TO",
+      "name": "Tonga",
+      "hdi": 0.769,
+      "year": 2023
+    },
+    {
+      "code": "MV",
+      "name": "Maldives",
+      "hdi": 0.766,
+      "year": 2023
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "hdi": 0.766,
+      "year": 2023
+    },
+    {
+      "code": "TM",
+      "name": "Turkmenistan",
+      "hdi": 0.764,
+      "year": 2023
+    },
+    {
+      "code": "DZ",
+      "name": "Algeria",
+      "hdi": 0.763,
+      "year": 2023
+    },
+    {
+      "code": "CU",
+      "name": "Cuba",
+      "hdi": 0.762,
+      "year": 2023
+    },
+    {
+      "code": "DM",
+      "name": "Dominica",
+      "hdi": 0.761,
+      "year": 2023
+    },
+    {
+      "code": "PY",
+      "name": "Paraguay",
+      "hdi": 0.756,
+      "year": 2023
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "hdi": 0.754,
+      "year": 2023
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "hdi": 0.754,
+      "year": 2023
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "hdi": 0.752,
+      "year": 2023
+    },
+    {
+      "code": "LC",
+      "name": "Saint Lucia",
+      "hdi": 0.748,
+      "year": 2023
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "hdi": 0.747,
+      "year": 2023
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "hdi": 0.746,
+      "year": 2023
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "hdi": 0.741,
+      "year": 2023
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "hdi": 0.74,
+      "year": 2023
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia",
+      "hdi": 0.733,
+      "year": 2023
+    },
+    {
+      "code": "GA",
+      "name": "Gabon",
+      "hdi": 0.733,
+      "year": 2023
+    },
+    {
+      "code": "MH",
+      "name": "Marshall Islands",
+      "hdi": 0.733,
+      "year": 2023
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "hdi": 0.731,
+      "year": 2023
+    },
+    {
+      "code": "FJ",
+      "name": "Fiji",
+      "hdi": 0.731,
+      "year": 2023
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "hdi": 0.728,
+      "year": 2023
+    },
+    {
+      "code": "SR",
+      "name": "Suriname",
+      "hdi": 0.722,
+      "year": 2023
+    },
+    {
+      "code": "BZ",
+      "name": "Belize",
+      "hdi": 0.721,
+      "year": 2023
+    },
+    {
+      "code": "LY",
+      "name": "Libya",
+      "hdi": 0.721,
+      "year": 2023
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "hdi": 0.72,
+      "year": 2023
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "hdi": 0.72,
+      "year": 2023
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "hdi": 0.72,
+      "year": 2023
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "hdi": 0.71,
+      "year": 2023
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "hdi": 0.709,
+      "year": 2023
+    },
+    {
+      "code": "WS",
+      "name": "Samoa",
+      "hdi": 0.708,
+      "year": 2023
+    },
+    {
+      "code": "NI",
+      "name": "Nicaragua",
+      "hdi": 0.706,
+      "year": 2023
+    },
+    {
+      "code": "NR",
+      "name": "Nauru",
+      "hdi": 0.703,
+      "year": 2023
+    },
+    {
+      "code": "BT",
+      "name": "Bhutan",
+      "hdi": 0.698,
+      "year": 2023
+    },
+    {
+      "code": "SZ",
+      "name": "Eswatini",
+      "hdi": 0.695,
+      "year": 2023
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "hdi": 0.695,
+      "year": 2023
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "hdi": 0.691,
+      "year": 2023
+    },
+    {
+      "code": "TV",
+      "name": "Tuvalu",
+      "hdi": 0.689,
+      "year": 2023
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "hdi": 0.685,
+      "year": 2023
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "hdi": 0.685,
+      "year": 2023
+    },
+    {
+      "code": "SV",
+      "name": "El Salvador",
+      "hdi": 0.678,
+      "year": 2023
+    },
+    {
+      "code": "GQ",
+      "name": "Equatorial Guinea",
+      "hdi": 0.674,
+      "year": 2023
+    },
+    {
+      "code": "PS",
+      "name": "Palestine",
+      "hdi": 0.674,
+      "year": 2023
+    },
+    {
+      "code": "CV",
+      "name": "Cape Verde",
+      "hdi": 0.668,
+      "year": 2023
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "hdi": 0.665,
+      "year": 2023
+    },
+    {
+      "code": "GT",
+      "name": "Guatemala",
+      "hdi": 0.662,
+      "year": 2023
+    },
+    {
+      "code": "CG",
+      "name": "Republic of the Congo",
+      "hdi": 0.649,
+      "year": 2023
+    },
+    {
+      "code": "HN",
+      "name": "Honduras",
+      "hdi": 0.645,
+      "year": 2023
+    },
+    {
+      "code": "KI",
+      "name": "Kiribati",
+      "hdi": 0.644,
+      "year": 2023
+    },
+    {
+      "code": "ST",
+      "name": "São Tomé and Príncipe",
+      "hdi": 0.637,
+      "year": 2023
+    },
+    {
+      "code": "TL",
+      "name": "Timor-Leste",
+      "hdi": 0.634,
+      "year": 2023
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "hdi": 0.628,
+      "year": 2023
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "hdi": 0.628,
+      "year": 2023
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "hdi": 0.622,
+      "year": 2023
+    },
+    {
+      "code": "VU",
+      "name": "Vanuatu",
+      "hdi": 0.621,
+      "year": 2023
+    },
+    {
+      "code": "LA",
+      "name": "Laos",
+      "hdi": 0.617,
+      "year": 2023
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "hdi": 0.616,
+      "year": 2023
+    },
+    {
+      "code": "FM",
+      "name": "Micronesia",
+      "hdi": 0.615,
+      "year": 2023
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "hdi": 0.609,
+      "year": 2023
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "hdi": 0.606,
+      "year": 2023
+    },
+    {
+      "code": "KM",
+      "name": "Comoros",
+      "hdi": 0.603,
+      "year": 2023
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "hdi": 0.598,
+      "year": 2023
+    },
+    {
+      "code": "ZM",
+      "name": "Zambia",
+      "hdi": 0.595,
+      "year": 2023
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "hdi": 0.588,
+      "year": 2023
+    },
+    {
+      "code": "SB",
+      "name": "Solomon Islands",
+      "hdi": 0.584,
+      "year": 2023
+    },
+    {
+      "code": "CI",
+      "name": "Ivory Coast",
+      "hdi": 0.582,
+      "year": 2023
+    },
+    {
+      "code": "UG",
+      "name": "Uganda",
+      "hdi": 0.582,
+      "year": 2023
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "hdi": 0.578,
+      "year": 2023
+    },
+    {
+      "code": "PG",
+      "name": "Papua New Guinea",
+      "hdi": 0.576,
+      "year": 2023
+    },
+    {
+      "code": "TG",
+      "name": "Togo",
+      "hdi": 0.571,
+      "year": 2023
+    },
+    {
+      "code": "SY",
+      "name": "Syria",
+      "hdi": 0.564,
+      "year": 2023
+    },
+    {
+      "code": "MR",
+      "name": "Mauritania",
+      "hdi": 0.563,
+      "year": 2023
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "hdi": 0.56,
+      "year": 2023
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania",
+      "hdi": 0.555,
+      "year": 2023
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "hdi": 0.554,
+      "year": 2023
+    },
+    {
+      "code": "LS",
+      "name": "Lesotho",
+      "hdi": 0.55,
+      "year": 2023
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "hdi": 0.544,
+      "year": 2023
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "hdi": 0.53,
+      "year": 2023
+    },
+    {
+      "code": "GM",
+      "name": "Gambia",
+      "hdi": 0.524,
+      "year": 2023
+    },
+    {
+      "code": "CD",
+      "name": "DR Congo",
+      "hdi": 0.522,
+      "year": 2023
+    },
+    {
+      "code": "MW",
+      "name": "Malawi",
+      "hdi": 0.517,
+      "year": 2023
+    },
+    {
+      "code": "BJ",
+      "name": "Benin",
+      "hdi": 0.515,
+      "year": 2023
+    },
+    {
+      "code": "GW",
+      "name": "Guinea-Bissau",
+      "hdi": 0.514,
+      "year": 2023
+    },
+    {
+      "code": "DJ",
+      "name": "Djibouti",
+      "hdi": 0.513,
+      "year": 2023
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "hdi": 0.511,
+      "year": 2023
+    },
+    {
+      "code": "LR",
+      "name": "Liberia",
+      "hdi": 0.51,
+      "year": 2023
+    },
+    {
+      "code": "ER",
+      "name": "Eritrea",
+      "hdi": 0.503,
+      "year": 2023
+    },
+    {
+      "code": "GN",
+      "name": "Guinea",
+      "hdi": 0.5,
+      "year": 2023
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "hdi": 0.497,
+      "year": 2023
+    },
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "hdi": 0.496,
+      "year": 2023
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "hdi": 0.493,
+      "year": 2023
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "hdi": 0.487,
+      "year": 2023
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "hdi": 0.47,
+      "year": 2023
+    },
+    {
+      "code": "SL",
+      "name": "Sierra Leone",
+      "hdi": 0.467,
+      "year": 2023
+    },
+    {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "hdi": 0.459,
+      "year": 2023
+    },
+    {
+      "code": "BI",
+      "name": "Burundi",
+      "hdi": 0.439,
+      "year": 2023
+    },
+    {
+      "code": "ML",
+      "name": "Mali",
+      "hdi": 0.419,
+      "year": 2023
+    },
+    {
+      "code": "NE",
+      "name": "Niger",
+      "hdi": 0.419,
+      "year": 2023
+    },
+    {
+      "code": "TD",
+      "name": "Chad",
+      "hdi": 0.416,
+      "year": 2023
+    },
+    {
+      "code": "CF",
+      "name": "Central African Republic",
+      "hdi": 0.414,
+      "year": 2023
+    },
+    {
+      "code": "SO",
+      "name": "Somalia",
+      "hdi": 0.404,
+      "year": 2023
+    },
+    {
+      "code": "SS",
+      "name": "South Sudan",
+      "hdi": 0.388,
+      "year": 2023
+    }
   ]
 }

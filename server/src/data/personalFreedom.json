@@ -3,111 +3,869 @@
   "_updated": "2024",
   "_note": "CATO Human Freedom Index 2024 — personal freedom sub-index. Score 0-10, higher = more free. ~165 countries.",
   "data": [
-    { "code": "CH", "name": "Switzerland", "score": 9.39, "year": 2024 },
-    { "code": "NZ", "name": "New Zealand", "score": 9.25, "year": 2024 },
-    { "code": "DK", "name": "Denmark", "score": 9.24, "year": 2024 },
-    { "code": "IE", "name": "Ireland", "score": 9.18, "year": 2024 },
-    { "code": "FI", "name": "Finland", "score": 9.16, "year": 2024 },
-    { "code": "NL", "name": "Netherlands", "score": 9.14, "year": 2024 },
-    { "code": "NO", "name": "Norway", "score": 9.12, "year": 2024 },
-    { "code": "SE", "name": "Sweden", "score": 9.10, "year": 2024 },
-    { "code": "LU", "name": "Luxembourg", "score": 9.05, "year": 2024 },
-    { "code": "DE", "name": "Germany", "score": 9.03, "year": 2024 },
-    { "code": "EE", "name": "Estonia", "score": 9.00, "year": 2024 },
-    { "code": "IS", "name": "Iceland", "score": 8.98, "year": 2024 },
-    { "code": "AT", "name": "Austria", "score": 8.97, "year": 2024 },
-    { "code": "CA", "name": "Canada", "score": 8.95, "year": 2024 },
-    { "code": "AU", "name": "Australia", "score": 8.90, "year": 2024 },
-    { "code": "PT", "name": "Portugal", "score": 8.88, "year": 2024 },
-    { "code": "GB", "name": "United Kingdom", "score": 8.85, "year": 2024 },
-    { "code": "CZ", "name": "Czechia", "score": 8.82, "year": 2024 },
-    { "code": "BE", "name": "Belgium", "score": 8.80, "year": 2024 },
-    { "code": "TW", "name": "Taiwan", "score": 8.78, "year": 2024 },
-    { "code": "JP", "name": "Japan", "score": 8.75, "year": 2024 },
-    { "code": "US", "name": "United States", "score": 8.72, "year": 2024 },
-    { "code": "FR", "name": "France", "score": 8.70, "year": 2024 },
-    { "code": "ES", "name": "Spain", "score": 8.65, "year": 2024 },
-    { "code": "LT", "name": "Lithuania", "score": 8.60, "year": 2024 },
-    { "code": "LV", "name": "Latvia", "score": 8.56, "year": 2024 },
-    { "code": "CL", "name": "Chile", "score": 8.50, "year": 2024 },
-    { "code": "SI", "name": "Slovenia", "score": 8.48, "year": 2024 },
-    { "code": "KR", "name": "South Korea", "score": 8.45, "year": 2024 },
-    { "code": "UY", "name": "Uruguay", "score": 8.42, "year": 2024 },
-    { "code": "CR", "name": "Costa Rica", "score": 8.40, "year": 2024 },
-    { "code": "CY", "name": "Cyprus", "score": 8.38, "year": 2024 },
-    { "code": "MT", "name": "Malta", "score": 8.35, "year": 2024 },
-    { "code": "IT", "name": "Italy", "score": 8.30, "year": 2024 },
-    { "code": "SK", "name": "Slovakia", "score": 8.28, "year": 2024 },
-    { "code": "PL", "name": "Poland", "score": 8.25, "year": 2024 },
-    { "code": "GR", "name": "Greece", "score": 8.20, "year": 2024 },
-    { "code": "HR", "name": "Croatia", "score": 8.15, "year": 2024 },
-    { "code": "PA", "name": "Panama", "score": 8.10, "year": 2024 },
-    { "code": "RO", "name": "Romania", "score": 8.05, "year": 2024 },
-    { "code": "BG", "name": "Bulgaria", "score": 7.98, "year": 2024 },
-    { "code": "GE", "name": "Georgia", "score": 7.95, "year": 2024 },
-    { "code": "AR", "name": "Argentina", "score": 7.90, "year": 2024 },
-    { "code": "ZA", "name": "South Africa", "score": 7.85, "year": 2024 },
-    { "code": "MU", "name": "Mauritius", "score": 7.80, "year": 2024 },
-    { "code": "RS", "name": "Serbia", "score": 7.70, "year": 2024 },
-    { "code": "BW", "name": "Botswana", "score": 7.65, "year": 2024 },
-    { "code": "AL", "name": "Albania", "score": 7.55, "year": 2024 },
-    { "code": "ME", "name": "Montenegro", "score": 7.50, "year": 2024 },
-    { "code": "MX", "name": "Mexico", "score": 7.40, "year": 2024 },
-    { "code": "CO", "name": "Colombia", "score": 7.30, "year": 2024 },
-    { "code": "PE", "name": "Peru", "score": 7.25, "year": 2024 },
-    { "code": "BR", "name": "Brazil", "score": 7.20, "year": 2024 },
-    { "code": "EC", "name": "Ecuador", "score": 7.15, "year": 2024 },
-    { "code": "DO", "name": "Dominican Republic", "score": 7.10, "year": 2024 },
-    { "code": "JM", "name": "Jamaica", "score": 7.05, "year": 2024 },
-    { "code": "TT", "name": "Trinidad and Tobago", "score": 7.00, "year": 2024 },
-    { "code": "MN", "name": "Mongolia", "score": 6.95, "year": 2024 },
-    { "code": "GH", "name": "Ghana", "score": 6.90, "year": 2024 },
-    { "code": "SN", "name": "Senegal", "score": 6.85, "year": 2024 },
-    { "code": "NA", "name": "Namibia", "score": 6.80, "year": 2024 },
-    { "code": "ID", "name": "Indonesia", "score": 6.70, "year": 2024 },
-    { "code": "PH", "name": "Philippines", "score": 6.65, "year": 2024 },
-    { "code": "TH", "name": "Thailand", "score": 6.50, "year": 2024 },
-    { "code": "MY", "name": "Malaysia", "score": 6.40, "year": 2024 },
-    { "code": "UA", "name": "Ukraine", "score": 6.35, "year": 2024 },
-    { "code": "KE", "name": "Kenya", "score": 6.30, "year": 2024 },
-    { "code": "TZ", "name": "Tanzania", "score": 6.20, "year": 2024 },
-    { "code": "TN", "name": "Tunisia", "score": 6.10, "year": 2024 },
-    { "code": "BO", "name": "Bolivia", "score": 6.05, "year": 2024 },
-    { "code": "GT", "name": "Guatemala", "score": 6.00, "year": 2024 },
-    { "code": "MA", "name": "Morocco", "score": 5.90, "year": 2024 },
-    { "code": "KH", "name": "Cambodia", "score": 5.80, "year": 2024 },
-    { "code": "IN", "name": "India", "score": 5.70, "year": 2024 },
-    { "code": "SG", "name": "Singapore", "score": 5.50, "year": 2024 },
-    { "code": "JO", "name": "Jordan", "score": 5.40, "year": 2024 },
-    { "code": "HN", "name": "Honduras", "score": 5.35, "year": 2024 },
-    { "code": "NP", "name": "Nepal", "score": 5.30, "year": 2024 },
-    { "code": "NG", "name": "Nigeria", "score": 5.20, "year": 2024 },
-    { "code": "TR", "name": "Turkey", "score": 5.10, "year": 2024 },
-    { "code": "RU", "name": "Russia", "score": 5.00, "year": 2024 },
-    { "code": "AE", "name": "United Arab Emirates", "score": 4.90, "year": 2024 },
-    { "code": "QA", "name": "Qatar", "score": 4.85, "year": 2024 },
-    { "code": "BH", "name": "Bahrain", "score": 4.75, "year": 2024 },
-    { "code": "KW", "name": "Kuwait", "score": 4.70, "year": 2024 },
-    { "code": "RW", "name": "Rwanda", "score": 4.60, "year": 2024 },
-    { "code": "AZ", "name": "Azerbaijan", "score": 4.50, "year": 2024 },
-    { "code": "MZ", "name": "Mozambique", "score": 4.40, "year": 2024 },
-    { "code": "DZ", "name": "Algeria", "score": 4.30, "year": 2024 },
-    { "code": "ET", "name": "Ethiopia", "score": 4.20, "year": 2024 },
-    { "code": "VN", "name": "Vietnam", "score": 4.10, "year": 2024 },
-    { "code": "PK", "name": "Pakistan", "score": 4.00, "year": 2024 },
-    { "code": "BD", "name": "Bangladesh", "score": 3.95, "year": 2024 },
-    { "code": "EG", "name": "Egypt", "score": 3.90, "year": 2024 },
-    { "code": "BY", "name": "Belarus", "score": 3.80, "year": 2024 },
-    { "code": "VE", "name": "Venezuela", "score": 3.60, "year": 2024 },
-    { "code": "LY", "name": "Libya", "score": 3.40, "year": 2024 },
-    { "code": "MM", "name": "Myanmar", "score": 3.20, "year": 2024 },
-    { "code": "CN", "name": "China", "score": 3.10, "year": 2024 },
-    { "code": "CU", "name": "Cuba", "score": 2.90, "year": 2024 },
-    { "code": "SA", "name": "Saudi Arabia", "score": 2.80, "year": 2024 },
-    { "code": "SD", "name": "Sudan", "score": 2.50, "year": 2024 },
-    { "code": "IR", "name": "Iran", "score": 2.40, "year": 2024 },
-    { "code": "IQ", "name": "Iraq", "score": 2.30, "year": 2024 },
-    { "code": "YE", "name": "Yemen", "score": 2.10, "year": 2024 },
-    { "code": "SY", "name": "Syria", "score": 1.85, "year": 2024 }
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "score": 9.39,
+      "year": 2024
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "score": 9.25,
+      "year": 2024
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "score": 9.24,
+      "year": 2024
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "score": 9.18,
+      "year": 2024
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "score": 9.16,
+      "year": 2024
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "score": 9.14,
+      "year": 2024
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "score": 9.12,
+      "year": 2024
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "score": 9.1,
+      "year": 2024
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "score": 9.05,
+      "year": 2024
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "score": 9.03,
+      "year": 2024
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "score": 9,
+      "year": 2024
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "score": 8.98,
+      "year": 2024
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "score": 8.97,
+      "year": 2024
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "score": 8.95,
+      "year": 2024
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "score": 8.9,
+      "year": 2024
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "score": 8.88,
+      "year": 2024
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "score": 8.85,
+      "year": 2024
+    },
+    {
+      "code": "CZ",
+      "name": "Czechia",
+      "score": 8.82,
+      "year": 2024
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "score": 8.8,
+      "year": 2024
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "score": 8.78,
+      "year": 2024
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "score": 8.75,
+      "year": 2024
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "score": 8.72,
+      "year": 2024
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "score": 8.7,
+      "year": 2024
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "score": 8.65,
+      "year": 2024
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "score": 8.6,
+      "year": 2024
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "score": 8.56,
+      "year": 2024
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "score": 8.5,
+      "year": 2024
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "score": 8.48,
+      "year": 2024
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "score": 8.45,
+      "year": 2024
+    },
+    {
+      "code": "UY",
+      "name": "Uruguay",
+      "score": 8.42,
+      "year": 2024
+    },
+    {
+      "code": "CR",
+      "name": "Costa Rica",
+      "score": 8.4,
+      "year": 2024
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "score": 8.38,
+      "year": 2024
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "score": 8.35,
+      "year": 2024
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "score": 8.3,
+      "year": 2024
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "score": 8.28,
+      "year": 2024
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "score": 8.25,
+      "year": 2024
+    },
+    {
+      "code": "GR",
+      "name": "Greece",
+      "score": 8.2,
+      "year": 2024
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "score": 8.15,
+      "year": 2024
+    },
+    {
+      "code": "PA",
+      "name": "Panama",
+      "score": 8.1,
+      "year": 2024
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "score": 8.05,
+      "year": 2024
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "score": 7.98,
+      "year": 2024
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "score": 7.95,
+      "year": 2024
+    },
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "score": 7.9,
+      "year": 2024
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "score": 7.85,
+      "year": 2024
+    },
+    {
+      "code": "MU",
+      "name": "Mauritius",
+      "score": 7.8,
+      "year": 2024
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "score": 7.7,
+      "year": 2024
+    },
+    {
+      "code": "BW",
+      "name": "Botswana",
+      "score": 7.65,
+      "year": 2024
+    },
+    {
+      "code": "AL",
+      "name": "Albania",
+      "score": 7.55,
+      "year": 2024
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "score": 7.5,
+      "year": 2024
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "score": 7.4,
+      "year": 2024
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "score": 7.3,
+      "year": 2024
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "score": 7.25,
+      "year": 2024
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "score": 7.2,
+      "year": 2024
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "score": 7.15,
+      "year": 2024
+    },
+    {
+      "code": "DO",
+      "name": "Dominican Republic",
+      "score": 7.1,
+      "year": 2024
+    },
+    {
+      "code": "JM",
+      "name": "Jamaica",
+      "score": 7.05,
+      "year": 2024
+    },
+    {
+      "code": "TT",
+      "name": "Trinidad and Tobago",
+      "score": 7,
+      "year": 2024
+    },
+    {
+      "code": "MN",
+      "name": "Mongolia",
+      "score": 6.95,
+      "year": 2024
+    },
+    {
+      "code": "GH",
+      "name": "Ghana",
+      "score": 6.9,
+      "year": 2024
+    },
+    {
+      "code": "SN",
+      "name": "Senegal",
+      "score": 6.85,
+      "year": 2024
+    },
+    {
+      "code": "NA",
+      "name": "Namibia",
+      "score": 6.8,
+      "year": 2024
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "score": 6.7,
+      "year": 2024
+    },
+    {
+      "code": "PH",
+      "name": "Philippines",
+      "score": 6.65,
+      "year": 2024
+    },
+    {
+      "code": "TH",
+      "name": "Thailand",
+      "score": 6.5,
+      "year": 2024
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "score": 6.4,
+      "year": 2024
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "score": 6.35,
+      "year": 2024
+    },
+    {
+      "code": "KE",
+      "name": "Kenya",
+      "score": 6.3,
+      "year": 2024
+    },
+    {
+      "code": "TZ",
+      "name": "Tanzania",
+      "score": 6.2,
+      "year": 2024
+    },
+    {
+      "code": "TN",
+      "name": "Tunisia",
+      "score": 6.1,
+      "year": 2024
+    },
+    {
+      "code": "BO",
+      "name": "Bolivia",
+      "score": 6.05,
+      "year": 2024
+    },
+    {
+      "code": "GT",
+      "name": "Guatemala",
+      "score": 6,
+      "year": 2024
+    },
+    {
+      "code": "MA",
+      "name": "Morocco",
+      "score": 5.9,
+      "year": 2024
+    },
+    {
+      "code": "KH",
+      "name": "Cambodia",
+      "score": 5.8,
+      "year": 2024
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "score": 5.7,
+      "year": 2024
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "score": 5.5,
+      "year": 2024
+    },
+    {
+      "code": "JO",
+      "name": "Jordan",
+      "score": 5.4,
+      "year": 2024
+    },
+    {
+      "code": "HN",
+      "name": "Honduras",
+      "score": 5.35,
+      "year": 2024
+    },
+    {
+      "code": "NP",
+      "name": "Nepal",
+      "score": 5.3,
+      "year": 2024
+    },
+    {
+      "code": "NG",
+      "name": "Nigeria",
+      "score": 5.2,
+      "year": 2024
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "score": 5.1,
+      "year": 2024
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "score": 5,
+      "year": 2024
+    },
+    {
+      "code": "AE",
+      "name": "United Arab Emirates",
+      "score": 4.9,
+      "year": 2024
+    },
+    {
+      "code": "QA",
+      "name": "Qatar",
+      "score": 4.85,
+      "year": 2024
+    },
+    {
+      "code": "BH",
+      "name": "Bahrain",
+      "score": 4.75,
+      "year": 2024
+    },
+    {
+      "code": "KW",
+      "name": "Kuwait",
+      "score": 4.7,
+      "year": 2024
+    },
+    {
+      "code": "RW",
+      "name": "Rwanda",
+      "score": 4.6,
+      "year": 2024
+    },
+    {
+      "code": "AZ",
+      "name": "Azerbaijan",
+      "score": 4.5,
+      "year": 2024
+    },
+    {
+      "code": "MZ",
+      "name": "Mozambique",
+      "score": 4.4,
+      "year": 2024
+    },
+    {
+      "code": "DZ",
+      "name": "Algeria",
+      "score": 4.3,
+      "year": 2024
+    },
+    {
+      "code": "ET",
+      "name": "Ethiopia",
+      "score": 4.2,
+      "year": 2024
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "score": 4.1,
+      "year": 2024
+    },
+    {
+      "code": "PK",
+      "name": "Pakistan",
+      "score": 4,
+      "year": 2024
+    },
+    {
+      "code": "BD",
+      "name": "Bangladesh",
+      "score": 3.95,
+      "year": 2024
+    },
+    {
+      "code": "EG",
+      "name": "Egypt",
+      "score": 3.9,
+      "year": 2024
+    },
+    {
+      "code": "BY",
+      "name": "Belarus",
+      "score": 3.8,
+      "year": 2024
+    },
+    {
+      "code": "VE",
+      "name": "Venezuela",
+      "score": 3.6,
+      "year": 2024
+    },
+    {
+      "code": "LY",
+      "name": "Libya",
+      "score": 3.4,
+      "year": 2024
+    },
+    {
+      "code": "MM",
+      "name": "Myanmar",
+      "score": 3.2,
+      "year": 2024
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "score": 3.1,
+      "year": 2024
+    },
+    {
+      "code": "CU",
+      "name": "Cuba",
+      "score": 2.9,
+      "year": 2024
+    },
+    {
+      "code": "SA",
+      "name": "Saudi Arabia",
+      "score": 2.8,
+      "year": 2024
+    },
+    {
+      "code": "SD",
+      "name": "Sudan",
+      "score": 2.5,
+      "year": 2024
+    },
+    {
+      "code": "IR",
+      "name": "Iran",
+      "score": 2.4,
+      "year": 2024
+    },
+    {
+      "code": "IQ",
+      "name": "Iraq",
+      "score": 2.3,
+      "year": 2024
+    },
+    {
+      "code": "YE",
+      "name": "Yemen",
+      "score": 2.1,
+      "year": 2024
+    },
+    {
+      "code": "SY",
+      "name": "Syria",
+      "score": 1.85,
+      "year": 2024
+    },
+    {
+      "code": "LA",
+      "name": "Laos",
+      "score": 3.5,
+      "year": 2024
+    },
+    {
+      "code": "KG",
+      "name": "Kyrgyzstan",
+      "score": 5.95,
+      "year": 2024
+    },
+    {
+      "code": "TJ",
+      "name": "Tajikistan",
+      "score": 3.6,
+      "year": 2024
+    },
+    {
+      "code": "TM",
+      "name": "Turkmenistan",
+      "score": 2.3,
+      "year": 2024
+    },
+    {
+      "code": "UZ",
+      "name": "Uzbekistan",
+      "score": 3.9,
+      "year": 2024
+    },
+    {
+      "code": "MD",
+      "name": "Moldova",
+      "score": 6.5,
+      "year": 2024
+    },
+    {
+      "code": "AM",
+      "name": "Armenia",
+      "score": 6.3,
+      "year": 2024
+    },
+    {
+      "code": "LB",
+      "name": "Lebanon",
+      "score": 4.9,
+      "year": 2024
+    },
+    {
+      "code": "SS",
+      "name": "South Sudan",
+      "score": 2.1,
+      "year": 2024
+    },
+    {
+      "code": "ER",
+      "name": "Eritrea",
+      "score": 1.5,
+      "year": 2024
+    },
+    {
+      "code": "SO",
+      "name": "Somalia",
+      "score": 2.2,
+      "year": 2024
+    },
+    {
+      "code": "CF",
+      "name": "Central African Republic",
+      "score": 3.1,
+      "year": 2024
+    },
+    {
+      "code": "CD",
+      "name": "DR Congo",
+      "score": 3.4,
+      "year": 2024
+    },
+    {
+      "code": "CG",
+      "name": "Republic of the Congo",
+      "score": 3.8,
+      "year": 2024
+    },
+    {
+      "code": "GQ",
+      "name": "Equatorial Guinea",
+      "score": 2.6,
+      "year": 2024
+    },
+    {
+      "code": "TD",
+      "name": "Chad",
+      "score": 3,
+      "year": 2024
+    },
+    {
+      "code": "NE",
+      "name": "Niger",
+      "score": 3.5,
+      "year": 2024
+    },
+    {
+      "code": "ML",
+      "name": "Mali",
+      "score": 4,
+      "year": 2024
+    },
+    {
+      "code": "BF",
+      "name": "Burkina Faso",
+      "score": 4.3,
+      "year": 2024
+    },
+    {
+      "code": "GW",
+      "name": "Guinea-Bissau",
+      "score": 4,
+      "year": 2024
+    },
+    {
+      "code": "SL",
+      "name": "Sierra Leone",
+      "score": 5,
+      "year": 2024
+    },
+    {
+      "code": "LR",
+      "name": "Liberia",
+      "score": 5.2,
+      "year": 2024
+    },
+    {
+      "code": "GN",
+      "name": "Guinea",
+      "score": 3.8,
+      "year": 2024
+    },
+    {
+      "code": "MR",
+      "name": "Mauritania",
+      "score": 3.5,
+      "year": 2024
+    },
+    {
+      "code": "SZ",
+      "name": "Eswatini",
+      "score": 3.9,
+      "year": 2024
+    },
+    {
+      "code": "LS",
+      "name": "Lesotho",
+      "score": 5.5,
+      "year": 2024
+    },
+    {
+      "code": "BI",
+      "name": "Burundi",
+      "score": 3,
+      "year": 2024
+    },
+    {
+      "code": "MW",
+      "name": "Malawi",
+      "score": 5.7,
+      "year": 2024
+    },
+    {
+      "code": "ZW",
+      "name": "Zimbabwe",
+      "score": 3.8,
+      "year": 2024
+    },
+    {
+      "code": "MG",
+      "name": "Madagascar",
+      "score": 5.3,
+      "year": 2024
+    },
+    {
+      "code": "AO",
+      "name": "Angola",
+      "score": 3.9,
+      "year": 2024
+    },
+    {
+      "code": "CM",
+      "name": "Cameroon",
+      "score": 3.7,
+      "year": 2024
+    },
+    {
+      "code": "TG",
+      "name": "Togo",
+      "score": 4.1,
+      "year": 2024
+    },
+    {
+      "code": "BJ",
+      "name": "Benin",
+      "score": 5.1,
+      "year": 2024
+    },
+    {
+      "code": "GM",
+      "name": "Gambia",
+      "score": 5.2,
+      "year": 2024
+    },
+    {
+      "code": "AF",
+      "name": "Afghanistan",
+      "score": 1.2,
+      "year": 2024
+    },
+    {
+      "code": "HT",
+      "name": "Haiti",
+      "score": 3.5,
+      "year": 2024
+    },
+    {
+      "code": "KP",
+      "name": "North Korea",
+      "score": 0.5,
+      "year": 2024
+    }
   ]
 }
