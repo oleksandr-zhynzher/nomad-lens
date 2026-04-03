@@ -6,7 +6,7 @@ import {
   CATEGORY_DESCRIPTIONS,
   CATEGORY_LABELS,
 } from "../utils/types";
-import { defaultWeights, weightLabel } from "../utils/scoring";
+import { defaultWeights, defaultIndependentWeights, weightLabel } from "../utils/scoring";
 import { Tooltip } from "./Tooltip";
 
 interface WeightSliderProps {
@@ -14,11 +14,12 @@ interface WeightSliderProps {
   value: number;
   onChange: (key: CategoryKey, value: number) => void;
   weights: WeightMap;
+  weightMode: WeightMode;
 }
 
-function WeightSlider({ categoryKey, value, onChange, weights }: WeightSliderProps) {
+function WeightSlider({ categoryKey, value, onChange, weights, weightMode }: WeightSliderProps) {
   const label = CATEGORY_LABELS[categoryKey];
-  const wLabel = weightLabel(categoryKey, weights);
+  const wLabel = weightMode === "independent" ? `${value}` : weightLabel(categoryKey, weights);
   const description = CATEGORY_DESCRIPTIONS[categoryKey];
   const dataSource = CATEGORY_DATA_SOURCES[categoryKey];
 
@@ -153,6 +154,33 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
           <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#666666", marginTop: "6px", lineHeight: "1.5" }}>
             Click a group to expand and adjust its indicator weights.
           </p>
+          {/* Weight mode toggle */}
+          <div className="flex" style={{ marginTop: "10px", backgroundColor: "#141414", borderRadius: "4px", padding: "2px" }}>
+            <button
+              onClick={() => onWeightModeChange("independent")}
+              style={{
+                flex: 1, padding: "5px 0", borderRadius: "3px", border: "none", cursor: "pointer",
+                fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600,
+                backgroundColor: weightMode === "independent" ? "#291608" : "transparent",
+                color: weightMode === "independent" ? "#C2956A" : "#555555",
+                transition: "all 0.15s ease",
+              }}
+            >
+              Independent
+            </button>
+            <button
+              onClick={() => onWeightModeChange("balanced")}
+              style={{
+                flex: 1, padding: "5px 0", borderRadius: "3px", border: "none", cursor: "pointer",
+                fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600,
+                backgroundColor: weightMode === "balanced" ? "#291608" : "transparent",
+                color: weightMode === "balanced" ? "#C2956A" : "#555555",
+                transition: "all 0.15s ease",
+              }}
+            >
+              Balanced
+            </button>
+          </div>
         </div>
       )}
 
@@ -161,6 +189,9 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
         {WEIGHT_GROUPS.map((group) => {
           const isOpen = !collapsed[group.label];
           const groupTotal = group.keys.reduce((s, k) => s + (weights[k] ?? 0), 0);
+          const groupBadge = weightMode === "independent"
+            ? `Avg ${Math.round(groupTotal / group.keys.length)}`
+            : `${groupTotal}%`;
 
           return (
             <div key={group.label} style={{ borderBottom: "1px solid #242424" }}>
@@ -176,7 +207,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
                 </span>
                 <div style={{ display: "flex", alignItems: "center", backgroundColor: "#291608", borderRadius: "3px", padding: "3px 8px" }}>
                   <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#C2956A" }}>
-                    {groupTotal}%
+                    {groupBadge}
                   </span>
                 </div>
                 <ChevronDown
@@ -196,7 +227,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
                   {group.keys.map((key) => (
                     <React.Fragment key={key}>
                       <div style={{ padding: "10px 16px" }}>
-                        <WeightSlider categoryKey={key} value={weights[key]} onChange={onChange} weights={weights} />
+                        <WeightSlider categoryKey={key} value={weights[key]} onChange={onChange} weights={weights} weightMode={weightMode} />
                       </div>
                       {key === "climate" && (
                         <div className="flex flex-col" style={{ backgroundColor: "#141414", padding: "10px 20px", gap: "8px" }}>
@@ -410,7 +441,9 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
             Reset to defaults
           </button>
           <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#555555", lineHeight: "1.4", textAlign: "center" }}>
-            All indicators share 100% — raising one lowers the others
+            {weightMode === "independent"
+              ? "Each indicator is weighted independently (0–100)"
+              : "All indicators share 100% \u2014 raising one lowers the others"}
           </p>
         </div>
       </div>
