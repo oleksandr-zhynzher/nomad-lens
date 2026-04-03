@@ -157,8 +157,8 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
               <div
                 className="relative rounded-lg p-5 flex flex-col items-center gap-3"
                 style={{
-                  backgroundColor: "#141416",
-                  border: "1px solid #1C1C1C",
+                  backgroundColor: "#1A1A1C",
+                  border: "1px solid #2E2E30",
                   height: "100%",
                 }}
               >
