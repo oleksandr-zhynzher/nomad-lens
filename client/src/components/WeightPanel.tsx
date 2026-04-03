@@ -148,6 +148,9 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
           <h2 style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#FFFFFF" }}>
             WEIGHTS & PREFERENCES
           </h2>
+          <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#666666", marginTop: "6px", lineHeight: "1.5" }}>
+            Click a group to expand and adjust its indicator weights.
+          </p>
         </div>
       )}
 

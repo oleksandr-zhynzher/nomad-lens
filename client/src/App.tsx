@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Search, ArrowDownWideNarrow, Flag, Globe, SlidersHorizontal, X, ChevronUp, ChevronDown } from "lucide-react";
+import { Search, ArrowDownWideNarrow, Flag, Globe, SlidersHorizontal, X, ChevronUp, ChevronDown, Filter } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
@@ -7,6 +7,7 @@ import { CountryList } from "./components/CountryList";
 import { WorldMap } from "./components/WorldMap";
 import { RegionComparison } from "./components/RegionComparison";
 import { CountryComparison } from "./components/CountryComparison";
+import { Tooltip } from "./components/Tooltip";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { defaultClimatePreferences, defaultWeights, redistributeWeights } from "./utils/scoring";
@@ -175,11 +176,22 @@ export default function App() {
   const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(() => _initialFilters.climatePrefs);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
+  const [searchMode, setSearchMode] = useState<"filter" | "highlight">("filter");
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const { countries, loading, error, refresh } = useCountries();
   const ranked = useScoring(countries, weights, selectedRegions, nomadVisaOnly, schengenOnly, minTouristDays, climatePrefs);
+
+  const displayedRanked = useMemo(() => {
+    if (searchMode === "filter" && search.trim().length >= 1) {
+      const q = search.trim().toLowerCase();
+      return ranked.filter((r) =>
+        r.country.name.toLowerCase().includes(q) || r.country.code.toLowerCase() === q
+      );
+    }
+    return ranked;
+  }, [ranked, search, searchMode]);
 
   // Persist weights to localStorage
   useEffect(() => {
@@ -268,7 +280,7 @@ export default function App() {
   // Search navigation
   const matchingCodes = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (q.length < 2) return [];
+    if (q.length < 1) return [];
     return ranked
       .filter((r) => r.country.name.toLowerCase().includes(q) || r.country.code.toLowerCase() === q)
       .map((r) => r.country.code);
@@ -302,7 +314,7 @@ export default function App() {
       const isSearchInput = e.target === searchInputRef.current;
 
       if (e.key === "Enter") {
-        const highlighted = search.trim().length >= 2
+        const highlighted = search.trim().length >= 1
           ? (matchingCodes[matchCursor] ?? null)
           : (navCursor !== null ? (allCodes[navCursor] ?? null) : null);
         if (highlighted) {
@@ -315,10 +327,13 @@ export default function App() {
       if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
       if (!isSearchInput && (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) return;
       e.preventDefault();
-      if (search.trim().length >= 2) {
-        // Navigate within search matches
-        if (e.key === "ArrowDown") goNext();
-        else goPrev();
+      if (search.trim().length >= 1) {
+        if (searchMode === "highlight") {
+          // Navigate within search matches (highlight mode only)
+          if (e.key === "ArrowDown") goNext();
+          else goPrev();
+        }
+        // In filter mode with active search: arrows do nothing (filtered list shown)
       } else if (!isSearchInput) {
         // Navigate full list (only when not typing in search)
         setNavCursor((c) => {
@@ -331,9 +346,9 @@ export default function App() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [search, goNext, goPrev, allCodes, matchingCodes, matchCursor, navCursor]);
+  }, [search, searchMode, goNext, goPrev, allCodes, matchingCodes, matchCursor, navCursor]);
 
-  const activeHighlight = search.trim().length >= 2
+  const activeHighlight = searchMode === "highlight" && search.trim().length >= 1
     ? (matchingCodes[matchCursor] ?? null)
     : (navCursor !== null ? (allCodes[navCursor] ?? null) : highlightedCode);
 
@@ -500,19 +515,11 @@ export default function App() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="w-full pl-12 py-3 rounded-md focus:outline-none"
-                  style={{ paddingRight: search.length === 0 ? "16px" : search.trim().length >= 2 ? "128px" : "44px", backgroundColor: "#161616", border: "1px solid #1E1E22", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: "14px" }}
+                  style={{ paddingRight: search.length === 0 ? "16px" : (searchMode === "highlight" && search.trim().length >= 1) ? "164px" : "72px", backgroundColor: "#161616", border: "1px solid #1E1E22", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontSize: "14px" }}
                 />
                 {search.length > 0 && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                    <button
-                      onClick={() => setSearch("")}
-                      className="flex items-center justify-center"
-                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: "#2A2A2A", color: "#CCCCCC" }}
-                      aria-label="Clear search"
-                    >
-                      <X size={14} />
-                    </button>
-                    {search.trim().length >= 2 && (
+                    {searchMode === "highlight" && search.trim().length >= 1 && (
                       <>
                         <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#666666", minWidth: "36px", textAlign: "right" }}>
                           {matchingCodes.length > 0 ? `${matchCursor + 1}/${matchingCodes.length}` : "0/0"}
@@ -537,6 +544,34 @@ export default function App() {
                         </button>
                       </>
                     )}
+                    <Tooltip
+                      side="bottom"
+                      content={
+                        <span>
+                          {searchMode === "filter"
+                            ? <><strong>Filter mode</strong> — only matching countries are shown.<br />Click to switch to <strong>Navigate mode</strong>: shows all countries and scrolls to each match.</>
+                            : <><strong>Navigate mode</strong> — shows all countries, scrolls to matches with ↑↓ arrows.<br />Click to switch to <strong>Filter mode</strong>: hides non-matching countries.</>
+                          }
+                        </span>
+                      }
+                    >
+                    <button
+                      onClick={() => { setSearchMode((m) => m === "filter" ? "highlight" : "filter"); setMatchCursor(0); }}
+                      className="flex items-center justify-center"
+                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: searchMode === "filter" ? "#291608" : "#2A2A2A", color: searchMode === "filter" ? "#C2956A" : "#888888" }}
+                      aria-label={searchMode === "filter" ? "Switch to navigate mode (show all, scroll to match)" : "Switch to filter mode (show only matches)"}
+                    >
+                      <Filter size={13} />
+                    </button>
+                    </Tooltip>
+                    <button
+                      onClick={() => setSearch("")}
+                      className="flex items-center justify-center"
+                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: "#2A2A2A", color: "#CCCCCC" }}
+                      aria-label="Clear search"
+                    >
+                      <X size={14} />
+                    </button>
                   </div>
                 )}
               </div>
@@ -594,7 +629,7 @@ export default function App() {
 
               {/* Country list */}
               <CountryList
-                ranked={ranked}
+                ranked={displayedRanked}
                 loading={loading}
                 error={error}
                 onRetry={refresh}
