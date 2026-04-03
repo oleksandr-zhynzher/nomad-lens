@@ -33,7 +33,6 @@
 
   .country-row:hover {
     background-color: var(--row-hover-bg) !important;
-    outline: 1px solid #4A4A4E;
   }
 
   /* Range slider thumb styling */

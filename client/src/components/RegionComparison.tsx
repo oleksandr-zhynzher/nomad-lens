@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import {
   TrendingUp,
   Coins,
@@ -100,6 +100,8 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
   );
 
   const [enabled, setEnabled] = useState<Set<string>>(new Set());
+  const headerRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   // Pre-select all regions once data loads
   useEffect(() => {
@@ -107,6 +109,21 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
       setEnabled(new Set(allRegions));
     }
   }, [allRegions]);
+
+  // Sync horizontal scroll between sticky header and body
+  useEffect(() => {
+    const header = headerRef.current;
+    const body = bodyRef.current;
+    if (!header || !body) return;
+    const onBody = () => { header.scrollLeft = body.scrollLeft; };
+    const onHeader = () => { body.scrollLeft = header.scrollLeft; };
+    body.addEventListener("scroll", onBody);
+    header.addEventListener("scroll", onHeader);
+    return () => {
+      body.removeEventListener("scroll", onBody);
+      header.removeEventListener("scroll", onHeader);
+    };
+  }, []);
 
   const regionStats = useMemo(() => {
     const grouped: Record<string, CountryData[]> = {};
@@ -173,23 +190,20 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
 
   return (
     <div>
-      {/* Region cards — horizontal scroll, click to toggle */}
-      <div
-        className="flex gap-4 pb-2"
-        style={{ overflowX: "auto", scrollbarWidth: "thin" }}
-      >
+      {/* Region cards — fill full width */}
+      <div className="flex gap-3 pb-2">
         {regionStats.map((r) => {
           const active = enabled.has(r.name);
           const RegionIcon = REGION_ICONS[r.name] || Globe;
           return (
-            <div key={r.name} className="shrink-0 w-[140px] md:w-[180px]">
+            <div key={r.name} className="flex-1 min-w-0">
               <button
                 onClick={() => toggleRegion(r.name)}
-                className="w-full rounded-lg p-5 flex flex-col items-center gap-3 transition-all"
+                className="w-full rounded-lg p-4 flex flex-col items-center gap-3 transition-all"
                 style={{
-                  backgroundColor: active ? `${r.color}18` : "#141416",
-                  border: active ? `1px solid ${r.color}33` : "1px solid #1C1C1C",
-                  opacity: active ? 1 : 0.4,
+                  backgroundColor: active ? "#1A1A1C" : "#141416",
+                  border: active ? "1px solid #2E2E30" : "1px solid #1C1C1C",
+                  opacity: active ? 1 : 0.45,
                   cursor: "pointer",
                 }}
               >
@@ -244,12 +258,16 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
 
       {/* Indicator grid */}
       {activeRegions.length > 0 && (
-        <div style={{ overflowX: "auto" }}>
-          <div style={{ minWidth: `${160 + activeRegions.length * 120}px` }}>
-            {/* Separator */}
-            <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
+        <div>
+          {/* Separator */}
+          <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
-            {/* Column header */}
+          {/* Sticky column header — own overflow wrapper, synced with body */}
+          <div
+            ref={headerRef}
+            className="sticky z-10"
+            style={{ top: "56px", overflowX: "auto", scrollbarWidth: "none", backgroundColor: "#0F1114" }}
+          >
             <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
               <div className="w-[160px] md:w-[240px] shrink-0">
                 <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
@@ -257,15 +275,17 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                 </span>
               </div>
               {activeRegions.map((r) => (
-                <div key={r.name} className="flex-1 flex items-center justify-center gap-1.5" style={{ minWidth: "120px" }}>
-                  <Globe size={14} style={{ color: r.color }} />
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: r.color }}>
+                <div key={r.name} className="flex-1 flex items-center justify-center">
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#FFFFFF" }}>
                     {r.name}
                   </span>
                 </div>
               ))}
             </div>
+          </div>
 
+          {/* Scrollable data rows */}
+          <div ref={bodyRef} style={{ overflowX: "auto" }}>
             {/* Overall row */}
             <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0", backgroundColor: "#0D0D0F" }}>
               <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
@@ -275,7 +295,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                 </span>
               </div>
               {activeRegions.map((r) => (
-                <div key={r.name} className="flex-1 text-center" style={{ minWidth: "120px" }}>
+                <div key={r.name} className="flex-1 text-center">
                   <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: scoreColour(r.overall) }}>
                     {r.overall.toFixed(1)}
                   </span>
@@ -297,7 +317,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                   {activeRegions.map((r) => {
                     const val = r.categories[key].avg;
                     return (
-                      <div key={r.name} className="flex-1 text-center" style={{ minWidth: "120px" }}>
+                      <div key={r.name} className="flex-1 text-center">
                         <span
                           style={{
                             fontFamily: "IBM Plex Mono, monospace",
