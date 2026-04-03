@@ -105,7 +105,7 @@ export const CATEGORY_LABELS: Record<CategoryKey, string> = {
 
 export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   economy: "GDP per capita, unemployment rate, income equality (Gini)",
-  affordability: "Purchasing power for foreign-income earners: Price Level Ratio (nominal vs. PPP GDP) weighted with inflation stability — lower prices and stable currency score higher",
+  affordability: "Cost of living for visitors: Price Level Ratio (nominal vs. PPP GDP) and nominal GDP per capita — lower prices score higher",
   foodSecurity: "Prevalence of undernourishment % (FAO via World Bank, inverted) — lower rates indicate better food security",
   healthcare: "Life expectancy, hospital beds, physicians per 1,000",
   education: "Adult literacy rate, primary school enrollment",
@@ -131,7 +131,7 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
 
 export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   economy: "World Bank (GDP per capita, unemployment, Gini)",
-  affordability: "World Bank — Price Level Ratio (NY.GDP.PCAP.CD / NY.GDP.PCAP.PP.CD) + CPI Inflation (FP.CPI.TOTL.ZG)",
+  affordability: "World Bank — Price Level Ratio (NY.GDP.PCAP.CD / NY.GDP.PCAP.PP.CD) + nominal GDP per capita (NY.GDP.PCAP.CD)",
   foodSecurity: "FAO via World Bank — SN.ITK.DEFC.ZS (undernourishment %)",
   healthcare: "WHO · World Bank (life expectancy, hospital beds, physicians)",
   education: "World Bank (literacy rate, school enrollment)",

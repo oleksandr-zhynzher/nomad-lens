@@ -40,6 +40,20 @@ export function invertMinMax(
 }
 
 /**
+ * Inverted log-scale min-max — use when lower value means better on a skewed
+ * distribution (e.g. nominal GDP as a cost-of-living proxy).
+ */
+export function invertLogMinMax(
+  value: number | null,
+  min: number,
+  max: number,
+): number | null {
+  const raw = logMinMax(value, min, max);
+  if (raw === null) return null;
+  return Math.round((100 - raw) * 10) / 10;
+}
+
+/**
  * Average an array of 0–100 scores, ignoring nulls.
  * Returns null if all values are null.
  */

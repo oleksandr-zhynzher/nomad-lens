@@ -16,6 +16,7 @@ import {
   minMax,
   logMinMax,
   invertMinMax,
+  invertLogMinMax,
   average,
   climateScore,
 } from './utils/normalize';
@@ -102,31 +103,32 @@ async function generate(): Promise<void> {
     };
 
     // ── Affordability ────────────────────────────────────────────────────
-    // Price Level Ratio = nominal GDP per capita / PPP GDP per capita.
-    // PLR < 1 → country is cheap (your USD goes further than at home).
-    // PLR > 1 → country is expensive.
-    // We score it 0-100 with low PLR = high score (better for nomads).
+    // Two complementary signals for how expensive a country is:
+    //
+    // 1. Price Level Ratio (PLR) = nominal GDP / PPP GDP.
+    //    PLR < 1 → local prices below international average.
+    //    PLR > 1 → local prices above international average.
+    //    Scored 0-100: low PLR → high score (cheaper is better).
+    //
+    // 2. Nominal GDP per capita (log-inverted).
+    //    High nominal GDP/capita strongly correlates with high consumer prices.
+    //    Scored 0-100: low GDP → high score (cheaper is better).
+    //
+    // Final score: simple average of both (handles missing data gracefully).
     const gdpPpp = wb?.[WB_INDICATORS.gdpPerCapitaPPP];
-    const inflation = wb?.[WB_INDICATORS.inflation];
 
     const plrRaw =
       gdp?.value != null && gdpPpp?.value != null && gdpPpp.value > 0
         ? gdp.value / gdpPpp.value
         : null;
 
-    // PLR: 0.10 (ultra-cheap) → 100 … 2.00 (ultra-expensive) → 0
-    const plrScore = invertMinMax(plrRaw, 0.1, 2.0);
+    // PLR: 0.20 (ultra-cheap) → 100 … 1.50 (very expensive) → 0
+    const plrScore = invertMinMax(plrRaw, 0.2, 1.5);
 
-    // Inflation: cap at 50 % to dampen hyperinflation outliers;
-    // 0 % → 100, 30 % → 0
-    const inflRaw = inflation?.value != null ? Math.min(inflation.value, 50) : null;
-    const inflScore = invertMinMax(inflRaw, 0, 30);
+    // Nominal GDP/capita: $400 → 100 … $120 000 → 0 (log scale)
+    const gdpCostScore = invertLogMinMax(gdp?.value ?? null, 400, 120_000);
 
-    // Final score: PLR carries 70 %, inflation 30 %; gracefully degrades if one is missing
-    const affordScore: number | null =
-      plrScore !== null && inflScore !== null
-        ? Math.round((plrScore * 0.7 + inflScore * 0.3) * 10) / 10
-        : plrScore ?? inflScore ?? null;
+    const affordScore = average([plrScore, gdpCostScore]);
 
     const affordability: CategoryScore = {
       value: affordScore,
@@ -137,8 +139,8 @@ async function generate(): Promise<void> {
         ...(gdpPpp?.value != null
           ? { gdpPerCapitaPPP: ind(gdpPpp.value, 'PPP $', gdpPpp.year) }
           : {}),
-        ...(inflation?.value != null
-          ? { inflation: ind(inflation.value, '% YoY', inflation.year) }
+        ...(gdp?.value != null
+          ? { gdpPerCapita: ind(gdp.value, 'USD', gdp.year) }
           : {}),
       },
     };
