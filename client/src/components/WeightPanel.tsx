@@ -156,7 +156,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
           </p>
           {/* Weight mode toggle */}
           <div className="flex" style={{ marginTop: "10px", backgroundColor: "#2A2A2A", borderRadius: "4px", padding: "4px", gap: "4px" }}>
-            <div style={{ flex: 1, display: "flex" }}>
+            <div style={{ flex: "1 1 0", display: "flex" }}>
               <Tooltip
                 content={
                   <div>
@@ -182,7 +182,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
                 </button>
               </Tooltip>
             </div>
-            <div style={{ flex: 1, display: "flex" }}>
+            <div style={{ flex: "1 1 0", display: "flex" }}>
               <Tooltip
                 content={
                   <div>
