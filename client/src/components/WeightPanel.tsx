@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Globe, Plane } from "lucide-react";
+import { Info, ChevronDown, Briefcase, HeartPulse, ShieldCheck, GraduationCap, Leaf, Globe, Plane, Sliders, Scale } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, SeasonType, WeightMap, WeightMode } from "../utils/types";
 import {
   CATEGORY_DATA_SOURCES,
@@ -167,6 +167,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
             >
               <button
                 onClick={() => onWeightModeChange("independent")}
+                className="flex items-center justify-center gap-1.5"
                 style={{
                   flex: 1, padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
                   fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "independent" ? 500 : 400,
@@ -175,6 +176,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
                   transition: "all 0.15s ease",
                 }}
               >
+                <Sliders size={16} />
                 Independent
               </button>
             </Tooltip>
@@ -189,6 +191,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
             >
               <button
                 onClick={() => onWeightModeChange("balanced")}
+                className="flex items-center justify-center gap-1.5"
                 style={{
                   flex: 1, padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
                   fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "balanced" ? 500 : 400,
@@ -197,6 +200,7 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
                   transition: "all 0.15s ease",
                 }}
               >
+                <Scale size={16} />
                 Balanced
               </button>
             </Tooltip>
