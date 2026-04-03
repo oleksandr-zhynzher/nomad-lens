@@ -209,7 +209,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
               >
                 <RegionIcon
                   size={36}
-                  style={{ color: active ? r.color : "#555555" }}
+                  style={{ color: active ? "#FFFFFF" : "#555555" }}
                 />
 
                 <span

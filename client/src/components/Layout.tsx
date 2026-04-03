@@ -26,7 +26,11 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
       <header className="border-b sticky top-0 z-30" style={{ backgroundColor: "#0D0E10", borderColor: "#252525", height: "56px" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => handleViewClick("list")}
+            className="flex items-center gap-2.5"
+            style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+          >
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               {/* Outer compass circle */}
               <circle cx="16" cy="16" r="15" stroke="#8F5A3C" strokeWidth="1.5" fill="none" opacity="0.6" />
@@ -53,7 +57,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
             <span style={{ fontFamily: "Anton, sans-serif", fontSize: "20px", letterSpacing: "2px", textTransform: "uppercase" }}>
               NOMAD LENS
             </span>
-          </div>
+          </button>
 
           {/* Desktop: right side nav links + view toggle + GitHub */}
           <div className="hidden md:flex items-center gap-4">
