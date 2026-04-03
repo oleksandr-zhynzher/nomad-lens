@@ -79,6 +79,23 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [query, setQuery] = useState("");
   const addBtnRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  // Sync horizontal scroll between sticky header and body
+  useEffect(() => {
+    const header = headerRef.current;
+    const body = bodyRef.current;
+    if (!header || !body) return;
+    const onBody = () => { header.scrollLeft = body.scrollLeft; };
+    const onHeader = () => { body.scrollLeft = header.scrollLeft; };
+    body.addEventListener("scroll", onBody);
+    header.addEventListener("scroll", onHeader);
+    return () => {
+      body.removeEventListener("scroll", onBody);
+      header.removeEventListener("scroll", onHeader);
+    };
+  }, []);
 
   const selectedCountries = selectedCodes
     .map((code, i) => {
@@ -140,15 +157,15 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
               <div
                 className="relative rounded-lg p-5 flex flex-col items-center gap-3"
                 style={{
-                  backgroundColor: `${sColor}18`,
-                  border: `1px solid ${sColor}33`,
+                  backgroundColor: "#141416",
+                  border: "1px solid #1C1C1C",
                   height: "100%",
                 }}
               >
                 <button
                   onClick={() => handleRemove(slot.index)}
                   className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
-                  style={{ opacity: 0.5, color: "#999999", fontFamily: "Geist, sans-serif", fontSize: "11px" }}
+                  style={{ opacity: 0.6, color: "#FFFFFF", fontFamily: "Geist, sans-serif", fontSize: "11px" }}
                 >
                   <X size={14} />
                 </button>
@@ -159,17 +176,22 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                   className="rounded-full object-cover w-10 h-10 md:w-12 md:h-12"
                 />
 
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "15px",
-                    fontWeight: 600,
-                    color: "#E8E9EB",
-                    textAlign: "center",
-                  }}
-                >
-                  {slot.country.name}
-                </span>
+                <div className="flex items-center justify-center gap-1.5">
+                  <span
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                      color: "#E8E9EB",
+                      textAlign: "center",
+                    }}
+                  >
+                    {slot.country.name}
+                  </span>
+                  {slot.country.hasNomadVisa && (
+                    <Plane size={13} style={{ color: "var(--color-accent-dim)", flexShrink: 0 }} />
+                  )}
+                </div>
 
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl md:text-[32px]" style={{ fontFamily: "Anton, sans-serif", color: sColor, lineHeight: 1 }}>
@@ -178,22 +200,12 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                   <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>/100</span>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-1.5">
-                  <span
+                <span
                     className="px-2 py-0.5 rounded-full"
                     style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#999999", backgroundColor: "#1C1C1C", border: "1px solid #2C2C2C" }}
                   >
                     {slot.country.region}
                   </span>
-                  {slot.country.hasNomadVisa && (
-                    <span
-                      className="px-2 py-0.5 rounded-full"
-                      style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "var(--color-accent)", backgroundColor: "rgba(143, 90, 60, 0.15)", border: "1px solid rgba(143, 90, 60, 0.3)" }}
-                    >
-                      Nomad Visa
-                    </span>
-                  )}
-                </div>
               </div>
             </div>
           );
@@ -276,12 +288,16 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
 
       {/* Indicator grid */}
       {selectedCountries.length > 0 && (
-        <div className="mt-8" style={{ overflowX: "auto" }}>
-          <div style={{ minWidth: `${160 + selectedCountries.length * 120}px` }}>
-            {/* Separator */}
-            <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
+        <div className="mt-8">
+          {/* Separator */}
+          <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
-            {/* Column header */}
+          {/* Sticky column header — own overflow wrapper, synced with body */}
+          <div
+            ref={headerRef}
+            className="sticky z-10"
+            style={{ top: "56px", overflowX: "auto", scrollbarWidth: "none", backgroundColor: "#0F1114" }}
+          >
             <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
               <div className="w-[160px] md:w-[240px] shrink-0">
                 <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
@@ -289,15 +305,18 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                 </span>
               </div>
               {selectedCountries.map((slot) => (
-                <div key={slot.index} className="flex-1 flex items-center justify-center gap-1.5" style={{ minWidth: "120px" }}>
+                <div key={slot.index} className="flex-1 flex items-center justify-center gap-1.5">
                   <img src={slot.country.flagUrl} alt={slot.country.name} className="rounded-full object-cover" style={{ width: "18px", height: "18px" }} />
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#AAAAAA" }}>
+                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#FFFFFF" }}>
                     {slot.country.name}
                   </span>
                 </div>
               ))}
             </div>
+          </div>
 
+          {/* Scrollable data rows */}
+          <div ref={bodyRef} style={{ overflowX: "auto" }}>
             {/* Indicator rows */}
             {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];
@@ -312,7 +331,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                   {selectedCountries.map((slot) => {
                     const val = slot.country.scores[key]?.value;
                     return (
-                      <div key={slot.index} className="flex-1 text-center" style={{ minWidth: "120px" }}>
+                      <div key={slot.index} className="flex-1 text-center">
                         <span
                           style={{
                             fontFamily: "IBM Plex Mono, monospace",
