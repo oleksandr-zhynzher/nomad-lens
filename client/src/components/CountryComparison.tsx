@@ -189,7 +189,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                     {slot.country.name}
                   </span>
                   {slot.country.hasNomadVisa && (
-                    <Plane size={13} style={{ color: "var(--color-accent-dim)", flexShrink: 0 }} />
+                    <Plane size={13} style={{ color: "#E8E9EB", flexShrink: 0 }} />
                   )}
                 </div>
 
