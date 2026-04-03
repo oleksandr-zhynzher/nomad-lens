@@ -1,23 +1,33 @@
 import { type ReactNode, useState } from "react";
 import { BarChart3, List, Map, Menu, X } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useLangPrefix } from "../hooks/useLangPrefix";
 
 interface LayoutProps {
   children: ReactNode;
-  view?: "list" | "map" | "compare";
-  onViewChange?: (view: "list" | "map" | "compare") => void;
   activePage?: "data-sources" | "indicators";
 }
 
-export function Layout({ children, view, onViewChange, activePage }: LayoutProps) {
+export function Layout({ children, activePage }: LayoutProps) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { t, i18n } = useTranslation();
+  const langPrefix = useLangPrefix();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const activeView: "list" | "map" | "compare" =
+    pathname.endsWith("/map") ? "map" :
+    pathname.endsWith("/compare") ? "compare" : "list";
+
+  const showViewToggle =
+    !pathname.endsWith("/indicators") && !pathname.endsWith("/data-sources");
+
   const handleViewClick = (v: "list" | "map" | "compare") => {
-    if (onViewChange) {
-      onViewChange(v);
+    if (v === "list") {
+      navigate(langPrefix || "/");
     } else {
-      navigate(`/?view=${v}`);
+      navigate(`${langPrefix}/${v}`);
     }
     setMobileMenuOpen(false);
   };
@@ -64,7 +74,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
             {/* Info page nav links */}
             <nav style={{ display: "flex", alignItems: "center", gap: "24px" }}>
               <Link
-                to="/indicators"
+                to={`${langPrefix}/indicators`}
                 style={{
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
@@ -73,10 +83,10 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
                   textDecoration: "none",
                 }}
               >
-                Indicators
+                {t("nav.indicators")}
               </Link>
               <Link
-                to="/data-sources"
+                to={`${langPrefix}/data-sources`}
                 style={{
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
@@ -85,7 +95,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
                   textDecoration: "none",
                 }}
               >
-                Data Sources
+                {t("nav.dataSources")}
               </Link>
             </nav>
             {/* Divider */}
@@ -96,44 +106,69 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
                 onClick={() => handleViewClick("list")}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
                 style={{
-                  backgroundColor: view === "list" ? "var(--color-accent)" : "transparent",
-                  color: view === "list" ? "#FFFFFF" : "#999999",
+                  backgroundColor: activeView === "list" ? "var(--color-accent)" : "transparent",
+                  color: activeView === "list" ? "#FFFFFF" : "#999999",
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
-                  fontWeight: view === "list" ? 500 : 400,
+                  fontWeight: activeView === "list" ? 500 : 400,
                 }}
               >
                 <List size={16} />
-                List
+                {t("views.list")}
               </button>
               <button
                 onClick={() => handleViewClick("map")}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
                 style={{
-                  backgroundColor: view === "map" ? "var(--color-accent)" : "transparent",
-                  color: view === "map" ? "#FFFFFF" : "#999999",
+                  backgroundColor: activeView === "map" ? "var(--color-accent)" : "transparent",
+                  color: activeView === "map" ? "#FFFFFF" : "#999999",
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
-                  fontWeight: view === "map" ? 500 : 400,
+                  fontWeight: activeView === "map" ? 500 : 400,
                 }}
               >
                 <Map size={16} />
-                Map
+                {t("views.map")}
               </button>
               <button
                 onClick={() => handleViewClick("compare")}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
                 style={{
-                  backgroundColor: view === "compare" ? "var(--color-accent)" : "transparent",
-                  color: view === "compare" ? "#FFFFFF" : "#999999",
+                  backgroundColor: activeView === "compare" ? "var(--color-accent)" : "transparent",
+                  color: activeView === "compare" ? "#FFFFFF" : "#999999",
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
-                  fontWeight: view === "compare" ? 500 : 400,
+                  fontWeight: activeView === "compare" ? 500 : 400,
                 }}
               >
                 <BarChart3 size={16} />
-                Compare
+                {t("views.compare")}
               </button>
+            </div>
+
+            {/* Divider */}
+            <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
+
+            {/* Language switcher */}
+            <div className="flex items-center" style={{ gap: "2px" }}>
+              {(["en", "ua", "ru"] as const).map((lng) => (
+                <Link
+                  key={lng}
+                  to={lng === "en" ? "/" : `/${lng}`}
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "12px",
+                    fontWeight: i18n.language === lng ? 700 : 400,
+                    color: i18n.language === lng ? "#C2956A" : "#555555",
+                    textDecoration: "none",
+                    padding: "3px 7px",
+                    borderRadius: "3px",
+                    backgroundColor: i18n.language === lng ? "#1A1208" : "transparent",
+                  }}
+                >
+                  {t(`langSwitcher.${lng}`)}
+                </Link>
+              ))}
             </div>
 
             {/* Divider */}
@@ -150,7 +185,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
               <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
               </svg>
-              GitHub
+              {t("nav.github")}
             </a>
           </div>
 
@@ -171,51 +206,51 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
         <div className="md:hidden fixed inset-x-0 top-14 z-20" style={{ backgroundColor: "#0D0E10", borderBottom: "1px solid #252525" }}>
           <div className="flex flex-col gap-1 px-4 py-3">
             {/* View toggle */}
-            {view !== undefined && (
+            {showViewToggle && (
               <>
-                <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#444444", marginBottom: "4px" }}>VIEW</p>
+                <p style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#444444", marginBottom: "4px" }}>{t("views.viewLabel")}</p>
                 <div className="flex rounded-md p-1 mb-3" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
                   <button
                     onClick={() => handleViewClick("list")}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
                     style={{
-                      backgroundColor: view === "list" ? "var(--color-accent)" : "transparent",
-                      color: view === "list" ? "#FFFFFF" : "#999999",
+                      backgroundColor: activeView === "list" ? "var(--color-accent)" : "transparent",
+                      color: activeView === "list" ? "#FFFFFF" : "#999999",
                       fontFamily: "Geist, sans-serif",
                       fontSize: "13px",
-                      fontWeight: view === "list" ? 500 : 400,
+                      fontWeight: activeView === "list" ? 500 : 400,
                     }}
                   >
                     <List size={16} />
-                    List
+                    {t("views.list")}
                   </button>
                   <button
                     onClick={() => handleViewClick("map")}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
                     style={{
-                      backgroundColor: view === "map" ? "var(--color-accent)" : "transparent",
-                      color: view === "map" ? "#FFFFFF" : "#999999",
+                      backgroundColor: activeView === "map" ? "var(--color-accent)" : "transparent",
+                      color: activeView === "map" ? "#FFFFFF" : "#999999",
                       fontFamily: "Geist, sans-serif",
                       fontSize: "13px",
-                      fontWeight: view === "map" ? 500 : 400,
+                      fontWeight: activeView === "map" ? 500 : 400,
                     }}
                   >
                     <Map size={16} />
-                    Map
+                    {t("views.map")}
                   </button>
                   <button
                     onClick={() => handleViewClick("compare")}
                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
                     style={{
-                      backgroundColor: view === "compare" ? "var(--color-accent)" : "transparent",
-                      color: view === "compare" ? "#FFFFFF" : "#999999",
+                      backgroundColor: activeView === "compare" ? "var(--color-accent)" : "transparent",
+                      color: activeView === "compare" ? "#FFFFFF" : "#999999",
                       fontFamily: "Geist, sans-serif",
                       fontSize: "13px",
-                      fontWeight: view === "compare" ? 500 : 400,
+                      fontWeight: activeView === "compare" ? 500 : 400,
                     }}
                   >
                     <BarChart3 size={16} />
-                    Compare
+                    {t("views.compare")}
                   </button>
                 </div>
               </>
@@ -223,7 +258,7 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
 
             {/* Nav links */}
             <Link
-              to="/indicators"
+              to={`${langPrefix}/indicators`}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center py-3"
               style={{
@@ -235,10 +270,10 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
                 borderBottom: "1px solid #1E1E1E",
               }}
             >
-              Indicators
+              {t("nav.indicators")}
             </Link>
             <Link
-              to="/data-sources"
+              to={`${langPrefix}/data-sources`}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center py-3"
               style={{
@@ -250,8 +285,29 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
                 borderBottom: "1px solid #1E1E1E",
               }}
             >
-              Data Sources
+              {t("nav.dataSources")}
             </Link>
+
+            {/* Language switcher */}
+            <div className="flex items-center gap-3 py-3" style={{ borderBottom: "1px solid #1E1E1E" }}>
+              {(["en", "ua", "ru"] as const).map((lng) => (
+                <Link
+                  key={lng}
+                  to={lng === "en" ? "/" : `/${lng}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "13px",
+                    fontWeight: i18n.language === lng ? 700 : 400,
+                    color: i18n.language === lng ? "#C2956A" : "#555555",
+                    textDecoration: "none",
+                  }}
+                >
+                  {t(`langSwitcher.${lng}`)}
+                </Link>
+              ))}
+            </div>
+
             <a
               href="https://github.com/oleksandr-zhynzher/nomad-lens"
               target="_blank"
@@ -262,16 +318,16 @@ export function Layout({ children, view, onViewChange, activePage }: LayoutProps
               <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
               </svg>
-              GitHub
+              {t("nav.github")}
             </a>
           </div>
         </div>
       )}
 
-      <main className={view === "compare" ? "" : "max-w-7xl mx-auto px-4 py-4 md:py-6"}>{children}</main>
+      <main className={activeView === "compare" ? "" : "max-w-7xl mx-auto px-4 py-4 md:py-6"}>{children}</main>
 
       <footer className="border-t mt-16 py-6 text-center text-xs px-4" style={{ borderColor: "#333333", color: "#666666" }}>
-        Data: World Bank · WHO · Open-Meteo · REST Countries · UNDP · World Happiness Report · Global Peace Index · UNODC
+        {t("footer.data")}
       </footer>
     </div>
   );

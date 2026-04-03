@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
 
@@ -105,87 +106,24 @@ function DataSourceCard({ name, category, description, tags }: DataSourceCardPro
   );
 }
 
-const DATA_SOURCES: DataSourceCardProps[][] = [
-  [
-    {
-      name: "World Bank",
-      category: "MULTILATERAL",
-      description: "Comprehensive development data covering 200+ countries",
-      tags: ["Economy", "Governance", "Education"],
-    },
-    {
-      name: "WHO",
-      category: "UN AGENCY",
-      description: "Global health statistics and epidemiological data",
-      tags: ["Healthcare", "Food Security"],
-    },
-  ],
-  [
-    {
-      name: "UNDP",
-      category: "UN AGENCY",
-      description: "Human Development Index combining health, education, and income",
-      tags: ["Human Development"],
-    },
-    {
-      name: "ITU",
-      category: "UN AGENCY",
-      description: "Global ICT statistics and connectivity data",
-      tags: ["Internet", "Infrastructure"],
-    },
-  ],
-  [
-    {
-      name: "Yale EPI",
-      category: "ACADEMIC",
-      description: "Environmental Performance Index measuring 180 countries",
-      tags: ["Environment"],
-    },
-    {
-      name: "IEP / Vision of Humanity",
-      category: "NGO",
-      description: "Global Peace Index measuring societal safety and security",
-      tags: ["Safety"],
-    },
-  ],
-  [
-    {
-      name: "World Happiness Report",
-      category: "ACADEMIC",
-      description: "Annual survey-based wellbeing and life satisfaction scores",
-      tags: ["Happiness"],
-    },
-    {
-      name: "EF Education First",
-      category: "PRIVATE",
-      description: "World's largest ranking of English skills by country",
-      tags: ["English Proficiency"],
-    },
-  ],
-  [
-    {
-      name: "FAO",
-      category: "UN AGENCY",
-      description: "Food and Agriculture Organization nutritional and security data",
-      tags: ["Food Security"],
-    },
-    {
-      name: "ND-GAIN",
-      category: "ACADEMIC",
-      description: "Notre Dame climate vulnerability and readiness index",
-      tags: ["Climate"],
-    },
-  ],
+/** Rows of translation keys — names/categories/etc. come from i18n */
+const DATA_SOURCE_KEYS: string[][] = [
+  ["worldBank", "who"],
+  ["undp", "itu"],
+  ["yaleEpi", "iep"],
+  ["worldHappiness", "ef"],
+  ["fao", "ndGain"],
 ];
 
 export function DataSourcesPage() {
+  const { t } = useTranslation();
   return (
     <Layout activePage="data-sources">
       <HeroSection
         backgroundImage="/hero-map.png"
-        eyebrow="REFERENCE"
-        title="DATA SOURCES"
-        subtitle="Transparent methodology — every score is traceable to its origin."
+        eyebrow={t("dataSourcesPage.eyebrow")}
+        title={t("dataSourcesPage.title")}
+        subtitle={t("dataSourcesPage.subtitle")}
       />
 
       {/* Content zone */}
@@ -198,13 +136,19 @@ export function DataSourcesPage() {
           gap: "16px",
         }}
       >
-        {DATA_SOURCES.map((row, rowIdx) => (
+        {DATA_SOURCE_KEYS.map((row, rowIdx) => (
           <div
             key={rowIdx}
             className="flex flex-col md:flex-row gap-4 w-full"
           >
-            {row.map((card) => (
-              <DataSourceCard key={card.name} {...card} />
+            {row.map((key) => (
+              <DataSourceCard
+                key={key}
+                name={t(`dataSourcesPage.sources.${key}.name`)}
+                category={t(`dataSourcesPage.sources.${key}.category`)}
+                description={t(`dataSourcesPage.sources.${key}.description`)}
+                tags={t(`dataSourcesPage.sources.${key}.tags`, { returnObjects: true }) as string[]}
+              />
             ))}
           </div>
         ))}

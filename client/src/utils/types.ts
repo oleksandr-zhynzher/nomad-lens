@@ -11,7 +11,7 @@ export interface IndicatorValue {
 export interface CategoryScore {
   /** Normalized 0–100 composite score for this category. null = data unavailable. */
   value: number | null;
-  indicators: Record<string, IndicatorValue>;
+  indicators: Record<string, IndicatorValue | undefined>;
 }
 
 export type CategoryKey =

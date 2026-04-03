@@ -1,18 +1,26 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import './i18n'
 import './index.css'
 import App from './App.tsx'
 import { DataSourcesPage } from './pages/DataSourcesPage.tsx'
 import { IndicatorsPage } from './pages/IndicatorsPage.tsx'
+import { MapPage } from './pages/MapPage.tsx'
+import { ComparePage } from './pages/ComparePage.tsx'
+import { LangWrapper } from './components/LangWrapper.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/data-sources" element={<DataSourcesPage />} />
-        <Route path="/indicators" element={<IndicatorsPage />} />
+        <Route path="/:lang?" element={<LangWrapper />}>
+          <Route index element={<App />} />
+          <Route path="map" element={<MapPage />} />
+          <Route path="compare" element={<ComparePage />} />
+          <Route path="data-sources" element={<DataSourcesPage />} />
+          <Route path="indicators" element={<IndicatorsPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,

@@ -1,0 +1,327 @@
+{
+  "nav": {
+    "indicators": "Indicators",
+    "dataSources": "Data Sources",
+    "github": "GitHub"
+  },
+  "langSwitcher": {
+    "en": "EN",
+    "ua": "UA",
+    "ru": "RU"
+  },
+  "views": {
+    "list": "List",
+    "map": "Map",
+    "compare": "Compare",
+    "viewLabel": "VIEW"
+  },
+  "footer": {
+    "data": "Data: World Bank · WHO · Open-Meteo · REST Countries · UNDP · World Happiness Report · Global Peace Index · UNODC"
+  },
+  "hero": {
+    "eyebrow": "DISCOVER · COMPARE · DECIDE",
+    "title": "FIND YOUR NEXT COUNTRY",
+    "tagline": "Personalised rankings for digital nomads — live data from 10 global sources.",
+    "countries": "Countries",
+    "indicators": "Indicators",
+    "dataSources": "Data Sources"
+  },
+  "search": {
+    "placeholder": "Search by country name or ISO code…"
+  },
+  "regions": {
+    "label": "REGIONS",
+    "all": "All"
+  },
+  "compare": {
+    "eyebrow": "COMPARE",
+    "countryTitle": "COUNTRY COMPARISON",
+    "regionTitle": "REGION COMPARISON",
+    "countrySubtitle": "Select countries to compare across all indicators",
+    "regionSubtitle": "Compare average scores across world regions",
+    "countries": "Countries",
+    "regions": "Regions",
+    "parameters": "Parameters",
+    "sortByScore": "Sort by Score",
+    "share": "Share"
+  },
+  "mobileSheet": {
+    "weightsAndPreferences": "Weights & Preferences",
+    "parameters": "Parameters"
+  },
+  "weights": {
+    "title": "WEIGHTS & PREFERENCES",
+    "hint": "Click a group to expand and adjust its indicator weights.",
+    "independentMode": "Independent",
+    "balancedMode": "Balanced",
+    "independentTitle": "Independent Mode",
+    "independentDesc": "Each indicator is weighted independently on a 0–100 scale. Total weight can exceed 100. All indicators are considered when ranking countries — higher values = more important.",
+    "balancedTitle": "Balanced Mode",
+    "balancedDesc": "All visible indicators share 100% total weight. Increasing one indicator automatically decreases others proportionally. Perfect for comparing relative importance across categories.",
+    "footerIndependent": "Each indicator is weighted independently (0–100)",
+    "footerBalanced": "All indicators share 100% — raising one lowers the others",
+    "shareWeights": "Share weights",
+    "linkCopied": "Link copied!",
+    "resetToDefaults": "Reset to defaults",
+    "groups": {
+      "economic": "ECONOMIC",
+      "healthWellbeing": "HEALTH & WELLBEING",
+      "safetyGovernance": "SAFETY & GOVERNANCE",
+      "educationDevelopment": "EDUCATION & DEVELOPMENT",
+      "environmentClimate": "ENVIRONMENT & CLIMATE",
+      "connectivity": "CONNECTIVITY"
+    }
+  },
+  "visa": {
+    "sectionLabel": "VISA & STAY",
+    "nomadVisaOnly": "Nomad Visa Only",
+    "nomadVisaTitle": "Digital Nomad Visa",
+    "nomadVisaDesc": "Show only countries that offer digital nomad visas or long-term remote work permits.",
+    "schengenArea": "Schengen Area",
+    "schengenTitle": "Schengen Zone",
+    "schengenDesc": "Show only countries within the Schengen Area — 29 European countries with passport-free travel between them.",
+    "minTouristStay": "Min. Tourist Stay",
+    "touristVisaTitle": "Tourist Visa Length",
+    "touristVisaDesc": "Filter by the minimum visa-free or visa-on-arrival stay available for most Western passports. Countries requiring advance visa applications are excluded.",
+    "any": "Any"
+  },
+  "climate": {
+    "temperatureRange": "Temperature Range",
+    "min": "Min",
+    "max": "Max",
+    "seasons": {
+      "any": "Any",
+      "fourSeasons": "4 Seasons",
+      "mild": "Mild",
+      "tropical": "Tropical",
+      "arid": "Arid",
+      "polar": "Polar"
+    }
+  },
+  "countryDetail": {
+    "rank": "RANK",
+    "compositeScore": "COMPOSITE SCORE",
+    "nomadVisa": "Nomad Visa",
+    "scoreBreakdown": "SCORE BREAKDOWN",
+    "viewInList": "View in List →",
+    "climate": {
+      "fourSeasons": "Four Seasons",
+      "mild": "Mild",
+      "tropical": "Tropical",
+      "arid": "Arid",
+      "polar": "Polar"
+    }
+  },
+  "countryList": {
+    "noResults": "No countries match your search.",
+    "retry": "Retry",
+    "count": "{{count}} countries"
+  },
+  "indicatorsPage": {
+    "eyebrow": "REFERENCE",
+    "title": "INDICATORS",
+    "subtitle": "How each score is calculated — data sources, methodology, and weighting.",
+    "indicators": {
+      "economy": {
+        "name": "Economy",
+        "description": "GDP per capita, income inequality, employment rates, and economic stability. Higher scores reflect stronger, more resilient economies with broad-based prosperity.",
+        "source": "World Bank",
+        "weight": "Default weight 10%"
+      },
+      "affordability": {
+        "name": "Affordability",
+        "description": "Cost of living relative to local income. Covers housing, groceries, transport, and daily expenses using Numbeo and World Bank purchasing power data.",
+        "source": "Numbeo · World Bank",
+        "weight": "Default weight 10%"
+      },
+      "foodSecurity": {
+        "name": "Food Security",
+        "description": "Access to sufficient, safe, and nutritious food. FAO data tracks prevalence of undernourishment, food price stability, and agricultural production capacity.",
+        "source": "FAO",
+        "weight": "Default weight 7%"
+      },
+      "healthcare": {
+        "name": "Healthcare",
+        "description": "Quality and accessibility of healthcare systems. WHO data covers life expectancy, hospital beds per capita, physician density, and health expenditure.",
+        "source": "WHO",
+        "weight": "Default weight 8%"
+      },
+      "education": {
+        "name": "Education",
+        "description": "Literacy rates, school enrollment, and quality of education institutions. UNESCO tracks years of schooling, tertiary enrollment, and educational attainment.",
+        "source": "UNESCO · World Bank",
+        "weight": "Default weight 7%"
+      },
+      "environment": {
+        "name": "Environment",
+        "description": "Air quality, water purity, biodiversity, and ecological sustainability. Yale's Environmental Performance Index scores countries across 32 indicators in 11 categories.",
+        "source": "Yale EPI",
+        "weight": "Default weight 7%"
+      },
+      "climate": {
+        "name": "Climate",
+        "description": "Temperature comfort, seasonal variation, and climate vulnerability. ND-GAIN measures a country's exposure to climate-related risks and its readiness to adapt.",
+        "source": "ND-GAIN",
+        "weight": "Default weight 7%"
+      },
+      "safety": {
+        "name": "Safety",
+        "description": "Personal safety, crime rates, and political stability. The Global Peace Index from the Institute for Economics & Peace ranks 163 nations across 23 indicators.",
+        "source": "IEP / Vision of Humanity",
+        "weight": "Default weight 8%"
+      },
+      "infrastructure": {
+        "name": "Internet & Infrastructure",
+        "description": "Broadband speed, mobile connectivity, digital infrastructure, and access. ITU and Speedtest data track fixed broadband penetration and median download speeds.",
+        "source": "ITU · Speedtest",
+        "weight": "Default weight 9%"
+      },
+      "happiness": {
+        "name": "Happiness",
+        "description": "Subjective wellbeing, life satisfaction, and social support. The World Happiness Report surveys 150,000+ people annually across six key life dimensions.",
+        "source": "World Happiness Report",
+        "weight": "Default weight 7%"
+      },
+      "humanDevelopment": {
+        "name": "Human Development",
+        "description": "UNDP's Human Development Index — a composite of life expectancy, education, and gross national income per capita, measuring long-run progress.",
+        "source": "UNDP HDI",
+        "weight": "Default weight 8%"
+      },
+      "governance": {
+        "name": "Governance",
+        "description": "Rule of law, transparency, and government effectiveness. The World Bank's Worldwide Governance Indicators aggregate 30+ data sources on institutional quality.",
+        "source": "World Bank WGI",
+        "weight": "Default weight 8%"
+      },
+      "englishProficiency": {
+        "name": "English Proficiency",
+        "description": "English language fluency measured by the EF English Proficiency Index — the world's largest ranking based on tests taken by 2.2 million adults in 113 countries.",
+        "source": "EF EPI",
+        "weight": "Default weight 4%"
+      },
+      "digitalFreedom": {
+        "name": "Digital Freedom",
+        "description": "Internet freedom measured by Freedom House's Freedom on the Net report — covering censorship, surveillance, content restrictions, and access to VPNs.",
+        "source": "Freedom House",
+        "weight": "Default weight 4%"
+      },
+      "personalFreedom": {
+        "name": "Personal Freedom",
+        "description": "CATO Institute's Human Freedom Index personal sub-index — freedom of movement, expression, association, religion, and personal autonomy.",
+        "source": "CATO HFI",
+        "weight": "Default weight 4%"
+      },
+      "logistics": {
+        "name": "Logistics & Transport",
+        "description": "World Bank Logistics Performance Index — customs efficiency, infrastructure quality, timeliness, and international shipping capability.",
+        "source": "World Bank LPI",
+        "weight": "Default weight 4%"
+      },
+      "biodiversity": {
+        "name": "Biodiversity & Nature",
+        "description": "Protected land area and forest coverage from World Bank data — access to natural parks, green spaces, and outdoor activities for nomads.",
+        "source": "World Bank",
+        "weight": "Default weight 4%"
+      },
+      "socialTolerance": {
+        "name": "Social Tolerance",
+        "description": "LGBTQ+ rights composite score — marriage equality, civil unions, anti-discrimination protections, and legal status from ILGA and Equaldex databases.",
+        "source": "ILGA · Equaldex",
+        "weight": "Default weight 4%"
+      },
+      "taxFriendliness": {
+        "name": "Tax Friendliness",
+        "description": "Heritage Foundation Tax Burden score combined with tax revenue as % of GDP — lighter-tax countries score higher, relevant for nomad tax planning.",
+        "source": "Heritage Foundation · World Bank",
+        "weight": "Default weight 4%"
+      },
+      "startupEnvironment": {
+        "name": "Startup Environment",
+        "description": "Heritage Foundation Business Freedom score — ease of starting, operating, and closing a business. Covers regulatory burden and licensing requirements.",
+        "source": "Heritage Foundation",
+        "weight": "Default weight 4%"
+      },
+      "airConnectivity": {
+        "name": "Air Connectivity",
+        "description": "Air passengers carried (World Bank) and number of countries reachable via direct flights (OpenFlights) — route connectivity for frequent-flying digital nomads.",
+        "source": "World Bank · OpenFlights",
+        "weight": "Default weight 5%"
+      },
+      "healthcareCost": {
+        "name": "Healthcare Cost",
+        "description": "Out-of-pocket health expenditure as percentage of total health spending — lower out-of-pocket costs mean more accessible and affordable healthcare.",
+        "source": "World Bank",
+        "weight": "Default weight 5%"
+      }
+    }
+  },
+  "dataSourcesPage": {
+    "eyebrow": "REFERENCE",
+    "title": "DATA SOURCES",
+    "subtitle": "Transparent methodology — every score is traceable to its origin.",
+    "updatedAnnually": "Updated annually",
+    "sources": {
+      "worldBank": {
+        "name": "World Bank",
+        "category": "MULTILATERAL",
+        "description": "Comprehensive development data covering 200+ countries",
+        "tags": ["Economy", "Governance", "Education"]
+      },
+      "who": {
+        "name": "WHO",
+        "category": "UN AGENCY",
+        "description": "Global health statistics and epidemiological data",
+        "tags": ["Healthcare", "Food Security"]
+      },
+      "undp": {
+        "name": "UNDP",
+        "category": "UN AGENCY",
+        "description": "Human Development Index combining health, education, and income",
+        "tags": ["Human Development"]
+      },
+      "itu": {
+        "name": "ITU",
+        "category": "UN AGENCY",
+        "description": "Global ICT statistics and connectivity data",
+        "tags": ["Internet", "Infrastructure"]
+      },
+      "yaleEpi": {
+        "name": "Yale EPI",
+        "category": "ACADEMIC",
+        "description": "Environmental Performance Index measuring 180 countries",
+        "tags": ["Environment"]
+      },
+      "iep": {
+        "name": "IEP / Vision of Humanity",
+        "category": "NGO",
+        "description": "Global Peace Index measuring societal safety and security",
+        "tags": ["Safety"]
+      },
+      "worldHappiness": {
+        "name": "World Happiness Report",
+        "category": "ACADEMIC",
+        "description": "Annual survey-based wellbeing and life satisfaction scores",
+        "tags": ["Happiness"]
+      },
+      "ef": {
+        "name": "EF Education First",
+        "category": "PRIVATE",
+        "description": "World's largest ranking of English skills by country",
+        "tags": ["English Proficiency"]
+      },
+      "fao": {
+        "name": "FAO",
+        "category": "UN AGENCY",
+        "description": "Food and Agriculture Organization nutritional and security data",
+        "tags": ["Food Security"]
+      },
+      "ndGain": {
+        "name": "ND-GAIN",
+        "category": "ACADEMIC",
+        "description": "Notre Dame climate vulnerability and readiness index",
+        "tags": ["Climate"]
+      }
+    }
+  }
+}

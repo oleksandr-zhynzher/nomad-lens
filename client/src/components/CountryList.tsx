@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { RankedCountry } from "../utils/types";
 import { CountryCard } from "./CountryCard";
 
@@ -12,6 +13,7 @@ interface CountryListProps {
 }
 
 export function CountryList({ ranked, loading, error, onRetry, highlightedCode, expandedCode, onToggleExpanded }: CountryListProps) {
+  const { t } = useTranslation();
   if (loading) {
     return (
       <div className="flex flex-col gap-2">
@@ -35,7 +37,7 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode, 
           className="px-4 py-2 rounded text-sm transition-colors"
           style={{ backgroundColor: "var(--color-accent)", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontWeight: 500 }}
         >
-          Retry
+          {t("countryList.retry")}
         </button>
       </div>
     );
@@ -44,7 +46,7 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode, 
   if (ranked.length === 0) {
     return (
       <p className="text-center py-20" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "#666666" }}>
-        No countries match your search.
+        {t("countryList.noResults")}
       </p>
     );
   }
@@ -52,7 +54,7 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode, 
   return (
     <div className="flex flex-col">
       <p className="text-xs text-right pr-1 mb-2" style={{ fontFamily: "Geist, sans-serif", color: "#666666" }}>
-        {ranked.length} countries
+        {t("countryList.count", { count: ranked.length })}
       </p>
       {ranked.map((r, index) => (
         <CountryCard

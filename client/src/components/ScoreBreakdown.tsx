@@ -19,9 +19,11 @@ export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
         // Build detail text from indicators
         let detailText = "";
         if (category?.indicators) {
-          const indEntries = Object.entries(category.indicators).slice(0, 2); // First 2 indicators
+          const indEntries = Object.entries(category.indicators)
+            .filter(([_, ind]) => ind !== undefined)
+            .slice(0, 2); // First 2 indicators
           detailText = indEntries
-            .map(([_, ind]) => `${ind.raw.toLocaleString()}${ind.unit} (${ind.year})`)
+            .map(([_, ind]) => `${ind!.raw.toLocaleString()}${ind!.unit} (${ind!.year})`)
             .join(" · ");
         }
 

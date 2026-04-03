@@ -70,12 +70,13 @@ interface Props {
   countries: CountryData[];
   weights: WeightMap;
   climatePrefs: ClimatePreferences;
+  selectedCodes: string[];
+  onSelectedCodesChange: (codes: string[]) => void;
   sortTrigger?: number;
   onSelectionCount?: (count: number) => void;
 }
 
-export function CountryComparison({ countries, weights, sortTrigger = 0, onSelectionCount }: Props) {
-  const [selectedCodes, setSelectedCodes] = useState<string[]>([]);
+export function CountryComparison({ countries, weights, selectedCodes, onSelectedCodesChange, sortTrigger = 0, onSelectionCount }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [query, setQuery] = useState("");
   const addBtnRef = useRef<HTMLDivElement>(null);
@@ -105,11 +106,11 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
     .filter(Boolean) as { country: CountryData; color: string; index: number }[];
 
   const handleRemove = (index: number) => {
-    setSelectedCodes((prev) => prev.filter((_, i) => i !== index));
+    onSelectedCodesChange(selectedCodes.filter((_, i) => i !== index));
   };
 
   const handleAdd = (code: string) => {
-    setSelectedCodes((prev) => [...prev, code]);
+    onSelectedCodesChange([...selectedCodes, code]);
     setDropdownOpen(false);
     setQuery("");
   };
@@ -117,15 +118,13 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
   // Sort when parent triggers it
   useEffect(() => {
     if (sortTrigger > 0) {
-      setSelectedCodes((prev) => {
-        const sorted = [...prev].sort((a, b) => {
-          const countryA = countries.find((c) => c.code === a);
-          const countryB = countries.find((c) => c.code === b);
-          if (!countryA || !countryB) return 0;
-          return computeScore(countryB, weights) - computeScore(countryA, weights);
-        });
-        return sorted;
+      const sorted = [...selectedCodes].sort((a, b) => {
+        const countryA = countries.find((c) => c.code === a);
+        const countryB = countries.find((c) => c.code === b);
+        if (!countryA || !countryB) return 0;
+        return computeScore(countryB, weights) - computeScore(countryA, weights);
       });
+      onSelectedCodesChange(sorted);
     }
   }, [sortTrigger]);
 
