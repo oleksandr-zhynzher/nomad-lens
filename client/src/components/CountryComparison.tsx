@@ -146,7 +146,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
     <div>
       {/* Country selector — horizontal scroll */}
       <div
-        className="flex items-stretch gap-4 pb-2"
+        className="flex items-stretch gap-3 pb-2"
         style={{ overflowX: "auto", scrollbarWidth: "thin" }}
       >
         {selectedCountries.map((slot) => {
@@ -155,7 +155,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
           return (
             <div key={slot.country.code} className="shrink-0 w-[140px] md:w-[180px]">
               <div
-                className="relative rounded-lg p-5 flex flex-col items-center gap-3"
+                className="relative rounded-lg p-4 flex flex-col items-center gap-3"
                 style={{
                   backgroundColor: "#1A1A1C",
                   border: "1px solid #2E2E30",
@@ -173,7 +173,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                 <img
                   src={slot.country.flagUrl}
                   alt={slot.country.name}
-                  className="rounded-full object-cover w-10 h-10 md:w-12 md:h-12"
+                  className="rounded-full object-cover w-9 h-9"
                 />
 
                 <div className="flex items-center justify-center gap-1.5">
@@ -194,7 +194,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
                 </div>
 
                 <div className="flex items-baseline gap-1">
-                  <span className="text-2xl md:text-[32px]" style={{ fontFamily: "Anton, sans-serif", color: sColor, lineHeight: 1 }}>
+                  <span className="text-[32px]" style={{ fontFamily: "Anton, sans-serif", color: sColor, lineHeight: 1 }}>
                     {score.toFixed(1)}
                   </span>
                   <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>/100</span>
@@ -215,7 +215,7 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
         <div ref={addBtnRef} className="shrink-0 w-[140px] md:w-[180px]">
           <button
             onClick={() => setDropdownOpen((p) => !p)}
-            className="w-full rounded-lg p-5 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
+            className="w-full rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
             style={{
               backgroundColor: "#141416",
               border: "1px dashed #252525",
