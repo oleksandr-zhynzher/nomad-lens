@@ -223,8 +223,8 @@ export function CountryComparison({ countries, weights, sortTrigger = 0, onSelec
               cursor: "pointer",
             }}
           >
-            <CirclePlus size={28} style={{ color: "#444444" }} />
-            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>
+            <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
+            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#E8E9EB" }}>
               Add Country
             </span>
           </button>
