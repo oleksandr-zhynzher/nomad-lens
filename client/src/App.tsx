@@ -17,7 +17,8 @@ import "./index.css";
 
 function weightsFromSearch(search: string): WeightMap {
   const params = new URLSearchParams(search);
-  const base = defaultWeights();
+  const mode = (params.get("weightMode") === "balanced") ? "balanced" : "independent";
+  const base = mode === "independent" ? defaultIndependentWeights() : defaultWeights();
   let hasParams = false;
   for (const key of CATEGORY_KEYS) {
     const v = params.get(key);
@@ -27,18 +28,21 @@ function weightsFromSearch(search: string): WeightMap {
     }
   }
   if (!hasParams) return base;
-  // Normalize visible weights to exactly 100
-  const visibleSum = VISIBLE_CATEGORY_KEYS.reduce((s, k) => s + base[k], 0);
-  if (visibleSum === 0 || visibleSum === 100) return base;
-  const scale = 100 / visibleSum;
-  const exactShares = VISIBLE_CATEGORY_KEYS.map((k) => base[k] * scale);
-  const floors = exactShares.map((s) => Math.floor(s));
-  const floorSum = floors.reduce((a, b) => a + b, 0);
-  let leftover = 100 - floorSum;
-  const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
-  remainders.sort((a, b) => b.r - a.r);
-  remainders.forEach(({ i }) => { if (leftover > 0) { floors[i]++; leftover--; } });
-  VISIBLE_CATEGORY_KEYS.forEach((k, i) => { base[k] = floors[i]; });
+  // In balanced mode, normalize visible weights to exactly 100
+  if (mode === "balanced") {
+    const visibleSum = VISIBLE_CATEGORY_KEYS.reduce((s, k) => s + base[k], 0);
+    if (visibleSum !== 0 && visibleSum !== 100) {
+      const scale = 100 / visibleSum;
+      const exactShares = VISIBLE_CATEGORY_KEYS.map((k) => base[k] * scale);
+      const floors = exactShares.map((s) => Math.floor(s));
+      const floorSum = floors.reduce((a, b) => a + b, 0);
+      let leftover = 100 - floorSum;
+      const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
+      remainders.sort((a, b) => b.r - a.r);
+      remainders.forEach(({ i }) => { if (leftover > 0) { floors[i]++; leftover--; } });
+      VISIBLE_CATEGORY_KEYS.forEach((k, i) => { base[k] = floors[i]; });
+    }
+  }
   return base;
 }
 
@@ -53,7 +57,7 @@ function weightsToSearch(weights: WeightMap): string {
 const LS_WEIGHTS_KEY = "nomad-lens:weights";
 const LS_WEIGHT_MODE_KEY = "nomad-lens:weight-mode";
 const LS_FILTERS_KEY = "nomad-lens:filters";
-const FILTER_URL_KEYS = ["nomadVisa", "schengen", "minDays", "regions", "climateSeason", "climateMin", "climateMax"];
+const FILTER_URL_KEYS = ["nomadVisa", "schengen", "minDays", "regions", "climateSeason", "climateMin", "climateMax", "weightMode"];
 
 // Parse the URL once at module load, clean it, and share the params with both loaders.
 const _sharedParams = (() => {
@@ -67,8 +71,14 @@ const _sharedParams = (() => {
 })();
 
 function loadWeightModeFromStorage(): WeightMode {
-  if (_sharedParams?.get("weightMode") === "balanced") return "balanced";
-  if (_sharedParams?.get("weightMode") === "independent") return "independent";
+  if (_sharedParams?.get("weightMode") === "balanced") {
+    try { localStorage.setItem(LS_WEIGHT_MODE_KEY, "balanced"); } catch { /* ignore */ }
+    return "balanced";
+  }
+  if (_sharedParams?.get("weightMode") === "independent") {
+    try { localStorage.setItem(LS_WEIGHT_MODE_KEY, "independent"); } catch { /* ignore */ }
+    return "independent";
+  }
   try {
     const raw = localStorage.getItem(LS_WEIGHT_MODE_KEY);
     if (raw === "balanced" || raw === "independent") return raw;
@@ -267,6 +277,7 @@ export default function App() {
 
   const handleShare = useCallback(() => {
     const params = new URLSearchParams(weightsToSearch(weights));
+    if (weightMode !== "independent") params.set("weightMode", weightMode);
     if (nomadVisaOnly) params.set("nomadVisa", "1");
     if (schengenOnly) params.set("schengen", "1");
     if (minTouristDays !== null) params.set("minDays", String(minTouristDays));
@@ -285,7 +296,7 @@ export default function App() {
       document.execCommand("copy");
       document.body.removeChild(el);
     });
-  }, [weights, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
+  }, [weights, weightMode, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
 
   const handleCountryClick = useCallback((iso2: string) => {
     setView("list");
