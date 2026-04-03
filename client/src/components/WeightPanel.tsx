@@ -156,54 +156,58 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
           </p>
           {/* Weight mode toggle */}
           <div className="flex" style={{ marginTop: "10px", backgroundColor: "#2A2A2A", borderRadius: "4px", padding: "4px", gap: "4px" }}>
-            <Tooltip
-              content={
-                <div>
-                  <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Independent Mode</div>
-                  <div>Each indicator is weighted independently on a 0–100 scale. Total weight can exceed 100. All indicators are considered when ranking countries — higher values = more important.</div>
-                </div>
-              }
-              side="top"
-            >
-              <button
-                onClick={() => onWeightModeChange("independent")}
-                className="flex items-center justify-center gap-1.5"
-                style={{
-                  flex: 1, padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
-                  fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "independent" ? 500 : 400,
-                  backgroundColor: weightMode === "independent" ? "var(--color-accent)" : "transparent",
-                  color: weightMode === "independent" ? "#FFFFFF" : "#999999",
-                  transition: "all 0.15s ease",
-                }}
+            <div style={{ flex: 1, display: "flex" }}>
+              <Tooltip
+                content={
+                  <div>
+                    <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Independent Mode</div>
+                    <div>Each indicator is weighted independently on a 0–100 scale. Total weight can exceed 100. All indicators are considered when ranking countries — higher values = more important.</div>
+                  </div>
+                }
+                side="top"
               >
-                <Sliders size={16} />
-                Independent
-              </button>
-            </Tooltip>
-            <Tooltip
-              content={
-                <div>
-                  <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Balanced Mode</div>
-                  <div>All visible indicators share 100% total weight. Increasing one indicator automatically decreases others proportionally. Perfect for comparing relative importance across categories.</div>
-                </div>
-              }
-              side="top"
-            >
-              <button
-                onClick={() => onWeightModeChange("balanced")}
-                className="flex items-center justify-center gap-1.5"
-                style={{
-                  flex: 1, padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
-                  fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "balanced" ? 500 : 400,
-                  backgroundColor: weightMode === "balanced" ? "var(--color-accent)" : "transparent",
-                  color: weightMode === "balanced" ? "#FFFFFF" : "#999999",
-                  transition: "all 0.15s ease",
-                }}
+                <button
+                  onClick={() => onWeightModeChange("independent")}
+                  className="flex items-center justify-center gap-1.5"
+                  style={{
+                    width: "100%", padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
+                    fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "independent" ? 500 : 400,
+                    backgroundColor: weightMode === "independent" ? "var(--color-accent)" : "transparent",
+                    color: weightMode === "independent" ? "#FFFFFF" : "#999999",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  <Sliders size={16} />
+                  Independent
+                </button>
+              </Tooltip>
+            </div>
+            <div style={{ flex: 1, display: "flex" }}>
+              <Tooltip
+                content={
+                  <div>
+                    <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Balanced Mode</div>
+                    <div>All visible indicators share 100% total weight. Increasing one indicator automatically decreases others proportionally. Perfect for comparing relative importance across categories.</div>
+                  </div>
+                }
+                side="top"
               >
-                <Scale size={16} />
-                Balanced
-              </button>
-            </Tooltip>
+                <button
+                  onClick={() => onWeightModeChange("balanced")}
+                  className="flex items-center justify-center gap-1.5"
+                  style={{
+                    width: "100%", padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
+                    fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "balanced" ? 500 : 400,
+                    backgroundColor: weightMode === "balanced" ? "var(--color-accent)" : "transparent",
+                    color: weightMode === "balanced" ? "#FFFFFF" : "#999999",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  <Scale size={16} />
+                  Balanced
+                </button>
+              </Tooltip>
+            </div>
           </div>
         </div>
       )}
