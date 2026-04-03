@@ -83,6 +83,15 @@ export function defaultWeights(): WeightMap {
 }
 
 /**
+ * Default weights for independent mode: every visible category set to 50.
+ */
+export function defaultIndependentWeights(): WeightMap {
+  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
+  VISIBLE_CATEGORY_KEYS.forEach((k) => { result[k] = 50; });
+  return result;
+}
+
+/**
  * Redistribute weights so all visible categories sum to exactly 100,
  * after the user changes one slider to a new value.
  * Others are scaled proportionally using the largest-remainder method.

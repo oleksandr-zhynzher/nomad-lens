@@ -218,6 +218,8 @@ export interface CountryData {
 
 // ─── Scoring ──────────────────────────────────────────────────────────────────
 
+export type WeightMode = "independent" | "balanced";
+
 export type WeightMap = Record<CategoryKey, number>;
 
 export interface RankedCountry {
