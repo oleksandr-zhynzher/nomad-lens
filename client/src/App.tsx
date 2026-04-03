@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Search, ArrowDownWideNarrow, Flag, Globe, SlidersHorizontal, X, ChevronUp, ChevronDown, Filter } from "lucide-react";
+import { Search, ArrowDownWideNarrow, Flag, Globe, SlidersHorizontal, X, ChevronUp, ChevronDown, Filter, List } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
@@ -561,6 +561,14 @@ export default function App() {
                 />
                 {search.length > 0 && (
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                    <button
+                      onClick={() => setSearch("")}
+                      className="flex items-center justify-center"
+                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: "#2A2A2A", color: "#CCCCCC" }}
+                      aria-label="Clear search"
+                    >
+                      <X size={14} />
+                    </button>
                     {searchMode === "highlight" && search.trim().length >= 1 && (
                       <>
                         <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "11px", color: "#666666", minWidth: "36px", textAlign: "right" }}>
@@ -589,31 +597,20 @@ export default function App() {
                     <Tooltip
                       side="bottom"
                       content={
-                        <span>
-                          {searchMode === "filter"
-                            ? <><strong>Filter mode</strong> — only matching countries are shown.<br />Click to switch to <strong>Navigate mode</strong>: shows all countries and scrolls to each match.</>
-                            : <><strong>Navigate mode</strong> — shows all countries, scrolls to matches with ↑↓ arrows.<br />Click to switch to <strong>Filter mode</strong>: hides non-matching countries.</>
-                          }
-                        </span>
+                        searchMode === "filter"
+                          ? <span>Switch to <strong>scroll mode</strong> — shows all countries, scrolls to each match.</span>
+                          : <span>Switch to <strong>filter mode</strong> — hides non-matching countries.</span>
                       }
                     >
                     <button
                       onClick={() => { setSearchMode((m) => m === "filter" ? "highlight" : "filter"); setMatchCursor(0); }}
                       className="flex items-center justify-center"
-                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: searchMode === "filter" ? "#291608" : "#2A2A2A", color: searchMode === "filter" ? "#C2956A" : "#888888" }}
-                      aria-label={searchMode === "filter" ? "Switch to navigate mode (show all, scroll to match)" : "Switch to filter mode (show only matches)"}
+                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: "#2A2A2A", color: "#888888" }}
+                      aria-label={searchMode === "filter" ? "Switch to scroll mode" : "Switch to filter mode"}
                     >
-                      <Filter size={13} />
+                      {searchMode === "filter" ? <List size={13} /> : <Filter size={13} />}
                     </button>
                     </Tooltip>
-                    <button
-                      onClick={() => setSearch("")}
-                      className="flex items-center justify-center"
-                      style={{ width: "24px", height: "24px", borderRadius: "3px", border: "none", cursor: "pointer", backgroundColor: "#2A2A2A", color: "#CCCCCC" }}
-                      aria-label="Clear search"
-                    >
-                      <X size={14} />
-                    </button>
                   </div>
                 )}
               </div>
