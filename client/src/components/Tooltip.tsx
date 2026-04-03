@@ -5,6 +5,8 @@ interface TooltipProps {
   content: ReactNode;
   children: ReactNode;
   side?: "top" | "bottom";
+  triggerStyle?: CSSProperties;
+  delay?: number;
 }
 
 interface Coords {
@@ -12,35 +14,50 @@ interface Coords {
   y: number;
 }
 
-export function Tooltip({ content, children, side = "top" }: TooltipProps) {
+export function Tooltip({ content, children, side = "top", triggerStyle, delay = 0 }: TooltipProps) {
   const [coords, setCoords] = useState<Coords | null>(null);
   const [actualSide, setActualSide] = useState<"top" | "bottom">(side);
   const triggerRef = useRef<HTMLSpanElement>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const showTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => () => { if (hideTimer.current) clearTimeout(hideTimer.current); }, []);
+  useEffect(() => () => { 
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    if (showTimer.current) clearTimeout(showTimer.current);
+  }, []);
 
   function show() {
     if (hideTimer.current) clearTimeout(hideTimer.current);
-    if (triggerRef.current) {
-      const r = triggerRef.current.getBoundingClientRect();
-      
-      // Auto-flip to bottom if not enough space on top
-      const tooltipHeight = 200; // approximate max height with padding
-      const spaceAbove = r.top;
-      
-      let finalSide = side;
-      if (side === "top" && spaceAbove < tooltipHeight) {
-        // Not enough space above, flip to bottom
-        finalSide = "bottom";
+    if (showTimer.current) clearTimeout(showTimer.current);
+    
+    const displayTooltip = () => {
+      if (triggerRef.current) {
+        const r = triggerRef.current.getBoundingClientRect();
+        
+        // Auto-flip to bottom if not enough space on top
+        const tooltipHeight = 200; // approximate max height with padding
+        const spaceAbove = r.top;
+        
+        let finalSide = side;
+        if (side === "top" && spaceAbove < tooltipHeight) {
+          // Not enough space above, flip to bottom
+          finalSide = "bottom";
+        }
+        
+        setActualSide(finalSide);
+        setCoords({ x: r.left + r.width / 2, y: finalSide === "bottom" ? r.bottom : r.top });
       }
-      
-      setActualSide(finalSide);
-      setCoords({ x: r.left + r.width / 2, y: finalSide === "bottom" ? r.bottom : r.top });
+    };
+    
+    if (delay > 0) {
+      showTimer.current = setTimeout(displayTooltip, delay);
+    } else {
+      displayTooltip();
     }
   }
 
   function hide() {
+    if (showTimer.current) clearTimeout(showTimer.current);
     hideTimer.current = setTimeout(() => setCoords(null), 120);
   }
 
@@ -60,6 +77,7 @@ export function Tooltip({ content, children, side = "top" }: TooltipProps) {
     <span
       ref={triggerRef}
       className="inline-flex"
+      style={triggerStyle}
       onMouseEnter={show}
       onMouseLeave={hide}
       onFocus={show}

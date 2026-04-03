@@ -165,6 +165,8 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
                   </div>
                 }
                 side="top"
+                triggerStyle={{ width: "100%" }}
+                delay={3000}
               >
                 <button
                   onClick={() => onWeightModeChange("independent")}
@@ -191,6 +193,8 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
                   </div>
                 }
                 side="top"
+                triggerStyle={{ width: "100%" }}
+                delay={3000}
               >
                 <button
                   onClick={() => onWeightModeChange("balanced")}
