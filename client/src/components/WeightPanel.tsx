@@ -155,31 +155,51 @@ export function WeightPanel({ weights, onChange, onReset, weightsAreDefault, onS
             Click a group to expand and adjust its indicator weights.
           </p>
           {/* Weight mode toggle */}
-          <div className="flex" style={{ marginTop: "10px", backgroundColor: "#141414", borderRadius: "4px", padding: "2px" }}>
-            <button
-              onClick={() => onWeightModeChange("independent")}
-              style={{
-                flex: 1, padding: "5px 0", borderRadius: "3px", border: "none", cursor: "pointer",
-                fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600,
-                backgroundColor: weightMode === "independent" ? "#291608" : "transparent",
-                color: weightMode === "independent" ? "#C2956A" : "#555555",
-                transition: "all 0.15s ease",
-              }}
+          <div className="flex" style={{ marginTop: "10px", backgroundColor: "#2A2A2A", borderRadius: "4px", padding: "4px", gap: "4px" }}>
+            <Tooltip
+              content={
+                <div>
+                  <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Independent Mode</div>
+                  <div>Each indicator is weighted independently on a 0–100 scale. Total weight can exceed 100. All indicators are considered when ranking countries — higher values = more important.</div>
+                </div>
+              }
+              side="top"
             >
-              Independent
-            </button>
-            <button
-              onClick={() => onWeightModeChange("balanced")}
-              style={{
-                flex: 1, padding: "5px 0", borderRadius: "3px", border: "none", cursor: "pointer",
-                fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600,
-                backgroundColor: weightMode === "balanced" ? "#291608" : "transparent",
-                color: weightMode === "balanced" ? "#C2956A" : "#555555",
-                transition: "all 0.15s ease",
-              }}
+              <button
+                onClick={() => onWeightModeChange("independent")}
+                style={{
+                  flex: 1, padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
+                  fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "independent" ? 500 : 400,
+                  backgroundColor: weightMode === "independent" ? "var(--color-accent)" : "transparent",
+                  color: weightMode === "independent" ? "#FFFFFF" : "#999999",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                Independent
+              </button>
+            </Tooltip>
+            <Tooltip
+              content={
+                <div>
+                  <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>Balanced Mode</div>
+                  <div>All visible indicators share 100% total weight. Increasing one indicator automatically decreases others proportionally. Perfect for comparing relative importance across categories.</div>
+                </div>
+              }
+              side="top"
             >
-              Balanced
-            </button>
+              <button
+                onClick={() => onWeightModeChange("balanced")}
+                style={{
+                  flex: 1, padding: "6px 12px", borderRadius: "3px", border: "none", cursor: "pointer",
+                  fontFamily: "Geist, sans-serif", fontSize: "13px", fontWeight: weightMode === "balanced" ? 500 : 400,
+                  backgroundColor: weightMode === "balanced" ? "var(--color-accent)" : "transparent",
+                  color: weightMode === "balanced" ? "#FFFFFF" : "#999999",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                Balanced
+              </button>
+            </Tooltip>
           </div>
         </div>
       )}
