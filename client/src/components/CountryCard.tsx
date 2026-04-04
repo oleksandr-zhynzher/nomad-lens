@@ -124,7 +124,10 @@ export function CountryCard({
         <div className="hidden sm:flex gap-1 items-center">
           {VISIBLE_CATEGORY_KEYS.map((key) => {
             const val = country.scores[key]?.value ?? null;
-            const label = CATEGORY_LABELS[key];
+            const label = t(
+              `indicatorsPage.indicators.${key}.name`,
+              CATEGORY_LABELS[key],
+            );
             const tooltipContent = (
               <div
                 style={{

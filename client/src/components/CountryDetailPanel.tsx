@@ -17,13 +17,10 @@ import type { RankedCountry, SeasonType } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 
-const TAX_STATUS_COLORS: Record<
-  string,
-  { bg: string; text: string; label: string }
-> = {
-  exempt: { bg: "#1A4A2A", text: "#44CC66", label: "Tax Exempt" },
-  standard: { bg: "#2A2A3A", text: "#8888CC", label: "Standard Tax" },
-  special: { bg: "#4A3A1A", text: "#DDAA44", label: "Special Rate" },
+const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
+  exempt: { bg: "#1A4A2A", text: "#44CC66" },
+  standard: { bg: "#2A2A3A", text: "#8888CC" },
+  special: { bg: "#4A3A1A", text: "#DDAA44" },
 };
 
 interface CountryDetailPanelProps {
@@ -582,12 +579,11 @@ export function CountryDetailPanel({
                             ).text,
                           }}
                         >
-                          {
-                            (
-                              TAX_STATUS_COLORS[c.nomadVisa.tax.status] ??
-                              TAX_STATUS_COLORS.standard
-                            ).label
-                          }
+                          {c.nomadVisa.tax.status === "exempt"
+                            ? t("countryPage.taxExemptLabel")
+                            : c.nomadVisa.tax.status === "special"
+                              ? t("countryPage.specialTaxLabel")
+                              : t("countryPage.standardTaxLabel")}
                         </span>
                       </div>
                     </div>

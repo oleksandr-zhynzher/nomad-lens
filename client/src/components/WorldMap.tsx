@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ComposableMap,
   Geographies,
@@ -28,7 +29,13 @@ interface HoverInfo {
   y: number;
 }
 
-export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights }: WorldMapProps) {
+export function WorldMap({
+  ranked,
+  onCountryClick,
+  onToggleWeights,
+  showWeights,
+}: WorldMapProps) {
+  const { t } = useTranslation();
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState<[number, number]>([0, 20]);
@@ -39,7 +46,10 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
     ranked.map((r) => [r.country.code, r]),
   );
 
-  function geoToAlpha2(geo: { id?: unknown; properties: Record<string, unknown> }): string {
+  function geoToAlpha2(geo: {
+    id?: unknown;
+    properties: Record<string, unknown>;
+  }): string {
     const numeric = String(geo.id ?? "").padStart(3, "0");
     return isoNumericToAlpha2[numeric] ?? "";
   }
@@ -53,11 +63,19 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
     return "#FF5722"; // Low - red-orange
   }
 
-  function handleMouseEnter(geo: { id?: unknown; properties: Record<string, unknown> }, e: React.MouseEvent) {
+  function handleMouseEnter(
+    geo: { id?: unknown; properties: Record<string, unknown> },
+    e: React.MouseEvent,
+  ) {
     const alpha2 = geoToAlpha2(geo);
     const r = scoreByAlpha2.get(alpha2);
     const name = String(geo.properties["name"] ?? alpha2);
-    setHover({ name, score: r?.finalScore ?? null, x: e.clientX, y: e.clientY });
+    setHover({
+      name,
+      score: r?.finalScore ?? null,
+      x: e.clientX,
+      y: e.clientY,
+    });
   }
 
   function handleMouseMove(e: React.MouseEvent) {
@@ -68,19 +86,27 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
     setHover(null);
   }
 
-  function handleClick(geo: { id?: unknown; properties: Record<string, unknown> }) {
+  function handleClick(geo: {
+    id?: unknown;
+    properties: Record<string, unknown>;
+  }) {
     const alpha2 = geoToAlpha2(geo);
     if (!alpha2) return;
     setHover(null);
     setSelectedCode(alpha2);
   }
 
-  const selectedCountry = selectedCode ? (scoreByAlpha2.get(selectedCode) ?? null) : null;
+  const selectedCountry = selectedCode
+    ? (scoreByAlpha2.get(selectedCode) ?? null)
+    : null;
 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
       {/* Zoom controls */}
-      <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10 flex flex-col overflow-hidden" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
+      <div
+        className="absolute top-2 left-2 md:top-3 md:left-3 z-10 flex flex-col overflow-hidden"
+        style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}
+      >
         <button
           onClick={() => setZoom((z) => Math.min(z * 1.5, 12))}
           className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
@@ -92,7 +118,10 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         <button
           onClick={() => setZoom((z) => Math.max(z / 1.5, 1))}
           className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
-          style={{ color: "#999999", borderBottom: onToggleWeights ? "1px solid #333333" : undefined }}
+          style={{
+            color: "#999999",
+            borderBottom: onToggleWeights ? "1px solid #333333" : undefined,
+          }}
           aria-label="Zoom out"
         >
           −
@@ -101,28 +130,69 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
           <button
             onClick={onToggleWeights}
             className="hidden md:flex w-10 h-10 items-center justify-center transition-colors"
-            style={{ color: showWeights ? "var(--color-accent-dim)" : "#999999" }}
+            style={{
+              color: showWeights ? "var(--color-accent-dim)" : "#999999",
+            }}
             aria-label="Toggle parameters"
           >
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            <svg
+              width="16"
+              height="16"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+              />
             </svg>
           </button>
         )}
       </div>
 
       {/* Legend */}
-      <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 z-10 px-2 py-1.5 md:px-3 md:py-2 flex flex-col gap-1 md:gap-1.5" style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}>
-        <p style={{ fontFamily: "Geist, sans-serif", fontSize: "9px", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#666666", marginBottom: "2px" }}>SCORE</p>
+      <div
+        className="absolute bottom-2 left-2 md:bottom-3 md:left-3 z-10 px-2 py-1.5 md:px-3 md:py-2 flex flex-col gap-1 md:gap-1.5"
+        style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}
+      >
+        <p
+          style={{
+            fontFamily: "Geist, sans-serif",
+            fontSize: "9px",
+            fontWeight: 600,
+            letterSpacing: "1.5px",
+            textTransform: "uppercase",
+            color: "#666666",
+            marginBottom: "2px",
+          }}
+        >
+          {t("map.score")}
+        </p>
         {[
-          { color: "#4CAF50", label: "Excellent", range: "(75–100)" },
-          { color: "#FFC107", label: "Moderate", range: "(50–74)" },
-          { color: "#FF5722", label: "Low", range: "(0–49)" },
-          { color: "#3A3A3A", label: "No data", range: "" },
+          {
+            color: "#4CAF50",
+            label: t("map.excellent"),
+            range: "(75\u2013100)",
+          },
+          { color: "#FFC107", label: t("map.moderate"), range: "(50\u201374)" },
+          { color: "#FF5722", label: t("map.low"), range: "(0\u201349)" },
+          { color: "#3A3A3A", label: t("map.noData"), range: "" },
         ].map(({ color, label, range }) => (
           <div key={label} className="flex items-center gap-2">
-            <span className="w-3 h-3 shrink-0" style={{ background: color, borderRadius: "2px" }} />
-            <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "10px", color: "#CCCCCC" }}>
+            <span
+              className="w-3 h-3 shrink-0"
+              style={{ background: color, borderRadius: "2px" }}
+            />
+            <span
+              style={{
+                fontFamily: "IBM Plex Mono, monospace",
+                fontSize: "10px",
+                color: "#CCCCCC",
+              }}
+            >
               {label} <span style={{ color: "#666666" }}>{range}</span>
             </span>
           </div>
@@ -161,10 +231,16 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
                     strokeWidth={isSelected ? 1.5 / zoom : 0.4}
                     style={{
                       default: { outline: "none" },
-                      hover: { outline: "none", filter: "brightness(1.25)", cursor: "pointer" },
+                      hover: {
+                        outline: "none",
+                        filter: "brightness(1.25)",
+                        cursor: "pointer",
+                      },
                       pressed: { outline: "none" },
                     }}
-                    onMouseEnter={(e: React.MouseEvent) => handleMouseEnter(geo, e)}
+                    onMouseEnter={(e: React.MouseEvent) =>
+                      handleMouseEnter(geo, e)
+                    }
                     onMouseLeave={() => handleMouseLeave()}
                     onClick={() => handleClick(geo)}
                   />
@@ -172,7 +248,6 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
               })
             }
           </Geographies>
-
         </ZoomableGroup>
       </ComposableMap>
 
@@ -180,23 +255,63 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
       {hover && (
         <div
           className="pointer-events-none fixed z-50 px-3 py-2 shadow-xl rounded"
-          style={{ left: hover.x + 12, top: hover.y - 10, backgroundColor: "#1A1A1A", borderRadius: "4px" }}
+          style={{
+            left: hover.x + 12,
+            top: hover.y - 10,
+            backgroundColor: "#1A1A1A",
+            borderRadius: "4px",
+          }}
         >
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", fontWeight: 600, color: "#FFFFFF" }}>{hover.name}</p>
+          <p
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "13px",
+              fontWeight: 600,
+              color: "#FFFFFF",
+            }}
+          >
+            {hover.name}
+          </p>
           {hover.score !== null ? (
-            <p style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "13px", fontWeight: 600, marginTop: "2px", color: scoreTextColour(hover.score) }}>
+            <p
+              style={{
+                fontFamily: "IBM Plex Mono, monospace",
+                fontSize: "13px",
+                fontWeight: 600,
+                marginTop: "2px",
+                color: scoreTextColour(hover.score),
+              }}
+            >
               {hover.score.toFixed(1)}{" "}
               <span style={{ fontWeight: 400, color: "#666666" }}>/ 100</span>
             </p>
           ) : (
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", color: "#666666", marginTop: "2px" }}>No data</p>
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "12px",
+                color: "#666666",
+                marginTop: "2px",
+              }}
+            >
+              {t("map.noData")}
+            </p>
           )}
         </div>
       )}
 
       {/* Ranked count */}
-      <p style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555", textAlign: "right", marginTop: "8px", paddingRight: "4px" }}>
-        {ranked.length} countries scored · click a country for details
+      <p
+        style={{
+          fontFamily: "Geist, sans-serif",
+          fontSize: "11px",
+          color: "#555555",
+          textAlign: "right",
+          marginTop: "8px",
+          paddingRight: "4px",
+        }}
+      >
+        {t("map.countriesScored", { count: ranked.length })}
       </p>
 
       {/* Country detail panel */}

@@ -12,7 +12,15 @@ interface CountryListProps {
   onToggleExpanded?: (code: string) => void;
 }
 
-export function CountryList({ ranked, loading, error, onRetry, highlightedCode, expandedCode, onToggleExpanded }: CountryListProps) {
+export function CountryList({
+  ranked,
+  loading,
+  error,
+  onRetry,
+  highlightedCode,
+  expandedCode,
+  onToggleExpanded,
+}: CountryListProps) {
   const { t } = useTranslation();
   if (loading) {
     return (
@@ -21,7 +29,10 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode, 
           <div
             key={i}
             className="h-14 animate-pulse"
-            style={{ backgroundColor: "#1A1A1A", borderTop: "1px solid #333333" }}
+            style={{
+              backgroundColor: "#1A1A1A",
+              borderTop: "1px solid #333333",
+            }}
           />
         ))}
       </div>
@@ -31,11 +42,23 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode, 
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
-        <p style={{ color: "var(--color-danger)", fontFamily: "Inter, sans-serif" }}>{error}</p>
+        <p
+          style={{
+            color: "var(--color-danger)",
+            fontFamily: "Inter, sans-serif",
+          }}
+        >
+          {error}
+        </p>
         <button
           onClick={onRetry}
           className="px-4 py-2 rounded text-sm transition-colors"
-          style={{ backgroundColor: "var(--color-accent)", color: "#FFFFFF", fontFamily: "Inter, sans-serif", fontWeight: 500 }}
+          style={{
+            backgroundColor: "var(--color-accent)",
+            color: "#FFFFFF",
+            fontFamily: "Inter, sans-serif",
+            fontWeight: 500,
+          }}
         >
           {t("countryList.retry")}
         </button>
@@ -45,7 +68,14 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode, 
 
   if (ranked.length === 0) {
     return (
-      <p className="text-center py-20" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "#666666" }}>
+      <p
+        className="text-center py-20"
+        style={{
+          fontFamily: "Inter, sans-serif",
+          fontSize: "14px",
+          color: "#666666",
+        }}
+      >
         {t("countryList.noResults")}
       </p>
     );
@@ -53,7 +83,10 @@ export function CountryList({ ranked, loading, error, onRetry, highlightedCode, 
 
   return (
     <div className="flex flex-col">
-      <p className="text-xs text-right pr-1 mb-2" style={{ fontFamily: "Geist, sans-serif", color: "#666666" }}>
+      <p
+        className="text-xs text-right pr-1 my-4"
+        style={{ fontFamily: "Geist, sans-serif", color: "#666666" }}
+      >
         {t("countryList.count", { count: ranked.length })}
       </p>
       {ranked.map((r, index) => (

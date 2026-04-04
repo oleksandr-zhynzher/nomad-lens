@@ -77,6 +77,15 @@ export interface NomadVisaApplicationProcess {
   documents: string[];
 }
 
+export interface NomadVisaLocalization {
+  benefits?: string[];
+  eligibility?: { requirements?: string[] };
+  applicationProcess?: { processingTime?: string; documents?: string[] };
+  tax?: { notes?: string };
+  cost?: { notes?: string };
+  incomeRequirement?: { notes?: string };
+}
+
 export interface NomadVisaDetails {
   code: string;
   visaName: string;
@@ -89,6 +98,7 @@ export interface NomadVisaDetails {
   benefits: string[];
   applicationProcess: NomadVisaApplicationProcess;
   lastUpdated: string;
+  i18n?: { ru?: NomadVisaLocalization; ua?: NomadVisaLocalization };
 }
 
 // ─── Climate ─────────────────────────────────────────────────────────────────

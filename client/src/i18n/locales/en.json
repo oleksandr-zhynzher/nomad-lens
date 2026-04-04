@@ -32,7 +32,21 @@
   },
   "regions": {
     "label": "REGIONS",
-    "all": "All"
+    "all": "All",
+    "Africa": "Africa",
+    "Americas": "Americas",
+    "Asia": "Asia",
+    "Europe": "Europe",
+    "MiddleEast": "Middle East",
+    "Oceania": "Oceania"
+  },
+  "map": {
+    "score": "SCORE",
+    "excellent": "Excellent",
+    "moderate": "Moderate",
+    "low": "Low",
+    "noData": "No data",
+    "countriesScored": "{{count}} countries scored · click a country for details"
   },
   "compare": {
     "eyebrow": "COMPARE",
@@ -44,7 +58,10 @@
     "regions": "Regions",
     "parameters": "Parameters",
     "sortByScore": "Sort by Score",
-    "share": "Share"
+    "share": "Share",
+    "addCountry": "Add Country",
+    "searchCountry": "Search country…",
+    "noCountriesFound": "No countries found"
   },
   "mobileSheet": {
     "weightsAndPreferences": "Weights & Preferences",
@@ -105,6 +122,7 @@
     "nomadVisa": "Nomad Visa",
     "scoreBreakdown": "SCORE BREAKDOWN",
     "viewInList": "View in List →",
+    "nomadVisaDetails": "Digital Nomad Visa",
     "climate": {
       "fourSeasons": "Four Seasons",
       "mild": "Mild",
@@ -145,7 +163,69 @@
       "onlineApplication": "Online application available",
       "inPersonApplication": "In-person application required",
       "requiredDocuments": "Required Documents",
-      "officialWebsite": "Official visa website"
+      "officialWebsite": "Official visa website",
+      "visaName": "Visa Name",
+      "visitWebsite": "Visit Website →"
+    },
+    "back": "Back",
+    "backToCountries": "← Back to Countries",
+    "countryDetailLabel": "COUNTRY DETAIL",
+    "nomadVisaBadge": "Nomad Visa",
+    "touristVisaBadge": "{{days}} day tourist visa",
+    "globalRankScore": "Global Rank · Score",
+    "population": "Population",
+    "capital": "Capital",
+    "region": "Region",
+    "nomadVisaSection": "NOMAD VISA",
+    "updated": "Updated {{date}}",
+    "durationCost": "DURATION & COST",
+    "monthsInitial": "{{count}} months initial",
+    "moExtension": "+{{count}} mo extension",
+    "renewable": "Renewable",
+    "applicationFee": "application fee",
+    "incomeRequirement": "INCOME REQUIREMENT",
+    "perMonth": "/ month",
+    "perYear": "/ year",
+    "taxation": "TAXATION",
+    "taxExemptLabel": "Tax Exempt",
+    "specialTaxLabel": "Special Tax",
+    "standardTaxLabel": "Standard Tax",
+    "eligibilitySection": "ELIGIBILITY",
+    "minimumAge": "Minimum age: {{age}}",
+    "visaBenefits": "VISA BENEFITS",
+    "applicationProcessSection": "APPLICATION PROCESS",
+    "onlineApplication": "Online Application",
+    "inPersonApplication": "In-Person Application",
+    "processing": "Processing: {{time}}",
+    "requiredDocsSection": "REQUIRED DOCUMENTS",
+    "officialVisaWebsite": "Official Visa Website",
+    "free": "Free",
+    "performanceBreakdown": "PERFORMANCE BREAKDOWN",
+    "categoriesSubtitle": "{{count}} categories · {{name}}",
+    "annualAverages": "Annual averages",
+    "climateDataSection": "CLIMATE DATA",
+    "annualMeanTemp": "Annual Mean Temp",
+    "annualPrecipitation": "Annual Precipitation",
+    "hottestMonth": "Hottest Month",
+    "coldestMonth": "Coldest Month",
+    "seasonLabels": {
+      "four_seasons": "Four Seasons",
+      "mild_seasons": "Mild Seasons",
+      "tropical": "Tropical",
+      "arid": "Arid",
+      "polar": "Polar"
+    },
+    "scoreBadge": {
+      "excellent": "EXCELLENT",
+      "good": "GOOD",
+      "fair": "FAIR",
+      "weak": "WEAK"
+    },
+    "cardLabels": {
+      "infrastructure": "Internet",
+      "humanDevelopment": "Human Dev",
+      "englishProficiency": "English Prof",
+      "startupEnvironment": "Startup Env"
     }
   },
   "indicatorsPage": {
@@ -353,6 +433,24 @@
         "description": "Notre Dame climate vulnerability and readiness index",
         "tags": ["Climate"]
       }
+    }
+  },
+  "loading": "Loading…",
+  "nomadVisasPage": {
+    "eyebrow": "TRAVEL & WORK",
+    "subtitle": "Compare digital nomad visa programs across {{count}} countries",
+    "countries": "Countries",
+    "taxExempt": "Tax Exempt",
+    "freeVisas": "Free Visas",
+    "search": "Search countries...",
+    "noResults": "No countries found",
+    "table": {
+      "country": "Country",
+      "visaName": "Visa Name",
+      "duration": "Duration",
+      "cost": "Cost",
+      "income": "Income Req.",
+      "tax": "Tax Status"
     }
   }
 }

@@ -2,7 +2,7 @@
   "nav": {
     "indicators": "Показники",
     "dataSources": "Джерела даних",
-    "nomadVisas": "Візи номадів",
+    "nomadVisas": "Номад-візи",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -21,7 +21,7 @@
   },
   "hero": {
     "eyebrow": "ДОСЛІДЖУЙ · ПОРІВНЮЙ · ВИРІШУЙ",
-    "title": "ЗНАЙДИ СВОЮ НАСТУПНУ КРАЇНУ",
+    "title": "ЗНАЙДИ КРАЇНУ МРІЇ",
     "tagline": "Персоналізовані рейтинги для цифрових кочівників — живі дані з 10 глобальних джерел.",
     "countries": "Країни",
     "indicators": "Показники",
@@ -32,7 +32,21 @@
   },
   "regions": {
     "label": "РЕГІОНИ",
-    "all": "Всі"
+    "all": "Всі",
+    "Africa": "Африка",
+    "Americas": "Америка",
+    "Asia": "Азія",
+    "Europe": "Європа",
+    "MiddleEast": "Близький Схід",
+    "Oceania": "Океанія"
+  },
+  "map": {
+    "score": "БАЛ",
+    "excellent": "Відмінно",
+    "moderate": "Помірно",
+    "low": "Низький",
+    "noData": "Немає даних",
+    "countriesScored": "{{count}} країн у рейтингу · клікніть для деталей"
   },
   "compare": {
     "eyebrow": "ПОРІВНЯТИ",
@@ -44,7 +58,10 @@
     "regions": "Регіони",
     "parameters": "Параметри",
     "sortByScore": "Сортувати за балом",
-    "share": "Поділитися"
+    "share": "Поділитися",
+    "addCountry": "Додати країну",
+    "searchCountry": "Пошук країни…",
+    "noCountriesFound": "Країни не знайдено"
   },
   "mobileSheet": {
     "weightsAndPreferences": "Ваги та налаштування",
@@ -105,6 +122,7 @@
     "nomadVisa": "Номад-Або",
     "scoreBreakdown": "РОЗБИВКА БАЛІВ",
     "viewInList": "Переглянути у списку →",
+    "nomadVisaDetails": "Цифрова номад-віза",
     "climate": {
       "fourSeasons": "Чотири сезони",
       "mild": "М'який",
@@ -145,7 +163,69 @@
       "onlineApplication": "Подача онлайн доступна",
       "inPersonApplication": "Потрібна особиста подача",
       "requiredDocuments": "Необхідні документи",
-      "officialWebsite": "Офіційний сайт візи"
+      "officialWebsite": "Офіційний сайт візи",
+      "visaName": "Назва візи",
+      "visitWebsite": "Відкрити сайт →"
+    },
+    "back": "Назад",
+    "backToCountries": "← До країн",
+    "countryDetailLabel": "КРАЇНА",
+    "nomadVisaBadge": "Номад-віза",
+    "touristVisaBadge": "{{days}} днів турист. віза",
+    "globalRankScore": "Рейтинг · Бал",
+    "population": "Населення",
+    "capital": "Столиця",
+    "region": "Регіон",
+    "nomadVisaSection": "НОМАД-ВІЗА",
+    "updated": "Оновлено {{date}}",
+    "durationCost": "ТРИВАЛІСТЬ ТА ВАРТІСТЬ",
+    "monthsInitial": "{{count}} міс. початково",
+    "moExtension": "+{{count}} міс. продовження",
+    "renewable": "Поновлювана",
+    "applicationFee": "збір за подачу",
+    "incomeRequirement": "ВИМОГИ ДО ДОХОДУ",
+    "perMonth": "/ місяц",
+    "perYear": "/ рік",
+    "taxation": "ОПОДАТКУВАННЯ",
+    "taxExemptLabel": "Без податку",
+    "specialTaxLabel": "Особливий податок",
+    "standardTaxLabel": "Стандартний податок",
+    "eligibilitySection": "ВИМОГИ",
+    "minimumAge": "Мін. вік: {{age}}",
+    "visaBenefits": "ПЕРЕВАГИ ВІЗИ",
+    "applicationProcessSection": "ПРОЦЕС ПОДАЧІ",
+    "onlineApplication": "Онлайн-подача",
+    "inPersonApplication": "Особиста подача",
+    "processing": "Строк: {{time}}",
+    "requiredDocsSection": "НЕОБХІДНІ ДОКУМЕНТИ",
+    "officialVisaWebsite": "Офіційний сайт візи",
+    "free": "Безкоштовно",
+    "performanceBreakdown": "АНАЛІЗ ПОКАЗНИКІВ",
+    "categoriesSubtitle": "{{count}} категорії · {{name}}",
+    "annualAverages": "Річні середні",
+    "climateDataSection": "КЛІМАТИЧНІ ДАНІ",
+    "annualMeanTemp": "Середня температура",
+    "annualPrecipitation": "Річна кількість опадів",
+    "hottestMonth": "Найспекотніший місяц",
+    "coldestMonth": "Найхолодніший місяц",
+    "seasonLabels": {
+      "four_seasons": "Чотири сезони",
+      "mild_seasons": "М´які сезони",
+      "tropical": "Тропічний",
+      "arid": "Посушливий",
+      "polar": "Полярний"
+    },
+    "scoreBadge": {
+      "excellent": "ВІДМІННО",
+      "good": "ДОБРЕ",
+      "fair": "СЕРЕДНЬО",
+      "weak": "СЛАБО"
+    },
+    "cardLabels": {
+      "infrastructure": "Інтернет",
+      "humanDevelopment": "Люд. розвиток",
+      "englishProficiency": "Англійська",
+      "startupEnvironment": "Стартапи"
     }
   },
   "indicatorsPage": {
@@ -353,6 +433,24 @@
         "description": "Індекс кліматичної вразливості та готовності Університету Нотр-Дам",
         "tags": ["Клімат"]
       }
+    }
+  },
+  "loading": "Завантаження…",
+  "nomadVisasPage": {
+    "eyebrow": "ПОДОРОЖІ ТА РОБОТА",
+    "subtitle": "Порівняйте програми цифрових номад-віз в {{count}} країнах",
+    "countries": "Країни",
+    "taxExempt": "Без податку",
+    "freeVisas": "Безкошт. візи",
+    "search": "Пошук країн...",
+    "noResults": "Країни не знайдено",
+    "table": {
+      "country": "Країна",
+      "visaName": "Назва візи",
+      "duration": "Тривалість",
+      "cost": "Вартість",
+      "income": "Мін. дохід",
+      "tax": "Податковий статус"
     }
   }
 }

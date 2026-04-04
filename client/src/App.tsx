@@ -338,7 +338,7 @@ export default function App() {
 
         {/* Right content area */}
         <main className="flex-1 min-w-0" style={{ backgroundColor: "#0F1114" }}>
-          <div className="px-4 py-4 md:px-6 md:py-6">
+          <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
               className="relative mb-6 md:mb-12 rounded-lg overflow-hidden"
@@ -360,7 +360,7 @@ export default function App() {
               />
 
               <div
-                className="relative flex flex-col justify-end px-4 pb-4 md:px-12 md:pb-12"
+                className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
                 style={{ minHeight: "160px" }}
               >
                 {/* Eyebrow */}
@@ -766,7 +766,7 @@ export default function App() {
                           : "#999999",
                       }}
                     >
-                      {r}
+                      {t(`regions.${r.replace(/\s/g, "")}`, r)}
                     </button>
                   ))}
                 </div>

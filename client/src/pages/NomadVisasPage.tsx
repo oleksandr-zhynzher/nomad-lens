@@ -14,13 +14,10 @@ import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { CountryData } from "../utils/types";
 
-const TAX_STATUS_COLORS: Record<
-  string,
-  { bg: string; text: string; label: string }
-> = {
-  exempt: { bg: "#1A4A2A", text: "#44CC66", label: "Tax Exempt" },
-  standard: { bg: "#2A2A3A", text: "#8888CC", label: "Standard Tax" },
-  special: { bg: "#4A3A1A", text: "#DDAA44", label: "Special Rate" },
+const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
+  exempt: { bg: "#1A4A2A", text: "#44CC66" },
+  standard: { bg: "#2A2A3A", text: "#8888CC" },
+  special: { bg: "#4A3A1A", text: "#DDAA44" },
 };
 
 type SortField = "country" | "duration" | "cost" | "income" | "tax";
@@ -358,6 +355,7 @@ export function NomadVisasPage() {
                     cursor: "pointer",
                     userSelect: "none",
                     backgroundColor: "var(--color-bg)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {t("nomadVisasPage.table.country", "Country")}{" "}
@@ -378,6 +376,7 @@ export function NomadVisasPage() {
                     textTransform: "uppercase",
                     color: "#999999",
                     backgroundColor: "var(--color-bg)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {t("nomadVisasPage.table.visaName", "Visa Name")}
@@ -396,6 +395,7 @@ export function NomadVisasPage() {
                     cursor: "pointer",
                     userSelect: "none",
                     backgroundColor: "var(--color-bg)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {t("nomadVisasPage.table.duration", "Duration")}{" "}
@@ -419,6 +419,7 @@ export function NomadVisasPage() {
                     cursor: "pointer",
                     userSelect: "none",
                     backgroundColor: "var(--color-bg)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {t("nomadVisasPage.table.cost", "Cost")}{" "}
@@ -442,6 +443,7 @@ export function NomadVisasPage() {
                     cursor: "pointer",
                     userSelect: "none",
                     backgroundColor: "var(--color-bg)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {t("nomadVisasPage.table.income", "Income Req.")}{" "}
@@ -465,6 +467,7 @@ export function NomadVisasPage() {
                     cursor: "pointer",
                     userSelect: "none",
                     backgroundColor: "var(--color-bg)",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {t("nomadVisasPage.table.tax", "Tax Status")}{" "}
@@ -582,7 +585,7 @@ export function NomadVisasPage() {
                           marginLeft: "3px",
                         }}
                       >
-                        mo
+                        {t("countryPage.visa.mo")}
                       </span>
                       {visa.duration.maxExtension > 0 && (
                         <span
@@ -637,7 +640,7 @@ export function NomadVisasPage() {
                               marginLeft: "2px",
                             }}
                           >
-                            /mo
+                            /{t("countryPage.visa.mo")}
                           </span>
                         </>
                       ) : visa.incomeRequirement.annual ? (
@@ -661,7 +664,7 @@ export function NomadVisasPage() {
                               marginLeft: "2px",
                             }}
                           >
-                            /yr
+                            /{t("countryPage.visa.yr")}
                           </span>
                         </>
                       ) : (
@@ -691,7 +694,11 @@ export function NomadVisasPage() {
                           whiteSpace: "nowrap",
                         }}
                       >
-                        {taxColors.label}
+                        {visa.tax.status === "exempt"
+                          ? t("countryPage.taxExemptLabel")
+                          : visa.tax.status === "special"
+                            ? t("countryPage.specialTaxLabel")
+                            : t("countryPage.standardTaxLabel")}
                       </span>
                     </td>
 

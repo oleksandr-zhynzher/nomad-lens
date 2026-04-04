@@ -2,7 +2,7 @@
   "nav": {
     "indicators": "Показатели",
     "dataSources": "Источники данных",
-    "nomadVisas": "Визы номадов",
+    "nomadVisas": "Номад-визы",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -21,7 +21,7 @@
   },
   "hero": {
     "eyebrow": "ИССЛЕДУЙ · СРАВНИВАЙ · РЕШАЙ",
-    "title": "НАЙДИ СВОЮ СЛЕДУЮЩУЮ СТРАНУ",
+    "title": "НАЙДИ СТРАНУ МЕЧТЫ",
     "tagline": "Персонализированные рейтинги для цифровых кочевников — актуальные данные из 10 глобальных источников.",
     "countries": "Страны",
     "indicators": "Показатели",
@@ -32,7 +32,21 @@
   },
   "regions": {
     "label": "РЕГИОНЫ",
-    "all": "Все"
+    "all": "Все",
+    "Africa": "Африка",
+    "Americas": "Америка",
+    "Asia": "Азия",
+    "Europe": "Европа",
+    "MiddleEast": "Ближний Восток",
+    "Oceania": "Океания"
+  },
+  "map": {
+    "score": "БАЛЛ",
+    "excellent": "Отлично",
+    "moderate": "Умеренно",
+    "low": "Низкий",
+    "noData": "Нет данных",
+    "countriesScored": "{{count}} стран в рейтинге · нажмите для деталей"
   },
   "compare": {
     "eyebrow": "СРАВНИТЬ",
@@ -44,7 +58,10 @@
     "regions": "Регионы",
     "parameters": "Параметры",
     "sortByScore": "Сортировать по баллу",
-    "share": "Поделиться"
+    "share": "Поделиться",
+    "addCountry": "Добавить страну",
+    "searchCountry": "Поиск страны…",
+    "noCountriesFound": "Страны не найдены"
   },
   "mobileSheet": {
     "weightsAndPreferences": "Веса и настройки",
@@ -54,10 +71,10 @@
     "title": "ВЕСА И НАСТРОЙКИ",
     "hint": "Нажмите на группу, чтобы развернуть и настроить веса показателей.",
     "independentMode": "Независимый",
-    "balancedMode": "Сбалансированный",
+    "balancedMode": "Соразмерный",
     "independentTitle": "Независимый режим",
     "independentDesc": "Каждый показатель взвешивается независимо по шкале 0–100. Общий вес может превышать 100. Все показатели учитываются при ранжировании стран — более высокие значения = больше важности.",
-    "balancedTitle": "Сбалансированный режим",
+    "balancedTitle": "Соразмерный режим",
     "balancedDesc": "Все видимые показатели вместе составляют 100% общего веса. Увеличение одного показателя автоматически уменьшает другие пропорционально. Идеально для сравнения относительной важности категорий.",
     "footerIndependent": "Каждый показатель взвешивается независимо (0–100)",
     "footerBalanced": "Все показатели в сумме 100% — увеличение одного уменьшает другие",
@@ -105,6 +122,7 @@
     "nomadVisa": "Номад-Виза",
     "scoreBreakdown": "РАЗБИВКА БАЛЛОВ",
     "viewInList": "Просмотреть в списке →",
+    "nomadVisaDetails": "Цифровая номад-виза",
     "climate": {
       "fourSeasons": "Четыре сезона",
       "mild": "Мягкий",
@@ -145,7 +163,69 @@
       "onlineApplication": "Онлайн-подача доступна",
       "inPersonApplication": "Требуется личная подача",
       "requiredDocuments": "Необходимые документы",
-      "officialWebsite": "Официальный сайт визы"
+      "officialWebsite": "Официальный сайт визы",
+      "visaName": "Название визы",
+      "visitWebsite": "Открыть сайт →"
+    },
+    "back": "Назад",
+    "backToCountries": "← К странам",
+    "countryDetailLabel": "СТРАНА",
+    "nomadVisaBadge": "Номад-виза",
+    "touristVisaBadge": "{{days}} дней туристич. виза",
+    "globalRankScore": "Рейтинг · Балл",
+    "population": "Население",
+    "capital": "Столица",
+    "region": "Регион",
+    "nomadVisaSection": "НОМАД-ВИЗА",
+    "updated": "Обновлено {{date}}",
+    "durationCost": "ДЛИТЕЛЬНОСТЬ И СТОИМОСТЬ",
+    "monthsInitial": "{{count}} мес. первоначально",
+    "moExtension": "+{{count}} мес. продление",
+    "renewable": "Возобновляемая",
+    "applicationFee": "сбор за подачу",
+    "incomeRequirement": "ТРЕБОВАНИЯ К ДОХОДУ",
+    "perMonth": "/ месяц",
+    "perYear": "/ год",
+    "taxation": "НАЛОГООБЛОЖЕНИЕ",
+    "taxExemptLabel": "Без налога",
+    "specialTaxLabel": "Особый налог",
+    "standardTaxLabel": "Стандартный налог",
+    "eligibilitySection": "ТРЕБОВАНИЯ",
+    "minimumAge": "Мин. возраст: {{age}}",
+    "visaBenefits": "ПРЕИМУЩЕСТВА ВИЗЫ",
+    "applicationProcessSection": "ПРОЦЕСС ПОДАЧИ",
+    "onlineApplication": "Онлайн-подача",
+    "inPersonApplication": "Личная подача",
+    "processing": "Срок: {{time}}",
+    "requiredDocsSection": "НЕОБХОДИМЫЕ ДОКУМЕНТЫ",
+    "officialVisaWebsite": "Официальный сайт визы",
+    "free": "Бесплатно",
+    "performanceBreakdown": "АНАЛИЗ ПОКАЗАТЕЛЕЙ",
+    "categoriesSubtitle": "{{count}} категории · {{name}}",
+    "annualAverages": "Годовые средние",
+    "climateDataSection": "КЛИМАТИЧЕСКИЕ ДАННЫЕ",
+    "annualMeanTemp": "Средняя температура",
+    "annualPrecipitation": "Годовые осадки",
+    "hottestMonth": "Самый жаркий месяц",
+    "coldestMonth": "Самый холодный месяц",
+    "seasonLabels": {
+      "four_seasons": "Четыре сезона",
+      "mild_seasons": "Мягкие сезоны",
+      "tropical": "Тропический",
+      "arid": "Засушливый",
+      "polar": "Полярный"
+    },
+    "scoreBadge": {
+      "excellent": "ОТЛИЧНО",
+      "good": "ХОРОШО",
+      "fair": "СРЕДНЕ",
+      "weak": "СЛАБО"
+    },
+    "cardLabels": {
+      "infrastructure": "Интернет",
+      "humanDevelopment": "Чел. развитие",
+      "englishProficiency": "Английский",
+      "startupEnvironment": "Стартапы"
     }
   },
   "indicatorsPage": {
@@ -353,6 +433,24 @@
         "description": "Индекс климатической уязвимости и готовности Университета Нотр-Дам",
         "tags": ["Климат"]
       }
+    }
+  },
+  "loading": "Загрузка…",
+  "nomadVisasPage": {
+    "eyebrow": "ПУТЕШЕСТВИЯ И РАБОТА",
+    "subtitle": "Сравните программы цифровых номад-виз в {{count}} странах",
+    "countries": "Страны",
+    "taxExempt": "Без налога",
+    "freeVisas": "Бесплатные визы",
+    "search": "Поиск стран...",
+    "noResults": "Страны не найдены",
+    "table": {
+      "country": "Страна",
+      "visaName": "Название визы",
+      "duration": "Длительность",
+      "cost": "Стоимость",
+      "income": "Мин. доход",
+      "tax": "Налоговый статус"
     }
   }
 }

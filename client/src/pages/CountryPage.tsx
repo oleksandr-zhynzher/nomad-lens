@@ -43,12 +43,13 @@ import { useCountries } from "../hooks/useCountries";
 import { useWeightState } from "../hooks/useWeightState";
 import { useScoring } from "../hooks/useScoring";
 import { useLangPrefix } from "../hooks/useLangPrefix";
+import { useTranslation } from "react-i18next";
+import type { NomadVisaDetails, NomadVisaLocalization } from "../utils/types";
 import {
   VISIBLE_CATEGORY_KEYS,
   CATEGORY_LABELS,
   type CategoryKey,
   type ClimatePreferences,
-  type SeasonType,
 } from "../utils/types";
 
 type LucideIcon = React.ComponentType<{
@@ -63,13 +64,12 @@ const DEFAULT_CLIMATE: ClimatePreferences = {
   maxTemp: 45,
 };
 
-const SEASON_LABELS: Record<SeasonType, string> = {
-  four_seasons: "Four Seasons",
-  mild_seasons: "Mild Seasons",
-  tropical: "Tropical",
-  arid: "Arid",
-  polar: "Polar",
-};
+type SeasonLabelKey =
+  | "four_seasons"
+  | "mild_seasons"
+  | "tropical"
+  | "arid"
+  | "polar";
 
 interface CategoryStyleEntry {
   icon: LucideIcon;
@@ -114,20 +114,39 @@ const CARD_LABELS: Partial<Record<CategoryKey, string>> = {
   startupEnvironment: "Startup Env",
 };
 
-function getScoreBadge(value: number | null): string {
+function getScoreBadgeKey(value: number | null): string {
   if (value === null) return "N/A";
-  if (value >= 85) return "EXCELLENT";
-  if (value >= 70) return "GOOD";
-  if (value >= 55) return "FAIR";
-  return "WEAK";
+  if (value >= 85) return "excellent";
+  if (value >= 70) return "good";
+  if (value >= 55) return "fair";
+  return "weak";
 }
 
 export function CountryPage() {
+  const { t, i18n: i18nInstance } = useTranslation();
   const { code } = useParams<{ code: string }>();
   const navigate = useNavigate();
   const langPrefix = useLangPrefix();
   const { countries, loading, error } = useCountries();
   const { weights } = useWeightState();
+
+  // Helper: pick the localised string array/value for the active language,
+  // falling back to the English default when a translation is missing.
+  function localize<T>(
+    defaultValue: T,
+    visa: NomadVisaDetails,
+    pick: (loc: NomadVisaLocalization) => T | undefined,
+  ): T {
+    const lang = i18nInstance.language as "ru" | "ua" | string;
+    if (lang === "ru" || lang === "ua") {
+      const loc = visa.i18n?.[lang as "ru" | "ua"];
+      if (loc) {
+        const translated = pick(loc);
+        if (translated !== undefined) return translated;
+      }
+    }
+    return defaultValue;
+  }
 
   const ranked = useScoring(
     countries,
@@ -167,7 +186,7 @@ export function CountryPage() {
               color: "#666666",
             }}
           >
-            Loading…
+            {t("loading")}
           </span>
         </div>
       </Layout>
@@ -194,7 +213,7 @@ export function CountryPage() {
               color: "#999999",
             }}
           >
-            {error ?? "Country not found"}
+            {error ?? t("countryPage.notFound")}
           </span>
           <Link
             to={`${langPrefix}/`}
@@ -205,7 +224,7 @@ export function CountryPage() {
               textDecoration: "none",
             }}
           >
-            ← Back to Countries
+            {t("countryPage.backToCountries")}
           </Link>
         </div>
       </Layout>
@@ -213,7 +232,9 @@ export function CountryPage() {
   }
 
   const seasonLabel = c.climateData
-    ? SEASON_LABELS[c.climateData.seasonType]
+    ? t(
+        `countryPage.seasonLabels.${c.climateData.seasonType as SeasonLabelKey}`,
+      )
     : null;
 
   const getHostname = (url: string) => {
@@ -272,7 +293,7 @@ export function CountryPage() {
             }}
           >
             <ArrowLeft size={15} color="#AAAAAA" />
-            Back
+            {t("countryPage.back")}
           </button>
 
           {/* Bottom content: flag + name + badges */}
@@ -318,7 +339,7 @@ export function CountryPage() {
                     textTransform: "uppercase",
                   }}
                 >
-                  Country Detail
+                  {t("countryPage.countryDetailLabel")}
                 </span>
                 <h1
                   style={{
@@ -377,7 +398,7 @@ export function CountryPage() {
                       color: "#C2956A",
                     }}
                   >
-                    Nomad Visa
+                    {t("countryPage.nomadVisaBadge")}
                   </span>
                 </div>
               )}
@@ -402,7 +423,7 @@ export function CountryPage() {
                       color: "#7BACC8",
                     }}
                   >
-                    Schengen Area
+                    {t("countryPage.schengen")}
                   </span>
                 </div>
               )}
@@ -427,7 +448,9 @@ export function CountryPage() {
                       color: "#C2956A",
                     }}
                   >
-                    {c.touristVisaDays} day tourist visa
+                    {t("countryPage.touristVisaBadge", {
+                      days: c.touristVisaDays,
+                    })}
                   </span>
                 </div>
               )}
@@ -452,7 +475,7 @@ export function CountryPage() {
                       color: "#7A9B6B",
                     }}
                   >
-                    {SEASON_LABELS[c.climateData.seasonType]}
+                    {seasonLabel}
                   </span>
                 </div>
               )}
@@ -515,7 +538,7 @@ export function CountryPage() {
                 color: "#555555",
               }}
             >
-              Global Rank · Score
+              {t("countryPage.globalRankScore")}
             </span>
           </div>
           <div
@@ -548,7 +571,7 @@ export function CountryPage() {
                 color: "#555555",
               }}
             >
-              Population
+              {t("countryPage.population")}
             </span>
           </div>
           <div
@@ -581,7 +604,7 @@ export function CountryPage() {
                 color: "#555555",
               }}
             >
-              Capital
+              {t("countryPage.capital")}
             </span>
           </div>
           <div
@@ -614,7 +637,7 @@ export function CountryPage() {
                 color: "#555555",
               }}
             >
-              Region
+              {t("countryPage.region")}
             </span>
           </div>
         </div>
@@ -641,7 +664,7 @@ export function CountryPage() {
                   margin: 0,
                 }}
               >
-                NOMAD VISA
+                {t("countryPage.nomadVisaSection")}
               </h2>
               <div style={{ flex: 1 }} />
               <div
@@ -668,7 +691,7 @@ export function CountryPage() {
                   color: "#444444",
                 }}
               >
-                Updated {visa.lastUpdated}
+                {t("countryPage.updated", { date: visa.lastUpdated })}
               </span>
             </div>
 
@@ -704,7 +727,7 @@ export function CountryPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    DURATION & COST
+                    {t("countryPage.durationCost")}
                   </span>
                   <div
                     style={{
@@ -721,7 +744,9 @@ export function CountryPage() {
                         color: "#E8E9EB",
                       }}
                     >
-                      {visa.duration.initial} months initial
+                      {t("countryPage.monthsInitial", {
+                        count: visa.duration.initial,
+                      })}
                     </span>
                     <div style={{ flex: 1 }} />
                     {visa.duration.maxExtension > 0 && (
@@ -732,7 +757,9 @@ export function CountryPage() {
                           color: "#C2956A",
                         }}
                       >
-                        +{visa.duration.maxExtension} mo extension
+                        {t("countryPage.moExtension", {
+                          count: visa.duration.maxExtension,
+                        })}
                       </span>
                     )}
                   </div>
@@ -752,7 +779,7 @@ export function CountryPage() {
                           color: "#6B9E6B",
                         }}
                       >
-                        Renewable
+                        {t("countryPage.renewable")}
                       </span>
                     </div>
                   )}
@@ -774,7 +801,7 @@ export function CountryPage() {
                       }}
                     >
                       {visa.cost.amount === 0
-                        ? "Free"
+                        ? t("countryPage.free")
                         : `${visa.cost.currency} ${visa.cost.amount.toLocaleString()}`}
                     </span>
                     <span
@@ -784,7 +811,7 @@ export function CountryPage() {
                         color: "#666666",
                       }}
                     >
-                      application fee
+                      {t("countryPage.applicationFee")}
                     </span>
                   </div>
                   <div
@@ -806,7 +833,7 @@ export function CountryPage() {
                         textTransform: "uppercase",
                       }}
                     >
-                      INCOME REQUIREMENT
+                      {t("countryPage.incomeRequirement")}
                     </span>
                     {visa.incomeRequirement.monthly != null ? (
                       <>
@@ -819,8 +846,8 @@ export function CountryPage() {
                           }}
                         >
                           {visa.incomeRequirement.currency}{" "}
-                          {visa.incomeRequirement.monthly.toLocaleString()} /
-                          month
+                          {visa.incomeRequirement.monthly.toLocaleString()}{" "}
+                          {t("countryPage.perMonth")}
                         </span>
                         <span
                           style={{
@@ -833,7 +860,7 @@ export function CountryPage() {
                           {(
                             visa.incomeRequirement.monthly * 12
                           ).toLocaleString()}{" "}
-                          / year
+                          {t("countryPage.perYear")}
                         </span>
                       </>
                     ) : visa.incomeRequirement.annual != null ? (
@@ -846,7 +873,8 @@ export function CountryPage() {
                         }}
                       >
                         {visa.incomeRequirement.currency}{" "}
-                        {visa.incomeRequirement.annual.toLocaleString()} / year
+                        {visa.incomeRequirement.annual.toLocaleString()}{" "}
+                        {t("countryPage.perYear")}
                       </span>
                     ) : (
                       <span
@@ -857,7 +885,7 @@ export function CountryPage() {
                           color: "#44CC66",
                         }}
                       >
-                        No minimum
+                        {t("countryPage.visa.noMinimum")}
                       </span>
                     )}
                   </div>
@@ -884,7 +912,7 @@ export function CountryPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    TAXATION
+                    {t("countryPage.taxation")}
                   </span>
                   <div
                     style={{
@@ -915,10 +943,10 @@ export function CountryPage() {
                       }}
                     >
                       {visa.tax.status === "exempt"
-                        ? "Tax Exempt"
+                        ? t("countryPage.taxExemptLabel")
                         : visa.tax.status === "special"
-                          ? "Special Tax"
-                          : "Standard Tax"}
+                          ? t("countryPage.specialTaxLabel")
+                          : t("countryPage.standardTaxLabel")}
                     </span>
                     {visa.tax.rate != null && visa.tax.status !== "exempt" && (
                       <span
@@ -942,7 +970,7 @@ export function CountryPage() {
                         margin: 0,
                       }}
                     >
-                      {visa.tax.notes}
+                      {localize(visa.tax.notes, visa, (l) => l.tax?.notes)}
                     </p>
                   )}
                 </div>
@@ -968,7 +996,7 @@ export function CountryPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    ELIGIBILITY
+                    {t("countryPage.eligibilitySection")}
                   </span>
                   <div
                     style={{
@@ -985,10 +1013,16 @@ export function CountryPage() {
                         color: "#777777",
                       }}
                     >
-                      Minimum age: {visa.eligibility.minAge}
+                      {t("countryPage.minimumAge", {
+                        age: visa.eligibility.minAge,
+                      })}
                     </span>
                   </div>
-                  {visa.eligibility.requirements.map((req, i) => (
+                  {localize(
+                    visa.eligibility.requirements,
+                    visa,
+                    (l) => l.eligibility?.requirements,
+                  ).map((req, i) => (
                     <div
                       key={i}
                       style={{ display: "flex", gap: "8px", paddingTop: "4px" }}
@@ -1049,32 +1083,34 @@ export function CountryPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    VISA BENEFITS
+                    {t("countryPage.visaBenefits")}
                   </span>
-                  {visa.benefits.map((benefit, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: "flex",
-                        gap: "10px",
-                        alignItems: "center",
-                        backgroundColor: "#0A0A0A",
-                        borderRadius: "8px",
-                        padding: "10px 12px",
-                      }}
-                    >
-                      <Briefcase size={16} color="#8F5A3C" />
-                      <span
+                  {localize(visa.benefits, visa, (l) => l.benefits).map(
+                    (benefit, i) => (
+                      <div
+                        key={i}
                         style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "13px",
-                          color: "#CCCCCC",
+                          display: "flex",
+                          gap: "10px",
+                          alignItems: "center",
+                          backgroundColor: "#0A0A0A",
+                          borderRadius: "8px",
+                          padding: "10px 12px",
                         }}
                       >
-                        {benefit}
-                      </span>
-                    </div>
-                  ))}
+                        <Briefcase size={16} color="#8F5A3C" />
+                        <span
+                          style={{
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: "13px",
+                            color: "#CCCCCC",
+                          }}
+                        >
+                          {benefit}
+                        </span>
+                      </div>
+                    ),
+                  )}
                 </div>
 
                 {/* Application Process */}
@@ -1098,7 +1134,7 @@ export function CountryPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    APPLICATION PROCESS
+                    {t("countryPage.applicationProcessSection")}
                   </span>
                   <div
                     style={{
@@ -1116,8 +1152,8 @@ export function CountryPage() {
                       }}
                     >
                       {visa.applicationProcess.online
-                        ? "Online Application"
-                        : "In-Person Application"}
+                        ? t("countryPage.onlineApplication")
+                        : t("countryPage.inPersonApplication")}
                     </span>
                   </div>
                   <div
@@ -1135,7 +1171,13 @@ export function CountryPage() {
                         color: "#888888",
                       }}
                     >
-                      Processing: {visa.applicationProcess.processingTime}
+                      {t("countryPage.processing", {
+                        time: localize(
+                          visa.applicationProcess.processingTime,
+                          visa,
+                          (l) => l.applicationProcess?.processingTime,
+                        ),
+                      })}
                     </span>
                   </div>
                   <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
@@ -1148,9 +1190,13 @@ export function CountryPage() {
                       textTransform: "uppercase",
                     }}
                   >
-                    REQUIRED DOCUMENTS
+                    {t("countryPage.requiredDocsSection")}
                   </span>
-                  {visa.applicationProcess.documents.map((doc, i) => (
+                  {localize(
+                    visa.applicationProcess.documents,
+                    visa,
+                    (l) => l.applicationProcess?.documents,
+                  ).map((doc, i) => (
                     <div
                       key={i}
                       style={{
@@ -1197,7 +1243,7 @@ export function CountryPage() {
                       color: "#C2956A",
                     }}
                   >
-                    Official Visa Website
+                    {t("countryPage.officialVisaWebsite")}
                   </span>
                   <div style={{ flex: 1 }} />
                   <span
@@ -1236,7 +1282,7 @@ export function CountryPage() {
                 margin: 0,
               }}
             >
-              PERFORMANCE BREAKDOWN
+              {t("countryPage.performanceBreakdown")}
             </h2>
             <span
               style={{
@@ -1247,7 +1293,10 @@ export function CountryPage() {
                 color: "#444444",
               }}
             >
-              {VISIBLE_CATEGORY_KEYS.length} categories · {c.name}
+              {t("countryPage.categoriesSubtitle", {
+                count: VISIBLE_CATEGORY_KEYS.length,
+                name: c.name,
+              })}
             </span>
           </div>
 
@@ -1262,8 +1311,17 @@ export function CountryPage() {
               const catStyle = CATEGORY_STYLE[key];
               const IconComp = catStyle.icon;
               const scoreValue = c.scores[key]?.value ?? null;
-              const label = CARD_LABELS[key] ?? CATEGORY_LABELS[key];
-              const badge = getScoreBadge(scoreValue);
+              const label = CARD_LABELS[key]
+                ? t(`countryPage.cardLabels.${key}`, CARD_LABELS[key])
+                : t(
+                    `indicatorsPage.indicators.${key}.name`,
+                    CATEGORY_LABELS[key],
+                  );
+              const badgeKey = getScoreBadgeKey(scoreValue);
+              const badge =
+                badgeKey === "N/A"
+                  ? "N/A"
+                  : t(`countryPage.scoreBadge.${badgeKey}`).toUpperCase();
               return (
                 <div
                   key={key}
@@ -1410,7 +1468,7 @@ export function CountryPage() {
                       margin: 0,
                     }}
                   >
-                    CLIMATE DATA
+                    {t("countryPage.climateDataSection")}
                   </h2>
                   <span
                     style={{
@@ -1421,7 +1479,7 @@ export function CountryPage() {
                       color: "#444444",
                     }}
                   >
-                    {seasonLabel} · Annual averages
+                    {seasonLabel} · {t("countryPage.annualAverages")}
                   </span>
                 </div>
 
@@ -1456,7 +1514,7 @@ export function CountryPage() {
                         color: "#555555",
                       }}
                     >
-                      Annual Mean Temp
+                      {t("countryPage.annualMeanTemp")}
                     </span>
                   </div>
                   <div
@@ -1489,7 +1547,7 @@ export function CountryPage() {
                         color: "#555555",
                       }}
                     >
-                      Annual Precipitation
+                      {t("countryPage.annualPrecipitation")}
                     </span>
                   </div>
                   <div
@@ -1522,7 +1580,7 @@ export function CountryPage() {
                         color: "#555555",
                       }}
                     >
-                      Hottest Month
+                      {t("countryPage.hottestMonth")}
                     </span>
                   </div>
                   <div
@@ -1555,7 +1613,7 @@ export function CountryPage() {
                         color: "#555555",
                       }}
                     >
-                      Coldest Month
+                      {t("countryPage.coldestMonth")}
                     </span>
                   </div>
                 </div>

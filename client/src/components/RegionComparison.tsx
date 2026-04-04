@@ -1,4 +1,5 @@
 import { useMemo, useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import {
   TrendingUp,
   Coins,
@@ -31,7 +32,12 @@ import {
   Theater,
   Stethoscope,
 } from "lucide-react";
-import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
+import type {
+  CategoryKey,
+  ClimatePreferences,
+  CountryData,
+  WeightMap,
+} from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 
@@ -93,20 +99,27 @@ interface RegionStats {
   categories: Record<CategoryKey, { avg: number | null; count: number }>;
 }
 
-export function RegionComparison({ countries, weights }: RegionComparisonProps) {
+export function RegionComparison({
+  countries,
+  weights,
+}: RegionComparisonProps) {
+  const { t } = useTranslation();
   const allRegions = useMemo(
     () => [...new Set(countries.map((c) => c.region))].sort(),
     [countries],
   );
 
-  const [enabled, setEnabled] = useState<Set<string>>(new Set());
+  const [enabled, setEnabled] = useState<Set<string>>(
+    () => new Set(allRegions),
+  );
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
   // Pre-select all regions once data loads
   useEffect(() => {
-    if (allRegions.length > 0 && enabled.size === 0) {
-      setEnabled(new Set(allRegions));
+    if (allRegions.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time init from async data
+      setEnabled((prev) => (prev.size === 0 ? new Set(allRegions) : prev));
     }
   }, [allRegions]);
 
@@ -115,8 +128,12 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
     const header = headerRef.current;
     const body = bodyRef.current;
     if (!header || !body) return;
-    const onBody = () => { header.scrollLeft = body.scrollLeft; };
-    const onHeader = () => { body.scrollLeft = header.scrollLeft; };
+    const onBody = () => {
+      header.scrollLeft = body.scrollLeft;
+    };
+    const onHeader = () => {
+      body.scrollLeft = header.scrollLeft;
+    };
     body.addEventListener("scroll", onBody);
     header.addEventListener("scroll", onHeader);
     return () => {
@@ -145,7 +162,10 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
         if (values.length === 0) {
           categories[key] = { avg: null, count: 0 };
         } else {
-          const avg = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10) / 10;
+          const avg =
+            Math.round(
+              (values.reduce((a, b) => a + b, 0) / values.length) * 10,
+            ) / 10;
           categories[key] = { avg, count: values.length };
         }
       }
@@ -160,7 +180,8 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
         numerator += w * avg;
         denominator += w;
       }
-      const overall = denominator === 0 ? 0 : Math.round((numerator / denominator) * 10) / 10;
+      const overall =
+        denominator === 0 ? 0 : Math.round((numerator / denominator) * 10) / 10;
 
       stats.push({
         name: regionName,
@@ -235,7 +256,15 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                   >
                     {r.overall.toFixed(1)}
                   </span>
-                  <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>/100</span>
+                  <span
+                    style={{
+                      fontFamily: "Geist, sans-serif",
+                      fontSize: "12px",
+                      color: "#555555",
+                    }}
+                  >
+                    /100
+                  </span>
                 </div>
 
                 <span
@@ -266,17 +295,44 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
           <div
             ref={headerRef}
             className="sticky z-10"
-            style={{ top: "56px", overflowX: "auto", scrollbarWidth: "none", backgroundColor: "#0F1114" }}
+            style={{
+              top: "56px",
+              overflowX: "auto",
+              scrollbarWidth: "none",
+              backgroundColor: "#0F1114",
+            }}
           >
-            <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
+            <div
+              className="flex items-center"
+              style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}
+            >
               <div className="w-[160px] md:w-[240px] shrink-0">
-                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
+                <span
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "10px",
+                    fontWeight: 600,
+                    letterSpacing: "1.5px",
+                    color: "#333333",
+                    textTransform: "uppercase",
+                  }}
+                >
                   Indicator
                 </span>
               </div>
               {activeRegions.map((r) => (
-                <div key={r.name} className="flex-1 flex items-center justify-center">
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#FFFFFF" }}>
+                <div
+                  key={r.name}
+                  className="flex-1 flex items-center justify-center"
+                >
+                  <span
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: "#FFFFFF",
+                    }}
+                  >
                     {r.name}
                   </span>
                 </div>
@@ -287,16 +343,37 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
           {/* Scrollable data rows */}
           <div ref={bodyRef} style={{ overflowX: "auto" }}>
             {/* Overall row */}
-            <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0", backgroundColor: "#0D0D0F" }}>
+            <div
+              className="flex items-center"
+              style={{
+                borderBottom: "1px solid #1C1C1C",
+                padding: "16px 0",
+                backgroundColor: "#0D0D0F",
+              }}
+            >
               <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
                 <TrendingUp size={16} style={{ color: "#888888" }} />
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", fontWeight: 600, color: "#AAAAAA" }}>
+                <span
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    color: "#AAAAAA",
+                  }}
+                >
                   Overall Score
                 </span>
               </div>
               {activeRegions.map((r) => (
                 <div key={r.name} className="flex-1 text-center">
-                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "22px", fontWeight: 600, color: scoreColour(r.overall) }}>
+                  <span
+                    style={{
+                      fontFamily: "IBM Plex Mono, monospace",
+                      fontSize: "22px",
+                      fontWeight: 600,
+                      color: scoreColour(r.overall),
+                    }}
+                  >
                     {r.overall.toFixed(1)}
                   </span>
                 </div>
@@ -307,11 +384,27 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
             {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];
               return (
-                <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>
+                <div
+                  key={key}
+                  className="flex items-center"
+                  style={{
+                    borderBottom: "1px solid #1C1C1C",
+                    padding: "16px 0",
+                  }}
+                >
                   <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
                     <Icon size={16} style={{ color: "#555555" }} />
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#777777" }}>
-                      {CATEGORY_LABELS[key]}
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "13px",
+                        color: "#777777",
+                      }}
+                    >
+                      {t(
+                        `indicatorsPage.indicators.${key}.name`,
+                        CATEGORY_LABELS[key],
+                      )}
                     </span>
                   </div>
                   {activeRegions.map((r) => {

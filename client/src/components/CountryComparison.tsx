@@ -163,6 +163,7 @@ export function CountryComparison({
       });
       onSelectedCodesChange(sorted);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortTrigger]);
 
   // Report selection count to parent
@@ -314,7 +315,7 @@ export function CountryComparison({
                 color: "#E8E9EB",
               }}
             >
-              Add Country
+              {t("compare.addCountry")}
             </span>
           </button>
         </div>
@@ -333,7 +334,7 @@ export function CountryComparison({
           <input
             type="text"
             autoFocus
-            placeholder="Search country…"
+            placeholder={t("compare.searchCountry")}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full px-3 py-2.5 focus:outline-none"
@@ -402,7 +403,7 @@ export function CountryComparison({
                   color: "#555555",
                 }}
               >
-                No countries found
+                {t("compare.noCountriesFound")}
               </div>
             )}
           </div>
@@ -493,7 +494,10 @@ export function CountryComparison({
                         color: "#777777",
                       }}
                     >
-                      {CATEGORY_LABELS[key]}
+                      {t(
+                        `indicatorsPage.indicators.${key}.name`,
+                        CATEGORY_LABELS[key],
+                      )}
                     </span>
                   </div>
                   {selectedCountries.map((slot) => {
