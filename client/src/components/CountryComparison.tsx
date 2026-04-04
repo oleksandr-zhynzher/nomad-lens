@@ -28,6 +28,12 @@ import {
   Plane,
   Theater,
   Stethoscope,
+  UsersRound,
+  Stamp,
+  BadgeDollarSign,
+  Coffee,
+  Smartphone,
+  Handshake,
 } from "lucide-react";
 import type {
   CountryData,
@@ -83,6 +89,12 @@ const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
   airConnectivity: Plane,
   culturalHeritage: Theater,
   healthcareCost: Stethoscope,
+  nomadCommunity: UsersRound,
+  visaFriendliness: Stamp,
+  costEfficiency: BadgeDollarSign,
+  workLifeBalance: Coffee,
+  digitalReadiness: Smartphone,
+  culturalFit: Handshake,
 };
 
 interface Props {

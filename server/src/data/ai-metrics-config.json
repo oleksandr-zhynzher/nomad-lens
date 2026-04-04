@@ -1,0 +1,238 @@
+{
+  "_version": "1.0.0",
+  "_generatedBy": "Claude (Anthropic) — AI-analyzed composite scores",
+  "_generatedDate": "2025-04-04",
+  "_methodology": "Each metric is a 0–100 composite score synthesized by Claude from multiple publicly available data sources, structured datasets, expert knowledge, and qualitative assessment. Sub-indicators are weighted within each metric as specified below. Countries with insufficient data receive null. Scores are designed to be reproducible: re-running with the same methodology and data sources should yield comparable results within ±5 points.",
+  "metrics": [
+    {
+      "key": "nomadCommunity",
+      "name": "Nomad & Expat Community",
+      "description": "Measures the density and vibrancy of digital nomad and expatriate communities. Countries with established coworking ecosystems, nomad hubs, coliving spaces, and active expat networks score higher.",
+      "subIndicators": [
+        {
+          "name": "coworkingDensity",
+          "weight": 0.3,
+          "description": "Density of coworking spaces per capita and per major city, sourced from Coworker.com, Coworkly, and NomadList listings"
+        },
+        {
+          "name": "nomadHubPresence",
+          "weight": 0.25,
+          "description": "Presence of recognized nomad hub cities (from NomadList top-100, Reddit r/digitalnomad consensus, and Lonely Planet digital nomad guides)"
+        },
+        {
+          "name": "colivingAvailability",
+          "weight": 0.15,
+          "description": "Availability of coliving spaces (Coliving.com, NomadList coliving listings, Outsite, Selina network)"
+        },
+        {
+          "name": "expatCommunitySize",
+          "weight": 0.3,
+          "description": "Estimated expat population relative to total population, international school density, InterNations community activity, and Facebook expat group sizes"
+        }
+      ],
+      "normalization": "Linear 0–100 composite of weighted sub-indicators. Each sub-indicator is independently scored 0–100 then combined.",
+      "dataSources": [
+        "NomadList (nomadlist.com) — city rankings and coworking/coliving data",
+        "Coworker.com — global coworking directory",
+        "InterNations Expat Insider Survey",
+        "UN DESA International Migrant Stock",
+        "Coliving.com directory",
+        "Selina/Outsite network coverage"
+      ]
+    },
+    {
+      "key": "visaFriendliness",
+      "name": "Visa & Stay Flexibility",
+      "description": "Assesses how easy it is for a digital nomad (holding a strong passport like US/EU) to enter, stay long-term, and extend their stay. Considers tourist visa duration, visa-run feasibility, e-visa availability, dedicated nomad visa programs, and paths to longer residency.",
+      "subIndicators": [
+        {
+          "name": "touristVisaLength",
+          "weight": 0.25,
+          "description": "Standard tourist visa duration in days for US/EU passport holders (Henley, Sherpa, IATA data)"
+        },
+        {
+          "name": "visaRunEase",
+          "weight": 0.15,
+          "description": "Feasibility and legality of visa runs — proximity to border, tolerance by immigration authorities, land-border accessibility"
+        },
+        {
+          "name": "eVisaAvailability",
+          "weight": 0.15,
+          "description": "Whether e-visa or visa-on-arrival is available for major passport holders (Henley Passport Index, VisaGuide.World)"
+        },
+        {
+          "name": "nomadVisaProgram",
+          "weight": 0.25,
+          "description": "Existence and quality of a dedicated digital nomad visa — duration, cost, income threshold, renewal options"
+        },
+        {
+          "name": "pathToResidency",
+          "weight": 0.2,
+          "description": "Availability of investor/freelancer/entrepreneur residency routes beyond tourist stays"
+        }
+      ],
+      "normalization": "Linear 0–100 composite. nomadVisaProgram scores 0 if no program exists, 50–100 based on program quality if it does.",
+      "dataSources": [
+        "Henley Passport Index",
+        "IATA Timatic visa database (via airline tools)",
+        "VisaGuide.World",
+        "NomadList visa data",
+        "Government immigration websites (individual country verification)",
+        "Existing nomadVisa.json and visas.json in project data"
+      ]
+    },
+    {
+      "key": "costEfficiency",
+      "name": "Nomad Cost-Value Ratio",
+      "description": "Not just cheapness — this measures the quality of nomad life per dollar spent. Countries where you get excellent coworking, reliable fast internet, good food, and comfortable housing at a reasonable price score highest. An expensive country with world-class nomad infrastructure can still score well.",
+      "subIndicators": [
+        {
+          "name": "monthlyNomadBudget",
+          "weight": 0.3,
+          "description": "Estimated monthly cost for a comfortable nomad lifestyle (private room, coworking, meals, transport) — NomadList cost data, Numbeo, Expatistan"
+        },
+        {
+          "name": "qualityPerDollar",
+          "weight": 0.35,
+          "description": "Ratio of infrastructure quality (internet speed, coworking quality, housing standard) to monthly cost"
+        },
+        {
+          "name": "internetValueRatio",
+          "weight": 0.2,
+          "description": "Average internet speed (Speedtest Global Index) relative to the cost of a reliable connection"
+        },
+        {
+          "name": "foodAndAccommodationValue",
+          "weight": 0.15,
+          "description": "Quality and variety of food/accommodation options relative to price — restaurant diversity, Airbnb median prices, local food quality indices"
+        }
+      ],
+      "normalization": "Composite 0–100. High quality at low cost → top scores. High quality at high cost → moderate. Low quality at low cost → moderate. Low quality at high cost → low.",
+      "dataSources": [
+        "NomadList cost of living data",
+        "Numbeo Cost of Living Index",
+        "Expatistan Cost of Living Index",
+        "Speedtest Global Index (Ookla)",
+        "Airbnb average prices by country",
+        "Numbeo Restaurant Price Index"
+      ]
+    },
+    {
+      "key": "workLifeBalance",
+      "name": "Remote Work & Lifestyle",
+      "description": "Evaluates how well a country supports the remote work lifestyle beyond just internet. Considers timezone overlap with major client regions (US/EU), café work culture, outdoor recreation access, social scene for nomads, and overall work-life rhythm.",
+      "subIndicators": [
+        {
+          "name": "timezoneOverlap",
+          "weight": 0.3,
+          "description": "Hours of business overlap with US East (ET) and Central European (CET) working hours. UTC-1 to UTC+3 score highest for EU overlap; UTC-4 to UTC-8 for US overlap. Best = overlap with both."
+        },
+        {
+          "name": "cafeCulture",
+          "weight": 0.2,
+          "description": "Prevalence of laptop-friendly cafés with wifi, power outlets, and reasonable stay expectations — qualitative assessment from nomad community consensus"
+        },
+        {
+          "name": "outdoorRecreation",
+          "weight": 0.2,
+          "description": "Access to beaches, mountains, hiking, surfing, diving, and outdoor sports — geographic and climate-based assessment"
+        },
+        {
+          "name": "socialScene",
+          "weight": 0.15,
+          "description": "Nightlife, meetup culture, dating scene accessibility, and general social vibrancy for foreigners"
+        },
+        {
+          "name": "weekendEscapes",
+          "weight": 0.15,
+          "description": "Proximity to diverse weekend trip destinations — beaches, nature, cultural sites, neighboring countries reachable in 1-3 hours"
+        }
+      ],
+      "normalization": "Linear 0–100 composite of weighted sub-indicators.",
+      "dataSources": [
+        "TimeAndDate.com timezone data",
+        "NomadList city fun/social scores",
+        "TripAdvisor/Lonely Planet outdoor activity rankings",
+        "Digital nomad community surveys and blog consensus",
+        "Geographic proximity analysis"
+      ]
+    },
+    {
+      "key": "digitalReadiness",
+      "name": "Digital Nomad Infrastructure",
+      "description": "Goes beyond basic internet penetration (already covered by 'infrastructure'). Measures the digital ecosystem specifically relevant to nomads: café wifi reliability, mobile data quality and eSIM support, digital payment adoption, app ecosystem for daily life, and tech-forward city infrastructure.",
+      "subIndicators": [
+        {
+          "name": "cafeWifiReliability",
+          "weight": 0.25,
+          "description": "Average wifi speed and reliability in cafés and public spaces — Speedtest data, NomadList wifi scores, nomad community reports"
+        },
+        {
+          "name": "mobileDataQuality",
+          "weight": 0.25,
+          "description": "4G/5G coverage, average mobile speeds, and prepaid SIM/eSIM availability and cost for tourists (Opensignal, GSMA data)"
+        },
+        {
+          "name": "digitalPayments",
+          "weight": 0.2,
+          "description": "Adoption of contactless payments, mobile wallets (Apple Pay, Google Pay), and card acceptance rate vs cash-only economy"
+        },
+        {
+          "name": "eSIMSupport",
+          "weight": 0.15,
+          "description": "eSIM availability from local carriers, Airalo/Holafly coverage, ease of getting connected on arrival"
+        },
+        {
+          "name": "appEcosystem",
+          "weight": 0.15,
+          "description": "Availability of essential apps: ride-hailing (Uber/Bolt/local), food delivery, maps, translation, banking — practical digital daily life"
+        }
+      ],
+      "normalization": "Linear 0–100 composite of weighted sub-indicators.",
+      "dataSources": [
+        "Speedtest Global Index (Ookla) — fixed and mobile",
+        "Opensignal Mobile Network Experience reports",
+        "GSMA Mobile Connectivity Index",
+        "NomadList city wifi scores",
+        "Airalo eSIM country coverage",
+        "World Bank digital adoption indicators"
+      ]
+    },
+    {
+      "key": "culturalFit",
+      "name": "Cultural Openness to Foreigners",
+      "description": "Measures how welcoming and navigable daily life is for a foreign remote worker. Not about tourist attractions — about real daily-life friction: can you get things done without speaking the local language? Are locals friendly to foreigners in daily interactions? Is there bureaucratic hassle? Are scams/tourist-targeting common?",
+      "subIndicators": [
+        {
+          "name": "dailyLifeFriendliness",
+          "weight": 0.3,
+          "description": "General friendliness and helpfulness toward foreigners in daily interactions — InterNations Expat Insider friendliness rankings, nomad community consensus"
+        },
+        {
+          "name": "languageAccessibility",
+          "weight": 0.25,
+          "description": "How easy it is to navigate daily life (not tourism — groceries, banking, healthcare, bureaucracy) without the local language. English signage, bilingual service staff prevalence"
+        },
+        {
+          "name": "scamPrevalence",
+          "weight": 0.2,
+          "description": "Prevalence of tourist/foreigner-targeting scams, taxi overcharging, dual pricing — qualitative assessment from nomad/expat community reports and travel advisories"
+        },
+        {
+          "name": "bureaucraticEase",
+          "weight": 0.25,
+          "description": "Ease of dealing with local bureaucracy as a foreigner — opening a bank account, getting a SIM card, registering an address, dealing with police. World Bank Doing Business (legacy), expat surveys"
+        }
+      ],
+      "normalization": "Linear 0–100 composite. Lower scam prevalence and bureaucratic friction → higher scores.",
+      "dataSources": [
+        "InterNations Expat Insider Survey (Friendliness index)",
+        "NomadList city friendliness scores",
+        "World Bank Doing Business indicators (legacy 2020)",
+        "Transparency International CPI (corruption perception as proxy for bureaucratic friction)",
+        "Digital nomad forum consensus (Reddit, Facebook groups)",
+        "US State Department / UK FCO travel advisories"
+      ]
+    }
+  ]
+}

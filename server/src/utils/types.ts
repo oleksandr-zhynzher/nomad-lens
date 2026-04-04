@@ -37,7 +37,25 @@ export type CategoryKey =
   | "startupEnvironment"
   | "airConnectivity"
   | "culturalHeritage"
-  | "healthcareCost";
+  | "healthcareCost"
+  | "nomadCommunity"
+  | "visaFriendliness"
+  | "costEfficiency"
+  | "workLifeBalance"
+  | "digitalReadiness"
+  | "culturalFit";
+
+// ─── AI Metrics ───────────────────────────────────────────────────────────────
+
+export interface AiMetricsEntry {
+  code: string;
+  nomadCommunity: number | null;
+  visaFriendliness: number | null;
+  costEfficiency: number | null;
+  workLifeBalance: number | null;
+  digitalReadiness: number | null;
+  culturalFit: number | null;
+}
 
 // ─── Nomad Visa Details ───────────────────────────────────────────────────────
 

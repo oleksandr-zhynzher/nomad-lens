@@ -11,6 +11,7 @@ import {
   Plane,
   Sliders,
   Scale,
+  Sparkles,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type {
@@ -24,6 +25,7 @@ import {
   CATEGORY_DATA_SOURCES,
   CATEGORY_DESCRIPTIONS,
   CATEGORY_LABELS,
+  AI_CATEGORIES,
 } from "../utils/types";
 import { defaultWeights, weightLabel } from "../utils/scoring";
 import { Tooltip } from "./Tooltip";
@@ -54,6 +56,7 @@ function WeightSlider({
       : weightLabel(categoryKey, weights);
   const description = CATEGORY_DESCRIPTIONS[categoryKey];
   const dataSource = CATEGORY_DATA_SOURCES[categoryKey];
+  const isAi = AI_CATEGORIES.has(categoryKey);
 
   return (
     <div className="flex flex-col" style={{ gap: "9px" }}>
@@ -69,6 +72,23 @@ function WeightSlider({
           >
             {label}
           </span>
+          {isAi && (
+            <span
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "9px",
+                fontWeight: 600,
+                color: "#C084FC",
+                backgroundColor: "rgba(192, 132, 252, 0.12)",
+                padding: "1px 5px",
+                borderRadius: "4px",
+                letterSpacing: "0.5px",
+                lineHeight: "16px",
+              }}
+            >
+              AI
+            </span>
+          )}
           <Tooltip
             content={
               <div>
@@ -198,6 +218,19 @@ const WEIGHT_GROUPS: Array<{
       "logistics",
       "airConnectivity",
       "englishProficiency",
+    ],
+  },
+  {
+    label: "AI INSIGHTS",
+    labelKey: "weights.groups.aiInsights",
+    icon: <Sparkles size={16} color="#C084FC" />,
+    keys: [
+      "nomadCommunity",
+      "visaFriendliness",
+      "costEfficiency",
+      "workLifeBalance",
+      "digitalReadiness",
+      "culturalFit",
     ],
   },
 ];

@@ -37,7 +37,13 @@ export type CategoryKey =
   | "startupEnvironment"
   | "airConnectivity"
   | "culturalHeritage"
-  | "healthcareCost";
+  | "healthcareCost"
+  | "nomadCommunity"
+  | "visaFriendliness"
+  | "costEfficiency"
+  | "workLifeBalance"
+  | "digitalReadiness"
+  | "culturalFit";
 
 export const CATEGORY_KEYS: CategoryKey[] = [
   "economy",
@@ -63,6 +69,22 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   "airConnectivity",
   "culturalHeritage",
   "healthcareCost",
+  "nomadCommunity",
+  "visaFriendliness",
+  "costEfficiency",
+  "workLifeBalance",
+  "digitalReadiness",
+  "culturalFit",
+];
+
+/** AI-analyzed category keys — opt-in only (default weight 0). */
+export const AI_CATEGORY_KEYS: CategoryKey[] = [
+  "nomadCommunity",
+  "visaFriendliness",
+  "costEfficiency",
+  "workLifeBalance",
+  "digitalReadiness",
+  "culturalFit",
 ];
 
 /** Categories computed by the server but hidden from the UI. */
@@ -71,6 +93,9 @@ export const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
   "biodiversity",
   "digitalFreedom",
 ]);
+
+/** AI metrics are visible but opt-in (default weight = 0). */
+export const AI_CATEGORIES: Set<CategoryKey> = new Set(AI_CATEGORY_KEYS);
 
 /** Only the categories visible in the UI (weights, breakdowns, comparisons). */
 export const VISIBLE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
@@ -101,6 +126,12 @@ export const CATEGORY_LABELS: Record<CategoryKey, string> = {
   airConnectivity: "Air Connectivity",
   culturalHeritage: "Cultural Heritage",
   healthcareCost: "Healthcare Cost",
+  nomadCommunity: "Nomad & Expat Community",
+  visaFriendliness: "Visa & Stay Flexibility",
+  costEfficiency: "Nomad Cost-Value Ratio",
+  workLifeBalance: "Remote Work & Lifestyle",
+  digitalReadiness: "Digital Nomad Infra",
+  culturalFit: "Cultural Openness",
 };
 
 export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
@@ -142,6 +173,18 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
     "UNESCO World Heritage Sites, Intangible Cultural Heritage elements, and international tourism arrivals",
   healthcareCost:
     "Out-of-pocket health expenditure as % of total — lower costs mean more accessible care",
+  nomadCommunity:
+    "Coworking density, nomad hub presence, coliving availability, and expat community size",
+  visaFriendliness:
+    "Tourist visa length, visa-run ease, e-visa availability, nomad visa programs, and paths to residency",
+  costEfficiency:
+    "Quality of nomad life per dollar — coworking, internet, food, and housing value ratio",
+  workLifeBalance:
+    "Timezone overlap with US/EU, café culture, outdoor recreation, social scene, and weekend escapes",
+  digitalReadiness:
+    "Café wifi reliability, mobile data quality, digital payments, eSIM support, and app ecosystem",
+  culturalFit:
+    "Daily-life friendliness to foreigners, language accessibility, scam prevalence, and bureaucratic ease",
 };
 
 export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
@@ -174,6 +217,18 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   culturalHeritage:
     "UNESCO World Heritage Centre · UNESCO ICH · World Bank (ST.INT.ARVL)",
   healthcareCost: "World Bank — SH.XPD.OOPC.CH.ZS (out-of-pocket expenditure)",
+  nomadCommunity:
+    "AI-analyzed (Claude) — NomadList, Coworker.com, InterNations, UN DESA migrant stock",
+  visaFriendliness:
+    "AI-analyzed (Claude) — Henley Passport Index, IATA Timatic, NomadList, government sources",
+  costEfficiency:
+    "AI-analyzed (Claude) — NomadList, Numbeo, Expatistan, Speedtest, Airbnb pricing",
+  workLifeBalance:
+    "AI-analyzed (Claude) — timezone data, NomadList, TripAdvisor, geographic analysis",
+  digitalReadiness:
+    "AI-analyzed (Claude) — Speedtest/Ookla, Opensignal, GSMA, NomadList, Airalo",
+  culturalFit:
+    "AI-analyzed (Claude) — InterNations Expat Insider, NomadList, World Bank, travel advisories",
 };
 
 export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
@@ -200,6 +255,12 @@ export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
   airConnectivity: "AIR",
   culturalHeritage: "CUL",
   healthcareCost: "OOP",
+  nomadCommunity: "NMD",
+  visaFriendliness: "VIS",
+  costEfficiency: "VAL",
+  workLifeBalance: "WLB",
+  digitalReadiness: "DIG+",
+  culturalFit: "FIT",
 };
 
 // ─── Nomad Visa Details ───────────────────────────────────────────────────────

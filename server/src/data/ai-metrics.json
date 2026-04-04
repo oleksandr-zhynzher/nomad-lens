@@ -1,0 +1,1952 @@
+{
+  "_source": "AI-analyzed by Claude (Anthropic) — see ai-metrics-config.json for full methodology",
+  "_version": "1.0.0",
+  "_generatedDate": "2025-04-04",
+  "_note": "Each value is a 0–100 composite score. null = data unavailable or concept inapplicable.",
+  "data": [
+    {
+      "code": "AD",
+      "nomadCommunity": 12,
+      "visaFriendliness": 50,
+      "costEfficiency": 18,
+      "workLifeBalance": 42,
+      "digitalReadiness": 55,
+      "culturalFit": 60
+    },
+    {
+      "code": "AE",
+      "nomadCommunity": 65,
+      "visaFriendliness": 78,
+      "costEfficiency": 28,
+      "workLifeBalance": 62,
+      "digitalReadiness": 82,
+      "culturalFit": 60
+    },
+    {
+      "code": "AF",
+      "nomadCommunity": 2,
+      "visaFriendliness": 5,
+      "costEfficiency": 30,
+      "workLifeBalance": 5,
+      "digitalReadiness": 8,
+      "culturalFit": 8
+    },
+    {
+      "code": "AG",
+      "nomadCommunity": 18,
+      "visaFriendliness": 72,
+      "costEfficiency": 22,
+      "workLifeBalance": 55,
+      "digitalReadiness": 42,
+      "culturalFit": 58
+    },
+    {
+      "code": "AL",
+      "nomadCommunity": 48,
+      "visaFriendliness": 78,
+      "costEfficiency": 88,
+      "workLifeBalance": 62,
+      "digitalReadiness": 45,
+      "culturalFit": 55
+    },
+    {
+      "code": "AM",
+      "nomadCommunity": 35,
+      "visaFriendliness": 78,
+      "costEfficiency": 82,
+      "workLifeBalance": 48,
+      "digitalReadiness": 48,
+      "culturalFit": 52
+    },
+    {
+      "code": "AO",
+      "nomadCommunity": 5,
+      "visaFriendliness": 22,
+      "costEfficiency": 28,
+      "workLifeBalance": 15,
+      "digitalReadiness": 15,
+      "culturalFit": 22
+    },
+    {
+      "code": "AR",
+      "nomadCommunity": 58,
+      "visaFriendliness": 72,
+      "costEfficiency": 82,
+      "workLifeBalance": 72,
+      "digitalReadiness": 58,
+      "culturalFit": 58
+    },
+    {
+      "code": "AS",
+      "nomadCommunity": 2,
+      "visaFriendliness": 35,
+      "costEfficiency": 22,
+      "workLifeBalance": 25,
+      "digitalReadiness": 22,
+      "culturalFit": 35
+    },
+    {
+      "code": "AT",
+      "nomadCommunity": 45,
+      "visaFriendliness": 58,
+      "costEfficiency": 30,
+      "workLifeBalance": 70,
+      "digitalReadiness": 75,
+      "culturalFit": 65
+    },
+    {
+      "code": "AU",
+      "nomadCommunity": 62,
+      "visaFriendliness": 52,
+      "costEfficiency": 22,
+      "workLifeBalance": 82,
+      "digitalReadiness": 82,
+      "culturalFit": 78
+    },
+    {
+      "code": "AW",
+      "nomadCommunity": 15,
+      "visaFriendliness": 65,
+      "costEfficiency": 22,
+      "workLifeBalance": 58,
+      "digitalReadiness": 52,
+      "culturalFit": 62
+    },
+    {
+      "code": "AZ",
+      "nomadCommunity": 18,
+      "visaFriendliness": 55,
+      "costEfficiency": 68,
+      "workLifeBalance": 38,
+      "digitalReadiness": 45,
+      "culturalFit": 38
+    },
+    {
+      "code": "BA",
+      "nomadCommunity": 22,
+      "visaFriendliness": 60,
+      "costEfficiency": 80,
+      "workLifeBalance": 48,
+      "digitalReadiness": 42,
+      "culturalFit": 45
+    },
+    {
+      "code": "BB",
+      "nomadCommunity": 32,
+      "visaFriendliness": 82,
+      "costEfficiency": 25,
+      "workLifeBalance": 62,
+      "digitalReadiness": 55,
+      "culturalFit": 68
+    },
+    {
+      "code": "BD",
+      "nomadCommunity": 8,
+      "visaFriendliness": 30,
+      "costEfficiency": 65,
+      "workLifeBalance": 18,
+      "digitalReadiness": 22,
+      "culturalFit": 25
+    },
+    {
+      "code": "BE",
+      "nomadCommunity": 48,
+      "visaFriendliness": 55,
+      "costEfficiency": 32,
+      "workLifeBalance": 68,
+      "digitalReadiness": 78,
+      "culturalFit": 72
+    },
+    {
+      "code": "BF",
+      "nomadCommunity": 3,
+      "visaFriendliness": 25,
+      "costEfficiency": 55,
+      "workLifeBalance": 12,
+      "digitalReadiness": 10,
+      "culturalFit": 28
+    },
+    {
+      "code": "BG",
+      "nomadCommunity": 52,
+      "visaFriendliness": 62,
+      "costEfficiency": 85,
+      "workLifeBalance": 58,
+      "digitalReadiness": 58,
+      "culturalFit": 48
+    },
+    {
+      "code": "BH",
+      "nomadCommunity": 22,
+      "visaFriendliness": 60,
+      "costEfficiency": 38,
+      "workLifeBalance": 40,
+      "digitalReadiness": 68,
+      "culturalFit": 48
+    },
+    {
+      "code": "BI",
+      "nomadCommunity": 2,
+      "visaFriendliness": 22,
+      "costEfficiency": 55,
+      "workLifeBalance": 8,
+      "digitalReadiness": 8,
+      "culturalFit": 22
+    },
+    {
+      "code": "BJ",
+      "nomadCommunity": 5,
+      "visaFriendliness": 42,
+      "costEfficiency": 62,
+      "workLifeBalance": 18,
+      "digitalReadiness": 12,
+      "culturalFit": 30
+    },
+    {
+      "code": "BM",
+      "nomadCommunity": 15,
+      "visaFriendliness": 75,
+      "costEfficiency": 5,
+      "workLifeBalance": 50,
+      "digitalReadiness": 62,
+      "culturalFit": 65
+    },
+    {
+      "code": "BN",
+      "nomadCommunity": 5,
+      "visaFriendliness": 45,
+      "costEfficiency": 38,
+      "workLifeBalance": 30,
+      "digitalReadiness": 52,
+      "culturalFit": 35
+    },
+    {
+      "code": "BO",
+      "nomadCommunity": 15,
+      "visaFriendliness": 55,
+      "costEfficiency": 82,
+      "workLifeBalance": 38,
+      "digitalReadiness": 25,
+      "culturalFit": 38
+    },
+    {
+      "code": "BR",
+      "nomadCommunity": 55,
+      "visaFriendliness": 62,
+      "costEfficiency": 68,
+      "workLifeBalance": 72,
+      "digitalReadiness": 55,
+      "culturalFit": 55
+    },
+    {
+      "code": "BS",
+      "nomadCommunity": 12,
+      "visaFriendliness": 62,
+      "costEfficiency": 15,
+      "workLifeBalance": 52,
+      "digitalReadiness": 52,
+      "culturalFit": 58
+    },
+    {
+      "code": "BT",
+      "nomadCommunity": 5,
+      "visaFriendliness": 18,
+      "costEfficiency": 35,
+      "workLifeBalance": 35,
+      "digitalReadiness": 22,
+      "culturalFit": 42
+    },
+    {
+      "code": "BW",
+      "nomadCommunity": 8,
+      "visaFriendliness": 55,
+      "costEfficiency": 42,
+      "workLifeBalance": 28,
+      "digitalReadiness": 28,
+      "culturalFit": 48
+    },
+    {
+      "code": "BY",
+      "nomadCommunity": 12,
+      "visaFriendliness": 30,
+      "costEfficiency": 72,
+      "workLifeBalance": 32,
+      "digitalReadiness": 40,
+      "culturalFit": 25
+    },
+    {
+      "code": "BZ",
+      "nomadCommunity": 22,
+      "visaFriendliness": 72,
+      "costEfficiency": 55,
+      "workLifeBalance": 55,
+      "digitalReadiness": 32,
+      "culturalFit": 58
+    },
+    {
+      "code": "CA",
+      "nomadCommunity": 60,
+      "visaFriendliness": 48,
+      "costEfficiency": 28,
+      "workLifeBalance": 72,
+      "digitalReadiness": 82,
+      "culturalFit": 82
+    },
+    {
+      "code": "CD",
+      "nomadCommunity": 2,
+      "visaFriendliness": 15,
+      "costEfficiency": 28,
+      "workLifeBalance": 5,
+      "digitalReadiness": 5,
+      "culturalFit": 15
+    },
+    {
+      "code": "CF",
+      "nomadCommunity": 1,
+      "visaFriendliness": 10,
+      "costEfficiency": 25,
+      "workLifeBalance": 3,
+      "digitalReadiness": 3,
+      "culturalFit": 10
+    },
+    {
+      "code": "CG",
+      "nomadCommunity": 3,
+      "visaFriendliness": 20,
+      "costEfficiency": 32,
+      "workLifeBalance": 10,
+      "digitalReadiness": 10,
+      "culturalFit": 18
+    },
+    {
+      "code": "CH",
+      "nomadCommunity": 45,
+      "visaFriendliness": 45,
+      "costEfficiency": 8,
+      "workLifeBalance": 72,
+      "digitalReadiness": 85,
+      "culturalFit": 70
+    },
+    {
+      "code": "CI",
+      "nomadCommunity": 8,
+      "visaFriendliness": 32,
+      "costEfficiency": 52,
+      "workLifeBalance": 18,
+      "digitalReadiness": 18,
+      "culturalFit": 28
+    },
+    {
+      "code": "CL",
+      "nomadCommunity": 38,
+      "visaFriendliness": 55,
+      "costEfficiency": 52,
+      "workLifeBalance": 62,
+      "digitalReadiness": 62,
+      "culturalFit": 55
+    },
+    {
+      "code": "CM",
+      "nomadCommunity": 5,
+      "visaFriendliness": 28,
+      "costEfficiency": 52,
+      "workLifeBalance": 15,
+      "digitalReadiness": 12,
+      "culturalFit": 22
+    },
+    {
+      "code": "CN",
+      "nomadCommunity": 30,
+      "visaFriendliness": 35,
+      "costEfficiency": 55,
+      "workLifeBalance": 48,
+      "digitalReadiness": 55,
+      "culturalFit": 28
+    },
+    {
+      "code": "CO",
+      "nomadCommunity": 78,
+      "visaFriendliness": 72,
+      "costEfficiency": 85,
+      "workLifeBalance": 78,
+      "digitalReadiness": 55,
+      "culturalFit": 58
+    },
+    {
+      "code": "CR",
+      "nomadCommunity": 62,
+      "visaFriendliness": 75,
+      "costEfficiency": 52,
+      "workLifeBalance": 82,
+      "digitalReadiness": 52,
+      "culturalFit": 72
+    },
+    {
+      "code": "CU",
+      "nomadCommunity": 5,
+      "visaFriendliness": 32,
+      "costEfficiency": 38,
+      "workLifeBalance": 28,
+      "digitalReadiness": 8,
+      "culturalFit": 32
+    },
+    {
+      "code": "CV",
+      "nomadCommunity": 22,
+      "visaFriendliness": 62,
+      "costEfficiency": 55,
+      "workLifeBalance": 58,
+      "digitalReadiness": 35,
+      "culturalFit": 58
+    },
+    {
+      "code": "CW",
+      "nomadCommunity": 12,
+      "visaFriendliness": 60,
+      "costEfficiency": 28,
+      "workLifeBalance": 52,
+      "digitalReadiness": 52,
+      "culturalFit": 55
+    },
+    {
+      "code": "CY",
+      "nomadCommunity": 42,
+      "visaFriendliness": 60,
+      "costEfficiency": 50,
+      "workLifeBalance": 68,
+      "digitalReadiness": 62,
+      "culturalFit": 62
+    },
+    {
+      "code": "CZ",
+      "nomadCommunity": 62,
+      "visaFriendliness": 58,
+      "costEfficiency": 70,
+      "workLifeBalance": 68,
+      "digitalReadiness": 72,
+      "culturalFit": 60
+    },
+    {
+      "code": "DE",
+      "nomadCommunity": 72,
+      "visaFriendliness": 55,
+      "costEfficiency": 42,
+      "workLifeBalance": 72,
+      "digitalReadiness": 80,
+      "culturalFit": 72
+    },
+    {
+      "code": "DJ",
+      "nomadCommunity": 3,
+      "visaFriendliness": 35,
+      "costEfficiency": 32,
+      "workLifeBalance": 12,
+      "digitalReadiness": 15,
+      "culturalFit": 25
+    },
+    {
+      "code": "DK",
+      "nomadCommunity": 45,
+      "visaFriendliness": 55,
+      "costEfficiency": 18,
+      "workLifeBalance": 72,
+      "digitalReadiness": 88,
+      "culturalFit": 78
+    },
+    {
+      "code": "DM",
+      "nomadCommunity": 10,
+      "visaFriendliness": 68,
+      "costEfficiency": 42,
+      "workLifeBalance": 45,
+      "digitalReadiness": 32,
+      "culturalFit": 52
+    },
+    {
+      "code": "DO",
+      "nomadCommunity": 35,
+      "visaFriendliness": 68,
+      "costEfficiency": 65,
+      "workLifeBalance": 62,
+      "digitalReadiness": 42,
+      "culturalFit": 50
+    },
+    {
+      "code": "DZ",
+      "nomadCommunity": 8,
+      "visaFriendliness": 25,
+      "costEfficiency": 58,
+      "workLifeBalance": 28,
+      "digitalReadiness": 28,
+      "culturalFit": 25
+    },
+    {
+      "code": "EC",
+      "nomadCommunity": 42,
+      "visaFriendliness": 68,
+      "costEfficiency": 82,
+      "workLifeBalance": 62,
+      "digitalReadiness": 42,
+      "culturalFit": 52
+    },
+    {
+      "code": "EE",
+      "nomadCommunity": 55,
+      "visaFriendliness": 82,
+      "costEfficiency": 65,
+      "workLifeBalance": 60,
+      "digitalReadiness": 88,
+      "culturalFit": 68
+    },
+    {
+      "code": "EG",
+      "nomadCommunity": 35,
+      "visaFriendliness": 62,
+      "costEfficiency": 75,
+      "workLifeBalance": 52,
+      "digitalReadiness": 40,
+      "culturalFit": 38
+    },
+    {
+      "code": "ER",
+      "nomadCommunity": 1,
+      "visaFriendliness": 8,
+      "costEfficiency": 35,
+      "workLifeBalance": 5,
+      "digitalReadiness": 5,
+      "culturalFit": 8
+    },
+    {
+      "code": "ES",
+      "nomadCommunity": 82,
+      "visaFriendliness": 72,
+      "costEfficiency": 62,
+      "workLifeBalance": 88,
+      "digitalReadiness": 72,
+      "culturalFit": 75
+    },
+    {
+      "code": "ET",
+      "nomadCommunity": 10,
+      "visaFriendliness": 42,
+      "costEfficiency": 68,
+      "workLifeBalance": 22,
+      "digitalReadiness": 15,
+      "culturalFit": 30
+    },
+    {
+      "code": "FI",
+      "nomadCommunity": 35,
+      "visaFriendliness": 55,
+      "costEfficiency": 22,
+      "workLifeBalance": 68,
+      "digitalReadiness": 88,
+      "culturalFit": 72
+    },
+    {
+      "code": "FJ",
+      "nomadCommunity": 15,
+      "visaFriendliness": 62,
+      "costEfficiency": 48,
+      "workLifeBalance": 55,
+      "digitalReadiness": 28,
+      "culturalFit": 55
+    },
+    {
+      "code": "FM",
+      "nomadCommunity": 2,
+      "visaFriendliness": 42,
+      "costEfficiency": 35,
+      "workLifeBalance": 18,
+      "digitalReadiness": 10,
+      "culturalFit": 35
+    },
+    {
+      "code": "FO",
+      "nomadCommunity": 5,
+      "visaFriendliness": 52,
+      "costEfficiency": 12,
+      "workLifeBalance": 38,
+      "digitalReadiness": 60,
+      "culturalFit": 62
+    },
+    {
+      "code": "FR",
+      "nomadCommunity": 60,
+      "visaFriendliness": 55,
+      "costEfficiency": 38,
+      "workLifeBalance": 78,
+      "digitalReadiness": 75,
+      "culturalFit": 62
+    },
+    {
+      "code": "GA",
+      "nomadCommunity": 5,
+      "visaFriendliness": 28,
+      "costEfficiency": 28,
+      "workLifeBalance": 15,
+      "digitalReadiness": 18,
+      "culturalFit": 25
+    },
+    {
+      "code": "GB",
+      "nomadCommunity": 70,
+      "visaFriendliness": 50,
+      "costEfficiency": 28,
+      "workLifeBalance": 72,
+      "digitalReadiness": 82,
+      "culturalFit": 78
+    },
+    {
+      "code": "GD",
+      "nomadCommunity": 8,
+      "visaFriendliness": 62,
+      "costEfficiency": 35,
+      "workLifeBalance": 48,
+      "digitalReadiness": 32,
+      "culturalFit": 52
+    },
+    {
+      "code": "GE",
+      "nomadCommunity": 72,
+      "visaFriendliness": 90,
+      "costEfficiency": 90,
+      "workLifeBalance": 68,
+      "digitalReadiness": 55,
+      "culturalFit": 68
+    },
+    {
+      "code": "GH",
+      "nomadCommunity": 15,
+      "visaFriendliness": 42,
+      "costEfficiency": 62,
+      "workLifeBalance": 28,
+      "digitalReadiness": 25,
+      "culturalFit": 42
+    },
+    {
+      "code": "GI",
+      "nomadCommunity": 15,
+      "visaFriendliness": 42,
+      "costEfficiency": 18,
+      "workLifeBalance": 40,
+      "digitalReadiness": 65,
+      "culturalFit": 65
+    },
+    {
+      "code": "GL",
+      "nomadCommunity": 3,
+      "visaFriendliness": 42,
+      "costEfficiency": 10,
+      "workLifeBalance": 25,
+      "digitalReadiness": 35,
+      "culturalFit": 50
+    },
+    {
+      "code": "GM",
+      "nomadCommunity": 8,
+      "visaFriendliness": 48,
+      "costEfficiency": 68,
+      "workLifeBalance": 22,
+      "digitalReadiness": 15,
+      "culturalFit": 38
+    },
+    {
+      "code": "GN",
+      "nomadCommunity": 3,
+      "visaFriendliness": 28,
+      "costEfficiency": 55,
+      "workLifeBalance": 10,
+      "digitalReadiness": 8,
+      "culturalFit": 22
+    },
+    {
+      "code": "GQ",
+      "nomadCommunity": 2,
+      "visaFriendliness": 18,
+      "costEfficiency": 22,
+      "workLifeBalance": 8,
+      "digitalReadiness": 10,
+      "culturalFit": 15
+    },
+    {
+      "code": "GR",
+      "nomadCommunity": 62,
+      "visaFriendliness": 68,
+      "costEfficiency": 68,
+      "workLifeBalance": 82,
+      "digitalReadiness": 62,
+      "culturalFit": 60
+    },
+    {
+      "code": "GT",
+      "nomadCommunity": 32,
+      "visaFriendliness": 68,
+      "costEfficiency": 82,
+      "workLifeBalance": 52,
+      "digitalReadiness": 35,
+      "culturalFit": 42
+    },
+    {
+      "code": "GU",
+      "nomadCommunity": 5,
+      "visaFriendliness": 48,
+      "costEfficiency": 22,
+      "workLifeBalance": 35,
+      "digitalReadiness": 52,
+      "culturalFit": 48
+    },
+    {
+      "code": "GW",
+      "nomadCommunity": 2,
+      "visaFriendliness": 30,
+      "costEfficiency": 55,
+      "workLifeBalance": 10,
+      "digitalReadiness": 5,
+      "culturalFit": 22
+    },
+    {
+      "code": "GY",
+      "nomadCommunity": 5,
+      "visaFriendliness": 48,
+      "costEfficiency": 48,
+      "workLifeBalance": 18,
+      "digitalReadiness": 18,
+      "culturalFit": 38
+    },
+    {
+      "code": "HK",
+      "nomadCommunity": 45,
+      "visaFriendliness": 62,
+      "costEfficiency": 22,
+      "workLifeBalance": 62,
+      "digitalReadiness": 88,
+      "culturalFit": 62
+    },
+    {
+      "code": "HN",
+      "nomadCommunity": 15,
+      "visaFriendliness": 62,
+      "costEfficiency": 75,
+      "workLifeBalance": 38,
+      "digitalReadiness": 28,
+      "culturalFit": 35
+    },
+    {
+      "code": "HR",
+      "nomadCommunity": 60,
+      "visaFriendliness": 78,
+      "costEfficiency": 62,
+      "workLifeBalance": 78,
+      "digitalReadiness": 62,
+      "culturalFit": 58
+    },
+    {
+      "code": "HT",
+      "nomadCommunity": 3,
+      "visaFriendliness": 25,
+      "costEfficiency": 38,
+      "workLifeBalance": 8,
+      "digitalReadiness": 8,
+      "culturalFit": 15
+    },
+    {
+      "code": "HU",
+      "nomadCommunity": 52,
+      "visaFriendliness": 58,
+      "costEfficiency": 72,
+      "workLifeBalance": 62,
+      "digitalReadiness": 68,
+      "culturalFit": 52
+    },
+    {
+      "code": "ID",
+      "nomadCommunity": 88,
+      "visaFriendliness": 70,
+      "costEfficiency": 90,
+      "workLifeBalance": 88,
+      "digitalReadiness": 62,
+      "culturalFit": 65
+    },
+    {
+      "code": "IE",
+      "nomadCommunity": 45,
+      "visaFriendliness": 52,
+      "costEfficiency": 22,
+      "workLifeBalance": 68,
+      "digitalReadiness": 78,
+      "culturalFit": 82
+    },
+    {
+      "code": "IL",
+      "nomadCommunity": 42,
+      "visaFriendliness": 52,
+      "costEfficiency": 22,
+      "workLifeBalance": 62,
+      "digitalReadiness": 82,
+      "culturalFit": 48
+    },
+    {
+      "code": "IM",
+      "nomadCommunity": 5,
+      "visaFriendliness": 42,
+      "costEfficiency": 15,
+      "workLifeBalance": 38,
+      "digitalReadiness": 62,
+      "culturalFit": 68
+    },
+    {
+      "code": "IN",
+      "nomadCommunity": 52,
+      "visaFriendliness": 42,
+      "costEfficiency": 72,
+      "workLifeBalance": 52,
+      "digitalReadiness": 48,
+      "culturalFit": 42
+    },
+    {
+      "code": "IQ",
+      "nomadCommunity": 3,
+      "visaFriendliness": 15,
+      "costEfficiency": 35,
+      "workLifeBalance": 8,
+      "digitalReadiness": 18,
+      "culturalFit": 12
+    },
+    {
+      "code": "IR",
+      "nomadCommunity": 5,
+      "visaFriendliness": 18,
+      "costEfficiency": 55,
+      "workLifeBalance": 25,
+      "digitalReadiness": 22,
+      "culturalFit": 28
+    },
+    {
+      "code": "IS",
+      "nomadCommunity": 25,
+      "visaFriendliness": 58,
+      "costEfficiency": 10,
+      "workLifeBalance": 65,
+      "digitalReadiness": 82,
+      "culturalFit": 72
+    },
+    {
+      "code": "IT",
+      "nomadCommunity": 58,
+      "visaFriendliness": 62,
+      "costEfficiency": 48,
+      "workLifeBalance": 82,
+      "digitalReadiness": 68,
+      "culturalFit": 60
+    },
+    {
+      "code": "JM",
+      "nomadCommunity": 20,
+      "visaFriendliness": 62,
+      "costEfficiency": 42,
+      "workLifeBalance": 52,
+      "digitalReadiness": 38,
+      "culturalFit": 48
+    },
+    {
+      "code": "JO",
+      "nomadCommunity": 18,
+      "visaFriendliness": 55,
+      "costEfficiency": 55,
+      "workLifeBalance": 42,
+      "digitalReadiness": 48,
+      "culturalFit": 42
+    },
+    {
+      "code": "JP",
+      "nomadCommunity": 55,
+      "visaFriendliness": 58,
+      "costEfficiency": 45,
+      "workLifeBalance": 72,
+      "digitalReadiness": 82,
+      "culturalFit": 62
+    },
+    {
+      "code": "KE",
+      "nomadCommunity": 35,
+      "visaFriendliness": 55,
+      "costEfficiency": 68,
+      "workLifeBalance": 40,
+      "digitalReadiness": 38,
+      "culturalFit": 45
+    },
+    {
+      "code": "KG",
+      "nomadCommunity": 18,
+      "visaFriendliness": 72,
+      "costEfficiency": 85,
+      "workLifeBalance": 42,
+      "digitalReadiness": 30,
+      "culturalFit": 45
+    },
+    {
+      "code": "KH",
+      "nomadCommunity": 55,
+      "visaFriendliness": 72,
+      "costEfficiency": 85,
+      "workLifeBalance": 58,
+      "digitalReadiness": 38,
+      "culturalFit": 52
+    },
+    {
+      "code": "KI",
+      "nomadCommunity": 1,
+      "visaFriendliness": 38,
+      "costEfficiency": 35,
+      "workLifeBalance": 12,
+      "digitalReadiness": 5,
+      "culturalFit": 30
+    },
+    {
+      "code": "KM",
+      "nomadCommunity": 2,
+      "visaFriendliness": 42,
+      "costEfficiency": 48,
+      "workLifeBalance": 15,
+      "digitalReadiness": 8,
+      "culturalFit": 25
+    },
+    {
+      "code": "KN",
+      "nomadCommunity": 8,
+      "visaFriendliness": 62,
+      "costEfficiency": 28,
+      "workLifeBalance": 45,
+      "digitalReadiness": 38,
+      "culturalFit": 55
+    },
+    {
+      "code": "KP",
+      "nomadCommunity": null,
+      "visaFriendliness": null,
+      "costEfficiency": null,
+      "workLifeBalance": null,
+      "digitalReadiness": null,
+      "culturalFit": null
+    },
+    {
+      "code": "KR",
+      "nomadCommunity": 52,
+      "visaFriendliness": 55,
+      "costEfficiency": 42,
+      "workLifeBalance": 68,
+      "digitalReadiness": 92,
+      "culturalFit": 52
+    },
+    {
+      "code": "KW",
+      "nomadCommunity": 15,
+      "visaFriendliness": 35,
+      "costEfficiency": 28,
+      "workLifeBalance": 28,
+      "digitalReadiness": 65,
+      "culturalFit": 28
+    },
+    {
+      "code": "KY",
+      "nomadCommunity": 10,
+      "visaFriendliness": 58,
+      "costEfficiency": 8,
+      "workLifeBalance": 48,
+      "digitalReadiness": 55,
+      "culturalFit": 60
+    },
+    {
+      "code": "KZ",
+      "nomadCommunity": 18,
+      "visaFriendliness": 62,
+      "costEfficiency": 72,
+      "workLifeBalance": 35,
+      "digitalReadiness": 45,
+      "culturalFit": 38
+    },
+    {
+      "code": "LA",
+      "nomadCommunity": 22,
+      "visaFriendliness": 60,
+      "costEfficiency": 82,
+      "workLifeBalance": 48,
+      "digitalReadiness": 28,
+      "culturalFit": 48
+    },
+    {
+      "code": "LB",
+      "nomadCommunity": 20,
+      "visaFriendliness": 42,
+      "costEfficiency": 48,
+      "workLifeBalance": 45,
+      "digitalReadiness": 40,
+      "culturalFit": 42
+    },
+    {
+      "code": "LC",
+      "nomadCommunity": 12,
+      "visaFriendliness": 68,
+      "costEfficiency": 32,
+      "workLifeBalance": 52,
+      "digitalReadiness": 38,
+      "culturalFit": 55
+    },
+    {
+      "code": "LI",
+      "nomadCommunity": 5,
+      "visaFriendliness": 45,
+      "costEfficiency": 8,
+      "workLifeBalance": 42,
+      "digitalReadiness": 72,
+      "culturalFit": 62
+    },
+    {
+      "code": "LK",
+      "nomadCommunity": 42,
+      "visaFriendliness": 60,
+      "costEfficiency": 78,
+      "workLifeBalance": 65,
+      "digitalReadiness": 42,
+      "culturalFit": 58
+    },
+    {
+      "code": "LR",
+      "nomadCommunity": 3,
+      "visaFriendliness": 28,
+      "costEfficiency": 48,
+      "workLifeBalance": 8,
+      "digitalReadiness": 8,
+      "culturalFit": 28
+    },
+    {
+      "code": "LS",
+      "nomadCommunity": 2,
+      "visaFriendliness": 42,
+      "costEfficiency": 58,
+      "workLifeBalance": 15,
+      "digitalReadiness": 12,
+      "culturalFit": 35
+    },
+    {
+      "code": "LT",
+      "nomadCommunity": 38,
+      "visaFriendliness": 58,
+      "costEfficiency": 68,
+      "workLifeBalance": 55,
+      "digitalReadiness": 72,
+      "culturalFit": 55
+    },
+    {
+      "code": "LU",
+      "nomadCommunity": 25,
+      "visaFriendliness": 55,
+      "costEfficiency": 15,
+      "workLifeBalance": 58,
+      "digitalReadiness": 82,
+      "culturalFit": 72
+    },
+    {
+      "code": "LV",
+      "nomadCommunity": 35,
+      "visaFriendliness": 58,
+      "costEfficiency": 68,
+      "workLifeBalance": 52,
+      "digitalReadiness": 70,
+      "culturalFit": 52
+    },
+    {
+      "code": "LY",
+      "nomadCommunity": 2,
+      "visaFriendliness": 10,
+      "costEfficiency": 35,
+      "workLifeBalance": 8,
+      "digitalReadiness": 15,
+      "culturalFit": 12
+    },
+    {
+      "code": "MA",
+      "nomadCommunity": 55,
+      "visaFriendliness": 68,
+      "costEfficiency": 78,
+      "workLifeBalance": 68,
+      "digitalReadiness": 48,
+      "culturalFit": 55
+    },
+    {
+      "code": "MC",
+      "nomadCommunity": 15,
+      "visaFriendliness": 45,
+      "costEfficiency": 5,
+      "workLifeBalance": 55,
+      "digitalReadiness": 72,
+      "culturalFit": 62
+    },
+    {
+      "code": "MD",
+      "nomadCommunity": 15,
+      "visaFriendliness": 62,
+      "costEfficiency": 85,
+      "workLifeBalance": 35,
+      "digitalReadiness": 38,
+      "culturalFit": 38
+    },
+    {
+      "code": "ME",
+      "nomadCommunity": 45,
+      "visaFriendliness": 72,
+      "costEfficiency": 72,
+      "workLifeBalance": 68,
+      "digitalReadiness": 50,
+      "culturalFit": 55
+    },
+    {
+      "code": "MF",
+      "nomadCommunity": 8,
+      "visaFriendliness": 58,
+      "costEfficiency": 22,
+      "workLifeBalance": 55,
+      "digitalReadiness": 52,
+      "culturalFit": 58
+    },
+    {
+      "code": "MG",
+      "nomadCommunity": 8,
+      "visaFriendliness": 52,
+      "costEfficiency": 78,
+      "workLifeBalance": 35,
+      "digitalReadiness": 12,
+      "culturalFit": 38
+    },
+    {
+      "code": "MH",
+      "nomadCommunity": 1,
+      "visaFriendliness": 38,
+      "costEfficiency": 32,
+      "workLifeBalance": 12,
+      "digitalReadiness": 8,
+      "culturalFit": 32
+    },
+    {
+      "code": "MK",
+      "nomadCommunity": 25,
+      "visaFriendliness": 68,
+      "costEfficiency": 82,
+      "workLifeBalance": 48,
+      "digitalReadiness": 45,
+      "culturalFit": 48
+    },
+    {
+      "code": "ML",
+      "nomadCommunity": 3,
+      "visaFriendliness": 22,
+      "costEfficiency": 52,
+      "workLifeBalance": 10,
+      "digitalReadiness": 8,
+      "culturalFit": 22
+    },
+    {
+      "code": "MM",
+      "nomadCommunity": 8,
+      "visaFriendliness": 22,
+      "costEfficiency": 62,
+      "workLifeBalance": 25,
+      "digitalReadiness": 18,
+      "culturalFit": 28
+    },
+    {
+      "code": "MN",
+      "nomadCommunity": 12,
+      "visaFriendliness": 62,
+      "costEfficiency": 72,
+      "workLifeBalance": 38,
+      "digitalReadiness": 32,
+      "culturalFit": 42
+    },
+    {
+      "code": "MO",
+      "nomadCommunity": 12,
+      "visaFriendliness": 55,
+      "costEfficiency": 28,
+      "workLifeBalance": 42,
+      "digitalReadiness": 68,
+      "culturalFit": 48
+    },
+    {
+      "code": "MP",
+      "nomadCommunity": 3,
+      "visaFriendliness": 45,
+      "costEfficiency": 22,
+      "workLifeBalance": 32,
+      "digitalReadiness": 42,
+      "culturalFit": 42
+    },
+    {
+      "code": "MR",
+      "nomadCommunity": 2,
+      "visaFriendliness": 32,
+      "costEfficiency": 48,
+      "workLifeBalance": 10,
+      "digitalReadiness": 10,
+      "culturalFit": 18
+    },
+    {
+      "code": "MT",
+      "nomadCommunity": 40,
+      "visaFriendliness": 65,
+      "costEfficiency": 40,
+      "workLifeBalance": 68,
+      "digitalReadiness": 70,
+      "culturalFit": 72
+    },
+    {
+      "code": "MU",
+      "nomadCommunity": 28,
+      "visaFriendliness": 72,
+      "costEfficiency": 52,
+      "workLifeBalance": 62,
+      "digitalReadiness": 52,
+      "culturalFit": 62
+    },
+    {
+      "code": "MV",
+      "nomadCommunity": 15,
+      "visaFriendliness": 68,
+      "costEfficiency": 18,
+      "workLifeBalance": 62,
+      "digitalReadiness": 45,
+      "culturalFit": 55
+    },
+    {
+      "code": "MW",
+      "nomadCommunity": 5,
+      "visaFriendliness": 42,
+      "costEfficiency": 65,
+      "workLifeBalance": 15,
+      "digitalReadiness": 10,
+      "culturalFit": 38
+    },
+    {
+      "code": "MX",
+      "nomadCommunity": 88,
+      "visaFriendliness": 82,
+      "costEfficiency": 85,
+      "workLifeBalance": 82,
+      "digitalReadiness": 58,
+      "culturalFit": 65
+    },
+    {
+      "code": "MY",
+      "nomadCommunity": 68,
+      "visaFriendliness": 68,
+      "costEfficiency": 82,
+      "workLifeBalance": 72,
+      "digitalReadiness": 72,
+      "culturalFit": 62
+    },
+    {
+      "code": "MZ",
+      "nomadCommunity": 5,
+      "visaFriendliness": 35,
+      "costEfficiency": 55,
+      "workLifeBalance": 18,
+      "digitalReadiness": 10,
+      "culturalFit": 30
+    },
+    {
+      "code": "NA",
+      "nomadCommunity": 15,
+      "visaFriendliness": 55,
+      "costEfficiency": 48,
+      "workLifeBalance": 38,
+      "digitalReadiness": 28,
+      "culturalFit": 52
+    },
+    {
+      "code": "NC",
+      "nomadCommunity": 5,
+      "visaFriendliness": 42,
+      "costEfficiency": 22,
+      "workLifeBalance": 42,
+      "digitalReadiness": 42,
+      "culturalFit": 45
+    },
+    {
+      "code": "NE",
+      "nomadCommunity": 2,
+      "visaFriendliness": 22,
+      "costEfficiency": 52,
+      "workLifeBalance": 8,
+      "digitalReadiness": 5,
+      "culturalFit": 20
+    },
+    {
+      "code": "NG",
+      "nomadCommunity": 15,
+      "visaFriendliness": 32,
+      "costEfficiency": 55,
+      "workLifeBalance": 22,
+      "digitalReadiness": 28,
+      "culturalFit": 30
+    },
+    {
+      "code": "NI",
+      "nomadCommunity": 18,
+      "visaFriendliness": 62,
+      "costEfficiency": 82,
+      "workLifeBalance": 42,
+      "digitalReadiness": 25,
+      "culturalFit": 38
+    },
+    {
+      "code": "NL",
+      "nomadCommunity": 62,
+      "visaFriendliness": 55,
+      "costEfficiency": 28,
+      "workLifeBalance": 75,
+      "digitalReadiness": 85,
+      "culturalFit": 82
+    },
+    {
+      "code": "NO",
+      "nomadCommunity": 35,
+      "visaFriendliness": 55,
+      "costEfficiency": 12,
+      "workLifeBalance": 70,
+      "digitalReadiness": 88,
+      "culturalFit": 75
+    },
+    {
+      "code": "NP",
+      "nomadCommunity": 32,
+      "visaFriendliness": 58,
+      "costEfficiency": 85,
+      "workLifeBalance": 52,
+      "digitalReadiness": 28,
+      "culturalFit": 52
+    },
+    {
+      "code": "NR",
+      "nomadCommunity": 1,
+      "visaFriendliness": 32,
+      "costEfficiency": 22,
+      "workLifeBalance": 8,
+      "digitalReadiness": 8,
+      "culturalFit": 28
+    },
+    {
+      "code": "NZ",
+      "nomadCommunity": 48,
+      "visaFriendliness": 52,
+      "costEfficiency": 25,
+      "workLifeBalance": 78,
+      "digitalReadiness": 78,
+      "culturalFit": 82
+    },
+    {
+      "code": "OM",
+      "nomadCommunity": 12,
+      "visaFriendliness": 52,
+      "costEfficiency": 42,
+      "workLifeBalance": 38,
+      "digitalReadiness": 58,
+      "culturalFit": 48
+    },
+    {
+      "code": "PA",
+      "nomadCommunity": 38,
+      "visaFriendliness": 72,
+      "costEfficiency": 48,
+      "workLifeBalance": 58,
+      "digitalReadiness": 52,
+      "culturalFit": 55
+    },
+    {
+      "code": "PE",
+      "nomadCommunity": 42,
+      "visaFriendliness": 62,
+      "costEfficiency": 78,
+      "workLifeBalance": 60,
+      "digitalReadiness": 42,
+      "culturalFit": 48
+    },
+    {
+      "code": "PF",
+      "nomadCommunity": 8,
+      "visaFriendliness": 48,
+      "costEfficiency": 12,
+      "workLifeBalance": 62,
+      "digitalReadiness": 38,
+      "culturalFit": 50
+    },
+    {
+      "code": "PG",
+      "nomadCommunity": 3,
+      "visaFriendliness": 32,
+      "costEfficiency": 38,
+      "workLifeBalance": 12,
+      "digitalReadiness": 8,
+      "culturalFit": 22
+    },
+    {
+      "code": "PH",
+      "nomadCommunity": 52,
+      "visaFriendliness": 55,
+      "costEfficiency": 78,
+      "workLifeBalance": 65,
+      "digitalReadiness": 48,
+      "culturalFit": 58
+    },
+    {
+      "code": "PK",
+      "nomadCommunity": 8,
+      "visaFriendliness": 25,
+      "costEfficiency": 62,
+      "workLifeBalance": 15,
+      "digitalReadiness": 22,
+      "culturalFit": 20
+    },
+    {
+      "code": "PL",
+      "nomadCommunity": 55,
+      "visaFriendliness": 58,
+      "costEfficiency": 72,
+      "workLifeBalance": 60,
+      "digitalReadiness": 72,
+      "culturalFit": 55
+    },
+    {
+      "code": "PR",
+      "nomadCommunity": 32,
+      "visaFriendliness": 62,
+      "costEfficiency": 38,
+      "workLifeBalance": 60,
+      "digitalReadiness": 62,
+      "culturalFit": 58
+    },
+    {
+      "code": "PS",
+      "nomadCommunity": 5,
+      "visaFriendliness": 12,
+      "costEfficiency": 42,
+      "workLifeBalance": 15,
+      "digitalReadiness": 22,
+      "culturalFit": 25
+    },
+    {
+      "code": "PT",
+      "nomadCommunity": 90,
+      "visaFriendliness": 82,
+      "costEfficiency": 72,
+      "workLifeBalance": 88,
+      "digitalReadiness": 72,
+      "culturalFit": 85
+    },
+    {
+      "code": "PW",
+      "nomadCommunity": 2,
+      "visaFriendliness": 55,
+      "costEfficiency": 22,
+      "workLifeBalance": 22,
+      "digitalReadiness": 15,
+      "culturalFit": 42
+    },
+    {
+      "code": "PY",
+      "nomadCommunity": 10,
+      "visaFriendliness": 55,
+      "costEfficiency": 75,
+      "workLifeBalance": 30,
+      "digitalReadiness": 28,
+      "culturalFit": 38
+    },
+    {
+      "code": "QA",
+      "nomadCommunity": 22,
+      "visaFriendliness": 55,
+      "costEfficiency": 22,
+      "workLifeBalance": 38,
+      "digitalReadiness": 72,
+      "culturalFit": 42
+    },
+    {
+      "code": "RO",
+      "nomadCommunity": 48,
+      "visaFriendliness": 58,
+      "costEfficiency": 78,
+      "workLifeBalance": 55,
+      "digitalReadiness": 62,
+      "culturalFit": 48
+    },
+    {
+      "code": "RS",
+      "nomadCommunity": 40,
+      "visaFriendliness": 72,
+      "costEfficiency": 78,
+      "workLifeBalance": 55,
+      "digitalReadiness": 55,
+      "culturalFit": 50
+    },
+    {
+      "code": "RU",
+      "nomadCommunity": 25,
+      "visaFriendliness": 28,
+      "costEfficiency": 65,
+      "workLifeBalance": 40,
+      "digitalReadiness": 55,
+      "culturalFit": 28
+    },
+    {
+      "code": "RW",
+      "nomadCommunity": 12,
+      "visaFriendliness": 62,
+      "costEfficiency": 62,
+      "workLifeBalance": 25,
+      "digitalReadiness": 28,
+      "culturalFit": 45
+    },
+    {
+      "code": "SA",
+      "nomadCommunity": 15,
+      "visaFriendliness": 42,
+      "costEfficiency": 35,
+      "workLifeBalance": 32,
+      "digitalReadiness": 68,
+      "culturalFit": 30
+    },
+    {
+      "code": "SB",
+      "nomadCommunity": 2,
+      "visaFriendliness": 38,
+      "costEfficiency": 35,
+      "workLifeBalance": 12,
+      "digitalReadiness": 5,
+      "culturalFit": 28
+    },
+    {
+      "code": "SC",
+      "nomadCommunity": 12,
+      "visaFriendliness": 72,
+      "costEfficiency": 18,
+      "workLifeBalance": 58,
+      "digitalReadiness": 42,
+      "culturalFit": 58
+    },
+    {
+      "code": "SD",
+      "nomadCommunity": 1,
+      "visaFriendliness": 10,
+      "costEfficiency": 35,
+      "workLifeBalance": 5,
+      "digitalReadiness": 8,
+      "culturalFit": 10
+    },
+    {
+      "code": "SE",
+      "nomadCommunity": 42,
+      "visaFriendliness": 55,
+      "costEfficiency": 18,
+      "workLifeBalance": 72,
+      "digitalReadiness": 88,
+      "culturalFit": 78
+    },
+    {
+      "code": "SG",
+      "nomadCommunity": 55,
+      "visaFriendliness": 52,
+      "costEfficiency": 18,
+      "workLifeBalance": 62,
+      "digitalReadiness": 92,
+      "culturalFit": 72
+    },
+    {
+      "code": "SI",
+      "nomadCommunity": 30,
+      "visaFriendliness": 58,
+      "costEfficiency": 55,
+      "workLifeBalance": 68,
+      "digitalReadiness": 68,
+      "culturalFit": 62
+    },
+    {
+      "code": "SK",
+      "nomadCommunity": 28,
+      "visaFriendliness": 58,
+      "costEfficiency": 68,
+      "workLifeBalance": 55,
+      "digitalReadiness": 65,
+      "culturalFit": 50
+    },
+    {
+      "code": "SL",
+      "nomadCommunity": 3,
+      "visaFriendliness": 28,
+      "costEfficiency": 52,
+      "workLifeBalance": 10,
+      "digitalReadiness": 8,
+      "culturalFit": 28
+    },
+    {
+      "code": "SM",
+      "nomadCommunity": 5,
+      "visaFriendliness": 45,
+      "costEfficiency": 20,
+      "workLifeBalance": 42,
+      "digitalReadiness": 55,
+      "culturalFit": 55
+    },
+    {
+      "code": "SN",
+      "nomadCommunity": 15,
+      "visaFriendliness": 42,
+      "costEfficiency": 62,
+      "workLifeBalance": 25,
+      "digitalReadiness": 20,
+      "culturalFit": 38
+    },
+    {
+      "code": "SO",
+      "nomadCommunity": 1,
+      "visaFriendliness": 8,
+      "costEfficiency": 28,
+      "workLifeBalance": 3,
+      "digitalReadiness": 5,
+      "culturalFit": 8
+    },
+    {
+      "code": "SR",
+      "nomadCommunity": 3,
+      "visaFriendliness": 32,
+      "costEfficiency": 42,
+      "workLifeBalance": 18,
+      "digitalReadiness": 18,
+      "culturalFit": 32
+    },
+    {
+      "code": "SS",
+      "nomadCommunity": 1,
+      "visaFriendliness": 8,
+      "costEfficiency": 25,
+      "workLifeBalance": 3,
+      "digitalReadiness": 3,
+      "culturalFit": 5
+    },
+    {
+      "code": "ST",
+      "nomadCommunity": 3,
+      "visaFriendliness": 48,
+      "costEfficiency": 45,
+      "workLifeBalance": 22,
+      "digitalReadiness": 10,
+      "culturalFit": 35
+    },
+    {
+      "code": "SV",
+      "nomadCommunity": 22,
+      "visaFriendliness": 62,
+      "costEfficiency": 72,
+      "workLifeBalance": 42,
+      "digitalReadiness": 35,
+      "culturalFit": 40
+    },
+    {
+      "code": "SX",
+      "nomadCommunity": 8,
+      "visaFriendliness": 55,
+      "costEfficiency": 22,
+      "workLifeBalance": 50,
+      "digitalReadiness": 48,
+      "culturalFit": 55
+    },
+    {
+      "code": "SY",
+      "nomadCommunity": 1,
+      "visaFriendliness": 5,
+      "costEfficiency": 25,
+      "workLifeBalance": 5,
+      "digitalReadiness": 8,
+      "culturalFit": 8
+    },
+    {
+      "code": "SZ",
+      "nomadCommunity": 3,
+      "visaFriendliness": 42,
+      "costEfficiency": 52,
+      "workLifeBalance": 15,
+      "digitalReadiness": 15,
+      "culturalFit": 32
+    },
+    {
+      "code": "TC",
+      "nomadCommunity": 5,
+      "visaFriendliness": 55,
+      "costEfficiency": 12,
+      "workLifeBalance": 48,
+      "digitalReadiness": 42,
+      "culturalFit": 55
+    },
+    {
+      "code": "TD",
+      "nomadCommunity": 1,
+      "visaFriendliness": 15,
+      "costEfficiency": 35,
+      "workLifeBalance": 5,
+      "digitalReadiness": 3,
+      "culturalFit": 12
+    },
+    {
+      "code": "TG",
+      "nomadCommunity": 3,
+      "visaFriendliness": 35,
+      "costEfficiency": 58,
+      "workLifeBalance": 12,
+      "digitalReadiness": 10,
+      "culturalFit": 28
+    },
+    {
+      "code": "TH",
+      "nomadCommunity": 92,
+      "visaFriendliness": 75,
+      "costEfficiency": 92,
+      "workLifeBalance": 85,
+      "digitalReadiness": 72,
+      "culturalFit": 78
+    },
+    {
+      "code": "TJ",
+      "nomadCommunity": 5,
+      "visaFriendliness": 50,
+      "costEfficiency": 78,
+      "workLifeBalance": 25,
+      "digitalReadiness": 18,
+      "culturalFit": 32
+    },
+    {
+      "code": "TL",
+      "nomadCommunity": 5,
+      "visaFriendliness": 55,
+      "costEfficiency": 58,
+      "workLifeBalance": 28,
+      "digitalReadiness": 15,
+      "culturalFit": 42
+    },
+    {
+      "code": "TM",
+      "nomadCommunity": 2,
+      "visaFriendliness": 8,
+      "costEfficiency": 45,
+      "workLifeBalance": 12,
+      "digitalReadiness": 10,
+      "culturalFit": 12
+    },
+    {
+      "code": "TN",
+      "nomadCommunity": 22,
+      "visaFriendliness": 55,
+      "costEfficiency": 72,
+      "workLifeBalance": 48,
+      "digitalReadiness": 38,
+      "culturalFit": 42
+    },
+    {
+      "code": "TO",
+      "nomadCommunity": 2,
+      "visaFriendliness": 42,
+      "costEfficiency": 35,
+      "workLifeBalance": 18,
+      "digitalReadiness": 12,
+      "culturalFit": 38
+    },
+    {
+      "code": "TR",
+      "nomadCommunity": 60,
+      "visaFriendliness": 65,
+      "costEfficiency": 78,
+      "workLifeBalance": 72,
+      "digitalReadiness": 62,
+      "culturalFit": 52
+    },
+    {
+      "code": "TT",
+      "nomadCommunity": 10,
+      "visaFriendliness": 52,
+      "costEfficiency": 38,
+      "workLifeBalance": 35,
+      "digitalReadiness": 42,
+      "culturalFit": 42
+    },
+    {
+      "code": "TV",
+      "nomadCommunity": 1,
+      "visaFriendliness": 35,
+      "costEfficiency": 28,
+      "workLifeBalance": 8,
+      "digitalReadiness": 5,
+      "culturalFit": 28
+    },
+    {
+      "code": "TW",
+      "nomadCommunity": 52,
+      "visaFriendliness": 58,
+      "costEfficiency": 55,
+      "workLifeBalance": 72,
+      "digitalReadiness": 85,
+      "culturalFit": 68
+    },
+    {
+      "code": "TZ",
+      "nomadCommunity": 15,
+      "visaFriendliness": 52,
+      "costEfficiency": 65,
+      "workLifeBalance": 38,
+      "digitalReadiness": 20,
+      "culturalFit": 42
+    },
+    {
+      "code": "UA",
+      "nomadCommunity": 30,
+      "visaFriendliness": 55,
+      "costEfficiency": 82,
+      "workLifeBalance": 40,
+      "digitalReadiness": 52,
+      "culturalFit": 42
+    },
+    {
+      "code": "UG",
+      "nomadCommunity": 10,
+      "visaFriendliness": 48,
+      "costEfficiency": 65,
+      "workLifeBalance": 22,
+      "digitalReadiness": 18,
+      "culturalFit": 38
+    },
+    {
+      "code": "US",
+      "nomadCommunity": 75,
+      "visaFriendliness": 42,
+      "costEfficiency": 22,
+      "workLifeBalance": 72,
+      "digitalReadiness": 88,
+      "culturalFit": 72
+    },
+    {
+      "code": "UY",
+      "nomadCommunity": 28,
+      "visaFriendliness": 68,
+      "costEfficiency": 45,
+      "workLifeBalance": 62,
+      "digitalReadiness": 58,
+      "culturalFit": 65
+    },
+    {
+      "code": "UZ",
+      "nomadCommunity": 12,
+      "visaFriendliness": 58,
+      "costEfficiency": 78,
+      "workLifeBalance": 30,
+      "digitalReadiness": 32,
+      "culturalFit": 38
+    },
+    {
+      "code": "VC",
+      "nomadCommunity": 5,
+      "visaFriendliness": 58,
+      "costEfficiency": 38,
+      "workLifeBalance": 42,
+      "digitalReadiness": 28,
+      "culturalFit": 48
+    },
+    {
+      "code": "VE",
+      "nomadCommunity": 5,
+      "visaFriendliness": 18,
+      "costEfficiency": 52,
+      "workLifeBalance": 15,
+      "digitalReadiness": 15,
+      "culturalFit": 22
+    },
+    {
+      "code": "VG",
+      "nomadCommunity": 8,
+      "visaFriendliness": 55,
+      "costEfficiency": 12,
+      "workLifeBalance": 48,
+      "digitalReadiness": 45,
+      "culturalFit": 55
+    },
+    {
+      "code": "VI",
+      "nomadCommunity": 8,
+      "visaFriendliness": 55,
+      "costEfficiency": 15,
+      "workLifeBalance": 48,
+      "digitalReadiness": 52,
+      "culturalFit": 58
+    },
+    {
+      "code": "VN",
+      "nomadCommunity": 75,
+      "visaFriendliness": 62,
+      "costEfficiency": 88,
+      "workLifeBalance": 75,
+      "digitalReadiness": 58,
+      "culturalFit": 62
+    },
+    {
+      "code": "VU",
+      "nomadCommunity": 5,
+      "visaFriendliness": 55,
+      "costEfficiency": 38,
+      "workLifeBalance": 28,
+      "digitalReadiness": 12,
+      "culturalFit": 42
+    },
+    {
+      "code": "WS",
+      "nomadCommunity": 3,
+      "visaFriendliness": 48,
+      "costEfficiency": 38,
+      "workLifeBalance": 22,
+      "digitalReadiness": 15,
+      "culturalFit": 42
+    },
+    {
+      "code": "YE",
+      "nomadCommunity": 1,
+      "visaFriendliness": 5,
+      "costEfficiency": 30,
+      "workLifeBalance": 3,
+      "digitalReadiness": 5,
+      "culturalFit": 5
+    },
+    {
+      "code": "ZA",
+      "nomadCommunity": 48,
+      "visaFriendliness": 52,
+      "costEfficiency": 62,
+      "workLifeBalance": 62,
+      "digitalReadiness": 52,
+      "culturalFit": 48
+    },
+    {
+      "code": "ZM",
+      "nomadCommunity": 5,
+      "visaFriendliness": 45,
+      "costEfficiency": 55,
+      "workLifeBalance": 18,
+      "digitalReadiness": 15,
+      "culturalFit": 40
+    },
+    {
+      "code": "ZW",
+      "nomadCommunity": 5,
+      "visaFriendliness": 32,
+      "costEfficiency": 42,
+      "workLifeBalance": 15,
+      "digitalReadiness": 12,
+      "culturalFit": 28
+    }
+  ]
+}

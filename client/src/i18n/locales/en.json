@@ -87,7 +87,8 @@
       "safetyGovernance": "SAFETY & GOVERNANCE",
       "educationDevelopment": "EDUCATION & DEVELOPMENT",
       "environmentClimate": "ENVIRONMENT & CLIMATE",
-      "connectivity": "CONNECTIVITY"
+      "connectivity": "CONNECTIVITY",
+      "aiInsights": "AI INSIGHTS"
     }
   },
   "visa": {
@@ -364,6 +365,42 @@
         "description": "Out-of-pocket health expenditure as percentage of total health spending — lower out-of-pocket costs mean more accessible and affordable healthcare.",
         "source": "World Bank",
         "weight": "Default weight 5%"
+      },
+      "nomadCommunity": {
+        "name": "Nomad & Expat Community",
+        "description": "Coworking space density, established nomad hub cities, coliving availability, and expatriate community size — AI-analyzed composite from multiple nomad-focused data sources.",
+        "source": "AI-analyzed (Claude) — NomadList, Coworker.com, InterNations, UN DESA",
+        "weight": "AI metric — off by default"
+      },
+      "visaFriendliness": {
+        "name": "Visa & Stay Flexibility",
+        "description": "Tourist visa duration, visa-run feasibility, e-visa availability, dedicated nomad visa programs, and paths to longer residency — specifically for US/EU passport holders.",
+        "source": "AI-analyzed (Claude) — Henley Passport Index, IATA, NomadList, govt sources",
+        "weight": "AI metric — off by default"
+      },
+      "costEfficiency": {
+        "name": "Nomad Cost-Value Ratio",
+        "description": "Quality of nomad life per dollar — not just cheapness. Rates coworking, internet speed, food quality, and housing standard relative to monthly cost.",
+        "source": "AI-analyzed (Claude) — NomadList, Numbeo, Expatistan, Speedtest, Airbnb",
+        "weight": "AI metric — off by default"
+      },
+      "workLifeBalance": {
+        "name": "Remote Work & Lifestyle",
+        "description": "Timezone overlap with US/EU clients, café work culture, outdoor recreation access, social scene vibrancy, and weekend escape proximity.",
+        "source": "AI-analyzed (Claude) — timezone data, NomadList, TripAdvisor",
+        "weight": "AI metric — off by default"
+      },
+      "digitalReadiness": {
+        "name": "Digital Nomad Infra",
+        "description": "Beyond basic internet — café wifi reliability, mobile data quality and eSIM support, digital payment adoption, and app ecosystem for daily nomad life.",
+        "source": "AI-analyzed (Claude) — Speedtest/Ookla, Opensignal, GSMA, Airalo",
+        "weight": "AI metric — off by default"
+      },
+      "culturalFit": {
+        "name": "Cultural Openness",
+        "description": "Daily-life friendliness to foreigners, language accessibility for non-speakers, scam prevalence, and bureaucratic ease — real friction for remote workers, not tourist experience.",
+        "source": "AI-analyzed (Claude) — InterNations, NomadList, World Bank, travel advisories",
+        "weight": "AI metric — off by default"
       }
     }
   },

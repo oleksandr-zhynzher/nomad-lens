@@ -640,6 +640,63 @@ async function generate(): Promise<void> {
       },
     };
 
+    // ── AI-Analyzed Metrics ──────────────────────────────────────────────
+    const ai = localData.getAiMetrics(iso2);
+
+    const nomadCommunity: CategoryScore = {
+      value: ai?.nomadCommunity ?? null,
+      indicators: {
+        ...(ai?.nomadCommunity != null
+          ? { aiComposite: ind(ai.nomadCommunity, "AI score", 2025) }
+          : {}),
+      },
+    };
+
+    const visaFriendliness: CategoryScore = {
+      value: ai?.visaFriendliness ?? null,
+      indicators: {
+        ...(ai?.visaFriendliness != null
+          ? { aiComposite: ind(ai.visaFriendliness, "AI score", 2025) }
+          : {}),
+      },
+    };
+
+    const costEfficiency: CategoryScore = {
+      value: ai?.costEfficiency ?? null,
+      indicators: {
+        ...(ai?.costEfficiency != null
+          ? { aiComposite: ind(ai.costEfficiency, "AI score", 2025) }
+          : {}),
+      },
+    };
+
+    const workLifeBalance: CategoryScore = {
+      value: ai?.workLifeBalance ?? null,
+      indicators: {
+        ...(ai?.workLifeBalance != null
+          ? { aiComposite: ind(ai.workLifeBalance, "AI score", 2025) }
+          : {}),
+      },
+    };
+
+    const digitalReadiness: CategoryScore = {
+      value: ai?.digitalReadiness ?? null,
+      indicators: {
+        ...(ai?.digitalReadiness != null
+          ? { aiComposite: ind(ai.digitalReadiness, "AI score", 2025) }
+          : {}),
+      },
+    };
+
+    const culturalFit: CategoryScore = {
+      value: ai?.culturalFit ?? null,
+      indicators: {
+        ...(ai?.culturalFit != null
+          ? { aiComposite: ind(ai.culturalFit, "AI score", 2025) }
+          : {}),
+      },
+    };
+
     // ── Assemble & filter ────────────────────────────────────────────────
     const scores = {
       economy,
@@ -665,6 +722,12 @@ async function generate(): Promise<void> {
       airConnectivity,
       culturalHeritage,
       healthcareCost,
+      nomadCommunity,
+      visaFriendliness,
+      costEfficiency,
+      workLifeBalance,
+      digitalReadiness,
+      culturalFit,
     };
     const nonNull = Object.values(scores).filter(
       (s) => s.value !== null,

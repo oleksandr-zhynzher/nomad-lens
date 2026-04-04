@@ -7,7 +7,7 @@ import type {
   SeasonType,
   WeightMap,
 } from "./types";
-import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "./types";
+import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS, AI_CATEGORIES } from "./types";
 
 /**
  * Compute a weighted composite score for a single country.
@@ -18,10 +18,7 @@ import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "./types";
  * a −2 pt penalty each, so countries with sparse data rank lower than data-rich
  * countries with similar weighted averages.
  */
-export function computeScore(
-  country: CountryData,
-  weights: WeightMap,
-): number {
+export function computeScore(country: CountryData, weights: WeightMap): number {
   let numerator = 0;
   let denominator = 0;
   let missingCount = 0;
@@ -41,7 +38,7 @@ export function computeScore(
   }
 
   if (denominator === 0) return 0;
-  const base = (numerator / denominator) - (missingCount * 2);
+  const base = numerator / denominator - missingCount * 2;
   return Math.round(Math.max(0, base) * 10) / 10;
 }
 
@@ -69,13 +66,16 @@ export function rankCountries(
 }
 
 /**
- * Default equal weights for all visible categories, summing to exactly 100.
+ * Default equal weights for all visible non-AI categories, summing to exactly 100.
+ * AI metrics default to 0 (opt-in only).
  */
 export function defaultWeights(): WeightMap {
-  const visible = VISIBLE_CATEGORY_KEYS;
+  const visible = VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k));
   const base = Math.floor(100 / visible.length);
   const leftover = 100 - base * visible.length;
-  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
+  const result = Object.fromEntries(
+    CATEGORY_KEYS.map((k) => [k, 0]),
+  ) as WeightMap;
   visible.forEach((k, i) => {
     result[k] = base + (i < leftover ? 1 : 0);
   });
@@ -83,11 +83,16 @@ export function defaultWeights(): WeightMap {
 }
 
 /**
- * Default weights for independent mode: every visible category set to 50.
+ * Default weights for independent mode: every visible non-AI category set to 50.
+ * AI metrics default to 0 (opt-in only).
  */
 export function defaultIndependentWeights(): WeightMap {
-  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
-  VISIBLE_CATEGORY_KEYS.forEach((k) => { result[k] = 50; });
+  const result = Object.fromEntries(
+    CATEGORY_KEYS.map((k) => [k, 0]),
+  ) as WeightMap;
+  VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k)).forEach((k) => {
+    result[k] = 50;
+  });
   return result;
 }
 
@@ -103,13 +108,21 @@ export function redistributeWeights(
 ): WeightMap {
   const clamped = Math.max(0, Math.min(100, Math.round(newValue)));
   const result = { ...weights, [changedKey]: clamped };
-  const others = VISIBLE_CATEGORY_KEYS.filter((k) => k !== changedKey);
+
+  // AI metrics are always independent — even in balanced mode
+  if (AI_CATEGORIES.has(changedKey)) return result;
+
+  const others = VISIBLE_CATEGORY_KEYS.filter(
+    (k) => k !== changedKey && !AI_CATEGORIES.has(k),
+  );
   const remaining = 100 - clamped;
 
   if (others.length === 0) return result;
 
   if (remaining === 0) {
-    others.forEach((k) => { result[k] = 0; });
+    others.forEach((k) => {
+      result[k] = 0;
+    });
     return result;
   }
 
@@ -137,10 +150,15 @@ export function redistributeWeights(
   const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
   remainders.sort((a, b) => b.r - a.r);
   remainders.forEach(({ i }) => {
-    if (leftover > 0) { floors[i]++; leftover--; }
+    if (leftover > 0) {
+      floors[i]++;
+      leftover--;
+    }
   });
 
-  others.forEach((k, i) => { result[k] = floors[i]; });
+  others.forEach((k, i) => {
+    result[k] = floors[i];
+  });
   return result;
 }
 
@@ -179,11 +197,11 @@ export function weightLabel(key: CategoryKey, weights: WeightMap): string {
 // ─── Climate Preferences Scoring ──────────────────────────────────────────────
 
 const ADJACENT: Record<SeasonType, SeasonType[]> = {
-  four_seasons: ['mild_seasons'],
-  mild_seasons: ['four_seasons', 'tropical'],
-  tropical: ['mild_seasons', 'arid'],
-  arid: ['tropical'],
-  polar: ['four_seasons'],
+  four_seasons: ["mild_seasons"],
+  mild_seasons: ["four_seasons", "tropical"],
+  tropical: ["mild_seasons", "arid"],
+  arid: ["tropical"],
+  polar: ["four_seasons"],
 };
 
 /**
@@ -208,7 +226,7 @@ export function computeClimateScore(
   }
 
   let seasonScore: number;
-  if (prefs.seasonType === 'any') {
+  if (prefs.seasonType === "any") {
     seasonScore = 100;
   } else if (prefs.seasonType === seasonType) {
     seasonScore = 100;
@@ -222,5 +240,5 @@ export function computeClimateScore(
 }
 
 export function defaultClimatePreferences(): ClimatePreferences {
-  return { seasonType: 'any', minTemp: 15, maxTemp: 25 };
+  return { seasonType: "any", minTemp: 15, maxTemp: 25 };
 }
