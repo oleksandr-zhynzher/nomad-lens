@@ -279,7 +279,7 @@ export function WeightPanel({
       className={`flex flex-col overflow-hidden${mobile ? " flex-1 min-h-0" : ""}`}
       style={{
         backgroundColor: "#1A1A1A",
-        width: mobile ? "100%" : "320px",
+        width: mobile ? "100%" : "340px",
         height: mobile ? undefined : "100%",
       }}
     >
@@ -1055,19 +1055,6 @@ export function WeightPanel({
             </svg>
             {t("weights.resetToDefaults")}
           </button>
-          <p
-            style={{
-              fontFamily: "Geist, sans-serif",
-              fontSize: "10px",
-              color: "#555555",
-              lineHeight: "1.4",
-              textAlign: "center",
-            }}
-          >
-            {weightMode === "independent"
-              ? t("weights.footerIndependent")
-              : t("weights.footerBalanced")}
-          </p>
         </div>
       </div>
     </aside>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import {
@@ -122,6 +122,7 @@ export function CountryComparison({
   const bodyRef = useRef<HTMLDivElement>(null);
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
+  const navigate = useNavigate();
   const lang = i18n.language;
 
   // Sync horizontal scroll between sticky header and body
@@ -213,6 +214,12 @@ export function CountryComparison({
             <div
               key={slot.country.code}
               className="shrink-0 w-[140px] md:w-[180px]"
+              onClick={() =>
+                navigate(
+                  `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
+                )
+              }
+              style={{ cursor: "pointer" }}
             >
               <div
                 className="relative rounded-lg p-4 flex flex-col items-center gap-3"
@@ -223,7 +230,10 @@ export function CountryComparison({
                 }}
               >
                 <button
-                  onClick={() => handleRemove(slot.index)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemove(slot.index);
+                  }}
                   className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
                   style={{
                     opacity: 0.6,
@@ -276,27 +286,16 @@ export function CountryComparison({
                   )}
                 </div>
 
-                <div className="flex items-baseline gap-1">
-                  <span
-                    className="text-[32px]"
-                    style={{
-                      fontFamily: "Anton, sans-serif",
-                      color: sColor,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {score.toFixed(1)}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "12px",
-                      color: "#555555",
-                    }}
-                  >
-                    /100
-                  </span>
-                </div>
+                <span
+                  className="text-[32px]"
+                  style={{
+                    fontFamily: "Anton, sans-serif",
+                    color: sColor,
+                    lineHeight: 1,
+                  }}
+                >
+                  {score.toFixed(1)}
+                </span>
 
                 <span
                   className="px-2 py-0.5 rounded-full"

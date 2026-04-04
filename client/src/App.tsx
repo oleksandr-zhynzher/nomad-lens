@@ -19,7 +19,7 @@ import { useScoring } from "./hooks/useScoring";
 import { useLangPrefix } from "./hooks/useLangPrefix";
 import { useWeightState } from "./hooks/useWeightState";
 import { localizeCountry } from "./utils/localize";
-import { VISIBLE_CATEGORY_KEYS } from "./utils/types";
+import { VISIBLE_CATEGORY_KEYS, AI_CATEGORY_KEYS } from "./utils/types";
 import "./index.css";
 
 export default function App() {
@@ -537,6 +537,35 @@ export default function App() {
                       </div>
                     </div>
                   </Link>
+                  <div
+                    className="w-px h-6 md:h-8"
+                    style={{ backgroundColor: "#333333" }}
+                  />
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        color: "var(--color-accent-dim)",
+                        lineHeight: "1",
+                      }}
+                    >
+                      {AI_CATEGORY_KEYS.length}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "Geist, sans-serif",
+                        fontSize: "10px",
+                        color: "#444444",
+                        textTransform: "uppercase",
+                        letterSpacing: "1px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      {t("hero.aiIndicators")}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

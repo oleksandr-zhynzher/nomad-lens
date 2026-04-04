@@ -1,4 +1,4 @@
-import { ChevronRight, Plane } from "lucide-react";
+import { ChevronRight, Plane, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
@@ -205,23 +205,33 @@ export function CountryCard({
       {expanded && (
         <div
           className="px-4 py-4"
-          style={{ borderTop: `1px solid ${borderColor}` }}
+          style={{
+            borderTop: `1px solid ${borderColor}`,
+            backgroundColor: "#111113",
+          }}
         >
+          <Link
+            to={`${langPrefix}/country/${country.code.toLowerCase()}`}
+            className="w-full flex items-center justify-center gap-2 transition-colors"
+            style={{
+              display: "flex",
+              height: "40px",
+              backgroundColor: "transparent",
+              border: "1px solid #333333",
+              borderRadius: "6px",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "13px",
+              fontWeight: 500,
+              color: "var(--color-accent-dim)",
+              textDecoration: "none",
+              marginBottom: "16px",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <User size={14} />
+            {t("countryPage.viewProfile", "View Country Details")}
+          </Link>
           <ScoreBreakdown country={country} />
-          <div style={{ marginTop: "12px", textAlign: "right" }}>
-            <Link
-              to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "13px",
-                fontWeight: 600,
-                color: "var(--color-accent)",
-                textDecoration: "none",
-              }}
-            >
-              {t("countryPage.viewProfile", "View Full Profile →")}
-            </Link>
-          </div>
         </div>
       )}
     </div>

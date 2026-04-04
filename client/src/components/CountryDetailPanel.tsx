@@ -8,12 +8,13 @@ import {
   DollarSign,
   TrendingUp,
   Shield,
+  User,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLangPrefix } from "../hooks/useLangPrefix";
-import type { RankedCountry, SeasonType } from "../utils/types";
+import type { RankedCountry } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
@@ -29,37 +30,6 @@ interface CountryDetailPanelProps {
   onClose: () => void;
   onViewInList: () => void;
 }
-
-const DRAWER_SEASON_BADGE: Record<
-  SeasonType,
-  { labelKey: string; bg: string; text: string }
-> = {
-  four_seasons: {
-    labelKey: "countryDetail.climate.fourSeasons",
-    bg: "#8F5A3C",
-    text: "#FFFFFF",
-  },
-  mild_seasons: {
-    labelKey: "countryDetail.climate.mild",
-    bg: "#1A3A5C",
-    text: "#60A5FA",
-  },
-  tropical: {
-    labelKey: "countryDetail.climate.tropical",
-    bg: "#1A4A2A",
-    text: "#44CC66",
-  },
-  arid: {
-    labelKey: "countryDetail.climate.arid",
-    bg: "#4A3A1A",
-    text: "#AA7733",
-  },
-  polar: {
-    labelKey: "countryDetail.climate.polar",
-    bg: "#2A2A2A",
-    text: "#999999",
-  },
-};
 
 export function CountryDetailPanel({
   country,
@@ -88,7 +58,7 @@ export function CountryDetailPanel({
         className="w-full md:w-auto md:h-full flex flex-col overflow-hidden"
         style={{
           maxWidth: "100%",
-          maxHeight: "90vh",
+          height: "100vh",
           backgroundColor: "#1A1A1A",
         }}
         onClick={(e) => e.stopPropagation()}
@@ -106,47 +76,83 @@ export function CountryDetailPanel({
         </div>
 
         {/* Desktop width constraint wrapper */}
-        <div className="flex flex-col flex-1 overflow-hidden md:w-[380px]">
-          {/* Header */}
+        <div className="flex flex-col flex-1 overflow-hidden md:w-[480px]">
+          {/* Header: Rank | Country | Score */}
           <div
-            className="flex items-start gap-3 px-5 pt-5 pb-4 shrink-0"
-            style={{ backgroundColor: "#222222" }}
+            className="flex items-center px-5 pt-5 pb-4 shrink-0"
+            style={{
+              backgroundColor: "#222222",
+              gap: "12px",
+              borderBottom: "1px solid #2A2A2A",
+            }}
           >
-            <img
-              src={c.flagUrl}
-              alt={`${locC.name} flag`}
-              className="object-cover shrink-0"
+            {/* Rank */}
+            <span
               style={{
-                width: "36px",
-                height: "24px",
-                borderRadius: "4px",
-                marginTop: "2px",
+                fontFamily: "Geist, sans-serif",
+                fontSize: "14px",
+                fontWeight: 500,
+                color: "var(--color-accent)",
+                lineHeight: "1",
+                whiteSpace: "nowrap",
               }}
-              loading="eager"
-            />
-            <div className="flex-1 min-w-0">
-              <h2
+            >
+              #{rank}
+            </span>
+
+            {/* Flag + Name + Region */}
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <img
+                src={c.flagUrl}
+                alt={`${locC.name} flag`}
+                className="object-cover shrink-0"
                 style={{
-                  fontFamily: "Anton, sans-serif",
-                  fontSize: "22px",
-                  fontWeight: 400,
-                  color: "#FFFFFF",
-                  lineHeight: "1.2",
+                  width: "36px",
+                  height: "24px",
+                  borderRadius: "4px",
                 }}
-              >
-                {locC.name}
-              </h2>
-              <p
-                style={{
-                  fontFamily: "Geist, sans-serif",
-                  fontSize: "12px",
-                  color: "#999999",
-                  marginTop: "4px",
-                }}
-              >
-                {t(`regions.${regionKey(c.region)}`)}
-              </p>
+                loading="eager"
+              />
+              <div className="flex items-baseline gap-2 min-w-0">
+                <h2
+                  style={{
+                    fontFamily: "Anton, sans-serif",
+                    fontSize: "22px",
+                    fontWeight: 400,
+                    color: "#FFFFFF",
+                    lineHeight: "1.2",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {locC.name}
+                </h2>
+                <span
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "12px",
+                    color: "#999999",
+                  }}
+                >
+                  {t(`regions.${regionKey(c.region)}`)}
+                </span>
+              </div>
             </div>
+
+            {/* Score */}
+            <span
+              style={{
+                fontFamily: "Anton, sans-serif",
+                fontSize: "22px",
+                fontWeight: 400,
+                color: scoreColour(finalScore),
+                lineHeight: "1",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {finalScore.toFixed(1)}
+            </span>
+
+            {/* Close */}
             <button
               onClick={onClose}
               className="shrink-0 flex items-center justify-center transition-colors"
@@ -161,102 +167,6 @@ export function CountryDetailPanel({
             >
               <X size={18} />
             </button>
-          </div>
-
-          {/* Score Row - split RANK | COMPOSITE SCORE */}
-          <div
-            className="flex items-center px-5 py-5 shrink-0"
-            style={{
-              backgroundColor: "#141416",
-              gap: "20px",
-              borderBottom: "1px solid #2A2A2A",
-            }}
-          >
-            <div
-              className="flex-1 flex flex-col items-center"
-              style={{
-                padding: "12px",
-                backgroundColor: "#1E1E1E",
-                borderRadius: "8px",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "Geist, sans-serif",
-                  fontSize: "10px",
-                  fontWeight: 600,
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                  color: "#777777",
-                  marginBottom: "8px",
-                }}
-              >
-                {t("countryDetail.rank")}
-              </span>
-              <div
-                style={{ display: "flex", alignItems: "baseline", gap: "2px" }}
-              >
-                <span
-                  style={{
-                    fontFamily: "Anton, sans-serif",
-                    fontSize: "36px",
-                    fontWeight: 400,
-                    color: "var(--color-accent)",
-                    lineHeight: "1",
-                  }}
-                >
-                  {rank}
-                </span>
-                <span
-                  style={{
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "16px",
-                    color: "#666666",
-                  }}
-                >
-                  {rank === 1
-                    ? "st"
-                    : rank === 2
-                      ? "nd"
-                      : rank === 3
-                        ? "rd"
-                        : "th"}
-                </span>
-              </div>
-            </div>
-            <div
-              className="flex-1 flex flex-col items-center"
-              style={{
-                padding: "12px",
-                backgroundColor: "#1E1E1E",
-                borderRadius: "8px",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "Geist, sans-serif",
-                  fontSize: "10px",
-                  fontWeight: 600,
-                  letterSpacing: "1.5px",
-                  textTransform: "uppercase",
-                  color: "#777777",
-                  marginBottom: "8px",
-                }}
-              >
-                {t("countryDetail.compositeScore")}
-              </span>
-              <span
-                style={{
-                  fontFamily: "Anton, sans-serif",
-                  fontSize: "36px",
-                  fontWeight: 400,
-                  color: scoreColour(finalScore),
-                  lineHeight: "1",
-                }}
-              >
-                {finalScore.toFixed(1)}
-              </span>
-            </div>
           </div>
 
           {/* Badge Row */}
@@ -281,24 +191,6 @@ export function CountryDetailPanel({
                 <Plane size={11} /> {t("countryDetail.nomadVisa")}
               </Link>
             )}
-            {c.climateData &&
-              (() => {
-                const badge = DRAWER_SEASON_BADGE[c.climateData.seasonType];
-                return (
-                  <span
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded-full"
-                    style={{
-                      backgroundColor: badge.bg,
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "10px",
-                      fontWeight: 500,
-                      color: badge.text,
-                    }}
-                  >
-                    {t(badge.labelKey)}
-                  </span>
-                );
-              })()}
           </div>
 
           {/* Breakdown section */}
@@ -635,23 +527,6 @@ export function CountryDetailPanel({
             className="px-5 py-4 shrink-0 flex flex-col gap-2"
             style={{ borderTop: "1px solid #333333" }}
           >
-            <Link
-              to={`${langPrefix}/country/${c.code.toLowerCase()}`}
-              onClick={onClose}
-              className="w-full flex items-center justify-center gap-2 transition-colors"
-              style={{
-                height: "44px",
-                backgroundColor: "var(--color-accent)",
-                borderRadius: "4px",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "#FFFFFF",
-                textDecoration: "none",
-              }}
-            >
-              {t("countryPage.viewProfile", "View Full Profile →")}
-            </Link>
             <button
               onClick={() => {
                 onViewInList();
@@ -659,17 +534,38 @@ export function CountryDetailPanel({
               }}
               className="w-full flex items-center justify-center gap-2 transition-colors"
               style={{
-                height: "44px",
-                backgroundColor: "#2A2A2A",
-                borderRadius: "4px",
+                height: "40px",
+                backgroundColor: "transparent",
+                border: "1px solid #333333",
+                borderRadius: "6px",
                 fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "#CCCCCC",
+                fontSize: "13px",
+                fontWeight: 500,
+                color: "var(--color-accent-dim)",
               }}
             >
               {t("countryDetail.viewInList")}
             </button>
+            <Link
+              to={`${langPrefix}/country/${c.code.toLowerCase()}`}
+              onClick={onClose}
+              className="w-full flex items-center justify-center gap-2 transition-colors"
+              style={{
+                display: "flex",
+                height: "40px",
+                backgroundColor: "transparent",
+                border: "1px solid #333333",
+                borderRadius: "6px",
+                fontFamily: "Inter, sans-serif",
+                fontSize: "13px",
+                fontWeight: 500,
+                color: "var(--color-accent-dim)",
+                textDecoration: "none",
+              }}
+            >
+              <User size={14} />
+              {t("countryPage.viewProfile", "View Country Details")}
+            </Link>
           </div>
         </div>
       </div>

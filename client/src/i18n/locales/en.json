@@ -25,7 +25,8 @@
     "tagline": "Personalised rankings for digital nomads — live data from 10 global sources.",
     "countries": "Countries",
     "indicators": "Indicators",
-    "dataSources": "Data Sources"
+    "dataSources": "Data Sources",
+    "aiIndicators": "AI Indicators"
   },
   "search": {
     "placeholder": "Search by country name or ISO code…"
@@ -142,7 +143,7 @@
     "backToList": "Back to list",
     "schengen": "Schengen Area",
     "touristDays": "days tourist visa",
-    "viewProfile": "View Full Profile →",
+    "viewProfile": "View Country Details",
     "visa": {
       "lastUpdated": "Last updated",
       "duration": "Duration",

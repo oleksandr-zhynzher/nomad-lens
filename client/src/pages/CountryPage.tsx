@@ -1244,7 +1244,6 @@ export function CountryPage() {
                 <div
                   style={{ display: "flex", gap: "12px", alignItems: "center" }}
                 >
-                  <Thermometer size={20} color="#5B8FA8" />
                   <h2
                     style={{
                       fontFamily: "Anton, sans-serif",

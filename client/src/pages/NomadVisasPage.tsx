@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   Search,
@@ -52,6 +52,7 @@ export function NomadVisasPage() {
   const { t, i18n } = useTranslation();
   const { countries, loading } = useCountries();
   const langPrefix = useLangPrefix();
+  const navigate = useNavigate();
   const lang = i18n.language;
   const [searchParams] = useSearchParams();
   const highlightCode = searchParams.get("country")?.toUpperCase() ?? null;
@@ -510,7 +511,13 @@ export function NomadVisasPage() {
                         ? "#1A1208"
                         : "transparent",
                       transition: "background-color 0.2s",
+                      cursor: "pointer",
                     }}
+                    onClick={() =>
+                      navigate(
+                        `${langPrefix}/country/${country.code.toLowerCase()}`,
+                      )
+                    }
                     onMouseEnter={(e) => {
                       if (!isHighlighted) {
                         e.currentTarget.style.backgroundColor = "#1A1A1A";
@@ -714,6 +721,7 @@ export function NomadVisasPage() {
                         href={visa.officialUrl}
                         target="_blank"
                         rel="noreferrer"
+                        onClick={(e) => e.stopPropagation()}
                         style={{
                           color: "var(--color-accent)",
                           display: "inline-flex",

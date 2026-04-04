@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Flag, Globe, ArrowDownWideNarrow } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,27 @@ export function ComparePage() {
 
   const ws = useWeightState();
   const { countries } = useCountries();
+
+  // Keep the weight panel sized to fit from its current position to the viewport bottom
+  const panelRef = useRef<HTMLDivElement>(null);
+  const syncPanelHeight = useCallback(() => {
+    const el = panelRef.current;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top;
+    el.style.height = `${window.innerHeight - Math.max(top, 16) - 16}px`;
+  }, []);
+
+  useEffect(() => {
+    if (!showWeights) return;
+    // wait one frame so the DOM has the panel mounted
+    requestAnimationFrame(syncPanelHeight);
+    window.addEventListener("scroll", syncPanelHeight, { passive: true });
+    window.addEventListener("resize", syncPanelHeight, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", syncPanelHeight);
+      window.removeEventListener("resize", syncPanelHeight);
+    };
+  }, [showWeights, syncPanelHeight]);
 
   // URL-driven compare state — persisted so links are shareable
   const compareMode: "countries" | "regions" =
@@ -62,10 +83,16 @@ export function ComparePage() {
     <Layout>
       <div>
         {/* Hero band */}
-        <div className="relative overflow-hidden" style={{ backgroundColor: "#141416" }}>
+        <div
+          className="relative overflow-hidden"
+          style={{ backgroundColor: "#141416" }}
+        >
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(135deg, #0D0D0FCC 0%, transparent 60%)" }}
+            style={{
+              background:
+                "linear-gradient(135deg, #0D0D0FCC 0%, transparent 60%)",
+            }}
           />
           <div
             className="relative h-full max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-col justify-center"
@@ -94,13 +121,22 @@ export function ComparePage() {
                 margin: 0,
               }}
             >
-              {compareMode === "countries" ? t("compare.countryTitle") : t("compare.regionTitle")}
+              {compareMode === "countries"
+                ? t("compare.countryTitle")
+                : t("compare.regionTitle")}
             </h2>
             <p
               className="hidden md:block"
-              style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", color: "#666666", marginTop: "8px" }}
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "14px",
+                color: "#666666",
+                marginTop: "8px",
+              }}
             >
-              {compareMode === "countries" ? t("compare.countrySubtitle") : t("compare.regionSubtitle")}
+              {compareMode === "countries"
+                ? t("compare.countrySubtitle")
+                : t("compare.regionSubtitle")}
             </p>
           </div>
         </div>
@@ -111,13 +147,19 @@ export function ComparePage() {
             {/* Compare mode toggle pills */}
             <div
               className="flex w-full sm:w-auto rounded-md p-1"
-              style={{ backgroundColor: "#1A1A1A", border: "1px solid #252525" }}
+              style={{
+                backgroundColor: "#1A1A1A",
+                border: "1px solid #252525",
+              }}
             >
               <button
                 onClick={() => setCompareMode("countries")}
                 className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                 style={{
-                  backgroundColor: compareMode === "countries" ? "var(--color-accent)" : "transparent",
+                  backgroundColor:
+                    compareMode === "countries"
+                      ? "var(--color-accent)"
+                      : "transparent",
                   color: compareMode === "countries" ? "#FFFFFF" : "#777777",
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
@@ -131,7 +173,10 @@ export function ComparePage() {
                 onClick={() => setCompareMode("regions")}
                 className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                 style={{
-                  backgroundColor: compareMode === "regions" ? "var(--color-accent)" : "transparent",
+                  backgroundColor:
+                    compareMode === "regions"
+                      ? "var(--color-accent)"
+                      : "transparent",
                   color: compareMode === "regions" ? "#FFFFFF" : "#777777",
                   fontFamily: "Geist, sans-serif",
                   fontSize: "13px",
@@ -148,13 +193,21 @@ export function ComparePage() {
               onClick={() => setShowWeights((p) => !p)}
               className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors"
               style={{
-                backgroundColor: showWeights ? "var(--color-accent)" : "#1A1A1A",
+                backgroundColor: showWeights
+                  ? "var(--color-accent)"
+                  : "#1A1A1A",
                 borderColor: showWeights ? "var(--color-accent)" : "#333333",
                 color: showWeights ? "#FFFFFF" : "#999999",
                 fontFamily: "Inter, sans-serif",
               }}
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -196,12 +249,28 @@ export function ComparePage() {
               }}
             >
               {copied ? (
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               ) : (
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                  />
                 </svg>
               )}
               {copied ? t("weights.linkCopied") : t("compare.share")}
@@ -210,11 +279,22 @@ export function ComparePage() {
 
           <div
             className={`grid gap-4 md:gap-6 ${
-              showWeights ? "grid-cols-1 lg:grid-cols-[300px_1fr]" : "grid-cols-1"
+              showWeights
+                ? "grid-cols-1 lg:grid-cols-[340px_1fr]"
+                : "grid-cols-1"
             }`}
           >
             {showWeights && (
-              <div className="hidden md:block">
+              <div
+                ref={panelRef}
+                className="hidden md:block"
+                style={{
+                  position: "sticky",
+                  top: "16px",
+                  overflow: "hidden",
+                  borderRadius: "8px",
+                }}
+              >
                 <WeightPanel
                   weights={ws.weights}
                   onChange={ws.handleWeightChange}
@@ -235,7 +315,11 @@ export function ComparePage() {
               </div>
             )}
             {compareMode === "regions" ? (
-              <RegionComparison countries={countries} weights={ws.weights} climatePrefs={ws.climatePrefs} />
+              <RegionComparison
+                countries={countries}
+                weights={ws.weights}
+                climatePrefs={ws.climatePrefs}
+              />
             ) : (
               <CountryComparison
                 countries={countries}

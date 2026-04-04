@@ -8,19 +8,18 @@ import {
   GraduationCap,
   Leaf,
   CloudSun,
-  Shield,
-  Wifi,
-  Smile,
-  Users,
-  Landmark,
-  Languages,
-  Globe,
   Sun,
   Mountain,
   Tent,
   Castle,
   Lamp,
   Waves,
+  Shield,
+  Wifi,
+  Smile,
+  Users,
+  Landmark,
+  Languages,
   ShieldCheck,
   UserCheck,
   Truck,
@@ -46,6 +45,7 @@ import type {
 } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
+import { regionKey } from "../utils/localize";
 
 interface RegionComparisonProps {
   countries: CountryData[];
@@ -62,7 +62,7 @@ const REGION_COLORS: Record<string, string> = {
   Oceania: "#00CEC9",
 };
 
-const REGION_ICONS: Record<string, typeof Globe> = {
+const REGION_ICONS: Record<string, typeof Sun> = {
   Africa: Sun,
   Americas: Mountain,
   Asia: Tent,
@@ -227,24 +227,27 @@ export function RegionComparison({
       <div className="flex gap-3 pb-2">
         {regionStats.map((r) => {
           const active = enabled.has(r.name);
-          const RegionIcon = REGION_ICONS[r.name] || Globe;
           return (
             <div key={r.name} className="flex-1 min-w-0">
               <button
                 onClick={() => toggleRegion(r.name)}
                 className="w-full rounded-lg p-4 flex flex-col items-center gap-3 transition-all"
                 style={{
-                  backgroundColor: active ? "#1A1A1C" : "#141416",
+                  backgroundColor: "transparent",
                   border: active ? "1px solid #2E2E30" : "1px solid #1C1C1C",
                   opacity: active ? 1 : 0.45,
                   cursor: "pointer",
                 }}
               >
-                <RegionIcon
-                  size={36}
-                  style={{ color: active ? "#FFFFFF" : "#555555" }}
-                />
-
+                {(() => {
+                  const Icon = REGION_ICONS[r.name];
+                  return Icon ? (
+                    <Icon
+                      size={20}
+                      style={{ color: active ? r.color : "#555555" }}
+                    />
+                  ) : null;
+                })()}
                 <span
                   style={{
                     fontFamily: "Inter, sans-serif",
@@ -257,27 +260,16 @@ export function RegionComparison({
                   {t(`regions.${regionKey(r.name)}`)}
                 </span>
 
-                <div className="flex items-baseline gap-1">
-                  <span
-                    style={{
-                      fontFamily: "Anton, sans-serif",
-                      fontSize: "32px",
-                      color: active ? scoreColour(r.overall) : "#333333",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {r.overall.toFixed(1)}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "12px",
-                      color: "#555555",
-                    }}
-                  >
-                    /100
-                  </span>
-                </div>
+                <span
+                  style={{
+                    fontFamily: "Anton, sans-serif",
+                    fontSize: "32px",
+                    color: active ? scoreColour(r.overall) : "#333333",
+                    lineHeight: 1,
+                  }}
+                >
+                  {r.overall.toFixed(1)}
+                </span>
 
                 <span
                   className="px-2 py-0.5 rounded-full"
