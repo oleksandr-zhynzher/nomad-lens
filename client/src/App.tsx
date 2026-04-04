@@ -18,13 +18,15 @@ import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { useLangPrefix } from "./hooks/useLangPrefix";
 import { useWeightState } from "./hooks/useWeightState";
+import { localizeCountry } from "./utils/localize";
 import { VISIBLE_CATEGORY_KEYS } from "./utils/types";
 import "./index.css";
 
 export default function App() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
+  const lang = i18n.language;
   const ws = useWeightState();
 
   const [search, setSearch] = useState("");
@@ -75,12 +77,12 @@ export default function App() {
       const q = search.trim().toLowerCase();
       return ranked.filter(
         (r) =>
-          r.country.name.toLowerCase().includes(q) ||
+          localizeCountry(r.country, lang).name.toLowerCase().includes(q) ||
           r.country.code.toLowerCase() === q,
       );
     }
     return ranked;
-  }, [ranked, search, searchMode]);
+  }, [ranked, search, searchMode, lang]);
 
   const regions = useMemo(
     () => [...new Set(countries.map((c) => c.region))].sort(),
@@ -94,11 +96,11 @@ export default function App() {
     return ranked
       .filter(
         (r) =>
-          r.country.name.toLowerCase().includes(q) ||
+          localizeCountry(r.country, lang).name.toLowerCase().includes(q) ||
           r.country.code.toLowerCase() === q,
       )
       .map((r) => r.country.code);
-  }, [ranked, search]);
+  }, [ranked, search, lang]);
   const [matchCursor, setMatchCursor] = useState(0);
   useEffect(() => {
     setMatchCursor(0);

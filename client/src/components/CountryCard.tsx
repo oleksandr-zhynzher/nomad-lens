@@ -8,6 +8,7 @@ import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "./Tooltip";
 import { CATEGORY_LABELS } from "../utils/types";
+import { useLocalizedCountry, regionKey } from "../utils/localize";
 
 interface CountryCardProps {
   ranked: RankedCountry;
@@ -27,6 +28,7 @@ export function CountryCard({
   const { country, finalScore, rank } = ranked;
   const { t } = useTranslation();
   const langPrefix = useLangPrefix();
+  const locC = useLocalizedCountry(country);
 
   // Alternating backgrounds
   const isEven = index % 2 === 0;
@@ -77,7 +79,7 @@ export function CountryCard({
         {/* Flag */}
         <img
           src={country.flagUrl}
-          alt={`${country.name} flag`}
+          alt={`${locC.name} flag`}
           className="object-cover shrink-0"
           style={{ width: "24px", height: "16px", borderRadius: "2px" }}
           loading="lazy"
@@ -94,7 +96,7 @@ export function CountryCard({
               color: "#FFFFFF",
             }}
           >
-            {country.name}
+            {locC.name}
           </p>
           <span
             className="hidden sm:inline shrink-0"
@@ -104,7 +106,7 @@ export function CountryCard({
               color: "#555555",
             }}
           >
-            {country.region}
+            {t(`regions.${regionKey(country.region)}`)}
           </span>
           {country.hasNomadVisa && (
             <Tooltip content="Nomad Visa Available" side="top">

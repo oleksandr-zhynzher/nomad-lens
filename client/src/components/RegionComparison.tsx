@@ -242,7 +242,7 @@ export function RegionComparison({
                     textAlign: "center",
                   }}
                 >
-                  {r.name}
+                  {t(`regions.${regionKey(r.name)}`)}
                 </span>
 
                 <div className="flex items-baseline gap-1">
@@ -333,7 +333,7 @@ export function RegionComparison({
                       color: "#FFFFFF",
                     }}
                   >
-                    {r.name}
+                    {t(`regions.${regionKey(r.name)}`)}
                   </span>
                 </div>
               ))}

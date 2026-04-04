@@ -26,6 +26,17 @@ import {
   climateScore,
 } from "./utils/normalize";
 
+// Country name + capital translations (Ukrainian / Russian) from Wikidata
+const countriesI18n: Record<
+  string,
+  {
+    name: { en: string; ua?: string; ru?: string };
+    capital?: { en: string; ua?: string; ru?: string };
+  }
+> = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "data", "countries-i18n.json"), "utf-8"),
+);
+
 function ind(value: number, unit: string, year: number) {
   return { raw: value, unit, year };
 }
@@ -660,6 +671,26 @@ async function generate(): Promise<void> {
     ).length;
     if (nonNull < 5) continue;
 
+    // Build country-level i18n (name + capital)
+    const ci = countriesI18n[iso2];
+    const nameRu = ci?.name?.ru;
+    const nameUa = ci?.name?.ua;
+    const capRu = ci?.capital?.ru;
+    const capUa = ci?.capital?.ua;
+    const countryI18n: CountryData["i18n"] = {};
+    if (nameRu || capRu) {
+      countryI18n.ru = {
+        ...(nameRu ? { name: nameRu } : {}),
+        ...(capRu ? { capital: capRu } : {}),
+      };
+    }
+    if (nameUa || capUa) {
+      countryI18n.ua = {
+        ...(nameUa ? { name: nameUa } : {}),
+        ...(capUa ? { capital: capUa } : {}),
+      };
+    }
+
     data.push({
       code: iso2,
       name: rc.name.common,
@@ -675,6 +706,7 @@ async function generate(): Promise<void> {
       nomadVisa: localData.getNomadVisaDetails(iso2) ?? undefined,
       climateData: clim ?? undefined,
       scores,
+      ...(Object.keys(countryI18n).length > 0 ? { i18n: countryI18n } : {}),
     });
   }
 

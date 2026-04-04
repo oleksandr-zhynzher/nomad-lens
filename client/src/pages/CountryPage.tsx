@@ -51,6 +51,7 @@ import {
   type CategoryKey,
   type ClimatePreferences,
 } from "../utils/types";
+import { useLocalizedCountry, regionKey } from "../utils/localize";
 
 type LucideIcon = React.ComponentType<{
   size?: number;
@@ -167,6 +168,7 @@ export function CountryPage() {
   }, [ranked, code]);
 
   const visa = c?.nomadVisa ?? null;
+  const locC = useLocalizedCountry(c);
 
   if (loading) {
     return (
@@ -322,7 +324,7 @@ export function CountryPage() {
               >
                 <img
                   src={c.flagUrl}
-                  alt={`${c.name} flag`}
+                  alt={`${locC.name} flag`}
                   style={{ objectFit: "cover", width: "100%", height: "100%" }}
                 />
               </div>
@@ -351,7 +353,7 @@ export function CountryPage() {
                     lineHeight: 1,
                   }}
                 >
-                  {c.name}
+                  {locC.name}
                 </h1>
               </div>
               <div style={{ flex: 1 }} />
@@ -595,7 +597,7 @@ export function CountryPage() {
                 color: "#E8E9EB",
               }}
             >
-              {c.capital}
+              {locC.capital}
             </span>
             <span
               style={{
@@ -628,7 +630,7 @@ export function CountryPage() {
                 color: "#E8E9EB",
               }}
             >
-              {c.region}
+              {t(`regions.${regionKey(c.region)}`)}
             </span>
             <span
               style={{
@@ -1295,7 +1297,7 @@ export function CountryPage() {
             >
               {t("countryPage.categoriesSubtitle", {
                 count: VISIBLE_CATEGORY_KEYS.length,
-                name: c.name,
+                name: locC.name,
               })}
             </span>
           </div>

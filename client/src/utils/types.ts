@@ -303,6 +303,10 @@ export interface CountryData {
   nomadVisa?: NomadVisaDetails;
   climateData?: ClimateData;
   scores: Record<CategoryKey, CategoryScore>;
+  i18n?: {
+    ru?: { name?: string; capital?: string };
+    ua?: { name?: string; capital?: string };
+  };
 }
 
 // ─── Scoring ──────────────────────────────────────────────────────────────────

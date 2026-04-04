@@ -37,6 +37,7 @@ import type {
 } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { computeScore, scoreColour } from "../utils/scoring";
+import { localizeCountry, regionKey } from "../utils/localize";
 import { Tooltip } from "./Tooltip";
 
 const SLOT_COLORS = [
@@ -107,8 +108,9 @@ export function CountryComparison({
   const addBtnRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
+  const lang = i18n.language;
 
   // Sync horizontal scroll between sticky header and body
   useEffect(() => {
@@ -175,9 +177,15 @@ export function CountryComparison({
     .filter(
       (c) =>
         !selectedCodes.includes(c.code) &&
-        c.name.toLowerCase().includes(query.toLowerCase()),
+        localizeCountry(c, lang)
+          .name.toLowerCase()
+          .includes(query.toLowerCase()),
     )
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort((a, b) =>
+      localizeCountry(a, lang).name.localeCompare(
+        localizeCountry(b, lang).name,
+      ),
+    );
 
   return (
     <div>
@@ -217,7 +225,7 @@ export function CountryComparison({
 
                 <img
                   src={slot.country.flagUrl}
-                  alt={slot.country.name}
+                  alt={localizeCountry(slot.country, lang).name}
                   className="rounded-full object-cover w-9 h-9"
                 />
 
@@ -231,7 +239,7 @@ export function CountryComparison({
                       textAlign: "center",
                     }}
                   >
-                    {slot.country.name}
+                    {localizeCountry(slot.country, lang).name}
                   </span>
                   {slot.country.hasNomadVisa && (
                     <Tooltip
@@ -288,7 +296,7 @@ export function CountryComparison({
                     border: "1px solid #2C2C2C",
                   }}
                 >
-                  {slot.country.region}
+                  {t(`regions.${regionKey(slot.country.region)}`)}
                 </span>
               </div>
             </div>
@@ -358,7 +366,7 @@ export function CountryComparison({
                 >
                   <img
                     src={c.flagUrl}
-                    alt={c.name}
+                    alt={localizeCountry(c, lang).name}
                     className="rounded-full object-cover"
                     style={{ width: "24px", height: "24px" }}
                   />
@@ -370,7 +378,7 @@ export function CountryComparison({
                       color: "#E8E9EB",
                     }}
                   >
-                    {c.name}
+                    {localizeCountry(c, lang).name}
                   </span>
                   <span
                     style={{
@@ -379,7 +387,7 @@ export function CountryComparison({
                       color: "#555555",
                     }}
                   >
-                    {c.region}
+                    {t(`regions.${regionKey(c.region)}`)}
                   </span>
                   <span
                     style={{
@@ -452,7 +460,7 @@ export function CountryComparison({
                 >
                   <img
                     src={slot.country.flagUrl}
-                    alt={slot.country.name}
+                    alt={localizeCountry(slot.country, lang).name}
                     className="rounded-full object-cover"
                     style={{ width: "18px", height: "18px" }}
                   />
@@ -464,7 +472,7 @@ export function CountryComparison({
                       color: "#FFFFFF",
                     }}
                   >
-                    {slot.country.name}
+                    {localizeCountry(slot.country, lang).name}
                   </span>
                 </div>
               ))}

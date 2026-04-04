@@ -16,6 +16,7 @@ import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { RankedCountry, SeasonType } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
+import { useLocalizedCountry, regionKey } from "../utils/localize";
 
 const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   exempt: { bg: "#1A4A2A", text: "#44CC66" },
@@ -69,6 +70,7 @@ export function CountryDetailPanel({
   const langPrefix = useLangPrefix();
   const { country: c, finalScore, rank } = country;
   const [visaExpanded, setVisaExpanded] = useState(true);
+  const locC = useLocalizedCountry(c);
 
   return createPortal(
     <div
@@ -112,7 +114,7 @@ export function CountryDetailPanel({
           >
             <img
               src={c.flagUrl}
-              alt={`${c.name} flag`}
+              alt={`${locC.name} flag`}
               className="object-cover shrink-0"
               style={{
                 width: "36px",
@@ -132,7 +134,7 @@ export function CountryDetailPanel({
                   lineHeight: "1.2",
                 }}
               >
-                {c.name}
+                {locC.name}
               </h2>
               <p
                 style={{
@@ -142,7 +144,7 @@ export function CountryDetailPanel({
                   marginTop: "4px",
                 }}
               >
-                {c.region}
+                {t(`regions.${regionKey(c.region)}`)}
               </p>
             </div>
             <button

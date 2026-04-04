@@ -9,6 +9,7 @@ import {
   Graticule,
 } from "react-simple-maps";
 import type { RankedCountry } from "../utils/types";
+import { localizeCountry } from "../utils/localize";
 import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
 import { CountryDetailPanel } from "./CountryDetailPanel";
 
@@ -35,7 +36,7 @@ export function WorldMap({
   onToggleWeights,
   showWeights,
 }: WorldMapProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState<[number, number]>([0, 20]);
@@ -69,7 +70,9 @@ export function WorldMap({
   ) {
     const alpha2 = geoToAlpha2(geo);
     const r = scoreByAlpha2.get(alpha2);
-    const name = String(geo.properties["name"] ?? alpha2);
+    const name = r
+      ? localizeCountry(r.country, i18n.language).name
+      : String(geo.properties["name"] ?? alpha2);
     setHover({
       name,
       score: r?.finalScore ?? null,

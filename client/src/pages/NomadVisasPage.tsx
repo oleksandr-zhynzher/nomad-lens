@@ -12,6 +12,7 @@ import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
+import { localizeCountry } from "../utils/localize";
 import type { CountryData } from "../utils/types";
 
 const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
@@ -48,9 +49,10 @@ function SortIcon({
 }
 
 export function NomadVisasPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { countries, loading } = useCountries();
   const langPrefix = useLangPrefix();
+  const lang = i18n.language;
   const [searchParams] = useSearchParams();
   const highlightCode = searchParams.get("country")?.toUpperCase() ?? null;
 
@@ -77,9 +79,11 @@ export function NomadVisasPage() {
     return allVisaCountries.filter(
       (c) =>
         trimmedQuery === "" ||
-        c.name.toLowerCase().includes(trimmedQuery.toLowerCase()),
+        localizeCountry(c, lang)
+          .name.toLowerCase()
+          .includes(trimmedQuery.toLowerCase()),
     );
-  }, [allVisaCountries, searchQuery]);
+  }, [allVisaCountries, searchQuery, lang]);
 
   const sortedCountries = useMemo(() => {
     const sorted = [...visaCountries];
@@ -88,7 +92,9 @@ export function NomadVisasPage() {
 
       switch (sortField) {
         case "country":
-          comparison = a.name.localeCompare(b.name);
+          comparison = localizeCountry(a, lang).name.localeCompare(
+            localizeCountry(b, lang).name,
+          );
           break;
         case "duration":
           comparison =
@@ -120,7 +126,7 @@ export function NomadVisasPage() {
     });
 
     return sorted;
-  }, [visaCountries, sortField, sortDirection]);
+  }, [visaCountries, sortField, sortDirection, lang]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -529,7 +535,7 @@ export function NomadVisasPage() {
                       >
                         <img
                           src={country.flagUrl}
-                          alt={`${country.name} flag`}
+                          alt={`${localizeCountry(country, lang).name} flag`}
                           style={{
                             width: "28px",
                             height: "19px",
@@ -547,7 +553,7 @@ export function NomadVisasPage() {
                             color: "#FFFFFF",
                           }}
                         >
-                          {country.name}
+                          {localizeCountry(country, lang).name}
                         </span>
                       </Link>
                     </td>
