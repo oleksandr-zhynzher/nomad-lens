@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { BarChart3, List, Map, Menu, Plane, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -15,6 +15,29 @@ export function Layout({ children, activePage }: LayoutProps) {
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+        setLangDropdownOpen(false);
+      }
+    }
+    if (langDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [langDropdownOpen]);
+
+  const LANG_OPTIONS = [
+    { code: "en" as const, flagCode: "gb", label: "English" },
+    { code: "ua" as const, flagCode: "ua", label: "Українська" },
+    { code: "ru" as const, flagCode: "ru", label: "Русский" },
+  ];
+
+  const currentLang =
+    LANG_OPTIONS.find((l) => l.code === i18n.language) ?? LANG_OPTIONS[0];
 
   const activeView: "list" | "map" | "compare" | null = pathname.endsWith(
     "/map",
@@ -266,34 +289,64 @@ export function Layout({ children, activePage }: LayoutProps) {
               </Link>
             </div>
 
-            {/* Divider */}
-            <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
+            {/* Language switcher – text button + dropdown */}
+            <div style={{ position: "relative" }} ref={langRef}>
+              <button
+                onClick={() => setLangDropdownOpen((p) => !p)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  letterSpacing: "1px",
+                  color: langDropdownOpen ? "#C2956A" : "#555555",
+                  padding: "4px 2px",
+                }}
+              >
+                {currentLang.code.toUpperCase()}
+              </button>
 
-            {/* Language switcher */}
-            <div className="flex items-center" style={{ gap: "2px" }}>
-              {(["en", "ua", "ru"] as const).map((lng) => (
-                <Link
-                  key={lng}
-                  to={lng === "en" ? "/" : `/${lng}`}
+              {langDropdownOpen && (
+                <div
                   style={{
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: i18n.language === lng ? 700 : 400,
-                    color: i18n.language === lng ? "#C2956A" : "#555555",
-                    textDecoration: "none",
-                    padding: "3px 7px",
-                    borderRadius: "3px",
-                    backgroundColor:
-                      i18n.language === lng ? "#1A1208" : "transparent",
+                    position: "absolute",
+                    top: "calc(100% + 6px)",
+                    right: 0,
+                    backgroundColor: "#111111",
+                    border: "1px solid #252525",
+                    borderRadius: "8px",
+                    overflow: "hidden",
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.6)",
+                    zIndex: 50,
                   }}
                 >
-                  {t(`langSwitcher.${lng}`)}
-                </Link>
-              ))}
+                  {LANG_OPTIONS.filter((o) => o.code !== i18n.language).map(
+                    (opt, i) => (
+                      <Link
+                        key={opt.code}
+                        to={opt.code === "en" ? "/" : `/${opt.code}`}
+                        onClick={() => setLangDropdownOpen(false)}
+                        style={{
+                          display: "block",
+                          padding: "8px 16px",
+                          textDecoration: "none",
+                          fontFamily: "Geist, sans-serif",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          letterSpacing: "1px",
+                          color: "#888888",
+                          borderTop: i === 0 ? "none" : "1px solid #1E1E1E",
+                        }}
+                      >
+                        {opt.code.toUpperCase()}
+                      </Link>
+                    ),
+                  )}
+                </div>
+              )}
             </div>
-
-            {/* Divider */}
-            <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
 
             {/* GitHub link */}
             <a
