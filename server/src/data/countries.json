@@ -15,8 +15,8 @@
       "annualMeanTemp": 26.68520547945204,
       "annualPrecipitation": 2924.9999999999995,
       "tempRange": 2.183870967741939,
-      "hottestMonth": 4,
-      "coldestMonth": 7,
+      "hottestMonth": 27.85483870967742,
+      "coldestMonth": 25.67096774193548,
       "seasonType": "tropical"
     },
     "scores": {
@@ -334,8 +334,8 @@
       "annualMeanTemp": 26.938082191780826,
       "annualPrecipitation": 1160.6000000000006,
       "tempRange": 2.6997849462365515,
-      "hottestMonth": 3,
-      "coldestMonth": 7,
+      "hottestMonth": 28.09333333333333,
+      "coldestMonth": 25.39354838709678,
       "seasonType": "tropical"
     },
     "scores": {
@@ -819,8 +819,8 @@
       "annualMeanTemp": 22.61260273972603,
       "annualPrecipitation": 1305.0000000000002,
       "tempRange": 13.351612903225812,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 29.119354838709683,
+      "coldestMonth": 15.76774193548387,
       "seasonType": "tropical"
     },
     "scores": {
@@ -1031,8 +1031,8 @@
       "annualMeanTemp": 12.061095890410959,
       "annualPrecipitation": 674.3000000000004,
       "tempRange": 35.32258064516129,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 27.60322580645161,
+      "coldestMonth": -7.719354838709678,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -1404,8 +1404,8 @@
       "annualMeanTemp": 26.570410958904098,
       "annualPrecipitation": 2653.5999999999985,
       "tempRange": 4.167741935483878,
-      "hottestMonth": 9,
-      "coldestMonth": 0,
+      "hottestMonth": 28.822580645161292,
+      "coldestMonth": 24.654838709677414,
       "seasonType": "tropical"
     },
     "scores": {
@@ -1721,8 +1721,8 @@
       "annualMeanTemp": 25.830958904109586,
       "annualPrecipitation": 1315.1000000000013,
       "tempRange": 4.449677419354831,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 27.639999999999997,
+      "coldestMonth": 23.190322580645166,
       "seasonType": "tropical"
     },
     "scores": {
@@ -2076,8 +2076,8 @@
       "annualMeanTemp": 19.32520547945205,
       "annualPrecipitation": 1197.2999999999993,
       "tempRange": 3.6645161290322577,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 20.81935483870968,
+      "coldestMonth": 17.15483870967742,
       "seasonType": "tropical"
     },
     "scores": {
@@ -2421,8 +2421,8 @@
       "annualMeanTemp": 18.041095890410958,
       "annualPrecipitation": 510.70000000000016,
       "tempRange": 17.539631336405527,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 27.896774193548385,
+      "coldestMonth": 10.357142857142858,
       "seasonType": "tropical"
     },
     "scores": {
@@ -2746,8 +2746,8 @@
       "annualMeanTemp": 10.559726027397266,
       "annualPrecipitation": 714.7,
       "tempRange": 23.94735023041475,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 23.258064516129036,
+      "coldestMonth": -0.6892857142857146,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -3119,8 +3119,8 @@
       "annualMeanTemp": 26.972328767123315,
       "annualPrecipitation": 845.0000000000007,
       "tempRange": 4.7421428571428486,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 29.25999999999999,
+      "coldestMonth": 24.517857142857142,
       "seasonType": "tropical"
     },
     "scores": {
@@ -3520,8 +3520,8 @@
       "annualMeanTemp": 13.068493150684931,
       "annualPrecipitation": 1228.6999999999994,
       "tempRange": 19.79873271889401,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 23.34516129032258,
+      "coldestMonth": 3.5464285714285717,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -3893,8 +3893,8 @@
       "annualMeanTemp": 22.07945205479451,
       "annualPrecipitation": 3408.2000000000007,
       "tempRange": 1.103225806451615,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 22.72258064516129,
+      "coldestMonth": 21.619354838709675,
       "seasonType": "tropical"
     },
     "scores": {
@@ -4328,8 +4328,8 @@
       "annualMeanTemp": 26.990136986301355,
       "annualPrecipitation": 2263.5,
       "tempRange": 1.8465591397849366,
-      "hottestMonth": 3,
-      "coldestMonth": 0,
+      "hottestMonth": 27.943333333333335,
+      "coldestMonth": 26.0967741935484,
       "seasonType": "tropical"
     },
     "scores": {
@@ -4689,8 +4689,8 @@
       "annualMeanTemp": 11.829041095890414,
       "annualPrecipitation": 1000.8999999999999,
       "tempRange": 14.877096774193552,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 19.89,
+      "coldestMonth": 5.012903225806449,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -5062,8 +5062,8 @@
       "annualMeanTemp": 20.33041095890411,
       "annualPrecipitation": 782.3000000000005,
       "tempRange": 2.7938709677419347,
-      "hottestMonth": 7,
-      "coldestMonth": 3,
+      "hottestMonth": 22.18387096774193,
+      "coldestMonth": 19.389999999999997,
       "seasonType": "tropical"
     },
     "scores": {
@@ -5563,8 +5563,8 @@
       "annualMeanTemp": 24.815616438356155,
       "annualPrecipitation": 266.49999999999994,
       "tempRange": 6.388709677419357,
-      "hottestMonth": 9,
-      "coldestMonth": 1,
+      "hottestMonth": 27.438709677419357,
+      "coldestMonth": 21.05,
       "seasonType": "tropical"
     },
     "scores": {
@@ -5853,8 +5853,8 @@
       "annualMeanTemp": 12.169863013698626,
       "annualPrecipitation": 1632.1000000000004,
       "tempRange": 29.03225806451613,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 25.554838709677423,
+      "coldestMonth": -3.4774193548387102,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -6226,8 +6226,8 @@
       "annualMeanTemp": 26.85342465753425,
       "annualPrecipitation": 3482.2999999999993,
       "tempRange": 1.3283870967741969,
-      "hottestMonth": 10,
-      "coldestMonth": 2,
+      "hottestMonth": 27.580000000000002,
+      "coldestMonth": 26.251612903225805,
       "seasonType": "tropical"
     },
     "scores": {
@@ -6435,8 +6435,8 @@
       "annualMeanTemp": 12.04054794520548,
       "annualPrecipitation": 762.9000000000002,
       "tempRange": 18.59677419354839,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 21.354838709677423,
+      "coldestMonth": 2.758064516129031,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -6698,8 +6698,8 @@
       "annualMeanTemp": 24.951506849315056,
       "annualPrecipitation": 389,
       "tempRange": 9.042741935483878,
-      "hottestMonth": 9,
-      "coldestMonth": 1,
+      "hottestMonth": 28.567741935483877,
+      "coldestMonth": 19.525,
       "seasonType": "tropical"
     },
     "scores": {
@@ -7192,8 +7192,8 @@
       "annualMeanTemp": 17.354794520547944,
       "annualPrecipitation": 936.5,
       "tempRange": 12.15182795698925,
-      "hottestMonth": 0,
-      "coldestMonth": 5,
+      "hottestMonth": 24.145161290322584,
+      "coldestMonth": 11.993333333333334,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -7559,8 +7559,8 @@
       "annualMeanTemp": 25.628767123287666,
       "annualPrecipitation": 1714.4,
       "tempRange": 2.18193548387098,
-      "hottestMonth": 8,
-      "coldestMonth": 6,
+      "hottestMonth": 26.840000000000007,
+      "coldestMonth": 24.658064516129027,
       "seasonType": "tropical"
     },
     "scores": {
@@ -8023,8 +8023,8 @@
       "annualMeanTemp": 20.465753424657525,
       "annualPrecipitation": 245.39999999999998,
       "tempRange": 11.725268817204295,
-      "hottestMonth": 10,
-      "coldestMonth": 6,
+      "hottestMonth": 24.783333333333328,
+      "coldestMonth": 13.058064516129033,
       "seasonType": "arid"
     },
     "scores": {
@@ -8385,8 +8385,8 @@
       "annualMeanTemp": 27.281917808219173,
       "annualPrecipitation": 2364.799999999998,
       "tempRange": 2.667741935483871,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 28.474193548387095,
+      "coldestMonth": 25.806451612903224,
       "seasonType": "tropical"
     },
     "scores": {
@@ -8746,8 +8746,8 @@
       "annualMeanTemp": 6.268767123287674,
       "annualPrecipitation": 856.9000000000005,
       "tempRange": 21.029032258064518,
-      "hottestMonth": 7,
-      "coldestMonth": 11,
+      "hottestMonth": 17.187096774193552,
+      "coldestMonth": -3.8419354838709676,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -9119,8 +9119,8 @@
       "annualMeanTemp": 23.752054794520546,
       "annualPrecipitation": 28.300000000000004,
       "tempRange": 18.123502304147465,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 31.980645161290322,
+      "coldestMonth": 13.85714285714286,
       "seasonType": "arid"
     },
     "scores": {
@@ -9492,8 +9492,8 @@
       "annualMeanTemp": 26.543013698630144,
       "annualPrecipitation": 6605.599999999998,
       "tempRange": 1.2838709677419438,
-      "hottestMonth": 11,
-      "coldestMonth": 0,
+      "hottestMonth": 27.193548387096786,
+      "coldestMonth": 25.909677419354843,
       "seasonType": "tropical"
     },
     "scores": {
@@ -9756,8 +9756,8 @@
       "annualMeanTemp": 26.716164383561647,
       "annualPrecipitation": 2912.899999999998,
       "tempRange": 0.8533333333333317,
-      "hottestMonth": 10,
-      "coldestMonth": 8,
+      "hottestMonth": 27.14666666666666,
+      "coldestMonth": 26.29333333333333,
       "seasonType": "tropical"
     },
     "scores": {
@@ -10080,8 +10080,8 @@
       "annualMeanTemp": 27.11698630136986,
       "annualPrecipitation": 963.3000000000002,
       "tempRange": 4.385952380952382,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 29.196666666666665,
+      "coldestMonth": 24.810714285714283,
       "seasonType": "tropical"
     },
     "scores": {
@@ -10481,8 +10481,8 @@
       "annualMeanTemp": 26.51452054794521,
       "annualPrecipitation": 2802.6000000000004,
       "tempRange": 2.2354838709677374,
-      "hottestMonth": 4,
-      "coldestMonth": 6,
+      "hottestMonth": 27.545161290322575,
+      "coldestMonth": 25.309677419354838,
       "seasonType": "tropical"
     },
     "scores": {
@@ -10765,8 +10765,8 @@
       "annualMeanTemp": 27.187397260273997,
       "annualPrecipitation": 231.49999999999997,
       "tempRange": 26.251612903225812,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 39.39032258064516,
+      "coldestMonth": 13.138709677419351,
       "seasonType": "arid"
     },
     "scores": {
@@ -11251,8 +11251,8 @@
       "annualMeanTemp": 18.41780821917808,
       "annualPrecipitation": 561.4000000000001,
       "tempRange": 21.792511520737325,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 30.30322580645161,
+      "coldestMonth": 8.510714285714286,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -11624,8 +11624,8 @@
       "annualMeanTemp": 27.76438356164385,
       "annualPrecipitation": 3465.0999999999976,
       "tempRange": 1.0614055299539125,
-      "hottestMonth": 9,
-      "coldestMonth": 1,
+      "hottestMonth": 28.193548387096772,
+      "coldestMonth": 27.13214285714286,
       "seasonType": "tropical"
     },
     "scores": {
@@ -12037,8 +12037,8 @@
       "annualMeanTemp": 20.168493150684927,
       "annualPrecipitation": 286.2,
       "tempRange": 21.683064516129036,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 31.158064516129034,
+      "coldestMonth": 9.474999999999998,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -12387,8 +12387,8 @@
       "annualMeanTemp": 28.224657534246607,
       "annualPrecipitation": 711.1999999999998,
       "tempRange": 6.795913978494614,
-      "hottestMonth": 3,
-      "coldestMonth": 11,
+      "hottestMonth": 32.37333333333333,
+      "coldestMonth": 25.577419354838714,
       "seasonType": "tropical"
     },
     "scores": {
@@ -12864,8 +12864,8 @@
       "annualMeanTemp": 22.2649315068493,
       "annualPrecipitation": 1795.1999999999998,
       "tempRange": 9.474193548387088,
-      "hottestMonth": 7,
-      "coldestMonth": 2,
+      "hottestMonth": 27.574193548387093,
+      "coldestMonth": 18.100000000000005,
       "seasonType": "tropical"
     },
     "scores": {
@@ -13084,8 +13084,8 @@
       "annualMeanTemp": -0.8156164383561634,
       "annualPrecipitation": 921.9000000000008,
       "tempRange": 20.166705069124426,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 7.7774193548387105,
+      "coldestMonth": -12.389285714285716,
       "seasonType": "polar"
     },
     "scores": {
@@ -13302,8 +13302,8 @@
       "annualMeanTemp": 16.918904109589036,
       "annualPrecipitation": 552.2000000000002,
       "tempRange": 5.212688172043013,
-      "hottestMonth": 8,
-      "coldestMonth": 0,
+      "hottestMonth": 19.193333333333335,
+      "coldestMonth": 13.980645161290322,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -13606,8 +13606,8 @@
       "annualMeanTemp": 22.478904109589052,
       "annualPrecipitation": 480.59999999999997,
       "tempRange": 3.9193548387096833,
-      "hottestMonth": 9,
-      "coldestMonth": 6,
+      "hottestMonth": 24.322580645161292,
+      "coldestMonth": 20.40322580645161,
       "seasonType": "tropical"
     },
     "scores": {
@@ -13973,8 +13973,8 @@
       "annualMeanTemp": 24.620273972602728,
       "annualPrecipitation": 1706.3999999999992,
       "tempRange": 13.703225806451606,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 30.212903225806446,
+      "coldestMonth": 16.50967741935484,
       "seasonType": "tropical"
     },
     "scores": {
@@ -14341,8 +14341,8 @@
       "annualMeanTemp": 29.374246575342458,
       "annualPrecipitation": 661,
       "tempRange": 9.732258064516131,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 34.96129032258065,
+      "coldestMonth": 25.22903225806452,
       "seasonType": "tropical"
     },
     "scores": {
@@ -14676,8 +14676,8 @@
       "annualMeanTemp": 26.18438356164386,
       "annualPrecipitation": 1399.2999999999993,
       "tempRange": 3.1532258064516085,
-      "hottestMonth": 1,
-      "coldestMonth": 6,
+      "hottestMonth": 28.25,
+      "coldestMonth": 25.09677419354839,
       "seasonType": "tropical"
     },
     "scores": {
@@ -15162,8 +15162,8 @@
       "annualMeanTemp": 14.689863013698623,
       "annualPrecipitation": 682.4000000000002,
       "tempRange": 25.35161290322581,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 27.56129032258065,
+      "coldestMonth": 2.209677419354839,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -15540,8 +15540,8 @@
       "annualMeanTemp": 10.343287671232872,
       "annualPrecipitation": 1537.6999999999996,
       "tempRange": 9.712473118279568,
-      "hottestMonth": 5,
-      "coldestMonth": 2,
+      "hottestMonth": 15.786666666666665,
+      "coldestMonth": 6.074193548387098,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -15696,8 +15696,8 @@
       "annualMeanTemp": 14.299999999999995,
       "annualPrecipitation": 674.4000000000002,
       "tempRange": 6.0266666666666655,
-      "hottestMonth": 10,
-      "coldestMonth": 5,
+      "hottestMonth": 17.50333333333333,
+      "coldestMonth": 11.476666666666665,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -16025,8 +16025,8 @@
       "annualMeanTemp": 9.759452054794519,
       "annualPrecipitation": 832.0000000000003,
       "tempRange": 13.815476190476184,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 17.033333333333328,
+      "coldestMonth": 3.217857142857144,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -16393,8 +16393,8 @@
       "annualMeanTemp": 19.408767123287664,
       "annualPrecipitation": 145.4,
       "tempRange": 32.74838709677419,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 33.47419354838709,
+      "coldestMonth": 0.725806451612903,
       "seasonType": "arid"
     },
     "scores": {
@@ -16718,8 +16718,8 @@
       "annualMeanTemp": 30.013698630136982,
       "annualPrecipitation": 319.5000000000001,
       "tempRange": 10.629032258064516,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 35.20645161290323,
+      "coldestMonth": 24.577419354838714,
       "seasonType": "tropical"
     },
     "scores": {
@@ -17069,8 +17069,8 @@
       "annualMeanTemp": 26.50712328767121,
       "annualPrecipitation": 4839.2999999999965,
       "tempRange": 1.2490322580645135,
-      "hottestMonth": 11,
-      "coldestMonth": 3,
+      "hottestMonth": 27.22903225806451,
+      "coldestMonth": 25.979999999999997,
       "seasonType": "tropical"
     },
     "scores": {
@@ -17453,8 +17453,8 @@
       "annualMeanTemp": 27.977808219178062,
       "annualPrecipitation": 1050.4999999999998,
       "tempRange": 3.9806451612903224,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 30.10645161290323,
+      "coldestMonth": 26.125806451612906,
       "seasonType": "tropical"
     },
     "scores": {
@@ -17667,8 +17667,8 @@
       "annualMeanTemp": 11.581917808219165,
       "annualPrecipitation": 2103.9,
       "tempRange": 18.129032258064516,
-      "hottestMonth": 6,
-      "coldestMonth": 11,
+      "hottestMonth": 20.838709677419356,
+      "coldestMonth": 2.7096774193548385,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -18037,8 +18037,8 @@
       "annualMeanTemp": 11.401917808219174,
       "annualPrecipitation": 1083.6000000000004,
       "tempRange": 20.25011520737327,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 21.83225806451613,
+      "coldestMonth": 1.5821428571428573,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -18376,8 +18376,8 @@
       "annualMeanTemp": 12.934520547945205,
       "annualPrecipitation": 949.0000000000006,
       "tempRange": 15.421190476190471,
-      "hottestMonth": 5,
-      "coldestMonth": 1,
+      "hottestMonth": 20.90333333333333,
+      "coldestMonth": 5.482142857142857,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -18749,8 +18749,8 @@
       "annualMeanTemp": 25.22767123287672,
       "annualPrecipitation": 3315.2000000000016,
       "tempRange": 2.876666666666665,
-      "hottestMonth": 2,
-      "coldestMonth": 8,
+      "hottestMonth": 26.400000000000002,
+      "coldestMonth": 23.523333333333337,
       "seasonType": "tropical"
     },
     "scores": {
@@ -18927,8 +18927,8 @@
       "annualMeanTemp": 5.718356164383561,
       "annualPrecipitation": 410.1000000000002,
       "tempRange": 37.78709677419354,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 24.196774193548382,
+      "coldestMonth": -13.590322580645157,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -19267,8 +19267,8 @@
       "annualMeanTemp": 25.255342465753426,
       "annualPrecipitation": 1159.0000000000005,
       "tempRange": 5.849423963133628,
-      "hottestMonth": 1,
-      "coldestMonth": 6,
+      "hottestMonth": 27.410714285714278,
+      "coldestMonth": 21.56129032258065,
       "seasonType": "tropical"
     },
     "scores": {
@@ -19623,8 +19623,8 @@
       "annualMeanTemp": 13.941369863013698,
       "annualPrecipitation": 1023.400000000001,
       "tempRange": 8.189746543778803,
-      "hottestMonth": 1,
-      "coldestMonth": 7,
+      "hottestMonth": 17.760714285714286,
+      "coldestMonth": 9.570967741935483,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -19991,8 +19991,8 @@
       "annualMeanTemp": 26.729589041095903,
       "annualPrecipitation": 948.3999999999995,
       "tempRange": 4.986774193548381,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 29.089999999999993,
+      "coldestMonth": 24.10322580645161,
       "seasonType": "tropical"
     },
     "scores": {
@@ -20226,8 +20226,8 @@
       "annualMeanTemp": 27.20054794520547,
       "annualPrecipitation": 142.89999999999995,
       "tempRange": 24.845161290322572,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 37.80645161290322,
+      "coldestMonth": 12.961290322580643,
       "seasonType": "arid"
     },
     "scores": {
@@ -20733,8 +20733,8 @@
       "annualMeanTemp": 16.01999999999999,
       "annualPrecipitation": 2244.499999999999,
       "tempRange": 21.781912442396315,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 27.835483870967742,
+      "coldestMonth": 6.053571428571428,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -21217,8 +21217,8 @@
       "annualMeanTemp": 18.698630136986296,
       "annualPrecipitation": 491.69999999999993,
       "tempRange": 11.225806451612902,
-      "hottestMonth": 0,
-      "coldestMonth": 6,
+      "hottestMonth": 22.932258064516127,
+      "coldestMonth": 11.706451612903225,
       "seasonType": "tropical"
     },
     "scores": {
@@ -21585,8 +21585,8 @@
       "annualMeanTemp": 21.004931506849328,
       "annualPrecipitation": 1039.9999999999998,
       "tempRange": 20.340107526881724,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 29.543333333333337,
+      "coldestMonth": 9.203225806451615,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -22079,8 +22079,8 @@
       "annualMeanTemp": 26.330684931506838,
       "annualPrecipitation": 3468.2999999999993,
       "tempRange": 2.156236559139785,
-      "hottestMonth": 3,
-      "coldestMonth": 0,
+      "hottestMonth": 27.34333333333333,
+      "coldestMonth": 25.187096774193545,
       "seasonType": "tropical"
     },
     "scores": {
@@ -22446,8 +22446,8 @@
       "annualMeanTemp": 23.102739726027398,
       "annualPrecipitation": 1733.0000000000002,
       "tempRange": 2.7952380952380977,
-      "hottestMonth": 1,
-      "coldestMonth": 5,
+      "hottestMonth": 25.12857142857143,
+      "coldestMonth": 22.333333333333332,
       "seasonType": "tropical"
     },
     "scores": {
@@ -22808,8 +22808,8 @@
       "annualMeanTemp": 25.99780821917808,
       "annualPrecipitation": 3024.100000000001,
       "tempRange": 1.855591397849448,
-      "hottestMonth": 3,
-      "coldestMonth": 6,
+      "hottestMonth": 26.923333333333325,
+      "coldestMonth": 25.067741935483877,
       "seasonType": "tropical"
     },
     "scores": {
@@ -23273,8 +23273,8 @@
       "annualMeanTemp": 28.660273972602756,
       "annualPrecipitation": 49.30000000000001,
       "tempRange": 15.332258064516136,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 35.64516129032259,
+      "coldestMonth": 20.312903225806455,
       "seasonType": "arid"
     },
     "scores": {
@@ -23646,8 +23646,8 @@
       "annualMeanTemp": 10.47095890410959,
       "annualPrecipitation": 1454.5999999999992,
       "tempRange": 18.745161290322585,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 19.725806451612907,
+      "coldestMonth": 0.9806451612903223,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -24153,8 +24153,8 @@
       "annualMeanTemp": 12.506301369863024,
       "annualPrecipitation": 952.8999999999997,
       "tempRange": 21.664516129032258,
-      "hottestMonth": 6,
-      "coldestMonth": 11,
+      "hottestMonth": 23.545161290322582,
+      "coldestMonth": 1.8806451612903228,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -24515,8 +24515,8 @@
       "annualMeanTemp": 20.715342465753427,
       "annualPrecipitation": 230.49999999999991,
       "tempRange": 15.680645161290322,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 28.948387096774194,
+      "coldestMonth": 13.267741935483873,
       "seasonType": "arid"
     },
     "scores": {
@@ -24852,8 +24852,8 @@
       "annualMeanTemp": 24.405479452054806,
       "annualPrecipitation": 2482.4999999999945,
       "tempRange": 4.453010752688179,
-      "hottestMonth": 3,
-      "coldestMonth": 7,
+      "hottestMonth": 26.243333333333336,
+      "coldestMonth": 21.790322580645157,
       "seasonType": "tropical"
     },
     "scores": {
@@ -25274,8 +25274,8 @@
       "annualMeanTemp": 25.839452054794535,
       "annualPrecipitation": 920.6000000000003,
       "tempRange": 3.758809523809518,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 27.526666666666664,
+      "coldestMonth": 23.767857142857146,
       "seasonType": "tropical"
     },
     "scores": {
@@ -25552,8 +25552,8 @@
       "annualMeanTemp": 25.8827397260274,
       "annualPrecipitation": 1464,
       "tempRange": 3.2319047619047545,
-      "hottestMonth": 1,
-      "coldestMonth": 10,
+      "hottestMonth": 28.07857142857143,
+      "coldestMonth": 24.846666666666675,
       "seasonType": "tropical"
     },
     "scores": {
@@ -25870,8 +25870,8 @@
       "annualMeanTemp": 16.635068493150694,
       "annualPrecipitation": 393.59999999999985,
       "tempRange": 31.622580645161285,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 30.519354838709674,
+      "coldestMonth": -1.1032258064516132,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -26237,8 +26237,8 @@
       "annualMeanTemp": 11.411780821917807,
       "annualPrecipitation": 1088.5999999999995,
       "tempRange": 9.738064516129029,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 16.279999999999998,
+      "coldestMonth": 6.541935483870969,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -26610,8 +26610,8 @@
       "annualMeanTemp": 22.348767123287665,
       "annualPrecipitation": 2020.699999999999,
       "tempRange": 7.016129032258068,
-      "hottestMonth": 11,
-      "coldestMonth": 7,
+      "hottestMonth": 25.551612903225806,
+      "coldestMonth": 18.535483870967738,
       "seasonType": "tropical"
     },
     "scores": {
@@ -26788,8 +26788,8 @@
       "annualMeanTemp": 18.84849315068493,
       "annualPrecipitation": 148.90000000000003,
       "tempRange": 9.583870967741936,
-      "hottestMonth": 6,
-      "coldestMonth": 11,
+      "hottestMonth": 24.058064516129033,
+      "coldestMonth": 14.474193548387097,
       "seasonType": "arid"
     },
     "scores": {
@@ -27097,8 +27097,8 @@
       "annualMeanTemp": 6.530958904109588,
       "annualPrecipitation": 1647.8000000000009,
       "tempRange": 10.364516129032255,
-      "hottestMonth": 7,
-      "coldestMonth": 2,
+      "hottestMonth": 11.216129032258062,
+      "coldestMonth": 0.8516129032258064,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -27268,8 +27268,8 @@
       "annualMeanTemp": 26.162465753424662,
       "annualPrecipitation": 756.2000000000003,
       "tempRange": 6.441935483870971,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 29.45161290322581,
+      "coldestMonth": 23.00967741935484,
       "seasonType": "tropical"
     },
     "scores": {
@@ -27594,8 +27594,8 @@
       "annualMeanTemp": 16.087123287671233,
       "annualPrecipitation": 253.89999999999984,
       "tempRange": 23.38064516129032,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 27.829032258064515,
+      "coldestMonth": 4.448387096774193,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -27967,8 +27967,8 @@
       "annualMeanTemp": 25.85643835616436,
       "annualPrecipitation": 3287.1999999999975,
       "tempRange": 0.9238709677419301,
-      "hottestMonth": 3,
-      "coldestMonth": 7,
+      "hottestMonth": 26.139999999999997,
+      "coldestMonth": 25.216129032258067,
       "seasonType": "tropical"
     },
     "scores": {
@@ -28258,8 +28258,8 @@
       "annualMeanTemp": 25.617534246575346,
       "annualPrecipitation": 1532.9999999999989,
       "tempRange": 4.264516129032259,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 27.577419354838714,
+      "coldestMonth": 23.312903225806455,
       "seasonType": "tropical"
     },
     "scores": {
@@ -28598,8 +28598,8 @@
       "annualMeanTemp": 18.760821917808215,
       "annualPrecipitation": 332.69999999999993,
       "tempRange": 11.380645161290317,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 24.5258064516129,
+      "coldestMonth": 13.145161290322584,
       "seasonType": "tropical"
     },
     "scores": {
@@ -28966,8 +28966,8 @@
       "annualMeanTemp": 26.691506849315054,
       "annualPrecipitation": 948.7999999999994,
       "tempRange": 3.0008602150537698,
-      "hottestMonth": 8,
-      "coldestMonth": 0,
+      "hottestMonth": 28.12666666666667,
+      "coldestMonth": 25.1258064516129,
       "seasonType": "tropical"
     },
     "scores": {
@@ -29425,8 +29425,8 @@
       "annualMeanTemp": 26.031506849315058,
       "annualPrecipitation": 1707.899999999999,
       "tempRange": 5.989784946236551,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 28.98333333333333,
+      "coldestMonth": 22.99354838709678,
       "seasonType": "tropical"
     },
     "scores": {
@@ -29749,8 +29749,8 @@
       "annualMeanTemp": 13.43808219178083,
       "annualPrecipitation": 640.6,
       "tempRange": 32.39268817204301,
-      "hottestMonth": 5,
-      "coldestMonth": 11,
+      "hottestMonth": 28.373333333333335,
+      "coldestMonth": -4.019354838709678,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -30117,8 +30117,8 @@
       "annualMeanTemp": 26.546849315068513,
       "annualPrecipitation": 2564.099999999998,
       "tempRange": 1.2829032258064537,
-      "hottestMonth": 10,
-      "coldestMonth": 6,
+      "hottestMonth": 27.169999999999998,
+      "coldestMonth": 25.887096774193544,
       "seasonType": "tropical"
     },
     "scores": {
@@ -30398,8 +30398,8 @@
       "annualMeanTemp": 26.784931506849304,
       "annualPrecipitation": 868.3000000000011,
       "tempRange": 4.319761904761908,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 28.87333333333333,
+      "coldestMonth": 24.553571428571423,
       "seasonType": "tropical"
     },
     "scores": {
@@ -30564,8 +30564,8 @@
       "annualMeanTemp": 31.001369863013693,
       "annualPrecipitation": 14.399999999999999,
       "tempRange": 11.180645161290322,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 34.82258064516129,
+      "coldestMonth": 23.641935483870967,
       "seasonType": "arid"
     },
     "scores": {
@@ -31037,8 +31037,8 @@
       "annualMeanTemp": 12.216986301369856,
       "annualPrecipitation": 735.4000000000002,
       "tempRange": 20.506451612903223,
-      "hottestMonth": 6,
-      "coldestMonth": 11,
+      "hottestMonth": 23.14838709677419,
+      "coldestMonth": 2.641935483870968,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -31410,8 +31410,8 @@
       "annualMeanTemp": 19.047671232876716,
       "annualPrecipitation": 1132.6000000000001,
       "tempRange": 2.5570967741935426,
-      "hottestMonth": 7,
-      "coldestMonth": 3,
+      "hottestMonth": 20.787096774193543,
+      "coldestMonth": 18.23,
       "seasonType": "tropical"
     },
     "scores": {
@@ -31733,8 +31733,8 @@
       "annualMeanTemp": 27.627123287671235,
       "annualPrecipitation": 3979.8999999999996,
       "tempRange": 0.8864285714285636,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 28.039999999999996,
+      "coldestMonth": 27.153571428571432,
       "seasonType": "tropical"
     },
     "scores": {
@@ -32008,8 +32008,8 @@
       "annualMeanTemp": 12.191780821917808,
       "annualPrecipitation": 767.8000000000002,
       "tempRange": 19.893548387096782,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 23.200000000000006,
+      "coldestMonth": 3.3064516129032255,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -32381,8 +32381,8 @@
       "annualMeanTemp": 23.223835616438343,
       "annualPrecipitation": 799.6000000000004,
       "tempRange": 7.07419354838709,
-      "hottestMonth": 0,
-      "coldestMonth": 6,
+      "hottestMonth": 25.925806451612903,
+      "coldestMonth": 18.851612903225814,
       "seasonType": "tropical"
     },
     "scores": {
@@ -32743,8 +32743,8 @@
       "annualMeanTemp": 27.099726027397274,
       "annualPrecipitation": 915.0999999999992,
       "tempRange": 3.583571428571428,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 28.830000000000002,
+      "coldestMonth": 25.246428571428574,
       "seasonType": "tropical"
     },
     "scores": {
@@ -33017,8 +33017,8 @@
       "annualMeanTemp": 26.098356164383574,
       "annualPrecipitation": 1856.3999999999987,
       "tempRange": 2.2129032258064463,
-      "hottestMonth": 11,
-      "coldestMonth": 7,
+      "hottestMonth": 27.293548387096767,
+      "coldestMonth": 25.08064516129032,
       "seasonType": "tropical"
     },
     "scores": {
@@ -33357,8 +33357,8 @@
       "annualMeanTemp": 13.29561643835616,
       "annualPrecipitation": 537.5000000000005,
       "tempRange": 26.598847926267293,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 27.677419354838722,
+      "coldestMonth": 1.0785714285714287,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -33866,8 +33866,8 @@
       "annualMeanTemp": 22.24356164383559,
       "annualPrecipitation": 1823.8000000000004,
       "tempRange": 9.483870967741929,
-      "hottestMonth": 7,
-      "coldestMonth": 2,
+      "hottestMonth": 27.56774193548387,
+      "coldestMonth": 18.08387096774194,
       "seasonType": "tropical"
     },
     "scores": {
@@ -34135,8 +34135,8 @@
       "annualMeanTemp": 27.672328767123293,
       "annualPrecipitation": 2239.0999999999976,
       "tempRange": 4.588494623655922,
-      "hottestMonth": 3,
-      "coldestMonth": 0,
+      "hottestMonth": 29.743333333333336,
+      "coldestMonth": 25.154838709677414,
       "seasonType": "tropical"
     },
     "scores": {
@@ -34637,8 +34637,8 @@
       "annualMeanTemp": 17.238904109589043,
       "annualPrecipitation": 462.50000000000006,
       "tempRange": 12.664631336405538,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 23.496774193548394,
+      "coldestMonth": 10.832142857142856,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -35010,8 +35010,8 @@
       "annualMeanTemp": 11.723013698630128,
       "annualPrecipitation": 805.7,
       "tempRange": 13.096451612903223,
-      "hottestMonth": 8,
-      "coldestMonth": 0,
+      "hottestMonth": 18.29,
+      "coldestMonth": 5.193548387096775,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -35383,8 +35383,8 @@
       "annualMeanTemp": 25.86849315068493,
       "annualPrecipitation": 839.4000000000002,
       "tempRange": 4.458064516129035,
-      "hottestMonth": 1,
-      "coldestMonth": 7,
+      "hottestMonth": 28.099999999999998,
+      "coldestMonth": 23.641935483870963,
       "seasonType": "tropical"
     },
     "scores": {
@@ -35746,8 +35746,8 @@
       "annualMeanTemp": 25.976712328767114,
       "annualPrecipitation": 1898.7,
       "tempRange": 1.663655913978495,
-      "hottestMonth": 10,
-      "coldestMonth": 0,
+      "hottestMonth": 26.673333333333332,
+      "coldestMonth": 25.009677419354837,
       "seasonType": "tropical"
     },
     "scores": {
@@ -35914,8 +35914,8 @@
       "annualMeanTemp": 18.525753424657545,
       "annualPrecipitation": 309.1999999999999,
       "tempRange": 17.92039170506913,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 26.609677419354842,
+      "coldestMonth": 8.689285714285713,
       "seasonType": "tropical"
     },
     "scores": {
@@ -36275,8 +36275,8 @@
       "annualMeanTemp": 21.104931506849326,
       "annualPrecipitation": 801.0000000000001,
       "tempRange": 16.58018433179723,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 28.551612903225806,
+      "coldestMonth": 11.971428571428575,
       "seasonType": "tropical"
     },
     "scores": {
@@ -36648,8 +36648,8 @@
       "annualMeanTemp": 16.768493150684932,
       "annualPrecipitation": 1322.5000000000011,
       "tempRange": 24.46451612903226,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 28.77741935483871,
+      "coldestMonth": 4.312903225806451,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -37010,8 +37010,8 @@
       "annualMeanTemp": 26.629041095890422,
       "annualPrecipitation": 702.5,
       "tempRange": 4.485714285714284,
-      "hottestMonth": 9,
-      "coldestMonth": 1,
+      "hottestMonth": 28.599999999999994,
+      "coldestMonth": 24.11428571428571,
       "seasonType": "tropical"
     },
     "scores": {
@@ -37361,8 +37361,8 @@
       "annualMeanTemp": 26.983013698630145,
       "annualPrecipitation": 768.4000000000003,
       "tempRange": 4.236428571428572,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 29.04,
+      "coldestMonth": 24.803571428571427,
       "seasonType": "tropical"
     },
     "scores": {
@@ -37517,8 +37517,8 @@
       "annualMeanTemp": 27.219726027397254,
       "annualPrecipitation": 1206.4000000000003,
       "tempRange": 2.867741935483874,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 28.441935483870974,
+      "coldestMonth": 25.5741935483871,
       "seasonType": "tropical"
     },
     "scores": {
@@ -37830,8 +37830,8 @@
       "annualMeanTemp": 26.65397260273973,
       "annualPrecipitation": 2196.2999999999993,
       "tempRange": 9.879999999999995,
-      "hottestMonth": 3,
-      "coldestMonth": 0,
+      "hottestMonth": 31.079999999999995,
+      "coldestMonth": 21.2,
       "seasonType": "tropical"
     },
     "scores": {
@@ -38191,8 +38191,8 @@
       "annualMeanTemp": 14.141369863013699,
       "annualPrecipitation": 559.3000000000003,
       "tempRange": 22.280645161290323,
-      "hottestMonth": 6,
-      "coldestMonth": 11,
+      "hottestMonth": 26.506451612903227,
+      "coldestMonth": 4.225806451612902,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -38509,8 +38509,8 @@
       "annualMeanTemp": 28.209315068493154,
       "annualPrecipitation": 160.49999999999991,
       "tempRange": 18.787096774193547,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 36.303225806451614,
+      "coldestMonth": 17.516129032258068,
       "seasonType": "arid"
     },
     "scores": {
@@ -38854,8 +38854,8 @@
       "annualMeanTemp": 21.240273972602733,
       "annualPrecipitation": 735.8999999999999,
       "tempRange": 9.399999999999999,
-      "hottestMonth": 9,
-      "coldestMonth": 6,
+      "hottestMonth": 25.825806451612905,
+      "coldestMonth": 16.425806451612907,
       "seasonType": "tropical"
     },
     "scores": {
@@ -39350,8 +39350,8 @@
       "annualMeanTemp": 26.850410958904092,
       "annualPrecipitation": 840.4999999999998,
       "tempRange": 3.6359523809523644,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 28.74666666666666,
+      "coldestMonth": 25.110714285714295,
       "seasonType": "tropical"
     },
     "scores": {
@@ -39790,8 +39790,8 @@
       "annualMeanTemp": 16.741917808219178,
       "annualPrecipitation": 1035.8000000000006,
       "tempRange": 19.55023041474654,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 27.464516129032255,
+      "coldestMonth": 7.914285714285714,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -40163,8 +40163,8 @@
       "annualMeanTemp": 25.94931506849316,
       "annualPrecipitation": 2610.400000000004,
       "tempRange": 3.432258064516123,
-      "hottestMonth": 11,
-      "coldestMonth": 7,
+      "hottestMonth": 27.548387096774192,
+      "coldestMonth": 24.11612903225807,
       "seasonType": "tropical"
     },
     "scores": {
@@ -40577,8 +40577,8 @@
       "annualMeanTemp": 16.28904109589041,
       "annualPrecipitation": 1640.0000000000005,
       "tempRange": 19.73617511520738,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 26.72903225806452,
+      "coldestMonth": 6.992857142857142,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -40938,8 +40938,8 @@
       "annualMeanTemp": 18.32575342465754,
       "annualPrecipitation": 449.90000000000003,
       "tempRange": 12.151612903225802,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 24.890322580645158,
+      "coldestMonth": 12.738709677419356,
       "seasonType": "tropical"
     },
     "scores": {
@@ -41093,8 +41093,8 @@
       "annualMeanTemp": 0.6506849315068503,
       "annualPrecipitation": 425.70000000000016,
       "tempRange": 36.79354838709678,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 17.319354838709682,
+      "coldestMonth": -19.474193548387095,
       "seasonType": "polar"
     },
     "scores": {
@@ -41465,8 +41465,8 @@
       "annualMeanTemp": 24.241917808219192,
       "annualPrecipitation": 1700.0999999999992,
       "tempRange": 5.322580645161295,
-      "hottestMonth": 0,
-      "coldestMonth": 7,
+      "hottestMonth": 26.761290322580646,
+      "coldestMonth": 21.43870967741935,
       "seasonType": "tropical"
     },
     "scores": {
@@ -41744,8 +41744,8 @@
       "annualMeanTemp": 18.323287671232883,
       "annualPrecipitation": 1533.3999999999983,
       "tempRange": 6.10967741935484,
-      "hottestMonth": 11,
-      "coldestMonth": 6,
+      "hottestMonth": 21.229032258064514,
+      "coldestMonth": 15.119354838709674,
       "seasonType": "tropical"
     },
     "scores": {
@@ -42117,8 +42117,8 @@
       "annualMeanTemp": 16.747945205479443,
       "annualPrecipitation": 604.0999999999999,
       "tempRange": 16.86774193548387,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 25.658064516129034,
+      "coldestMonth": 8.790322580645162,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -42501,8 +42501,8 @@
       "annualMeanTemp": 22.338630136986286,
       "annualPrecipitation": 872.4,
       "tempRange": 5.629784946236558,
-      "hottestMonth": 9,
-      "coldestMonth": 5,
+      "hottestMonth": 25.10645161290323,
+      "coldestMonth": 19.47666666666667,
       "seasonType": "tropical"
     },
     "scores": {
@@ -42879,8 +42879,8 @@
       "annualMeanTemp": 13.211506849315068,
       "annualPrecipitation": 612.4,
       "tempRange": 13.235483870967744,
-      "hottestMonth": 11,
-      "coldestMonth": 6,
+      "hottestMonth": 19.36451612903226,
+      "coldestMonth": 6.129032258064516,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -43247,8 +43247,8 @@
       "annualMeanTemp": 27.028219178082203,
       "annualPrecipitation": 2084.8000000000015,
       "tempRange": 3.7741935483870996,
-      "hottestMonth": 9,
-      "coldestMonth": 0,
+      "hottestMonth": 28.903225806451612,
+      "coldestMonth": 25.129032258064512,
       "seasonType": "tropical"
     },
     "scores": {
@@ -43576,8 +43576,8 @@
       "annualMeanTemp": 11.22246575342466,
       "annualPrecipitation": 1519.6999999999998,
       "tempRange": 20.4073732718894,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 21.364516129032257,
+      "coldestMonth": 0.9571428571428572,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -43938,8 +43938,8 @@
       "annualMeanTemp": 13.66328767123288,
       "annualPrecipitation": 1130.1,
       "tempRange": 19.325806451612905,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 24.016129032258068,
+      "coldestMonth": 4.690322580645161,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -44200,8 +44200,8 @@
       "annualMeanTemp": 17.201095890410954,
       "annualPrecipitation": 391.20000000000005,
       "tempRange": 17.250230414746543,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 24.864516129032257,
+      "coldestMonth": 7.614285714285715,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -44523,8 +44523,8 @@
       "annualMeanTemp": 11.588493150684924,
       "annualPrecipitation": 3491.9999999999973,
       "tempRange": 13.338709677419356,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 17.583870967741937,
+      "coldestMonth": 4.245161290322581,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -44840,8 +44840,8 @@
       "annualMeanTemp": 26.301643835616435,
       "annualPrecipitation": 742.1,
       "tempRange": 4.22095238095239,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 28.356666666666673,
+      "coldestMonth": 24.135714285714283,
       "seasonType": "tropical"
     },
     "scores": {
@@ -45028,8 +45028,8 @@
       "annualMeanTemp": 27.443561643835636,
       "annualPrecipitation": 1936.5999999999997,
       "tempRange": 3.6419354838709666,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 29.11290322580645,
+      "coldestMonth": 25.470967741935482,
       "seasonType": "tropical"
     },
     "scores": {
@@ -45401,8 +45401,8 @@
       "annualMeanTemp": 16.560273972602747,
       "annualPrecipitation": 505.4000000000001,
       "tempRange": 11.213133640552988,
-      "hottestMonth": 1,
-      "coldestMonth": 6,
+      "hottestMonth": 23.435714285714283,
+      "coldestMonth": 12.222580645161296,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -45774,8 +45774,8 @@
       "annualMeanTemp": 27.78931506849313,
       "annualPrecipitation": 407.4000000000002,
       "tempRange": 5.92903225806451,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 30.51290322580645,
+      "coldestMonth": 24.58387096774194,
       "seasonType": "tropical"
     },
     "scores": {
@@ -46104,8 +46104,8 @@
       "annualMeanTemp": 26.227945205479454,
       "annualPrecipitation": 2649.6,
       "tempRange": 1.4483870967741908,
-      "hottestMonth": 4,
-      "coldestMonth": 7,
+      "hottestMonth": 26.88064516129032,
+      "coldestMonth": 25.43225806451613,
       "seasonType": "tropical"
     },
     "scores": {
@@ -46742,8 +46742,8 @@
       "annualMeanTemp": 24.883013698630144,
       "annualPrecipitation": 1326.9000000000008,
       "tempRange": 3.799999999999997,
-      "hottestMonth": 11,
-      "coldestMonth": 6,
+      "hottestMonth": 26.629032258064516,
+      "coldestMonth": 22.82903225806452,
       "seasonType": "tropical"
     },
     "scores": {
@@ -47086,8 +47086,8 @@
       "annualMeanTemp": 27.55890410958901,
       "annualPrecipitation": 130.10000000000002,
       "tempRange": 19.209677419354836,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 36.02258064516129,
+      "coldestMonth": 16.812903225806455,
       "seasonType": "arid"
     },
     "scores": {
@@ -47447,8 +47447,8 @@
       "annualMeanTemp": 17.26684931506849,
       "annualPrecipitation": 833.6999999999996,
       "tempRange": 8.89849462365592,
-      "hottestMonth": 5,
-      "coldestMonth": 11,
+      "hottestMonth": 21.753333333333337,
+      "coldestMonth": 12.854838709677418,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -47956,8 +47956,8 @@
       "annualMeanTemp": 17.89972602739725,
       "annualPrecipitation": 866.4,
       "tempRange": 14.412580645161286,
-      "hottestMonth": 0,
-      "coldestMonth": 5,
+      "hottestMonth": 25.722580645161287,
+      "coldestMonth": 11.31,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -48329,8 +48329,8 @@
       "annualMeanTemp": 17.936986301369856,
       "annualPrecipitation": 2052.1999999999994,
       "tempRange": 11.927849462365597,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 23.06333333333334,
+      "coldestMonth": 11.135483870967743,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -48690,8 +48690,8 @@
       "annualMeanTemp": 7.096712328767124,
       "annualPrecipitation": 772,
       "tempRange": 19.860430107526884,
-      "hottestMonth": 5,
-      "coldestMonth": 11,
+      "hottestMonth": 17.073333333333334,
+      "coldestMonth": -2.7870967741935493,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -49063,8 +49063,8 @@
       "annualMeanTemp": 26.040273972602737,
       "annualPrecipitation": 2859.300000000001,
       "tempRange": 2.2078494623655978,
-      "hottestMonth": 3,
-      "coldestMonth": 7,
+      "hottestMonth": 27.04333333333334,
+      "coldestMonth": 24.835483870967742,
       "seasonType": "tropical"
     },
     "scores": {
@@ -49389,8 +49389,8 @@
       "annualMeanTemp": 17.04712328767124,
       "annualPrecipitation": 1350.0000000000011,
       "tempRange": 7.032258064516135,
-      "hottestMonth": 0,
-      "coldestMonth": 6,
+      "hottestMonth": 19.609677419354846,
+      "coldestMonth": 12.57741935483871,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -49867,8 +49867,8 @@
       "annualMeanTemp": 15.872876712328756,
       "annualPrecipitation": 516.7000000000002,
       "tempRange": 22.96774193548388,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 28.03548387096775,
+      "coldestMonth": 5.06774193548387,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -50373,8 +50373,8 @@
       "annualMeanTemp": 13.455890410958903,
       "annualPrecipitation": 1038.7000000000007,
       "tempRange": 2.3258064516129036,
-      "hottestMonth": 9,
-      "coldestMonth": 0,
+      "hottestMonth": 14.293548387096774,
+      "coldestMonth": 11.96774193548387,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -50751,8 +50751,8 @@
       "annualMeanTemp": 27.133150684931504,
       "annualPrecipitation": 695.0000000000002,
       "tempRange": 4.128095238095234,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 29.056666666666672,
+      "coldestMonth": 24.928571428571438,
       "seasonType": "tropical"
     },
     "scores": {
@@ -50934,8 +50934,8 @@
       "annualMeanTemp": 30.364931506849306,
       "annualPrecipitation": 241.19999999999985,
       "tempRange": 12.535483870967749,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 37.39032258064517,
+      "coldestMonth": 24.85483870967742,
       "seasonType": "arid"
     },
     "scores": {
@@ -51225,8 +51225,8 @@
       "annualMeanTemp": 27.950136986301377,
       "annualPrecipitation": 2544.3000000000006,
       "tempRange": 0.810107526881719,
-      "hottestMonth": 3,
-      "coldestMonth": 0,
+      "hottestMonth": 28.313333333333333,
+      "coldestMonth": 27.503225806451614,
       "seasonType": "tropical"
     },
     "scores": {
@@ -51615,8 +51615,8 @@
       "annualMeanTemp": 24.428493150684947,
       "annualPrecipitation": 1534.9999999999998,
       "tempRange": 2.2967741935483836,
-      "hottestMonth": 4,
-      "coldestMonth": 9,
+      "hottestMonth": 25.70967741935484,
+      "coldestMonth": 23.412903225806456,
       "seasonType": "tropical"
     },
     "scores": {
@@ -51949,8 +51949,8 @@
       "annualMeanTemp": 22.221917808219164,
       "annualPrecipitation": 1249.1000000000001,
       "tempRange": 4.396774193548385,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 24.016129032258064,
+      "coldestMonth": 19.61935483870968,
       "seasonType": "tropical"
     },
     "scores": {
@@ -52421,8 +52421,8 @@
       "annualMeanTemp": 19.253150684931512,
       "annualPrecipitation": 682.6000000000004,
       "tempRange": 3.82050691244239,
-      "hottestMonth": 1,
-      "coldestMonth": 6,
+      "hottestMonth": 21.178571428571427,
+      "coldestMonth": 17.358064516129037,
       "seasonType": "tropical"
     },
     "scores": {
@@ -52928,8 +52928,8 @@
       "annualMeanTemp": 20.273424657534235,
       "annualPrecipitation": 339.00000000000017,
       "tempRange": 16.247811059907836,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 29.187096774193552,
+      "coldestMonth": 12.939285714285717,
       "seasonType": "tropical"
     },
     "scores": {
@@ -53407,8 +53407,8 @@
       "annualMeanTemp": 8.294246575342468,
       "annualPrecipitation": 860.3000000000003,
       "tempRange": 20.11612903225807,
-      "hottestMonth": 7,
-      "coldestMonth": 11,
+      "hottestMonth": 18.867741935483874,
+      "coldestMonth": -1.2483870967741943,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -53780,8 +53780,8 @@
       "annualMeanTemp": 25.786027397260266,
       "annualPrecipitation": 2960.6999999999985,
       "tempRange": 1.5,
-      "hottestMonth": 4,
-      "coldestMonth": 6,
+      "hottestMonth": 26.503225806451614,
+      "coldestMonth": 25.003225806451614,
       "seasonType": "tropical"
     },
     "scores": {
@@ -54088,8 +54088,8 @@
       "annualMeanTemp": 22.963561643835614,
       "annualPrecipitation": 2054.099999999999,
       "tempRange": 13.074193548387102,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 28.3225806451613,
+      "coldestMonth": 15.248387096774197,
       "seasonType": "tropical"
     },
     "scores": {
@@ -54381,8 +54381,8 @@
       "annualMeanTemp": 28.205205479452033,
       "annualPrecipitation": 2584.499999999999,
       "tempRange": 1.0541935483871008,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 28.88,
+      "coldestMonth": 27.8258064516129,
       "seasonType": "tropical"
     },
     "scores": {
@@ -54649,8 +54649,8 @@
       "annualMeanTemp": 26.231780821917823,
       "annualPrecipitation": 895.1000000000005,
       "tempRange": 2.6576344086021457,
-      "hottestMonth": 10,
-      "coldestMonth": 6,
+      "hottestMonth": 27.686666666666667,
+      "coldestMonth": 25.02903225806452,
       "seasonType": "tropical"
     },
     "scores": {
@@ -54944,8 +54944,8 @@
       "annualMeanTemp": 14.050958904109596,
       "annualPrecipitation": 815.8000000000001,
       "tempRange": 12.877849462365592,
-      "hottestMonth": 0,
-      "coldestMonth": 5,
+      "hottestMonth": 19.26451612903226,
+      "coldestMonth": 6.386666666666668,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -55274,8 +55274,8 @@
       "annualMeanTemp": 14.539452054794525,
       "annualPrecipitation": 1122.5,
       "tempRange": 19.774193548387093,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 25.651612903225804,
+      "coldestMonth": 5.87741935483871,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -55784,8 +55784,8 @@
       "annualMeanTemp": 28.24027397260276,
       "annualPrecipitation": 1721.2000000000003,
       "tempRange": 4.907096774193558,
-      "hottestMonth": 3,
-      "coldestMonth": 0,
+      "hottestMonth": 30.820000000000007,
+      "coldestMonth": 25.91290322580645,
       "seasonType": "tropical"
     },
     "scores": {
@@ -56162,8 +56162,8 @@
       "annualMeanTemp": 24.097260273972587,
       "annualPrecipitation": 860.5000000000003,
       "tempRange": 19.02602150537634,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 31.106666666666666,
+      "coldestMonth": 12.080645161290322,
       "seasonType": "tropical"
     },
     "scores": {
@@ -56674,8 +56674,8 @@
       "annualMeanTemp": 8.539726027397265,
       "annualPrecipitation": 828.8000000000001,
       "tempRange": 21.64930875576037,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 20.106451612903225,
+      "coldestMonth": -1.542857142857143,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -57047,8 +57047,8 @@
       "annualMeanTemp": 19.569315068493147,
       "annualPrecipitation": 711.8000000000004,
       "tempRange": 8.59150537634409,
-      "hottestMonth": 10,
-      "coldestMonth": 6,
+      "hottestMonth": 23.13666666666667,
+      "coldestMonth": 14.54516129032258,
       "seasonType": "tropical"
     },
     "scores": {
@@ -57400,8 +57400,8 @@
       "annualMeanTemp": 27.79041095890412,
       "annualPrecipitation": 2526.6,
       "tempRange": 1.505161290322583,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 28.46,
+      "coldestMonth": 26.954838709677418,
       "seasonType": "tropical"
     },
     "scores": {
@@ -57690,8 +57690,8 @@
       "annualMeanTemp": 19.752602739726026,
       "annualPrecipitation": 433.1000000000002,
       "tempRange": 20.461290322580645,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 31.36451612903226,
+      "coldestMonth": 10.903225806451614,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -58189,8 +58189,8 @@
       "annualMeanTemp": 6.765753424657536,
       "annualPrecipitation": 887.0000000000003,
       "tempRange": 20.89677419354839,
-      "hottestMonth": 7,
-      "coldestMonth": 11,
+      "hottestMonth": 17.445161290322584,
+      "coldestMonth": -3.451612903225806,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -58562,8 +58562,8 @@
       "annualMeanTemp": 25.765753424657536,
       "annualPrecipitation": 1774.8999999999992,
       "tempRange": 11.7489247311828,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 29.81666666666667,
+      "coldestMonth": 18.06774193548387,
       "seasonType": "tropical"
     },
     "scores": {
@@ -58940,8 +58940,8 @@
       "annualMeanTemp": 15.569863013698654,
       "annualPrecipitation": 410.69999999999993,
       "tempRange": 38.06774193548386,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 31.38709677419354,
+      "coldestMonth": -6.680645161290321,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -59318,8 +59318,8 @@
       "annualMeanTemp": 26.817534246575338,
       "annualPrecipitation": 1097.5999999999997,
       "tempRange": 3.032365591397852,
-      "hottestMonth": 3,
-      "coldestMonth": 7,
+      "hottestMonth": 28.10333333333334,
+      "coldestMonth": 25.070967741935487,
       "seasonType": "tropical"
     },
     "scores": {
@@ -59809,8 +59809,8 @@
       "annualMeanTemp": 6.759726027397265,
       "annualPrecipitation": 1061.5000000000005,
       "tempRange": 24.036236559139788,
-      "hottestMonth": 5,
-      "coldestMonth": 11,
+      "hottestMonth": 19.023333333333333,
+      "coldestMonth": -5.012903225806452,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -60177,8 +60177,8 @@
       "annualMeanTemp": 26.55068493150685,
       "annualPrecipitation": 743.9999999999999,
       "tempRange": 2.4394623655914067,
-      "hottestMonth": 3,
-      "coldestMonth": 6,
+      "hottestMonth": 27.823333333333338,
+      "coldestMonth": 25.38387096774193,
       "seasonType": "tropical"
     },
     "scores": {
@@ -60655,8 +60655,8 @@
       "annualMeanTemp": 26.288219178082215,
       "annualPrecipitation": 963.7000000000006,
       "tempRange": 6.451612903225804,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 29.812903225806448,
+      "coldestMonth": 23.361290322580643,
       "seasonType": "tropical"
     },
     "scores": {
@@ -60941,8 +60941,8 @@
       "annualMeanTemp": 29.130684931506845,
       "annualPrecipitation": 59.199999999999996,
       "tempRange": 14.603440860215052,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 35.50666666666667,
+      "coldestMonth": 20.903225806451616,
       "seasonType": "arid"
     },
     "scores": {
@@ -61291,8 +61291,8 @@
       "annualMeanTemp": 10.886027397260273,
       "annualPrecipitation": 993.5000000000001,
       "tempRange": 16.21309523809524,
-      "hottestMonth": 5,
-      "coldestMonth": 1,
+      "hottestMonth": 19.666666666666668,
+      "coldestMonth": 3.453571428571429,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -61637,8 +61637,8 @@
       "annualMeanTemp": 25.487945205479487,
       "annualPrecipitation": 180.20000000000005,
       "tempRange": 29.061290322580653,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 39.4225806451613,
+      "coldestMonth": 10.361290322580643,
       "seasonType": "arid"
     },
     "scores": {
@@ -61990,8 +61990,8 @@
       "annualMeanTemp": 25.53808219178084,
       "annualPrecipitation": 904.7000000000003,
       "tempRange": 4.275000000000009,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 27.60000000000001,
+      "coldestMonth": 23.325,
       "seasonType": "tropical"
     },
     "scores": {
@@ -62204,8 +62204,8 @@
       "annualMeanTemp": 26.191232876712327,
       "annualPrecipitation": 150.9,
       "tempRange": 8.29904761904762,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 30.413333333333338,
+      "coldestMonth": 22.114285714285717,
       "seasonType": "arid"
     },
     "scores": {
@@ -62524,8 +62524,8 @@
       "annualMeanTemp": 7.913424657534246,
       "annualPrecipitation": 1125.8999999999994,
       "tempRange": 28.627649769585254,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 21.741935483870968,
+      "coldestMonth": -6.885714285714286,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -62897,8 +62897,8 @@
       "annualMeanTemp": 26.58602739726028,
       "annualPrecipitation": 2761.199999999999,
       "tempRange": 8.563333333333329,
-      "hottestMonth": 3,
-      "coldestMonth": 0,
+      "hottestMonth": 32.06333333333333,
+      "coldestMonth": 23.500000000000004,
       "seasonType": "tropical"
     },
     "scores": {
@@ -63389,8 +63389,8 @@
       "annualMeanTemp": 26.59013698630139,
       "annualPrecipitation": 3339.000000000001,
       "tempRange": 2.267849462365586,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 27.80333333333333,
+      "coldestMonth": 25.535483870967745,
       "seasonType": "tropical"
     },
     "scores": {
@@ -63761,8 +63761,8 @@
       "annualMeanTemp": 21.28520547945206,
       "annualPrecipitation": 1391.5999999999988,
       "tempRange": 1.5090476190476139,
-      "hottestMonth": 1,
-      "coldestMonth": 5,
+      "hottestMonth": 22.385714285714283,
+      "coldestMonth": 20.87666666666667,
       "seasonType": "tropical"
     },
     "scores": {
@@ -64113,8 +64113,8 @@
       "annualMeanTemp": 19.01863013698631,
       "annualPrecipitation": 234.29999999999995,
       "tempRange": 30.409677419354836,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 32.91935483870967,
+      "coldestMonth": 2.509677419354839,
       "seasonType": "arid"
     },
     "scores": {
@@ -64607,8 +64607,8 @@
       "annualMeanTemp": 28.15178082191782,
       "annualPrecipitation": 555.2000000000004,
       "tempRange": 4.176428571428573,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 30.23,
+      "coldestMonth": 26.053571428571427,
       "seasonType": "tropical"
     },
     "scores": {
@@ -64937,8 +64937,8 @@
       "annualMeanTemp": 13.809315068493145,
       "annualPrecipitation": 597.1,
       "tempRange": 22.861175115207374,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 25.829032258064515,
+      "coldestMonth": 2.9678571428571425,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -65315,8 +65315,8 @@
       "annualMeanTemp": 19.689315068493148,
       "annualPrecipitation": 182.9,
       "tempRange": 22.50817972350231,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 30.790322580645164,
+      "coldestMonth": 8.282142857142857,
       "seasonType": "arid"
     },
     "scores": {
@@ -65666,8 +65666,8 @@
       "annualMeanTemp": 24.38328767123286,
       "annualPrecipitation": 2206.6,
       "tempRange": 4.177419354838708,
-      "hottestMonth": 0,
-      "coldestMonth": 6,
+      "hottestMonth": 26.2483870967742,
+      "coldestMonth": 22.07096774193549,
       "seasonType": "tropical"
     },
     "scores": {
@@ -65996,8 +65996,8 @@
       "annualMeanTemp": 28.07780821917807,
       "annualPrecipitation": 410.1,
       "tempRange": 4.136904761904763,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 30.133333333333336,
+      "coldestMonth": 25.996428571428574,
       "seasonType": "tropical"
     },
     "scores": {
@@ -66225,8 +66225,8 @@
       "annualMeanTemp": 11.600821917808211,
       "annualPrecipitation": 1213.0000000000005,
       "tempRange": 13.11634408602151,
-      "hottestMonth": 5,
-      "coldestMonth": 0,
+      "hottestMonth": 18.70666666666667,
+      "coldestMonth": 5.590322580645162,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -66593,8 +66593,8 @@
       "annualMeanTemp": 20.41534246575343,
       "annualPrecipitation": 71.80000000000001,
       "tempRange": 5.609999999999999,
-      "hottestMonth": 3,
-      "coldestMonth": 8,
+      "hottestMonth": 23.876666666666665,
+      "coldestMonth": 18.266666666666666,
       "seasonType": "arid"
     },
     "scores": {
@@ -66954,8 +66954,8 @@
       "annualMeanTemp": 21.082465753424668,
       "annualPrecipitation": 221.79999999999995,
       "tempRange": 13.303225806451609,
-      "hottestMonth": 11,
-      "coldestMonth": 6,
+      "hottestMonth": 26.787096774193547,
+      "coldestMonth": 13.483870967741938,
       "seasonType": "arid"
     },
     "scores": {
@@ -67316,8 +67316,8 @@
       "annualMeanTemp": 12.946301369863027,
       "annualPrecipitation": 254.5999999999999,
       "tempRange": 29.60967741935484,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 24.729032258064517,
+      "coldestMonth": -4.880645161290321,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -67800,8 +67800,8 @@
       "annualMeanTemp": 13.771780821917833,
       "annualPrecipitation": 882.6000000000007,
       "tempRange": 20.794815668202773,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 24.3483870967742,
+      "coldestMonth": 3.553571428571428,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -68307,8 +68307,8 @@
       "annualMeanTemp": 11.408219178082186,
       "annualPrecipitation": 772.7000000000002,
       "tempRange": 19.528686635944695,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 22.132258064516122,
+      "coldestMonth": 2.6035714285714286,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -68811,8 +68811,8 @@
       "annualMeanTemp": 26.50328767123289,
       "annualPrecipitation": 1057.2000000000005,
       "tempRange": 4.278095238095233,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 28.506666666666668,
+      "coldestMonth": 24.228571428571435,
       "seasonType": "tropical"
     },
     "scores": {
@@ -69080,8 +69080,8 @@
       "annualMeanTemp": 10.608219178082196,
       "annualPrecipitation": 755.0000000000006,
       "tempRange": 19.989285714285714,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 21.1,
+      "coldestMonth": 1.110714285714286,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -69447,8 +69447,8 @@
       "annualMeanTemp": 26.74986301369862,
       "annualPrecipitation": 1645.6999999999998,
       "tempRange": 2.5096774193548406,
-      "hottestMonth": 2,
-      "coldestMonth": 6,
+      "hottestMonth": 28.025806451612908,
+      "coldestMonth": 25.516129032258068,
       "seasonType": "tropical"
     },
     "scores": {
@@ -69792,8 +69792,8 @@
       "annualMeanTemp": 12.736164383561642,
       "annualPrecipitation": 495.8000000000001,
       "tempRange": 23.289746543778797,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 25.129032258064512,
+      "coldestMonth": 1.8392857142857142,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -70143,8 +70143,8 @@
       "annualMeanTemp": 6.308767123287681,
       "annualPrecipitation": 651.1999999999998,
       "tempRange": 25.358064516129037,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 19.287096774193554,
+      "coldestMonth": -6.070967741935484,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -70658,8 +70658,8 @@
       "annualMeanTemp": 27.17369863013698,
       "annualPrecipitation": 1791.8999999999985,
       "tempRange": 2.6857142857142975,
-      "hottestMonth": 9,
-      "coldestMonth": 1,
+      "hottestMonth": 28.500000000000007,
+      "coldestMonth": 25.81428571428571,
       "seasonType": "tropical"
     },
     "scores": {
@@ -71026,8 +71026,8 @@
       "annualMeanTemp": 27.640547945205494,
       "annualPrecipitation": 1651.1999999999991,
       "tempRange": 2.8161290322580683,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 29.209677419354836,
+      "coldestMonth": 26.393548387096768,
       "seasonType": "tropical"
     },
     "scores": {
@@ -71473,8 +71473,8 @@
       "annualMeanTemp": 13.993424657534227,
       "annualPrecipitation": 390.8000000000001,
       "tempRange": 29.719354838709677,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 28.619354838709675,
+      "coldestMonth": -1.0999999999999999,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -71851,8 +71851,8 @@
       "annualMeanTemp": 8.313150684931506,
       "annualPrecipitation": 791.9000000000001,
       "tempRange": 23.385714285714286,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 20.6,
+      "coldestMonth": -2.7857142857142856,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -72208,8 +72208,8 @@
       "annualMeanTemp": 15.067397260273982,
       "annualPrecipitation": 1809.8999999999992,
       "tempRange": 1.4237327188940103,
-      "hottestMonth": 1,
-      "coldestMonth": 7,
+      "hottestMonth": 15.87857142857143,
+      "coldestMonth": 14.45483870967742,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -72708,8 +72708,8 @@
       "annualMeanTemp": 20.255342465753433,
       "annualPrecipitation": 2933.199999999999,
       "tempRange": 2.016129032258064,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 21.4,
+      "coldestMonth": 19.383870967741935,
       "seasonType": "tropical"
     },
     "scores": {
@@ -73076,8 +73076,8 @@
       "annualMeanTemp": 18.52547945205479,
       "annualPrecipitation": 307.4999999999999,
       "tempRange": 20.088594470046075,
-      "hottestMonth": 7,
-      "coldestMonth": 1,
+      "hottestMonth": 27.80645161290322,
+      "coldestMonth": 7.717857142857143,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -73586,8 +73586,8 @@
       "annualMeanTemp": 11.135890410958902,
       "annualPrecipitation": 830.9000000000001,
       "tempRange": 17.28006912442396,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 20.119354838709675,
+      "coldestMonth": 2.8392857142857144,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -74096,8 +74096,8 @@
       "annualMeanTemp": 12.210958904109587,
       "annualPrecipitation": 3596.9000000000005,
       "tempRange": 1.9968817204301033,
-      "hottestMonth": 8,
-      "coldestMonth": 0,
+      "hottestMonth": 13.103333333333332,
+      "coldestMonth": 11.106451612903228,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -74468,8 +74468,8 @@
       "annualMeanTemp": 11.652328767123299,
       "annualPrecipitation": 1269.7000000000005,
       "tempRange": 30.55806451612903,
-      "hottestMonth": 6,
-      "coldestMonth": 0,
+      "hottestMonth": 25.512903225806447,
+      "coldestMonth": -5.04516129032258,
       "seasonType": "four_seasons"
     },
     "scores": {
@@ -74831,8 +74831,8 @@
       "annualMeanTemp": 4.842465753424656,
       "annualPrecipitation": 1633.9,
       "tempRange": 14.329032258064515,
-      "hottestMonth": 7,
-      "coldestMonth": 0,
+      "hottestMonth": 11.993548387096773,
+      "coldestMonth": -2.3354838709677415,
       "seasonType": "mild_seasons"
     },
     "scores": {
@@ -75193,8 +75193,8 @@
       "annualMeanTemp": 28.55808219178083,
       "annualPrecipitation": 779.5000000000006,
       "tempRange": 3.8595238095238003,
-      "hottestMonth": 1,
-      "coldestMonth": 8,
+      "hottestMonth": 30.892857142857142,
+      "coldestMonth": 27.033333333333342,
       "seasonType": "tropical"
     },
     "scores": {
@@ -75486,8 +75486,8 @@
       "annualMeanTemp": 20.95999999999999,
       "annualPrecipitation": 887.5000000000005,
       "tempRange": 7.70645161290323,
-      "hottestMonth": 9,
-      "coldestMonth": 6,
+      "hottestMonth": 24.987096774193553,
+      "coldestMonth": 17.280645161290323,
       "seasonType": "tropical"
     },
     "scores": {
@@ -75839,8 +75839,8 @@
       "annualMeanTemp": 28.155890410958904,
       "annualPrecipitation": 699.6000000000003,
       "tempRange": 8.299032258064514,
-      "hottestMonth": 3,
-      "coldestMonth": 11,
+      "hottestMonth": 32.269999999999996,
+      "coldestMonth": 23.970967741935482,
       "seasonType": "tropical"
     },
     "scores": {
@@ -76200,8 +76200,8 @@
       "annualMeanTemp": 25.911232876712305,
       "annualPrecipitation": 1608,
       "tempRange": 2.355376344086018,
-      "hottestMonth": 8,
-      "coldestMonth": 0,
+      "hottestMonth": 27.21666666666666,
+      "coldestMonth": 24.861290322580643,
       "seasonType": "tropical"
     },
     "scores": {
@@ -76557,8 +76557,8 @@
       "annualMeanTemp": 21.901643835616426,
       "annualPrecipitation": 914.9999999999999,
       "tempRange": 4.982857142857135,
-      "hottestMonth": 8,
-      "coldestMonth": 1,
+      "hottestMonth": 23.839999999999996,
+      "coldestMonth": 18.85714285714286,
       "seasonType": "tropical"
     },
     "scores": {
@@ -76890,8 +76890,8 @@
       "annualMeanTemp": 26.563013698630122,
       "annualPrecipitation": 3563.599999999999,
       "tempRange": 1.632258064516126,
-      "hottestMonth": 4,
-      "coldestMonth": 0,
+      "hottestMonth": 27.245161290322574,
+      "coldestMonth": 25.61290322580645,
       "seasonType": "tropical"
     },
     "scores": {
@@ -77185,8 +77185,8 @@
       "annualMeanTemp": 24.053424657534233,
       "annualPrecipitation": 1862.4999999999998,
       "tempRange": 9.090430107526881,
-      "hottestMonth": 0,
-      "coldestMonth": 5,
+      "hottestMonth": 28.28709677419355,
+      "coldestMonth": 19.19666666666667,
       "seasonType": "tropical"
     },
     "scores": {
@@ -77519,8 +77519,8 @@
       "annualMeanTemp": 12.302465753424652,
       "annualPrecipitation": 814.8,
       "tempRange": 21.283064516129034,
-      "hottestMonth": 6,
-      "coldestMonth": 1,
+      "hottestMonth": 23.958064516129035,
+      "coldestMonth": 2.675,
       "seasonType": "four_seasons"
     },
     "scores": {

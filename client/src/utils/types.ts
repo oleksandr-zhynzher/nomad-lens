@@ -277,8 +277,8 @@ export interface ClimateData {
   annualMeanTemp: number;
   annualPrecipitation: number;
   tempRange: number;
-  hottestMonth: number;
-  coldestMonth: number;
+  hottestMonth: number; // °C – warmest monthly mean
+  coldestMonth: number; // °C – coldest monthly mean
   seasonType: SeasonType;
 }
 
