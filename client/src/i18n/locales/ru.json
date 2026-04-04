@@ -2,6 +2,7 @@
   "nav": {
     "indicators": "Показатели",
     "dataSources": "Источники данных",
+    "nomadVisas": "Визы номадов",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -116,6 +117,36 @@
     "noResults": "Ни одна страна не соответствует вашему запросу.",
     "retry": "Повторить",
     "count": "{{count}} стран"
+  },
+  "countryPage": {
+    "notFound": "Страна не найдена",
+    "backToList": "Назад к списку",
+    "schengen": "Шенгенская зона",
+    "touristDays": "дней туристическая виза",
+    "viewProfile": "Посмотреть профиль →",
+    "visa": {
+      "lastUpdated": "Обновлено",
+      "duration": "Длительность",
+      "months": "месяцев",
+      "extension": "мес. продление",
+      "renewable": "Возобновляемая",
+      "cost": "Стоимость визы",
+      "free": "БЕСПЛАТНО",
+      "income": "Мин. доход",
+      "mo": "мес",
+      "yr": "год",
+      "noMinimum": "Без минимума",
+      "tax": "Налоговый статус",
+      "taxExempt": "БЕЗ НАЛОГА",
+      "taxSpecial": "Специальный",
+      "benefits": "КЛЮЧЕВЫЕ ПРЕИМУЩЕСТВА",
+      "eligibility": "ТРЕБОВАНИЯ К КАНДИДАТАМ",
+      "applicationProcess": "ПРОЦЕСС ПОДАЧИ",
+      "onlineApplication": "Онлайн-подача доступна",
+      "inPersonApplication": "Требуется личная подача",
+      "requiredDocuments": "Необходимые документы",
+      "officialWebsite": "Официальный сайт визы"
+    }
   },
   "indicatorsPage": {
     "eyebrow": "СПРАВКА",

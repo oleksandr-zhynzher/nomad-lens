@@ -4,14 +4,19 @@
  *
  * Usage: npx tsx src/generate.ts
  */
-import * as fs from 'fs';
-import * as path from 'path';
-import type { CountryData, CategoryScore, ClimateData, RestCountry } from './utils/types';
-import { fetchRestCountries } from './services/restCountries';
-import { fetchWorldBankIndicators, WB_INDICATORS } from './services/worldBank';
-import { fetchWhoLifeExpectancy } from './services/whoGho';
-import { fetchClimate } from './services/openMeteo';
-import { localData } from './services/localData';
+import * as fs from "fs";
+import * as path from "path";
+import type {
+  CountryData,
+  CategoryScore,
+  ClimateData,
+  RestCountry,
+} from "./utils/types";
+import { fetchRestCountries } from "./services/restCountries";
+import { fetchWorldBankIndicators, WB_INDICATORS } from "./services/worldBank";
+import { fetchWhoLifeExpectancy } from "./services/whoGho";
+import { fetchClimate } from "./services/openMeteo";
+import { localData } from "./services/localData";
 import {
   minMax,
   logMinMax,
@@ -19,19 +24,19 @@ import {
   invertLogMinMax,
   average,
   climateScore,
-} from './utils/normalize';
+} from "./utils/normalize";
 
 function ind(value: number, unit: string, year: number) {
   return { raw: value, unit, year };
 }
 
 function deriveRegion(region: string, subregion?: string): string {
-  if (subregion === 'Western Asia') return 'Middle East';
+  if (subregion === "Western Asia") return "Middle East";
   return region;
 }
 
 async function generate(): Promise<void> {
-  console.log('⏳ Fetching external data…');
+  console.log("⏳ Fetching external data…");
 
   const [countries, wbData, whoData] = await Promise.all([
     fetchRestCountries(),
@@ -46,21 +51,24 @@ async function generate(): Promise<void> {
   // Build ISO3 → ISO2 mapping
   const iso3ToIso2 = new Map<string, string>();
   for (const c of countries as (RestCountry & { cca3?: string })[]) {
-    if (c.cca3 && c.cca2) iso3ToIso2.set(c.cca3.toUpperCase(), c.cca2.toUpperCase());
+    if (c.cca3 && c.cca2)
+      iso3ToIso2.set(c.cca3.toUpperCase(), c.cca2.toUpperCase());
   }
 
   // Fetch climate for all capitals in batches
   const CLIMATE_BATCH = 3;
   const CLIMATE_DELAY = 1500;
   const climateMap = new Map<string, ClimateData>();
-  console.log('⏳ Fetching climate data (batched)…');
+  console.log("⏳ Fetching climate data (batched)…");
   for (let i = 0; i < countries.length; i += CLIMATE_BATCH) {
     const batch = countries.slice(i, i + CLIMATE_BATCH);
     await Promise.all(
       batch.map(async (c) => {
         const latLng = c.capitalInfo?.latlng ?? c.latlng;
         if (!latLng) return;
-        const result = await fetchClimate(latLng[0], latLng[1]).catch(() => null);
+        const result = await fetchClimate(latLng[0], latLng[1]).catch(
+          () => null,
+        );
         if (result) climateMap.set(c.cca2.toUpperCase(), result);
       }),
     );
@@ -69,7 +77,9 @@ async function generate(): Promise<void> {
     }
     // Progress indicator every 30 countries
     if ((i + CLIMATE_BATCH) % 30 === 0) {
-      process.stdout.write(`  … ${Math.min(i + CLIMATE_BATCH, countries.length)}/${countries.length}\n`);
+      process.stdout.write(
+        `  … ${Math.min(i + CLIMATE_BATCH, countries.length)}/${countries.length}\n`,
+      );
     }
   }
   console.log(`  ✔ Climate: ${climateMap.size} countries`);
@@ -96,9 +106,15 @@ async function generate(): Promise<void> {
         invertMinMax(gini?.value ?? null, 20, 65),
       ]),
       indicators: {
-        ...(gdp?.value != null ? { gdpPerCapita: ind(gdp.value, 'USD', gdp.year) } : {}),
-        ...(unemp?.value != null ? { unemployment: ind(unemp.value, '%', unemp.year) } : {}),
-        ...(gini?.value != null ? { gini: ind(gini.value, 'index', gini.year) } : {}),
+        ...(gdp?.value != null
+          ? { gdpPerCapita: ind(gdp.value, "USD", gdp.year) }
+          : {}),
+        ...(unemp?.value != null
+          ? { unemployment: ind(unemp.value, "%", unemp.year) }
+          : {}),
+        ...(gini?.value != null
+          ? { gini: ind(gini.value, "index", gini.year) }
+          : {}),
       },
     };
 
@@ -134,13 +150,19 @@ async function generate(): Promise<void> {
       value: affordScore,
       indicators: {
         ...(plrRaw != null
-          ? { priceLevelRatio: ind(Math.round(plrRaw * 100) / 100, 'vs intl avg', gdp!.year) }
+          ? {
+              priceLevelRatio: ind(
+                Math.round(plrRaw * 100) / 100,
+                "vs intl avg",
+                gdp!.year,
+              ),
+            }
           : {}),
         ...(gdpPpp?.value != null
-          ? { gdpPerCapitaPPP: ind(gdpPpp.value, 'PPP $', gdpPpp.year) }
+          ? { gdpPerCapitaPPP: ind(gdpPpp.value, "PPP $", gdpPpp.year) }
           : {}),
         ...(gdp?.value != null
-          ? { gdpPerCapita: ind(gdp.value, 'USD', gdp.year) }
+          ? { gdpPerCapita: ind(gdp.value, "USD", gdp.year) }
           : {}),
       },
     };
@@ -151,7 +173,9 @@ async function generate(): Promise<void> {
     const foodSecurity: CategoryScore = {
       value: invertMinMax(undrnrsh?.value ?? null, 0, 55),
       indicators: {
-        ...(undrnrsh?.value != null ? { undernourishment: ind(undrnrsh.value, '%', undrnrsh.year) } : {}),
+        ...(undrnrsh?.value != null
+          ? { undernourishment: ind(undrnrsh.value, "%", undrnrsh.year) }
+          : {}),
       },
     };
 
@@ -170,9 +194,15 @@ async function generate(): Promise<void> {
         minMax(phys?.value ?? null, 0, 7),
       ]),
       indicators: {
-        ...(lifeExp != null ? { lifeExpectancy: ind(lifeExp, 'years', lifeExpYear) } : {}),
-        ...(beds?.value != null ? { hospitalBeds: ind(beds.value, 'per 1k', beds.year) } : {}),
-        ...(phys?.value != null ? { physicians: ind(phys.value, 'per 1k', phys.year) } : {}),
+        ...(lifeExp != null
+          ? { lifeExpectancy: ind(lifeExp, "years", lifeExpYear) }
+          : {}),
+        ...(beds?.value != null
+          ? { hospitalBeds: ind(beds.value, "per 1k", beds.year) }
+          : {}),
+        ...(phys?.value != null
+          ? { physicians: ind(phys.value, "per 1k", phys.year) }
+          : {}),
       },
     };
 
@@ -188,9 +218,15 @@ async function generate(): Promise<void> {
         minMax(tertiary?.value ?? null, 0, 100),
       ]),
       indicators: {
-        ...(lit?.value != null ? { literacy: ind(lit.value, '%', lit.year) } : {}),
-        ...(enroll?.value != null ? { secondaryEnrollment: ind(enroll.value, '%', enroll.year) } : {}),
-        ...(tertiary?.value != null ? { tertiaryEnrollment: ind(tertiary.value, '%', tertiary.year) } : {}),
+        ...(lit?.value != null
+          ? { literacy: ind(lit.value, "%", lit.year) }
+          : {}),
+        ...(enroll?.value != null
+          ? { secondaryEnrollment: ind(enroll.value, "%", enroll.year) }
+          : {}),
+        ...(tertiary?.value != null
+          ? { tertiaryEnrollment: ind(tertiary.value, "%", tertiary.year) }
+          : {}),
       },
     };
 
@@ -200,7 +236,9 @@ async function generate(): Promise<void> {
     const environment: CategoryScore = {
       value: invertMinMax(pm25?.value ?? null, 0, 100),
       indicators: {
-        ...(pm25?.value != null ? { pm25: ind(pm25.value, 'μg/m³', pm25.year) } : {}),
+        ...(pm25?.value != null
+          ? { pm25: ind(pm25.value, "μg/m³", pm25.year) }
+          : {}),
       },
     };
 
@@ -215,8 +253,16 @@ async function generate(): Promise<void> {
       indicators: {
         ...(clim
           ? {
-              annualMeanTemp: ind(Math.round(clim.annualMeanTemp * 10) / 10, '°C', 2023),
-              annualPrecipitation: ind(Math.round(clim.annualPrecipitation), 'mm', 2023),
+              annualMeanTemp: ind(
+                Math.round(clim.annualMeanTemp * 10) / 10,
+                "°C",
+                2023,
+              ),
+              annualPrecipitation: ind(
+                Math.round(clim.annualPrecipitation),
+                "mm",
+                2023,
+              ),
             }
           : {}),
       },
@@ -232,8 +278,10 @@ async function generate(): Promise<void> {
         invertMinMax(peace?.score ?? null, 1, 4),
       ]),
       indicators: {
-        ...(crime ? { homicideRate: ind(crime.homicideRate, 'per 100k', crime.year) } : {}),
-        ...(peace ? { peaceIndex: ind(peace.score, 'index', peace.year) } : {}),
+        ...(crime
+          ? { homicideRate: ind(crime.homicideRate, "per 100k", crime.year) }
+          : {}),
+        ...(peace ? { peaceIndex: ind(peace.score, "index", peace.year) } : {}),
       },
     };
 
@@ -249,9 +297,15 @@ async function generate(): Promise<void> {
         minMax(bb?.value ?? null, 0, 50),
       ]),
       indicators: {
-        ...(internet?.value != null ? { internetUsers: ind(internet.value, '%', internet.year) } : {}),
-        ...(elec?.value != null ? { electricityAccess: ind(elec.value, '%', elec.year) } : {}),
-        ...(bb?.value != null ? { broadband: ind(bb.value, 'subs/100', bb.year) } : {}),
+        ...(internet?.value != null
+          ? { internetUsers: ind(internet.value, "%", internet.year) }
+          : {}),
+        ...(elec?.value != null
+          ? { electricityAccess: ind(elec.value, "%", elec.year) }
+          : {}),
+        ...(bb?.value != null
+          ? { broadband: ind(bb.value, "subs/100", bb.year) }
+          : {}),
       },
     };
 
@@ -261,7 +315,7 @@ async function generate(): Promise<void> {
     const happiness: CategoryScore = {
       value: minMax(hap?.score ?? null, 2, 8),
       indicators: {
-        ...(hap ? { cantrilScore: ind(hap.score, 'score', hap.year) } : {}),
+        ...(hap ? { cantrilScore: ind(hap.score, "score", hap.year) } : {}),
       },
     };
 
@@ -271,7 +325,7 @@ async function generate(): Promise<void> {
     const humanDevelopment: CategoryScore = {
       value: minMax(hdi?.hdi ?? null, 0.4, 1.0),
       indicators: {
-        ...(hdi ? { hdi: ind(hdi.hdi, 'index', hdi.year) } : {}),
+        ...(hdi ? { hdi: ind(hdi.hdi, "index", hdi.year) } : {}),
       },
     };
 
@@ -281,20 +335,78 @@ async function generate(): Promise<void> {
     // Native English-speaking countries are excluded from the EPI survey.
     // We assign them a perfect score of 100 when no EPI data is available.
     const NATIVE_ENGLISH_ISO2 = new Set([
-      'AU','NZ','GB','IE','US','CA','JM','TT','BB','BZ','GY','AG','BS','DM','GD','KN','LC','VC',
-      'SB','PG','FJ','VU','WS','TO','NR','TV','KI','MH','FM','PW','ZW','SL','NG','GH','KE','UG',
-      'TZ','ZM','MW','BW','LS','SZ','NA','CM','RW','SS','SD','ET','ER','SO','LR','GM','SL',
+      "AU",
+      "NZ",
+      "GB",
+      "IE",
+      "US",
+      "CA",
+      "JM",
+      "TT",
+      "BB",
+      "BZ",
+      "GY",
+      "AG",
+      "BS",
+      "DM",
+      "GD",
+      "KN",
+      "LC",
+      "VC",
+      "SB",
+      "PG",
+      "FJ",
+      "VU",
+      "WS",
+      "TO",
+      "NR",
+      "TV",
+      "KI",
+      "MH",
+      "FM",
+      "PW",
+      "ZW",
+      "SL",
+      "NG",
+      "GH",
+      "KE",
+      "UG",
+      "TZ",
+      "ZM",
+      "MW",
+      "BW",
+      "LS",
+      "SZ",
+      "NA",
+      "CM",
+      "RW",
+      "SS",
+      "SD",
+      "ET",
+      "ER",
+      "SO",
+      "LR",
+      "GM",
+      "SL",
     ]);
     const isNativeEnglish = NATIVE_ENGLISH_ISO2.has(iso2);
 
-    const englishProficiency: CategoryScore = isNativeEnglish && !epiEntry
-      ? { value: 100, indicators: { nativeSpeaker: ind(100, 'score', new Date().getFullYear()) } }
-      : {
-          value: minMax(epiEntry?.score ?? null, 390, 624),
-          indicators: {
-            ...(epiEntry ? { epiScore: ind(epiEntry.score, 'score', epiEntry.year) } : {}),
-          },
-        };
+    const englishProficiency: CategoryScore =
+      isNativeEnglish && !epiEntry
+        ? {
+            value: 100,
+            indicators: {
+              nativeSpeaker: ind(100, "score", new Date().getFullYear()),
+            },
+          }
+        : {
+            value: minMax(epiEntry?.score ?? null, 390, 624),
+            indicators: {
+              ...(epiEntry
+                ? { epiScore: ind(epiEntry.score, "score", epiEntry.year) }
+                : {}),
+            },
+          };
 
     // ── Governance ───────────────────────────────────────────────────────
     const cpi = localData.getCpi(iso2);
@@ -316,13 +428,31 @@ async function generate(): Promise<void> {
         minMax(cpi?.score ?? null, 0, 100),
       ]),
       indicators: {
-        ...(corruption?.value != null ? { controlOfCorruption: ind(corruption.value, 'WGI', corruption.year) } : {}),
-        ...(ruleLaw?.value != null ? { ruleOfLaw: ind(ruleLaw.value, 'WGI', ruleLaw.year) } : {}),
-        ...(polStab?.value != null ? { politicalStability: ind(polStab.value, 'WGI', polStab.year) } : {}),
-        ...(govEff?.value != null ? { govEffectiveness: ind(govEff.value, 'WGI', govEff.year) } : {}),
-        ...(regQual?.value != null ? { regulatoryQuality: ind(regQual.value, 'WGI', regQual.year) } : {}),
-        ...(voiceAcc?.value != null ? { voiceAccountability: ind(voiceAcc.value, 'WGI', voiceAcc.year) } : {}),
-        ...(cpi ? { cpiScore: ind(cpi.score, 'score', cpi.year) } : {}),
+        ...(corruption?.value != null
+          ? {
+              controlOfCorruption: ind(
+                corruption.value,
+                "WGI",
+                corruption.year,
+              ),
+            }
+          : {}),
+        ...(ruleLaw?.value != null
+          ? { ruleOfLaw: ind(ruleLaw.value, "WGI", ruleLaw.year) }
+          : {}),
+        ...(polStab?.value != null
+          ? { politicalStability: ind(polStab.value, "WGI", polStab.year) }
+          : {}),
+        ...(govEff?.value != null
+          ? { govEffectiveness: ind(govEff.value, "WGI", govEff.year) }
+          : {}),
+        ...(regQual?.value != null
+          ? { regulatoryQuality: ind(regQual.value, "WGI", regQual.year) }
+          : {}),
+        ...(voiceAcc?.value != null
+          ? { voiceAccountability: ind(voiceAcc.value, "WGI", voiceAcc.year) }
+          : {}),
+        ...(cpi ? { cpiScore: ind(cpi.score, "score", cpi.year) } : {}),
       },
     };
 
@@ -332,7 +462,9 @@ async function generate(): Promise<void> {
     const digitalFreedom: CategoryScore = {
       value: minMax(digFree?.score ?? null, 0, 100),
       indicators: {
-        ...(digFree ? { freedomOnNet: ind(digFree.score, 'score', digFree.year) } : {}),
+        ...(digFree
+          ? { freedomOnNet: ind(digFree.score, "score", digFree.year) }
+          : {}),
       },
     };
 
@@ -342,7 +474,9 @@ async function generate(): Promise<void> {
     const personalFreedom: CategoryScore = {
       value: minMax(persFree?.score ?? null, 0, 10),
       indicators: {
-        ...(persFree ? { hfiPersonal: ind(persFree.score, 'score', persFree.year) } : {}),
+        ...(persFree
+          ? { hfiPersonal: ind(persFree.score, "score", persFree.year) }
+          : {}),
       },
     };
 
@@ -352,7 +486,9 @@ async function generate(): Promise<void> {
     const logistics: CategoryScore = {
       value: minMax(lpi?.value ?? null, 1, 5),
       indicators: {
-        ...(lpi?.value != null ? { lpiScore: ind(lpi.value, 'score', lpi.year) } : {}),
+        ...(lpi?.value != null
+          ? { lpiScore: ind(lpi.value, "score", lpi.year) }
+          : {}),
       },
     };
 
@@ -366,8 +502,12 @@ async function generate(): Promise<void> {
         minMax(protLand?.value ?? null, 0, 50),
       ]),
       indicators: {
-        ...(nbi ? { nationalBiodiversityIndex: ind(nbi.nbi, 'index', nbi.year) } : {}),
-        ...(protLand?.value != null ? { protectedLand: ind(protLand.value, '%', protLand.year) } : {}),
+        ...(nbi
+          ? { nationalBiodiversityIndex: ind(nbi.nbi, "index", nbi.year) }
+          : {}),
+        ...(protLand?.value != null
+          ? { protectedLand: ind(protLand.value, "%", protLand.year) }
+          : {}),
       },
     };
 
@@ -377,7 +517,9 @@ async function generate(): Promise<void> {
     const socialTolerance: CategoryScore = {
       value: minMax(socTol?.score ?? null, 0, 100),
       indicators: {
-        ...(socTol ? { lgbtqRights: ind(socTol.score, 'score', socTol.year) } : {}),
+        ...(socTol
+          ? { lgbtqRights: ind(socTol.score, "score", socTol.year) }
+          : {}),
       },
     };
 
@@ -391,8 +533,12 @@ async function generate(): Promise<void> {
         minMax(taxBurden?.score ?? null, 0, 100),
       ]),
       indicators: {
-        ...(taxRev?.value != null ? { taxRevenueGDP: ind(taxRev.value, '% GDP', taxRev.year) } : {}),
-        ...(taxBurden ? { taxBurdenScore: ind(taxBurden.score, 'score', taxBurden.year) } : {}),
+        ...(taxRev?.value != null
+          ? { taxRevenueGDP: ind(taxRev.value, "% GDP", taxRev.year) }
+          : {}),
+        ...(taxBurden
+          ? { taxBurdenScore: ind(taxBurden.score, "score", taxBurden.year) }
+          : {}),
       },
     };
 
@@ -402,7 +548,9 @@ async function generate(): Promise<void> {
     const startupEnvironment: CategoryScore = {
       value: minMax(startup?.score ?? null, 0, 100),
       indicators: {
-        ...(startup ? { businessFreedom: ind(startup.score, 'score', startup.year) } : {}),
+        ...(startup
+          ? { businessFreedom: ind(startup.score, "score", startup.year) }
+          : {}),
       },
     };
 
@@ -416,8 +564,18 @@ async function generate(): Promise<void> {
         logMinMax(airport?.destinationCountries ?? null, 5, 110),
       ]),
       indicators: {
-        ...(airPax?.value != null ? { airPassengers: ind(airPax.value, 'passengers', airPax.year) } : {}),
-        ...(airport ? { destinationCountries: ind(airport.destinationCountries, 'countries', airport.year) } : {}),
+        ...(airPax?.value != null
+          ? { airPassengers: ind(airPax.value, "passengers", airPax.year) }
+          : {}),
+        ...(airport
+          ? {
+              destinationCountries: ind(
+                airport.destinationCountries,
+                "countries",
+                airport.year,
+              ),
+            }
+          : {}),
       },
     };
 
@@ -433,9 +591,27 @@ async function generate(): Promise<void> {
         logMinMax(tourismArr?.value ?? null, 50_000, 100_000_000),
       ]),
       indicators: {
-        ...(heritage ? { worldHeritageSites: ind(heritage.sites, 'sites', heritage.year) } : {}),
-        ...(intangible ? { intangibleHeritage: ind(intangible.elements, 'elements', intangible.year) } : {}),
-        ...(tourismArr?.value != null ? { tourismArrivals: ind(tourismArr.value, 'arrivals', tourismArr.year) } : {}),
+        ...(heritage
+          ? { worldHeritageSites: ind(heritage.sites, "sites", heritage.year) }
+          : {}),
+        ...(intangible
+          ? {
+              intangibleHeritage: ind(
+                intangible.elements,
+                "elements",
+                intangible.year,
+              ),
+            }
+          : {}),
+        ...(tourismArr?.value != null
+          ? {
+              tourismArrivals: ind(
+                tourismArr.value,
+                "arrivals",
+                tourismArr.year,
+              ),
+            }
+          : {}),
       },
     };
 
@@ -445,7 +621,11 @@ async function generate(): Promise<void> {
     const healthcareCost: CategoryScore = {
       value: invertMinMax(oopExp?.value ?? null, 0, 80),
       indicators: {
-        ...(oopExp?.value != null ? { outOfPocketExpend: ind(oopExp.value, '% health exp', oopExp.year) } : {}),
+        ...(oopExp?.value != null
+          ? {
+              outOfPocketExpend: ind(oopExp.value, "% health exp", oopExp.year),
+            }
+          : {}),
       },
     };
 
@@ -475,7 +655,9 @@ async function generate(): Promise<void> {
       culturalHeritage,
       healthcareCost,
     };
-    const nonNull = Object.values(scores).filter((s) => s.value !== null).length;
+    const nonNull = Object.values(scores).filter(
+      (s) => s.value !== null,
+    ).length;
     if (nonNull < 5) continue;
 
     data.push({
@@ -484,24 +666,27 @@ async function generate(): Promise<void> {
       region: deriveRegion(rc.region, rc.subregion),
       population: rc.population,
       flagUrl: rc.flags.svg || rc.flags.png,
-      capital: rc.capital?.[0] ?? '',
+      capital: rc.capital?.[0] ?? "",
       lat: rc.capitalInfo?.latlng?.[0] ?? rc.latlng?.[0] ?? 0,
       lng: rc.capitalInfo?.latlng?.[1] ?? rc.latlng?.[1] ?? 0,
       hasNomadVisa: localData.hasNomadVisa(iso2),
       isSchengen: localData.isSchengen(iso2),
       touristVisaDays: localData.getTouristVisaDays(iso2),
+      nomadVisa: localData.getNomadVisaDetails(iso2) ?? undefined,
       climateData: clim ?? undefined,
       scores,
     });
   }
 
   // ── Write output ───────────────────────────────────────────────────────
-  const outPath = path.join(__dirname, 'data', 'countries.json');
+  const outPath = path.join(__dirname, "data", "countries.json");
   fs.writeFileSync(outPath, JSON.stringify(data, null, 2));
-  console.log(`\n✅ Wrote ${data.length} countries to ${path.relative(process.cwd(), outPath)}`);
+  console.log(
+    `\n✅ Wrote ${data.length} countries to ${path.relative(process.cwd(), outPath)}`,
+  );
 }
 
 generate().catch((err) => {
-  console.error('❌ Generate failed:', err);
+  console.error("❌ Generate failed:", err);
   process.exit(1);
 });

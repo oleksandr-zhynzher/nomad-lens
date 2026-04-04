@@ -3,9 +3,16 @@ interface HeroSectionProps {
   eyebrow: string;
   title: string;
   subtitle: string;
+  children?: React.ReactNode;
 }
 
-export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroSectionProps) {
+export function HeroSection({
+  backgroundImage,
+  eyebrow,
+  title,
+  subtitle,
+  children,
+}: HeroSectionProps) {
   return (
     <div
       style={{
@@ -14,7 +21,9 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
         backgroundColor: "#0F1114",
         overflow: "hidden",
       }}
-      className="h-[120px] md:h-[180px]"
+      className={
+        children ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"
+      }
     >
       {/* Background image */}
       <div
@@ -45,8 +54,9 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
           inset: 0,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: children ? "flex-end" : "center",
           gap: "10px",
+          paddingBottom: children ? "24px" : undefined,
         }}
       >
         <span
@@ -84,6 +94,23 @@ export function HeroSection({ backgroundImage, eyebrow, title, subtitle }: HeroS
         >
           {subtitle}
         </p>
+        {children && (
+          <>
+            {/* Copper rule */}
+            <div
+              className="hidden md:block"
+              style={{
+                width: "128px",
+                height: "2px",
+                backgroundColor: "var(--color-accent)",
+                marginTop: "8px",
+                marginBottom: "12px",
+              }}
+            />
+            {/* Stats row */}
+            {children}
+          </>
+        )}
       </div>
     </div>
   );

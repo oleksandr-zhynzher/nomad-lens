@@ -1,8 +1,9 @@
 import { ChevronRight, Plane } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { RankedCountry } from "../utils/types";
-import {
-  VISIBLE_CATEGORY_KEYS,
-} from "../utils/types";
+import { VISIBLE_CATEGORY_KEYS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "./Tooltip";
@@ -16,9 +17,17 @@ interface CountryCardProps {
   onToggle?: () => void;
 }
 
-export function CountryCard({ ranked, highlighted = false, index, expanded = false, onToggle }: CountryCardProps) {
+export function CountryCard({
+  ranked,
+  highlighted = false,
+  index,
+  expanded = false,
+  onToggle,
+}: CountryCardProps) {
   const { country, finalScore, rank } = ranked;
-  
+  const { t } = useTranslation();
+  const langPrefix = useLangPrefix();
+
   // Alternating backgrounds
   const isEven = index % 2 === 0;
   const bgColor = isEven ? "#1A1A1C" : "#161618";
@@ -32,19 +41,36 @@ export function CountryCard({ ranked, highlighted = false, index, expanded = fal
       style={{
         backgroundColor: bgColor,
         borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
-        ['--row-hover-bg' as string]: hoverBg,
-        ...(highlighted && { outline: `2px solid var(--color-accent)`, outlineOffset: "-1px" }),
+        ["--row-hover-bg" as string]: hoverBg,
+        ...(highlighted && {
+          outline: `2px solid var(--color-accent)`,
+          outlineOffset: "-1px",
+        }),
       }}
     >
       {/* Main row */}
       <button
         className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 transition-all text-left cursor-pointer"
-        style={{ minHeight: "56px", backgroundColor: "transparent", border: "none" }}
+        style={{
+          minHeight: "56px",
+          backgroundColor: "transparent",
+          border: "none",
+        }}
         onClick={onToggle}
         aria-expanded={expanded}
       >
         {/* Rank */}
-        <span className="text-base md:text-lg" style={{ fontFamily: "IBM Plex Mono, monospace", fontWeight: 700, color: "var(--color-accent)", width: "28px", textAlign: "center", flexShrink: 0 }}>
+        <span
+          className="text-base md:text-lg"
+          style={{
+            fontFamily: "IBM Plex Mono, monospace",
+            fontWeight: 700,
+            color: "var(--color-accent)",
+            width: "28px",
+            textAlign: "center",
+            flexShrink: 0,
+          }}
+        >
           {rank}
         </span>
 
@@ -57,21 +83,41 @@ export function CountryCard({ ranked, highlighted = false, index, expanded = fal
           loading="lazy"
         />
 
-{/* Name + region + visa icon */}
-          <div className="flex-1 min-w-0 flex items-center gap-2 min-w-0">
-            <p className="truncate" style={{ fontFamily: "Inter, sans-serif", fontSize: "14px", fontWeight: 600, color: "#FFFFFF" }}>
-              {country.name}
-            </p>
-            <span className="hidden sm:inline shrink-0" style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>
-              {country.region}
-            </span>
-            {country.hasNomadVisa && (
-              <Tooltip content="Nomad Visa Available" side="top">
-                <span className="shrink-0 inline-flex items-center justify-center" style={{ color: "var(--color-accent-dim)", lineHeight: 1 }}>
-                  <Plane size={13} />
-                </span>
-              </Tooltip>
-            )}
+        {/* Name + region + visa icon */}
+        <div className="flex-1 min-w-0 flex items-center gap-2 min-w-0">
+          <p
+            className="truncate"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "14px",
+              fontWeight: 600,
+              color: "#FFFFFF",
+            }}
+          >
+            {country.name}
+          </p>
+          <span
+            className="hidden sm:inline shrink-0"
+            style={{
+              fontFamily: "Geist, sans-serif",
+              fontSize: "11px",
+              color: "#555555",
+            }}
+          >
+            {country.region}
+          </span>
+          {country.hasNomadVisa && (
+            <Tooltip content="Nomad Visa Available" side="top">
+              <Link
+                to={`${langPrefix}/country/${country.code.toLowerCase()}`}
+                className="shrink-0 inline-flex items-center justify-center"
+                style={{ color: "var(--color-accent)", lineHeight: 1 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Plane size={13} />
+              </Link>
+            </Tooltip>
+          )}
         </div>
 
         {/* Sparkline dots */}
@@ -80,9 +126,31 @@ export function CountryCard({ ranked, highlighted = false, index, expanded = fal
             const val = country.scores[key]?.value ?? null;
             const label = CATEGORY_LABELS[key];
             const tooltipContent = (
-              <div style={{ display: "flex", alignItems: "center", gap: "6px", whiteSpace: "nowrap" }}>
-                <span style={{ fontSize: "11px", color: "#CCCCCC", fontFamily: "Geist, sans-serif" }}>{label}</span>
-                <span style={{ fontSize: "11px", fontWeight: 700, fontFamily: "IBM Plex Mono, monospace", color: dotColour(val) }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "11px",
+                    color: "#CCCCCC",
+                    fontFamily: "Geist, sans-serif",
+                  }}
+                >
+                  {label}
+                </span>
+                <span
+                  style={{
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    fontFamily: "IBM Plex Mono, monospace",
+                    color: dotColour(val),
+                  }}
+                >
                   {val !== null ? val.toFixed(1) : "—"}
                 </span>
               </div>
@@ -91,7 +159,11 @@ export function CountryCard({ ranked, highlighted = false, index, expanded = fal
               <Tooltip key={key} content={tooltipContent} side="top">
                 <div
                   className="rounded-full cursor-default"
-                  style={{ width: "12px", height: "12px", backgroundColor: dotColour(val) }}
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    backgroundColor: dotColour(val),
+                  }}
                 />
               </Tooltip>
             );
@@ -100,19 +172,51 @@ export function CountryCard({ ranked, highlighted = false, index, expanded = fal
 
         {/* Final score */}
         <div className="shrink-0">
-          <span className="text-lg md:text-xl" style={{ fontFamily: "IBM Plex Mono, monospace", fontWeight: 700, color: scoreColour(finalScore) }}>
+          <span
+            className="text-lg md:text-xl"
+            style={{
+              fontFamily: "IBM Plex Mono, monospace",
+              fontWeight: 700,
+              color: scoreColour(finalScore),
+            }}
+          >
             {finalScore.toFixed(1)}
           </span>
         </div>
 
         {/* Chevron */}
-        <ChevronRight size={20} style={{ color: "#333333", transition: "transform 0.2s", transform: expanded ? "rotate(90deg)" : "rotate(0deg)" }} className="shrink-0" />
+        <ChevronRight
+          size={20}
+          style={{
+            color: "#333333",
+            transition: "transform 0.2s",
+            transform: expanded ? "rotate(90deg)" : "rotate(0deg)",
+          }}
+          className="shrink-0"
+        />
       </button>
 
       {/* Expanded breakdown */}
       {expanded && (
-        <div className="px-4 py-4" style={{ borderTop: `1px solid ${borderColor}` }}>
+        <div
+          className="px-4 py-4"
+          style={{ borderTop: `1px solid ${borderColor}` }}
+        >
           <ScoreBreakdown country={country} />
+          <div style={{ marginTop: "12px", textAlign: "right" }}>
+            <Link
+              to={`${langPrefix}/country/${country.code.toLowerCase()}`}
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "13px",
+                fontWeight: 600,
+                color: "var(--color-accent)",
+                textDecoration: "none",
+              }}
+            >
+              {t("countryPage.viewProfile", "View Full Profile →")}
+            </Link>
+          </div>
         </div>
       )}
     </div>

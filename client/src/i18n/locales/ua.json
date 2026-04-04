@@ -2,6 +2,7 @@
   "nav": {
     "indicators": "Показники",
     "dataSources": "Джерела даних",
+    "nomadVisas": "Візи номадів",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -116,6 +117,36 @@
     "noResults": "Жодна країна не відповідає вашому пошуку.",
     "retry": "Повторити",
     "count": "{{count}} країн"
+  },
+  "countryPage": {
+    "notFound": "Країну не знайдено",
+    "backToList": "Назад до списку",
+    "schengen": "Шенгенська зона",
+    "touristDays": "днів туристична віза",
+    "viewProfile": "Переглянути профіль →",
+    "visa": {
+      "lastUpdated": "Оновлено",
+      "duration": "Тривалість",
+      "months": "місяців",
+      "extension": "міс. продовження",
+      "renewable": "Поновлювана",
+      "cost": "Вартість візи",
+      "free": "БЕЗКОШТОВНО",
+      "income": "Мін. дохід",
+      "mo": "міс",
+      "yr": "рік",
+      "noMinimum": "Без мінімуму",
+      "tax": "Податковий статус",
+      "taxExempt": "БЕЗ ПОДАТКУ",
+      "taxSpecial": "Спеціальний",
+      "benefits": "КЛЮЧОВІ ПЕРЕВАГИ",
+      "eligibility": "ВИМОГИ ДО КАНДИДАТІВ",
+      "applicationProcess": "ПРОЦЕС ПОДАЧІ",
+      "onlineApplication": "Подача онлайн доступна",
+      "inPersonApplication": "Потрібна особиста подача",
+      "requiredDocuments": "Необхідні документи",
+      "officialWebsite": "Офіційний сайт візи"
+    }
   },
   "indicatorsPage": {
     "eyebrow": "ДОВІДКА",

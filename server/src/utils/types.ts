@@ -39,16 +39,73 @@ export type CategoryKey =
   | "culturalHeritage"
   | "healthcareCost";
 
+// ─── Nomad Visa Details ───────────────────────────────────────────────────────
+
+export interface NomadVisaDuration {
+  initial: number; // months
+  maxExtension: number; // months (0 = no extension)
+  renewable: boolean;
+}
+
+export interface NomadVisaCost {
+  currency: string;
+  amount: number;
+  notes: string;
+}
+
+export interface NomadVisaIncomeRequirement {
+  currency: string;
+  monthly: number | null;
+  annual: number | null;
+  notes: string;
+}
+
+export interface NomadVisaTax {
+  status: "exempt" | "standard" | "special";
+  rate: number | null;
+  notes: string;
+}
+
+export interface NomadVisaEligibility {
+  minAge: number;
+  requirements: string[];
+}
+
+export interface NomadVisaApplicationProcess {
+  online: boolean;
+  processingTime: string;
+  documents: string[];
+}
+
+export interface NomadVisaDetails {
+  code: string;
+  visaName: string;
+  officialUrl: string;
+  duration: NomadVisaDuration;
+  cost: NomadVisaCost;
+  incomeRequirement: NomadVisaIncomeRequirement;
+  tax: NomadVisaTax;
+  eligibility: NomadVisaEligibility;
+  benefits: string[];
+  applicationProcess: NomadVisaApplicationProcess;
+  lastUpdated: string;
+}
+
 // ─── Climate ─────────────────────────────────────────────────────────────────
 
-export type SeasonType = 'four_seasons' | 'mild_seasons' | 'tropical' | 'arid' | 'polar';
+export type SeasonType =
+  | "four_seasons"
+  | "mild_seasons"
+  | "tropical"
+  | "arid"
+  | "polar";
 
 export interface ClimateData {
   annualMeanTemp: number;
   annualPrecipitation: number;
   tempRange: number;
-  hottestMonth: number;  // 0–11
-  coldestMonth: number;  // 0–11
+  hottestMonth: number; // 0–11
+  coldestMonth: number; // 0–11
   seasonType: SeasonType;
 }
 
@@ -66,6 +123,7 @@ export interface CountryData {
   hasNomadVisa: boolean;
   isSchengen: boolean;
   touristVisaDays: number | null;
+  nomadVisa?: NomadVisaDetails;
   climateData?: ClimateData;
   scores: Record<CategoryKey, CategoryScore>;
 }

@@ -105,40 +105,57 @@ export const CATEGORY_LABELS: Record<CategoryKey, string> = {
 
 export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   economy: "GDP per capita, unemployment rate, income equality (Gini)",
-  affordability: "Cost of living for visitors: Price Level Ratio (nominal vs. PPP GDP) and nominal GDP per capita — lower prices score higher",
-  foodSecurity: "Prevalence of undernourishment % (FAO via World Bank, inverted) — lower rates indicate better food security",
+  affordability:
+    "Cost of living for visitors: Price Level Ratio (nominal vs. PPP GDP) and nominal GDP per capita — lower prices score higher",
+  foodSecurity:
+    "Prevalence of undernourishment % (FAO via World Bank, inverted) — lower rates indicate better food security",
   healthcare: "Life expectancy, hospital beds, physicians per 1,000",
   education: "Adult literacy rate, primary school enrollment",
   environment: "Air pollution (PM2.5), CO₂ emissions per capita",
   climate: "Average temperature & precipitation comfort range",
   safety: "Homicide rate, global peace index",
-  infrastructure: "Internet penetration, electricity access, fixed broadband density",
+  infrastructure:
+    "Internet penetration, electricity access, fixed broadband density",
   happiness: "World Happiness Report ladder score",
   humanDevelopment: "UNDP Human Development Index (HDI)",
-  governance: "Corruption control, rule of law, political stability, government effectiveness",
-  englishProficiency: "EF English Proficiency Index 2025 — language accessibility for nomads (123 countries)",
-  digitalFreedom: "Freedom House Internet Freedom score — censorship, surveillance, and content restrictions",
-  personalFreedom: "CATO Human Freedom Index personal sub-index — movement, expression, and association",
-  logistics: "World Bank Logistics Performance Index — customs, infrastructure, and shipping efficiency",
-  biodiversity: "Protected land area and forest coverage — nature access for nomads",
-  socialTolerance: "LGBTQ+ rights composite — marriage equality, anti-discrimination protections, and legal status",
-  taxFriendliness: "Heritage Foundation Tax Burden and tax revenue as % of GDP — lighter-tax countries score higher",
-  startupEnvironment: "Heritage Foundation Business Freedom — ease of starting and running a business",
-  airConnectivity: "Air passengers carried and destination countries reachable via direct flights — route connectivity for nomads",
-  culturalHeritage: "UNESCO World Heritage Sites, Intangible Cultural Heritage elements, and international tourism arrivals",
-  healthcareCost: "Out-of-pocket health expenditure as % of total — lower costs mean more accessible care",
+  governance:
+    "Corruption control, rule of law, political stability, government effectiveness",
+  englishProficiency:
+    "EF English Proficiency Index 2025 — language accessibility for nomads (123 countries)",
+  digitalFreedom:
+    "Freedom House Internet Freedom score — censorship, surveillance, and content restrictions",
+  personalFreedom:
+    "CATO Human Freedom Index personal sub-index — movement, expression, and association",
+  logistics:
+    "World Bank Logistics Performance Index — customs, infrastructure, and shipping efficiency",
+  biodiversity:
+    "Protected land area and forest coverage — nature access for nomads",
+  socialTolerance:
+    "LGBTQ+ rights composite — marriage equality, anti-discrimination protections, and legal status",
+  taxFriendliness:
+    "Heritage Foundation Tax Burden and tax revenue as % of GDP — lighter-tax countries score higher",
+  startupEnvironment:
+    "Heritage Foundation Business Freedom — ease of starting and running a business",
+  airConnectivity:
+    "Air passengers carried and destination countries reachable via direct flights — route connectivity for nomads",
+  culturalHeritage:
+    "UNESCO World Heritage Sites, Intangible Cultural Heritage elements, and international tourism arrivals",
+  healthcareCost:
+    "Out-of-pocket health expenditure as % of total — lower costs mean more accessible care",
 };
 
 export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   economy: "World Bank (GDP per capita, unemployment, Gini)",
-  affordability: "World Bank — Price Level Ratio (NY.GDP.PCAP.CD / NY.GDP.PCAP.PP.CD) + nominal GDP per capita (NY.GDP.PCAP.CD)",
+  affordability:
+    "World Bank — Price Level Ratio (NY.GDP.PCAP.CD / NY.GDP.PCAP.PP.CD) + nominal GDP per capita (NY.GDP.PCAP.CD)",
   foodSecurity: "FAO via World Bank — SN.ITK.DEFC.ZS (undernourishment %)",
   healthcare: "WHO · World Bank (life expectancy, hospital beds, physicians)",
   education: "World Bank (literacy rate, school enrollment)",
   environment: "World Bank (PM2.5 air pollution, CO₂ per capita)",
   climate: "Open-Meteo (30-year climate normals — temperature & precipitation)",
   safety: "UNODC (homicide rate) · IEP Global Peace Index",
-  infrastructure: "World Bank (internet users %, electricity access %, broadband subs/100)",
+  infrastructure:
+    "World Bank (internet users %, electricity access %, broadband subs/100)",
   happiness: "UN World Happiness Report (Cantril ladder score)",
   humanDevelopment: "UNDP Human Development Index (HDI)",
   governance: "World Bank WGI · Transparency International CPI",
@@ -146,12 +163,16 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   digitalFreedom: "Freedom House — Freedom on the Net 2024",
   personalFreedom: "CATO Institute — Human Freedom Index 2024",
   logistics: "World Bank — Logistics Performance Index (LP.LPI.OVRL.XQ)",
-  biodiversity: "World Bank (ER.LND.PTLD.ZS protected land, AG.LND.FRST.ZS forest area)",
+  biodiversity:
+    "World Bank (ER.LND.PTLD.ZS protected land, AG.LND.FRST.ZS forest area)",
   socialTolerance: "ILGA World Database · Equaldex",
-  taxFriendliness: "Heritage Foundation Tax Burden · World Bank (GC.TAX.TOTL.GD.ZS)",
+  taxFriendliness:
+    "Heritage Foundation Tax Burden · World Bank (GC.TAX.TOTL.GD.ZS)",
   startupEnvironment: "Heritage Foundation — Business Freedom 2025",
-  airConnectivity: "World Bank (IS.AIR.PSGR) · OpenFlights (destination countries)",
-  culturalHeritage: "UNESCO World Heritage Centre · UNESCO ICH · World Bank (ST.INT.ARVL)",
+  airConnectivity:
+    "World Bank (IS.AIR.PSGR) · OpenFlights (destination countries)",
+  culturalHeritage:
+    "UNESCO World Heritage Centre · UNESCO ICH · World Bank (ST.INT.ARVL)",
   healthcareCost: "World Bank — SH.XPD.OOPC.CH.ZS (out-of-pocket expenditure)",
 };
 
@@ -181,9 +202,66 @@ export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
   healthcareCost: "OOP",
 };
 
+// ─── Nomad Visa Details ───────────────────────────────────────────────────────
+
+export interface NomadVisaDuration {
+  initial: number;
+  maxExtension: number;
+  renewable: boolean;
+}
+
+export interface NomadVisaCost {
+  currency: string;
+  amount: number;
+  notes: string;
+}
+
+export interface NomadVisaIncomeRequirement {
+  currency: string;
+  monthly: number | null;
+  annual: number | null;
+  notes: string;
+}
+
+export interface NomadVisaTax {
+  status: "exempt" | "standard" | "special";
+  rate: number | null;
+  notes: string;
+}
+
+export interface NomadVisaEligibility {
+  minAge: number;
+  requirements: string[];
+}
+
+export interface NomadVisaApplicationProcess {
+  online: boolean;
+  processingTime: string;
+  documents: string[];
+}
+
+export interface NomadVisaDetails {
+  code: string;
+  visaName: string;
+  officialUrl: string;
+  duration: NomadVisaDuration;
+  cost: NomadVisaCost;
+  incomeRequirement: NomadVisaIncomeRequirement;
+  tax: NomadVisaTax;
+  eligibility: NomadVisaEligibility;
+  benefits: string[];
+  applicationProcess: NomadVisaApplicationProcess;
+  lastUpdated: string;
+}
+
 // ─── Climate ─────────────────────────────────────────────────────────────────
 
-export type SeasonType = 'four_seasons' | 'mild_seasons' | 'tropical' | 'arid' | 'polar';
+export type SeasonType =
+  | "four_seasons"
+  | "mild_seasons"
+  | "tropical"
+  | "arid"
+  | "polar";
 
 export interface ClimateData {
   annualMeanTemp: number;
@@ -195,7 +273,7 @@ export interface ClimateData {
 }
 
 export interface ClimatePreferences {
-  seasonType: SeasonType | 'any';
+  seasonType: SeasonType | "any";
   minTemp: number;
   maxTemp: number;
 }
@@ -212,6 +290,7 @@ export interface CountryData {
   hasNomadVisa?: boolean;
   isSchengen?: boolean;
   touristVisaDays?: number | null;
+  nomadVisa?: NomadVisaDetails;
   climateData?: ClimateData;
   scores: Record<CategoryKey, CategoryScore>;
 }

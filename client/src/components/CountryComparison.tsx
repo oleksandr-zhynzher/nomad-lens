@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useLangPrefix } from "../hooks/useLangPrefix";
 import {
   CirclePlus,
   X,
@@ -26,14 +29,29 @@ import {
   Theater,
   Stethoscope,
 } from "lucide-react";
-import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
+import type {
+  CountryData,
+  WeightMap,
+  ClimatePreferences,
+  CategoryKey,
+} from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { computeScore, scoreColour } from "../utils/scoring";
+import { Tooltip } from "./Tooltip";
 
 const SLOT_COLORS = [
-  "#8F5A3C", "#5B8FA8", "#6B9E6B", "#B07CC6",
-  "#E07C4F", "#4EA8B0", "#C75D8E", "#7B9E3C",
-  "#D4A04A", "#6889C7", "#A66BBF", "#4CAF8B",
+  "#8F5A3C",
+  "#5B8FA8",
+  "#6B9E6B",
+  "#B07CC6",
+  "#E07C4F",
+  "#4EA8B0",
+  "#C75D8E",
+  "#7B9E3C",
+  "#D4A04A",
+  "#6889C7",
+  "#A66BBF",
+  "#4CAF8B",
 ] as const;
 
 function getSlotColor(index: number) {
@@ -76,20 +94,33 @@ interface Props {
   onSelectionCount?: (count: number) => void;
 }
 
-export function CountryComparison({ countries, weights, selectedCodes, onSelectedCodesChange, sortTrigger = 0, onSelectionCount }: Props) {
+export function CountryComparison({
+  countries,
+  weights,
+  selectedCodes,
+  onSelectedCodesChange,
+  sortTrigger = 0,
+  onSelectionCount,
+}: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [query, setQuery] = useState("");
   const addBtnRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
+  const langPrefix = useLangPrefix();
 
   // Sync horizontal scroll between sticky header and body
   useEffect(() => {
     const header = headerRef.current;
     const body = bodyRef.current;
     if (!header || !body) return;
-    const onBody = () => { header.scrollLeft = body.scrollLeft; };
-    const onHeader = () => { body.scrollLeft = header.scrollLeft; };
+    const onBody = () => {
+      header.scrollLeft = body.scrollLeft;
+    };
+    const onHeader = () => {
+      body.scrollLeft = header.scrollLeft;
+    };
     body.addEventListener("scroll", onBody);
     header.addEventListener("scroll", onHeader);
     return () => {
@@ -103,7 +134,11 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
       const country = countries.find((c) => c.code === code);
       return country ? { country, color: getSlotColor(i), index: i } : null;
     })
-    .filter(Boolean) as { country: CountryData; color: string; index: number }[];
+    .filter(Boolean) as {
+    country: CountryData;
+    color: string;
+    index: number;
+  }[];
 
   const handleRemove = (index: number) => {
     onSelectedCodesChange(selectedCodes.filter((_, i) => i !== index));
@@ -122,7 +157,9 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
         const countryA = countries.find((c) => c.code === a);
         const countryB = countries.find((c) => c.code === b);
         if (!countryA || !countryB) return 0;
-        return computeScore(countryB, weights) - computeScore(countryA, weights);
+        return (
+          computeScore(countryB, weights) - computeScore(countryA, weights)
+        );
       });
       onSelectedCodesChange(sorted);
     }
@@ -152,7 +189,10 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
           const score = computeScore(slot.country, weights);
           const sColor = scoreColour(score);
           return (
-            <div key={slot.country.code} className="shrink-0 w-[140px] md:w-[180px]">
+            <div
+              key={slot.country.code}
+              className="shrink-0 w-[140px] md:w-[180px]"
+            >
               <div
                 className="relative rounded-lg p-4 flex flex-col items-center gap-3"
                 style={{
@@ -164,7 +204,12 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
                 <button
                   onClick={() => handleRemove(slot.index)}
                   className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
-                  style={{ opacity: 0.6, color: "#FFFFFF", fontFamily: "Geist, sans-serif", fontSize: "11px" }}
+                  style={{
+                    opacity: 0.6,
+                    color: "#FFFFFF",
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "11px",
+                  }}
                 >
                   <X size={14} />
                 </button>
@@ -188,23 +233,62 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
                     {slot.country.name}
                   </span>
                   {slot.country.hasNomadVisa && (
-                    <Plane size={13} style={{ color: "#E8E9EB", flexShrink: 0 }} />
+                    <Tooltip
+                      content={t(
+                        "countryDetail.nomadVisa",
+                        "Nomad Visa Available",
+                      )}
+                      side="top"
+                    >
+                      <Link
+                        to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
+                        style={{
+                          color: "var(--color-accent)",
+                          flexShrink: 0,
+                          lineHeight: 1,
+                          display: "inline-flex",
+                        }}
+                      >
+                        <Plane size={13} />
+                      </Link>
+                    </Tooltip>
                   )}
                 </div>
 
                 <div className="flex items-baseline gap-1">
-                  <span className="text-[32px]" style={{ fontFamily: "Anton, sans-serif", color: sColor, lineHeight: 1 }}>
+                  <span
+                    className="text-[32px]"
+                    style={{
+                      fontFamily: "Anton, sans-serif",
+                      color: sColor,
+                      lineHeight: 1,
+                    }}
+                  >
                     {score.toFixed(1)}
                   </span>
-                  <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#555555" }}>/100</span>
+                  <span
+                    style={{
+                      fontFamily: "Geist, sans-serif",
+                      fontSize: "12px",
+                      color: "#555555",
+                    }}
+                  >
+                    /100
+                  </span>
                 </div>
 
                 <span
-                    className="px-2 py-0.5 rounded-full"
-                    style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", color: "#999999", backgroundColor: "#1C1C1C", border: "1px solid #2C2C2C" }}
-                  >
-                    {slot.country.region}
-                  </span>
+                  className="px-2 py-0.5 rounded-full"
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "10px",
+                    color: "#999999",
+                    backgroundColor: "#1C1C1C",
+                    border: "1px solid #2C2C2C",
+                  }}
+                >
+                  {slot.country.region}
+                </span>
               </div>
             </div>
           );
@@ -223,7 +307,13 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
             }}
           >
             <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
-            <span style={{ fontFamily: "Geist, sans-serif", fontSize: "12px", color: "#E8E9EB" }}>
+            <span
+              style={{
+                fontFamily: "Geist, sans-serif",
+                fontSize: "12px",
+                color: "#E8E9EB",
+              }}
+            >
               Add Country
             </span>
           </button>
@@ -265,19 +355,53 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
                   className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors text-left"
                   onClick={() => handleAdd(c.code)}
                 >
-                  <img src={c.flagUrl} alt={c.name} className="rounded-full object-cover" style={{ width: "24px", height: "24px" }} />
-                  <span className="flex-1 truncate" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#E8E9EB" }}>
+                  <img
+                    src={c.flagUrl}
+                    alt={c.name}
+                    className="rounded-full object-cover"
+                    style={{ width: "24px", height: "24px" }}
+                  />
+                  <span
+                    className="flex-1 truncate"
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "13px",
+                      color: "#E8E9EB",
+                    }}
+                  >
                     {c.name}
                   </span>
-                  <span style={{ fontFamily: "Geist, sans-serif", fontSize: "11px", color: "#555555" }}>{c.region}</span>
-                  <span style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: "13px", fontWeight: 600, color: scoreColour(score) }}>
+                  <span
+                    style={{
+                      fontFamily: "Geist, sans-serif",
+                      fontSize: "11px",
+                      color: "#555555",
+                    }}
+                  >
+                    {c.region}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "IBM Plex Mono, monospace",
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      color: scoreColour(score),
+                    }}
+                  >
                     {score.toFixed(1)}
                   </span>
                 </button>
               );
             })}
             {filtered.length === 0 && (
-              <div className="px-3 py-4 text-center" style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#555555" }}>
+              <div
+                className="px-3 py-4 text-center"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  color: "#555555",
+                }}
+              >
                 No countries found
               </div>
             )}
@@ -295,18 +419,50 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
           <div
             ref={headerRef}
             className="sticky z-10"
-            style={{ top: "56px", overflowX: "auto", scrollbarWidth: "none", backgroundColor: "#0F1114" }}
+            style={{
+              top: "56px",
+              overflowX: "auto",
+              scrollbarWidth: "none",
+              backgroundColor: "#0F1114",
+            }}
           >
-            <div className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}>
+            <div
+              className="flex items-center"
+              style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}
+            >
               <div className="w-[160px] md:w-[240px] shrink-0">
-                <span style={{ fontFamily: "Geist, sans-serif", fontSize: "10px", fontWeight: 600, letterSpacing: "1.5px", color: "#333333", textTransform: "uppercase" }}>
+                <span
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    fontSize: "10px",
+                    fontWeight: 600,
+                    letterSpacing: "1.5px",
+                    color: "#333333",
+                    textTransform: "uppercase",
+                  }}
+                >
                   Indicator
                 </span>
               </div>
               {selectedCountries.map((slot) => (
-                <div key={slot.index} className="flex-1 flex items-center justify-center gap-1.5">
-                  <img src={slot.country.flagUrl} alt={slot.country.name} className="rounded-full object-cover" style={{ width: "18px", height: "18px" }} />
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: "12px", fontWeight: 600, color: "#FFFFFF" }}>
+                <div
+                  key={slot.index}
+                  className="flex-1 flex items-center justify-center gap-1.5"
+                >
+                  <img
+                    src={slot.country.flagUrl}
+                    alt={slot.country.name}
+                    className="rounded-full object-cover"
+                    style={{ width: "18px", height: "18px" }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      color: "#FFFFFF",
+                    }}
+                  >
                     {slot.country.name}
                   </span>
                 </div>
@@ -320,10 +476,23 @@ export function CountryComparison({ countries, weights, selectedCodes, onSelecte
             {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];
               return (
-                <div key={key} className="flex items-center" style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}>
+                <div
+                  key={key}
+                  className="flex items-center"
+                  style={{
+                    borderBottom: "1px solid #1C1C1C",
+                    padding: "16px 0",
+                  }}
+                >
                   <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
                     <Icon size={16} style={{ color: "#555555" }} />
-                    <span style={{ fontFamily: "Inter, sans-serif", fontSize: "13px", color: "#777777" }}>
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "13px",
+                        color: "#777777",
+                      }}
+                    >
                       {CATEGORY_LABELS[key]}
                     </span>
                   </div>

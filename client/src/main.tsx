@@ -1,16 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './i18n'
-import './index.css'
-import App from './App.tsx'
-import { DataSourcesPage } from './pages/DataSourcesPage.tsx'
-import { IndicatorsPage } from './pages/IndicatorsPage.tsx'
-import { MapPage } from './pages/MapPage.tsx'
-import { ComparePage } from './pages/ComparePage.tsx'
-import { LangWrapper } from './components/LangWrapper.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./i18n";
+import "./index.css";
+import App from "./App.tsx";
+import { DataSourcesPage } from "./pages/DataSourcesPage.tsx";
+import { IndicatorsPage } from "./pages/IndicatorsPage.tsx";
+import { MapPage } from "./pages/MapPage.tsx";
+import { ComparePage } from "./pages/ComparePage.tsx";
+import { CountryPage } from "./pages/CountryPage.tsx";
+import { NomadVisasPage } from "./pages/NomadVisasPage.tsx";
+import { LangWrapper } from "./components/LangWrapper.tsx";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
@@ -18,10 +20,12 @@ createRoot(document.getElementById('root')!).render(
           <Route index element={<App />} />
           <Route path="map" element={<MapPage />} />
           <Route path="compare" element={<ComparePage />} />
+          <Route path="country/:code" element={<CountryPage />} />
+          <Route path="nomad-visas" element={<NomadVisasPage />} />
           <Route path="data-sources" element={<DataSourcesPage />} />
           <Route path="indicators" element={<IndicatorsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
-)
+);

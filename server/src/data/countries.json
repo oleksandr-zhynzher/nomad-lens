@@ -661,6 +661,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "TW",
+      "visaName": "Gold Card (Employment Gold Card)",
+      "officialUrl": "https://goldcard.nat.gov.tw/en/",
+      "duration": {
+        "initial": 36,
+        "maxExtension": 36,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 310,
+        "notes": "3-year Gold Card; 1-year option ~$110"
+      },
+      "incomeRequirement": {
+        "currency": "TWD",
+        "monthly": 160000,
+        "annual": null,
+        "notes": "~$5,000/month; or demonstrate special expertise in one of 8 professional fields"
+      },
+      "tax": {
+        "status": "special",
+        "rate": null,
+        "notes": "First 3 years: income over TWD 3M (≈$94k) is 50% tax exempt; employer contributions exempt; comprehensive tax treaty network"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Outstanding talent in one of 8 fields (science, economy, education, culture, sport, finance, law, architecture)",
+          "OR monthly salary ≥TWD 160,000 ($5,000)",
+          "Valid passport",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "3-year open work permit",
+        "50% tax exemption on income >$94k for first 3 years",
+        "Open work rights (no employer-specific)",
+        "Bring family members",
+        "National Health Insurance eligible",
+        "Excellent tech infrastructure",
+        "World-class food"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–60 days",
+        "documents": [
+          "Passport",
+          "Professional credentials proof (publications, patents, awards)",
+          "Income proof if salary-based",
+          "CV/resume",
+          "Passport photos"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 22.61260273972603,
       "annualPrecipitation": 1305.0000000000002,
@@ -3145,6 +3201,63 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "HR",
+      "visaName": "Digital Nomad Residence Permit",
+      "officialUrl": "https://mup.gov.hr/aliens-702/stay-and-work/digital-nomads/286telecommuters/286286.aspx",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 85,
+        "notes": "Residence permit processing fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 2540,
+        "annual": 30480,
+        "notes": "Approximately 2.5× Croatian average salary"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Croatian income tax for digital nomads during the permit period"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company or own foreign-registered business",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record",
+          "Proof of accommodation in Croatia"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "EU country with Schengen access",
+        "Low cost of living relative to Western Europe",
+        "Mediterranean lifestyle",
+        "Growing digital nomad community"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–60 days",
+        "documents": [
+          "Passport",
+          "Proof of employment/business registration abroad",
+          "Income proof (bank statements)",
+          "Health insurance",
+          "Criminal record certificate",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 13.068493150684931,
       "annualPrecipitation": 1228.6999999999994,
@@ -3799,6 +3912,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 180,
+    "nomadVisa": {
+      "code": "PA",
+      "visaName": "Remote Worker Visa (Short Stay)",
+      "officialUrl": "https://www.migracion.gob.pa/",
+      "duration": {
+        "initial": 9,
+        "maxExtension": 9,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 250,
+        "notes": "Visa processing fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 3000,
+        "annual": 36000,
+        "notes": "Minimum monthly income from remote work"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "Panama taxes only local-source income; foreign income is exempt (territorial tax system)"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company or self-employed",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$3,000/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Territorial tax system (foreign income exempt)",
+        "US dollar economy",
+        "Excellent banking infrastructure",
+        "Hub of the Americas connectivity",
+        "Panama Canal Zone lifestyle"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "30–45 days",
+        "documents": [
+          "Passport",
+          "Employment letter or contracts",
+          "Bank statements (6 months)",
+          "Health insurance",
+          "Police clearance",
+          "Proof of accommodation"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.990136986301355,
       "annualPrecipitation": 2263.5,
@@ -4870,6 +5039,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 30,
+    "nomadVisa": {
+      "code": "CV",
+      "visaName": "Remote Working Cape Verde",
+      "officialUrl": "https://www.government.cv/",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 6,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 54,
+        "notes": "Visa application fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 1500,
+        "annual": null,
+        "notes": "Moderate income requirement"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No local income tax on remote work income from abroad"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Tropical island lifestyle",
+        "Portuguese-speaking (European cultural links)",
+        "Growing digital infrastructure",
+        "Affordable living"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "15–30 days",
+        "documents": [
+          "Passport",
+          "Employment proof",
+          "Income documentation",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 24.815616438356155,
       "annualPrecipitation": 266.49999999999994,
@@ -6334,9 +6559,61 @@
     "capital": "Montevideo",
     "lat": -34.85,
     "lng": -56.17,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "UY",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://www.gub.uy/ministerio-relaciones-exteriores/",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 6,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 11,
+        "notes": "Lowest visa fee globally; just CI (Cédula de Identidad) processing"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": null,
+        "annual": null,
+        "notes": "No minimum income requirement; must demonstrate remote work"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Uruguayan tax on foreign-source income for first 5 years after establishing residency (tax holiday)"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Proof of remote employment or freelance activity"
+        ]
+      },
+      "benefits": [
+        "Cheapest visa fee in the world ($11)",
+        "No income requirement",
+        "5-year tax holiday on foreign income",
+        "Stable democracy",
+        "High quality of life",
+        "Good internet in Montevideo"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "10–30 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Payment of CI fee ($11)"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 17.354794520547944,
       "annualPrecipitation": 936.5,
@@ -7011,9 +7288,65 @@
     "capital": "Windhoek",
     "lat": -22.57,
     "lng": 17.08,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "NA",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://mhaiss.gov.na/",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 6,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "NAD",
+        "amount": 1150,
+        "notes": "~€62; visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 2000,
+        "annual": null,
+        "notes": "Minimum monthly income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Namibian income tax on foreign-source income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$2,000/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Stunning desert landscapes",
+        "Wildlife experiences",
+        "English-speaking",
+        "Affordable living"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "14–30 days",
+        "documents": [
+          "Passport",
+          "Proof of employment",
+          "Income proof",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 20.465753424657525,
       "annualPrecipitation": 245.39999999999998,
@@ -8890,6 +9223,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 180,
+    "nomadVisa": {
+      "code": "AG",
+      "visaName": "Nomad Digital Residence (NDR)",
+      "officialUrl": "https://antiguanomadresidence.gov.ag/",
+      "duration": {
+        "initial": 24,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 1500,
+        "notes": "Individual; $2,000 for couples; $3,000 for families"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 4167,
+        "annual": 50000,
+        "notes": "Minimum $50,000 annual income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No personal income tax in Antigua and Barbuda"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Annual income ≥$50,000",
+          "Valid passport",
+          "Health insurance",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Zero personal income tax",
+        "2-year permit",
+        "Tropical Caribbean climate",
+        "English-speaking",
+        "365 beaches"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–14 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income documentation",
+          "Health insurance certificate",
+          "Police clearance"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 27.11698630136986,
       "annualPrecipitation": 963.3000000000002,
@@ -9150,6 +9538,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 30,
+    "nomadVisa": {
+      "code": "SC",
+      "visaName": "Workcation Retreat Programme",
+      "officialUrl": "https://www.seychelles.com/workcation",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 0,
+        "notes": "Free application; Seychelles issues visitor permits on arrival"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": null,
+        "annual": null,
+        "notes": "Must demonstrate sufficient income; no fixed minimum"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No local income tax for remote workers under the Workcation programme"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Valid passport",
+          "Health insurance",
+          "Proof of accommodation",
+          "Proof of sufficient income"
+        ]
+      },
+      "benefits": [
+        "Free application",
+        "No income tax",
+        "Pristine beaches and nature",
+        "Year-round tropical climate",
+        "Small and safe island nation"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–14 days",
+        "documents": [
+          "Passport",
+          "Proof of employment/business",
+          "Health insurance",
+          "Income proof",
+          "Accommodation booking"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.51452054794521,
       "annualPrecipitation": 2802.6000000000004,
@@ -9766,6 +10209,62 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "GR",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://www.migration.gov.gr/en/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 24,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 75,
+        "notes": "Visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 3500,
+        "annual": 42000,
+        "notes": "Plus 20% for spouse, 15% per child"
+      },
+      "tax": {
+        "status": "special",
+        "rate": null,
+        "notes": "50% income tax reduction for 7 years if transferring tax residency to Greece; applies to employed and self-employed"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for employer/clients outside Greece",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "50% income tax reduction for 7 years",
+        "Access to Schengen Area",
+        "Family members eligible",
+        "Low cost of living",
+        "Mediterranean climate and lifestyle"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "30–60 days",
+        "documents": [
+          "Passport",
+          "Employment contract or business proof",
+          "Income evidence",
+          "Health insurance certificate",
+          "Criminal record",
+          "Proof of accommodation"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 18.41780821917808,
       "annualPrecipitation": 561.4000000000001,
@@ -10395,6 +10894,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "CY",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://www.pio.gov.cy/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 24,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 70,
+        "notes": "Application processing fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 3500,
+        "annual": 42000,
+        "notes": "Plus 20% for spouse, 15% per dependent child"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Cyprus income tax on foreign employment income for first 12 months; afterwards non-dom regime may exempt dividends and interest"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for employer outside Cyprus",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record",
+          "Not previously resided in Cyprus"
+        ]
+      },
+      "benefits": [
+        "No local tax on foreign income (year 1)",
+        "Favorable non-domicile tax regime",
+        "EU member state",
+        "English widely spoken",
+        "300+ days of sunshine per year"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–45 days",
+        "documents": [
+          "Passport",
+          "Employment contract",
+          "Income proof (bank statements)",
+          "Health insurance",
+          "Criminal record certificate",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 20.168493150684927,
       "annualPrecipitation": 286.2,
@@ -11071,6 +11627,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": null,
+    "nomadVisa": {
+      "code": "BM",
+      "visaName": "Work from Bermuda Certificate",
+      "officialUrl": "https://www.gov.bm/work-from-bermuda",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 263,
+        "notes": "Application fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": null,
+        "annual": null,
+        "notes": "Must demonstrate ability to support yourself; no fixed minimum"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No income tax in Bermuda (zero income tax jurisdiction)"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Valid passport",
+          "Health insurance with Bermuda coverage",
+          "Proof of employment and income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Zero income tax jurisdiction",
+        "Beautiful island setting",
+        "English-speaking",
+        "Close proximity to US East Coast",
+        "High safety and quality of life"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "5–10 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Health insurance",
+          "Brief cover letter",
+          "Passport photos"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 22.2649315068493,
       "annualPrecipitation": 1795.1999999999998,
@@ -13178,6 +13789,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 365,
+    "nomadVisa": {
+      "code": "GE",
+      "visaName": "Remotely from Georgia",
+      "officialUrl": "https://stopcov.ge/en/remotely-from-georgia",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 0,
+        "notes": "Free application; no visa fee required"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 2000,
+        "annual": 24000,
+        "notes": "Minimum monthly earnings from remote work"
+      },
+      "tax": {
+        "status": "special",
+        "rate": 1,
+        "notes": "1% tax on turnover via Individual Entrepreneur (IE) status for income under 500,000 GEL; standard rate 20% otherwise"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company or freelance",
+          "Valid passport",
+          "Health insurance",
+          "Proof of monthly income ≥$2,000",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Free visa application",
+        "1% turnover tax available for freelancers",
+        "Extremely low cost of living",
+        "365-day visa-free for most nationalities",
+        "Beautiful Caucasus mountains and culture",
+        "Growing tech and startup scene in Tbilisi"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "10–15 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment/freelance",
+          "Bank statements showing $2,000+/month",
+          "Health insurance"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 14.689863013698623,
       "annualPrecipitation": 682.4000000000002,
@@ -15278,6 +15944,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": null,
+    "nomadVisa": {
+      "code": "KY",
+      "visaName": "Global Citizen Concierge Program",
+      "officialUrl": "https://www.visitcaymanislands.com/en-us/global-citizen-concierge",
+      "duration": {
+        "initial": 24,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 1469,
+        "notes": "Individual rate; $2,400 for couples; $3,180 for families"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 8333,
+        "annual": 100000,
+        "notes": "Minimum $100,000 annual income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No income tax in the Cayman Islands"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Annual income ≥$100,000",
+          "Valid passport",
+          "Health insurance",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Zero income tax",
+        "2-year initial permit",
+        "World-class diving and beaches",
+        "English-speaking",
+        "Stable and safe environment"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "14–21 days",
+        "documents": [
+          "Passport",
+          "Proof of employment/business",
+          "Income documentation",
+          "Health insurance",
+          "Police clearance certificate"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 27.977808219178062,
       "annualPrecipitation": 1050.4999999999998,
@@ -15718,6 +16439,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "BA",
+      "visaName": "Digital Nomad Residence Permit",
+      "officialUrl": "https://www.mvp.gov.ba/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "BAM",
+        "amount": 100,
+        "notes": "~€50; administrative fees"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 1350,
+        "annual": null,
+        "notes": "One of the lowest thresholds in Europe"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 10,
+        "notes": "Flat 10% personal income tax; one of Europe's lowest"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Very low cost of living",
+        "Low flat tax rate",
+        "Beautiful natural scenery",
+        "Affordable accommodation",
+        "Welcoming local culture"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "30–45 days",
+        "documents": [
+          "Passport",
+          "Employment proof",
+          "Income evidence",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 11.401917808219174,
       "annualPrecipitation": 1083.6000000000004,
@@ -18220,6 +18997,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "ME",
+      "visaName": "Digital Nomad Residence Permit",
+      "officialUrl": "https://www.gov.me/en/",
+      "duration": {
+        "initial": 24,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 65,
+        "notes": "Residence permit fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 1350,
+        "annual": 16200,
+        "notes": "Relatively low threshold"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 9,
+        "notes": "Flat 9% personal income tax; one of Europe's lowest rates"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Very low cost of living",
+        "Low flat tax rate (9%)",
+        "Adriatic coastline",
+        "2-year permit duration",
+        "EU candidate country"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "30–45 days",
+        "documents": [
+          "Passport",
+          "Employment or freelance contract",
+          "Bank statements",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 16.01999999999999,
       "annualPrecipitation": 2244.499999999999,
@@ -18554,6 +19387,64 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "ZA",
+      "visaName": "Remote Work Visa (Digital Nomad Visa)",
+      "officialUrl": "https://www.dha.gov.za/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "ZAR",
+        "amount": 1520,
+        "notes": "~€75; visa application fee"
+      },
+      "incomeRequirement": {
+        "currency": "ZAR",
+        "monthly": 57000,
+        "annual": null,
+        "notes": "~€2,800/month; based on South African standards"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No South African income tax on foreign income for remote workers (if non-resident)"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer or own foreign business",
+          "Valid passport",
+          "Medical/health insurance",
+          "Proof of income",
+          "No criminal record",
+          "Proof of accommodation"
+        ]
+      },
+      "benefits": [
+        "No local income tax on foreign income",
+        "World-class nature and wildlife",
+        "Affordable living costs",
+        "English-speaking",
+        "Cape Town digital nomad hub",
+        "Diverse culture and cuisine"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–60 days",
+        "documents": [
+          "Passport",
+          "Employment contract or business proof",
+          "Bank statements (3 months)",
+          "Health insurance",
+          "Police clearance certificate",
+          "Proof of accommodation"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 18.698630136986296,
       "annualPrecipitation": 491.69999999999993,
@@ -19262,9 +20153,64 @@
     "capital": "Sri Jayawardenepura Kotte",
     "lat": 6.89,
     "lng": 79.9,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 30,
+    "nomadVisa": {
+      "code": "LK",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://www.immigration.gov.lk/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 250,
+        "notes": "Visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 2000,
+        "annual": null,
+        "notes": "Minimum monthly income from remote work"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Sri Lankan income tax on foreign-source income for digital nomad visa holders"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$2,000/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Extremely low cost of living",
+        "Beautiful beaches and mountains",
+        "Rich culture and history",
+        "Growing nomad scene in Colombo and south coast"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–14 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income proof",
+          "Health insurance",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.330684931506838,
       "annualPrecipitation": 3468.2999999999993,
@@ -20289,6 +21235,64 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 30,
+    "nomadVisa": {
+      "code": "AE",
+      "visaName": "Virtual Working Programme (Dubai)",
+      "officialUrl": "https://www.visitdubai.com/en/sc7/work-remotely-in-dubai",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 611,
+        "notes": "Visa fee + Emirates ID processing"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 5000,
+        "annual": 60000,
+        "notes": "Minimum monthly income or equivalent in savings"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "Zero personal income tax in UAE"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment with current employer or own business",
+          "Valid passport",
+          "Health insurance with UAE coverage",
+          "Proof of income ≥$5,000/month",
+          "Employment contract or business ownership proof"
+        ]
+      },
+      "benefits": [
+        "Zero income tax",
+        "World-class infrastructure",
+        "International hub with global connectivity",
+        "Safe and modern city",
+        "Year-round sunshine",
+        "High-speed internet everywhere",
+        "Diverse international community"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "5–10 days",
+        "documents": [
+          "Passport",
+          "Passport photo",
+          "Health insurance",
+          "Proof of employment",
+          "Bank statements (3 months)",
+          "Employment contract"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 28.660273972602756,
       "annualPrecipitation": 49.30000000000001,
@@ -21015,6 +22019,62 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "HU",
+      "visaName": "White Card (Digital Nomad Permit)",
+      "officialUrl": "https://enterhungary.gov.hu/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 110,
+        "notes": "Application fee"
+      },
+      "incomeRequirement": {
+        "currency": "HUF",
+        "monthly": 2000,
+        "annual": null,
+        "notes": "~€2,000/month; based on Hungarian minimum wage multiples"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Hungarian income tax on foreign-source remote work income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "Clean criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Schengen Area access",
+        "Very affordable living costs",
+        "Vibrant Budapest digital nomad community",
+        "Fast internet infrastructure"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "20–30 days",
+        "documents": [
+          "Passport",
+          "Proof of employment abroad",
+          "Bank statements",
+          "Health insurance",
+          "Criminal record certificate",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 12.506301369863024,
       "annualPrecipitation": 952.8999999999997,
@@ -21972,9 +23032,64 @@
     "capital": "Castries",
     "lat": 14,
     "lng": -61,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 42,
+    "nomadVisa": {
+      "code": "LC",
+      "visaName": "Live It Programme",
+      "officialUrl": "https://www.investsaintlucia.com/liveit",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 75,
+        "notes": "Very affordable application fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 3000,
+        "annual": 36000,
+        "notes": "Minimum annual income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Saint Lucian income tax on foreign-source income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Annual income ≥$36,000",
+          "Valid passport",
+          "Health insurance",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Very low visa fee",
+        "No local income tax",
+        "Stunning Caribbean piton mountains",
+        "English-speaking",
+        "Tropical paradise"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–14 days",
+        "documents": [
+          "Passport",
+          "Proof of employment",
+          "Income proof",
+          "Health insurance certificate",
+          "Police clearance"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 25.839452054794535,
       "annualPrecipitation": 920.6000000000003,
@@ -25882,9 +26997,64 @@
     "capital": "Belmopan",
     "lat": 17.25,
     "lng": -88.77,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 30,
+    "nomadVisa": {
+      "code": "BZ",
+      "visaName": "Work Where You Vacation Programme",
+      "officialUrl": "https://www.immigration.gov.bz/",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 6,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 220,
+        "notes": "Application fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 6250,
+        "annual": 75000,
+        "notes": "Minimum $75,000 annual income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Belizean income tax on foreign-source income for programme participants"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment with foreign company",
+          "Annual income ≥$75,000",
+          "Valid passport",
+          "Health insurance",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "English-speaking Caribbean nation",
+        "Barrier reef diving",
+        "Tropical climate",
+        "Low population density"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "14–21 days",
+        "documents": [
+          "Passport",
+          "Proof of employment",
+          "Tax returns or income proof",
+          "Health insurance",
+          "Police clearance"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.031506849315058,
       "annualPrecipitation": 1707.899999999999,
@@ -27320,6 +28490,63 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "SK",
+      "visaName": "Temporary Residence for Business (Freelance)",
+      "officialUrl": "https://www.minv.sk/?residence",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 24,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 165,
+        "notes": "Residence permit fee for third-country nationals"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 2400,
+        "annual": null,
+        "notes": "Based on Slovak living standard requirements"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 19,
+        "notes": "19% flat rate up to €41,445; 25% above; health/social contributions apply"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Freelance or business activity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of funds",
+          "Clean criminal record",
+          "Business registration or trade licence"
+        ]
+      },
+      "benefits": [
+        "EU/Schengen access",
+        "Central European location",
+        "Affordable cost of living",
+        "Growing tech sector",
+        "High quality of life"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "60–90 days",
+        "documents": [
+          "Passport",
+          "Business registration proof",
+          "Financial documentation",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 12.216986301369856,
       "annualPrecipitation": 735.4000000000002,
@@ -29938,6 +31165,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "GD",
+      "visaName": "Grenada Remote Workers Visa",
+      "officialUrl": "https://www.gov.gd/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 1500,
+        "notes": "Individual rate"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 3000,
+        "annual": 36000,
+        "notes": "Minimum demonstrable income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No local income tax on foreign-source income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or freelance",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Spice Isle Caribbean lifestyle",
+        "English-speaking",
+        "Citizenship by Investment program available",
+        "Tropical climate year-round"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–14 days",
+        "documents": [
+          "Passport",
+          "Remote employment proof",
+          "Bank statements",
+          "Health insurance",
+          "Police clearance"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 22.24356164383559,
       "annualPrecipitation": 1823.8000000000004,
@@ -30555,6 +31837,62 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "PT",
+      "visaName": "D8 Digital Nomad Visa",
+      "officialUrl": "https://vistos.mne.gov.pt/en/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 24,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 75,
+        "notes": "Visa application fee; residency permit ~€83 extra"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 3510,
+        "annual": 42120,
+        "notes": "4× Portuguese minimum wage"
+      },
+      "tax": {
+        "status": "special",
+        "rate": 20,
+        "notes": "NHR regime: flat 20% on Portuguese-source income for 10 years; foreign income may be exempt"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or freelance contract with non-Portuguese entity",
+          "Valid passport (6+ months)",
+          "Clean criminal record",
+          "Health insurance covering Portugal",
+          "Proof of accommodation"
+        ]
+      },
+      "benefits": [
+        "Path to permanent residency after 5 years",
+        "Access to Schengen Area",
+        "Family reunification allowed",
+        "NHR tax regime eligible",
+        "Access to Portuguese healthcare (SNS)"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–60 days",
+        "documents": [
+          "Passport",
+          "Proof of income (3 months bank statements)",
+          "Employment/freelance contract",
+          "Criminal record certificate",
+          "Health insurance policy",
+          "Proof of accommodation in Portugal"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 17.238904109589043,
       "annualPrecipitation": 462.50000000000006,
@@ -35014,6 +36352,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 180,
+    "nomadVisa": {
+      "code": "BB",
+      "visaName": "Barbados Welcome Stamp",
+      "officialUrl": "https://www.barbadoswelcomestamp.bb/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 2000,
+        "notes": "Individual rate; $3,000 for families"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 4167,
+        "annual": 50000,
+        "notes": "Minimum annual income of $50,000"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Barbadian income tax on foreign earnings during Welcome Stamp period"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Valid passport",
+          "Health insurance including COVID coverage",
+          "Proof of income ≥$50,000/year",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Caribbean island lifestyle",
+        "English-speaking country",
+        "Reliable internet infrastructure",
+        "Year-round tropical weather",
+        "Vibrant expat community"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–14 days",
+        "documents": [
+          "Passport",
+          "Proof of employment/business",
+          "Income proof (bank statements or tax returns)",
+          "Health insurance",
+          "Passport photo"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.850410958904092,
       "annualPrecipitation": 840.4999999999998,
@@ -35304,6 +36698,64 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "IT",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://vistoperitalia.esteri.it/en/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 116,
+        "notes": "National visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 2835,
+        "annual": 34020,
+        "notes": "Minimum annual income threshold set by Italian government"
+      },
+      "tax": {
+        "status": "special",
+        "rate": null,
+        "notes": "Italy offers a 7% flat tax for retirees in southern regions; digital nomads subject to standard rates unless qualifying for impatriate regime (50–90% exemption)"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Highly qualified remote work activity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "Proof of accommodation in Italy",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Possible impatriate tax regime (significant reductions)",
+        "Schengen Area access",
+        "World-class culture and cuisine",
+        "Family reunification",
+        "Path to long-term EU residency"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–60 days",
+        "documents": [
+          "Passport",
+          "Proof of highly qualified work",
+          "Employment/freelance contract",
+          "Income proof",
+          "Health insurance",
+          "Accommodation proof",
+          "Criminal record"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 16.741917808219178,
       "annualPrecipitation": 1035.8000000000006,
@@ -35937,6 +37389,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "AL",
+      "visaName": "Digital Nomad Residence Permit",
+      "officialUrl": "https://e-albania.al/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 50,
+        "notes": "Very affordable application fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 1540,
+        "annual": null,
+        "notes": "Relatively low threshold; based on Albanian living standards"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Albanian income tax on foreign-source remote work income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Very low cost of living",
+        "Mediterranean coastline",
+        "Emerging destination with growing nomad community",
+        "Path to long-term residency possible"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "20–30 days",
+        "documents": [
+          "Passport",
+          "Employment or freelance contract",
+          "Bank statements",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 16.28904109589041,
       "annualPrecipitation": 1640.0000000000005,
@@ -37674,6 +39182,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "BR",
+      "visaName": "Digital Nomad Visa (VITEM XIV)",
+      "officialUrl": "https://www.gov.br/mre/pt-br/assuntos/portal-consular",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 100,
+        "notes": "Consular fee varies by nationality"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 1500,
+        "annual": 18000,
+        "notes": "Minimum monthly income from remote work"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Brazilian income tax on foreign-source income for non-residents (up to 12 months)"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company or own foreign-registered business",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$1,500/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax (year 1)",
+        "Diverse cultural experiences",
+        "Growing tech hubs (São Paulo, Florianópolis)",
+        "Beach lifestyle",
+        "Large international expat communities",
+        "Rich biodiversity (Amazon, Pantanal)"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "15–30 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment or freelance",
+          "Income proof (bank statements)",
+          "Health insurance",
+          "Criminal record certificate",
+          "Passport photos"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 22.338630136986286,
       "annualPrecipitation": 872.4,
@@ -41658,6 +43223,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 60,
+    "nomadVisa": {
+      "code": "MU",
+      "visaName": "Premium Travel Visa",
+      "officialUrl": "https://www.edbmauritius.org/premium-visa",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 0,
+        "notes": "Free application; no visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 1500,
+        "annual": null,
+        "notes": "Minimum monthly income ≥$1,500 from remote work"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Mauritian income tax for Premium Visa holders on foreign-source income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer or self-employed",
+          "Valid passport",
+          "Travel/health insurance",
+          "Proof of income",
+          "Accommodation in Mauritius"
+        ]
+      },
+      "benefits": [
+        "Free application",
+        "No local income tax",
+        "Tropical island paradise",
+        "English-speaking",
+        "Good internet connectivity",
+        "Multicultural society",
+        "Safe and stable country"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "48 hours – 14 days",
+        "documents": [
+          "Passport",
+          "Travel insurance",
+          "Proof of remote work",
+          "Bank statements",
+          "Proof of accommodation"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 24.883013698630144,
       "annualPrecipitation": 1326.9000000000008,
@@ -42711,6 +44333,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "AR",
+      "visaName": "Digital Nomad Visa (Nómada Digital)",
+      "officialUrl": "https://www.argentina.gob.ar/interior/migraciones/nomadas-digitales",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 6,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 0,
+        "notes": "Free application; no visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 1500,
+        "annual": null,
+        "notes": "Minimum monthly income from remote work abroad"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Argentine income tax for digital nomad visa holders (non-residents)"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company or own business registered abroad",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$1,500/month"
+        ]
+      },
+      "benefits": [
+        "Free application",
+        "No local income tax",
+        "Favorable USD exchange rate for daily expenses",
+        "Rich culture (tango, wine, cuisine)",
+        "Buenos Aires nomad hub",
+        "Patagonia and diverse landscapes"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "10–20 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income proof (bank statements)",
+          "Health insurance",
+          "Digital photo"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 17.89972602739725,
       "annualPrecipitation": 866.4,
@@ -44435,6 +46112,63 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "ES",
+      "visaName": "Digital Nomad Visa (Ley de Startups)",
+      "officialUrl": "https://www.exteriores.gob.es/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 24,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 80,
+        "notes": "National visa fee; residence permit ~€16 extra"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 3256,
+        "annual": 39072,
+        "notes": "200% of Spanish minimum wage (SMI)"
+      },
+      "tax": {
+        "status": "special",
+        "rate": 24,
+        "notes": "Beckham Law: flat 24% on Spanish-source income up to €600k for first 6 years; foreign income exempt"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for non-Spanish company (or max 20% Spanish clients)",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "Clean criminal record",
+          "Minimum 3 months of prior remote work relationship"
+        ]
+      },
+      "benefits": [
+        "Beckham Law tax benefits (flat 24%)",
+        "Access to Schengen Area",
+        "Family reunification",
+        "Path to long-term residency",
+        "High quality of life"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "20–45 days",
+        "documents": [
+          "Passport",
+          "Employment contract or business relationship proof",
+          "Income proof (bank statements)",
+          "Health insurance",
+          "Criminal record certificate",
+          "University degree or 3+ years professional experience"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 15.872876712328756,
       "annualPrecipitation": 516.7000000000002,
@@ -44797,6 +46531,62 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "CO",
+      "visaName": "Digital Nomad Visa (V-Nómada Digital)",
+      "officialUrl": "https://www.cancilleria.gov.co/",
+      "duration": {
+        "initial": 24,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 177,
+        "notes": "Visa issuance fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 684,
+        "annual": null,
+        "notes": "3× Colombian minimum wage; one of the lowest globally"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Colombian income tax if staying less than 183 days; after 183 days, only Colombian-source income taxed"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company or freelance",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$684/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Lowest income requirement globally",
+        "2-year visa duration",
+        "Vibrant cities (Medellín, Bogotá, Cartagena)",
+        "Large digital nomad communities",
+        "Low cost of living",
+        "Rich culture and biodiversity"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "5–15 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment or freelance",
+          "Income proof (bank statements)",
+          "Health insurance",
+          "Motivation letter"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 13.455890410958903,
       "annualPrecipitation": 1038.7000000000007,
@@ -45875,9 +47665,64 @@
     "capital": "San Salvador",
     "lat": 13.7,
     "lng": -89.2,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "SV",
+      "visaName": "Digital Nomad Visa (Bitcoin-friendly)",
+      "officialUrl": "https://www.migracion.gob.sv/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 2825,
+        "notes": "Processing fee; includes Bitcoin wallet setup support"
+      },
+      "incomeRequirement": {
+        "currency": "BTC",
+        "monthly": null,
+        "annual": null,
+        "notes": "Must demonstrate stable remote income; Bitcoin accepted as proof of funds"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No income tax on foreign income; El Salvador has no capital gains tax on Bitcoin"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Valid passport",
+          "Proof of income (fiat or Bitcoin)",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Zero income tax on foreign earnings",
+        "No capital gains tax on Bitcoin",
+        "Bitcoin legal tender",
+        "Pacific coast surfing",
+        "Low cost of living",
+        "Growing nomad community"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30 days",
+        "documents": [
+          "Passport",
+          "Proof of employment/income",
+          "Proof of Bitcoin holdings (optional)",
+          "Criminal record certificate",
+          "Application form"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 24.428493150684947,
       "annualPrecipitation": 1534.9999999999998,
@@ -46527,6 +48372,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "KE",
+      "visaName": "Digital Nomad Work Permit",
+      "officialUrl": "https://fns.immigration.go.ke/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 250,
+        "notes": "Work permit fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 2000,
+        "annual": null,
+        "notes": "Minimum monthly income from remote work"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "Exempt from Kenyan income tax on foreign-source remote work income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$2,000/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax on foreign income",
+        "East Africa hub",
+        "Wildlife and safari experiences",
+        "Growing tech ecosystem (Silicon Savannah)",
+        "English-speaking",
+        "Good internet in Nairobi"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "14–30 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income proof",
+          "Health insurance",
+          "Criminal record certificate",
+          "Passport photos"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 19.253150684931512,
       "annualPrecipitation": 682.6000000000004,
@@ -46890,6 +48792,62 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "MT",
+      "visaName": "Nomad Residence Permit",
+      "officialUrl": "https://nomad.residencymalta.gov.mt/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 24,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 300,
+        "notes": "Application fee for non-EU/EEA nationals; €300 for third-country nationals"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 2700,
+        "annual": 32400,
+        "notes": "Minimum gross monthly income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Maltese income tax on foreign-source remote work income during permit"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer or own foreign-registered company",
+          "Valid passport",
+          "Travel health insurance",
+          "Proof of income",
+          "Proof of accommodation in Malta"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "English-speaking EU country",
+        "Mediterranean climate",
+        "Schengen Area access",
+        "High internet speeds"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "15–30 days",
+        "documents": [
+          "Passport",
+          "Proof of remote work",
+          "Bank statements (3 months)",
+          "Health insurance",
+          "Lease agreement or property proof",
+          "CV"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 20.273424657534235,
       "annualPrecipitation": 339.00000000000017,
@@ -47225,6 +49183,62 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "LV",
+      "visaName": "Digital Nomad Visa (Startup Visa pathway)",
+      "officialUrl": "https://www.pmlp.gov.lv/en",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 60,
+        "notes": "Long-stay visa processing fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 2857,
+        "annual": 34284,
+        "notes": "2.5× Latvian average monthly salary"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 23,
+        "notes": "Standard 23% personal income tax; micro-enterprise tax (25% on turnover) may apply for freelancers"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "EU/Schengen access",
+        "Fast broadband (top 10 in EU)",
+        "Affordable living costs",
+        "English widely spoken",
+        "Green and nature-rich environment"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income proof",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 8.294246575342468,
       "annualPrecipitation": 860.3000000000003,
@@ -49405,6 +51419,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 60,
+    "nomadVisa": {
+      "code": "TH",
+      "visaName": "Long-Term Resident (LTR) Visa – Work-from-Thailand",
+      "officialUrl": "https://ltr.boi.go.th/",
+      "duration": {
+        "initial": 60,
+        "maxExtension": 60,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "THB",
+        "amount": 50000,
+        "notes": "~€1,300; 10-year visa (5+5 years)"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 6667,
+        "annual": 80000,
+        "notes": "Minimum $80,000/year for Work-from-Thailand professionals"
+      },
+      "tax": {
+        "status": "special",
+        "rate": 17,
+        "notes": "Flat 17% income tax rate (reduced from progressive up to 35%); foreign income remitted to Thailand exempt under certain conditions"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Employment with established company (publicly listed or revenue >$150M)",
+          "Annual income ≥$80,000",
+          "Valid passport",
+          "Health insurance covering $50,000+",
+          "5+ years work experience in relevant field"
+        ]
+      },
+      "benefits": [
+        "5-year renewable visa (10 years total)",
+        "Reduced 17% flat tax rate",
+        "No 90-day reporting requirement",
+        "Fast-track airport services",
+        "Digital Work Permit included",
+        "World-famous food and culture"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "20–60 days",
+        "documents": [
+          "Passport",
+          "Employment contract",
+          "Income proof (tax returns)",
+          "Health insurance ($50k+ coverage)",
+          "CV and credentials proof",
+          "Company verification documents"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 28.24027397260276,
       "annualPrecipitation": 1721.2000000000003,
@@ -50141,6 +52212,62 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "LT",
+      "visaName": "Digital Nomad Visa (Temporary Residence Permit)",
+      "officialUrl": "https://www.migracija.lt/en",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 120,
+        "notes": "Residence permit fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 2922,
+        "annual": null,
+        "notes": "Based on Lithuanian average salary multiplier"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 20,
+        "notes": "Flat 20% personal income tax; 15% for self-employed via individual activity certificate"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer or clients",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "EU/Schengen access",
+        "Vibrant tech scene (especially Vilnius)",
+        "Fast and reliable internet",
+        "Affordable cost of living",
+        "Fintech hub"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–60 days",
+        "documents": [
+          "Passport",
+          "Employment contract or freelance proof",
+          "Income evidence",
+          "Health insurance",
+          "Criminal record",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 8.539726027397265,
       "annualPrecipitation": 828.8000000000001,
@@ -51485,6 +53612,61 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "EE",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://www.e-resident.gov.ee/nomadvisa/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 0,
+        "renewable": false
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 100,
+        "notes": "Long-stay visa fee; short-stay (up to 6 months) €80"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 4500,
+        "annual": 54000,
+        "notes": "Gross income in 6 months preceding application"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Estonian income tax if employer is outside Estonia; e-Residency program available separately"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for employer/clients outside Estonia",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income (6 months)",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax on foreign earnings",
+        "Access to Schengen Area",
+        "Excellent digital infrastructure",
+        "e-Residency ecosystem",
+        "Startup-friendly environment"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "15–30 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income evidence (6 months)",
+          "Health insurance",
+          "Passport-size photo"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 6.765753424657536,
       "annualPrecipitation": 887.0000000000003,
@@ -52931,6 +55113,62 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "NO",
+      "visaName": "Independent Contractor Visa (Freelance)",
+      "officialUrl": "https://www.udi.no/en/",
+      "duration": {
+        "initial": 24,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "NOK",
+        "amount": 6300,
+        "notes": "~€560; residence permit fee"
+      },
+      "incomeRequirement": {
+        "currency": "NOK",
+        "monthly": 36000,
+        "annual": null,
+        "notes": "~€3,200/month; must demonstrate ability to support yourself"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 22,
+        "notes": "Standard 22% tax on ordinary income; progressive rates on personal income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Independent contractor/freelance with verifiable clients",
+          "Valid passport",
+          "Health insurance or registration in Norwegian system",
+          "Proof of income and client contracts",
+          "Accommodation arranged"
+        ]
+      },
+      "benefits": [
+        "2-year initial permit",
+        "Access to Norwegian social system",
+        "Schengen Area access",
+        "Path to permanent residency after 3 years",
+        "High quality of life and safety"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–90 days",
+        "documents": [
+          "Passport",
+          "Client contracts",
+          "Income/financial documentation",
+          "Education/qualification proof",
+          "Accommodation proof",
+          "Health insurance"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 6.759726027397265,
       "annualPrecipitation": 1061.5000000000005,
@@ -53623,9 +55861,64 @@
     "capital": "Nassau",
     "lat": 25.08,
     "lng": -77.35,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "BS",
+      "visaName": "Bahamas Extended Access Travel Stay (BEATS)",
+      "officialUrl": "https://www.bahamas.gov.bs/beats",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 1000,
+        "notes": "Individual rate; additional fees for dependents"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": null,
+        "annual": null,
+        "notes": "Must demonstrate sufficient income; no fixed minimum"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No income tax in the Bahamas"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or self-employment",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Zero income tax",
+        "700+ islands",
+        "English-speaking",
+        "Close proximity to USA",
+        "Year-round tropical weather"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–21 days",
+        "documents": [
+          "Passport",
+          "Proof of employment",
+          "Income documentation",
+          "Health insurance",
+          "Police certificate"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.288219178082215,
       "annualPrecipitation": 963.7000000000006,
@@ -56150,6 +58443,64 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "MY",
+      "visaName": "DE Rantau Nomad Pass",
+      "officialUrl": "https://mdec.my/derantau/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "MYR",
+        "amount": 1000,
+        "notes": "~€200; processing fee includes co-working space access"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 2000,
+        "annual": 24000,
+        "notes": "Minimum $24,000 annual income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "Foreign-source income is not taxed in Malaysia under territorial tax principle"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Digital professional (tech, creative, or digital marketing)",
+          "Valid passport",
+          "Proof of income",
+          "Health insurance",
+          "Employment contract or freelance portfolio"
+        ]
+      },
+      "benefits": [
+        "No tax on foreign income",
+        "Very low cost of living",
+        "Excellent food scene",
+        "English widely spoken",
+        "Fast internet",
+        "Kuala Lumpur and Penang nomad hubs",
+        "Co-working space access included"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "14–30 days",
+        "documents": [
+          "Passport",
+          "CV/resume",
+          "Portfolio or work samples",
+          "Employment proof or freelance contracts",
+          "Income proof",
+          "Health insurance"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.59013698630139,
       "annualPrecipitation": 3339.000000000001,
@@ -57207,6 +59558,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": null,
+    "nomadVisa": {
+      "code": "CW",
+      "visaName": "@HOME in Curaçao",
+      "officialUrl": "https://athomeincuracao.com/",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 6,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 262,
+        "notes": "Application fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 3000,
+        "annual": 36000,
+        "notes": "Minimum monthly income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No local income tax during the @HOME permit"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment for foreign company",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$3,000/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Dutch Caribbean island",
+        "Multilingual (Dutch, Papiamentu, English, Spanish)",
+        "Year-round warm weather",
+        "Part of the Kingdom of the Netherlands"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "14–21 days",
+        "documents": [
+          "Passport",
+          "Proof of employment",
+          "Bank statements",
+          "Health insurance",
+          "Police certificate"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 28.15178082191782,
       "annualPrecipitation": 555.2000000000004,
@@ -57390,6 +59796,63 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "RO",
+      "visaName": "Digital Nomad Visa",
+      "officialUrl": "https://www.mae.ro/en",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 120,
+        "notes": "Long-stay visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 3700,
+        "annual": 44400,
+        "notes": "3× Romanian average gross salary"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Romanian income tax during the first year of the digital nomad visa"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income (3× average salary)",
+          "No criminal record",
+          "Proof of accommodation"
+        ]
+      },
+      "benefits": [
+        "No local income tax (first year)",
+        "Very low cost of living",
+        "Fast internet (top globally)",
+        "EU member state",
+        "Rich cultural heritage"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "30–45 days",
+        "documents": [
+          "Passport",
+          "Employment contract or business proof",
+          "Income evidence (6 months)",
+          "Health insurance",
+          "Criminal record certificate",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 13.809315068493145,
       "annualPrecipitation": 597.1,
@@ -60036,6 +62499,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "RS",
+      "visaName": "Digital Nomad Temporary Residence",
+      "officialUrl": "https://mup.gov.rs/wps/portal/en/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "RSD",
+        "amount": 5000,
+        "notes": "~€42; very affordable"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 1700,
+        "annual": null,
+        "notes": "Low threshold relative to Western Europe"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Serbian income tax for digital nomad permit holders working for foreign entities"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign company",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record",
+          "Accommodation in Serbia"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Very low cost of living",
+        "Growing nomad scene in Belgrade and Novi Sad",
+        "Central European location",
+        "Affordable and vibrant nightlife"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "30 days",
+        "documents": [
+          "Passport",
+          "Employment proof abroad",
+          "Bank statements",
+          "Health insurance",
+          "Criminal record certificate",
+          "Accommodation proof"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 13.771780821917833,
       "annualPrecipitation": 882.6000000000007,
@@ -60393,6 +62913,64 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "CZ",
+      "visaName": "Zivnostensky List (Trade Licence / Freelance Visa)",
+      "officialUrl": "https://www.mvcr.cz/mvcren/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 24,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 0,
+        "notes": "Trade licence itself is free; long-term visa application ~€100"
+      },
+      "incomeRequirement": {
+        "currency": "CZK",
+        "monthly": 2500,
+        "annual": null,
+        "notes": "~€2,500/month demonstrable savings or income"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 15,
+        "notes": "15% flat tax on income; social contributions apply"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Trade licence (Zivnostensky list)",
+          "Valid passport",
+          "Health insurance (Czech provider)",
+          "Proof of funds",
+          "Clean criminal record",
+          "Proof of accommodation"
+        ]
+      },
+      "benefits": [
+        "EU/Schengen access",
+        "Low cost of living",
+        "Excellent infrastructure",
+        "Central European location",
+        "Thriving expat community in Prague"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "60–90 days",
+        "documents": [
+          "Passport",
+          "Trade licence application",
+          "Proof of funds",
+          "Health insurance (Czech-compliant)",
+          "Criminal record certificate",
+          "Accommodation proof",
+          "Business plan or client contracts"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 11.408219178082186,
       "annualPrecipitation": 772.7000000000002,
@@ -60756,6 +63334,61 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 21,
+    "nomadVisa": {
+      "code": "DM",
+      "visaName": "Work In Nature (WIN) Programme",
+      "officialUrl": "https://dominicanomads.dm/",
+      "duration": {
+        "initial": 18,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 100,
+        "notes": "Individual; $150 for families"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 4167,
+        "annual": 50000,
+        "notes": "Minimum $50,000 annual income"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No local income tax on foreign-source income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment or freelance/self-employment",
+          "Annual income ≥$50,000",
+          "Valid passport",
+          "Health insurance",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Very affordable application fee",
+        "No local income tax",
+        "Nature-rich Caribbean island",
+        "18-month permit",
+        "Eco-tourism paradise"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "7–14 days",
+        "documents": [
+          "Passport",
+          "Proof of employment",
+          "Income proof",
+          "Health insurance",
+          "Passport photo"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 26.50328767123289,
       "annualPrecipitation": 1057.2000000000005,
@@ -62416,6 +65049,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 30,
+    "nomadVisa": {
+      "code": "ID",
+      "visaName": "B211A Remote Worker Visa (Digital Nomad)",
+      "officialUrl": "https://molina.imigrasi.go.id/",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 6,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 250,
+        "notes": "Visa on arrival + extension fee; e-Visa available"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 2000,
+        "annual": null,
+        "notes": "Minimum monthly income from foreign employment"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Indonesian income tax if staying under 183 days; Second Home Visa option may have different rules"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer or self-employed",
+          "Valid passport (6+ months)",
+          "Health insurance",
+          "Proof of income",
+          "Return ticket or proof of onward travel"
+        ]
+      },
+      "benefits": [
+        "No local income tax (under 183 days)",
+        "Bali digital nomad paradise",
+        "Extremely low cost of living",
+        "Tropical climate year-round",
+        "World-class surfing and diving",
+        "Growing co-working infrastructure"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "3–7 days",
+        "documents": [
+          "Passport",
+          "Passport photo",
+          "Proof of income/employment",
+          "Health insurance",
+          "Return or onward ticket",
+          "Proof of accommodation"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 27.17369863013698,
       "annualPrecipitation": 1791.8999999999985,
@@ -63074,9 +65764,65 @@
     "capital": "Yerevan",
     "lat": 40.17,
     "lng": 44.5,
-    "hasNomadVisa": false,
+    "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 180,
+    "nomadVisa": {
+      "code": "AM",
+      "visaName": "Digital Nomad / Freelance Residency",
+      "officialUrl": "https://www.mfa.am/en/visa",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "AMD",
+        "amount": 105000,
+        "notes": "~€240; residence permit fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 1500,
+        "annual": null,
+        "notes": "Moderate income threshold"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": 20,
+        "notes": "Flat 20% income tax; IT sector workers may qualify for 10% rate"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer or freelance",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "Affordable cost of living",
+        "Growing tech scene in Yerevan",
+        "Caucasus mountain culture",
+        "Path to permanent residency after 5 years",
+        "IT sector tax benefits (10%)",
+        "Visa-free for many nationalities (180 days)"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30 days",
+        "documents": [
+          "Passport",
+          "Proof of employment/freelance",
+          "Income proof",
+          "Health insurance",
+          "Criminal record certificate"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 13.993424657534227,
       "annualPrecipitation": 390.8000000000001,
@@ -64145,6 +66891,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "CR",
+      "visaName": "Digital Nomad Visa (Ley de Nómada Digital)",
+      "officialUrl": "https://www.migracion.go.cr/",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 12,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 100,
+        "notes": "Application fee; additional ~$100 for consular processing"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 3000,
+        "annual": 36000,
+        "notes": "Or $5,000/month for families"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "Exempt from Costa Rican income tax on foreign-source remote work income"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign employer or self-employed",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income ≥$3,000/month",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax on foreign income",
+        "World-renowned biodiversity",
+        "Pura Vida lifestyle",
+        "Good internet in main cities",
+        "Year-round warm climate",
+        "Access to Pacific and Caribbean coasts"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "15–30 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income proof (bank statements)",
+          "Health insurance",
+          "Criminal record certificate",
+          "Application form"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 20.255342465753433,
       "annualPrecipitation": 2933.199999999999,
@@ -64866,6 +67669,63 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "DE",
+      "visaName": "Freiberufler Visa (Freelance Visa)",
+      "officialUrl": "https://www.make-it-in-germany.com/en/visa-residence/types/self-employment",
+      "duration": {
+        "initial": 12,
+        "maxExtension": 36,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "EUR",
+        "amount": 100,
+        "notes": "Visa fee; residence permit ~€100 additional"
+      },
+      "incomeRequirement": {
+        "currency": "EUR",
+        "monthly": 2800,
+        "annual": 33600,
+        "notes": "Sufficient to cover living expenses; no fixed minimum but ~€2,800/month expected"
+      },
+      "tax": {
+        "status": "standard",
+        "rate": null,
+        "notes": "German tax residency applies; progressive income tax 14–45%; double taxation treaties may apply"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Proof of freelance work or remote employment",
+          "Valid passport",
+          "Health insurance (public or private)",
+          "Proof of financial means",
+          "Client letters or contracts"
+        ]
+      },
+      "benefits": [
+        "Access to EU/Schengen Area",
+        "Path to permanent residency after 5 years",
+        "Family reunification",
+        "Access to German social services",
+        "Strong digital infrastructure"
+      ],
+      "applicationProcess": {
+        "online": false,
+        "processingTime": "4–12 weeks",
+        "documents": [
+          "Passport",
+          "Completed visa application form",
+          "Proof of income/contracts",
+          "Business plan or client letters",
+          "Health insurance certificate",
+          "Proof of accommodation",
+          "CV/resume"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 11.135890410958902,
       "annualPrecipitation": 830.9000000000001,
@@ -65229,6 +68089,63 @@
     "hasNomadVisa": true,
     "isSchengen": false,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "EC",
+      "visaName": "Digital Nomad Visa (REMPE)",
+      "officialUrl": "https://www.cancilleria.gob.ec/",
+      "duration": {
+        "initial": 24,
+        "maxExtension": 0,
+        "renewable": true
+      },
+      "cost": {
+        "currency": "USD",
+        "amount": 450,
+        "notes": "Visa fee"
+      },
+      "incomeRequirement": {
+        "currency": "USD",
+        "monthly": 1275,
+        "annual": 15300,
+        "notes": "3× Ecuador's basic unified salary; very affordable"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Ecuadorian income tax on foreign-source income during the first 2 years"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote work for foreign entity",
+          "Valid passport",
+          "Health insurance",
+          "Proof of income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax (first 2 years)",
+        "2-year permit",
+        "US dollar economy",
+        "Extremely low cost of living",
+        "Incredible biodiversity (Galápagos)",
+        "Pacific coast and Andes mountains"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "30–45 days",
+        "documents": [
+          "Passport",
+          "Proof of remote employment",
+          "Income proof",
+          "Health insurance",
+          "Criminal record certificate",
+          "Application form"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 12.210958904109587,
       "annualPrecipitation": 3596.9000000000005,
@@ -65813,6 +68730,61 @@
     "hasNomadVisa": true,
     "isSchengen": true,
     "touristVisaDays": 90,
+    "nomadVisa": {
+      "code": "IS",
+      "visaName": "Remote Work Long-Term Visa",
+      "officialUrl": "https://www.government.is/",
+      "duration": {
+        "initial": 6,
+        "maxExtension": 0,
+        "renewable": false
+      },
+      "cost": {
+        "currency": "ISK",
+        "amount": 12600,
+        "notes": "~€85; visa application fee"
+      },
+      "incomeRequirement": {
+        "currency": "ISK",
+        "monthly": 1000000,
+        "annual": 12000000,
+        "notes": "~€6,700/month; one of the highest requirements"
+      },
+      "tax": {
+        "status": "exempt",
+        "rate": 0,
+        "notes": "No Icelandic income tax for the visa duration if income is from abroad"
+      },
+      "eligibility": {
+        "minAge": 18,
+        "requirements": [
+          "Remote employment with foreign employer",
+          "Valid passport",
+          "Health insurance",
+          "Proof of high income",
+          "No criminal record"
+        ]
+      },
+      "benefits": [
+        "No local income tax",
+        "Unique natural environment",
+        "Safe and high quality of life",
+        "Excellent internet connectivity",
+        "Access to Schengen Area"
+      ],
+      "applicationProcess": {
+        "online": true,
+        "processingTime": "14–30 days",
+        "documents": [
+          "Passport",
+          "Employment contract",
+          "Income proof",
+          "Health insurance",
+          "Criminal record certificate"
+        ]
+      },
+      "lastUpdated": "2025-12-01"
+    },
     "climateData": {
       "annualMeanTemp": 4.842465753424656,
       "annualPrecipitation": 1633.9,

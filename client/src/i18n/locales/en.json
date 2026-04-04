@@ -2,6 +2,7 @@
   "nav": {
     "indicators": "Indicators",
     "dataSources": "Data Sources",
+    "nomadVisas": "Nomad Visas",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -116,6 +117,36 @@
     "noResults": "No countries match your search.",
     "retry": "Retry",
     "count": "{{count}} countries"
+  },
+  "countryPage": {
+    "notFound": "Country not found",
+    "backToList": "Back to list",
+    "schengen": "Schengen Area",
+    "touristDays": "days tourist visa",
+    "viewProfile": "View Full Profile →",
+    "visa": {
+      "lastUpdated": "Last updated",
+      "duration": "Duration",
+      "months": "months",
+      "extension": "mo extension",
+      "renewable": "Renewable",
+      "cost": "Visa Cost",
+      "free": "FREE",
+      "income": "Min. Income",
+      "mo": "mo",
+      "yr": "yr",
+      "noMinimum": "No minimum",
+      "tax": "Tax Status",
+      "taxExempt": "TAX EXEMPT",
+      "taxSpecial": "Special",
+      "benefits": "KEY BENEFITS",
+      "eligibility": "ELIGIBILITY REQUIREMENTS",
+      "applicationProcess": "APPLICATION PROCESS",
+      "onlineApplication": "Online application available",
+      "inPersonApplication": "In-person application required",
+      "requiredDocuments": "Required Documents",
+      "officialWebsite": "Official visa website"
+    }
   },
   "indicatorsPage": {
     "eyebrow": "REFERENCE",
