@@ -4,7 +4,6 @@ import { Layout } from "../components/Layout";
 import {
   Activity,
   ArrowLeft,
-  BarChart2,
   BookOpen,
   Briefcase,
   Building,
@@ -656,7 +655,6 @@ export function CountryPage() {
             }}
           >
             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-              <Plane size={20} color="#8F5A3C" />
               <h2
                 style={{
                   fontFamily: "Anton, sans-serif",
@@ -1274,7 +1272,6 @@ export function CountryPage() {
           }}
         >
           <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-            <BarChart2 size={20} color="#8F5A3C" />
             <h2
               style={{
                 fontFamily: "Anton, sans-serif",
