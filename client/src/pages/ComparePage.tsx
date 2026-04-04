@@ -314,23 +314,25 @@ export function ComparePage() {
                 />
               </div>
             )}
-            {compareMode === "regions" ? (
-              <RegionComparison
-                countries={countries}
-                weights={ws.weights}
-                climatePrefs={ws.climatePrefs}
-              />
-            ) : (
-              <CountryComparison
-                countries={countries}
-                weights={ws.weights}
-                climatePrefs={ws.climatePrefs}
-                selectedCodes={selectedCodes}
-                onSelectedCodesChange={handleSelectedCodesChange}
-                sortTrigger={sortTrigger}
-                onSelectionCount={setCountrySelectionCount}
-              />
-            )}
+            <div style={{ minWidth: 0 }}>
+              {compareMode === "regions" ? (
+                <RegionComparison
+                  countries={countries}
+                  weights={ws.weights}
+                  climatePrefs={ws.climatePrefs}
+                />
+              ) : (
+                <CountryComparison
+                  countries={countries}
+                  weights={ws.weights}
+                  climatePrefs={ws.climatePrefs}
+                  selectedCodes={selectedCodes}
+                  onSelectedCodesChange={handleSelectedCodesChange}
+                  sortTrigger={sortTrigger}
+                  onSelectionCount={setCountrySelectionCount}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

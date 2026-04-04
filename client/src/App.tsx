@@ -212,7 +212,7 @@ export default function App() {
         {/* Left sidebar - Weight Panel (hidden on mobile) */}
         <aside
           className="hidden md:block sticky top-14 self-start"
-          style={{ width: "320px", height: "calc(100vh - 56px)" }}
+          style={{ width: "340px", height: "calc(100vh - 56px)" }}
         >
           <WeightPanel
             weights={ws.weights}

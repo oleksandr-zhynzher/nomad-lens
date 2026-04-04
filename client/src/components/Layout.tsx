@@ -11,12 +11,23 @@ interface LayoutProps {
 
 export function Layout({ children, activePage }: LayoutProps) {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
+
+  /** Strip current lang prefix from pathname, then prepend the target one */
+  const langSwitchPath = (targetLang: string) => {
+    // Remove current lang prefix (/ua or /ru) from the start of the path
+    let rest = pathname;
+    if (langPrefix && rest.startsWith(langPrefix)) {
+      rest = rest.slice(langPrefix.length) || "/";
+    }
+    const prefix = targetLang === "en" ? "" : `/${targetLang}`;
+    return `${prefix}${rest}${search}`;
+  };
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -326,7 +337,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                     (opt, i) => (
                       <Link
                         key={opt.code}
-                        to={opt.code === "en" ? "/" : `/${opt.code}`}
+                        to={langSwitchPath(opt.code)}
                         onClick={() => setLangDropdownOpen(false)}
                         style={{
                           display: "block",
@@ -530,7 +541,7 @@ export function Layout({ children, activePage }: LayoutProps) {
               {(["en", "ua", "ru"] as const).map((lng) => (
                 <Link
                   key={lng}
-                  to={lng === "en" ? "/" : `/${lng}`}
+                  to={langSwitchPath(lng)}
                   onClick={() => setMobileMenuOpen(false)}
                   style={{
                     fontFamily: "Geist, sans-serif",
