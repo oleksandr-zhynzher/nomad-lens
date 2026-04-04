@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../components/Layout";
+import { ScoreBreakdown } from "../components/ScoreBreakdown";
 import {
-  Activity,
   ArrowLeft,
-  BookOpen,
   Briefcase,
   Building,
   Building2,
@@ -16,27 +15,16 @@ import {
   ExternalLink,
   FileText,
   Globe,
-  Heart,
-  Key,
-  Leaf,
   MapPin,
-  MessageCircle,
   Plane,
   RefreshCw,
-  Rocket,
-  Shield,
-  Smile,
   Snowflake,
   Sun,
-  Tag,
   Thermometer,
   Timer,
   TrendingUp,
-  Truck,
   User,
   Users,
-  Utensils,
-  Wifi,
 } from "lucide-react";
 import { useCountries } from "../hooks/useCountries";
 import { useWeightState } from "../hooks/useWeightState";
@@ -44,19 +32,8 @@ import { useScoring } from "../hooks/useScoring";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails, NomadVisaLocalization } from "../utils/types";
-import {
-  VISIBLE_CATEGORY_KEYS,
-  CATEGORY_LABELS,
-  type CategoryKey,
-  type ClimatePreferences,
-} from "../utils/types";
+import { VISIBLE_CATEGORY_KEYS, type ClimatePreferences } from "../utils/types";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
-
-type LucideIcon = React.ComponentType<{
-  size?: number;
-  color?: string;
-  className?: string;
-}>;
 
 const DEFAULT_CLIMATE: ClimatePreferences = {
   seasonType: "any",
@@ -70,57 +47,6 @@ type SeasonLabelKey =
   | "tropical"
   | "arid"
   | "polar";
-
-interface CategoryStyleEntry {
-  icon: LucideIcon;
-  color: string;
-  iconBg: string;
-}
-
-const CATEGORY_STYLE: Record<CategoryKey, CategoryStyleEntry> = {
-  economy: { icon: TrendingUp, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  affordability: { icon: Tag, color: "#C2956A", iconBg: "#211408" },
-  foodSecurity: { icon: Utensils, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  healthcare: { icon: Activity, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  education: { icon: BookOpen, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  environment: { icon: Leaf, color: "#C2956A", iconBg: "#211408" },
-  climate: { icon: Thermometer, color: "#C2956A", iconBg: "#211408" },
-  safety: { icon: Shield, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  infrastructure: { icon: Wifi, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  happiness: { icon: Smile, color: "#C2956A", iconBg: "#211408" },
-  humanDevelopment: { icon: Users, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  governance: { icon: Building2, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  englishProficiency: {
-    icon: MessageCircle,
-    color: "#C2956A",
-    iconBg: "#211408",
-  },
-  digitalFreedom: { icon: Globe, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  personalFreedom: { icon: Key, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  logistics: { icon: Truck, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  biodiversity: { icon: Leaf, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  socialTolerance: { icon: Heart, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  taxFriendliness: { icon: Tag, color: "#8F5A3C", iconBg: "#2A1208" },
-  startupEnvironment: { icon: Rocket, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  airConnectivity: { icon: Plane, color: "#7A9B6B", iconBg: "#0F1F0F" },
-  culturalHeritage: { icon: Globe, color: "#C2956A", iconBg: "#211408" },
-  healthcareCost: { icon: Activity, color: "#C2956A", iconBg: "#211408" },
-};
-
-const CARD_LABELS: Partial<Record<CategoryKey, string>> = {
-  infrastructure: "Internet",
-  humanDevelopment: "Human Dev",
-  englishProficiency: "English Prof",
-  startupEnvironment: "Startup Env",
-};
-
-function getScoreBadgeKey(value: number | null): string {
-  if (value === null) return "N/A";
-  if (value >= 85) return "excellent";
-  if (value >= 70) return "good";
-  if (value >= 55) return "fair";
-  return "weak";
-}
 
 export function CountryPage() {
   const { t, i18n: i18nInstance } = useTranslation();
@@ -1299,146 +1225,7 @@ export function CountryPage() {
             </span>
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "12px",
-            }}
-          >
-            {VISIBLE_CATEGORY_KEYS.map((key) => {
-              const catStyle = CATEGORY_STYLE[key];
-              const IconComp = catStyle.icon;
-              const scoreValue = c.scores[key]?.value ?? null;
-              const label = CARD_LABELS[key]
-                ? t(`countryPage.cardLabels.${key}`, CARD_LABELS[key])
-                : t(
-                    `indicatorsPage.indicators.${key}.name`,
-                    CATEGORY_LABELS[key],
-                  );
-              const badgeKey = getScoreBadgeKey(scoreValue);
-              const badge =
-                badgeKey === "N/A"
-                  ? "N/A"
-                  : t(`countryPage.scoreBadge.${badgeKey}`).toUpperCase();
-              return (
-                <div
-                  key={key}
-                  style={{
-                    backgroundColor: "#111111",
-                    borderRadius: "12px",
-                    border: "1px solid #1E1E1E",
-                    padding: "16px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "32px",
-                        height: "32px",
-                        borderRadius: "8px",
-                        backgroundColor: catStyle.iconBg,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <IconComp size={16} color={catStyle.color} />
-                    </div>
-                    <span
-                      style={{
-                        fontFamily: "Geist, sans-serif",
-                        fontSize: "11px",
-                        color: "#777777",
-                        flex: 1,
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {label}
-                    </span>
-                    <div
-                      style={{
-                        backgroundColor: catStyle.iconBg,
-                        borderRadius: "4px",
-                        padding: "3px 8px",
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: "Geist, sans-serif",
-                          fontSize: "9px",
-                          color: catStyle.color,
-                          letterSpacing: "1.5px",
-                        }}
-                      >
-                        {badge}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "6px",
-                      alignItems: "flex-end",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "40px",
-                        fontWeight: 700,
-                        color: catStyle.color,
-                        lineHeight: 1,
-                      }}
-                    >
-                      {scoreValue !== null ? Math.round(scoreValue) : "–"}
-                    </span>
-                    <span
-                      style={{
-                        fontFamily: "Geist, sans-serif",
-                        fontSize: "14px",
-                        color: "#444444",
-                        paddingBottom: "4px",
-                      }}
-                    >
-                      /100
-                    </span>
-                  </div>
-
-                  <div
-                    style={{
-                      height: "6px",
-                      backgroundColor: "#1E1E1E",
-                      borderRadius: "3px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: `${scoreValue ?? 0}%`,
-                        backgroundColor: catStyle.color,
-                        height: "6px",
-                        borderRadius: "3px",
-                      }}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+          <ScoreBreakdown country={c} />
 
           {/* ── Climate Data ── */}
           {c.climateData && (
