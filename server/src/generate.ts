@@ -768,6 +768,7 @@ async function generate(): Promise<void> {
       touristVisaDays: localData.getTouristVisaDays(iso2),
       nomadVisa: localData.getNomadVisaDetails(iso2) ?? undefined,
       climateData: clim ?? undefined,
+      costOfLiving: localData.getCostOfLiving(iso2) ?? null,
       scores,
       ...(Object.keys(countryI18n).length > 0 ? { i18n: countryI18n } : {}),
     });

@@ -10,6 +10,7 @@ import { MapPage } from "./pages/MapPage.tsx";
 import { ComparePage } from "./pages/ComparePage.tsx";
 import { CountryPage } from "./pages/CountryPage.tsx";
 import { NomadVisasPage } from "./pages/NomadVisasPage.tsx";
+import { BudgetMatcherPage } from "./pages/BudgetMatcherPage.tsx";
 import { LangWrapper } from "./components/LangWrapper.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="compare" element={<ComparePage />} />
           <Route path="country/:code" element={<CountryPage />} />
           <Route path="nomad-visas" element={<NomadVisasPage />} />
+          <Route path="budget-matcher" element={<BudgetMatcherPage />} />
           <Route path="data-sources" element={<DataSourcesPage />} />
           <Route path="indicators" element={<IndicatorsPage />} />
         </Route>

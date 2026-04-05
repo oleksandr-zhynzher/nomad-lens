@@ -3,6 +3,7 @@
     "indicators": "Показатели",
     "dataSources": "Источники данных",
     "nomadVisas": "Номад-визы",
+    "budgetMatcher": "Бюджет",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -62,7 +63,23 @@
     "share": "Поделиться",
     "addCountry": "Добавить страну",
     "searchCountry": "Поиск страны…",
-    "noCountriesFound": "Страны не найдены"
+    "noCountriesFound": "Страны не найдены",
+    "nomadVisas": "Номад-визы",
+    "nomadVisaTitle": "СРАВНЕНИЕ НОМАД-ВИЗ",
+    "nomadVisaSubtitle": "Сравните программы цифровых номад-виз",
+    "visaDetail": "Детали визы",
+    "visaFields": {
+      "visaName": "Название визы",
+      "duration": "Начальный срок",
+      "maxExtension": "Макс. продление",
+      "renewable": "Возобновляемая",
+      "cost": "Стоимость подачи",
+      "income": "Требование к доходу",
+      "taxStatus": "Налоговый статус",
+      "online": "Онлайн-подача",
+      "processingTime": "Время обработки",
+      "benefits": "Основные преимущества"
+    }
   },
   "mobileSheet": {
     "weightsAndPreferences": "Веса и настройки",
@@ -490,5 +507,37 @@
       "income": "Мин. доход",
       "tax": "Налоговый статус"
     }
+  },
+  "budget": {
+    "eyebrow": "ПОДБОР ПО БЮДЖЕТУ",
+    "title": "НАЙДИТЕ СВОЮ СТРАНУ",
+    "subtitle": "Введите месячный бюджет и узнайте, какие страны предлагают лучший уровень жизни за ваши деньги",
+    "budgetLabel": "Месячный бюджет",
+    "perMonth": "/ месяц",
+    "housing": {
+      "label": "Жильё",
+      "center": "Центр города",
+      "outside": "За пределами центра"
+    },
+    "settings": "Настройки",
+    "qualityBlend": "Баланс качества",
+    "pureAffordability": "Цена",
+    "qualityFocus": "Качество",
+    "categoryWeights": "Веса категорий",
+    "categories": {
+      "housing": "Жильё",
+      "groceries": "Продукты",
+      "dining": "Питание",
+      "transport": "Транспорт",
+      "utilities": "Коммунальные",
+      "coworking": "Коворкинг",
+      "healthInsurance": "Медицинская страховка"
+    },
+    "reset": "Сбросить",
+    "results": "Результаты",
+    "countriesFound": "{{count}} стран",
+    "noResults": "Нет стран с данными о стоимости жизни",
+    "loading": "Загрузка...",
+    "budgetLine": "Бюджет"
   }
 }

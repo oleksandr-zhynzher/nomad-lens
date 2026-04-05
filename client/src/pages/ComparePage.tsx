@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Flag, Globe, ArrowDownWideNarrow } from "lucide-react";
+import { Flag, Globe, ArrowDownWideNarrow, Plane } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { WeightPanel } from "../components/WeightPanel";
 import { CountryComparison } from "../components/CountryComparison";
 import { RegionComparison } from "../components/RegionComparison";
+import { NomadVisaComparison } from "../components/NomadVisaComparison";
 import { useCountries } from "../hooks/useCountries";
 import { useWeightState } from "../hooks/useWeightState";
 
@@ -42,11 +43,15 @@ export function ComparePage() {
   }, [showWeights, syncPanelHeight]);
 
   // URL-driven compare state — persisted so links are shareable
-  const compareMode: "countries" | "regions" =
-    searchParams.get("m") === "regions" ? "regions" : "countries";
+  const compareMode: "countries" | "regions" | "nomadVisas" =
+    searchParams.get("m") === "regions"
+      ? "regions"
+      : searchParams.get("m") === "nomadVisas"
+        ? "nomadVisas"
+        : "countries";
   const selectedCodes = searchParams.get("c")?.split(",").filter(Boolean) ?? [];
 
-  const setCompareMode = (mode: "countries" | "regions") => {
+  const setCompareMode = (mode: "countries" | "regions" | "nomadVisas") => {
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
@@ -123,7 +128,9 @@ export function ComparePage() {
             >
               {compareMode === "countries"
                 ? t("compare.countryTitle")
-                : t("compare.regionTitle")}
+                : compareMode === "regions"
+                  ? t("compare.regionTitle")
+                  : t("compare.nomadVisaTitle")}
             </h2>
             <p
               className="hidden md:block"
@@ -136,7 +143,9 @@ export function ComparePage() {
             >
               {compareMode === "countries"
                 ? t("compare.countrySubtitle")
-                : t("compare.regionSubtitle")}
+                : compareMode === "regions"
+                  ? t("compare.regionSubtitle")
+                  : t("compare.nomadVisaSubtitle")}
             </p>
           </div>
         </div>
@@ -186,36 +195,55 @@ export function ComparePage() {
                 <Globe size={14} />
                 {t("compare.regions")}
               </button>
+              <button
+                onClick={() => setCompareMode("nomadVisas")}
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor:
+                    compareMode === "nomadVisas"
+                      ? "var(--color-accent)"
+                      : "transparent",
+                  color: compareMode === "nomadVisas" ? "#FFFFFF" : "#777777",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: compareMode === "nomadVisas" ? 500 : 400,
+                }}
+              >
+                <Plane size={14} />
+                {t("compare.nomadVisas")}
+              </button>
             </div>
 
             {/* Weights toggle */}
-            <button
-              onClick={() => setShowWeights((p) => !p)}
-              className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors"
-              style={{
-                backgroundColor: showWeights
-                  ? "var(--color-accent)"
-                  : "#1A1A1A",
-                borderColor: showWeights ? "var(--color-accent)" : "#333333",
-                color: showWeights ? "#FFFFFF" : "#999999",
-                fontFamily: "Inter, sans-serif",
-              }}
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
+            {compareMode !== "nomadVisas" && (
+              <button
+                onClick={() => setShowWeights((p) => !p)}
+                className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors"
+                style={{
+                  backgroundColor: showWeights
+                    ? "var(--color-accent)"
+                    : "#1A1A1A",
+                  borderColor: showWeights ? "var(--color-accent)" : "#333333",
+                  color: showWeights ? "#FFFFFF" : "#999999",
+                  fontFamily: "Inter, sans-serif",
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                />
-              </svg>
-              {t("compare.parameters")}
-            </button>
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                  />
+                </svg>
+                {t("compare.parameters")}
+              </button>
+            )}
 
             {/* Sort button — visible when 2+ countries in country mode */}
             {compareMode === "countries" && countrySelectionCount > 1 && (
@@ -320,6 +348,12 @@ export function ComparePage() {
                   countries={countries}
                   weights={ws.weights}
                   climatePrefs={ws.climatePrefs}
+                />
+              ) : compareMode === "nomadVisas" ? (
+                <NomadVisaComparison
+                  countries={countries}
+                  selectedCodes={selectedCodes}
+                  onSelectedCodesChange={handleSelectedCodesChange}
                 />
               ) : (
                 <CountryComparison

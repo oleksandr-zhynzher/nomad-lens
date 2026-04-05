@@ -45,6 +45,22 @@ export type CategoryKey =
   | "digitalReadiness"
   | "culturalFit";
 
+// ─── Cost of Living ───────────────────────────────────────────────────────────
+
+export interface CostOfLivingEntry {
+  code: string;
+  rentCenter: number | null;
+  rentOutside: number | null;
+  groceries: number | null;
+  dining: number | null;
+  transport: number | null;
+  utilities: number | null;
+  coworking: number | null;
+  healthInsurance: number | null;
+  totalBasic: number | null;
+  totalComfortable: number | null;
+}
+
 // ─── AI Metrics ───────────────────────────────────────────────────────────────
 
 export interface AiMetricsEntry {
@@ -153,6 +169,7 @@ export interface CountryData {
   touristVisaDays: number | null;
   nomadVisa?: NomadVisaDetails;
   climateData?: ClimateData;
+  costOfLiving?: CostOfLivingEntry | null;
   scores: Record<CategoryKey, CategoryScore>;
   i18n?: {
     ru?: { name?: string; capital?: string };

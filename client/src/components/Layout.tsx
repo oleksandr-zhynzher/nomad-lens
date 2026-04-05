@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import { BarChart3, List, Map, Menu, Plane, X } from "lucide-react";
+import { BarChart3, List, Map, Menu, Plane, Wallet, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
@@ -57,6 +57,7 @@ export function Layout({ children, activePage }: LayoutProps) {
     : pathname.endsWith("/compare")
       ? "compare"
       : pathname.endsWith("/nomad-visas") ||
+          pathname.endsWith("/budget-matcher") ||
           pathname.endsWith("/indicators") ||
           pathname.endsWith("/data-sources")
         ? null
@@ -65,7 +66,8 @@ export function Layout({ children, activePage }: LayoutProps) {
   const showViewToggle =
     !pathname.endsWith("/indicators") &&
     !pathname.endsWith("/data-sources") &&
-    !pathname.endsWith("/nomad-visas");
+    !pathname.endsWith("/nomad-visas") &&
+    !pathname.endsWith("/budget-matcher");
 
   const handleViewClick = (v: "list" | "map" | "compare") => {
     if (v === "list") {
@@ -298,6 +300,25 @@ export function Layout({ children, activePage }: LayoutProps) {
                 <Plane size={16} />
                 {t("nav.nomadVisas")}
               </Link>
+              <Link
+                to={`${langPrefix}/budget-matcher`}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor: pathname.endsWith("/budget-matcher")
+                    ? "var(--color-accent)"
+                    : "transparent",
+                  color: pathname.endsWith("/budget-matcher")
+                    ? "#FFFFFF"
+                    : "#999999",
+                  fontFamily: "Geist, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
+                  textDecoration: "none",
+                }}
+              >
+                <Wallet size={16} />
+                {t("nav.budgetMatcher")}
+              </Link>
             </div>
 
             {/* Language switcher – text button + dropdown */}
@@ -496,6 +517,28 @@ export function Layout({ children, activePage }: LayoutProps) {
                   >
                     <Plane size={16} />
                     {t("nav.nomadVisas")}
+                  </Link>
+                  <Link
+                    to={`${langPrefix}/budget-matcher`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
+                    style={{
+                      backgroundColor: pathname.endsWith("/budget-matcher")
+                        ? "var(--color-accent)"
+                        : "#2A2A2A",
+                      color: pathname.endsWith("/budget-matcher")
+                        ? "#FFFFFF"
+                        : "#999999",
+                      fontFamily: "Geist, sans-serif",
+                      fontSize: "13px",
+                      fontWeight: pathname.endsWith("/budget-matcher")
+                        ? 500
+                        : 400,
+                      textDecoration: "none",
+                    }}
+                  >
+                    <Wallet size={16} />
+                    {t("nav.budgetMatcher")}
                   </Link>
                 </div>
               </>

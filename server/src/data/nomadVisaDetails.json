@@ -15,14 +15,14 @@
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 3510,
-      "annual": 42120,
-      "notes": "4× Portuguese minimum wage"
+      "monthly": 3680,
+      "annual": 44160,
+      "notes": "4× Portuguese minimum wage (€920 in 2025)"
     },
     "tax": {
       "status": "special",
       "rate": 20,
-      "notes": "NHR regime: flat 20% on Portuguese-source income for 10 years; foreign income may be exempt"
+      "notes": "NHR regime ended for new applicants in March 2025; replaced by IFICI (NHR 2.0): flat 20% on qualifying income for 10 years, limited to specific sectors (tech, science, innovation)"
     },
     "eligibility": {
       "minAge": 18,
@@ -38,7 +38,7 @@
       "Path to permanent residency after 5 years",
       "Access to Schengen Area",
       "Family reunification allowed",
-      "NHR tax regime eligible",
+      "IFICI tax regime eligible (replaces NHR)",
       "Access to Portuguese healthcare (SNS)"
     ],
     "applicationProcess": {
@@ -53,17 +53,17 @@
         "Proof of accommodation in Portugal"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за визу; вид на жительство ~83 € дополнительно"
         },
         "incomeRequirement": {
-          "notes": "4× минимальной зарплаты Португалии"
+          "notes": "4× минимальной зарплаты Португалии (920 € в 2025)"
         },
         "tax": {
-          "notes": "Режим NHR: фиксированные 20% на доход из португальских источников в течение 10 лет; иностранный доход может быть освобождён от налогов"
+          "notes": "Режим NHR закрыт для новых заявителей с марта 2025; заменён на IFICI (NHR 2.0): фиксированные 20% на квалифицированный доход в течение 10 лет, ограничен определёнными секторами (технологии, наука, инновации)"
         },
         "eligibility": {
           "requirements": [
@@ -78,7 +78,7 @@
           "Путь к ПМЖ через 5 лет",
           "Доступ в Шенгенскую зону",
           "Возможность воссоединения семьи",
-          "Право на налоговый режим NHR",
+          "Право на налоговый режим IFICI (заменяет NHR)",
           "Доступ к системе здравоохранения Португалии (SNS)"
         ],
         "applicationProcess": {
@@ -98,10 +98,10 @@
           "notes": "Збір за візу; дозвіл на проживання ~83 € додатково"
         },
         "incomeRequirement": {
-          "notes": "4× мінімальної зарплати Португалії"
+          "notes": "4× мінімальної зарплати Португалії (920 € у 2025)"
         },
         "tax": {
-          "notes": "Режим NHR: фіксовані 20% на дохід із португальських джерел протягом 10 років; іноземний дохід може бути звільнений від податків"
+          "notes": "Режим NHR закритий для нових заявників з березня 2025; замінений на IFICI (NHR 2.0): фіксовані 20% на кваліфікований дохід протягом 10 років, обмежений певними секторами (технології, наука, інновації)"
         },
         "eligibility": {
           "requirements": [
@@ -116,7 +116,7 @@
           "Шлях до ПМП через 5 років",
           "Доступ до Шенгенської зони",
           "Можливість возз'єднання сім'ї",
-          "Право на податковий режим NHR",
+          "Право на податковий режим IFICI (замінює NHR)",
           "Доступ до системи охорони здоров'я Португалії (SNS)"
         ],
         "applicationProcess": {
@@ -188,7 +188,7 @@
         "CV/resume"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -323,7 +323,7 @@
         "Passport-size photo"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -404,22 +404,22 @@
   {
     "code": "HR",
     "visaName": "Digital Nomad Residence Permit",
-    "officialUrl": "https://mup.gov.hr/aliens-702/stay-and-work/digital-nomads/286telecommuters/286286.aspx",
+    "officialUrl": "https://mup.gov.hr/en",
     "duration": {
-      "initial": 12,
+      "initial": 18,
       "maxExtension": 0,
-      "renewable": true
+      "renewable": false
     },
     "cost": {
       "currency": "EUR",
-      "amount": 85,
-      "notes": "Residence permit processing fee"
+      "amount": 56,
+      "notes": "Temporary stay approval €56 + biometric card €32-41; varies by application location"
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 2540,
-      "annual": 30480,
-      "notes": "Approximately 2.5× Croatian average salary"
+      "monthly": 3623,
+      "annual": 43470,
+      "notes": "2.5× Croatian average monthly net salary; or €43,470 savings for 12 months / €65,205 for 18 months"
     },
     "tax": {
       "status": "exempt",
@@ -456,14 +456,14 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за обработку вида на жительство"
         },
         "incomeRequirement": {
-          "notes": "Примерно 2,5× средней зарплаты Хорватии"
+          "notes": "2,5× средней чистой месячной зарплаты Хорватии; или 43 470 € сбережений на 12 месяцев / 65 205 € на 18 месяцев"
         },
         "tax": {
           "notes": "Нет хорватского подоходного налога для цифровых кочевников в период действия разрешения"
@@ -502,7 +502,7 @@
           "notes": "Збір за оформлення дозволу на проживання"
         },
         "incomeRequirement": {
-          "notes": "Приблизно 2,5× середньої зарплати Хорватії"
+          "notes": "2,5× середньої чистої місячної зарплати Хорватії; або 43 470 € заощаджень на 12 місяців / 65 205 € на 18 місяців"
         },
         "tax": {
           "notes": "Немає хорватського податку на доходи для цифрових кочівників протягом дії дозволу"
@@ -554,9 +554,9 @@
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 3256,
-      "annual": 39072,
-      "notes": "200% of Spanish minimum wage (SMI)"
+      "monthly": 2849,
+      "annual": 34188,
+      "notes": "200% of Spanish minimum wage (SMI 2026: €1,221/month in 14 payments)"
     },
     "tax": {
       "status": "special",
@@ -593,14 +593,14 @@
         "University degree or 3+ years professional experience"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за национальную визу; вид на жительство ~16 € дополнительно"
         },
         "incomeRequirement": {
-          "notes": "200% минимальной зарплаты Испании (SMI)"
+          "notes": "200% минимальной зарплаты Испании (SMI 2026: 1 221 €/мес. в 14 выплатах)"
         },
         "tax": {
           "notes": "Закон Бекхэма: фиксированные 24% на доход из испанских источников до 600 тыс. € в течение первых 6 лет; иностранный доход освобождён"
@@ -639,7 +639,7 @@
           "notes": "Збір за національну візу; дозвіл на проживання ~16 € додатково"
         },
         "incomeRequirement": {
-          "notes": "200% мінімальної зарплати Іспанії (SMI)"
+          "notes": "200% мінімальної зарплати Іспанії (SMI 2026: 1 221 €/міс. у 14 виплатах)"
         },
         "tax": {
           "notes": "Закон Бекхема: фіксовані 24% на дохід із іспанських джерел до 600 тис. € протягом перших 6 років; іноземний дохід звільнений"
@@ -729,7 +729,7 @@
         "Proof of accommodation"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -824,10 +824,10 @@
       "notes": "Application fee"
     },
     "incomeRequirement": {
-      "currency": "HUF",
-      "monthly": 2000,
-      "annual": null,
-      "notes": "~€2,000/month; based on Hungarian minimum wage multiples"
+      "currency": "EUR",
+      "monthly": 3000,
+      "annual": 36000,
+      "notes": "Minimum €3,000 net monthly income; verified via bank statements"
     },
     "tax": {
       "status": "exempt",
@@ -863,14 +863,14 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за подачу заявления"
         },
         "incomeRequirement": {
-          "notes": "~2 000 €/мес.; на основе мультипликатора минимальной зарплаты Венгрии"
+          "notes": "Минимум 3 000 € чистого месячного дохода; подтверждается банковскими выписками"
         },
         "tax": {
           "notes": "Нет венгерского подоходного налога на иностранный доход от удалённой работы"
@@ -908,7 +908,7 @@
           "notes": "Збір за подання заяви"
         },
         "incomeRequirement": {
-          "notes": "~2 000 €/міс.; на основі мультиплікатора мінімальної зарплати Угорщини"
+          "notes": "Мінімум 3 000 € чистого місячного доходу; підтверджується банківськими виписками"
         },
         "tax": {
           "notes": "Немає угорського податку на доходи на іноземний дохід від віддаленої роботи"
@@ -961,12 +961,12 @@
       "currency": "EUR",
       "monthly": 1350,
       "annual": 16200,
-      "notes": "Relatively low threshold"
+      "notes": "3× Montenegrin minimum wage (~€450); income range €1,350-2,400 depending on education level"
     },
     "tax": {
-      "status": "standard",
-      "rate": 9,
-      "notes": "Flat 9% personal income tax; one of Europe's lowest rates"
+      "status": "exempt",
+      "rate": 0,
+      "notes": "Digital nomads exempt from Montenegrin income tax on foreign-source income (Article 32d, Personal Income Tax Law); no social contributions required"
     },
     "eligibility": {
       "minAge": 18,
@@ -997,17 +997,17 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за вид на жительство"
         },
         "incomeRequirement": {
-          "notes": "Относительно низкий порог"
+          "notes": "3× минимальной зарплаты Черногории (~450 €); диапазон дохода 1 350-2 400 € в зависимости от уровня образования"
         },
         "tax": {
-          "notes": "Фиксированный подоходный налог 9%; одна из самых низких ставок в Европе"
+          "notes": "Цифровые кочевники освобождены от черногорского подоходного налога на иностранный доход (статья 32d Закона о подоходном налоге); социальные взносы не требуются"
         },
         "eligibility": {
           "requirements": [
@@ -1042,10 +1042,10 @@
           "notes": "Збір за дозвіл на проживання"
         },
         "incomeRequirement": {
-          "notes": "Відносно низький поріг"
+          "notes": "3× мінімальної зарплати Чорногорії (~450 €); діапазон доходу 1 350-2 400 € залежно від рівня освіти"
         },
         "tax": {
-          "notes": "Фіксований податок на доходи 9%; одна з найнижчих ставок у Європі"
+          "notes": "Цифрові кочівники звільнені від чорногорського податку на доходи на іноземний дохід (стаття 32d Закону про податок на доходи); соціальні внески не потрібні"
         },
         "eligibility": {
           "requirements": [
@@ -1087,9 +1087,9 @@
       "renewable": true
     },
     "cost": {
-      "currency": "EUR",
-      "amount": 0,
-      "notes": "Trade licence itself is free; long-term visa application ~€100"
+      "currency": "USD",
+      "amount": 115,
+      "notes": "~$115 long-term visa application fee"
     },
     "incomeRequirement": {
       "currency": "CZK",
@@ -1133,11 +1133,11 @@
         "Business plan or client contracts"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Торговая лицензия бесплатна; подача на долгосрочную визу ~100 €"
+          "notes": "~115 $ сбор за подачу на долгосрочную визу"
         },
         "incomeRequirement": {
           "notes": "~2 500 €/мес. подтверждённых сбережений или дохода"
@@ -1177,7 +1177,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Торгова ліцензія безкоштовна; подання на довгострокову візу ~100 €"
+          "notes": "~115 $ збір за подачу на довгострокову візу"
         },
         "incomeRequirement": {
           "notes": "~2 500 €/міс. підтверджених заощаджень або доходу"
@@ -1228,8 +1228,8 @@
     },
     "cost": {
       "currency": "ISK",
-      "amount": 12600,
-      "notes": "~€85; visa application fee"
+      "amount": 12200,
+      "notes": "~€84; visa application fee"
     },
     "incomeRequirement": {
       "currency": "ISK",
@@ -1270,11 +1270,11 @@
         "Criminal record certificate"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "~85 €; визовый сбор"
+          "notes": "~84 €; визовый сбор"
         },
         "incomeRequirement": {
           "notes": "~6 700 €/мес.; одно из самых высоких требований"
@@ -1311,7 +1311,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "~85 €; візовий збір"
+          "notes": "~84 €; візовий збір"
         },
         "incomeRequirement": {
           "notes": "~6 700 €/міс.; одна з найвищих вимог"
@@ -1364,9 +1364,9 @@
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 2700,
-      "annual": 32400,
-      "notes": "Minimum gross monthly income"
+      "monthly": 3500,
+      "annual": 42000,
+      "notes": "Minimum €42,000 gross annual income (increased from €32,400 for applications after April 2024)"
     },
     "tax": {
       "status": "exempt",
@@ -1402,14 +1402,14 @@
         "CV"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за подачу для граждан стран, не входящих в ЕС/ЕЭЗ; 300 € для граждан третьих стран"
         },
         "incomeRequirement": {
-          "notes": "Минимальный валовой месячный доход"
+          "notes": "Минимум 42 000 € валового годового дохода (увеличено с 32 400 € для заявлений после апреля 2024)"
         },
         "tax": {
           "notes": "Нет мальтийского подоходного налога на иностранный доход от удалённой работы в период действия разрешения"
@@ -1447,7 +1447,7 @@
           "notes": "Збір за подання для громадян країн, що не входять до ЄС/ЄЕЗ; 300 € для громадян третіх країн"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний валовий місячний дохід"
+          "notes": "Мінімум 42 000 € валового річного доходу (збільшено з 32 400 € для заяв після квітня 2024)"
         },
         "tax": {
           "notes": "Немає мальтійського податку на доходи на іноземний дохід від віддаленої роботи протягом дії дозволу"
@@ -1505,7 +1505,7 @@
     "tax": {
       "status": "exempt",
       "rate": 0,
-      "notes": "No Romanian income tax during the first year of the digital nomad visa"
+      "notes": "Exempt from Romanian income tax if staying under 183 days; after 183 days, 10% flat rate applies on worldwide income as tax resident"
     },
     "eligibility": {
       "minAge": 18,
@@ -1537,7 +1537,7 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -1547,7 +1547,7 @@
           "notes": "3× средней валовой зарплаты Румынии"
         },
         "tax": {
-          "notes": "Нет румынского подоходного налога в течение первого года действия визы цифрового кочевника"
+          "notes": "Освобождение от румынского подоходного налога при пребывании менее 183 дней; после 183 дней — фиксированная ставка 10% на мировой доход как налоговый резидент"
         },
         "eligibility": {
           "requirements": [
@@ -1586,7 +1586,7 @@
           "notes": "3× середньої валової зарплати Румунії"
         },
         "tax": {
-          "notes": "Немає румунського податку на доходи протягом першого року дії візи цифрового кочівника"
+          "notes": "Звільнення від румунського податку на доходи при перебуванні менше 183 днів; після 183 днів — фіксована ставка 10% на світовий дохід як податковий резидент"
         },
         "eligibility": {
           "requirements": [
@@ -1635,9 +1635,9 @@
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 2835,
-      "annual": 34020,
-      "notes": "Minimum annual income threshold set by Italian government"
+      "monthly": 2333,
+      "annual": 28000,
+      "notes": "Minimum €28,000 annual income; increases to €34,087 with spouse, +€1,550 per child"
     },
     "tax": {
       "status": "special",
@@ -1675,14 +1675,14 @@
         "Criminal record"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за национальную визу"
         },
         "incomeRequirement": {
-          "notes": "Минимальный годовой доход, установленный правительством Италии"
+          "notes": "Минимум 28 000 € годового дохода; увеличивается до 34 087 € с супругом, +1 550 € на ребёнка"
         },
         "tax": {
           "notes": "Италия предлагает фиксированный налог 7% для пенсионеров в южных регионах; цифровые кочевники облагаются стандартными ставками, если не подходят под режим для иммигрантов (освобождение 50–90%)"
@@ -1722,7 +1722,7 @@
           "notes": "Збір за національну візу"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний річний дохід, встановлений урядом Італії"
+          "notes": "Мінімум 28 000 € річного доходу; збільшується до 34 087 € з подружжям, +1 550 € на дитину"
         },
         "tax": {
           "notes": "Італія пропонує фіксований податок 7% для пенсіонерів у південних регіонах; цифрові кочівники оподатковуються стандартними ставками, якщо не підходять під режим для іммігрантів (звільнення 50–90%)"
@@ -1761,7 +1761,7 @@
   },
   {
     "code": "LV",
-    "visaName": "Digital Nomad Visa (Startup Visa pathway)",
+    "visaName": "Long-Stay Visa for Remote Work",
     "officialUrl": "https://www.pmlp.gov.lv/en",
     "duration": {
       "initial": 12,
@@ -1775,9 +1775,9 @@
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 2857,
-      "annual": 34284,
-      "notes": "2.5× Latvian average monthly salary"
+      "monthly": 4213,
+      "annual": 50556,
+      "notes": "2.5× Latvian average monthly gross salary; OECD employer required"
     },
     "tax": {
       "status": "standard",
@@ -1813,14 +1813,14 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за обработку долгосрочной визы"
         },
         "incomeRequirement": {
-          "notes": "2,5× средней месячной зарплаты Латвии"
+          "notes": "2,5× средней валовой месячной зарплаты Латвии; требуется работодатель из ОЭСР"
         },
         "tax": {
           "notes": "Стандартный подоходный налог 23%; для фрилансеров может применяться налог на микропредприятие (25% от оборота)"
@@ -1858,7 +1858,7 @@
           "notes": "Збір за обробку довгострокової візи"
         },
         "incomeRequirement": {
-          "notes": "2,5× середньої місячної зарплати Латвії"
+          "notes": "2,5× середньої валової місячної зарплати Латвії; потрібен роботодавець з ОЕСР"
         },
         "tax": {
           "notes": "Стандартний податок на доходи 23%; для фрілансерів може застосовуватися податок на мікропідприємство (25% від обороту)"
@@ -1947,7 +1947,7 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -2033,7 +2033,7 @@
     "officialUrl": "https://www.pio.gov.cy/",
     "duration": {
       "initial": 12,
-      "maxExtension": 24,
+      "maxExtension": 36,
       "renewable": true
     },
     "cost": {
@@ -2082,7 +2082,7 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -2180,9 +2180,9 @@
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 1540,
-      "annual": null,
-      "notes": "Relatively low threshold; based on Albanian living standards"
+      "monthly": 817,
+      "annual": 9804,
+      "notes": "Low threshold; based on Albanian living standards (~40,000 ALL/month)"
     },
     "tax": {
       "status": "exempt",
@@ -2218,14 +2218,14 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Очень доступный сбор за подачу заявления"
         },
         "incomeRequirement": {
-          "notes": "Относительно низкий порог; на основе албанских стандартов жизни"
+          "notes": "Низкий порог; на основе уровня жизни Албании (~40 000 ALL/мес.)"
         },
         "tax": {
           "notes": "Нет албанского подоходного налога на иностранный доход от удалённой работы"
@@ -2263,7 +2263,7 @@
           "notes": "Дуже доступний збір за подання заяви"
         },
         "incomeRequirement": {
-          "notes": "Відносно низький поріг; на основі албанських стандартів життя"
+          "notes": "Низький поріг; на основі рівня життя Албанії (~40 000 ALL/міс.)"
         },
         "tax": {
           "notes": "Немає албанського податку на доходи на іноземний дохід від віддаленої роботи"
@@ -2300,8 +2300,8 @@
   },
   {
     "code": "GE",
-    "visaName": "Remotely from Georgia",
-    "officialUrl": "https://stopcov.ge/en/remotely-from-georgia",
+    "visaName": "Remotely from Georgia (visa-free entry preferred)",
+    "officialUrl": "https://www.geoconsul.gov.ge/en",
     "duration": {
       "initial": 12,
       "maxExtension": 0,
@@ -2310,7 +2310,7 @@
     "cost": {
       "currency": "USD",
       "amount": 0,
-      "notes": "Free application; no visa fee required"
+      "notes": "Free application; 95+ nationalities can enter visa-free for up to 365 days"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -2351,11 +2351,11 @@
         "Health insurance"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Бесплатная подача; визовый сбор не требуется"
+          "notes": "Бесплатная подача; граждане 95+ стран могут въезжать без визы на срок до 365 дней"
         },
         "incomeRequirement": {
           "notes": "Минимальный ежемесячный заработок от удалённой работы"
@@ -2392,7 +2392,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Безкоштовна подача; візовий збір не потрібен"
+          "notes": "Безкоштовна подача; громадяни 95+ країн можуть в'їжджати без візи на строк до 365 днів"
         },
         "incomeRequirement": {
           "notes": "Мінімальний щомісячний заробіток від віддаленої роботи"
@@ -2445,9 +2445,9 @@
     },
     "incomeRequirement": {
       "currency": "NOK",
-      "monthly": 36000,
-      "annual": null,
-      "notes": "~€3,200/month; must demonstrate ability to support yourself"
+      "monthly": 43550,
+      "annual": 522600,
+      "notes": "~€3,500/month; must demonstrate ability to support yourself; at least one client contract required"
     },
     "tax": {
       "status": "standard",
@@ -2483,14 +2483,14 @@
         "Health insurance"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "~560 €; сбор за вид на жительство"
         },
         "incomeRequirement": {
-          "notes": "~3 200 €/мес.; необходимо подтвердить способность содержать себя"
+          "notes": "~3 500 €/мес.; необходимо продемонстрировать способность содержать себя; требуется хотя бы один клиентский контракт"
         },
         "tax": {
           "notes": "Стандартный налог 22% на обычный доход; прогрессивные ставки на персональный доход"
@@ -2528,7 +2528,7 @@
           "notes": "~560 €; збір за дозвіл на проживання"
         },
         "incomeRequirement": {
-          "notes": "~3 200 €/міс.; необхідно підтвердити здатність утримувати себе"
+          "notes": "~3 500 €/міс.; необхідно продемонструвати здатність утримувати себе; потрібен хоча б один клієнтський контракт"
         },
         "tax": {
           "notes": "Стандартний податок 22% на звичайний дохід; прогресивні ставки на персональний дохід"
@@ -2565,7 +2565,7 @@
   },
   {
     "code": "RS",
-    "visaName": "Digital Nomad Temporary Residence",
+    "visaName": "Self-Employment Visa (Freelance Residence)",
     "officialUrl": "https://mup.gov.rs/wps/portal/en/",
     "duration": {
       "initial": 12,
@@ -2579,14 +2579,14 @@
     },
     "incomeRequirement": {
       "currency": "EUR",
-      "monthly": 1700,
-      "annual": null,
-      "notes": "Low threshold relative to Western Europe"
+      "monthly": 3500,
+      "annual": 42000,
+      "notes": "Confirmed monthly income; no dedicated digital nomad visa — uses freelance residence path"
     },
     "tax": {
-      "status": "exempt",
-      "rate": 0,
-      "notes": "No Serbian income tax for digital nomad permit holders working for foreign entities"
+      "status": "standard",
+      "rate": 10,
+      "notes": "Flat 10% personal income tax; social contributions may apply; no special digital nomad exemption"
     },
     "eligibility": {
       "minAge": 18,
@@ -2618,17 +2618,17 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "~42 €; очень доступно"
         },
         "incomeRequirement": {
-          "notes": "Низкий порог по сравнению с Западной Европой"
+          "notes": "Подтверждённый ежемесячный доход; специальная виза для цифровых кочевников отсутствует — используется путь фриланс-резидентства"
         },
         "tax": {
-          "notes": "Нет сербского подоходного налога для обладателей разрешения для цифровых кочевников, работающих на иностранные компании"
+          "notes": "Фиксированный подоходный налог 10%; могут применяться социальные взносы; нет специального освобождения для цифровых кочевников"
         },
         "eligibility": {
           "requirements": [
@@ -2664,10 +2664,10 @@
           "notes": "~42 €; дуже доступно"
         },
         "incomeRequirement": {
-          "notes": "Низький поріг порівняно із Західною Європою"
+          "notes": "Підтверджений щомісячний дохід; спеціальна віза для цифрових кочівників відсутня — використовується шлях фріланс-резидентства"
         },
         "tax": {
-          "notes": "Немає сербського податку на доходи для власників дозволу для цифрових кочівників, які працюють на іноземні компанії"
+          "notes": "Фіксований податок на доходи 10%; можуть застосовуватися соціальні внески; немає спеціального звільнення для цифрових кочівників"
         },
         "eligibility": {
           "requirements": [
@@ -2694,277 +2694,6 @@
             "Банківські виписки",
             "Медичне страхування",
             "Довідка про відсутність судимості",
-            "Підтвердження наявності житла"
-          ]
-        }
-      }
-    }
-  },
-  {
-    "code": "BA",
-    "visaName": "Digital Nomad Residence Permit",
-    "officialUrl": "https://www.mvp.gov.ba/",
-    "duration": {
-      "initial": 12,
-      "maxExtension": 12,
-      "renewable": true
-    },
-    "cost": {
-      "currency": "BAM",
-      "amount": 100,
-      "notes": "~€50; administrative fees"
-    },
-    "incomeRequirement": {
-      "currency": "EUR",
-      "monthly": 1350,
-      "annual": null,
-      "notes": "One of the lowest thresholds in Europe"
-    },
-    "tax": {
-      "status": "standard",
-      "rate": 10,
-      "notes": "Flat 10% personal income tax; one of Europe's lowest"
-    },
-    "eligibility": {
-      "minAge": 18,
-      "requirements": [
-        "Remote work for foreign entity",
-        "Valid passport",
-        "Health insurance",
-        "Proof of income",
-        "No criminal record"
-      ]
-    },
-    "benefits": [
-      "Very low cost of living",
-      "Low flat tax rate",
-      "Beautiful natural scenery",
-      "Affordable accommodation",
-      "Welcoming local culture"
-    ],
-    "applicationProcess": {
-      "online": false,
-      "processingTime": "30–45 days",
-      "documents": [
-        "Passport",
-        "Employment proof",
-        "Income evidence",
-        "Health insurance",
-        "Criminal record",
-        "Accommodation proof"
-      ]
-    },
-    "lastUpdated": "2025-12-01",
-    "i18n": {
-      "ru": {
-        "cost": {
-          "notes": "~50 €; административные сборы"
-        },
-        "incomeRequirement": {
-          "notes": "Один из самых низких порогов в Европе"
-        },
-        "tax": {
-          "notes": "Фиксированный подоходный налог 10%; один из самых низких в Европе"
-        },
-        "eligibility": {
-          "requirements": [
-            "Удалённая работа на иностранную компанию",
-            "Действующий паспорт",
-            "Медицинская страховка",
-            "Подтверждение дохода",
-            "Отсутствие судимости"
-          ]
-        },
-        "benefits": [
-          "Очень низкая стоимость жизни",
-          "Низкая фиксированная ставка налога",
-          "Красивая природа",
-          "Доступное жильё",
-          "Гостеприимная местная культура"
-        ],
-        "applicationProcess": {
-          "processingTime": "30–45 дней",
-          "documents": [
-            "Паспорт",
-            "Подтверждение трудоустройства",
-            "Подтверждение доходов",
-            "Медицинская страховка",
-            "Справка о несудимости",
-            "Подтверждение наличия жилья"
-          ]
-        }
-      },
-      "ua": {
-        "cost": {
-          "notes": "~50 €; адміністративні збори"
-        },
-        "incomeRequirement": {
-          "notes": "Один із найнижчих порогів у Європі"
-        },
-        "tax": {
-          "notes": "Фіксований податок на доходи 10%; один із найнижчих у Європі"
-        },
-        "eligibility": {
-          "requirements": [
-            "Віддалена робота на іноземну компанію",
-            "Дійсний паспорт",
-            "Медичне страхування",
-            "Підтвердження доходу",
-            "Відсутність судимості"
-          ]
-        },
-        "benefits": [
-          "Дуже низька вартість життя",
-          "Низька фіксована ставка податку",
-          "Гарна природа",
-          "Доступне житло",
-          "Гостинна місцева культура"
-        ],
-        "applicationProcess": {
-          "processingTime": "30–45 днів",
-          "documents": [
-            "Паспорт",
-            "Підтвердження працевлаштування",
-            "Підтвердження доходів",
-            "Медичне страхування",
-            "Довідка про несудимість",
-            "Підтвердження наявності житла"
-          ]
-        }
-      }
-    }
-  },
-  {
-    "code": "SK",
-    "visaName": "Temporary Residence for Business (Freelance)",
-    "officialUrl": "https://www.minv.sk/?residence",
-    "duration": {
-      "initial": 12,
-      "maxExtension": 24,
-      "renewable": true
-    },
-    "cost": {
-      "currency": "EUR",
-      "amount": 165,
-      "notes": "Residence permit fee for third-country nationals"
-    },
-    "incomeRequirement": {
-      "currency": "EUR",
-      "monthly": 2400,
-      "annual": null,
-      "notes": "Based on Slovak living standard requirements"
-    },
-    "tax": {
-      "status": "standard",
-      "rate": 19,
-      "notes": "19% flat rate up to €41,445; 25% above; health/social contributions apply"
-    },
-    "eligibility": {
-      "minAge": 18,
-      "requirements": [
-        "Freelance or business activity",
-        "Valid passport",
-        "Health insurance",
-        "Proof of funds",
-        "Clean criminal record",
-        "Business registration or trade licence"
-      ]
-    },
-    "benefits": [
-      "EU/Schengen access",
-      "Central European location",
-      "Affordable cost of living",
-      "Growing tech sector",
-      "High quality of life"
-    ],
-    "applicationProcess": {
-      "online": false,
-      "processingTime": "60–90 days",
-      "documents": [
-        "Passport",
-        "Business registration proof",
-        "Financial documentation",
-        "Health insurance",
-        "Criminal record",
-        "Accommodation proof"
-      ]
-    },
-    "lastUpdated": "2025-12-01",
-    "i18n": {
-      "ru": {
-        "cost": {
-          "notes": "Сбор за вид на жительство для граждан третьих стран"
-        },
-        "incomeRequirement": {
-          "notes": "На основе требований к уровню жизни Словакии"
-        },
-        "tax": {
-          "notes": "Фиксированная ставка 19% до 41 445 €; 25% свыше; применяются взносы на медицинское и социальное страхование"
-        },
-        "eligibility": {
-          "requirements": [
-            "Фриланс или предпринимательская деятельность",
-            "Действующий паспорт",
-            "Медицинская страховка",
-            "Подтверждение наличия средств",
-            "Отсутствие судимости",
-            "Регистрация бизнеса или торговая лицензия"
-          ]
-        },
-        "benefits": [
-          "Доступ в ЕС/Шенгенскую зону",
-          "Центральноевропейское расположение",
-          "Доступная стоимость жизни",
-          "Растущий технологический сектор",
-          "Высокое качество жизни"
-        ],
-        "applicationProcess": {
-          "processingTime": "60–90 дней",
-          "documents": [
-            "Паспорт",
-            "Подтверждение регистрации бизнеса",
-            "Финансовая документация",
-            "Медицинская страховка",
-            "Справка о несудимости",
-            "Подтверждение наличия жилья"
-          ]
-        }
-      },
-      "ua": {
-        "cost": {
-          "notes": "Збір за дозвіл на проживання для громадян третіх країн"
-        },
-        "incomeRequirement": {
-          "notes": "На основі вимог до рівня життя Словаччини"
-        },
-        "tax": {
-          "notes": "Фіксована ставка 19% до 41 445 €; 25% вище; застосовуються внески на медичне та соціальне страхування"
-        },
-        "eligibility": {
-          "requirements": [
-            "Фріланс або підприємницька діяльність",
-            "Дійсний паспорт",
-            "Медичне страхування",
-            "Підтвердження наявності коштів",
-            "Відсутність судимості",
-            "Реєстрація бізнесу або торгова ліцензія"
-          ]
-        },
-        "benefits": [
-          "Доступ до ЄС/Шенгенської зони",
-          "Центральноєвропейське розташування",
-          "Доступна вартість життя",
-          "Зростаючий технологічний сектор",
-          "Висока якість життя"
-        ],
-        "applicationProcess": {
-          "processingTime": "60–90 днів",
-          "documents": [
-            "Паспорт",
-            "Підтвердження реєстрації бізнесу",
-            "Фінансова документація",
-            "Медичне страхування",
-            "Довідка про несудимість",
             "Підтвердження наявності житла"
           ]
         }
@@ -3025,7 +2754,7 @@
         "Passport photo"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -3106,137 +2835,6 @@
     }
   },
   {
-    "code": "BM",
-    "visaName": "Work from Bermuda Certificate",
-    "officialUrl": "https://www.gov.bm/work-from-bermuda",
-    "duration": {
-      "initial": 12,
-      "maxExtension": 12,
-      "renewable": true
-    },
-    "cost": {
-      "currency": "USD",
-      "amount": 263,
-      "notes": "Application fee"
-    },
-    "incomeRequirement": {
-      "currency": "USD",
-      "monthly": null,
-      "annual": null,
-      "notes": "Must demonstrate ability to support yourself; no fixed minimum"
-    },
-    "tax": {
-      "status": "exempt",
-      "rate": 0,
-      "notes": "No income tax in Bermuda (zero income tax jurisdiction)"
-    },
-    "eligibility": {
-      "minAge": 18,
-      "requirements": [
-        "Remote employment or self-employment",
-        "Valid passport",
-        "Health insurance with Bermuda coverage",
-        "Proof of employment and income",
-        "No criminal record"
-      ]
-    },
-    "benefits": [
-      "Zero income tax jurisdiction",
-      "Beautiful island setting",
-      "English-speaking",
-      "Close proximity to US East Coast",
-      "High safety and quality of life"
-    ],
-    "applicationProcess": {
-      "online": true,
-      "processingTime": "5–10 days",
-      "documents": [
-        "Passport",
-        "Proof of remote employment",
-        "Health insurance",
-        "Brief cover letter",
-        "Passport photos"
-      ]
-    },
-    "lastUpdated": "2025-12-01",
-    "i18n": {
-      "ru": {
-        "cost": {
-          "notes": "Сбор за подачу заявления"
-        },
-        "incomeRequirement": {
-          "notes": "Необходимо подтвердить способность содержать себя; фиксированный минимум отсутствует"
-        },
-        "tax": {
-          "notes": "Нет подоходного налога на Бермудах (юрисдикция с нулевым подоходным налогом)"
-        },
-        "eligibility": {
-          "requirements": [
-            "Удалённая работа по найму или самозанятость",
-            "Действующий паспорт",
-            "Медицинская страховка с покрытием Бермуд",
-            "Подтверждение трудоустройства и дохода",
-            "Отсутствие судимости"
-          ]
-        },
-        "benefits": [
-          "Юрисдикция с нулевым подоходным налогом",
-          "Прекрасная островная обстановка",
-          "Англоязычная страна",
-          "Близость к Восточному побережью США",
-          "Высокая безопасность и качество жизни"
-        ],
-        "applicationProcess": {
-          "processingTime": "5–10 дней",
-          "documents": [
-            "Паспорт",
-            "Подтверждение удалённой работы",
-            "Медицинская страховка",
-            "Краткое сопроводительное письмо",
-            "Фотографии на паспорт"
-          ]
-        }
-      },
-      "ua": {
-        "cost": {
-          "notes": "Збір за подання заяви"
-        },
-        "incomeRequirement": {
-          "notes": "Необхідно підтвердити здатність утримувати себе; фіксований мінімум відсутній"
-        },
-        "tax": {
-          "notes": "Немає податку на доходи на Бермудах (юрисдикція з нульовим податком на доходи)"
-        },
-        "eligibility": {
-          "requirements": [
-            "Віддалена робота за наймом або самозайнятість",
-            "Дійсний паспорт",
-            "Медичне страхування з покриттям Бермудів",
-            "Підтвердження працевлаштування та доходу",
-            "Відсутність судимості"
-          ]
-        },
-        "benefits": [
-          "Юрисдикція з нульовим податком на доходи",
-          "Чудова острівна обстановка",
-          "Англомовна країна",
-          "Близькість до Східного узбережжя США",
-          "Висока безпека та якість життя"
-        ],
-        "applicationProcess": {
-          "processingTime": "5–10 днів",
-          "documents": [
-            "Паспорт",
-            "Підтвердження віддаленої роботи",
-            "Медичне страхування",
-            "Короткий супровідний лист",
-            "Фотографії на паспорт"
-          ]
-        }
-      }
-    }
-  },
-  {
     "code": "KY",
     "visaName": "Global Citizen Concierge Program",
     "officialUrl": "https://www.visitcaymanislands.com/en-us/global-citizen-concierge",
@@ -3248,7 +2846,7 @@
     "cost": {
       "currency": "USD",
       "amount": 1469,
-      "notes": "Individual rate; $2,400 for couples; $3,180 for families"
+      "notes": "$1,469 annual fee for up to 2 persons; $500 per additional dependent; 7% credit card processing fee"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -3289,11 +2887,11 @@
         "Police clearance certificate"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Индивидуальный тариф; $2 400 для пар; $3 180 для семей"
+          "notes": "1 469 $ годовой сбор на 1-2 человек; 500 $ за каждого дополнительного иждивенца; 7% комиссия за оплату картой"
         },
         "incomeRequirement": {
           "notes": "Минимальный годовой доход $100 000"
@@ -3330,7 +2928,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Індивідуальний тариф; $2 400 для пар; $3 180 для сімей"
+          "notes": "1 469 $ річний збір на 1-2 осіб; 500 $ за кожного додаткового утриманця; 7% комісія за оплату карткою"
         },
         "incomeRequirement": {
           "notes": "Мінімальний річний дохід $100 000"
@@ -3420,7 +3018,7 @@
         "Police clearance"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -3509,8 +3107,8 @@
     },
     "cost": {
       "currency": "USD",
-      "amount": 100,
-      "notes": "Individual; $150 for families"
+      "amount": 800,
+      "notes": "Individual visa fee ($800); families $1,200; plus $100 non-refundable application fee"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -3551,11 +3149,11 @@
         "Passport photo"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Индивидуальный тариф; $150 для семей"
+          "notes": "Визовый сбор для индивидуального заявителя (800 $); семьи 1 200 $; плюс невозвратный сбор за подачу 100 $"
         },
         "incomeRequirement": {
           "notes": "Минимальный годовой доход $50 000"
@@ -3592,7 +3190,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Індивідуальний тариф; $150 для сімей"
+          "notes": "Візовий збір для індивідуального заявника (800 $); сім'ї 1 200 $; плюс неповоротний збір за подачу 100 $"
         },
         "incomeRequirement": {
           "notes": "Мінімальний річний дохід $50 000"
@@ -3640,8 +3238,8 @@
     },
     "cost": {
       "currency": "EUR",
-      "amount": 54,
-      "notes": "Visa application fee"
+      "amount": 20,
+      "notes": "~€20 visa fee paid on arrival; +€34 airport security fee"
     },
     "incomeRequirement": {
       "currency": "EUR",
@@ -3683,11 +3281,11 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Визовый сбор за подачу заявления"
+          "notes": "~20 € визовый сбор при прибытии; +34 € сбор за безопасность аэропорта"
         },
         "incomeRequirement": {
           "notes": "Умеренные требования к доходу"
@@ -3725,7 +3323,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Візовий збір за подання заяви"
+          "notes": "~20 € візовий збір при прибутті; +34 € збір за безпеку аеропорту"
         },
         "incomeRequirement": {
           "notes": "Помірні вимоги до доходу"
@@ -3779,9 +3377,9 @@
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": null,
-      "annual": null,
-      "notes": "Must demonstrate sufficient income to support yourself; no fixed minimum"
+      "monthly": 4583,
+      "annual": 55000,
+      "notes": "Minimum $55,000 annual income"
     },
     "tax": {
       "status": "exempt",
@@ -3813,14 +3411,14 @@
         "Employment letter or business proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Индивидуальный тариф; $3 000 для пар; $3 500 для семей"
         },
         "incomeRequirement": {
-          "notes": "Необходимо подтвердить достаточный доход для самообеспечения; фиксированный минимум отсутствует"
+          "notes": "Минимум 55 000 $ годового дохода"
         },
         "tax": {
           "notes": "Нет подоходного налога с физических лиц в Ангилье"
@@ -3854,7 +3452,7 @@
           "notes": "Індивідуальний тариф; $3 000 для пар; $3 500 для сімей"
         },
         "incomeRequirement": {
-          "notes": "Необхідно підтвердити достатній дохід для самозабезпечення; фіксований мінімум відсутній"
+          "notes": "Мінімум 55 000 $ річного доходу"
         },
         "tax": {
           "notes": "Немає податку на доходи фізичних осіб в Ангільї"
@@ -3901,9 +3499,9 @@
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 3000,
-      "annual": 36000,
-      "notes": "Minimum demonstrable income"
+      "monthly": 3083,
+      "annual": 37000,
+      "notes": "Minimum EC$100,000 annual income (~$37,000 USD)"
     },
     "tax": {
       "status": "exempt",
@@ -3938,14 +3536,14 @@
         "Police clearance"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Индивидуальный тариф"
         },
         "incomeRequirement": {
-          "notes": "Минимальный подтверждаемый доход"
+          "notes": "Минимум 100 000 EC$ годового дохода (~37 000 $)"
         },
         "tax": {
           "notes": "Нет местного подоходного налога на доход из иностранных источников"
@@ -3982,7 +3580,7 @@
           "notes": "Індивідуальний тариф"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний підтверджуваний дохід"
+          "notes": "Мінімум 100 000 EC$ річного доходу (~37 000 $)"
         },
         "tax": {
           "notes": "Немає місцевого податку на доходи на дохід з іноземних джерел"
@@ -4026,15 +3624,15 @@
       "renewable": true
     },
     "cost": {
-      "currency": "USD",
-      "amount": 262,
-      "notes": "Application fee"
+      "currency": "ANG",
+      "amount": 535,
+      "notes": "~$294 USD application fee per person"
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 3000,
+      "monthly": 2600,
       "annual": 36000,
-      "notes": "Minimum monthly income"
+      "notes": "~€2,600/month minimum income"
     },
     "tax": {
       "status": "exempt",
@@ -4069,11 +3667,11 @@
         "Police certificate"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Сбор за подачу заявления"
+          "notes": "~294 $ сбор за подачу заявления на человека"
         },
         "incomeRequirement": {
           "notes": "Минимальный месячный доход"
@@ -4110,7 +3708,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Збір за подання заяви"
+          "notes": "~294 $ збір за подання заяви на людину"
         },
         "incomeRequirement": {
           "notes": "Мінімальний місячний дохід"
@@ -4202,7 +3800,7 @@
         "Application form"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -4338,7 +3936,7 @@
         "Proof of accommodation"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -4434,9 +4032,9 @@
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 1275,
-      "annual": 15300,
-      "notes": "3× Ecuador's basic unified salary; very affordable"
+      "monthly": 1446,
+      "annual": 17352,
+      "notes": "3× Ecuador's basic unified salary; +$250/month per additional adult dependent"
     },
     "tax": {
       "status": "exempt",
@@ -4473,14 +4071,14 @@
         "Application form"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Визовый сбор"
         },
         "incomeRequirement": {
-          "notes": "3× базовой единой зарплаты Эквадора; очень доступно"
+          "notes": "3× базовой единой зарплаты Эквадора; +250 $/мес. на каждого взрослого иждивенца"
         },
         "tax": {
           "notes": "Нет эквадорского подоходного налога на иностранный доход в течение первых 2 лет"
@@ -4519,7 +4117,7 @@
           "notes": "Візовий збір"
         },
         "incomeRequirement": {
-          "notes": "3× базової єдиної зарплати Еквадору; дуже доступно"
+          "notes": "3× базової єдиної зарплати Еквадору; +250 $/міс. на кожного дорослого утриманця"
         },
         "tax": {
           "notes": "Немає еквадорського податку на доходи на іноземний дохід протягом перших 2 років"
@@ -4571,9 +4169,9 @@
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 684,
-      "annual": null,
-      "notes": "3× Colombian minimum wage; one of the lowest globally"
+      "monthly": 1400,
+      "annual": 16800,
+      "notes": "3× Colombian minimum wage; approximately COP 5,252,715/month"
     },
     "tax": {
       "status": "exempt",
@@ -4609,14 +4207,14 @@
         "Motivation letter"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Сбор за выдачу визы"
         },
         "incomeRequirement": {
-          "notes": "3× минимальной зарплаты Колумбии; один из самых низких порогов в мире"
+          "notes": "3× минимальной зарплаты Колумбии; примерно 5 252 715 COP/мес."
         },
         "tax": {
           "notes": "Нет колумбийского подоходного налога при пребывании менее 183 дней; после 183 дней налогом облагается только доход из колумбийских источников"
@@ -4654,7 +4252,7 @@
           "notes": "Збір за видачу візи"
         },
         "incomeRequirement": {
-          "notes": "3× мінімальної зарплати Колумбії; один із найнижчих порогів у світі"
+          "notes": "3× мінімальної зарплати Колумбії; приблизно 5 252 715 COP/міс."
         },
         "tax": {
           "notes": "Немає колумбійського податку на доходи при перебуванні менше 183 днів; після 183 днів оподатковується лише дохід з колумбійських джерел"
@@ -4700,8 +4298,8 @@
     },
     "cost": {
       "currency": "USD",
-      "amount": 0,
-      "notes": "Free application; no visa fee"
+      "amount": 117,
+      "notes": "Visa application fee; varies by consulate ($117-400)"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -4742,11 +4340,11 @@
         "Digital photo"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Бесплатная подача; визовый сбор отсутствует"
+          "notes": "Визовый сбор; варьируется по консульствам (117-400 $)"
         },
         "incomeRequirement": {
           "notes": "Минимальный месячный доход от удалённой работы за рубежом"
@@ -4783,7 +4381,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Безкоштовна подача; візовий збір відсутній"
+          "notes": "Візовий збір; варіюється по консульствах (117-400 $)"
         },
         "incomeRequirement": {
           "notes": "Мінімальний місячний дохід від віддаленої роботи за кордоном"
@@ -4875,7 +4473,7 @@
         "Passport photos"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -4973,9 +4571,9 @@
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 5000,
-      "annual": 60000,
-      "notes": "Minimum monthly income or equivalent in savings"
+      "monthly": 3500,
+      "annual": 42000,
+      "notes": "Minimum $3,500/month for employees; $5,000/month for business owners"
     },
     "tax": {
       "status": "exempt",
@@ -5013,14 +4611,14 @@
         "Employment contract"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Визовый сбор + оформление Emirates ID"
         },
         "incomeRequirement": {
-          "notes": "Минимальный месячный доход или эквивалент в сбережениях"
+          "notes": "Минимум 3 500 $/мес. для наёмных работников; 5 000 $/мес. для владельцев бизнеса"
         },
         "tax": {
           "notes": "Нулевой подоходный налог с физических лиц в ОАЭ"
@@ -5060,7 +4658,7 @@
           "notes": "Візовий збір + оформлення Emirates ID"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний місячний дохід або еквівалент у заощадженнях"
+          "notes": "Мінімум 3 500 $/міс. для найманих працівників; 5 000 $/міс. для власників бізнесу"
         },
         "tax": {
           "notes": "Нульовий податок на доходи фізичних осіб в ОАЕ"
@@ -5152,7 +4750,7 @@
         "Proof of accommodation"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -5245,8 +4843,8 @@
     },
     "cost": {
       "currency": "EUR",
-      "amount": 0,
-      "notes": "Free application; Seychelles issues visitor permits on arrival"
+      "amount": 45,
+      "notes": "~€45 application fee per person; processed online"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -5287,11 +4885,11 @@
         "Accommodation booking"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Бесплатная подача; Сейшелы выдают разрешение посетителя по прибытии"
+          "notes": "~45 € сбор за подачу заявления; подаётся онлайн"
         },
         "incomeRequirement": {
           "notes": "Необходимо подтвердить достаточный доход; фиксированный минимум отсутствует"
@@ -5328,7 +4926,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Безкоштовна подача; Сейшели видають дозвіл відвідувача по прибутті"
+          "notes": "~45 € збір за подання заяви; подається онлайн"
         },
         "incomeRequirement": {
           "notes": "Необхідно підтвердити достатній дохід; фіксований мінімум відсутній"
@@ -5367,7 +4965,7 @@
   },
   {
     "code": "KE",
-    "visaName": "Digital Nomad Work Permit",
+    "visaName": "Class N Digital Nomad Permit",
     "officialUrl": "https://fns.immigration.go.ke/",
     "duration": {
       "initial": 12,
@@ -5376,14 +4974,14 @@
     },
     "cost": {
       "currency": "USD",
-      "amount": 250,
-      "notes": "Work permit fee"
+      "amount": 1000,
+      "notes": "$1,000 per permit year; issued for 1-2 years"
     },
     "incomeRequirement": {
       "currency": "USD",
       "monthly": 2000,
-      "annual": null,
-      "notes": "Minimum monthly income from remote work"
+      "annual": 24000,
+      "notes": "Minimum $24,000 annual income (reduced from $55,000 in late 2024)"
     },
     "tax": {
       "status": "exempt",
@@ -5420,14 +5018,14 @@
         "Passport photos"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Сбор за рабочее разрешение"
+          "notes": "1 000 $ за каждый год разрешения; выдаётся на 1-2 года"
         },
         "incomeRequirement": {
-          "notes": "Минимальный месячный доход от удалённой работы"
+          "notes": "Минимум 24 000 $ годового дохода (снижено с 55 000 $ в конце 2024)"
         },
         "tax": {
           "notes": "Освобождение от кенийского подоходного налога на иностранный доход от удалённой работы"
@@ -5463,10 +5061,10 @@
       },
       "ua": {
         "cost": {
-          "notes": "Збір за робочий дозвіл"
+          "notes": "1 000 $ за кожен рік дозволу; видається на 1-2 роки"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний місячний дохід від віддаленої роботи"
+          "notes": "Мінімум 24 000 $ річного доходу (знижено з 55 000 $ наприкінці 2024)"
         },
         "tax": {
           "notes": "Звільнення від кенійського податку на доходи на іноземний дохід від віддаленої роботи"
@@ -5518,9 +5116,9 @@
     },
     "incomeRequirement": {
       "currency": "ZAR",
-      "monthly": 57000,
-      "annual": null,
-      "notes": "~€2,800/month; based on South African standards"
+      "monthly": 54248,
+      "annual": 650976,
+      "notes": "ZAR 650,976/year minimum (~$35,000 USD); reduced from previous ZAR 1,000,000"
     },
     "tax": {
       "status": "exempt",
@@ -5558,14 +5156,14 @@
         "Proof of accommodation"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "~75 €; визовый сбор"
         },
         "incomeRequirement": {
-          "notes": "~2 800 €/мес.; на основе стандартов ЮАР"
+          "notes": "Минимум 650 976 ZAR/год (~35 000 $); снижено с прежних 1 000 000 ZAR"
         },
         "tax": {
           "notes": "Нет южноафриканского подоходного налога на иностранный доход для удалённых работников (при статусе нерезидента)"
@@ -5605,7 +5203,7 @@
           "notes": "~75 €; візовий збір"
         },
         "incomeRequirement": {
-          "notes": "~2 800 €/міс.; на основі стандартів ПАР"
+          "notes": "Мінімум 650 976 ZAR/рік (~35 000 $); знижено з попередніх 1 000 000 ZAR"
         },
         "tax": {
           "notes": "Немає південноафриканського податку на доходи на іноземний дохід для віддалених працівників (при статусі нерезидента)"
@@ -5660,7 +5258,7 @@
       "currency": "USD",
       "monthly": 2000,
       "annual": 24000,
-      "notes": "Minimum $24,000 annual income"
+      "notes": "$24,000/year for tech professionals; $60,000/year for non-tech professionals"
     },
     "tax": {
       "status": "exempt",
@@ -5698,14 +5296,14 @@
         "Health insurance"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "~200 €; сбор за обработку, включает доступ к коворкингу"
         },
         "incomeRequirement": {
-          "notes": "Минимальный годовой доход $24 000"
+          "notes": "24 000 $/год для IT-специалистов; 60 000 $/год для специалистов не из IT-сферы"
         },
         "tax": {
           "notes": "Иностранный доход не облагается налогом в Малайзии по принципу территориального налогообложения"
@@ -5745,7 +5343,7 @@
           "notes": "~200 €; збір за обробку, включає доступ до коворкінгу"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний річний дохід $24 000"
+          "notes": "24 000 $/рік для IT-спеціалістів; 60 000 $/рік для спеціалістів не з IT-сфери"
         },
         "tax": {
           "notes": "Іноземний дохід не оподатковується в Малайзії за принципом територіального оподаткування"
@@ -5837,7 +5435,7 @@
         "Company verification documents"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -5921,23 +5519,23 @@
   },
   {
     "code": "ID",
-    "visaName": "B211A Remote Worker Visa (Digital Nomad)",
+    "visaName": "E33G Remote Worker Visa (Digital Nomad)",
     "officialUrl": "https://molina.imigrasi.go.id/",
     "duration": {
-      "initial": 6,
-      "maxExtension": 6,
+      "initial": 12,
+      "maxExtension": 12,
       "renewable": true
     },
     "cost": {
       "currency": "USD",
-      "amount": 250,
-      "notes": "Visa on arrival + extension fee; e-Visa available"
+      "amount": 315,
+      "notes": "Visa application fee $150 + permit of stay fee $165"
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 2000,
-      "annual": null,
-      "notes": "Minimum monthly income from foreign employment"
+      "monthly": 5000,
+      "annual": 60000,
+      "notes": "Minimum $60,000/year annual income; replaces former B211A pathway"
     },
     "tax": {
       "status": "exempt",
@@ -5974,14 +5572,14 @@
         "Proof of accommodation"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Виза по прибытии + сбор за продление; доступна электронная виза"
+          "notes": "Визовый сбор 150 $ + сбор за разрешение на пребывание 165 $"
         },
         "incomeRequirement": {
-          "notes": "Минимальный месячный доход от иностранного работодателя"
+          "notes": "Минимум 60 000 $/год годового дохода; заменяет прежний путь B211A"
         },
         "tax": {
           "notes": "Нет индонезийского подоходного налога при пребывании менее 183 дней; виза «Второй дом» может иметь другие правила"
@@ -6017,10 +5615,10 @@
       },
       "ua": {
         "cost": {
-          "notes": "Віза по прибутті + збір за продовження; доступна електронна віза"
+          "notes": "Візовий збір 150 $ + збір за дозвіл на перебування 165 $"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний місячний дохід від іноземного роботодавця"
+          "notes": "Мінімум 60 000 $/рік річного доходу; замінює колишній шлях B211A"
         },
         "tax": {
           "notes": "Немає індонезійського податку на доходи при перебуванні менше 183 днів; віза «Другий дім» може мати інші правила"
@@ -6079,7 +5677,7 @@
     "tax": {
       "status": "special",
       "rate": null,
-      "notes": "First 3 years: income over TWD 3M (≈$94k) is 50% tax exempt; employer contributions exempt; comprehensive tax treaty network"
+      "notes": "First 5 years: salary income over TWD 3M (≈$94k) is 50% tax exempt; overseas income also exempt from basic income tax calculation"
     },
     "eligibility": {
       "minAge": 18,
@@ -6110,7 +5708,7 @@
         "Passport photos"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -6120,7 +5718,7 @@
           "notes": "~$5 000/мес.; или подтверждение специальной экспертизы в одной из 8 профессиональных областей"
         },
         "tax": {
-          "notes": "Первые 3 года: доход свыше TWD 3M (≈$94 тыс.) — 50% налоговая льгота; взносы работодателя освобождены; обширная сеть налоговых соглашений"
+          "notes": "Первые 5 лет: доход от зарплаты свыше 3 млн TWD (≈94 тыс. $) освобождён от налога на 50%; зарубежный доход также освобождён от расчёта базового подоходного налога"
         },
         "eligibility": {
           "requirements": [
@@ -6158,7 +5756,7 @@
           "notes": "~$5 000/міс.; або підтвердження спеціальної експертизи в одній з 8 професійних галузей"
         },
         "tax": {
-          "notes": "Перші 3 роки: дохід понад TWD 3M (≈$94 тис.) — 50% податкова пільга; внески роботодавця звільнені; розгалужена мережа податкових угод"
+          "notes": "Перші 5 років: дохід від зарплати понад 3 млн TWD (≈94 тис. $) звільнений від податку на 50%; закордонний дохід також звільнений від розрахунку базового податку на доходи"
         },
         "eligibility": {
           "requirements": [
@@ -6201,8 +5799,8 @@
     },
     "cost": {
       "currency": "USD",
-      "amount": 11,
-      "notes": "Lowest visa fee globally; just CI (Cédula de Identidad) processing"
+      "amount": 10,
+      "notes": "~$10 processing fee (paid in-country); no visa fee"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -6240,11 +5838,11 @@
         "Payment of CI fee ($11)"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Самый низкий визовый сбор в мире; только обработка CI (Cédula de Identidad)"
+          "notes": "~10 $ за обработку (оплата на месте); визовый сбор отсутствует"
         },
         "incomeRequirement": {
           "notes": "Нет минимального требования к доходу; необходимо подтвердить удалённую работу"
@@ -6278,7 +5876,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Найнижчий візовий збір у світі; лише обробка CI (Cédula de Identidad)"
+          "notes": "~10 $ за обробку (оплата на місці); візовий збір відсутній"
         },
         "incomeRequirement": {
           "notes": "Немає мінімальної вимоги до доходу; необхідно підтвердити віддалену роботу"
@@ -6323,14 +5921,14 @@
     },
     "cost": {
       "currency": "USD",
-      "amount": 250,
-      "notes": "Visa fee"
+      "amount": 500,
+      "notes": "$500 per person visa fee"
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 2000,
-      "annual": null,
-      "notes": "Minimum monthly income from remote work"
+      "monthly": 1500,
+      "annual": 18000,
+      "notes": "Reduced to $1,500/month since January 2026; 5-year visa option available"
     },
     "tax": {
       "status": "exempt",
@@ -6365,14 +5963,14 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Визовый сбор"
+          "notes": "500 $ визовый сбор на человека"
         },
         "incomeRequirement": {
-          "notes": "Минимальный месячный доход от удалённой работы"
+          "notes": "Снижено до 1 500 $/мес. с января 2026; доступна виза на 5 лет"
         },
         "tax": {
           "notes": "Нет шри-ланкийского подоходного налога на иностранный доход для обладателей визы цифрового кочевника"
@@ -6406,10 +6004,10 @@
       },
       "ua": {
         "cost": {
-          "notes": "Візовий збір"
+          "notes": "500 $ візовий збір на людину"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний місячний дохід від віддаленої роботи"
+          "notes": "Знижено до 1 500 $/міс. з січня 2026; доступна віза на 5 років"
         },
         "tax": {
           "notes": "Немає шрі-ланкійського податку на доходи на іноземний дохід для власників візи цифрового кочівника"
@@ -6449,13 +6047,13 @@
     "officialUrl": "https://mhaiss.gov.na/",
     "duration": {
       "initial": 6,
-      "maxExtension": 6,
-      "renewable": true
+      "maxExtension": 0,
+      "renewable": false
     },
     "cost": {
       "currency": "NAD",
-      "amount": 1150,
-      "notes": "~€62; visa fee"
+      "amount": 3300,
+      "notes": "NAD 3,300 (~$180 USD); paid after approval"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -6497,11 +6095,11 @@
         "Accommodation proof"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "~62 €; визовый сбор"
+          "notes": "3 300 NAD (~180 $); оплата после одобрения"
         },
         "incomeRequirement": {
           "notes": "Минимальный месячный доход"
@@ -6539,7 +6137,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "~62 €; візовий збір"
+          "notes": "3 300 NAD (~180 $); оплата після схвалення"
         },
         "incomeRequirement": {
           "notes": "Мінімальний місячний дохід"
@@ -6630,7 +6228,7 @@
         "Police clearance"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -6710,7 +6308,7 @@
   },
   {
     "code": "SV",
-    "visaName": "Digital Nomad Visa (Bitcoin-friendly)",
+    "visaName": "Digital Nomad Visa",
     "officialUrl": "https://www.migracion.gob.sv/",
     "duration": {
       "initial": 12,
@@ -6719,14 +6317,14 @@
     },
     "cost": {
       "currency": "USD",
-      "amount": 2825,
-      "notes": "Processing fee; includes Bitcoin wallet setup support"
+      "amount": 100,
+      "notes": "Application fee; express processing available for additional $60"
     },
     "incomeRequirement": {
-      "currency": "BTC",
-      "monthly": null,
-      "annual": null,
-      "notes": "Must demonstrate stable remote income; Bitcoin accepted as proof of funds"
+      "currency": "USD",
+      "monthly": 1460,
+      "annual": 17520,
+      "notes": "Minimum monthly income from remote work; Bitcoin accepted as proof of funds"
     },
     "tax": {
       "status": "exempt",
@@ -6761,14 +6359,14 @@
         "Application form"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Сбор за обработку; включает поддержку настройки Bitcoin-кошелька"
+          "notes": "Сбор за подачу заявления; ускоренная обработка доступна за дополнительные 60 $"
         },
         "incomeRequirement": {
-          "notes": "Необходимо подтвердить стабильный удалённый доход; Bitcoin принимается как подтверждение средств"
+          "notes": "Минимальный месячный доход от удалённой работы; биткоин принимается как подтверждение средств"
         },
         "tax": {
           "notes": "Нет подоходного налога на иностранный доход; в Сальвадоре нет налога на прирост капитала от Bitcoin"
@@ -6802,10 +6400,10 @@
       },
       "ua": {
         "cost": {
-          "notes": "Збір за обробку; включає підтримку налаштування Bitcoin-гаманця"
+          "notes": "Збір за подання заяви; прискорена обробка доступна за додаткові 60 $"
         },
         "incomeRequirement": {
-          "notes": "Необхідно підтвердити стабільний віддалений дохід; Bitcoin приймається як підтвердження коштів"
+          "notes": "Мінімальний місячний дохід від віддаленої роботи; біткоїн приймається як підтвердження коштів"
         },
         "tax": {
           "notes": "Немає податку на доходи на іноземний дохід; у Сальвадорі немає податку на приріст капіталу від Bitcoin"
@@ -6851,13 +6449,13 @@
     "cost": {
       "currency": "AMD",
       "amount": 105000,
-      "notes": "~€240; residence permit fee"
+      "notes": "AMD 105,000 (~$270); temporary residence permit fee"
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 1500,
+      "monthly": null,
       "annual": null,
-      "notes": "Moderate income threshold"
+      "notes": "No minimum income requirement; must demonstrate ability to cover living expenses"
     },
     "tax": {
       "status": "standard",
@@ -6893,14 +6491,14 @@
         "Criminal record certificate"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "~240 €; сбор за вид на жительство"
+          "notes": "105 000 AMD (~270 $); сбор за временный вид на жительство"
         },
         "incomeRequirement": {
-          "notes": "Умеренный порог дохода"
+          "notes": "Нет минимального требования к доходу; необходимо подтвердить способность покрывать расходы на жизнь"
         },
         "tax": {
           "notes": "Фиксированный подоходный налог 20%; работники IT-сектора могут претендовать на ставку 10%"
@@ -6935,10 +6533,10 @@
       },
       "ua": {
         "cost": {
-          "notes": "~240 €; збір за дозвіл на проживання"
+          "notes": "105 000 AMD (~270 $); збір за тимчасовий дозвіл на проживання"
         },
         "incomeRequirement": {
-          "notes": "Помірний поріг доходу"
+          "notes": "Немає мінімальної вимоги до доходу; необхідно підтвердити здатність покривати витрати на проживання"
         },
         "tax": {
           "notes": "Фіксований податок на доходи 20%; працівники IT-сектору можуть претендувати на ставку 10%"
@@ -6989,9 +6587,9 @@
     },
     "incomeRequirement": {
       "currency": "USD",
-      "monthly": 3000,
-      "annual": 36000,
-      "notes": "Minimum annual income"
+      "monthly": null,
+      "annual": null,
+      "notes": "No fixed minimum; must demonstrate sufficient funds to support stay"
     },
     "tax": {
       "status": "exempt",
@@ -7026,14 +6624,14 @@
         "Police clearance"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
           "notes": "Очень доступный сбор за подачу"
         },
         "incomeRequirement": {
-          "notes": "Минимальный годовой доход"
+          "notes": "Нет фиксированного минимума; необходимо подтвердить достаточность средств"
         },
         "tax": {
           "notes": "Нет сент-люсийского подоходного налога на иностранный доход"
@@ -7070,7 +6668,7 @@
           "notes": "Дуже доступний збір за подання"
         },
         "incomeRequirement": {
-          "notes": "Мінімальний річний дохід"
+          "notes": "Немає фіксованого мінімуму; необхідно підтвердити достатність коштів"
         },
         "tax": {
           "notes": "Немає сент-люсійського податку на доходи на іноземний дохід"
@@ -7157,7 +6755,7 @@
         "Police certificate"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
@@ -7246,8 +6844,8 @@
     },
     "cost": {
       "currency": "USD",
-      "amount": 1000,
-      "notes": "Individual rate; additional fees for dependents"
+      "amount": 1025,
+      "notes": "$25 application fee + $1,000 visa fee; $500 per dependent"
     },
     "incomeRequirement": {
       "currency": "USD",
@@ -7288,11 +6886,11 @@
         "Police certificate"
       ]
     },
-    "lastUpdated": "2025-12-01",
+    "lastUpdated": "2026-04-04",
     "i18n": {
       "ru": {
         "cost": {
-          "notes": "Индивидуальный тариф; дополнительные сборы за иждивенцев"
+          "notes": "25 $ за подачу + 1 000 $ визовый сбор; 500 $ за каждого иждивенца"
         },
         "incomeRequirement": {
           "notes": "Необходимо подтвердить достаточный доход; фиксированный минимум отсутствует"
@@ -7329,7 +6927,7 @@
       },
       "ua": {
         "cost": {
-          "notes": "Індивідуальний тариф; додаткові збори за утриманців"
+          "notes": "25 $ за подачу + 1 000 $ візовий збір; 500 $ за кожного утриманця"
         },
         "incomeRequirement": {
           "notes": "Необхідно підтвердити достатній дохід; фіксований мінімум відсутній"

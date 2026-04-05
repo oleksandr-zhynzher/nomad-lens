@@ -38,6 +38,20 @@ export default function App() {
   );
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const [isSticky, setIsSticky] = useState(false);
+
+  // Detect when the sticky sentinel scrolls above the header (56px)
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsSticky(!entry.isIntersecting),
+      { rootMargin: "-57px 0px 0px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const { countries, loading, error, refresh } = useCountries();
   const ranked = useScoring(
@@ -570,6 +584,9 @@ export default function App() {
               </div>
             </div>
 
+            {/* Sentinel — used by IntersectionObserver to detect sticky state */}
+            <div ref={sentinelRef} style={{ height: 0 }} />
+
             {/* Search bar + Region chips — sticky below header */}
             <div
               className="sticky z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-4"
@@ -580,7 +597,7 @@ export default function App() {
               }}
             >
               {/* Search bar */}
-              <div className="relative mb-4">
+              <div className={`relative${isSticky ? "" : " mb-4"}`}>
                 <Search
                   className="absolute left-4 top-1/2 -translate-y-1/2"
                   size={18}
@@ -736,51 +753,25 @@ export default function App() {
                 )}
               </div>
 
-              {/* Region chips */}
-              <div className="mb-0">
-                <div
-                  style={{
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: 700,
-                    letterSpacing: "2px",
-                    textTransform: "uppercase",
-                    color: "#888888",
-                    marginBottom: "12px",
-                  }}
-                >
-                  {t("regions.label")}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => ws.setSelectedRegions(new Set())}
+              {/* Region chips — hidden when sticky */}
+              {!isSticky && (
+                <div className="mb-0">
+                  <div
                     style={{
                       fontFamily: "Geist, sans-serif",
                       fontSize: "13px",
-                      fontWeight: 600,
-                      padding: "8px 18px",
-                      borderRadius: "3px",
-                      border: "none",
-                      cursor: "pointer",
-                      backgroundColor:
-                        ws.selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
-                      color:
-                        ws.selectedRegions.size === 0 ? "#FFFFFF" : "#999999",
+                      fontWeight: 700,
+                      letterSpacing: "2px",
+                      textTransform: "uppercase",
+                      color: "#888888",
+                      marginBottom: "12px",
                     }}
                   >
-                    {t("regions.all")}
-                  </button>
-                  {regions.map((r) => (
+                    {t("regions.label")}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
                     <button
-                      key={r}
-                      onClick={() =>
-                        ws.setSelectedRegions((prev) => {
-                          const next = new Set(prev);
-                          if (next.has(r)) next.delete(r);
-                          else next.add(r);
-                          return next;
-                        })
-                      }
+                      onClick={() => ws.setSelectedRegions(new Set())}
                       style={{
                         fontFamily: "Geist, sans-serif",
                         fontSize: "13px",
@@ -789,19 +780,47 @@ export default function App() {
                         borderRadius: "3px",
                         border: "none",
                         cursor: "pointer",
-                        backgroundColor: ws.selectedRegions.has(r)
-                          ? "#8F5A3C"
-                          : "#2A2A2A",
-                        color: ws.selectedRegions.has(r)
-                          ? "#FFFFFF"
-                          : "#999999",
+                        backgroundColor:
+                          ws.selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
+                        color:
+                          ws.selectedRegions.size === 0 ? "#FFFFFF" : "#999999",
                       }}
                     >
-                      {t(`regions.${r.replace(/\s/g, "")}`, r)}
+                      {t("regions.all")}
                     </button>
-                  ))}
+                    {regions.map((r) => (
+                      <button
+                        key={r}
+                        onClick={() =>
+                          ws.setSelectedRegions((prev) => {
+                            const next = new Set(prev);
+                            if (next.has(r)) next.delete(r);
+                            else next.add(r);
+                            return next;
+                          })
+                        }
+                        style={{
+                          fontFamily: "Geist, sans-serif",
+                          fontSize: "13px",
+                          fontWeight: 600,
+                          padding: "8px 18px",
+                          borderRadius: "3px",
+                          border: "none",
+                          cursor: "pointer",
+                          backgroundColor: ws.selectedRegions.has(r)
+                            ? "#8F5A3C"
+                            : "#2A2A2A",
+                          color: ws.selectedRegions.has(r)
+                            ? "#FFFFFF"
+                            : "#999999",
+                        }}
+                      >
+                        {t(`regions.${r.replace(/\s/g, "")}`, r)}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Country list */}

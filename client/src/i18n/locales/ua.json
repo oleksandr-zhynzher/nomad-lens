@@ -3,6 +3,7 @@
     "indicators": "Показники",
     "dataSources": "Джерела даних",
     "nomadVisas": "Номад-візи",
+    "budgetMatcher": "Бюджет",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -62,7 +63,23 @@
     "share": "Поділитися",
     "addCountry": "Додати країну",
     "searchCountry": "Пошук країни…",
-    "noCountriesFound": "Країни не знайдено"
+    "noCountriesFound": "Країни не знайдено",
+    "nomadVisas": "Номад-візи",
+    "nomadVisaTitle": "ПОРІВНЯННЯ НОМАД-ВІЗ",
+    "nomadVisaSubtitle": "Порівняйте програми цифрових номад-віз",
+    "visaDetail": "Деталі візи",
+    "visaFields": {
+      "visaName": "Назва візи",
+      "duration": "Початковий термін",
+      "maxExtension": "Макс. продовження",
+      "renewable": "Поновлювана",
+      "cost": "Вартість подання",
+      "income": "Вимога до доходу",
+      "taxStatus": "Податковий статус",
+      "online": "Онлайн-подання",
+      "processingTime": "Час обробки",
+      "benefits": "Основні переваги"
+    }
   },
   "mobileSheet": {
     "weightsAndPreferences": "Ваги та налаштування",
@@ -490,5 +507,37 @@
       "income": "Мін. дохід",
       "tax": "Податковий статус"
     }
+  },
+  "budget": {
+    "eyebrow": "ПІДБІР ЗА БЮДЖЕТОМ",
+    "title": "ЗНАЙДІТЬ СВОЮ КРАЇНУ",
+    "subtitle": "Введіть місячний бюджет і дізнайтеся, які країни пропонують найкращий рівень життя за ваші гроші",
+    "budgetLabel": "Місячний бюджет",
+    "perMonth": "/ місяць",
+    "housing": {
+      "label": "Житло",
+      "center": "Центр міста",
+      "outside": "За межами центру"
+    },
+    "settings": "Налаштування",
+    "qualityBlend": "Баланс якості",
+    "pureAffordability": "Ціна",
+    "qualityFocus": "Якість",
+    "categoryWeights": "Ваги категорій",
+    "categories": {
+      "housing": "Житло",
+      "groceries": "Продукти",
+      "dining": "Харчування",
+      "transport": "Транспорт",
+      "utilities": "Комунальні",
+      "coworking": "Коворкінг",
+      "healthInsurance": "Медичне страхування"
+    },
+    "reset": "Скинути",
+    "results": "Результати",
+    "countriesFound": "{{count}} країн",
+    "noResults": "Немає країн з даними про вартість життя",
+    "loading": "Завантаження...",
+    "budgetLine": "Бюджет"
   }
 }

@@ -349,6 +349,22 @@ export interface ClimatePreferences {
   maxTemp: number;
 }
 
+// ─── Cost of Living ───────────────────────────────────────────────────────────
+
+export interface CostOfLivingData {
+  code: string;
+  rentCenter: number | null;
+  rentOutside: number | null;
+  groceries: number | null;
+  dining: number | null;
+  transport: number | null;
+  utilities: number | null;
+  coworking: number | null;
+  healthInsurance: number | null;
+  totalBasic: number | null;
+  totalComfortable: number | null;
+}
+
 // ─── Country ──────────────────────────────────────────────────────────────────
 
 export interface CountryData {
@@ -363,6 +379,7 @@ export interface CountryData {
   touristVisaDays?: number | null;
   nomadVisa?: NomadVisaDetails;
   climateData?: ClimateData;
+  costOfLiving?: CostOfLivingData | null;
   scores: Record<CategoryKey, CategoryScore>;
   i18n?: {
     ru?: { name?: string; capital?: string };

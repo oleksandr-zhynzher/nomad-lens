@@ -3,6 +3,7 @@
     "indicators": "Indicators",
     "dataSources": "Data Sources",
     "nomadVisas": "Nomad Visas",
+    "budgetMatcher": "Budget",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -62,7 +63,23 @@
     "share": "Share",
     "addCountry": "Add Country",
     "searchCountry": "Search country…",
-    "noCountriesFound": "No countries found"
+    "noCountriesFound": "No countries found",
+    "nomadVisas": "Nomad Visas",
+    "nomadVisaTitle": "NOMAD VISA COMPARISON",
+    "nomadVisaSubtitle": "Compare digital nomad visa programs side by side",
+    "visaDetail": "Visa Detail",
+    "visaFields": {
+      "visaName": "Visa Name",
+      "duration": "Initial Duration",
+      "maxExtension": "Max Extension",
+      "renewable": "Renewable",
+      "cost": "Application Cost",
+      "income": "Income Requirement",
+      "taxStatus": "Tax Status",
+      "online": "Online Application",
+      "processingTime": "Processing Time",
+      "benefits": "Key Benefits"
+    }
   },
   "mobileSheet": {
     "weightsAndPreferences": "Weights & Preferences",
@@ -490,5 +507,37 @@
       "income": "Income Req.",
       "tax": "Tax Status"
     }
+  },
+  "budget": {
+    "eyebrow": "BUDGET MATCHER",
+    "title": "FIND YOUR BUDGET FIT",
+    "subtitle": "Enter your monthly budget and discover which countries offer the best lifestyle for your money",
+    "budgetLabel": "Monthly Budget",
+    "perMonth": "/ month",
+    "housing": {
+      "label": "Housing",
+      "center": "City Center",
+      "outside": "Outside Center"
+    },
+    "settings": "Settings",
+    "qualityBlend": "Quality Blend",
+    "pureAffordability": "Afford.",
+    "qualityFocus": "Quality",
+    "categoryWeights": "Category Weights",
+    "categories": {
+      "housing": "Housing",
+      "groceries": "Groceries",
+      "dining": "Dining",
+      "transport": "Transport",
+      "utilities": "Utilities",
+      "coworking": "Coworking",
+      "healthInsurance": "Health Insurance"
+    },
+    "reset": "Reset",
+    "results": "Results",
+    "countriesFound": "{{count}} countries",
+    "noResults": "No countries with cost data available",
+    "loading": "Loading...",
+    "budgetLine": "Budget"
   }
 }

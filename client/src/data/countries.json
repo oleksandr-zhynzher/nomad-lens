@@ -19,6 +19,19 @@
       "coldestMonth": 25.67096774193548,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GN",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 395,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 53.5,
@@ -397,6 +410,19 @@
       "hottestMonth": 28.09333333333333,
       "coldestMonth": 25.39354838709678,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "TG",
+      "rentCenter": 280,
+      "rentOutside": 170,
+      "groceries": 90,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 45,
+      "totalBasic": 320,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -824,7 +850,7 @@
       "tax": {
         "status": "special",
         "rate": null,
-        "notes": "First 3 years: income over TWD 3M (≈$94k) is 50% tax exempt; employer contributions exempt; comprehensive tax treaty network"
+        "notes": "First 5 years: salary income over TWD 3M (≈$94k) is 50% tax exempt; overseas income also exempt from basic income tax calculation"
       },
       "eligibility": {
         "minAge": 18,
@@ -855,7 +881,7 @@
           "Passport photos"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -865,7 +891,7 @@
             "notes": "~$5 000/мес.; или подтверждение специальной экспертизы в одной из 8 профессиональных областей"
           },
           "tax": {
-            "notes": "Первые 3 года: доход свыше TWD 3M (≈$94 тыс.) — 50% налоговая льгота; взносы работодателя освобождены; обширная сеть налоговых соглашений"
+            "notes": "Первые 5 лет: доход от зарплаты свыше 3 млн TWD (≈94 тыс. $) освобождён от налога на 50%; зарубежный доход также освобождён от расчёта базового подоходного налога"
           },
           "eligibility": {
             "requirements": [
@@ -903,7 +929,7 @@
             "notes": "~$5 000/міс.; або підтвердження спеціальної експертизи в одній з 8 професійних галузей"
           },
           "tax": {
-            "notes": "Перші 3 роки: дохід понад TWD 3M (≈$94 тис.) — 50% податкова пільга; внески роботодавця звільнені; розгалужена мережа податкових угод"
+            "notes": "Перші 5 років: дохід від зарплати понад 3 млн TWD (≈94 тис. $) звільнений від податку на 50%; закордонний дохід також звільнений від розрахунку базового податку на доходи"
           },
           "eligibility": {
             "requirements": [
@@ -942,6 +968,19 @@
       "hottestMonth": 29.119354838709683,
       "coldestMonth": 15.76774193548387,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "TW",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 80,
+      "coworking": 120,
+      "healthInsurance": 70,
+      "totalBasic": 705,
+      "totalComfortable": 1175
     },
     "scores": {
       "economy": {
@@ -1214,6 +1253,19 @@
       "hottestMonth": 27.60322580645161,
       "coldestMonth": -7.719354838709678,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "KG",
+      "rentCenter": 300,
+      "rentOutside": 200,
+      "groceries": 110,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 40,
+      "totalBasic": 370,
+      "totalComfortable": 610
     },
     "scores": {
       "economy": {
@@ -1648,6 +1700,19 @@
       "coldestMonth": 24.654838709677414,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "SR",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 580,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 61,
@@ -2024,6 +2089,19 @@
       "hottestMonth": 27.639999999999997,
       "coldestMonth": 23.190322580645166,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "DO",
+      "rentCenter": 550,
+      "rentOutside": 380,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 30,
+      "utilities": 90,
+      "coworking": 120,
+      "healthInsurance": 75,
+      "totalBasic": 700,
+      "totalComfortable": 1145
     },
     "scores": {
       "economy": {
@@ -2440,6 +2518,19 @@
       "coldestMonth": 17.15483870967742,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GT",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 60,
+      "totalBasic": 530,
+      "totalComfortable": 850
+    },
     "scores": {
       "economy": {
         "value": 61.6,
@@ -2845,6 +2936,19 @@
       "coldestMonth": 10.357142857142858,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "DZ",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 425,
+      "totalComfortable": 740
+    },
     "scores": {
       "economy": {
         "value": 54.7,
@@ -3229,6 +3333,19 @@
       "hottestMonth": 23.258064516129036,
       "coldestMonth": -0.6892857142857146,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "UA",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 70,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 485,
+      "totalComfortable": 805
     },
     "scores": {
       "economy": {
@@ -3663,6 +3780,19 @@
       "coldestMonth": 24.517857142857142,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "KN",
+      "rentCenter": 900,
+      "rentOutside": 650,
+      "groceries": 300,
+      "dining": 140,
+      "transport": 40,
+      "utilities": 130,
+      "coworking": 200,
+      "healthInsurance": 110,
+      "totalBasic": 1120,
+      "totalComfortable": 1820
+    },
     "scores": {
       "economy": {
         "value": 76.2,
@@ -3982,11 +4112,11 @@
     "nomadVisa": {
       "code": "HR",
       "visaName": "Digital Nomad Residence Permit",
-      "officialUrl": "https://mup.gov.hr/aliens-702/stay-and-work/digital-nomads/286telecommuters/286286.aspx",
+      "officialUrl": "https://mup.gov.hr/en",
       "duration": {
-        "initial": 12,
+        "initial": 18,
         "maxExtension": 0,
-        "renewable": true
+        "renewable": false
       },
       "cost": {
         "currency": "EUR",
@@ -3995,9 +4125,9 @@
       },
       "incomeRequirement": {
         "currency": "EUR",
-        "monthly": 2540,
-        "annual": 30480,
-        "notes": "Approximately 2.5× Croatian average salary"
+        "monthly": 3623,
+        "annual": 43470,
+        "notes": "2.5× Croatian average monthly net salary; or €43,470 savings for 12 months / €65,205 for 18 months"
       },
       "tax": {
         "status": "exempt",
@@ -4034,14 +4164,14 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за обработку вида на жительство"
           },
           "incomeRequirement": {
-            "notes": "Примерно 2,5× средней зарплаты Хорватии"
+            "notes": "2,5× средней чистой месячной зарплаты Хорватии; или 43 470 € сбережений на 12 месяцев / 65 205 € на 18 месяцев"
           },
           "tax": {
             "notes": "Нет хорватского подоходного налога для цифровых кочевников в период действия разрешения"
@@ -4080,7 +4210,7 @@
             "notes": "Збір за оформлення дозволу на проживання"
           },
           "incomeRequirement": {
-            "notes": "Приблизно 2,5× середньої зарплати Хорватії"
+            "notes": "2,5× середньої чистої місячної зарплати Хорватії; або 43 470 € заощаджень на 12 місяців / 65 205 € на 18 місяців"
           },
           "tax": {
             "notes": "Немає хорватського податку на доходи для цифрових кочівників протягом дії дозволу"
@@ -4123,6 +4253,19 @@
       "hottestMonth": 23.34516129032258,
       "coldestMonth": 3.5464285714285717,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "HR",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 240,
+      "dining": 100,
+      "transport": 35,
+      "utilities": 130,
+      "coworking": 150,
+      "healthInsurance": 90,
+      "totalBasic": 885,
+      "totalComfortable": 1445
     },
     "scores": {
       "economy": {
@@ -4557,6 +4700,19 @@
       "coldestMonth": 21.619354838709675,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GQ",
+      "rentCenter": 800,
+      "rentOutside": 500,
+      "groceries": 300,
+      "dining": 120,
+      "transport": 30,
+      "utilities": 120,
+      "coworking": null,
+      "healthInsurance": 80,
+      "totalBasic": 950,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 60.8,
@@ -4964,7 +5120,7 @@
           "Proof of accommodation"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -5051,6 +5207,19 @@
       "hottestMonth": 27.943333333333335,
       "coldestMonth": 26.0967741935484,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "PA",
+      "rentCenter": 750,
+      "rentOutside": 500,
+      "groceries": 220,
+      "dining": 90,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": 150,
+      "healthInsurance": 85,
+      "totalBasic": 845,
+      "totalComfortable": 1420
     },
     "scores": {
       "economy": {
@@ -5472,6 +5641,19 @@
       "hottestMonth": 19.89,
       "coldestMonth": 5.012903225806449,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "BE",
+      "rentCenter": 1100,
+      "rentOutside": 800,
+      "groceries": 350,
+      "dining": 180,
+      "transport": 55,
+      "utilities": 180,
+      "coworking": 250,
+      "healthInsurance": 130,
+      "totalBasic": 1385,
+      "totalComfortable": 2245
     },
     "scores": {
       "economy": {
@@ -5905,6 +6087,19 @@
       "hottestMonth": 22.18387096774193,
       "coldestMonth": 19.389999999999997,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "RW",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 50,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 405,
+      "totalComfortable": 695
     },
     "scores": {
       "economy": {
@@ -6379,7 +6574,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -6466,6 +6661,19 @@
       "hottestMonth": 27.438709677419357,
       "coldestMonth": 21.05,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "CV",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 25,
+      "utilities": 80,
+      "coworking": 100,
+      "healthInsurance": 65,
+      "totalBasic": 565,
+      "totalComfortable": 920
     },
     "scores": {
       "economy": {
@@ -6816,6 +7024,19 @@
       "hottestMonth": 25.554838709677423,
       "coldestMonth": -3.4774193548387102,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "KR",
+      "rentCenter": 900,
+      "rentOutside": 600,
+      "groceries": 280,
+      "dining": 120,
+      "transport": 45,
+      "utilities": 130,
+      "coworking": 180,
+      "healthInsurance": 100,
+      "totalBasic": 1055,
+      "totalComfortable": 1755
     },
     "scores": {
       "economy": {
@@ -7250,6 +7471,19 @@
       "coldestMonth": 26.251612903225805,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GU",
+      "rentCenter": 1200,
+      "rentOutside": 850,
+      "groceries": 380,
+      "dining": 180,
+      "transport": 50,
+      "utilities": 180,
+      "coworking": null,
+      "healthInsurance": 140,
+      "totalBasic": 1460,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 84.3,
@@ -7518,6 +7752,19 @@
       "hottestMonth": 21.354838709677423,
       "coldestMonth": 2.758064516129031,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "AD",
+      "rentCenter": 950,
+      "rentOutside": 700,
+      "groceries": 350,
+      "dining": 180,
+      "transport": 50,
+      "utilities": 150,
+      "coworking": 200,
+      "healthInsurance": 120,
+      "totalBasic": 1250,
+      "totalComfortable": 2000
     },
     "scores": {
       "economy": {
@@ -7841,6 +8088,19 @@
       "hottestMonth": 28.567741935483877,
       "coldestMonth": 19.525,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "SN",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 475,
+      "totalComfortable": 775
     },
     "scores": {
       "economy": {
@@ -8316,7 +8576,7 @@
           "Payment of CI fee ($11)"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -8395,6 +8655,19 @@
       "hottestMonth": 24.145161290322584,
       "coldestMonth": 11.993333333333334,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "UY",
+      "rentCenter": 550,
+      "rentOutside": 380,
+      "groceries": 220,
+      "dining": 90,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": 120,
+      "healthInsurance": 80,
+      "totalBasic": 725,
+      "totalComfortable": 1185
     },
     "scores": {
       "economy": {
@@ -8822,6 +9095,19 @@
       "hottestMonth": 26.840000000000007,
       "coldestMonth": 24.658064516129027,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "CG",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 725,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -9259,7 +9545,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -9346,6 +9632,19 @@
       "hottestMonth": 24.783333333333328,
       "coldestMonth": 13.058064516129033,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "NA",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 170,
+      "dining": 70,
+      "transport": 25,
+      "utilities": 80,
+      "coworking": 100,
+      "healthInsurance": 65,
+      "totalBasic": 575,
+      "totalComfortable": 960
     },
     "scores": {
       "economy": {
@@ -9769,6 +10068,19 @@
       "coldestMonth": 25.806451612903224,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "SG",
+      "rentCenter": 2200,
+      "rentOutside": 1500,
+      "groceries": 350,
+      "dining": 150,
+      "transport": 80,
+      "utilities": 130,
+      "coworking": 300,
+      "healthInsurance": 150,
+      "totalBasic": 2060,
+      "totalComfortable": 3360
+    },
     "scores": {
       "economy": {
         "value": 95.3,
@@ -10189,6 +10501,19 @@
       "hottestMonth": 17.187096774193552,
       "coldestMonth": -3.8419354838709676,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "FI",
+      "rentCenter": 1100,
+      "rentOutside": 800,
+      "groceries": 320,
+      "dining": 180,
+      "transport": 55,
+      "utilities": 150,
+      "coworking": 240,
+      "healthInsurance": 130,
+      "totalBasic": 1325,
+      "totalComfortable": 2175
     },
     "scores": {
       "economy": {
@@ -10623,6 +10948,19 @@
       "coldestMonth": 13.85714285714286,
       "seasonType": "arid"
     },
+    "costOfLiving": {
+      "code": "EG",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 340,
+      "totalComfortable": 605
+    },
     "scores": {
       "economy": {
         "value": 65.3,
@@ -11056,6 +11394,19 @@
       "coldestMonth": 25.909677419354843,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "PW",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 300,
+      "dining": 120,
+      "transport": 30,
+      "utilities": 120,
+      "coworking": null,
+      "healthInsurance": 90,
+      "totalBasic": 930,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 67.8,
@@ -11380,6 +11731,19 @@
       "coldestMonth": 26.29333333333333,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "AS",
+      "rentCenter": 900,
+      "rentOutside": 650,
+      "groceries": 350,
+      "dining": 150,
+      "transport": 40,
+      "utilities": 180,
+      "coworking": null,
+      "healthInsurance": 120,
+      "totalBasic": 1220,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 70.6,
@@ -11678,7 +12042,7 @@
           "Police clearance"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -11763,6 +12127,19 @@
       "hottestMonth": 29.196666666666665,
       "coldestMonth": 24.810714285714283,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "AG",
+      "rentCenter": 1100,
+      "rentOutside": 800,
+      "groceries": 350,
+      "dining": 180,
+      "transport": 60,
+      "utilities": 150,
+      "coworking": 250,
+      "healthInsurance": 130,
+      "totalBasic": 1360,
+      "totalComfortable": 2220
     },
     "scores": {
       "economy": {
@@ -12139,7 +12516,7 @@
           "Accommodation booking"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -12224,6 +12601,19 @@
       "hottestMonth": 27.545161290322575,
       "coldestMonth": 25.309677419354838,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "SC",
+      "rentCenter": 800,
+      "rentOutside": 550,
+      "groceries": 300,
+      "dining": 120,
+      "transport": 30,
+      "utilities": 120,
+      "coworking": null,
+      "healthInsurance": 90,
+      "totalBasic": 1000,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -12568,6 +12958,19 @@
       "hottestMonth": 39.39032258064516,
       "coldestMonth": 13.138709677419351,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "KW",
+      "rentCenter": 1200,
+      "rentOutside": 800,
+      "groceries": 300,
+      "dining": 130,
+      "transport": 40,
+      "utilities": 100,
+      "coworking": 200,
+      "healthInsurance": 120,
+      "totalBasic": 1240,
+      "totalComfortable": 2090
     },
     "scores": {
       "economy": {
@@ -13027,7 +13430,7 @@
           "Proof of accommodation"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -13114,6 +13517,19 @@
       "hottestMonth": 30.30322580645161,
       "coldestMonth": 8.510714285714286,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "GR",
+      "rentCenter": 650,
+      "rentOutside": 450,
+      "groceries": 250,
+      "dining": 110,
+      "transport": 30,
+      "utilities": 120,
+      "coworking": 150,
+      "healthInsurance": 90,
+      "totalBasic": 850,
+      "totalComfortable": 1400
     },
     "scores": {
       "economy": {
@@ -13548,6 +13964,19 @@
       "coldestMonth": 27.13214285714286,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "KI",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 200,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 580,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 30,
@@ -13882,7 +14311,7 @@
       "officialUrl": "https://www.pio.gov.cy/",
       "duration": {
         "initial": 12,
-        "maxExtension": 24,
+        "maxExtension": 36,
         "renewable": true
       },
       "cost": {
@@ -13931,7 +14360,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -14020,6 +14449,19 @@
       "hottestMonth": 31.158064516129034,
       "coldestMonth": 9.474999999999998,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "CY",
+      "rentCenter": 800,
+      "rentOutside": 550,
+      "groceries": 280,
+      "dining": 130,
+      "transport": 40,
+      "utilities": 130,
+      "coworking": 180,
+      "healthInsurance": 100,
+      "totalBasic": 1000,
+      "totalComfortable": 1660
     },
     "scores": {
       "economy": {
@@ -14430,6 +14872,19 @@
       "hottestMonth": 32.37333333333333,
       "coldestMonth": 25.577419354838714,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "ML",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 35,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 355,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -14882,7 +15337,7 @@
           "Passport photos"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -14967,6 +15422,19 @@
       "hottestMonth": 27.574193548387093,
       "coldestMonth": 18.100000000000005,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "BM",
+      "rentCenter": 2500,
+      "rentOutside": 1800,
+      "groceries": 500,
+      "dining": 300,
+      "transport": 80,
+      "utilities": 220,
+      "coworking": 400,
+      "healthInsurance": 200,
+      "totalBasic": 2600,
+      "totalComfortable": 4200
     },
     "scores": {
       "economy": {
@@ -15248,6 +15716,19 @@
       "coldestMonth": -12.389285714285716,
       "seasonType": "polar"
     },
+    "costOfLiving": {
+      "code": "GL",
+      "rentCenter": 1200,
+      "rentOutside": 900,
+      "groceries": 450,
+      "dining": 250,
+      "transport": 60,
+      "utilities": 200,
+      "coworking": null,
+      "healthInsurance": 150,
+      "totalBasic": 1610,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 93.8,
@@ -15525,6 +16006,19 @@
       "hottestMonth": 19.193333333333335,
       "coldestMonth": 13.980645161290322,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "ER",
+      "rentCenter": 250,
+      "rentOutside": 150,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 310,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -15889,6 +16383,19 @@
       "hottestMonth": 24.322580645161292,
       "coldestMonth": 20.40322580645161,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "TZ",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 405,
+      "totalComfortable": 680
     },
     "scores": {
       "economy": {
@@ -16316,6 +16823,19 @@
       "hottestMonth": 30.212903225806446,
       "coldestMonth": 16.50967741935484,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "VN",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 440,
+      "totalComfortable": 745
     },
     "scores": {
       "economy": {
@@ -16745,6 +17265,19 @@
       "coldestMonth": 25.22903225806452,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "TD",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 120,
+      "dining": 35,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 380,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 56.9,
@@ -17139,6 +17672,19 @@
       "hottestMonth": 28.25,
       "coldestMonth": 25.09677419354839,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "CI",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 470,
+      "totalComfortable": 805
     },
     "scores": {
       "economy": {
@@ -17600,7 +18146,7 @@
           "Health insurance"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -17685,6 +18231,19 @@
       "hottestMonth": 27.56129032258065,
       "coldestMonth": 2.209677419354839,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "GE",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 545,
+      "totalComfortable": 890
     },
     "scores": {
       "economy": {
@@ -18124,6 +18683,19 @@
       "coldestMonth": 6.074193548387098,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "IM",
+      "rentCenter": 1100,
+      "rentOutside": 800,
+      "groceries": 350,
+      "dining": 170,
+      "transport": 50,
+      "utilities": 160,
+      "coworking": 250,
+      "healthInsurance": 130,
+      "totalBasic": 1360,
+      "totalComfortable": 2210
+    },
     "scores": {
       "economy": {
         "value": 100,
@@ -18339,6 +18911,19 @@
       "hottestMonth": 17.50333333333333,
       "coldestMonth": 11.476666666666665,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "BO",
+      "rentCenter": 350,
+      "rentOutside": 230,
+      "groceries": 140,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 445,
+      "totalComfortable": 750
     },
     "scores": {
       "economy": {
@@ -18728,6 +19313,19 @@
       "hottestMonth": 17.033333333333328,
       "coldestMonth": 3.217857142857144,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "DK",
+      "rentCenter": 1400,
+      "rentOutside": 1000,
+      "groceries": 380,
+      "dining": 220,
+      "transport": 60,
+      "utilities": 180,
+      "coworking": 280,
+      "healthInsurance": 150,
+      "totalBasic": 1620,
+      "totalComfortable": 2670
     },
     "scores": {
       "economy": {
@@ -19157,6 +19755,19 @@
       "coldestMonth": 0.725806451612903,
       "seasonType": "arid"
     },
+    "costOfLiving": {
+      "code": "TM",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": null,
+      "healthInsurance": 45,
+      "totalBasic": 390,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 68.7,
@@ -19541,6 +20152,19 @@
       "hottestMonth": 35.20645161290323,
       "coldestMonth": 24.577419354838714,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "NE",
+      "rentCenter": 280,
+      "rentOutside": 170,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 45,
+      "totalBasic": 330,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -19953,6 +20577,19 @@
       "coldestMonth": 25.979999999999997,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "FM",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 100,
+      "coworking": null,
+      "healthInsurance": 75,
+      "totalBasic": 670,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 41.8,
@@ -20311,7 +20948,7 @@
           "Police clearance certificate"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -20389,13 +21026,18 @@
         }
       }
     },
-    "climateData": {
-      "annualMeanTemp": 27.977808219178062,
-      "annualPrecipitation": 1050.4999999999998,
-      "tempRange": 3.9806451612903224,
-      "hottestMonth": 30.10645161290323,
-      "coldestMonth": 26.125806451612906,
-      "seasonType": "tropical"
+    "costOfLiving": {
+      "code": "KY",
+      "rentCenter": 2200,
+      "rentOutside": 1600,
+      "groceries": 500,
+      "dining": 280,
+      "transport": 70,
+      "utilities": 200,
+      "coworking": 350,
+      "healthInsurance": 180,
+      "totalBasic": 2370,
+      "totalComfortable": 3780
     },
     "scores": {
       "economy": {
@@ -20457,19 +21099,8 @@
         "indicators": {}
       },
       "climate": {
-        "value": 64.6,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 28,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 1050,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": null,
@@ -20663,13 +21294,18 @@
     "hasNomadVisa": false,
     "isSchengen": true,
     "touristVisaDays": 90,
-    "climateData": {
-      "annualMeanTemp": 11.581917808219165,
-      "annualPrecipitation": 2103.9,
-      "tempRange": 18.129032258064516,
-      "hottestMonth": 20.838709677419356,
-      "coldestMonth": 2.7096774193548385,
-      "seasonType": "mild_seasons"
+    "costOfLiving": {
+      "code": "LI",
+      "rentCenter": 2000,
+      "rentOutside": 1500,
+      "groceries": 480,
+      "dining": 280,
+      "transport": 70,
+      "utilities": 200,
+      "coworking": 350,
+      "healthInsurance": 190,
+      "totalBasic": 2250,
+      "totalComfortable": 3570
     },
     "scores": {
       "economy": {
@@ -20726,19 +21362,8 @@
         "indicators": {}
       },
       "climate": {
-        "value": 40.7,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 11.6,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 2104,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": null,
@@ -21013,7 +21638,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -21093,13 +21718,18 @@
         }
       }
     },
-    "climateData": {
-      "annualMeanTemp": 11.401917808219174,
-      "annualPrecipitation": 1083.6000000000004,
-      "tempRange": 20.25011520737327,
-      "hottestMonth": 21.83225806451613,
-      "coldestMonth": 1.5821428571428573,
-      "seasonType": "four_seasons"
+    "costOfLiving": {
+      "code": "BA",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 170,
+      "dining": 70,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": 100,
+      "healthInsurance": 60,
+      "totalBasic": 575,
+      "totalComfortable": 925
     },
     "scores": {
       "economy": {
@@ -21193,19 +21823,8 @@
         }
       },
       "climate": {
-        "value": 73.5,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 11.4,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 1084,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 83.8,
@@ -21492,13 +22111,18 @@
     "hasNomadVisa": false,
     "isSchengen": true,
     "touristVisaDays": 90,
-    "climateData": {
-      "annualMeanTemp": 12.934520547945205,
-      "annualPrecipitation": 949.0000000000006,
-      "tempRange": 15.421190476190471,
-      "hottestMonth": 20.90333333333333,
-      "coldestMonth": 5.482142857142857,
-      "seasonType": "mild_seasons"
+    "costOfLiving": {
+      "code": "FR",
+      "rentCenter": 1100,
+      "rentOutside": 750,
+      "groceries": 320,
+      "dining": 170,
+      "transport": 55,
+      "utilities": 160,
+      "coworking": 250,
+      "healthInsurance": 130,
+      "totalBasic": 1285,
+      "totalComfortable": 2185
     },
     "scores": {
       "economy": {
@@ -21597,19 +22221,8 @@
         }
       },
       "climate": {
-        "value": 83,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 12.9,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 949,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 82.5,
@@ -21925,13 +22538,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": null,
-    "climateData": {
-      "annualMeanTemp": 25.22767123287672,
-      "annualPrecipitation": 3315.2000000000016,
-      "tempRange": 2.876666666666665,
-      "hottestMonth": 26.400000000000002,
-      "coldestMonth": 23.523333333333337,
-      "seasonType": "tropical"
+    "costOfLiving": {
+      "code": "PF",
+      "rentCenter": 1200,
+      "rentOutside": 850,
+      "groceries": 400,
+      "dining": 200,
+      "transport": 50,
+      "utilities": 160,
+      "coworking": null,
+      "healthInsurance": 130,
+      "totalBasic": 1460,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -21988,19 +22606,8 @@
         "indicators": {}
       },
       "climate": {
-        "value": 38.3,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 25.2,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 3315,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": null,
@@ -22163,13 +22770,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": 30,
-    "climateData": {
-      "annualMeanTemp": 5.718356164383561,
-      "annualPrecipitation": 410.1000000000002,
-      "tempRange": 37.78709677419354,
-      "hottestMonth": 24.196774193548382,
-      "coldestMonth": -13.590322580645157,
-      "seasonType": "four_seasons"
+    "costOfLiving": {
+      "code": "KZ",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 70,
+      "coworking": 90,
+      "healthInsurance": 55,
+      "totalBasic": 545,
+      "totalComfortable": 900
     },
     "scores": {
       "economy": {
@@ -22268,19 +22880,8 @@
         }
       },
       "climate": {
-        "value": 63.2,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 5.7,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 410,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 81.2,
@@ -22563,13 +23164,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": 30,
-    "climateData": {
-      "annualMeanTemp": 25.255342465753426,
-      "annualPrecipitation": 1159.0000000000005,
-      "tempRange": 5.849423963133628,
-      "hottestMonth": 27.410714285714278,
-      "coldestMonth": 21.56129032258065,
-      "seasonType": "tropical"
+    "costOfLiving": {
+      "code": "AO",
+      "rentCenter": 800,
+      "rentOutside": 500,
+      "groceries": 300,
+      "dining": 120,
+      "transport": 40,
+      "utilities": 120,
+      "coworking": 200,
+      "healthInsurance": 100,
+      "totalBasic": 960,
+      "totalComfortable": 1680
     },
     "scores": {
       "economy": {
@@ -22663,19 +23269,8 @@
         }
       },
       "climate": {
-        "value": 68.8,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 25.3,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 1159,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 78.8,
@@ -22979,13 +23574,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": 90,
-    "climateData": {
-      "annualMeanTemp": 13.941369863013698,
-      "annualPrecipitation": 1023.400000000001,
-      "tempRange": 8.189746543778803,
-      "hottestMonth": 17.760714285714286,
-      "coldestMonth": 9.570967741935483,
-      "seasonType": "mild_seasons"
+    "costOfLiving": {
+      "code": "NZ",
+      "rentCenter": 1300,
+      "rentOutside": 950,
+      "groceries": 350,
+      "dining": 180,
+      "transport": 80,
+      "utilities": 160,
+      "coworking": 260,
+      "healthInsurance": 140,
+      "totalBasic": 1540,
+      "totalComfortable": 2470
     },
     "scores": {
       "economy": {
@@ -23079,19 +23679,8 @@
         }
       },
       "climate": {
-        "value": 83.3,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 13.9,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 1023,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 94.4,
@@ -23407,13 +23996,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": null,
-    "climateData": {
-      "annualMeanTemp": 26.729589041095903,
-      "annualPrecipitation": 948.3999999999995,
-      "tempRange": 4.986774193548381,
-      "hottestMonth": 29.089999999999993,
-      "coldestMonth": 24.10322580645161,
-      "seasonType": "tropical"
+    "costOfLiving": {
+      "code": "PR",
+      "rentCenter": 1000,
+      "rentOutside": 700,
+      "groceries": 300,
+      "dining": 140,
+      "transport": 40,
+      "utilities": 150,
+      "coworking": 200,
+      "healthInsurance": 120,
+      "totalBasic": 1190,
+      "totalComfortable": 1950
     },
     "scores": {
       "economy": {
@@ -23491,19 +24085,8 @@
         }
       },
       "climate": {
-        "value": 72.1,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 26.7,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 948,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": null,
@@ -23702,13 +24285,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": 90,
-    "climateData": {
-      "annualMeanTemp": 27.20054794520547,
-      "annualPrecipitation": 142.89999999999995,
-      "tempRange": 24.845161290322572,
-      "hottestMonth": 37.80645161290322,
-      "coldestMonth": 12.961290322580643,
-      "seasonType": "arid"
+    "costOfLiving": {
+      "code": "SA",
+      "rentCenter": 800,
+      "rentOutside": 550,
+      "groceries": 250,
+      "dining": 100,
+      "transport": 30,
+      "utilities": 100,
+      "coworking": 180,
+      "healthInsurance": 100,
+      "totalBasic": 930,
+      "totalComfortable": 1560
     },
     "scores": {
       "economy": {
@@ -23807,19 +24395,8 @@
         }
       },
       "climate": {
-        "value": 46.7,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 27.2,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 143,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 81.4,
@@ -24153,12 +24730,12 @@
         "currency": "EUR",
         "monthly": 1350,
         "annual": 16200,
-        "notes": "Relatively low threshold"
+        "notes": "3× Montenegrin minimum wage (~€450); income range €1,350-2,400 depending on education level"
       },
       "tax": {
-        "status": "standard",
-        "rate": 9,
-        "notes": "Flat 9% personal income tax; one of Europe's lowest rates"
+        "status": "exempt",
+        "rate": 0,
+        "notes": "Digital nomads exempt from Montenegrin income tax on foreign-source income (Article 32d, Personal Income Tax Law); no social contributions required"
       },
       "eligibility": {
         "minAge": 18,
@@ -24189,17 +24766,17 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за вид на жительство"
           },
           "incomeRequirement": {
-            "notes": "Относительно низкий порог"
+            "notes": "3× минимальной зарплаты Черногории (~450 €); диапазон дохода 1 350-2 400 € в зависимости от уровня образования"
           },
           "tax": {
-            "notes": "Фиксированный подоходный налог 9%; одна из самых низких ставок в Европе"
+            "notes": "Цифровые кочевники освобождены от черногорского подоходного налога на иностранный доход (статья 32d Закона о подоходном налоге); социальные взносы не требуются"
           },
           "eligibility": {
             "requirements": [
@@ -24234,10 +24811,10 @@
             "notes": "Збір за дозвіл на проживання"
           },
           "incomeRequirement": {
-            "notes": "Відносно низький поріг"
+            "notes": "3× мінімальної зарплати Чорногорії (~450 €); діапазон доходу 1 350-2 400 € залежно від рівня освіти"
           },
           "tax": {
-            "notes": "Фіксований податок на доходи 9%; одна з найнижчих ставок у Європі"
+            "notes": "Цифрові кочівники звільнені від чорногорського податку на доходи на іноземний дохід (стаття 32d Закону про податок на доходи); соціальні внески не потрібні"
           },
           "eligibility": {
             "requirements": [
@@ -24269,13 +24846,18 @@
         }
       }
     },
-    "climateData": {
-      "annualMeanTemp": 16.01999999999999,
-      "annualPrecipitation": 2244.499999999999,
-      "tempRange": 21.781912442396315,
-      "hottestMonth": 27.835483870967742,
-      "coldestMonth": 6.053571428571428,
-      "seasonType": "four_seasons"
+    "costOfLiving": {
+      "code": "ME",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": 110,
+      "healthInsurance": 70,
+      "totalBasic": 675,
+      "totalComfortable": 1085
     },
     "scores": {
       "economy": {
@@ -24374,19 +24956,8 @@
         }
       },
       "climate": {
-        "value": 54.1,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 16,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 2244,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 86.2,
@@ -24689,9 +25260,9 @@
       },
       "incomeRequirement": {
         "currency": "ZAR",
-        "monthly": 57000,
-        "annual": null,
-        "notes": "~€2,800/month; based on South African standards"
+        "monthly": 54248,
+        "annual": 650976,
+        "notes": "ZAR 650,976/year minimum (~$35,000 USD); reduced from previous ZAR 1,000,000"
       },
       "tax": {
         "status": "exempt",
@@ -24729,14 +25300,14 @@
           "Proof of accommodation"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "~75 €; визовый сбор"
           },
           "incomeRequirement": {
-            "notes": "~2 800 €/мес.; на основе стандартов ЮАР"
+            "notes": "Минимум 650 976 ZAR/год (~35 000 $); снижено с прежних 1 000 000 ZAR"
           },
           "tax": {
             "notes": "Нет южноафриканского подоходного налога на иностранный доход для удалённых работников (при статусе нерезидента)"
@@ -24776,7 +25347,7 @@
             "notes": "~75 €; візовий збір"
           },
           "incomeRequirement": {
-            "notes": "~2 800 €/міс.; на основі стандартів ПАР"
+            "notes": "Мінімум 650 976 ZAR/рік (~35 000 $); знижено з попередніх 1 000 000 ZAR"
           },
           "tax": {
             "notes": "Немає південноафриканського податку на доходи на іноземний дохід для віддалених працівників (при статусі нерезидента)"
@@ -24813,13 +25384,18 @@
         }
       }
     },
-    "climateData": {
-      "annualMeanTemp": 18.698630136986296,
-      "annualPrecipitation": 491.69999999999993,
-      "tempRange": 11.225806451612902,
-      "hottestMonth": 22.932258064516127,
-      "coldestMonth": 11.706451612903225,
-      "seasonType": "tropical"
+    "costOfLiving": {
+      "code": "ZA",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 25,
+      "utilities": 80,
+      "coworking": 100,
+      "healthInsurance": 70,
+      "totalBasic": 635,
+      "totalComfortable": 1025
     },
     "scores": {
       "economy": {
@@ -24913,19 +25489,8 @@
         }
       },
       "climate": {
-        "value": 97.9,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 18.7,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 492,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 35.7,
@@ -25241,13 +25806,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": null,
-    "climateData": {
-      "annualMeanTemp": 21.004931506849328,
-      "annualPrecipitation": 1039.9999999999998,
-      "tempRange": 20.340107526881724,
-      "hottestMonth": 29.543333333333337,
-      "coldestMonth": 9.203225806451615,
-      "seasonType": "four_seasons"
+    "costOfLiving": {
+      "code": "PK",
+      "rentCenter": 250,
+      "rentOutside": 150,
+      "groceries": 90,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": 50,
+      "healthInsurance": 35,
+      "totalBasic": 290,
+      "totalComfortable": 505
     },
     "scores": {
       "economy": {
@@ -25346,19 +25916,8 @@
         }
       },
       "climate": {
-        "value": 85.9,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 21,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 1040,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 67,
@@ -25717,7 +26276,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -25802,6 +26361,19 @@
       "hottestMonth": 27.34333333333333,
       "coldestMonth": 25.187096774193545,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "LK",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 70,
+      "healthInsurance": 45,
+      "totalBasic": 400,
+      "totalComfortable": 685
     },
     "scores": {
       "economy": {
@@ -26230,6 +26802,19 @@
       "coldestMonth": 22.333333333333332,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "CM",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 355,
+      "totalComfortable": 635
+    },
     "scores": {
       "economy": {
         "value": 54.8,
@@ -26652,6 +27237,19 @@
       "coldestMonth": 25.067741935483877,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "LR",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 395,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 50.5,
@@ -27045,9 +27643,9 @@
       },
       "incomeRequirement": {
         "currency": "USD",
-        "monthly": 5000,
-        "annual": 60000,
-        "notes": "Minimum monthly income or equivalent in savings"
+        "monthly": 3500,
+        "annual": 42000,
+        "notes": "Minimum $3,500/month for employees; $5,000/month for business owners"
       },
       "tax": {
         "status": "exempt",
@@ -27085,14 +27683,14 @@
           "Employment contract"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Визовый сбор + оформление Emirates ID"
           },
           "incomeRequirement": {
-            "notes": "Минимальный месячный доход или эквивалент в сбережениях"
+            "notes": "Минимум 3 500 $/мес. для наёмных работников; 5 000 $/мес. для владельцев бизнеса"
           },
           "tax": {
             "notes": "Нулевой подоходный налог с физических лиц в ОАЭ"
@@ -27132,7 +27730,7 @@
             "notes": "Візовий збір + оформлення Emirates ID"
           },
           "incomeRequirement": {
-            "notes": "Мінімальний місячний дохід або еквівалент у заощадженнях"
+            "notes": "Мінімум 3 500 $/міс. для найманих працівників; 5 000 $/міс. для власників бізнесу"
           },
           "tax": {
             "notes": "Нульовий податок на доходи фізичних осіб в ОАЕ"
@@ -27176,6 +27774,19 @@
       "hottestMonth": 35.64516129032259,
       "coldestMonth": 20.312903225806455,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "AE",
+      "rentCenter": 1800,
+      "rentOutside": 1200,
+      "groceries": 400,
+      "dining": 200,
+      "transport": 80,
+      "utilities": 160,
+      "coworking": 300,
+      "healthInsurance": 150,
+      "totalBasic": 1840,
+      "totalComfortable": 3090
     },
     "scores": {
       "economy": {
@@ -27609,6 +28220,19 @@
       "hottestMonth": 19.725806451612907,
       "coldestMonth": 0.9806451612903223,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "CH",
+      "rentCenter": 2200,
+      "rentOutside": 1600,
+      "groceries": 500,
+      "dining": 300,
+      "transport": 80,
+      "utilities": 200,
+      "coworking": 350,
+      "healthInsurance": 200,
+      "totalBasic": 2380,
+      "totalComfortable": 3830
     },
     "scores": {
       "economy": {
@@ -28050,10 +28674,10 @@
         "notes": "Application fee"
       },
       "incomeRequirement": {
-        "currency": "HUF",
-        "monthly": 2000,
-        "annual": null,
-        "notes": "~€2,000/month; based on Hungarian minimum wage multiples"
+        "currency": "EUR",
+        "monthly": 3000,
+        "annual": 36000,
+        "notes": "Minimum €3,000 net monthly income; verified via bank statements"
       },
       "tax": {
         "status": "exempt",
@@ -28089,14 +28713,14 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за подачу заявления"
           },
           "incomeRequirement": {
-            "notes": "~2 000 €/мес.; на основе мультипликатора минимальной зарплаты Венгрии"
+            "notes": "Минимум 3 000 € чистого месячного дохода; подтверждается банковскими выписками"
           },
           "tax": {
             "notes": "Нет венгерского подоходного налога на иностранный доход от удалённой работы"
@@ -28134,7 +28758,7 @@
             "notes": "Збір за подання заяви"
           },
           "incomeRequirement": {
-            "notes": "~2 000 €/міс.; на основі мультиплікатора мінімальної зарплати Угорщини"
+            "notes": "Мінімум 3 000 € чистого місячного доходу; підтверджується банківськими виписками"
           },
           "tax": {
             "notes": "Немає угорського податку на доходи на іноземний дохід від віддаленої роботи"
@@ -28176,6 +28800,19 @@
       "hottestMonth": 23.545161290322582,
       "coldestMonth": 1.8806451612903228,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "HU",
+      "rentCenter": 600,
+      "rentOutside": 420,
+      "groceries": 210,
+      "dining": 90,
+      "transport": 25,
+      "utilities": 120,
+      "coworking": 130,
+      "healthInsurance": 80,
+      "totalBasic": 775,
+      "totalComfortable": 1255
     },
     "scores": {
       "economy": {
@@ -28599,6 +29236,19 @@
       "coldestMonth": 13.267741935483873,
       "seasonType": "arid"
     },
+    "costOfLiving": {
+      "code": "LY",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 55,
+      "totalBasic": 445,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 44.1,
@@ -28996,6 +29646,19 @@
       "coldestMonth": 21.790322580645157,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "VU",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 220,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 100,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 690,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 60.5,
@@ -29392,7 +30055,7 @@
           "Police clearance"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -29477,6 +30140,19 @@
       "hottestMonth": 27.526666666666664,
       "coldestMonth": 23.767857142857146,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "LC",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 250,
+      "dining": 100,
+      "transport": 30,
+      "utilities": 110,
+      "coworking": 150,
+      "healthInsurance": 85,
+      "totalBasic": 870,
+      "totalComfortable": 1425
     },
     "scores": {
       "economy": {
@@ -29815,6 +30491,19 @@
       "hottestMonth": 28.07857142857143,
       "coldestMonth": 24.846666666666675,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "CF",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": null,
+      "healthInsurance": 55,
+      "totalBasic": 490,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -30193,6 +30882,19 @@
       "hottestMonth": 30.519354838709674,
       "coldestMonth": -1.1032258064516132,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "TJ",
+      "rentCenter": 250,
+      "rentOutside": 160,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": null,
+      "healthInsurance": 35,
+      "totalBasic": 310,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -30620,6 +31322,19 @@
       "hottestMonth": 16.279999999999998,
       "coldestMonth": 6.541935483870969,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "IE",
+      "rentCenter": 1700,
+      "rentOutside": 1200,
+      "groceries": 380,
+      "dining": 200,
+      "transport": 80,
+      "utilities": 180,
+      "coworking": 300,
+      "healthInsurance": 150,
+      "totalBasic": 1840,
+      "totalComfortable": 2990
     },
     "scores": {
       "economy": {
@@ -31054,6 +31769,19 @@
       "coldestMonth": 18.535483870967738,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "NC",
+      "rentCenter": 1000,
+      "rentOutside": 700,
+      "groceries": 400,
+      "dining": 180,
+      "transport": 50,
+      "utilities": 160,
+      "coworking": null,
+      "healthInsurance": 130,
+      "totalBasic": 1310,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 71.5,
@@ -31291,6 +32019,19 @@
       "hottestMonth": 24.058064516129033,
       "coldestMonth": 14.474193548387097,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "YE",
+      "rentCenter": 200,
+      "rentOutside": 120,
+      "groceries": 80,
+      "dining": 25,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": null,
+      "healthInsurance": 40,
+      "totalBasic": 250,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -31661,6 +32402,19 @@
       "coldestMonth": 0.8516129032258064,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "FO",
+      "rentCenter": 1200,
+      "rentOutside": 850,
+      "groceries": 400,
+      "dining": 220,
+      "transport": 50,
+      "utilities": 180,
+      "coworking": null,
+      "healthInsurance": 140,
+      "totalBasic": 1480,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 98.5,
@@ -31891,6 +32645,19 @@
       "hottestMonth": 29.45161290322581,
       "coldestMonth": 23.00967741935484,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "CU",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 475,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -32277,6 +33044,19 @@
       "hottestMonth": 27.829032258064515,
       "coldestMonth": 4.448387096774193,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "AZ",
+      "rentCenter": 550,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 15,
+      "utilities": 80,
+      "coworking": 120,
+      "healthInsurance": 65,
+      "totalBasic": 625,
+      "totalComfortable": 1080
     },
     "scores": {
       "economy": {
@@ -32711,6 +33491,19 @@
       "coldestMonth": 25.216129032258067,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "SB",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 200,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 595,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 60.9,
@@ -33061,6 +33854,19 @@
       "hottestMonth": 27.577419354838714,
       "coldestMonth": 23.312903225806455,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "JM",
+      "rentCenter": 550,
+      "rentOutside": 380,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 90,
+      "coworking": 120,
+      "healthInsurance": 75,
+      "totalBasic": 695,
+      "totalComfortable": 1140
     },
     "scores": {
       "economy": {
@@ -33461,6 +34267,19 @@
       "hottestMonth": 24.5258064516129,
       "coldestMonth": 13.145161290322584,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "MA",
+      "rentCenter": 400,
+      "rentOutside": 270,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 505,
+      "totalComfortable": 820
     },
     "scores": {
       "economy": {
@@ -33889,6 +34708,19 @@
       "hottestMonth": 28.12666666666667,
       "coldestMonth": 25.1258064516129,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "TT",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 220,
+      "dining": 90,
+      "transport": 30,
+      "utilities": 90,
+      "coworking": 120,
+      "healthInsurance": 75,
+      "totalBasic": 740,
+      "totalComfortable": 1225
     },
     "scores": {
       "economy": {
@@ -34323,7 +35155,7 @@
           "Police clearance"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -34408,6 +35240,19 @@
       "hottestMonth": 28.98333333333333,
       "coldestMonth": 22.99354838709678,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "BZ",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 220,
+      "dining": 100,
+      "transport": 30,
+      "utilities": 100,
+      "coworking": 150,
+      "healthInsurance": 90,
+      "totalBasic": 750,
+      "totalComfortable": 1290
     },
     "scores": {
       "economy": {
@@ -34792,6 +35637,19 @@
       "hottestMonth": 28.373333333333335,
       "coldestMonth": -4.019354838709678,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "CN",
+      "rentCenter": 700,
+      "rentOutside": 450,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 80,
+      "coworking": 150,
+      "healthInsurance": 80,
+      "totalBasic": 755,
+      "totalComfortable": 1315
     },
     "scores": {
       "economy": {
@@ -35221,6 +36079,19 @@
       "coldestMonth": 25.887096774193544,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "WS",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 180,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 55,
+      "totalBasic": 555,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 65.1,
@@ -35562,6 +36433,19 @@
       "coldestMonth": 24.553571428571423,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "VG",
+      "rentCenter": 1800,
+      "rentOutside": 1300,
+      "groceries": 450,
+      "dining": 220,
+      "transport": 50,
+      "utilities": 180,
+      "coworking": null,
+      "healthInsurance": 150,
+      "totalBasic": 1980,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": null,
@@ -35787,6 +36671,19 @@
       "hottestMonth": 34.82258064516129,
       "coldestMonth": 23.641935483870967,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "SD",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 340,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -36231,7 +37128,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -36320,6 +37217,19 @@
       "hottestMonth": 23.14838709677419,
       "coldestMonth": 2.641935483870968,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "SK",
+      "rentCenter": 600,
+      "rentOutside": 420,
+      "groceries": 220,
+      "dining": 90,
+      "transport": 25,
+      "utilities": 120,
+      "coworking": 120,
+      "healthInsurance": 80,
+      "totalBasic": 785,
+      "totalComfortable": 1255
     },
     "scores": {
       "economy": {
@@ -36754,6 +37664,19 @@
       "coldestMonth": 18.23,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "BI",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 360,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 52.7,
@@ -37137,6 +38060,19 @@
       "coldestMonth": 27.153571428571432,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "MH",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 250,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 100,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 720,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 53.9,
@@ -37471,6 +38407,19 @@
       "hottestMonth": 23.200000000000006,
       "coldestMonth": 3.3064516129032255,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "AT",
+      "rentCenter": 1000,
+      "rentOutside": 750,
+      "groceries": 320,
+      "dining": 170,
+      "transport": 50,
+      "utilities": 170,
+      "coworking": 220,
+      "healthInsurance": 130,
+      "totalBasic": 1290,
+      "totalComfortable": 2060
     },
     "scores": {
       "economy": {
@@ -37905,6 +38854,19 @@
       "coldestMonth": 18.851612903225814,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "MZ",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 455,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 39.2,
@@ -38327,6 +39289,19 @@
       "coldestMonth": 25.246428571428574,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "VC",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 220,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 745,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 50.9,
@@ -38660,6 +39635,19 @@
       "hottestMonth": 27.293548387096767,
       "coldestMonth": 25.08064516129032,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "PG",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 650,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -39060,6 +40048,19 @@
       "hottestMonth": 27.677419354838722,
       "coldestMonth": 1.0785714285714287,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "TR",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 180,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": 100,
+      "healthInsurance": 65,
+      "totalBasic": 580,
+      "totalComfortable": 955
     },
     "scores": {
       "economy": {
@@ -39544,7 +40545,7 @@
           "Police clearance"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -39629,6 +40630,19 @@
       "hottestMonth": 27.56774193548387,
       "coldestMonth": 18.08387096774194,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "GD",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 250,
+      "dining": 100,
+      "transport": 30,
+      "utilities": 110,
+      "coworking": 150,
+      "healthInsurance": 85,
+      "totalBasic": 870,
+      "totalComfortable": 1425
     },
     "scores": {
       "economy": {
@@ -39958,6 +40972,19 @@
       "hottestMonth": 29.743333333333336,
       "coldestMonth": 25.154838709677414,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "KH",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 475,
+      "totalComfortable": 810
     },
     "scores": {
       "economy": {
@@ -40395,14 +41422,14 @@
       },
       "incomeRequirement": {
         "currency": "EUR",
-        "monthly": 3510,
-        "annual": 42120,
-        "notes": "4× Portuguese minimum wage"
+        "monthly": 3680,
+        "annual": 44160,
+        "notes": "4× Portuguese minimum wage (€920 in 2025)"
       },
       "tax": {
         "status": "special",
         "rate": 20,
-        "notes": "NHR regime: flat 20% on Portuguese-source income for 10 years; foreign income may be exempt"
+        "notes": "NHR regime ended for new applicants in March 2025; replaced by IFICI (NHR 2.0): flat 20% on qualifying income for 10 years, limited to specific sectors (tech, science, innovation)"
       },
       "eligibility": {
         "minAge": 18,
@@ -40418,7 +41445,7 @@
         "Path to permanent residency after 5 years",
         "Access to Schengen Area",
         "Family reunification allowed",
-        "NHR tax regime eligible",
+        "IFICI tax regime eligible (replaces NHR)",
         "Access to Portuguese healthcare (SNS)"
       ],
       "applicationProcess": {
@@ -40433,17 +41460,17 @@
           "Proof of accommodation in Portugal"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за визу; вид на жительство ~83 € дополнительно"
           },
           "incomeRequirement": {
-            "notes": "4× минимальной зарплаты Португалии"
+            "notes": "4× минимальной зарплаты Португалии (920 € в 2025)"
           },
           "tax": {
-            "notes": "Режим NHR: фиксированные 20% на доход из португальских источников в течение 10 лет; иностранный доход может быть освобождён от налогов"
+            "notes": "Режим NHR закрыт для новых заявителей с марта 2025; заменён на IFICI (NHR 2.0): фиксированные 20% на квалифицированный доход в течение 10 лет, ограничен определёнными секторами (технологии, наука, инновации)"
           },
           "eligibility": {
             "requirements": [
@@ -40458,7 +41485,7 @@
             "Путь к ПМЖ через 5 лет",
             "Доступ в Шенгенскую зону",
             "Возможность воссоединения семьи",
-            "Право на налоговый режим NHR",
+            "Право на налоговый режим IFICI (заменяет NHR)",
             "Доступ к системе здравоохранения Португалии (SNS)"
           ],
           "applicationProcess": {
@@ -40478,10 +41505,10 @@
             "notes": "Збір за візу; дозвіл на проживання ~83 € додатково"
           },
           "incomeRequirement": {
-            "notes": "4× мінімальної зарплати Португалії"
+            "notes": "4× мінімальної зарплати Португалії (920 € у 2025)"
           },
           "tax": {
-            "notes": "Режим NHR: фіксовані 20% на дохід із португальських джерел протягом 10 років; іноземний дохід може бути звільнений від податків"
+            "notes": "Режим NHR закритий для нових заявників з березня 2025; замінений на IFICI (NHR 2.0): фіксовані 20% на кваліфікований дохід протягом 10 років, обмежений певними секторами (технології, наука, інновації)"
           },
           "eligibility": {
             "requirements": [
@@ -40496,7 +41523,7 @@
             "Шлях до ПМП через 5 років",
             "Доступ до Шенгенської зони",
             "Можливість возз'єднання сім'ї",
-            "Право на податковий режим NHR",
+            "Право на податковий режим IFICI (замінює NHR)",
             "Доступ до системи охорони здоров'я Португалії (SNS)"
           ],
           "applicationProcess": {
@@ -40520,6 +41547,19 @@
       "hottestMonth": 23.496774193548394,
       "coldestMonth": 10.832142857142856,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "PT",
+      "rentCenter": 850,
+      "rentOutside": 580,
+      "groceries": 250,
+      "dining": 120,
+      "transport": 40,
+      "utilities": 130,
+      "coworking": 160,
+      "healthInsurance": 100,
+      "totalBasic": 1000,
+      "totalComfortable": 1650
     },
     "scores": {
       "economy": {
@@ -40954,6 +41994,19 @@
       "coldestMonth": 5.193548387096775,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "GB",
+      "rentCenter": 1500,
+      "rentOutside": 1050,
+      "groceries": 350,
+      "dining": 180,
+      "transport": 80,
+      "utilities": 180,
+      "coworking": 280,
+      "healthInsurance": 140,
+      "totalBasic": 1660,
+      "totalComfortable": 2710
+    },
     "scores": {
       "economy": {
         "value": 82.9,
@@ -41387,6 +42440,19 @@
       "coldestMonth": 23.641935483870963,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "NG",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 455,
+      "totalComfortable": 765
+    },
     "scores": {
       "economy": {
         "value": 58,
@@ -41810,6 +42876,19 @@
       "coldestMonth": 25.009677419354837,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "MP",
+      "rentCenter": 800,
+      "rentOutside": 550,
+      "groceries": 350,
+      "dining": 150,
+      "transport": 40,
+      "utilities": 160,
+      "coworking": null,
+      "healthInsurance": 120,
+      "totalBasic": 1100,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 76.1,
@@ -42037,6 +43116,19 @@
       "hottestMonth": 26.609677419354842,
       "coldestMonth": 8.689285714285713,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "IL",
+      "rentCenter": 1500,
+      "rentOutside": 1050,
+      "groceries": 380,
+      "dining": 180,
+      "transport": 60,
+      "utilities": 160,
+      "coworking": 270,
+      "healthInsurance": 140,
+      "totalBasic": 1630,
+      "totalComfortable": 2690
     },
     "scores": {
       "economy": {
@@ -42458,6 +43550,19 @@
       "hottestMonth": 28.551612903225806,
       "coldestMonth": 11.971428571428575,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "LB",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 30,
+      "utilities": 80,
+      "coworking": 120,
+      "healthInsurance": 75,
+      "totalBasic": 660,
+      "totalComfortable": 1085
     },
     "scores": {
       "economy": {
@@ -42892,6 +43997,19 @@
       "coldestMonth": 4.312903225806451,
       "seasonType": "four_seasons"
     },
+    "costOfLiving": {
+      "code": "JP",
+      "rentCenter": 900,
+      "rentOutside": 600,
+      "groceries": 300,
+      "dining": 130,
+      "transport": 60,
+      "utilities": 140,
+      "coworking": 200,
+      "healthInsurance": 110,
+      "totalBasic": 1100,
+      "totalComfortable": 1840
+    },
     "scores": {
       "economy": {
         "value": 82.2,
@@ -43314,6 +44432,19 @@
       "coldestMonth": 24.11428571428571,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GM",
+      "rentCenter": 280,
+      "rentOutside": 170,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 45,
+      "totalBasic": 330,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 49.1,
@@ -43725,6 +44856,19 @@
       "coldestMonth": 24.803571428571427,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "MF",
+      "rentCenter": 1000,
+      "rentOutside": 700,
+      "groceries": 350,
+      "dining": 160,
+      "transport": 40,
+      "utilities": 150,
+      "coworking": null,
+      "healthInsurance": 120,
+      "totalBasic": 1240,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 74.3,
@@ -43940,6 +45084,19 @@
       "hottestMonth": 28.441935483870974,
       "coldestMonth": 25.5741935483871,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "GW",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 45,
+      "totalBasic": 340,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -44313,6 +45470,19 @@
       "hottestMonth": 31.079999999999995,
       "coldestMonth": 21.2,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "LA",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 405,
+      "totalComfortable": 680
     },
     "scores": {
       "economy": {
@@ -44735,6 +45905,19 @@
       "coldestMonth": 4.225806451612902,
       "seasonType": "four_seasons"
     },
+    "costOfLiving": {
+      "code": "MK",
+      "rentCenter": 350,
+      "rentOutside": 240,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 500,
+      "totalComfortable": 805
+    },
     "scores": {
       "economy": {
         "value": 58.4,
@@ -45112,6 +46295,19 @@
       "hottestMonth": 36.303225806451614,
       "coldestMonth": 17.516129032258068,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "QA",
+      "rentCenter": 1500,
+      "rentOutside": 1000,
+      "groceries": 350,
+      "dining": 150,
+      "transport": 40,
+      "utilities": 120,
+      "coworking": 250,
+      "healthInsurance": 130,
+      "totalBasic": 1510,
+      "totalComfortable": 2540
     },
     "scores": {
       "economy": {
@@ -45517,6 +46713,19 @@
       "hottestMonth": 25.825806451612905,
       "coldestMonth": 16.425806451612907,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "ZM",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 455,
+      "totalComfortable": 765
     },
     "scores": {
       "economy": {
@@ -45986,7 +47195,7 @@
           "Passport photo"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -46073,6 +47282,19 @@
       "hottestMonth": 28.74666666666666,
       "coldestMonth": 25.110714285714295,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "BB",
+      "rentCenter": 1100,
+      "rentOutside": 750,
+      "groceries": 350,
+      "dining": 170,
+      "transport": 60,
+      "utilities": 150,
+      "coworking": 250,
+      "healthInsurance": 130,
+      "totalBasic": 1310,
+      "totalComfortable": 2210
     },
     "scores": {
       "economy": {
@@ -46442,9 +47664,9 @@
       },
       "incomeRequirement": {
         "currency": "EUR",
-        "monthly": 2835,
-        "annual": 34020,
-        "notes": "Minimum annual income threshold set by Italian government"
+        "monthly": 2333,
+        "annual": 28000,
+        "notes": "Minimum €28,000 annual income; increases to €34,087 with spouse, +€1,550 per child"
       },
       "tax": {
         "status": "special",
@@ -46482,14 +47704,14 @@
           "Criminal record"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за национальную визу"
           },
           "incomeRequirement": {
-            "notes": "Минимальный годовой доход, установленный правительством Италии"
+            "notes": "Минимум 28 000 € годового дохода; увеличивается до 34 087 € с супругом, +1 550 € на ребёнка"
           },
           "tax": {
             "notes": "Италия предлагает фиксированный налог 7% для пенсионеров в южных регионах; цифровые кочевники облагаются стандартными ставками, если не подходят под режим для иммигрантов (освобождение 50–90%)"
@@ -46529,7 +47751,7 @@
             "notes": "Збір за національну візу"
           },
           "incomeRequirement": {
-            "notes": "Мінімальний річний дохід, встановлений урядом Італії"
+            "notes": "Мінімум 28 000 € річного доходу; збільшується до 34 087 € з подружжям, +1 550 € на дитину"
           },
           "tax": {
             "notes": "Італія пропонує фіксований податок 7% для пенсіонерів у південних регіонах; цифрові кочівники оподатковуються стандартними ставками, якщо не підходять під режим для іммігрантів (звільнення 50–90%)"
@@ -46573,6 +47795,19 @@
       "hottestMonth": 27.464516129032255,
       "coldestMonth": 7.914285714285714,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "IT",
+      "rentCenter": 900,
+      "rentOutside": 620,
+      "groceries": 280,
+      "dining": 140,
+      "transport": 35,
+      "utilities": 150,
+      "coworking": 200,
+      "healthInsurance": 110,
+      "totalBasic": 1085,
+      "totalComfortable": 1815
     },
     "scores": {
       "economy": {
@@ -47007,6 +48242,19 @@
       "coldestMonth": 24.11612903225807,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "KM",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 360,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 55.5,
@@ -47355,9 +48603,9 @@
       },
       "incomeRequirement": {
         "currency": "EUR",
-        "monthly": 1540,
-        "annual": null,
-        "notes": "Relatively low threshold; based on Albanian living standards"
+        "monthly": 817,
+        "annual": 9804,
+        "notes": "Low threshold; based on Albanian living standards (~40,000 ALL/month)"
       },
       "tax": {
         "status": "exempt",
@@ -47393,14 +48641,14 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Очень доступный сбор за подачу заявления"
           },
           "incomeRequirement": {
-            "notes": "Относительно низкий порог; на основе албанских стандартов жизни"
+            "notes": "Низкий порог; на основе уровня жизни Албании (~40 000 ALL/мес.)"
           },
           "tax": {
             "notes": "Нет албанского подоходного налога на иностранный доход от удалённой работы"
@@ -47438,7 +48686,7 @@
             "notes": "Дуже доступний збір за подання заяви"
           },
           "incomeRequirement": {
-            "notes": "Відносно низький поріг; на основі албанських стандартів життя"
+            "notes": "Низький поріг; на основі рівня життя Албанії (~40 000 ALL/міс.)"
           },
           "tax": {
             "notes": "Немає албанського податку на доходи на іноземний дохід від віддаленої роботи"
@@ -47480,6 +48728,19 @@
       "hottestMonth": 26.72903225806452,
       "coldestMonth": 6.992857142857142,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "AL",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 180,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 90,
+      "coworking": 100,
+      "healthInsurance": 70,
+      "totalBasic": 595,
+      "totalComfortable": 995
     },
     "scores": {
       "economy": {
@@ -47902,6 +49163,19 @@
       "coldestMonth": 12.738709677419356,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GI",
+      "rentCenter": 1600,
+      "rentOutside": 1100,
+      "groceries": 400,
+      "dining": 200,
+      "transport": 40,
+      "utilities": 160,
+      "coworking": 300,
+      "healthInsurance": 150,
+      "totalBasic": 1700,
+      "totalComfortable": 2850
+    },
     "scores": {
       "economy": {
         "value": null,
@@ -48116,6 +49390,19 @@
       "hottestMonth": 17.319354838709682,
       "coldestMonth": -19.474193548387095,
       "seasonType": "polar"
+    },
+    "costOfLiving": {
+      "code": "MN",
+      "rentCenter": 400,
+      "rentOutside": 270,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 495,
+      "totalComfortable": 810
     },
     "scores": {
       "economy": {
@@ -48549,6 +49836,19 @@
       "coldestMonth": 21.43870967741935,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "TO",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 200,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 575,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 75.1,
@@ -48887,6 +50187,19 @@
       "hottestMonth": 21.229032258064514,
       "coldestMonth": 15.119354838709674,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "MG",
+      "rentCenter": 250,
+      "rentOutside": 150,
+      "groceries": 80,
+      "dining": 25,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": null,
+      "healthInsurance": 40,
+      "totalBasic": 280,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -49321,6 +50634,19 @@
       "coldestMonth": 8.790322580645162,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "MC",
+      "rentCenter": 3500,
+      "rentOutside": 2500,
+      "groceries": 550,
+      "dining": 350,
+      "transport": 60,
+      "utilities": 200,
+      "coworking": 450,
+      "healthInsurance": 200,
+      "totalBasic": 3310,
+      "totalComfortable": 5310
+    },
     "scores": {
       "economy": {
         "value": 100,
@@ -49675,7 +51001,7 @@
           "Passport photos"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -49764,6 +51090,19 @@
       "hottestMonth": 25.10645161290323,
       "coldestMonth": 19.47666666666667,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "BR",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 80,
+      "transport": 30,
+      "utilities": 80,
+      "coworking": 120,
+      "healthInsurance": 80,
+      "totalBasic": 640,
+      "totalComfortable": 1070
     },
     "scores": {
       "economy": {
@@ -50203,6 +51542,19 @@
       "coldestMonth": 6.129032258064516,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "AU",
+      "rentCenter": 1600,
+      "rentOutside": 1100,
+      "groceries": 380,
+      "dining": 200,
+      "transport": 100,
+      "utilities": 180,
+      "coworking": 300,
+      "healthInsurance": 160,
+      "totalBasic": 1760,
+      "totalComfortable": 2920
+    },
     "scores": {
       "economy": {
         "value": 83.8,
@@ -50631,6 +51983,19 @@
       "coldestMonth": 25.129032258064512,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GY",
+      "rentCenter": 400,
+      "rentOutside": 270,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 520,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 70.3,
@@ -51019,6 +52384,19 @@
       "hottestMonth": 21.364516129032257,
       "coldestMonth": 0.9571428571428572,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "SI",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 250,
+      "dining": 110,
+      "transport": 35,
+      "utilities": 130,
+      "coworking": 150,
+      "healthInsurance": 90,
+      "totalBasic": 895,
+      "totalComfortable": 1465
     },
     "scores": {
       "economy": {
@@ -51442,6 +52820,19 @@
       "coldestMonth": 4.690322580645161,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "SM",
+      "rentCenter": 850,
+      "rentOutside": 600,
+      "groceries": 280,
+      "dining": 140,
+      "transport": 30,
+      "utilities": 140,
+      "coworking": 200,
+      "healthInsurance": 110,
+      "totalBasic": 1050,
+      "totalComfortable": 1750
+    },
     "scores": {
       "economy": {
         "value": 94.3,
@@ -51763,6 +53154,19 @@
       "hottestMonth": 24.864516129032257,
       "coldestMonth": 7.614285714285715,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "PS",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 180,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 560,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -52147,6 +53551,19 @@
       "coldestMonth": 4.245161290322581,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "BT",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 385,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 70.1,
@@ -52524,6 +53941,19 @@
       "coldestMonth": 24.135714285714283,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "SX",
+      "rentCenter": 1200,
+      "rentOutside": 850,
+      "groceries": 380,
+      "dining": 180,
+      "transport": 50,
+      "utilities": 160,
+      "coworking": null,
+      "healthInsurance": 130,
+      "totalBasic": 1440,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 87.1,
@@ -52771,6 +54201,19 @@
       "hottestMonth": 29.11290322580645,
       "coldestMonth": 25.470967741935482,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "PH",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 10,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 420,
+      "totalComfortable": 720
     },
     "scores": {
       "economy": {
@@ -53205,6 +54648,19 @@
       "coldestMonth": 12.222580645161296,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "CL",
+      "rentCenter": 600,
+      "rentOutside": 420,
+      "groceries": 220,
+      "dining": 90,
+      "transport": 35,
+      "utilities": 100,
+      "coworking": 130,
+      "healthInsurance": 80,
+      "totalBasic": 775,
+      "totalComfortable": 1255
+    },
     "scores": {
       "economy": {
         "value": 62.7,
@@ -53638,6 +55094,19 @@
       "coldestMonth": 24.58387096774194,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "HT",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 70,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 485,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 39.5,
@@ -54028,6 +55497,19 @@
       "coldestMonth": 25.43225806451613,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "ST",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 445,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 54,
@@ -54359,6 +55841,19 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": null,
+    "costOfLiving": {
+      "code": "MO",
+      "rentCenter": 1500,
+      "rentOutside": 1000,
+      "groceries": 350,
+      "dining": 150,
+      "transport": 30,
+      "utilities": 120,
+      "coworking": 250,
+      "healthInsurance": 120,
+      "totalBasic": 1500,
+      "totalComfortable": 2520
+    },
     "scores": {
       "economy": {
         "value": 95.1,
@@ -54696,7 +56191,7 @@
           "Proof of accommodation"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -54785,6 +56280,19 @@
       "hottestMonth": 26.629032258064516,
       "coldestMonth": 22.82903225806452,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "MU",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 25,
+      "utilities": 80,
+      "coworking": 120,
+      "healthInsurance": 70,
+      "totalBasic": 635,
+      "totalComfortable": 1045
     },
     "scores": {
       "economy": {
@@ -55189,6 +56697,19 @@
       "hottestMonth": 36.02258064516129,
       "coldestMonth": 16.812903225806455,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "BH",
+      "rentCenter": 900,
+      "rentOutside": 600,
+      "groceries": 280,
+      "dining": 130,
+      "transport": 50,
+      "utilities": 100,
+      "coworking": 200,
+      "healthInsurance": 110,
+      "totalBasic": 1030,
+      "totalComfortable": 1770
     },
     "scores": {
       "economy": {
@@ -55610,6 +57131,19 @@
       "hottestMonth": 21.753333333333337,
       "coldestMonth": 12.854838709677418,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "MX",
+      "rentCenter": 550,
+      "rentOutside": 380,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 100,
+      "healthInsurance": 70,
+      "totalBasic": 650,
+      "totalComfortable": 1060
     },
     "scores": {
       "economy": {
@@ -56052,8 +57586,8 @@
       },
       "cost": {
         "currency": "USD",
-        "amount": 0,
-        "notes": "Free application; no visa fee"
+        "amount": 117,
+        "notes": "Visa application fee; varies by consulate ($117-400)"
       },
       "incomeRequirement": {
         "currency": "USD",
@@ -56094,11 +57628,11 @@
           "Digital photo"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
-            "notes": "Бесплатная подача; визовый сбор отсутствует"
+            "notes": "Визовый сбор; варьируется по консульствам (117-400 $)"
           },
           "incomeRequirement": {
             "notes": "Минимальный месячный доход от удалённой работы за рубежом"
@@ -56135,7 +57669,7 @@
         },
         "ua": {
           "cost": {
-            "notes": "Безкоштовна подача; візовий збір відсутній"
+            "notes": "Візовий збір; варіюється по консульствах (117-400 $)"
           },
           "incomeRequirement": {
             "notes": "Мінімальний місячний дохід від віддаленої роботи за кордоном"
@@ -56179,6 +57713,19 @@
       "hottestMonth": 25.722580645161287,
       "coldestMonth": 11.31,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "AR",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 100,
+      "healthInsurance": 80,
+      "totalBasic": 640,
+      "totalComfortable": 1050
     },
     "scores": {
       "economy": {
@@ -56613,6 +58160,19 @@
       "coldestMonth": 11.135483870967743,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "NP",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": 50,
+      "healthInsurance": 35,
+      "totalBasic": 330,
+      "totalComfortable": 565
+    },
     "scores": {
       "economy": {
         "value": 54.6,
@@ -57033,6 +58593,19 @@
       "hottestMonth": 17.073333333333334,
       "coldestMonth": -2.7870967741935493,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "SE",
+      "rentCenter": 1200,
+      "rentOutside": 850,
+      "groceries": 350,
+      "dining": 200,
+      "transport": 60,
+      "utilities": 160,
+      "coworking": 260,
+      "healthInsurance": 140,
+      "totalBasic": 1420,
+      "totalComfortable": 2370
     },
     "scores": {
       "economy": {
@@ -57467,6 +59040,19 @@
       "coldestMonth": 24.835483870967742,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "SL",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 120,
+      "dining": 35,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 395,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 49.5,
@@ -57852,6 +59438,19 @@
       "hottestMonth": 19.609677419354846,
       "coldestMonth": 12.57741935483871,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "SZ",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 130,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 425,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -58262,9 +59861,9 @@
       },
       "incomeRequirement": {
         "currency": "EUR",
-        "monthly": 3256,
-        "annual": 39072,
-        "notes": "200% of Spanish minimum wage (SMI)"
+        "monthly": 2849,
+        "annual": 34188,
+        "notes": "200% of Spanish minimum wage (SMI 2026: €1,221/month in 14 payments)"
       },
       "tax": {
         "status": "special",
@@ -58301,14 +59900,14 @@
           "University degree or 3+ years professional experience"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за национальную визу; вид на жительство ~16 € дополнительно"
           },
           "incomeRequirement": {
-            "notes": "200% минимальной зарплаты Испании (SMI)"
+            "notes": "200% минимальной зарплаты Испании (SMI 2026: 1 221 €/мес. в 14 выплатах)"
           },
           "tax": {
             "notes": "Закон Бекхэма: фиксированные 24% на доход из испанских источников до 600 тыс. € в течение первых 6 лет; иностранный доход освобождён"
@@ -58347,7 +59946,7 @@
             "notes": "Збір за національну візу; дозвіл на проживання ~16 € додатково"
           },
           "incomeRequirement": {
-            "notes": "200% мінімальної зарплати Іспанії (SMI)"
+            "notes": "200% мінімальної зарплати Іспанії (SMI 2026: 1 221 €/міс. у 14 виплатах)"
           },
           "tax": {
             "notes": "Закон Бекхема: фіксовані 24% на дохід із іспанських джерел до 600 тис. € протягом перших 6 років; іноземний дохід звільнений"
@@ -58390,6 +59989,19 @@
       "hottestMonth": 28.03548387096775,
       "coldestMonth": 5.06774193548387,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "ES",
+      "rentCenter": 900,
+      "rentOutside": 620,
+      "groceries": 270,
+      "dining": 130,
+      "transport": 45,
+      "utilities": 140,
+      "coworking": 180,
+      "healthInsurance": 110,
+      "totalBasic": 1075,
+      "totalComfortable": 1775
     },
     "scores": {
       "economy": {
@@ -58831,9 +60443,9 @@
       },
       "incomeRequirement": {
         "currency": "USD",
-        "monthly": 684,
-        "annual": null,
-        "notes": "3× Colombian minimum wage; one of the lowest globally"
+        "monthly": 1400,
+        "annual": 16800,
+        "notes": "3× Colombian minimum wage; approximately COP 5,252,715/month"
       },
       "tax": {
         "status": "exempt",
@@ -58869,14 +60481,14 @@
           "Motivation letter"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за выдачу визы"
           },
           "incomeRequirement": {
-            "notes": "3× минимальной зарплаты Колумбии; один из самых низких порогов в мире"
+            "notes": "3× минимальной зарплаты Колумбии; примерно 5 252 715 COP/мес."
           },
           "tax": {
             "notes": "Нет колумбийского подоходного налога при пребывании менее 183 дней; после 183 дней налогом облагается только доход из колумбийских источников"
@@ -58914,7 +60526,7 @@
             "notes": "Збір за видачу візи"
           },
           "incomeRequirement": {
-            "notes": "3× мінімальної зарплати Колумбії; один із найнижчих порогів у світі"
+            "notes": "3× мінімальної зарплати Колумбії; приблизно 5 252 715 COP/міс."
           },
           "tax": {
             "notes": "Немає колумбійського податку на доходи при перебуванні менше 183 днів; після 183 днів оподатковується лише дохід з колумбійських джерел"
@@ -58956,6 +60568,19 @@
       "hottestMonth": 14.293548387096774,
       "coldestMonth": 11.96774193548387,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "CO",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 100,
+      "healthInsurance": 65,
+      "totalBasic": 550,
+      "totalComfortable": 925
     },
     "scores": {
       "economy": {
@@ -59395,6 +61020,19 @@
       "coldestMonth": 24.928571428571438,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "TC",
+      "rentCenter": 1500,
+      "rentOutside": 1100,
+      "groceries": 400,
+      "dining": 200,
+      "transport": 50,
+      "utilities": 180,
+      "coworking": null,
+      "healthInsurance": 140,
+      "totalBasic": 1730,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 85.1,
@@ -59637,6 +61275,19 @@
       "hottestMonth": 37.39032258064517,
       "coldestMonth": 24.85483870967742,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "DJ",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 725,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -59981,13 +61632,18 @@
     "hasNomadVisa": false,
     "isSchengen": false,
     "touristVisaDays": 30,
-    "climateData": {
-      "annualMeanTemp": 27.950136986301377,
-      "annualPrecipitation": 2544.3000000000006,
-      "tempRange": 0.810107526881719,
-      "hottestMonth": 28.313333333333333,
-      "coldestMonth": 27.503225806451614,
-      "seasonType": "tropical"
+    "costOfLiving": {
+      "code": "NR",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 250,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 100,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 720,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -60060,19 +61716,8 @@
         }
       },
       "climate": {
-        "value": 30.1,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 28,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 2544,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": null,
@@ -60302,7 +61947,7 @@
     "touristVisaDays": 90,
     "nomadVisa": {
       "code": "SV",
-      "visaName": "Digital Nomad Visa (Bitcoin-friendly)",
+      "visaName": "Digital Nomad Visa",
       "officialUrl": "https://www.migracion.gob.sv/",
       "duration": {
         "initial": 12,
@@ -60311,14 +61956,14 @@
       },
       "cost": {
         "currency": "USD",
-        "amount": 2825,
-        "notes": "Processing fee; includes Bitcoin wallet setup support"
+        "amount": 100,
+        "notes": "Application fee; express processing available for additional $60"
       },
       "incomeRequirement": {
-        "currency": "BTC",
-        "monthly": null,
-        "annual": null,
-        "notes": "Must demonstrate stable remote income; Bitcoin accepted as proof of funds"
+        "currency": "USD",
+        "monthly": 1460,
+        "annual": 17520,
+        "notes": "Minimum monthly income from remote work; Bitcoin accepted as proof of funds"
       },
       "tax": {
         "status": "exempt",
@@ -60353,14 +61998,14 @@
           "Application form"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
-            "notes": "Сбор за обработку; включает поддержку настройки Bitcoin-кошелька"
+            "notes": "Сбор за подачу заявления; ускоренная обработка доступна за дополнительные 60 $"
           },
           "incomeRequirement": {
-            "notes": "Необходимо подтвердить стабильный удалённый доход; Bitcoin принимается как подтверждение средств"
+            "notes": "Минимальный месячный доход от удалённой работы; биткоин принимается как подтверждение средств"
           },
           "tax": {
             "notes": "Нет подоходного налога на иностранный доход; в Сальвадоре нет налога на прирост капитала от Bitcoin"
@@ -60394,10 +62039,10 @@
         },
         "ua": {
           "cost": {
-            "notes": "Збір за обробку; включає підтримку налаштування Bitcoin-гаманця"
+            "notes": "Збір за подання заяви; прискорена обробка доступна за додаткові 60 $"
           },
           "incomeRequirement": {
-            "notes": "Необхідно підтвердити стабільний віддалений дохід; Bitcoin приймається як підтвердження коштів"
+            "notes": "Мінімальний місячний дохід від віддаленої роботи; біткоїн приймається як підтвердження коштів"
           },
           "tax": {
             "notes": "Немає податку на доходи на іноземний дохід; у Сальвадорі немає податку на приріст капіталу від Bitcoin"
@@ -60431,13 +62076,18 @@
         }
       }
     },
-    "climateData": {
-      "annualMeanTemp": 24.428493150684947,
-      "annualPrecipitation": 1534.9999999999998,
-      "tempRange": 2.2967741935483836,
-      "hottestMonth": 25.70967741935484,
-      "coldestMonth": 23.412903225806456,
-      "seasonType": "tropical"
+    "costOfLiving": {
+      "code": "SV",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 170,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 60,
+      "totalBasic": 560,
+      "totalComfortable": 910
     },
     "scores": {
       "economy": {
@@ -60541,19 +62191,8 @@
         }
       },
       "climate": {
-        "value": 57.6,
-        "indicators": {
-          "annualMeanTemp": {
-            "raw": 24.4,
-            "unit": "°C",
-            "year": 2023
-          },
-          "annualPrecipitation": {
-            "raw": 1535,
-            "unit": "mm",
-            "year": 2023
-          }
-        }
+        "value": null,
+        "indicators": {}
       },
       "safety": {
         "value": 73.3,
@@ -60832,6 +62471,19 @@
       "hottestMonth": 24.016129032258064,
       "coldestMonth": 19.61935483870968,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "HN",
+      "rentCenter": 400,
+      "rentOutside": 270,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 60,
+      "totalBasic": 520,
+      "totalComfortable": 850
     },
     "scores": {
       "economy": {
@@ -61275,7 +62927,7 @@
           "Passport photos"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -61364,6 +63016,19 @@
       "hottestMonth": 21.178571428571427,
       "coldestMonth": 17.358064516129037,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "KE",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 20,
+      "utilities": 60,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 460,
+      "totalComfortable": 795
     },
     "scores": {
       "economy": {
@@ -61844,7 +63509,7 @@
           "CV"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -61931,6 +63596,19 @@
       "hottestMonth": 29.187096774193552,
       "coldestMonth": 12.939285714285717,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "MT",
+      "rentCenter": 900,
+      "rentOutside": 650,
+      "groceries": 280,
+      "dining": 130,
+      "transport": 30,
+      "utilities": 130,
+      "coworking": 200,
+      "healthInsurance": 100,
+      "totalBasic": 1060,
+      "totalComfortable": 1770
     },
     "scores": {
       "economy": {
@@ -62331,7 +64009,7 @@
     "touristVisaDays": 90,
     "nomadVisa": {
       "code": "LV",
-      "visaName": "Digital Nomad Visa (Startup Visa pathway)",
+      "visaName": "Long-Stay Visa for Remote Work",
       "officialUrl": "https://www.pmlp.gov.lv/en",
       "duration": {
         "initial": 12,
@@ -62345,9 +64023,9 @@
       },
       "incomeRequirement": {
         "currency": "EUR",
-        "monthly": 2857,
-        "annual": 34284,
-        "notes": "2.5× Latvian average monthly salary"
+        "monthly": 4213,
+        "annual": 50556,
+        "notes": "2.5× Latvian average monthly gross salary; OECD employer required"
       },
       "tax": {
         "status": "standard",
@@ -62383,14 +64061,14 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Сбор за обработку долгосрочной визы"
           },
           "incomeRequirement": {
-            "notes": "2,5× средней месячной зарплаты Латвии"
+            "notes": "2,5× средней валовой месячной зарплаты Латвии; требуется работодатель из ОЭСР"
           },
           "tax": {
             "notes": "Стандартный подоходный налог 23%; для фрилансеров может применяться налог на микропредприятие (25% от оборота)"
@@ -62428,7 +64106,7 @@
             "notes": "Збір за обробку довгострокової візи"
           },
           "incomeRequirement": {
-            "notes": "2,5× середньої місячної зарплати Латвії"
+            "notes": "2,5× середньої валової місячної зарплати Латвії; потрібен роботодавець з ОЕСР"
           },
           "tax": {
             "notes": "Стандартний податок на доходи 23%; для фрілансерів може застосовуватися податок на мікропідприємство (25% від обороту)"
@@ -62470,6 +64148,19 @@
       "hottestMonth": 18.867741935483874,
       "coldestMonth": -1.2483870967741943,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "LV",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 220,
+      "dining": 90,
+      "transport": 25,
+      "utilities": 120,
+      "coworking": 130,
+      "healthInsurance": 80,
+      "totalBasic": 765,
+      "totalComfortable": 1265
     },
     "scores": {
       "economy": {
@@ -62904,6 +64595,19 @@
       "coldestMonth": 25.003225806451614,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GA",
+      "rentCenter": 700,
+      "rentOutside": 450,
+      "groceries": 250,
+      "dining": 100,
+      "transport": 30,
+      "utilities": 120,
+      "coworking": null,
+      "healthInsurance": 80,
+      "totalBasic": 850,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 44,
@@ -63272,6 +64976,19 @@
       "coldestMonth": 15.248387096774197,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "HK",
+      "rentCenter": 2200,
+      "rentOutside": 1500,
+      "groceries": 400,
+      "dining": 180,
+      "transport": 60,
+      "utilities": 150,
+      "coworking": 350,
+      "healthInsurance": 160,
+      "totalBasic": 2110,
+      "totalComfortable": 3500
+    },
     "scores": {
       "economy": {
         "value": 91.5,
@@ -63625,6 +65342,19 @@
       "coldestMonth": 27.8258064516129,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "TV",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 200,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 575,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 50.1,
@@ -63952,6 +65682,19 @@
       "hottestMonth": 27.686666666666667,
       "coldestMonth": 25.02903225806452,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "TL",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 55,
+      "totalBasic": 475,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -64307,6 +66050,19 @@
       "hottestMonth": 19.26451612903226,
       "coldestMonth": 6.386666666666668,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "LS",
+      "rentCenter": 280,
+      "rentOutside": 170,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 40,
+      "totalBasic": 330,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -64697,6 +66453,19 @@
       "hottestMonth": 25.651612903225804,
       "coldestMonth": 5.87741935483871,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "US",
+      "rentCenter": 1800,
+      "rentOutside": 1300,
+      "groceries": 400,
+      "dining": 200,
+      "transport": 80,
+      "utilities": 180,
+      "coworking": 300,
+      "healthInsurance": 160,
+      "totalBasic": 1960,
+      "totalComfortable": 3120
     },
     "scores": {
       "economy": {
@@ -65178,7 +66947,7 @@
           "Company verification documents"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -65267,6 +67036,19 @@
       "hottestMonth": 30.820000000000007,
       "coldestMonth": 25.91290322580645,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "TH",
+      "rentCenter": 450,
+      "rentOutside": 280,
+      "groceries": 150,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 60,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 510,
+      "totalComfortable": 875
     },
     "scores": {
       "economy": {
@@ -65705,6 +67487,19 @@
       "hottestMonth": 31.106666666666666,
       "coldestMonth": 12.080645161290322,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "IN",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": 60,
+      "healthInsurance": 35,
+      "totalBasic": 330,
+      "totalComfortable": 575
     },
     "scores": {
       "economy": {
@@ -66190,7 +67985,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -66277,6 +68072,19 @@
       "hottestMonth": 20.106451612903225,
       "coldestMonth": -1.542857142857143,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "LT",
+      "rentCenter": 650,
+      "rentOutside": 450,
+      "groceries": 230,
+      "dining": 100,
+      "transport": 25,
+      "utilities": 120,
+      "coworking": 140,
+      "healthInsurance": 85,
+      "totalBasic": 825,
+      "totalComfortable": 1350
     },
     "scores": {
       "economy": {
@@ -66711,6 +68519,19 @@
       "coldestMonth": 14.54516129032258,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "ZW",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 475,
+      "totalComfortable": 795
+    },
     "scores": {
       "economy": {
         "value": 50.4,
@@ -67124,6 +68945,19 @@
       "coldestMonth": 26.954838709677418,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "MV",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 250,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 70,
+      "totalBasic": 750,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 74.9,
@@ -67473,6 +69307,19 @@
       "hottestMonth": 31.36451612903226,
       "coldestMonth": 10.903225806451614,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "TN",
+      "rentCenter": 300,
+      "rentOutside": 200,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 385,
+      "totalComfortable": 630
     },
     "scores": {
       "economy": {
@@ -67947,7 +69794,7 @@
           "Passport-size photo"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -68032,6 +69879,19 @@
       "hottestMonth": 17.445161290322584,
       "coldestMonth": -3.451612903225806,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "EE",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 250,
+      "dining": 110,
+      "transport": 30,
+      "utilities": 130,
+      "coworking": 160,
+      "healthInsurance": 90,
+      "totalBasic": 890,
+      "totalComfortable": 1470
     },
     "scores": {
       "economy": {
@@ -68465,6 +70325,19 @@
       "hottestMonth": 29.81666666666667,
       "coldestMonth": 18.06774193548387,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "BD",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 40,
+      "totalBasic": 340,
+      "totalComfortable": 600
     },
     "scores": {
       "economy": {
@@ -68904,6 +70777,19 @@
       "coldestMonth": -6.680645161290321,
       "seasonType": "four_seasons"
     },
+    "costOfLiving": {
+      "code": "UZ",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 40,
+      "totalBasic": 400,
+      "totalComfortable": 670
+    },
     "scores": {
       "economy": {
         "value": 62.8,
@@ -69342,6 +71228,19 @@
       "coldestMonth": 25.070967741935487,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "GH",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 490,
+      "totalComfortable": 825
+    },
     "scores": {
       "economy": {
         "value": 60.5,
@@ -69767,9 +71666,9 @@
       },
       "incomeRequirement": {
         "currency": "NOK",
-        "monthly": 36000,
-        "annual": null,
-        "notes": "~€3,200/month; must demonstrate ability to support yourself"
+        "monthly": 43550,
+        "annual": 522600,
+        "notes": "~€3,500/month; must demonstrate ability to support yourself; at least one client contract required"
       },
       "tax": {
         "status": "standard",
@@ -69805,14 +71704,14 @@
           "Health insurance"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "~560 €; сбор за вид на жительство"
           },
           "incomeRequirement": {
-            "notes": "~3 200 €/мес.; необходимо подтвердить способность содержать себя"
+            "notes": "~3 500 €/мес.; необходимо продемонстрировать способность содержать себя; требуется хотя бы один клиентский контракт"
           },
           "tax": {
             "notes": "Стандартный налог 22% на обычный доход; прогрессивные ставки на персональный доход"
@@ -69850,7 +71749,7 @@
             "notes": "~560 €; збір за дозвіл на проживання"
           },
           "incomeRequirement": {
-            "notes": "~3 200 €/міс.; необхідно підтвердити здатність утримувати себе"
+            "notes": "~3 500 €/міс.; необхідно продемонструвати здатність утримувати себе; потрібен хоча б один клієнтський контракт"
           },
           "tax": {
             "notes": "Стандартний податок 22% на звичайний дохід; прогресивні ставки на персональний дохід"
@@ -69892,6 +71791,19 @@
       "hottestMonth": 19.023333333333333,
       "coldestMonth": -5.012903225806452,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "NO",
+      "rentCenter": 1500,
+      "rentOutside": 1100,
+      "groceries": 400,
+      "dining": 250,
+      "transport": 70,
+      "utilities": 180,
+      "coworking": 300,
+      "healthInsurance": 150,
+      "totalBasic": 1750,
+      "totalComfortable": 2850
     },
     "scores": {
       "economy": {
@@ -70320,6 +72232,19 @@
       "hottestMonth": 27.823333333333338,
       "coldestMonth": 25.38387096774193,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "SO",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 120,
+      "dining": 35,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 360,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -70773,7 +72698,7 @@
           "Police certificate"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -70858,6 +72783,19 @@
       "hottestMonth": 29.812903225806448,
       "coldestMonth": 23.361290322580643,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "BS",
+      "rentCenter": 1400,
+      "rentOutside": 1000,
+      "groceries": 400,
+      "dining": 200,
+      "transport": 70,
+      "utilities": 180,
+      "coworking": 300,
+      "healthInsurance": 150,
+      "totalBasic": 1650,
+      "totalComfortable": 2700
     },
     "scores": {
       "economy": {
@@ -71204,6 +73142,19 @@
       "hottestMonth": 35.50666666666667,
       "coldestMonth": 20.903225806451616,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "OM",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 250,
+      "dining": 100,
+      "transport": 30,
+      "utilities": 100,
+      "coworking": 150,
+      "healthInsurance": 90,
+      "totalBasic": 860,
+      "totalComfortable": 1420
     },
     "scores": {
       "economy": {
@@ -71615,6 +73566,19 @@
       "coldestMonth": 3.453571428571429,
       "seasonType": "mild_seasons"
     },
+    "costOfLiving": {
+      "code": "LU",
+      "rentCenter": 1800,
+      "rentOutside": 1300,
+      "groceries": 400,
+      "dining": 220,
+      "transport": 0,
+      "utilities": 200,
+      "coworking": 300,
+      "healthInsurance": 160,
+      "totalBasic": 1900,
+      "totalComfortable": 3080
+    },
     "scores": {
       "economy": {
         "value": 82.9,
@@ -72020,6 +73984,19 @@
       "hottestMonth": 39.4225806451613,
       "coldestMonth": 10.361290322580643,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "IQ",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 180,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 520,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -72434,6 +74411,19 @@
       "coldestMonth": 23.325,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "VI",
+      "rentCenter": 1500,
+      "rentOutside": 1100,
+      "groceries": 400,
+      "dining": 200,
+      "transport": 50,
+      "utilities": 180,
+      "coworking": null,
+      "healthInsurance": 140,
+      "totalBasic": 1730,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 75.2,
@@ -72707,6 +74697,19 @@
       "hottestMonth": 30.413333333333338,
       "coldestMonth": 22.114285714285717,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "MR",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 120,
+      "dining": 35,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 45,
+      "totalBasic": 360,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -73087,6 +75090,19 @@
       "hottestMonth": 21.741935483870968,
       "coldestMonth": -6.885714285714286,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "CA",
+      "rentCenter": 1500,
+      "rentOutside": 1100,
+      "groceries": 350,
+      "dining": 180,
+      "transport": 90,
+      "utilities": 150,
+      "coworking": 280,
+      "healthInsurance": 140,
+      "totalBasic": 1690,
+      "totalComfortable": 2690
     },
     "scores": {
       "economy": {
@@ -73521,6 +75537,19 @@
       "coldestMonth": 23.500000000000004,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "MM",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 120,
+      "dining": 40,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 400,
+      "totalComfortable": 675
+    },
     "scores": {
       "economy": {
         "value": 54.8,
@@ -73943,7 +75972,7 @@
         "currency": "USD",
         "monthly": 2000,
         "annual": 24000,
-        "notes": "Minimum $24,000 annual income"
+        "notes": "$24,000/year for tech professionals; $60,000/year for non-tech professionals"
       },
       "tax": {
         "status": "exempt",
@@ -73981,14 +76010,14 @@
           "Health insurance"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "~200 €; сбор за обработку, включает доступ к коворкингу"
           },
           "incomeRequirement": {
-            "notes": "Минимальный годовой доход $24 000"
+            "notes": "24 000 $/год для IT-специалистов; 60 000 $/год для специалистов не из IT-сферы"
           },
           "tax": {
             "notes": "Иностранный доход не облагается налогом в Малайзии по принципу территориального налогообложения"
@@ -74028,7 +76057,7 @@
             "notes": "~200 €; збір за обробку, включає доступ до коворкінгу"
           },
           "incomeRequirement": {
-            "notes": "Мінімальний річний дохід $24 000"
+            "notes": "24 000 $/рік для IT-спеціалістів; 60 000 $/рік для спеціалістів не з IT-сфери"
           },
           "tax": {
             "notes": "Іноземний дохід не оподатковується в Малайзії за принципом територіального оподаткування"
@@ -74072,6 +76101,19 @@
       "hottestMonth": 27.80333333333333,
       "coldestMonth": 25.535483870967745,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "MY",
+      "rentCenter": 500,
+      "rentOutside": 330,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 60,
+      "coworking": 100,
+      "healthInsurance": 60,
+      "totalBasic": 570,
+      "totalComfortable": 960
     },
     "scores": {
       "economy": {
@@ -74505,6 +76547,19 @@
       "coldestMonth": 20.87666666666667,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "UG",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 100,
+      "dining": 35,
+      "transport": 15,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 365,
+      "totalComfortable": 655
+    },
     "scores": {
       "economy": {
         "value": 53,
@@ -74916,6 +76971,19 @@
       "hottestMonth": 32.91935483870967,
       "coldestMonth": 2.509677419354839,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "IR",
+      "rentCenter": 350,
+      "rentOutside": 220,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 430,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -75385,7 +77453,7 @@
           "Police certificate"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -75470,6 +77538,19 @@
       "hottestMonth": 30.23,
       "coldestMonth": 26.053571428571427,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "CW",
+      "rentCenter": 900,
+      "rentOutside": 650,
+      "groceries": 300,
+      "dining": 140,
+      "transport": 50,
+      "utilities": 140,
+      "coworking": 200,
+      "healthInsurance": 110,
+      "totalBasic": 1140,
+      "totalComfortable": 1840
     },
     "scores": {
       "economy": {
@@ -75739,7 +77820,7 @@
       "tax": {
         "status": "exempt",
         "rate": 0,
-        "notes": "No Romanian income tax during the first year of the digital nomad visa"
+        "notes": "Exempt from Romanian income tax if staying under 183 days; after 183 days, 10% flat rate applies on worldwide income as tax resident"
       },
       "eligibility": {
         "minAge": 18,
@@ -75771,7 +77852,7 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -75781,7 +77862,7 @@
             "notes": "3× средней валовой зарплаты Румынии"
           },
           "tax": {
-            "notes": "Нет румынского подоходного налога в течение первого года действия визы цифрового кочевника"
+            "notes": "Освобождение от румынского подоходного налога при пребывании менее 183 дней; после 183 дней — фиксированная ставка 10% на мировой доход как налоговый резидент"
           },
           "eligibility": {
             "requirements": [
@@ -75820,7 +77901,7 @@
             "notes": "3× середньої валової зарплати Румунії"
           },
           "tax": {
-            "notes": "Немає румунського податку на доходи протягом першого року дії візи цифрового кочівника"
+            "notes": "Звільнення від румунського податку на доходи при перебуванні менше 183 днів; після 183 днів — фіксована ставка 10% на світовий дохід як податковий резидент"
           },
           "eligibility": {
             "requirements": [
@@ -75860,6 +77941,19 @@
       "hottestMonth": 25.829032258064515,
       "coldestMonth": 2.9678571428571425,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "RO",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 20,
+      "utilities": 110,
+      "coworking": 110,
+      "healthInsurance": 70,
+      "totalBasic": 680,
+      "totalComfortable": 1090
     },
     "scores": {
       "economy": {
@@ -76299,6 +78393,19 @@
       "coldestMonth": 8.282142857142857,
       "seasonType": "arid"
     },
+    "costOfLiving": {
+      "code": "SY",
+      "rentCenter": 250,
+      "rentOutside": 150,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 300,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 51.6,
@@ -76710,6 +78817,19 @@
       "coldestMonth": 22.07096774193549,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "FJ",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 80,
+      "coworking": 120,
+      "healthInsurance": 75,
+      "totalBasic": 655,
+      "totalComfortable": 1080
+    },
     "scores": {
       "economy": {
         "value": 66.3,
@@ -77100,6 +79220,19 @@
       "coldestMonth": 25.996428571428574,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "AW",
+      "rentCenter": 1000,
+      "rentOutside": 700,
+      "groceries": 350,
+      "dining": 160,
+      "transport": 50,
+      "utilities": 160,
+      "coworking": 250,
+      "healthInsurance": 120,
+      "totalBasic": 1260,
+      "totalComfortable": 2090
+    },
     "scores": {
       "economy": {
         "value": 86.1,
@@ -77388,6 +79521,19 @@
       "hottestMonth": 18.70666666666667,
       "coldestMonth": 5.590322580645162,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "NL",
+      "rentCenter": 1400,
+      "rentOutside": 1000,
+      "groceries": 350,
+      "dining": 180,
+      "transport": 80,
+      "utilities": 180,
+      "coworking": 270,
+      "healthInsurance": 140,
+      "totalBasic": 1610,
+      "totalComfortable": 2600
     },
     "scores": {
       "economy": {
@@ -77817,6 +79963,19 @@
       "coldestMonth": 18.266666666666666,
       "seasonType": "arid"
     },
+    "costOfLiving": {
+      "code": "PE",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 90,
+      "healthInsurance": 60,
+      "totalBasic": 550,
+      "totalComfortable": 910
+    },
     "scores": {
       "economy": {
         "value": 64.6,
@@ -78237,6 +80396,19 @@
       "hottestMonth": 26.787096774193547,
       "coldestMonth": 13.483870967741938,
       "seasonType": "arid"
+    },
+    "costOfLiving": {
+      "code": "BW",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 80,
+      "transport": 30,
+      "utilities": 80,
+      "coworking": 120,
+      "healthInsurance": 70,
+      "totalBasic": 640,
+      "totalComfortable": 1060
     },
     "scores": {
       "economy": {
@@ -78660,6 +80832,19 @@
       "coldestMonth": -4.880645161290321,
       "seasonType": "four_seasons"
     },
+    "costOfLiving": {
+      "code": "AF",
+      "rentCenter": 250,
+      "rentOutside": 150,
+      "groceries": 100,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 50,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 315,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 27.8,
@@ -79061,7 +81246,7 @@
     "touristVisaDays": 90,
     "nomadVisa": {
       "code": "RS",
-      "visaName": "Digital Nomad Temporary Residence",
+      "visaName": "Self-Employment Visa (Freelance Residence)",
       "officialUrl": "https://mup.gov.rs/wps/portal/en/",
       "duration": {
         "initial": 12,
@@ -79075,14 +81260,14 @@
       },
       "incomeRequirement": {
         "currency": "EUR",
-        "monthly": 1700,
-        "annual": null,
-        "notes": "Low threshold relative to Western Europe"
+        "monthly": 3500,
+        "annual": 42000,
+        "notes": "Confirmed monthly income; no dedicated digital nomad visa — uses freelance residence path"
       },
       "tax": {
-        "status": "exempt",
-        "rate": 0,
-        "notes": "No Serbian income tax for digital nomad permit holders working for foreign entities"
+        "status": "standard",
+        "rate": 10,
+        "notes": "Flat 10% personal income tax; social contributions may apply; no special digital nomad exemption"
       },
       "eligibility": {
         "minAge": 18,
@@ -79114,17 +81299,17 @@
           "Accommodation proof"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "~42 €; очень доступно"
           },
           "incomeRequirement": {
-            "notes": "Низкий порог по сравнению с Западной Европой"
+            "notes": "Подтверждённый ежемесячный доход; специальная виза для цифровых кочевников отсутствует — используется путь фриланс-резидентства"
           },
           "tax": {
-            "notes": "Нет сербского подоходного налога для обладателей разрешения для цифровых кочевников, работающих на иностранные компании"
+            "notes": "Фиксированный подоходный налог 10%; могут применяться социальные взносы; нет специального освобождения для цифровых кочевников"
           },
           "eligibility": {
             "requirements": [
@@ -79160,10 +81345,10 @@
             "notes": "~42 €; дуже доступно"
           },
           "incomeRequirement": {
-            "notes": "Низький поріг порівняно із Західною Європою"
+            "notes": "Підтверджений щомісячний дохід; спеціальна віза для цифрових кочівників відсутня — використовується шлях фріланс-резидентства"
           },
           "tax": {
-            "notes": "Немає сербського податку на доходи для власників дозволу для цифрових кочівників, які працюють на іноземні компанії"
+            "notes": "Фіксований податок на доходи 10%; можуть застосовуватися соціальні внески; немає спеціального звільнення для цифрових кочівників"
           },
           "eligibility": {
             "requirements": [
@@ -79203,6 +81388,19 @@
       "hottestMonth": 24.3483870967742,
       "coldestMonth": 3.553571428571428,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "RS",
+      "rentCenter": 450,
+      "rentOutside": 300,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 20,
+      "utilities": 100,
+      "coworking": 100,
+      "healthInsurance": 65,
+      "totalBasic": 600,
+      "totalComfortable": 985
     },
     "scores": {
       "economy": {
@@ -79679,7 +81877,7 @@
           "Business plan or client contracts"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -79770,6 +81968,19 @@
       "hottestMonth": 22.132258064516122,
       "coldestMonth": 2.6035714285714286,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "CZ",
+      "rentCenter": 750,
+      "rentOutside": 520,
+      "groceries": 240,
+      "dining": 100,
+      "transport": 25,
+      "utilities": 130,
+      "coworking": 150,
+      "healthInsurance": 90,
+      "totalBasic": 915,
+      "totalComfortable": 1485
     },
     "scores": {
       "economy": {
@@ -80207,8 +82418,8 @@
       },
       "cost": {
         "currency": "USD",
-        "amount": 100,
-        "notes": "Individual; $150 for families"
+        "amount": 800,
+        "notes": "Individual visa fee ($800); families $1,200; plus $100 non-refundable application fee"
       },
       "incomeRequirement": {
         "currency": "USD",
@@ -80249,11 +82460,11 @@
           "Passport photo"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
-            "notes": "Индивидуальный тариф; $150 для семей"
+            "notes": "Визовый сбор для индивидуального заявителя (800 $); семьи 1 200 $; плюс невозвратный сбор за подачу 100 $"
           },
           "incomeRequirement": {
             "notes": "Минимальный годовой доход $50 000"
@@ -80290,7 +82501,7 @@
         },
         "ua": {
           "cost": {
-            "notes": "Індивідуальний тариф; $150 для сімей"
+            "notes": "Візовий збір для індивідуального заявника (800 $); сім'ї 1 200 $; плюс неповоротний збір за подачу 100 $"
           },
           "incomeRequirement": {
             "notes": "Мінімальний річний дохід $50 000"
@@ -80334,6 +82545,19 @@
       "hottestMonth": 28.506666666666668,
       "coldestMonth": 24.228571428571435,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "DM",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 230,
+      "dining": 90,
+      "transport": 30,
+      "utilities": 100,
+      "coworking": 150,
+      "healthInsurance": 85,
+      "totalBasic": 760,
+      "totalComfortable": 1285
     },
     "scores": {
       "economy": {
@@ -80663,6 +82887,19 @@
       "hottestMonth": 21.1,
       "coldestMonth": 1.110714285714286,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "PL",
+      "rentCenter": 700,
+      "rentOutside": 480,
+      "groceries": 230,
+      "dining": 100,
+      "transport": 25,
+      "utilities": 130,
+      "coworking": 140,
+      "healthInsurance": 85,
+      "totalBasic": 865,
+      "totalComfortable": 1410
     },
     "scores": {
       "economy": {
@@ -81091,6 +83328,19 @@
       "coldestMonth": 25.516129032258068,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "BJ",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 35,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 355,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 61.4,
@@ -81495,6 +83745,19 @@
       "hottestMonth": 25.129032258064512,
       "coldestMonth": 1.8392857142857142,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "MD",
+      "rentCenter": 350,
+      "rentOutside": 230,
+      "groceries": 140,
+      "dining": 50,
+      "transport": 10,
+      "utilities": 70,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 450,
+      "totalComfortable": 740
     },
     "scores": {
       "economy": {
@@ -81906,6 +84169,19 @@
       "hottestMonth": 19.287096774193554,
       "coldestMonth": -6.070967741935484,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "RU",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": 100,
+      "healthInsurance": 70,
+      "totalBasic": 630,
+      "totalComfortable": 1020
     },
     "scores": {
       "economy": {
@@ -82339,23 +84615,23 @@
     "touristVisaDays": 30,
     "nomadVisa": {
       "code": "ID",
-      "visaName": "B211A Remote Worker Visa (Digital Nomad)",
+      "visaName": "E33G Remote Worker Visa (Digital Nomad)",
       "officialUrl": "https://molina.imigrasi.go.id/",
       "duration": {
-        "initial": 6,
-        "maxExtension": 6,
+        "initial": 12,
+        "maxExtension": 12,
         "renewable": true
       },
       "cost": {
         "currency": "USD",
-        "amount": 250,
-        "notes": "Visa on arrival + extension fee; e-Visa available"
+        "amount": 315,
+        "notes": "Visa application fee $150 + permit of stay fee $165"
       },
       "incomeRequirement": {
         "currency": "USD",
-        "monthly": 2000,
-        "annual": null,
-        "notes": "Minimum monthly income from foreign employment"
+        "monthly": 5000,
+        "annual": 60000,
+        "notes": "Minimum $60,000/year annual income; replaces former B211A pathway"
       },
       "tax": {
         "status": "exempt",
@@ -82392,14 +84668,14 @@
           "Proof of accommodation"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
-            "notes": "Виза по прибытии + сбор за продление; доступна электронная виза"
+            "notes": "Визовый сбор 150 $ + сбор за разрешение на пребывание 165 $"
           },
           "incomeRequirement": {
-            "notes": "Минимальный месячный доход от иностранного работодателя"
+            "notes": "Минимум 60 000 $/год годового дохода; заменяет прежний путь B211A"
           },
           "tax": {
             "notes": "Нет индонезийского подоходного налога при пребывании менее 183 дней; виза «Второй дом» может иметь другие правила"
@@ -82435,10 +84711,10 @@
         },
         "ua": {
           "cost": {
-            "notes": "Віза по прибутті + збір за продовження; доступна електронна віза"
+            "notes": "Візовий збір 150 $ + збір за дозвіл на перебування 165 $"
           },
           "incomeRequirement": {
-            "notes": "Мінімальний місячний дохід від іноземного роботодавця"
+            "notes": "Мінімум 60 000 $/рік річного доходу; замінює колишній шлях B211A"
           },
           "tax": {
             "notes": "Немає індонезійського податку на доходи при перебуванні менше 183 днів; віза «Другий дім» може мати інші правила"
@@ -82481,6 +84757,19 @@
       "hottestMonth": 28.500000000000007,
       "coldestMonth": 25.81428571428571,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "ID",
+      "rentCenter": 400,
+      "rentOutside": 250,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 80,
+      "healthInsurance": 55,
+      "totalBasic": 455,
+      "totalComfortable": 790
     },
     "scores": {
       "economy": {
@@ -82910,6 +85199,19 @@
       "coldestMonth": 26.393548387096768,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "NI",
+      "rentCenter": 350,
+      "rentOutside": 230,
+      "groceries": 140,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 55,
+      "totalBasic": 445,
+      "totalComfortable": 740
+    },
     "scores": {
       "economy": {
         "value": 58.8,
@@ -83329,7 +85631,7 @@
           "Criminal record certificate"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -83416,6 +85718,19 @@
       "hottestMonth": 28.619354838709675,
       "coldestMonth": -1.0999999999999999,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "AM",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 15,
+      "utilities": 80,
+      "coworking": 100,
+      "healthInsurance": 65,
+      "totalBasic": 625,
+      "totalComfortable": 1010
     },
     "scores": {
       "economy": {
@@ -83855,6 +86170,19 @@
       "coldestMonth": -2.7857142857142856,
       "seasonType": "four_seasons"
     },
+    "costOfLiving": {
+      "code": "BY",
+      "rentCenter": 400,
+      "rentOutside": 280,
+      "groceries": 160,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 70,
+      "coworking": 80,
+      "healthInsurance": 60,
+      "totalBasic": 525,
+      "totalComfortable": 845
+    },
     "scores": {
       "economy": {
         "value": 78.1,
@@ -84271,6 +86599,19 @@
       "hottestMonth": 15.87857142857143,
       "coldestMonth": 14.45483870967742,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "ET",
+      "rentCenter": 350,
+      "rentOutside": 200,
+      "groceries": 100,
+      "dining": 30,
+      "transport": 10,
+      "utilities": 50,
+      "coworking": 60,
+      "healthInsurance": 45,
+      "totalBasic": 360,
+      "totalComfortable": 645
     },
     "scores": {
       "economy": {
@@ -84742,7 +87083,7 @@
           "Application form"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -84831,6 +87172,19 @@
       "hottestMonth": 21.4,
       "coldestMonth": 19.383870967741935,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "CR",
+      "rentCenter": 650,
+      "rentOutside": 450,
+      "groceries": 230,
+      "dining": 90,
+      "transport": 30,
+      "utilities": 100,
+      "coworking": 140,
+      "healthInsurance": 85,
+      "totalBasic": 810,
+      "totalComfortable": 1325
     },
     "scores": {
       "economy": {
@@ -85259,6 +87613,19 @@
       "hottestMonth": 27.80645161290322,
       "coldestMonth": 7.717857142857143,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "JO",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 90,
+      "coworking": 120,
+      "healthInsurance": 75,
+      "totalBasic": 665,
+      "totalComfortable": 1090
     },
     "scores": {
       "economy": {
@@ -85740,7 +88107,7 @@
           "CV/resume"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
@@ -85829,6 +88196,19 @@
       "hottestMonth": 20.119354838709675,
       "coldestMonth": 2.8392857142857144,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "DE",
+      "rentCenter": 1000,
+      "rentOutside": 700,
+      "groceries": 300,
+      "dining": 150,
+      "transport": 50,
+      "utilities": 170,
+      "coworking": 230,
+      "healthInsurance": 130,
+      "totalBasic": 1220,
+      "totalComfortable": 2030
     },
     "scores": {
       "economy": {
@@ -86271,9 +88651,9 @@
       },
       "incomeRequirement": {
         "currency": "USD",
-        "monthly": 1275,
-        "annual": 15300,
-        "notes": "3× Ecuador's basic unified salary; very affordable"
+        "monthly": 1446,
+        "annual": 17352,
+        "notes": "3× Ecuador's basic unified salary; +$250/month per additional adult dependent"
       },
       "tax": {
         "status": "exempt",
@@ -86310,14 +88690,14 @@
           "Application form"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
             "notes": "Визовый сбор"
           },
           "incomeRequirement": {
-            "notes": "3× базовой единой зарплаты Эквадора; очень доступно"
+            "notes": "3× базовой единой зарплаты Эквадора; +250 $/мес. на каждого взрослого иждивенца"
           },
           "tax": {
             "notes": "Нет эквадорского подоходного налога на иностранный доход в течение первых 2 лет"
@@ -86356,7 +88736,7 @@
             "notes": "Візовий збір"
           },
           "incomeRequirement": {
-            "notes": "3× базової єдиної зарплати Еквадору; дуже доступно"
+            "notes": "3× базової єдиної зарплати Еквадору; +250 $/міс. на кожного дорослого утриманця"
           },
           "tax": {
             "notes": "Немає еквадорського податку на доходи на іноземний дохід протягом перших 2 років"
@@ -86399,6 +88779,19 @@
       "hottestMonth": 13.103333333333332,
       "coldestMonth": 11.106451612903228,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "EC",
+      "rentCenter": 500,
+      "rentOutside": 350,
+      "groceries": 180,
+      "dining": 70,
+      "transport": 20,
+      "utilities": 70,
+      "coworking": 100,
+      "healthInsurance": 70,
+      "totalBasic": 620,
+      "totalComfortable": 1010
     },
     "scores": {
       "economy": {
@@ -86832,6 +89225,19 @@
       "coldestMonth": -5.04516129032258,
       "seasonType": "four_seasons"
     },
+    "costOfLiving": {
+      "code": "KP",
+      "rentCenter": null,
+      "rentOutside": null,
+      "groceries": null,
+      "dining": null,
+      "transport": null,
+      "utilities": null,
+      "coworking": null,
+      "healthInsurance": null,
+      "totalBasic": null,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 88.2,
@@ -87091,8 +89497,8 @@
       },
       "cost": {
         "currency": "ISK",
-        "amount": 12600,
-        "notes": "~€85; visa application fee"
+        "amount": 12200,
+        "notes": "~€84; visa application fee"
       },
       "incomeRequirement": {
         "currency": "ISK",
@@ -87133,11 +89539,11 @@
           "Criminal record certificate"
         ]
       },
-      "lastUpdated": "2025-12-01",
+      "lastUpdated": "2026-04-04",
       "i18n": {
         "ru": {
           "cost": {
-            "notes": "~85 €; визовый сбор"
+            "notes": "~84 €; визовый сбор"
           },
           "incomeRequirement": {
             "notes": "~6 700 €/мес.; одно из самых высоких требований"
@@ -87174,7 +89580,7 @@
         },
         "ua": {
           "cost": {
-            "notes": "~85 €; візовий збір"
+            "notes": "~84 €; візовий збір"
           },
           "incomeRequirement": {
             "notes": "~6 700 €/міс.; одна з найвищих вимог"
@@ -87218,6 +89624,19 @@
       "hottestMonth": 11.993548387096773,
       "coldestMonth": -2.3354838709677415,
       "seasonType": "mild_seasons"
+    },
+    "costOfLiving": {
+      "code": "IS",
+      "rentCenter": 1500,
+      "rentOutside": 1100,
+      "groceries": 420,
+      "dining": 250,
+      "transport": 70,
+      "utilities": 150,
+      "coworking": 280,
+      "healthInsurance": 150,
+      "totalBasic": 1720,
+      "totalComfortable": 2820
     },
     "scores": {
       "economy": {
@@ -87641,6 +90060,19 @@
       "coldestMonth": 27.033333333333342,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "SS",
+      "rentCenter": 500,
+      "rentOutside": 300,
+      "groceries": 200,
+      "dining": 60,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 600,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 58.8,
@@ -87993,6 +90425,19 @@
       "hottestMonth": 24.987096774193553,
       "coldestMonth": 17.280645161290323,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "MW",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 80,
+      "dining": 25,
+      "transport": 10,
+      "utilities": 40,
+      "coworking": null,
+      "healthInsurance": 40,
+      "totalBasic": 310,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -88406,6 +90851,19 @@
       "hottestMonth": 32.269999999999996,
       "coldestMonth": 23.970967741935482,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "BF",
+      "rentCenter": 300,
+      "rentOutside": 180,
+      "groceries": 100,
+      "dining": 40,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 50,
+      "totalBasic": 355,
+      "totalComfortable": null
     },
     "scores": {
       "economy": {
@@ -88828,6 +91286,19 @@
       "coldestMonth": 24.861290322580643,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "CD",
+      "rentCenter": 500,
+      "rentOutside": 300,
+      "groceries": 150,
+      "dining": 50,
+      "transport": 20,
+      "utilities": 80,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 550,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 45.2,
@@ -89245,6 +91716,19 @@
       "coldestMonth": 18.85714285714286,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "VE",
+      "rentCenter": 400,
+      "rentOutside": 270,
+      "groceries": 180,
+      "dining": 60,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": null,
+      "healthInsurance": 60,
+      "totalBasic": 525,
+      "totalComfortable": null
+    },
     "scores": {
       "economy": {
         "value": 62.2,
@@ -89638,6 +92122,19 @@
       "coldestMonth": 25.61290322580645,
       "seasonType": "tropical"
     },
+    "costOfLiving": {
+      "code": "BN",
+      "rentCenter": 600,
+      "rentOutside": 400,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 30,
+      "utilities": 80,
+      "coworking": 150,
+      "healthInsurance": 80,
+      "totalBasic": 710,
+      "totalComfortable": 1220
+    },
     "scores": {
       "economy": {
         "value": 82.5,
@@ -89992,6 +92489,19 @@
       "hottestMonth": 28.28709677419355,
       "coldestMonth": 19.19666666666667,
       "seasonType": "tropical"
+    },
+    "costOfLiving": {
+      "code": "PY",
+      "rentCenter": 350,
+      "rentOutside": 230,
+      "groceries": 140,
+      "dining": 50,
+      "transport": 15,
+      "utilities": 60,
+      "coworking": 70,
+      "healthInsurance": 50,
+      "totalBasic": 445,
+      "totalComfortable": 735
     },
     "scores": {
       "economy": {
@@ -90386,6 +92896,19 @@
       "hottestMonth": 23.958064516129035,
       "coldestMonth": 2.675,
       "seasonType": "four_seasons"
+    },
+    "costOfLiving": {
+      "code": "BG",
+      "rentCenter": 550,
+      "rentOutside": 380,
+      "groceries": 200,
+      "dining": 80,
+      "transport": 25,
+      "utilities": 100,
+      "coworking": 110,
+      "healthInsurance": 70,
+      "totalBasic": 705,
+      "totalComfortable": 1135
     },
     "scores": {
       "economy": {
