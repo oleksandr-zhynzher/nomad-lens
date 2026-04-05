@@ -11,6 +11,8 @@ import { ComparePage } from "./pages/ComparePage.tsx";
 import { CountryPage } from "./pages/CountryPage.tsx";
 import { NomadVisasPage } from "./pages/NomadVisasPage.tsx";
 import { BudgetMatcherPage } from "./pages/BudgetMatcherPage.tsx";
+import { AiIndicatorsPage } from "./pages/AiIndicatorsPage.tsx";
+import { BudgetCategoriesPage } from "./pages/BudgetCategoriesPage.tsx";
 import { LangWrapper } from "./components/LangWrapper.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -26,6 +28,8 @@ createRoot(document.getElementById("root")!).render(
           <Route path="budget-matcher" element={<BudgetMatcherPage />} />
           <Route path="data-sources" element={<DataSourcesPage />} />
           <Route path="indicators" element={<IndicatorsPage />} />
+          <Route path="ai-indicators" element={<AiIndicatorsPage />} />
+          <Route path="budget-categories" element={<BudgetCategoriesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

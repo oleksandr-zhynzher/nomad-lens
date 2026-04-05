@@ -35,7 +35,13 @@ interface IndicatorCardProps {
   weight: string;
 }
 
-function IndicatorCard({ Icon, name, description, source, weight }: IndicatorCardProps) {
+function IndicatorCard({
+  Icon,
+  name,
+  description,
+  source,
+  weight,
+}: IndicatorCardProps) {
   return (
     <div
       style={{
@@ -91,7 +97,7 @@ function IndicatorCard({ Icon, name, description, source, weight }: IndicatorCar
             border: "1px solid #252525",
             borderRadius: "4px",
             padding: "3px 8px",
-            fontFamily: "Geist, sans-serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: "10px",
             color: "#8F5A3C",
           }}
@@ -100,7 +106,7 @@ function IndicatorCard({ Icon, name, description, source, weight }: IndicatorCar
         </span>
         <span
           style={{
-            fontFamily: "Geist, sans-serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: "11px",
             color: "#3A3A3A",
           }}
@@ -112,22 +118,54 @@ function IndicatorCard({ Icon, name, description, source, weight }: IndicatorCar
   );
 }
 
-
 type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
 /** Rows of [Icon, translationKey] pairs — strings come from i18n */
 const INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
-  [[TrendingUp, "economy"], [Wallet, "affordability"]],
-  [[Wheat, "foodSecurity"], [HeartPulse, "healthcare"]],
-  [[GraduationCap, "education"], [Leaf, "environment"]],
-  [[CloudSun, "climate"], [ShieldCheck, "safety"]],
-  [[Wifi, "infrastructure"], [Smile, "happiness"]],
-  [[Users, "humanDevelopment"], [Scale, "governance"]],
-  [[MessageCircle, "englishProficiency"], [Globe, "digitalFreedom"]],
-  [[UserCheck, "personalFreedom"], [Truck, "logistics"]],
-  [[TreePine, "biodiversity"], [Heart, "socialTolerance"]],
-  [[Receipt, "taxFriendliness"], [Briefcase, "startupEnvironment"]],
-  [[Plane, "airConnectivity"], [Stethoscope, "healthcareCost"]],
+  [
+    [TrendingUp, "economy"],
+    [Wallet, "affordability"],
+  ],
+  [
+    [Wheat, "foodSecurity"],
+    [HeartPulse, "healthcare"],
+  ],
+  [
+    [GraduationCap, "education"],
+    [Leaf, "environment"],
+  ],
+  [
+    [CloudSun, "climate"],
+    [ShieldCheck, "safety"],
+  ],
+  [
+    [Wifi, "infrastructure"],
+    [Smile, "happiness"],
+  ],
+  [
+    [Users, "humanDevelopment"],
+    [Scale, "governance"],
+  ],
+  [
+    [MessageCircle, "englishProficiency"],
+    [Globe, "digitalFreedom"],
+  ],
+  [
+    [UserCheck, "personalFreedom"],
+    [Truck, "logistics"],
+  ],
+  [
+    [TreePine, "biodiversity"],
+    [Heart, "socialTolerance"],
+  ],
+  [
+    [Receipt, "taxFriendliness"],
+    [Briefcase, "startupEnvironment"],
+  ],
+  [
+    [Plane, "airConnectivity"],
+    [Stethoscope, "healthcareCost"],
+  ],
 ];
 
 export function IndicatorsPage() {

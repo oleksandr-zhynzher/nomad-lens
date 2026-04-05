@@ -6,10 +6,14 @@ import { useLangPrefix } from "../hooks/useLangPrefix";
 
 interface LayoutProps {
   children: ReactNode;
-  activePage?: "data-sources" | "indicators";
+  activePage?:
+    | "data-sources"
+    | "indicators"
+    | "ai-indicators"
+    | "budget-categories";
 }
 
-export function Layout({ children, activePage }: LayoutProps) {
+export function Layout({ children }: LayoutProps) {
   const navigate = useNavigate();
   const { pathname, search } = useLocation();
   const { t, i18n } = useTranslation();
@@ -50,24 +54,27 @@ export function Layout({ children, activePage }: LayoutProps) {
   const currentLang =
     LANG_OPTIONS.find((l) => l.code === i18n.language) ?? LANG_OPTIONS[0];
 
+  const INFO_PAGES = [
+    "/indicators",
+    "/data-sources",
+    "/nomad-visas",
+    "/budget-matcher",
+    "/ai-indicators",
+    "/budget-categories",
+  ];
+  const isInfoPage = INFO_PAGES.some((p) => pathname.endsWith(p));
+
   const activeView: "list" | "map" | "compare" | null = pathname.endsWith(
     "/map",
   )
     ? "map"
     : pathname.endsWith("/compare")
       ? "compare"
-      : pathname.endsWith("/nomad-visas") ||
-          pathname.endsWith("/budget-matcher") ||
-          pathname.endsWith("/indicators") ||
-          pathname.endsWith("/data-sources")
+      : isInfoPage
         ? null
         : "list";
 
-  const showViewToggle =
-    !pathname.endsWith("/indicators") &&
-    !pathname.endsWith("/data-sources") &&
-    !pathname.endsWith("/nomad-visas") &&
-    !pathname.endsWith("/budget-matcher");
+  const showViewToggle = !isInfoPage;
 
   const handleViewClick = (v: "list" | "map" | "compare") => {
     if (v === "list") {
@@ -184,8 +191,9 @@ export function Layout({ children, activePage }: LayoutProps) {
             </svg>
             <span
               style={{
-                fontFamily: "Anton, sans-serif",
+                fontFamily: "Oswald, sans-serif",
                 fontSize: "20px",
+                fontWeight: 700,
                 letterSpacing: "2px",
                 textTransform: "uppercase",
               }}
@@ -196,35 +204,6 @@ export function Layout({ children, activePage }: LayoutProps) {
 
           {/* Desktop: right side nav links + view toggle + GitHub */}
           <div className="hidden md:flex items-center gap-4">
-            {/* Info page nav links */}
-            <nav style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-              <Link
-                to={`${langPrefix}/indicators`}
-                style={{
-                  fontFamily: "Geist, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activePage === "indicators" ? 600 : "normal",
-                  color: activePage === "indicators" ? "#C2956A" : "#666666",
-                  textDecoration: "none",
-                }}
-              >
-                {t("nav.indicators")}
-              </Link>
-              <Link
-                to={`${langPrefix}/data-sources`}
-                style={{
-                  fontFamily: "Geist, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activePage === "data-sources" ? 600 : "normal",
-                  color: activePage === "data-sources" ? "#C2956A" : "#666666",
-                  textDecoration: "none",
-                }}
-              >
-                {t("nav.dataSources")}
-              </Link>
-            </nav>
-            {/* Divider */}
-            <div className="h-6 w-px" style={{ backgroundColor: "#252525" }} />
             {/* View toggle - segmented control */}
             <div
               className="flex rounded-md p-1"
@@ -239,7 +218,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                       ? "var(--color-accent)"
                       : "transparent",
                   color: activeView === "list" ? "#FFFFFF" : "#999999",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: activeView === "list" ? 500 : 400,
                 }}
@@ -256,7 +235,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                       ? "var(--color-accent)"
                       : "transparent",
                   color: activeView === "map" ? "#FFFFFF" : "#999999",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: activeView === "map" ? 500 : 400,
                 }}
@@ -273,7 +252,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                       ? "var(--color-accent)"
                       : "transparent",
                   color: activeView === "compare" ? "#FFFFFF" : "#999999",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: activeView === "compare" ? 500 : 400,
                 }}
@@ -291,7 +270,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                   color: pathname.endsWith("/nomad-visas")
                     ? "#FFFFFF"
                     : "#999999",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
                   textDecoration: "none",
@@ -310,7 +289,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                   color: pathname.endsWith("/budget-matcher")
                     ? "#FFFFFF"
                     : "#999999",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
                   textDecoration: "none",
@@ -329,7 +308,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                   background: "none",
                   border: "none",
                   cursor: "pointer",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "12px",
                   fontWeight: 700,
                   letterSpacing: "1px",
@@ -364,7 +343,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                           display: "block",
                           padding: "8px 16px",
                           textDecoration: "none",
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
                           fontWeight: 600,
                           letterSpacing: "1px",
@@ -387,7 +366,7 @@ export function Layout({ children, activePage }: LayoutProps) {
               rel="noreferrer"
               className="flex items-center gap-1.5 hover:text-slate-200 transition-colors"
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "13px",
                 color: "#999999",
               }}
@@ -435,7 +414,7 @@ export function Layout({ children, activePage }: LayoutProps) {
               <>
                 <p
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",
@@ -456,7 +435,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                           ? "var(--color-accent)"
                           : "#2A2A2A",
                       color: activeView === "list" ? "#FFFFFF" : "#999999",
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: activeView === "list" ? 500 : 400,
                     }}
@@ -473,7 +452,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                           ? "var(--color-accent)"
                           : "#2A2A2A",
                       color: activeView === "map" ? "#FFFFFF" : "#999999",
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: activeView === "map" ? 500 : 400,
                     }}
@@ -490,7 +469,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                           ? "var(--color-accent)"
                           : "#2A2A2A",
                       color: activeView === "compare" ? "#FFFFFF" : "#999999",
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: activeView === "compare" ? 500 : 400,
                     }}
@@ -509,7 +488,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                       color: pathname.endsWith("/nomad-visas")
                         ? "#FFFFFF"
                         : "#999999",
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
                       textDecoration: "none",
@@ -529,7 +508,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                       color: pathname.endsWith("/budget-matcher")
                         ? "#FFFFFF"
                         : "#999999",
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: pathname.endsWith("/budget-matcher")
                         ? 500
@@ -544,38 +523,6 @@ export function Layout({ children, activePage }: LayoutProps) {
               </>
             )}
 
-            {/* Nav links */}
-            <Link
-              to={`${langPrefix}/indicators`}
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center py-3"
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "14px",
-                fontWeight: activePage === "indicators" ? 600 : "normal",
-                color: activePage === "indicators" ? "#C2956A" : "#999999",
-                textDecoration: "none",
-                borderBottom: "1px solid #1E1E1E",
-              }}
-            >
-              {t("nav.indicators")}
-            </Link>
-            <Link
-              to={`${langPrefix}/data-sources`}
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center py-3"
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "14px",
-                fontWeight: activePage === "data-sources" ? 600 : "normal",
-                color: activePage === "data-sources" ? "#C2956A" : "#999999",
-                textDecoration: "none",
-                borderBottom: "1px solid #1E1E1E",
-              }}
-            >
-              {t("nav.dataSources")}
-            </Link>
-
             {/* Language switcher */}
             <div
               className="flex items-center gap-3 py-3"
@@ -587,7 +534,7 @@ export function Layout({ children, activePage }: LayoutProps) {
                   to={langSwitchPath(lng)}
                   onClick={() => setMobileMenuOpen(false)}
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "13px",
                     fontWeight: i18n.language === lng ? 700 : 400,
                     color: i18n.language === lng ? "#C2956A" : "#555555",
@@ -605,7 +552,7 @@ export function Layout({ children, activePage }: LayoutProps) {
               rel="noreferrer"
               className="flex items-center gap-2 py-3"
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "14px",
                 color: "#999999",
                 textDecoration: "none",
@@ -631,9 +578,9 @@ export function Layout({ children, activePage }: LayoutProps) {
 
       <main
         className={
-          activeView === "compare" || pathname.endsWith("/budget-matcher")
+          activeView === "compare"
             ? ""
-            : "max-w-7xl mx-auto px-4 py-4 md:py-6"
+            : "w-full max-w-7xl mx-auto px-4 py-4 md:py-6"
         }
       >
         {children}

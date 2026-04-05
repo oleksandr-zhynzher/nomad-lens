@@ -61,7 +61,7 @@ export function HeroSection({
       >
         <span
           style={{
-            fontFamily: "Geist, sans-serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: "11px",
             fontWeight: 600,
             letterSpacing: "2px",
@@ -74,8 +74,8 @@ export function HeroSection({
         <h1
           className="text-3xl md:text-[56px]"
           style={{
-            fontFamily: "Anton, sans-serif",
-            fontWeight: "normal",
+            fontFamily: "Oswald, sans-serif",
+            fontWeight: 700,
             color: "#E8E9EB",
             margin: 0,
             lineHeight: 1,

@@ -163,7 +163,7 @@ export function WorldMap({
       >
         <p
           style={{
-            fontFamily: "Geist, sans-serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: "9px",
             fontWeight: 600,
             letterSpacing: "1.5px",
@@ -306,7 +306,7 @@ export function WorldMap({
       {/* Ranked count */}
       <p
         style={{
-          fontFamily: "Geist, sans-serif",
+          fontFamily: "Inter, sans-serif",
           fontSize: "11px",
           color: "#555555",
           textAlign: "right",

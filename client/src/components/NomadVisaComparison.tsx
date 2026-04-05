@@ -297,7 +297,7 @@ export function NomadVisaComparison({
             ? t("countryPage.visa.taxExempt")
             : status === "special"
               ? t("countryPage.visa.taxSpecial")
-              : t("countryPage.taxStandard", "Standard");
+              : t("countryPage.visa.taxStandard");
         const taxNotes = loc?.tax?.notes ?? visa.tax.notes;
         return (
           <div className="flex flex-col items-center gap-1.5">
@@ -305,7 +305,7 @@ export function NomadVisaComparison({
               <span
                 className="px-2.5 py-1 rounded-full"
                 style={{
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "11px",
                   fontWeight: 600,
                   backgroundColor: colors.bg,
@@ -355,7 +355,7 @@ export function NomadVisaComparison({
                 color: "#44CC66",
               }}
             >
-              Online
+              {t("compare.online")}
             </span>
           </div>
         ) : (
@@ -368,7 +368,7 @@ export function NomadVisaComparison({
                 color: "#888888",
               }}
             >
-              In-person
+              {t("compare.inPerson")}
             </span>
           </div>
         );
@@ -443,7 +443,7 @@ export function NomadVisaComparison({
                 style={{
                   opacity: 0.6,
                   color: "#FFFFFF",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "11px",
                 }}
               >
@@ -492,7 +492,7 @@ export function NomadVisaComparison({
               <span
                 className="px-2 py-0.5 rounded-full"
                 style={{
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
                   color: "#999999",
                   backgroundColor: "#1C1C1C",
@@ -520,7 +520,7 @@ export function NomadVisaComparison({
             <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
             <span
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "12px",
                 color: "#E8E9EB",
               }}
@@ -582,7 +582,7 @@ export function NomadVisaComparison({
                 </span>
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     color: "#555555",
                   }}
@@ -631,7 +631,7 @@ export function NomadVisaComparison({
               <div className="w-[160px] md:w-[240px] shrink-0">
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",

@@ -167,7 +167,7 @@ export function NomadVisasPage() {
               </div>
               <div
                 style={{
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
                   color: "#444444",
                   textTransform: "uppercase",
@@ -200,7 +200,7 @@ export function NomadVisasPage() {
               </div>
               <div
                 style={{
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
                   color: "#444444",
                   textTransform: "uppercase",
@@ -232,7 +232,7 @@ export function NomadVisasPage() {
               </div>
               <div
                 style={{
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
                   color: "#444444",
                   textTransform: "uppercase",
@@ -286,7 +286,7 @@ export function NomadVisasPage() {
                 height: "48px",
                 paddingLeft: "42px",
                 paddingRight: "14px",
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "14px",
                 color: "#FFFFFF",
                 backgroundColor: "#1A1A1A",
@@ -306,7 +306,7 @@ export function NomadVisasPage() {
             textAlign: "center",
             padding: "64px 0",
             color: "#666666",
-            fontFamily: "Geist, sans-serif",
+            fontFamily: "Inter, sans-serif",
           }}
         >
           {t("loading", "Loading…")}
@@ -317,7 +317,7 @@ export function NomadVisasPage() {
             textAlign: "center",
             padding: "64px 16px",
             color: "#666666",
-            fontFamily: "Geist, sans-serif",
+            fontFamily: "Inter, sans-serif",
           }}
         >
           {t("nomadVisasPage.noResults", "No countries found")}
@@ -353,7 +353,7 @@ export function NomadVisasPage() {
                   style={{
                     padding: "16px 12px",
                     textAlign: "left",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "1px",
@@ -376,7 +376,7 @@ export function NomadVisasPage() {
                   style={{
                     padding: "16px 12px",
                     textAlign: "left",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "1px",
@@ -393,7 +393,7 @@ export function NomadVisasPage() {
                   style={{
                     padding: "16px 12px",
                     textAlign: "left",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "1px",
@@ -417,7 +417,7 @@ export function NomadVisasPage() {
                   style={{
                     padding: "16px 12px",
                     textAlign: "right",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "1px",
@@ -441,7 +441,7 @@ export function NomadVisasPage() {
                   style={{
                     padding: "16px 12px",
                     textAlign: "right",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "1px",
@@ -465,7 +465,7 @@ export function NomadVisasPage() {
                   style={{
                     padding: "16px 12px",
                     textAlign: "center",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "1px",
@@ -554,7 +554,7 @@ export function NomadVisasPage() {
                         />
                         <span
                           style={{
-                            fontFamily: "Geist, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                             fontSize: "14px",
                             fontWeight: 500,
                             color: "#FFFFFF",
@@ -569,7 +569,7 @@ export function NomadVisasPage() {
                     <td style={{ padding: "16px 12px" }}>
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "13px",
                           color: "#CCCCCC",
                         }}
@@ -592,7 +592,7 @@ export function NomadVisasPage() {
                       </span>
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
                           color: "#666666",
                           marginLeft: "3px",
@@ -603,7 +603,7 @@ export function NomadVisasPage() {
                       {visa.duration.maxExtension > 0 && (
                         <span
                           style={{
-                            fontFamily: "Geist, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                             fontSize: "11px",
                             color: "#555555",
                             marginLeft: "4px",
@@ -647,7 +647,7 @@ export function NomadVisasPage() {
                           </span>
                           <span
                             style={{
-                              fontFamily: "Geist, sans-serif",
+                              fontFamily: "Inter, sans-serif",
                               fontSize: "12px",
                               color: "#666666",
                               marginLeft: "2px",
@@ -671,7 +671,7 @@ export function NomadVisasPage() {
                           </span>
                           <span
                             style={{
-                              fontFamily: "Geist, sans-serif",
+                              fontFamily: "Inter, sans-serif",
                               fontSize: "12px",
                               color: "#666666",
                               marginLeft: "2px",

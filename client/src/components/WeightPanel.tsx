@@ -12,8 +12,11 @@ import {
   Sliders,
   Scale,
   Sparkles,
+  ExternalLink,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { useLangPrefix } from "../hooks/useLangPrefix";
 import type {
   CategoryKey,
   ClimatePreferences,
@@ -36,6 +39,7 @@ interface WeightSliderProps {
   onChange: (key: CategoryKey, value: number) => void;
   weights: WeightMap;
   weightMode: WeightMode;
+  langPrefix: string;
 }
 
 function WeightSlider({
@@ -44,6 +48,7 @@ function WeightSlider({
   onChange,
   weights,
   weightMode,
+  langPrefix,
 }: WeightSliderProps) {
   const { t } = useTranslation();
   const label = t(
@@ -62,32 +67,52 @@ function WeightSlider({
     <div className="flex flex-col" style={{ gap: "9px" }}>
       <div className="flex items-center justify-between">
         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "12px",
-              fontWeight: 400,
-              color: "#FFFFFF",
-            }}
-          >
-            {label}
-          </span>
-          {isAi && (
+          {isAi ? (
+            <Link
+              to={`${langPrefix}/ai-indicators`}
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "12px",
+                fontWeight: 400,
+                color: "#FFFFFF",
+                textDecoration: "none",
+              }}
+            >
+              {label}
+            </Link>
+          ) : (
             <span
               style={{
                 fontFamily: "Inter, sans-serif",
-                fontSize: "9px",
-                fontWeight: 600,
-                color: "#C084FC",
-                backgroundColor: "rgba(192, 132, 252, 0.12)",
-                padding: "1px 5px",
-                borderRadius: "4px",
-                letterSpacing: "0.5px",
-                lineHeight: "16px",
+                fontSize: "12px",
+                fontWeight: 400,
+                color: "#FFFFFF",
               }}
             >
-              AI
+              {label}
             </span>
+          )}
+          {isAi && (
+            <Link
+              to={`${langPrefix}/ai-indicators`}
+              style={{ textDecoration: "none" }}
+            >
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "9px",
+                  fontWeight: 600,
+                  color: "#C084FC",
+                  backgroundColor: "rgba(192, 132, 252, 0.12)",
+                  padding: "1px 5px",
+                  borderRadius: "4px",
+                  letterSpacing: "0.5px",
+                  lineHeight: "16px",
+                }}
+              >
+                AI
+              </span>
+            </Link>
           )}
           <Tooltip
             content={
@@ -254,6 +279,7 @@ export function WeightPanel({
   mobile,
 }: WeightPanelProps) {
   const { t } = useTranslation();
+  const langPrefix = useLangPrefix();
   const [copied, setCopied] = useState(false);
 
   const handleShare = () => {
@@ -291,8 +317,8 @@ export function WeightPanel({
         >
           <h2
             style={{
-              fontFamily: "Geist, sans-serif",
-              fontSize: "10px",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "13px",
               fontWeight: 700,
               letterSpacing: "2px",
               textTransform: "uppercase",
@@ -303,7 +329,7 @@ export function WeightPanel({
           </h2>
           <p
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: "10px",
               color: "#666666",
               marginTop: "6px",
@@ -352,7 +378,7 @@ export function WeightPanel({
                     borderRadius: "3px",
                     border: "none",
                     cursor: "pointer",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "13px",
                     fontWeight: weightMode === "independent" ? 500 : 400,
                     backgroundColor:
@@ -397,7 +423,7 @@ export function WeightPanel({
                     borderRadius: "3px",
                     border: "none",
                     cursor: "pointer",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "13px",
                     fontWeight: weightMode === "balanced" ? 500 : 400,
                     backgroundColor:
@@ -449,7 +475,7 @@ export function WeightPanel({
                 {group.icon}
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",
@@ -461,6 +487,22 @@ export function WeightPanel({
                 >
                   {t(group.labelKey)}
                 </span>
+                {group.label === "AI INSIGHTS" && (
+                  <Link
+                    to={`${langPrefix}/ai-indicators`}
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "2px",
+                      borderRadius: "3px",
+                      flexShrink: 0,
+                    }}
+                    title="AI Indicators methodology"
+                  >
+                    <ExternalLink size={12} color="#C084FC" />
+                  </Link>
+                )}
                 <div
                   style={{
                     display: "flex",
@@ -503,6 +545,7 @@ export function WeightPanel({
                           onChange={onChange}
                           weights={weights}
                           weightMode={weightMode}
+                          langPrefix={langPrefix}
                         />
                       </div>
                       {key === "climate" && (
@@ -539,7 +582,7 @@ export function WeightPanel({
                                       borderRadius: "3px",
                                       border: "none",
                                       cursor: "pointer",
-                                      fontFamily: "Geist, sans-serif",
+                                      fontFamily: "Inter, sans-serif",
                                       fontSize: "10px",
                                       fontWeight: "normal",
                                       backgroundColor: active
@@ -559,7 +602,7 @@ export function WeightPanel({
                           <div className="flex items-center justify-between">
                             <span
                               style={{
-                                fontFamily: "Geist, sans-serif",
+                                fontFamily: "Inter, sans-serif",
                                 fontSize: "12px",
                                 color: "#777777",
                               }}
@@ -582,7 +625,7 @@ export function WeightPanel({
                             <div className="flex items-center gap-2">
                               <span
                                 style={{
-                                  fontFamily: "Geist, sans-serif",
+                                  fontFamily: "Inter, sans-serif",
                                   fontSize: "12px",
                                   color: "#555555",
                                   width: "32px",
@@ -626,7 +669,7 @@ export function WeightPanel({
                             <div className="flex items-center gap-2">
                               <span
                                 style={{
-                                  fontFamily: "Geist, sans-serif",
+                                  fontFamily: "Inter, sans-serif",
                                   fontSize: "12px",
                                   color: "#555555",
                                   width: "32px",
@@ -698,7 +741,7 @@ export function WeightPanel({
                 <Plane size={16} color="#7A9BAD" />
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",
@@ -763,7 +806,7 @@ export function WeightPanel({
                     >
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
                           color: "#CCCCCC",
                         }}
@@ -830,7 +873,7 @@ export function WeightPanel({
                     >
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
                           color: "#CCCCCC",
                         }}
@@ -897,7 +940,7 @@ export function WeightPanel({
                     >
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
                           color: "#CCCCCC",
                         }}
@@ -947,7 +990,7 @@ export function WeightPanel({
                               borderRadius: "3px",
                               border: "none",
                               cursor: "pointer",
-                              fontFamily: "Geist, sans-serif",
+                              fontFamily: "Inter, sans-serif",
                               fontSize: "10px",
                               backgroundColor: active ? "#8F5A3C" : "#2A2A2A",
                               color: active ? "#FFFFFF" : "#666666",

@@ -262,8 +262,9 @@ export function RegionComparison({
 
                 <span
                   style={{
-                    fontFamily: "Anton, sans-serif",
+                    fontFamily: "Oswald, sans-serif",
                     fontSize: "32px",
+                    fontWeight: 700,
                     color: active ? scoreColour(r.overall) : "#333333",
                     lineHeight: 1,
                   }}
@@ -274,7 +275,7 @@ export function RegionComparison({
                 <span
                   className="px-2 py-0.5 rounded-full"
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     color: active ? "#999999" : "#444444",
                     backgroundColor: "#1C1C1C",
@@ -313,7 +314,7 @@ export function RegionComparison({
               <div className="w-[160px] md:w-[240px] shrink-0">
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",
@@ -321,7 +322,7 @@ export function RegionComparison({
                     textTransform: "uppercase",
                   }}
                 >
-                  Indicator
+                  {t("compare.indicatorHeader")}
                 </span>
               </div>
               {activeRegions.map((r) => (
@@ -365,7 +366,7 @@ export function RegionComparison({
                     color: "#AAAAAA",
                   }}
                 >
-                  Overall Score
+                  {t("compare.overallScore")}
                 </span>
               </div>
               {activeRegions.map((r) => (

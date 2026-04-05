@@ -87,70 +87,218 @@ export function ComparePage() {
   return (
     <Layout>
       <div>
-        {/* Hero band */}
+        {/* Hero banner — constrained to 1200px like NomadVisasPage */}
         <div
-          className="relative overflow-hidden"
-          style={{ backgroundColor: "#141416" }}
+          style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }}
         >
           <div
-            className="absolute inset-0"
+            className="relative mb-6 md:mb-8 overflow-hidden rounded-lg"
             style={{
-              background:
-                "linear-gradient(135deg, #0D0D0FCC 0%, transparent 60%)",
+              background: "#0A0D12",
+              backgroundImage: "url('/hero-map.png')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
             }}
-          />
-          <div
-            className="relative h-full max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6 flex flex-col justify-center"
-            style={{ minHeight: "80px" }}
           >
-            <span
+            {/* Gradient overlay */}
+            <div
+              className="absolute inset-0"
               style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "10px",
-                fontWeight: 600,
-                letterSpacing: "2.5px",
-                textTransform: "uppercase",
-                color: "var(--color-accent)",
-                marginBottom: "6px",
+                background:
+                  "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
               }}
+            />
+
+            <div
+              className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
+              style={{ minHeight: "160px" }}
             >
-              {t("compare.eyebrow")}
-            </span>
-            <h2
-              className="text-2xl md:text-4xl"
-              style={{
-                fontFamily: "Anton, sans-serif",
-                fontWeight: 400,
-                lineHeight: 1,
-                color: "#E8E9EB",
-                margin: 0,
-              }}
-            >
-              {compareMode === "countries"
-                ? t("compare.countryTitle")
-                : compareMode === "regions"
-                  ? t("compare.regionTitle")
-                  : t("compare.nomadVisaTitle")}
-            </h2>
-            <p
-              className="hidden md:block"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-                color: "#666666",
-                marginTop: "8px",
-              }}
-            >
-              {compareMode === "countries"
-                ? t("compare.countrySubtitle")
-                : compareMode === "regions"
-                  ? t("compare.regionSubtitle")
-                  : t("compare.nomadVisaSubtitle")}
-            </p>
+              {/* Eyebrow with dots */}
+              <div className="flex items-center gap-2 mb-2 md:mb-3">
+                {t("compare.eyebrow")
+                  .split("·")
+                  .map((word, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: "4px",
+                          height: "4px",
+                          borderRadius: "50%",
+                          backgroundColor: "var(--color-accent-dim)",
+                          flexShrink: 0,
+                          display: "inline-block",
+                        }}
+                      />
+                      <span
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "11px",
+                          fontWeight: 500,
+                          letterSpacing: "2.5px",
+                          textTransform: "uppercase",
+                          color: "var(--color-accent-dim)",
+                          lineHeight: 1,
+                        }}
+                      >
+                        {word.trim()}
+                      </span>
+                    </span>
+                  ))}
+              </div>
+
+              {/* Title */}
+              <h1
+                className="text-3xl md:text-6xl"
+                style={{
+                  fontFamily: "Oswald, sans-serif",
+                  fontWeight: 700,
+                  lineHeight: "0.95",
+                  color: "#FFFFFF",
+                  marginBottom: "8px",
+                }}
+              >
+                {compareMode === "countries"
+                  ? t("compare.countryTitle")
+                  : compareMode === "regions"
+                    ? t("compare.regionTitle")
+                    : t("compare.nomadVisaTitle")}
+              </h1>
+
+              {/* Subtitle */}
+              <p
+                className="hidden md:block"
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "15px",
+                  color: "#777777",
+                  maxWidth: "580px",
+                  marginBottom: "20px",
+                }}
+              >
+                {compareMode === "countries"
+                  ? t("compare.countrySubtitle")
+                  : compareMode === "regions"
+                    ? t("compare.regionSubtitle")
+                    : t("compare.nomadVisaSubtitle")}
+              </p>
+
+              {/* Copper rule */}
+              <div
+                className="hidden md:block"
+                style={{
+                  width: "128px",
+                  height: "2px",
+                  backgroundColor: "var(--color-accent)",
+                  marginBottom: "16px",
+                }}
+              />
+
+              {/* Stats row */}
+              <div className="flex items-center gap-4 md:gap-6">
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "IBM Plex Mono, monospace",
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "var(--color-accent-dim)",
+                      lineHeight: "1",
+                    }}
+                  >
+                    {countries.length}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "10px",
+                      color: "#444444",
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                      marginTop: "4px",
+                    }}
+                  >
+                    {t("hero.countries")}
+                  </div>
+                </div>
+                <div
+                  className="w-px h-6 md:h-8"
+                  style={{ backgroundColor: "#333333" }}
+                />
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "IBM Plex Mono, monospace",
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "var(--color-accent-dim)",
+                      lineHeight: "1",
+                    }}
+                  >
+                    {countries.filter((c) => c.hasNomadVisa).length}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "10px",
+                      color: "#444444",
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                      marginTop: "4px",
+                    }}
+                  >
+                    {t("compare.nomadVisas")}
+                  </div>
+                </div>
+                <div
+                  className="w-px h-6 md:h-8"
+                  style={{ backgroundColor: "#333333" }}
+                />
+                <div>
+                  <div
+                    style={{
+                      fontFamily: "IBM Plex Mono, monospace",
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "var(--color-accent-dim)",
+                      lineHeight: "1",
+                    }}
+                  >
+                    {Object.keys(countries[0]?.scores ?? {}).length || 29}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "10px",
+                      color: "#444444",
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                      marginTop: "4px",
+                    }}
+                  >
+                    {t("hero.indicators")}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        {/* end 1200px hero wrapper */}
 
-        <div className="max-w-7xl mx-auto px-4 py-4 md:py-6">
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "16px 16px 24px",
+          }}
+        >
           {/* Mode toggle + Parameters row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
             {/* Compare mode toggle pills */}
@@ -170,7 +318,7 @@ export function ComparePage() {
                       ? "var(--color-accent)"
                       : "transparent",
                   color: compareMode === "countries" ? "#FFFFFF" : "#777777",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: compareMode === "countries" ? 500 : 400,
                 }}
@@ -187,7 +335,7 @@ export function ComparePage() {
                       ? "var(--color-accent)"
                       : "transparent",
                   color: compareMode === "regions" ? "#FFFFFF" : "#777777",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: compareMode === "regions" ? 500 : 400,
                 }}
@@ -204,7 +352,7 @@ export function ComparePage() {
                       ? "var(--color-accent)"
                       : "transparent",
                   color: compareMode === "nomadVisas" ? "#FFFFFF" : "#777777",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: compareMode === "nomadVisas" ? 500 : 400,
                 }}

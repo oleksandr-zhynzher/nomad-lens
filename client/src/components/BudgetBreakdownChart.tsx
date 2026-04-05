@@ -80,7 +80,7 @@ export function BudgetBreakdownChart({
                   style={{
                     fontSize: "11px",
                     color: "#CCCCCC",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                   }}
                 >
                   {t(`budget.categories.${key}`)}

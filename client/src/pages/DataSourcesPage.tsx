@@ -9,7 +9,12 @@ interface DataSourceCardProps {
   tags: string[];
 }
 
-function DataSourceCard({ name, category, description, tags }: DataSourceCardProps) {
+function DataSourceCard({
+  name,
+  category,
+  description,
+  tags,
+}: DataSourceCardProps) {
   return (
     <div
       style={{
@@ -44,7 +49,7 @@ function DataSourceCard({ name, category, description, tags }: DataSourceCardPro
           border: "1px solid #252525",
           borderRadius: "4px",
           padding: "3px 8px",
-          fontFamily: "Geist, sans-serif",
+          fontFamily: "Inter, sans-serif",
           fontSize: "10px",
           fontWeight: "normal" as const,
           letterSpacing: "1px",
@@ -83,7 +88,7 @@ function DataSourceCard({ name, category, description, tags }: DataSourceCardPro
               border: "1px solid #4A2C1A",
               borderRadius: "3px",
               padding: "2px 6px",
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: "10px",
               color: "#C2956A",
             }}
@@ -94,7 +99,7 @@ function DataSourceCard({ name, category, description, tags }: DataSourceCardPro
         <div style={{ flex: 1 }} />
         <span
           style={{
-            fontFamily: "Geist, sans-serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: "11px",
             color: "#444444",
           }}
@@ -137,17 +142,18 @@ export function DataSourcesPage() {
         }}
       >
         {DATA_SOURCE_KEYS.map((row, rowIdx) => (
-          <div
-            key={rowIdx}
-            className="flex flex-col md:flex-row gap-4 w-full"
-          >
+          <div key={rowIdx} className="flex flex-col md:flex-row gap-4 w-full">
             {row.map((key) => (
               <DataSourceCard
                 key={key}
                 name={t(`dataSourcesPage.sources.${key}.name`)}
                 category={t(`dataSourcesPage.sources.${key}.category`)}
                 description={t(`dataSourcesPage.sources.${key}.description`)}
-                tags={t(`dataSourcesPage.sources.${key}.tags`, { returnObjects: true }) as string[]}
+                tags={
+                  t(`dataSourcesPage.sources.${key}.tags`, {
+                    returnObjects: true,
+                  }) as string[]
+                }
               />
             ))}
           </div>

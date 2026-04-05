@@ -85,7 +85,7 @@ export function CountryList({
     <div className="flex flex-col">
       <p
         className="text-xs text-right pr-1 my-4"
-        style={{ fontFamily: "Geist, sans-serif", color: "#666666" }}
+        style={{ fontFamily: "Inter, sans-serif", color: "#666666" }}
       >
         {t("countryList.count", { count: ranked.length })}
       </p>

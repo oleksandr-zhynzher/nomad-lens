@@ -122,7 +122,7 @@ export function BudgetCountryCard({
             <span
               className="hidden sm:inline shrink-0"
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "11px",
                 color: "#555555",
               }}
@@ -323,7 +323,7 @@ export function BudgetCountryCard({
                   </div>
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
                       color: "#555555",
                     }}

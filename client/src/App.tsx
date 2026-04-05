@@ -282,7 +282,7 @@ export default function App() {
               <div className="flex items-center justify-between px-4 pb-2 shrink-0">
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
                     fontWeight: 700,
                     letterSpacing: "1.5px",
@@ -357,7 +357,7 @@ export default function App() {
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
-              className="relative mb-6 md:mb-12 rounded-lg overflow-hidden"
+              className="relative mb-6 md:mb-6 rounded-lg overflow-hidden"
               style={{
                 background: "#0A0D12",
                 backgroundImage: `url('/hero-map.png')`,
@@ -406,7 +406,7 @@ export default function App() {
                         />
                         <span
                           style={{
-                            fontFamily: "Geist, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                             fontSize: "11px",
                             fontWeight: 500,
                             letterSpacing: "2.5px",
@@ -424,8 +424,8 @@ export default function App() {
                 <h1
                   className="text-3xl md:text-6xl"
                   style={{
-                    fontFamily: "Anton, sans-serif",
-                    fontWeight: 400,
+                    fontFamily: "Oswald, sans-serif",
+                    fontWeight: 700,
                     lineHeight: "0.95",
                     color: "#FFFFFF",
                     marginBottom: "8px",
@@ -472,7 +472,7 @@ export default function App() {
                     </div>
                     <div
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
                         color: "#444444",
                         textTransform: "uppercase",
@@ -505,7 +505,7 @@ export default function App() {
                       </div>
                       <div
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
                           color: "#444444",
                           textTransform: "uppercase",
@@ -539,7 +539,7 @@ export default function App() {
                       </div>
                       <div
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
                           color: "#444444",
                           textTransform: "uppercase",
@@ -555,31 +555,36 @@ export default function App() {
                     className="w-px h-6 md:h-8"
                     style={{ backgroundColor: "#333333" }}
                   />
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-dim)",
-                        lineHeight: "1",
-                      }}
-                    >
-                      {AI_CATEGORY_KEYS.length}
+                  <Link
+                    to={`${langPrefix}/ai-indicators`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div>
+                      <div
+                        style={{
+                          fontFamily: "IBM Plex Mono, monospace",
+                          fontSize: "18px",
+                          fontWeight: 600,
+                          color: "var(--color-accent-dim)",
+                          lineHeight: "1",
+                        }}
+                      >
+                        {AI_CATEGORY_KEYS.length}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "10px",
+                          color: "#444444",
+                          textTransform: "uppercase",
+                          letterSpacing: "1px",
+                          marginTop: "4px",
+                        }}
+                      >
+                        {t("hero.aiIndicators")}
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        fontFamily: "Geist, sans-serif",
-                        fontSize: "10px",
-                        color: "#444444",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginTop: "4px",
-                      }}
-                    >
-                      {t("hero.aiIndicators")}
-                    </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -758,7 +763,7 @@ export default function App() {
                 <div className="mb-0">
                   <div
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: 700,
                       letterSpacing: "2px",
@@ -773,7 +778,7 @@ export default function App() {
                     <button
                       onClick={() => ws.setSelectedRegions(new Set())}
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "13px",
                         fontWeight: 600,
                         padding: "8px 18px",
@@ -800,7 +805,7 @@ export default function App() {
                           })
                         }
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "13px",
                           fontWeight: 600,
                           padding: "8px 18px",

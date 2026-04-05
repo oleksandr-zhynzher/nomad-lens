@@ -15,7 +15,9 @@ import {
   Info,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { Layout } from "../components/Layout";
+import { useLangPrefix } from "../hooks/useLangPrefix";
 import { Tooltip } from "../components/Tooltip";
 import { BudgetCountryCard } from "../components/BudgetCountryCard";
 import { useCountries } from "../hooks/useCountries";
@@ -70,7 +72,7 @@ function ToggleGroup<T extends string | number>({
               borderRadius: 3,
               border: "none",
               cursor: "pointer",
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: 12,
               fontWeight: active ? 500 : 400,
               backgroundColor: active ? "var(--color-accent)" : "transparent",
@@ -89,6 +91,7 @@ function ToggleGroup<T extends string | number>({
 
 export function BudgetMatcherPage() {
   const { t } = useTranslation();
+  const langPrefix = useLangPrefix();
   const { countries, loading } = useCountries();
   const bs = useBudgetState();
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
@@ -138,7 +141,7 @@ export function BudgetMatcherPage() {
           </span>
           <span
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: 12,
               color: "#555555",
               paddingBottom: 2,
@@ -165,7 +168,7 @@ export function BudgetMatcherPage() {
         <div className="flex justify-between mt-1.5">
           <span
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: 10,
               color: "#555555",
             }}
@@ -174,7 +177,7 @@ export function BudgetMatcherPage() {
           </span>
           <span
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: 10,
               color: "#555555",
             }}
@@ -252,7 +255,7 @@ export function BudgetMatcherPage() {
           <div className="flex justify-between">
             <span
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: 10,
                 color: "#555555",
               }}
@@ -261,7 +264,7 @@ export function BudgetMatcherPage() {
             </span>
             <span
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: 10,
                 color: "#555555",
               }}
@@ -287,7 +290,7 @@ export function BudgetMatcherPage() {
           <UserRound size={16} color="#C2956A" />
           <span
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: 10,
               fontWeight: 600,
               letterSpacing: 1.5,
@@ -330,7 +333,7 @@ export function BudgetMatcherPage() {
                   color: "#FFFFFF",
                 }}
               >
-                {t("budget.bedrooms.label", "Apartment size")}
+                {t("budget.bedrooms.label")}
               </span>
               <ToggleGroup
                 options={[1, 2, 3] as const}
@@ -463,7 +466,7 @@ export function BudgetMatcherPage() {
           <Sliders size={16} color="#C2956A" />
           <span
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: 10,
               fontWeight: 600,
               letterSpacing: 1.5,
@@ -525,16 +528,18 @@ export function BudgetMatcherPage() {
                       }}
                     >
                       <Icon size={14} color="#888888" />
-                      <span
+                      <Link
+                        to={`${langPrefix}/budget-categories`}
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: 12,
                           fontWeight: 400,
                           color: "#FFFFFF",
+                          textDecoration: "none",
                         }}
                       >
                         {t(`budget.categories.${key}`)}
-                      </span>
+                      </Link>
                     </div>
                     <span
                       style={{
@@ -719,7 +724,7 @@ export function BudgetMatcherPage() {
               <div className="flex items-center justify-between px-4 pb-2 shrink-0">
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
                     fontWeight: 700,
                     letterSpacing: "1.5px",
@@ -781,7 +786,7 @@ export function BudgetMatcherPage() {
           <div className="px-4 md:px-6">
             {/* ── Hero section (matching list page) ─────────── */}
             <div
-              className="relative mb-6 md:mb-12 rounded-lg overflow-hidden"
+              className="relative mb-6 md:mb-6 rounded-lg overflow-hidden"
               style={{
                 background: "#0A0D12",
                 backgroundImage: "url('/hero-map.png')",
@@ -828,7 +833,7 @@ export function BudgetMatcherPage() {
                         />
                         <span
                           style={{
-                            fontFamily: "Geist, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                             fontSize: "11px",
                             fontWeight: 500,
                             letterSpacing: "2.5px",
@@ -846,8 +851,8 @@ export function BudgetMatcherPage() {
                 <h1
                   className="text-3xl md:text-6xl"
                   style={{
-                    fontFamily: "Anton, sans-serif",
-                    fontWeight: 400,
+                    fontFamily: "Oswald, sans-serif",
+                    fontWeight: 700,
                     lineHeight: "0.95",
                     color: "#FFFFFF",
                     marginBottom: "8px",
@@ -897,7 +902,7 @@ export function BudgetMatcherPage() {
                     </div>
                     <div
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
                         color: "#444444",
                         textTransform: "uppercase",
@@ -905,7 +910,7 @@ export function BudgetMatcherPage() {
                         marginTop: "4px",
                       }}
                     >
-                      {t("budget.matchedCountries", "COUNTRIES")}
+                      {t("budget.matchedCountries")}
                     </div>
                   </div>
                   <div
@@ -926,7 +931,7 @@ export function BudgetMatcherPage() {
                     </div>
                     <div
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
                         color: "#444444",
                         textTransform: "uppercase",
@@ -941,31 +946,36 @@ export function BudgetMatcherPage() {
                     className="w-px h-6 md:h-8"
                     style={{ backgroundColor: "#333333" }}
                   />
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-dim)",
-                        lineHeight: "1",
-                      }}
-                    >
-                      7
+                  <Link
+                    to={`${langPrefix}/budget-categories`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <div>
+                      <div
+                        style={{
+                          fontFamily: "IBM Plex Mono, monospace",
+                          fontSize: "18px",
+                          fontWeight: 600,
+                          color: "var(--color-accent-dim)",
+                          lineHeight: "1",
+                        }}
+                      >
+                        {BUDGET_CATEGORIES.length}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "10px",
+                          color: "#444444",
+                          textTransform: "uppercase",
+                          letterSpacing: "1px",
+                          marginTop: "4px",
+                        }}
+                      >
+                        {t("budget.categories.title")}
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        fontFamily: "Geist, sans-serif",
-                        fontSize: "10px",
-                        color: "#444444",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginTop: "4px",
-                      }}
-                    >
-                      {t("budget.categories.title", "CATEGORIES")}
-                    </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -1000,16 +1010,17 @@ export function BudgetMatcherPage() {
                 <p
                   className="text-xs text-right pr-1 my-4"
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     color: "#666666",
                   }}
                 >
                   {t("countryList.count", { count: matches.length })}
                 </p>
                 {/* Color legend */}
-                <div
+                <Link
+                  to={`${langPrefix}/budget-categories`}
                   className="flex flex-wrap gap-x-4 gap-y-1 mb-3 px-1"
-                  style={{ marginTop: "-4px" }}
+                  style={{ marginTop: "-4px", textDecoration: "none" }}
                 >
                   {BUDGET_CATEGORIES.map(({ key }) => (
                     <div key={key} className="flex items-center gap-1.5">
@@ -1033,7 +1044,7 @@ export function BudgetMatcherPage() {
                       />
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "11px",
                           color: "#666666",
                         }}
@@ -1042,7 +1053,7 @@ export function BudgetMatcherPage() {
                       </span>
                     </div>
                   ))}
-                </div>
+                </Link>
                 {matches.map((m, i) => (
                   <BudgetCountryCard
                     key={m.country.code}
@@ -1060,7 +1071,7 @@ export function BudgetMatcherPage() {
                 <p
                   className="text-xs text-right pr-1 my-4"
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     color: "#666666",
                   }}
                 >

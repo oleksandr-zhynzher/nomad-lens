@@ -116,6 +116,10 @@ export function CountryComparison({
   onSelectionCount,
 }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownPos, setDropdownPos] = useState<{
+    top: number;
+    left: number;
+  } | null>(null);
   const [query, setQuery] = useState("");
   const addBtnRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -238,7 +242,7 @@ export function CountryComparison({
                   style={{
                     opacity: 0.6,
                     color: "#FFFFFF",
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                   }}
                 >
@@ -289,7 +293,8 @@ export function CountryComparison({
                 <span
                   className="text-[32px]"
                   style={{
-                    fontFamily: "Anton, sans-serif",
+                    fontFamily: "Oswald, sans-serif",
+                    fontWeight: 700,
                     color: sColor,
                     lineHeight: 1,
                   }}
@@ -300,7 +305,7 @@ export function CountryComparison({
                 <span
                   className="px-2 py-0.5 rounded-full"
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     color: "#999999",
                     backgroundColor: "#1C1C1C",
@@ -317,7 +322,13 @@ export function CountryComparison({
         {/* Add button */}
         <div ref={addBtnRef} className="shrink-0 w-[140px] md:w-[180px]">
           <button
-            onClick={() => setDropdownOpen((p) => !p)}
+            onClick={() => {
+              if (!dropdownOpen && addBtnRef.current) {
+                const rect = addBtnRef.current.getBoundingClientRect();
+                setDropdownPos({ top: rect.bottom + 8, left: rect.left });
+              }
+              setDropdownOpen((p) => !p);
+            }}
             className="w-full rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
             style={{
               backgroundColor: "#141416",
@@ -329,7 +340,7 @@ export function CountryComparison({
             <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
             <span
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "12px",
                 color: "#E8E9EB",
               }}
@@ -340,11 +351,14 @@ export function CountryComparison({
         </div>
       </div>
 
-      {/* Dropdown — rendered outside the overflow container */}
-      {dropdownOpen && (
+      {/* Dropdown — fixed-positioned under the Add Country card */}
+      {dropdownOpen && dropdownPos && (
         <div
-          className="z-20 mt-1 rounded-lg overflow-hidden w-full md:w-[320px]"
+          className="z-50 rounded-lg overflow-hidden w-[320px]"
           style={{
+            position: "fixed",
+            top: dropdownPos.top,
+            left: dropdownPos.left,
             backgroundColor: "#1A1A1C",
             border: "1px solid #2A2A2A",
             boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
@@ -393,7 +407,7 @@ export function CountryComparison({
                   </span>
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "11px",
                       color: "#555555",
                     }}
@@ -453,7 +467,7 @@ export function CountryComparison({
               <div className="w-[160px] md:w-[240px] shrink-0">
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",
@@ -461,7 +475,7 @@ export function CountryComparison({
                     textTransform: "uppercase",
                   }}
                 >
-                  Indicator
+                  {t("compare.indicatorHeader")}
                 </span>
               </div>
               {selectedCountries.map((slot) => (

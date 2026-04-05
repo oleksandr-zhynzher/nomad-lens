@@ -115,7 +115,7 @@ export function CountryPage() {
         >
           <span
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: "14px",
               color: "#666666",
             }}
@@ -142,7 +142,7 @@ export function CountryPage() {
         >
           <span
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: "14px",
               color: "#999999",
             }}
@@ -152,7 +152,7 @@ export function CountryPage() {
           <Link
             to={`${langPrefix}/`}
             style={{
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: "13px",
               color: "#C2956A",
               textDecoration: "none",
@@ -221,7 +221,7 @@ export function CountryPage() {
               padding: "7px 14px",
               cursor: "pointer",
               color: "#AAAAAA",
-              fontFamily: "Geist, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: "13px",
               backdropFilter: "blur(8px)",
             }}
@@ -265,7 +265,7 @@ export function CountryPage() {
               >
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
                     fontWeight: 600,
                     letterSpacing: "2px",
@@ -277,9 +277,8 @@ export function CountryPage() {
                 </span>
                 <h1
                   style={{
-                    fontFamily: "Anton, sans-serif",
-                    fontSize: "64px",
-                    fontWeight: 400,
+                    fontFamily: "Oswald, sans-serif",
+                    fontWeight: 700,
                     color: "#E8E9EB",
                     margin: 0,
                     lineHeight: 1,
@@ -327,7 +326,7 @@ export function CountryPage() {
                   <Plane size={13} color="#8F5A3C" />
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       color: "#C2956A",
                     }}
@@ -352,7 +351,7 @@ export function CountryPage() {
                   <Globe size={13} color="#5B8FA8" />
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       color: "#7BACC8",
                     }}
@@ -377,7 +376,7 @@ export function CountryPage() {
                   <Calendar size={13} color="#C2956A" />
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       color: "#C2956A",
                     }}
@@ -404,7 +403,7 @@ export function CountryPage() {
                   <CloudSun size={13} color="#7A9B6B" />
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       color: "#7A9B6B",
                     }}
@@ -559,9 +558,8 @@ export function CountryPage() {
             <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
               <h2
                 style={{
-                  fontFamily: "Anton, sans-serif",
-                  fontSize: "32px",
-                  fontWeight: 400,
+                  fontFamily: "Oswald, sans-serif",
+                  fontWeight: 700,
                   color: "#E8E9EB",
                   margin: 0,
                 }}
@@ -578,7 +576,7 @@ export function CountryPage() {
               >
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
                     color: "#C2956A",
                   }}
@@ -588,7 +586,7 @@ export function CountryPage() {
               </div>
               <span
                 style={{
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
                   color: "#444444",
                 }}
@@ -622,7 +620,7 @@ export function CountryPage() {
                 >
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
                       color: "#555555",
                       letterSpacing: "1.5px",
@@ -654,7 +652,7 @@ export function CountryPage() {
                     {visa.duration.maxExtension > 0 && (
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "11px",
                           color: "#C2956A",
                         }}
@@ -708,7 +706,7 @@ export function CountryPage() {
                     </span>
                     <span
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "11px",
                         color: "#666666",
                       }}
@@ -728,7 +726,7 @@ export function CountryPage() {
                   >
                     <span
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "9px",
                         color: "#444444",
                         letterSpacing: "1px",
@@ -753,7 +751,7 @@ export function CountryPage() {
                         </span>
                         <span
                           style={{
-                            fontFamily: "Geist, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                             fontSize: "11px",
                             color: "#666666",
                           }}
@@ -807,7 +805,7 @@ export function CountryPage() {
                 >
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
                       color: "#555555",
                       letterSpacing: "1.5px",
@@ -833,7 +831,7 @@ export function CountryPage() {
                   >
                     <span
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "13px",
                         fontWeight: 600,
                         color:
@@ -891,7 +889,7 @@ export function CountryPage() {
                 >
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
                       color: "#555555",
                       letterSpacing: "1.5px",
@@ -978,7 +976,7 @@ export function CountryPage() {
                 >
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
                       color: "#555555",
                       letterSpacing: "1.5px",
@@ -1029,7 +1027,7 @@ export function CountryPage() {
                 >
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
                       color: "#555555",
                       letterSpacing: "1.5px",
@@ -1085,7 +1083,7 @@ export function CountryPage() {
                   <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "9px",
                       color: "#444444",
                       letterSpacing: "1px",
@@ -1150,7 +1148,7 @@ export function CountryPage() {
                   <div style={{ flex: 1 }} />
                   <span
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "11px",
                       color: "#555555",
                     }}
@@ -1176,9 +1174,8 @@ export function CountryPage() {
           <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
             <h2
               style={{
-                fontFamily: "Anton, sans-serif",
-                fontSize: "32px",
-                fontWeight: 400,
+                fontFamily: "Oswald, sans-serif",
+                fontWeight: 700,
                 color: "#E8E9EB",
                 margin: 0,
               }}
@@ -1189,7 +1186,7 @@ export function CountryPage() {
               style={{
                 flex: 1,
                 textAlign: "right",
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "12px",
                 color: "#444444",
               }}
@@ -1222,9 +1219,8 @@ export function CountryPage() {
                 >
                   <h2
                     style={{
-                      fontFamily: "Anton, sans-serif",
-                      fontSize: "32px",
-                      fontWeight: 400,
+                      fontFamily: "Oswald, sans-serif",
+                      fontWeight: 700,
                       color: "#E8E9EB",
                       margin: 0,
                     }}
@@ -1235,7 +1231,7 @@ export function CountryPage() {
                     style={{
                       flex: 1,
                       textAlign: "right",
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       color: "#444444",
                     }}
@@ -1283,7 +1279,7 @@ export function CountryPage() {
                       </div>
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
                           color: "#555555",
                         }}
@@ -1326,7 +1322,7 @@ export function CountryPage() {
                       </div>
                       <span
                         style={{
-                          fontFamily: "Geist, sans-serif",
+                          fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
                           color: "#555555",
                         }}
@@ -1450,7 +1446,7 @@ export function CountryPage() {
                         </div>
                         <span
                           style={{
-                            fontFamily: "Geist, sans-serif",
+                            fontFamily: "Inter, sans-serif",
                             fontSize: "10px",
                             color: "#555555",
                           }}
@@ -1484,9 +1480,8 @@ export function CountryPage() {
                 >
                   <h2
                     style={{
-                      fontFamily: "Anton, sans-serif",
-                      fontSize: "32px",
-                      fontWeight: 400,
+                      fontFamily: "Oswald, sans-serif",
+                      fontWeight: 700,
                       color: "#E8E9EB",
                       margin: 0,
                     }}
@@ -1497,7 +1492,7 @@ export function CountryPage() {
                     style={{
                       flex: 1,
                       textAlign: "right",
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       color: "#444444",
                     }}
@@ -1532,7 +1527,7 @@ export function CountryPage() {
                     </span>
                     <span
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
                         color: "#555555",
                       }}
@@ -1565,7 +1560,7 @@ export function CountryPage() {
                     </span>
                     <span
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
                         color: "#555555",
                       }}
@@ -1598,7 +1593,7 @@ export function CountryPage() {
                     </span>
                     <span
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
                         color: "#555555",
                       }}
@@ -1631,7 +1626,7 @@ export function CountryPage() {
                     </span>
                     <span
                       style={{
-                        fontFamily: "Geist, sans-serif",
+                        fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
                         color: "#555555",
                       }}

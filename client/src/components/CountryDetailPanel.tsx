@@ -89,7 +89,7 @@ export function CountryDetailPanel({
             {/* Rank */}
             <span
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "14px",
                 fontWeight: 500,
                 color: "var(--color-accent)",
@@ -116,9 +116,8 @@ export function CountryDetailPanel({
               <div className="flex items-baseline gap-2 min-w-0">
                 <h2
                   style={{
-                    fontFamily: "Anton, sans-serif",
-                    fontSize: "22px",
-                    fontWeight: 400,
+                    fontFamily: "Oswald, sans-serif",
+                    fontWeight: 700,
                     color: "#FFFFFF",
                     lineHeight: "1.2",
                     whiteSpace: "nowrap",
@@ -128,7 +127,7 @@ export function CountryDetailPanel({
                 </h2>
                 <span
                   style={{
-                    fontFamily: "Geist, sans-serif",
+                    fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
                     color: "#999999",
                   }}
@@ -141,9 +140,8 @@ export function CountryDetailPanel({
             {/* Score */}
             <span
               style={{
-                fontFamily: "Anton, sans-serif",
-                fontSize: "22px",
-                fontWeight: 400,
+                fontFamily: "Oswald, sans-serif",
+                fontWeight: 700,
                 color: scoreColour(finalScore),
                 lineHeight: "1",
                 whiteSpace: "nowrap",
@@ -181,7 +179,7 @@ export function CountryDetailPanel({
                 className="inline-flex items-center gap-1 px-2 py-1 rounded-full"
                 style={{
                   backgroundColor: "var(--color-accent)",
-                  fontFamily: "Geist, sans-serif",
+                  fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
                   fontWeight: 500,
                   color: "#FFFFFF",
@@ -197,7 +195,7 @@ export function CountryDetailPanel({
           <div className="flex-1 overflow-y-auto px-5 py-4">
             <h3
               style={{
-                fontFamily: "Geist, sans-serif",
+                fontFamily: "Inter, sans-serif",
                 fontSize: "11px",
                 fontWeight: 600,
                 letterSpacing: "1.5px",
@@ -229,7 +227,7 @@ export function CountryDetailPanel({
                 >
                   <h3
                     style={{
-                      fontFamily: "Geist, sans-serif",
+                      fontFamily: "Inter, sans-serif",
                       fontSize: "11px",
                       fontWeight: 600,
                       letterSpacing: "1.5px",
