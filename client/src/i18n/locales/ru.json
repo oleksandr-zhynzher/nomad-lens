@@ -222,6 +222,20 @@
     "performanceBreakdown": "Анализ показателей",
     "categoriesSubtitle": "{{count}} категории · {{name}}",
     "annualAverages": "Годовые средние",
+    "costOfLivingSection": "Стоимость жизни",
+    "costOfLivingSubtitle": "USD / месяц · один номад",
+    "colTotalBasic": "Базовый бюджет",
+    "colTotalComfortable": "Комфортный бюджет",
+    "colRentMajorCity": "Аренда · Крупный город",
+    "colRentSmallerCity": "Аренда · Небольшой город",
+    "colRent2br": "Аренда · 2 комнаты",
+    "colRent3br": "Аренда · 3 комнаты",
+    "colGroceries": "Продукты",
+    "colDining": "Еда в ресторанах",
+    "colTransport": "Транспорт",
+    "colUtilities": "Коммунальные и интернет",
+    "colCoworking": "Коворкинг",
+    "colHealthInsurance": "Медицинская страховка",
     "climateDataSection": "Климатические данные",
     "annualMeanTemp": "Средняя температура",
     "annualPrecipitation": "Годовые осадки",
@@ -515,14 +529,29 @@
     "budgetLabel": "Месячный бюджет",
     "perMonth": "/ месяц",
     "housing": {
-      "label": "Жильё",
-      "center": "Центр города",
-      "outside": "За пределами центра"
+      "label": "Расположение",
+      "majorCity": "Крупный город",
+      "smallerCity": "Регион / Малый город"
     },
+    "household": {
+      "label": "Семья"
+    },
+    "people": {
+      "label": "Люди"
+    },
+    "bedrooms": {
+      "label": "Квартира",
+      "1": "1 комн.",
+      "2": "2 комн.",
+      "3": "3 комн."
+    },
+    "lifestyleProfile": "ПРОФИЛЬ СТИЛЯ ЖИЗНИ",
     "settings": "Настройки",
     "qualityBlend": "Баланс качества",
-    "pureAffordability": "Цена",
-    "qualityFocus": "Качество",
+    "qualityBlendTooltip": "Регулирует баланс между чистой доступностью по стоимости жизни и общим качеством страны (безопасность, медицина, интернет, инфраструктура). При 0% учитывается только цена; при 100% — только качество.",
+    "pureAffordability": "Минимум затрат",
+    "qualityFocus": "Качество страны",
+    "blendHint": "Баланс между низкой стоимостью и качеством жизни",
     "categoryWeights": "Веса категорий",
     "categories": {
       "housing": "Жильё",
@@ -538,6 +567,9 @@
     "countriesFound": "{{count}} стран",
     "noResults": "Нет стран с данными о стоимости жизни",
     "loading": "Загрузка...",
-    "budgetLine": "Бюджет"
+    "budgetLine": "Бюджет",
+    "monthlyBreakdown": "Месячная разбивка",
+    "surplus": "остаток",
+    "comfortScore": "Оценка комфорта"
   }
 }

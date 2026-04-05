@@ -1,13 +1,13 @@
 {
-  "_version": "1.0.0",
-  "_generatedBy": "Claude (Anthropic) — AI-estimated cost-of-living data",
-  "_generatedDate": "2026-04-04",
-  "_methodology": "Monthly cost estimates in USD for a single digital nomad. Values are calibrated using World Bank GDP per capita (nominal and PPP), Price Level Ratios, and cross-referenced against Numbeo Cost of Living Index, NomadList city cost data, Expatistan, and Airbnb/Coworker.com listings. Countries are grouped by GDP/PPP tier and adjusted for regional purchasing patterns. null indicates data unavailable or concept inapplicable (e.g., coworking in conflict zones).",
+  "_version": "2.0.0",
+  "_generatedBy": "Calibrated against Numbeo, Livingcost.org and World Bank GDP PPP data (April 2026)",
+  "_generatedDate": "2026-04-05",
+  "_methodology": "Monthly cost estimates in USD for a single digital nomad. Primary source: Numbeo city-level data cross-referenced with Livingcost.org country averages. Secondary: GDP PPP ratio scaling for countries without direct Numbeo coverage. utilities = electricity + water + heating + garbage + internet (Numbeo 85m² benchmark). dining = ~12 meals/month at inexpensive-to-midrange restaurants. coworking = monthly hot desk. healthInsurance = basic private/travel insurance. null indicates data unavailable or concept inapplicable.",
   "categories": [
     {
-      "key": "rentCenter",
-      "name": "Rent (City Center)",
-      "description": "Monthly rent for a 1-bedroom apartment in the city center of the country's main hub city for digital nomads.",
+      "key": "rentMajorCity",
+      "name": "Rent (Major City)",
+      "description": "Monthly rent for a 1-bedroom apartment in the country's main hub city or cities for digital nomads.",
       "unit": "USD/month",
       "dataSources": [
         "Numbeo Rent Index",
@@ -16,15 +16,29 @@
       ]
     },
     {
-      "key": "rentOutside",
-      "name": "Rent (Outside Center)",
-      "description": "Monthly rent for a 1-bedroom apartment outside the city center, in a residential area with reasonable commute access.",
+      "key": "rentSmallerCity",
+      "name": "Rent (Smaller City)",
+      "description": "Monthly rent for a 1-bedroom apartment in smaller cities or towns outside the country's main metro areas.",
       "unit": "USD/month",
       "dataSources": [
         "Numbeo Rent Index",
         "NomadList city cost data",
         "Local real estate listings"
       ]
+    },
+    {
+      "key": "rent2br",
+      "name": "Rent (2 Bedroom)",
+      "description": "Monthly rent for a 2-bedroom apartment. Single national average derived from Numbeo city centre and outside-centre data. Interpolated from 1BR and 3BR where 2BR data unavailable.",
+      "unit": "USD/month",
+      "dataSources": ["Numbeo Rent Index", "NomadList city cost data"]
+    },
+    {
+      "key": "rent3br",
+      "name": "Rent (3 Bedroom)",
+      "description": "Monthly rent for a 3-bedroom apartment. Single national average derived from Numbeo city centre and outside-centre data.",
+      "unit": "USD/month",
+      "dataSources": ["Numbeo Rent Index", "NomadList city cost data"]
     },
     {
       "key": "groceries",
@@ -97,14 +111,14 @@
     {
       "key": "totalBasic",
       "name": "Basic Monthly Budget",
-      "formula": "rentOutside + groceries + transport + utilities",
-      "description": "Minimum monthly budget for basic living: apartment outside center, home cooking, public transit, and utilities. No dining out, coworking, or insurance."
+      "formula": "rentSmallerCity + groceries + transport + utilities",
+      "description": "Minimum monthly budget for basic living: apartment in a smaller city, home cooking, public transit, and utilities. No dining out, coworking, or insurance."
     },
     {
       "key": "totalComfortable",
       "name": "Comfortable Monthly Budget",
-      "formula": "rentCenter + groceries + dining + transport + utilities + coworking + healthInsurance",
-      "description": "Comfortable nomad lifestyle: city center apartment, groceries + dining out, transport, utilities, coworking membership, and health insurance. null if coworking is unavailable."
+      "formula": "rentMajorCity + groceries + dining + transport + utilities + coworking + healthInsurance",
+      "description": "Comfortable nomad lifestyle: major city apartment, groceries + dining out, transport, utilities, coworking membership, and health insurance. null if coworking is unavailable."
     }
   ],
   "calibrationAnchors": [
@@ -112,55 +126,55 @@
       "code": "US",
       "gdpPerCapita": 84534,
       "priceLevelRatio": 0.99,
-      "totalComfortable": 3120
+      "totalComfortable": 3121
     },
     {
       "code": "CH",
       "gdpPerCapita": 103998,
       "priceLevelRatio": 1.08,
-      "totalComfortable": 3830
+      "totalComfortable": 4010
     },
     {
       "code": "SG",
       "gdpPerCapita": 90674,
       "priceLevelRatio": 0.6,
-      "totalComfortable": 3360
+      "totalComfortable": 3340
     },
     {
       "code": "GB",
       "gdpPerCapita": 53246,
       "priceLevelRatio": 0.86,
-      "totalComfortable": 2710
+      "totalComfortable": 2787
     },
     {
       "code": "DE",
       "gdpPerCapita": 56104,
       "priceLevelRatio": 0.76,
-      "totalComfortable": 2030
+      "totalComfortable": 2217
     },
     {
       "code": "PT",
       "gdpPerCapita": 29292,
       "priceLevelRatio": 0.57,
-      "totalComfortable": 1650
+      "totalComfortable": 1890
     },
     {
       "code": "TH",
       "gdpPerCapita": 7347,
       "priceLevelRatio": 0.3,
-      "totalComfortable": 875
+      "totalComfortable": 903
     },
     {
       "code": "VN",
       "gdpPerCapita": 4717,
       "priceLevelRatio": 0.29,
-      "totalComfortable": 745
+      "totalComfortable": 780
     },
     {
       "code": "IN",
       "gdpPerCapita": 2695,
       "priceLevelRatio": 0.24,
-      "totalComfortable": 575
+      "totalComfortable": 595
     },
     {
       "code": "GE",
@@ -172,19 +186,19 @@
       "code": "CO",
       "gdpPerCapita": 7919,
       "priceLevelRatio": 0.35,
-      "totalComfortable": 925
+      "totalComfortable": 933
     },
     {
       "code": "MX",
       "gdpPerCapita": 14186,
       "priceLevelRatio": 0.54,
-      "totalComfortable": 1060
+      "totalComfortable": 1233
     },
     {
       "code": "EG",
       "gdpPerCapita": 3338,
       "priceLevelRatio": 0.17,
-      "totalComfortable": 605
+      "totalComfortable": 430
     }
   ]
 }

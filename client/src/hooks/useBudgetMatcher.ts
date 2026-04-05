@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import type { CountryData, CostOfLivingData } from "../utils/types";
 import type {
   BudgetCategoryWeights,
+  Bedrooms,
   HousingPreference,
 } from "./useBudgetState";
 
@@ -23,12 +24,59 @@ export interface BudgetMatch {
   breakdown: BudgetBreakdown;
 }
 
+// Per-person scaling formulas (n = number of people)
+// Each extra person adds a fraction of the base cost
+function scaleForPeople(category: string, base: number, n: number): number {
+  if (n <= 1) return base;
+  switch (category) {
+    case "groceries":
+      return base * (1 + (n - 1) * 0.8); // sub-linear
+    case "dining":
+      return base * n; // linear
+    case "transport":
+      return base * (1 + (n - 1) * 0.6); // sub-linear
+    case "utilities":
+      return base * (1 + (n - 1) * 0.12); // near-fixed
+    case "coworking":
+      return base; // always 1
+    case "healthInsurance":
+      return base * n; // linear
+    default:
+      return base * n;
+  }
+}
+
+function getRent(
+  col: CostOfLivingData,
+  housing: HousingPreference,
+  bedrooms: Bedrooms,
+): number | null {
+  if (bedrooms === 1) {
+    return housing === "majorCity" ? col.rentMajorCity : col.rentSmallerCity;
+  }
+
+  // For 2BR/3BR we have a national average — split it using the 1BR major/smaller ratio
+  const base = bedrooms === 3 ? col.rent3br : col.rent2br;
+  if (base === null) return null;
+
+  const major = col.rentMajorCity;
+  const smaller = col.rentSmallerCity;
+  if (major === null || smaller === null || smaller === 0) return base;
+
+  const avg1BR = (major + smaller) / 2;
+  const scaleFactor =
+    housing === "majorCity" ? major / avg1BR : smaller / avg1BR;
+  return Math.round(base * scaleFactor);
+}
+
 function computeWeightedCost(
   col: CostOfLivingData,
   housing: HousingPreference,
+  bedrooms: Bedrooms,
+  peopleCount: number,
   weights: BudgetCategoryWeights,
 ): { total: number; breakdown: BudgetBreakdown } | null {
-  const rent = housing === "center" ? col.rentCenter : col.rentOutside;
+  const rent = getRent(col, housing, bedrooms);
   if (
     rent === null ||
     col.groceries === null ||
@@ -37,14 +85,19 @@ function computeWeightedCost(
   )
     return null;
 
+  const n = Math.max(1, peopleCount);
   const raw = {
     housing: rent,
-    groceries: col.groceries,
-    dining: col.dining ?? 0,
-    transport: col.transport,
-    utilities: col.utilities,
-    coworking: col.coworking ?? 0,
-    healthInsurance: col.healthInsurance ?? 0,
+    groceries: scaleForPeople("groceries", col.groceries, n),
+    dining: scaleForPeople("dining", col.dining ?? 0, n),
+    transport: scaleForPeople("transport", col.transport, n),
+    utilities: scaleForPeople("utilities", col.utilities, n),
+    coworking: scaleForPeople("coworking", col.coworking ?? 0, n),
+    healthInsurance: scaleForPeople(
+      "healthInsurance",
+      col.healthInsurance ?? 0,
+      n,
+    ),
   };
 
   const breakdown: BudgetBreakdown = {
@@ -72,6 +125,8 @@ export function useBudgetMatcher(
   countries: CountryData[],
   budget: number,
   housing: HousingPreference,
+  bedrooms: Bedrooms,
+  peopleCount: number,
   categoryWeights: BudgetCategoryWeights,
   qualityBlend: number,
 ): BudgetMatch[] {
@@ -84,7 +139,13 @@ export function useBudgetMatcher(
       const col = country.costOfLiving;
       if (!col) continue;
 
-      const computed = computeWeightedCost(col, housing, categoryWeights);
+      const computed = computeWeightedCost(
+        col,
+        housing,
+        bedrooms,
+        peopleCount,
+        categoryWeights,
+      );
       if (!computed || computed.total <= 0) continue;
 
       const comfortRatio = budget / computed.total;
@@ -123,5 +184,13 @@ export function useBudgetMatcher(
 
     results.sort((a, b) => b.comfortScore - a.comfortScore);
     return results;
-  }, [countries, budget, housing, categoryWeights, qualityBlend]);
+  }, [
+    countries,
+    budget,
+    housing,
+    bedrooms,
+    peopleCount,
+    categoryWeights,
+    qualityBlend,
+  ]);
 }

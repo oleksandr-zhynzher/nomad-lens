@@ -1,8 +1,22 @@
 import { useState } from "react";
-import { ChevronDown, RotateCcw } from "lucide-react";
+import {
+  House,
+  ShoppingCart,
+  UtensilsCrossed,
+  Bus,
+  Wifi,
+  Laptop,
+  HeartPulse,
+  ChevronDown,
+  Sliders,
+  UserRound,
+  SlidersHorizontal,
+  X,
+  Info,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
-import { HeroSection } from "../components/HeroSection";
+import { Tooltip } from "../components/Tooltip";
 import { BudgetCountryCard } from "../components/BudgetCountryCard";
 import { useCountries } from "../hooks/useCountries";
 import { useBudgetState } from "../hooks/useBudgetState";
@@ -11,507 +25,1052 @@ import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
 
 const BUDGET_CATEGORIES: {
   key: keyof BudgetCategoryWeights;
-  color: string;
+  icon: typeof House;
 }[] = [
-  { key: "housing", color: "#8F5A3C" },
-  { key: "groceries", color: "#6B9E6B" },
-  { key: "dining", color: "#C2956A" },
-  { key: "transport", color: "#5B8FA8" },
-  { key: "utilities", color: "#7A9B6B" },
-  { key: "coworking", color: "#8B7BAD" },
-  { key: "healthInsurance", color: "#C07A9B" },
+  { key: "housing", icon: House },
+  { key: "groceries", icon: ShoppingCart },
+  { key: "dining", icon: UtensilsCrossed },
+  { key: "transport", icon: Bus },
+  { key: "utilities", icon: Wifi },
+  { key: "coworking", icon: Laptop },
+  { key: "healthInsurance", icon: HeartPulse },
 ];
+
+/* ── Shared toggle component ────────────────────────── */
+function ToggleGroup<T extends string | number>({
+  options,
+  value,
+  onChange,
+  labelFn,
+}: {
+  options: readonly T[];
+  value: T;
+  onChange: (v: T) => void;
+  labelFn: (v: T) => string;
+}) {
+  return (
+    <div
+      className="flex"
+      style={{
+        backgroundColor: "#2A2A2A",
+        borderRadius: 4,
+        padding: 4,
+        gap: 4,
+      }}
+    >
+      {options.map((opt) => {
+        const active = opt === value;
+        return (
+          <button
+            key={String(opt)}
+            onClick={() => onChange(opt)}
+            style={{
+              flex: 1,
+              padding: "5px 0",
+              borderRadius: 3,
+              border: "none",
+              cursor: "pointer",
+              fontFamily: "Geist, sans-serif",
+              fontSize: 12,
+              fontWeight: active ? 500 : 400,
+              backgroundColor: active ? "var(--color-accent)" : "transparent",
+              color: active ? "#FFFFFF" : "#666666",
+              textAlign: "center",
+              transition: "all 0.15s ease",
+            }}
+          >
+            {labelFn(opt)}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 export function BudgetMatcherPage() {
   const { t } = useTranslation();
   const { countries, loading } = useCountries();
   const bs = useBudgetState();
-  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
+  const [expandedCode, setExpandedCode] = useState<string | null>(null);
 
   const matches = useBudgetMatcher(
     countries,
     bs.budget,
     bs.housing,
+    bs.bedrooms,
+    bs.peopleCount,
     bs.categoryWeights,
     bs.qualityBlend,
   );
 
-  return (
-    <Layout>
-      <HeroSection
-        backgroundImage="/images/hero-budget.webp"
-        eyebrow={t("budget.eyebrow", "BUDGET MATCHER")}
-        title={t("budget.title", "FIND YOUR BUDGET FIT")}
-        subtitle={t(
-          "budget.subtitle",
-          "Enter your monthly budget and discover which countries offer the best lifestyle for your money",
-        )}
-      />
+  const budgetPct = ((bs.budget - 300) / 9700) * 100;
 
-      <main
-        className="mx-auto"
-        style={{ maxWidth: "960px", padding: "24px 16px" }}
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({
+    lifestyle: false,
+    categories: false,
+  });
+  const [copied, setCopied] = useState(false);
+  const toggle = (key: string) =>
+    setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  /* ── Sidebar content (shared between desktop & mobile) ── */
+  const sidebarContent = (
+    <>
+      {/* ── Budget slider (always visible) ────────────────── */}
+      <div
+        style={{
+          padding: "16px",
+          borderBottom: "1px solid #242424",
+        }}
       >
-        {/* ── Budget Input ───────────────────────────────────── */}
-        <div
-          style={{
-            backgroundColor: "#1A1A1C",
-            borderRadius: "8px",
-            padding: "20px 24px",
-            marginBottom: "16px",
-          }}
-        >
-          <label
+        <div className="flex items-end gap-2 mb-3">
+          <span
+            style={{
+              fontFamily: "IBM Plex Mono, monospace",
+              fontSize: 28,
+              fontWeight: 700,
+              color: "#E8E9EB",
+              lineHeight: 1,
+            }}
+          >
+            ${bs.budget.toLocaleString()}
+          </span>
+          <span
             style={{
               fontFamily: "Geist, sans-serif",
-              fontSize: "10px",
-              fontWeight: 700,
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-              color: "#888888",
-              display: "block",
-              marginBottom: "12px",
+              fontSize: 12,
+              color: "#555555",
+              paddingBottom: 2,
             }}
           >
-            {t("budget.budgetLabel", "Monthly Budget")}
-          </label>
+            {t("budget.perMonth", "/month")}
+          </span>
+        </div>
 
-          <div className="flex items-center gap-4">
+        <input
+          type="range"
+          min={300}
+          max={10000}
+          step={50}
+          value={bs.budget}
+          onChange={(e) => bs.setBudget(Number(e.target.value))}
+          className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
+          style={{
+            background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${budgetPct}%, #333333 ${budgetPct}%, #333333 100%)`,
+          }}
+          aria-label="Budget slider"
+        />
+
+        <div className="flex justify-between mt-1.5">
+          <span
+            style={{
+              fontFamily: "Geist, sans-serif",
+              fontSize: 10,
+              color: "#555555",
+            }}
+          >
+            $300
+          </span>
+          <span
+            style={{
+              fontFamily: "Geist, sans-serif",
+              fontSize: 10,
+              color: "#555555",
+            }}
+          >
+            $10,000
+          </span>
+        </div>
+      </div>
+
+      {/* ── QUALITY BLEND (top level) ─────────────────────── */}
+      <div style={{ padding: "12px 16px", borderBottom: "1px solid #242424" }}>
+        <div className="flex flex-col" style={{ gap: 9 }}>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 12,
+                  color: "#FFFFFF",
+                }}
+              >
+                {t("budget.qualityBlend", "Quality blend")}
+              </span>
+              <Tooltip
+                content={
+                  <div style={{ maxWidth: 240 }}>
+                    <div
+                      style={{
+                        marginBottom: 6,
+                        color: "#FFFFFF",
+                        fontWeight: 600,
+                      }}
+                    >
+                      {t("budget.qualityBlend", "Quality blend")}
+                    </div>
+                    <div>
+                      {t(
+                        "budget.qualityBlendTooltip",
+                        "Controls the balance between pure cost-of-living affordability and overall country quality (safety, healthcare, internet, infrastructure). At 0% only price matters; at 100% only quality matters.",
+                      )}
+                    </div>
+                  </div>
+                }
+                side="bottom"
+              >
+                <Info
+                  size={13}
+                  color="#FFFFFF"
+                  style={{ cursor: "pointer", flexShrink: 0, opacity: 0.45 }}
+                />
+              </Tooltip>
+            </div>
             <span
               style={{
                 fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "32px",
-                fontWeight: 700,
-                color: "var(--color-accent)",
+                fontSize: 11,
+                color: "var(--color-accent-dim)",
               }}
             >
-              $
-            </span>
-            <input
-              type="number"
-              min={300}
-              max={15000}
-              step={50}
-              value={bs.budget}
-              onChange={(e) => {
-                const v = parseInt(e.target.value, 10);
-                if (!isNaN(v) && v >= 0 && v <= 99999) bs.setBudget(v);
-              }}
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "32px",
-                fontWeight: 700,
-                color: "#FFFFFF",
-                backgroundColor: "transparent",
-                border: "none",
-                borderBottom: "2px solid #333",
-                outline: "none",
-                width: "160px",
-                textAlign: "left",
-              }}
-            />
-            <span
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "13px",
-                color: "#555",
-              }}
-            >
-              {t("budget.perMonth", "/ month")}
+              {bs.qualityBlend}
             </span>
           </div>
-
           <input
             type="range"
-            min={300}
-            max={10000}
-            step={50}
-            value={bs.budget}
-            onChange={(e) => bs.setBudget(Number(e.target.value))}
+            min={0}
+            max={100}
+            value={bs.qualityBlend}
+            onChange={(e) => bs.setQualityBlend(Number(e.target.value))}
             className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
             style={{
-              marginTop: "16px",
-              background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((bs.budget - 300) / 9700) * 100}%, #333333 ${((bs.budget - 300) / 9700) * 100}%, #333333 100%)`,
+              background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${bs.qualityBlend}%, #333333 ${bs.qualityBlend}%, #333333 100%)`,
             }}
-            aria-label="Budget slider"
+            aria-label="Quality blend"
           />
-
-          {/* Housing toggle */}
-          <div
-            className="flex items-center gap-3"
-            style={{ marginTop: "16px" }}
-          >
+          <div className="flex justify-between">
             <span
               style={{
                 fontFamily: "Geist, sans-serif",
-                fontSize: "12px",
-                color: "#888",
+                fontSize: 10,
+                color: "#555555",
               }}
             >
-              {t("budget.housing.label", "Housing")}:
+              {t("budget.pureAffordability", "Pure Affordability")}
             </span>
-            <div
-              className="flex"
+            <span
               style={{
-                backgroundColor: "#2A2A2A",
-                borderRadius: "4px",
-                padding: "3px",
-                gap: "3px",
+                fontFamily: "Geist, sans-serif",
+                fontSize: 10,
+                color: "#555555",
               }}
             >
-              {(["center", "outside"] as const).map((opt) => (
+              {t("budget.qualityFocus", "Country Quality")}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── LIFESTYLE PROFILE (collapsible) ───────────────── */}
+      <div style={{ borderBottom: "1px solid #242424" }}>
+        <button
+          className="w-full flex items-center"
+          style={{
+            height: 40,
+            padding: "0 14px",
+            gap: 8,
+            backgroundColor: "transparent",
+          }}
+          onClick={() => toggle("lifestyle")}
+        >
+          <UserRound size={16} color="#C2956A" />
+          <span
+            style={{
+              fontFamily: "Geist, sans-serif",
+              fontSize: 10,
+              fontWeight: 600,
+              letterSpacing: 1.5,
+              textTransform: "uppercase",
+              color: "#888888",
+              flex: 1,
+              textAlign: "left",
+            }}
+          >
+            {t("budget.lifestyleProfile", "LIFESTYLE PROFILE")}
+          </span>
+          <ChevronDown
+            size={14}
+            style={{
+              color: "#555555",
+              transform: !collapsed.lifestyle
+                ? "rotate(0deg)"
+                : "rotate(-90deg)",
+              transition: "transform 0.15s ease",
+              flexShrink: 0,
+            }}
+          />
+        </button>
+
+        {!collapsed.lifestyle && (
+          <div
+            style={{
+              padding: "12px 16px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 14,
+            }}
+          >
+            {/* Apartment size */}
+            <div className="flex flex-col" style={{ gap: 6 }}>
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 12,
+                  color: "#FFFFFF",
+                }}
+              >
+                {t("budget.bedrooms.label", "Apartment size")}
+              </span>
+              <ToggleGroup
+                options={[1, 2, 3] as const}
+                value={bs.bedrooms}
+                onChange={bs.setBedrooms}
+                labelFn={(v) => t(`budget.bedrooms.${v}`, `${v} BR`)}
+              />
+            </div>
+
+            {/* Housing preference — city vs region, applies to all bedroom counts */}
+            <div className="flex flex-col" style={{ gap: 6 }}>
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 12,
+                  color: "#FFFFFF",
+                }}
+              >
+                {t("budget.housing.label", "Location")}
+              </span>
+              <ToggleGroup
+                options={["majorCity", "smallerCity"] as const}
+                value={bs.housing}
+                onChange={bs.setHousing}
+                labelFn={(v) =>
+                  t(
+                    `budget.housing.${v}`,
+                    v === "majorCity" ? "Major City" : "Region / Smaller City",
+                  )
+                }
+              />
+            </div>
+
+            {/* People count */}
+            <div className="flex flex-col" style={{ gap: 6 }}>
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 12,
+                  color: "#FFFFFF",
+                }}
+              >
+                {t("budget.people.label", "People")}
+              </span>
+              <div
+                className="inline-flex items-center"
+                style={{
+                  borderRadius: 6,
+                  height: 36,
+                  gap: 4,
+                }}
+              >
                 <button
-                  key={opt}
-                  onClick={() => bs.setHousing(opt)}
+                  onClick={() =>
+                    bs.setPeopleCount(Math.max(1, bs.peopleCount - 1))
+                  }
+                  disabled={bs.peopleCount <= 1}
                   style={{
-                    padding: "5px 14px",
-                    borderRadius: "3px",
+                    width: 32,
+                    height: 32,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: bs.peopleCount <= 1 ? "#222" : "#333",
                     border: "none",
-                    cursor: "pointer",
-                    fontFamily: "Geist, sans-serif",
-                    fontSize: "12px",
-                    backgroundColor:
-                      bs.housing === opt
-                        ? "var(--color-accent)"
-                        : "transparent",
-                    color: bs.housing === opt ? "#FFFFFF" : "#666",
+                    borderRadius: 6,
+                    color: bs.peopleCount <= 1 ? "#555" : "#E8E9EB",
+                    fontSize: 16,
+                    fontWeight: 700,
+                    cursor: bs.peopleCount <= 1 ? "default" : "pointer",
                     transition: "all 0.15s ease",
                   }}
                 >
-                  {t(
-                    `budget.housing.${opt}`,
-                    opt === "center" ? "City Center" : "Outside Center",
-                  )}
+                  −
                 </button>
-              ))}
+                <span
+                  style={{
+                    fontFamily: "IBM Plex Mono, monospace",
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: "#E8E9EB",
+                    minWidth: 24,
+                    textAlign: "center",
+                    userSelect: "none",
+                  }}
+                >
+                  {bs.peopleCount}
+                </span>
+                <button
+                  onClick={() =>
+                    bs.setPeopleCount(Math.min(20, bs.peopleCount + 1))
+                  }
+                  disabled={bs.peopleCount >= 20}
+                  style={{
+                    width: 32,
+                    height: 32,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: bs.peopleCount >= 20 ? "#222" : "#333",
+                    border: "none",
+                    borderRadius: 6,
+                    color: bs.peopleCount >= 20 ? "#555" : "#E8E9EB",
+                    fontSize: 16,
+                    fontWeight: 700,
+                    cursor: bs.peopleCount >= 20 ? "default" : "pointer",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  +
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
+      </div>
 
-        {/* ── Collapsible Settings ───────────────────────────── */}
-        <div
+      {/* ── CATEGORY WEIGHTS (collapsible) ────────────────── */}
+      <div style={{ borderBottom: "1px solid #242424" }}>
+        <button
+          className="w-full flex items-center"
           style={{
-            backgroundColor: "#1A1A1C",
-            borderRadius: "8px",
-            marginBottom: "16px",
-            overflow: "hidden",
+            height: 40,
+            padding: "0 14px",
+            gap: 8,
+            backgroundColor: "transparent",
           }}
+          onClick={() => toggle("categories")}
         >
-          <button
-            className="w-full flex items-center justify-between"
+          <Sliders size={16} color="#C2956A" />
+          <span
             style={{
-              padding: "14px 20px",
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
+              fontFamily: "Geist, sans-serif",
+              fontSize: 10,
+              fontWeight: 600,
+              letterSpacing: 1.5,
+              textTransform: "uppercase",
+              color: "#888888",
+              flex: 1,
+              textAlign: "left",
             }}
-            onClick={() => setSettingsOpen((p) => !p)}
+          >
+            {t("budget.categoryWeights", "CATEGORY WEIGHTS")}
+          </span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#291608",
+              borderRadius: 3,
+              padding: "3px 8px",
+            }}
           >
             <span
               style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "10px",
-                fontWeight: 700,
-                letterSpacing: "2px",
-                textTransform: "uppercase",
-                color: "#888888",
+                fontFamily: "IBM Plex Mono, monospace",
+                fontSize: 11,
+                color: "#C2956A",
               }}
             >
-              {t("budget.settings", "Settings")}
+              Avg{" "}
+              {Math.round(
+                Object.values(bs.categoryWeights).reduce((a, b) => a + b, 0) /
+                  BUDGET_CATEGORIES.length,
+              )}
             </span>
-            <ChevronDown
-              size={16}
-              style={{
-                color: "#555",
-                transform: settingsOpen ? "rotate(0deg)" : "rotate(-90deg)",
-                transition: "transform 0.15s ease",
-              }}
-            />
-          </button>
+          </div>
+          <ChevronDown
+            size={14}
+            style={{
+              color: "#555555",
+              transform: !collapsed.categories
+                ? "rotate(0deg)"
+                : "rotate(-90deg)",
+              transition: "transform 0.15s ease",
+              flexShrink: 0,
+            }}
+          />
+        </button>
 
-          {settingsOpen && (
-            <div
-              style={{
-                padding: "0 20px 20px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "16px",
-              }}
-            >
-              {/* Quality blend */}
-              <div className="flex flex-col" style={{ gap: "8px" }}>
-                <div className="flex items-center justify-between">
-                  <span
-                    style={{
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "12px",
-                      color: "#CCCCCC",
-                    }}
-                  >
-                    {t("budget.qualityBlend", "Quality Blend")}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "IBM Plex Mono, monospace",
-                      fontSize: "11px",
-                      color: "var(--color-accent-dim)",
-                    }}
-                  >
-                    {bs.qualityBlend}%
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span
-                    style={{
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "10px",
-                      color: "#555",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {t("budget.pureAffordability", "Afford.")}
-                  </span>
+        {!collapsed.categories && (
+          <div style={{ paddingTop: 4, paddingBottom: 4 }}>
+            {BUDGET_CATEGORIES.map(({ key, icon: Icon }) => (
+              <div key={key} style={{ padding: "10px 16px" }}>
+                <div className="flex flex-col" style={{ gap: 9 }}>
+                  <div className="flex items-center justify-between">
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 6,
+                      }}
+                    >
+                      <Icon size={14} color="#888888" />
+                      <span
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: 12,
+                          fontWeight: 400,
+                          color: "#FFFFFF",
+                        }}
+                      >
+                        {t(`budget.categories.${key}`)}
+                      </span>
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: 11,
+                        color: "var(--color-accent-dim)",
+                      }}
+                    >
+                      {bs.categoryWeights[key]}
+                    </span>
+                  </div>
                   <input
                     type="range"
                     min={0}
                     max={100}
-                    value={bs.qualityBlend}
-                    onChange={(e) => bs.setQualityBlend(Number(e.target.value))}
-                    className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
+                    step={1}
+                    value={bs.categoryWeights[key]}
+                    onChange={(e) =>
+                      bs.handleCategoryWeight(key, Number(e.target.value))
+                    }
+                    className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
                     style={{
-                      background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${bs.qualityBlend}%, #333333 ${bs.qualityBlend}%, #333333 100%)`,
+                      background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${bs.categoryWeights[key]}%, #333333 ${bs.categoryWeights[key]}%, #333333 100%)`,
                     }}
-                    aria-label="Quality blend"
+                    aria-label={`${key} weight`}
                   />
-                  <span
-                    style={{
-                      fontFamily: "Geist, sans-serif",
-                      fontSize: "10px",
-                      color: "#555",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {t("budget.qualityFocus", "Quality")}
-                  </span>
                 </div>
               </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-              {/* Category weight sliders */}
-              <div className="flex flex-col" style={{ gap: "12px" }}>
+      {/* ── Share & Reset buttons ─────────────────────────── */}
+      <div
+        className="flex-shrink-0 sticky bottom-0"
+        style={{ borderTop: "1px solid #333333", backgroundColor: "#131416" }}
+      >
+        <div className="flex flex-col gap-2" style={{ padding: "12px 16px" }}>
+          {!bs.isDefault && (
+            <button
+              onClick={() => {
+                bs.handleShare();
+                setCopied(true);
+                setTimeout(() => setCopied(false), 3000);
+              }}
+              className="w-full flex items-center justify-center gap-2 rounded transition-colors"
+              style={{
+                backgroundColor: copied ? "#2A4A2A" : "#1A2A1A",
+                color: copied ? "#88CC88" : "#6B9E6B",
+                fontFamily: "Inter, sans-serif",
+                fontSize: "13px",
+                fontWeight: 500,
+                height: "40px",
+                border: `1px solid ${copied ? "#4A8A4A" : "#2A4A2A"}`,
+                borderRadius: "6px",
+                transition: "all 0.15s ease",
+                cursor: "pointer",
+              }}
+            >
+              {copied ? (
+                <>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  {t("weights.linkCopied", "Link copied!")}
+                </>
+              ) : (
+                <>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                    <polyline points="16 6 12 2 8 6" />
+                    <line x1="12" y1="2" x2="12" y2="15" />
+                  </svg>
+                  {t("weights.shareWeights", "Share weights")}
+                </>
+              )}
+            </button>
+          )}
+          <button
+            onClick={bs.handleReset}
+            className="w-full flex items-center justify-center gap-2 rounded transition-colors"
+            style={{
+              backgroundColor: "transparent",
+              color: "var(--color-accent-dim)",
+              fontFamily: "Inter, sans-serif",
+              fontSize: "13px",
+              fontWeight: 500,
+              height: "40px",
+              border: "1px solid #333333",
+              borderRadius: "6px",
+              cursor: "pointer",
+            }}
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+            {t("weights.resetToDefaults", "Reset to defaults")}
+          </button>
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <Layout>
+      <div className="flex">
+        {/* ── Left sidebar (hidden on mobile) ─────────────── */}
+        <aside
+          className="hidden md:block sticky top-14 self-start overflow-y-auto"
+          style={{
+            width: "340px",
+            height: "calc(100vh - 56px)",
+            backgroundColor: "#131416",
+            borderRight: "1px solid #1E1E22",
+            flexShrink: 0,
+          }}
+        >
+          {sidebarContent}
+        </aside>
+
+        {/* ── Mobile parameters bottom sheet ──────────────── */}
+        {mobileParamsOpen && (
+          <div
+            className="md:hidden fixed inset-0 z-50 flex flex-col"
+            onClick={() => setMobileParamsOpen(false)}
+          >
+            <div
+              className="flex-1"
+              style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+            />
+            <div
+              className="relative flex flex-col"
+              style={{
+                height: "85vh",
+                backgroundColor: "#1A1A1A",
+                borderTopLeftRadius: "12px",
+                borderTopRightRadius: "12px",
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Drag handle */}
+              <div className="flex justify-center pt-3 pb-1 shrink-0">
+                <div
+                  style={{
+                    width: "36px",
+                    height: "4px",
+                    borderRadius: "2px",
+                    backgroundColor: "#444444",
+                  }}
+                />
+              </div>
+              {/* Close button */}
+              <div className="flex items-center justify-between px-4 pb-2 shrink-0">
                 <span
                   style={{
                     fontFamily: "Geist, sans-serif",
-                    fontSize: "10px",
+                    fontSize: "12px",
                     fontWeight: 700,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
-                    color: "#666",
+                    color: "#999999",
                   }}
                 >
-                  {t("budget.categoryWeights", "Category Weights")}
+                  {t("budget.eyebrow", "BUDGET MATCHER")}
                 </span>
-                {BUDGET_CATEGORIES.map(({ key, color }) => (
-                  <div
-                    key={key}
-                    className="flex flex-col"
-                    style={{ gap: "6px" }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div
+                <button
+                  onClick={() => setMobileParamsOpen(false)}
+                  className="flex items-center justify-center"
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "4px",
+                    backgroundColor: "#333333",
+                    color: "#999999",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                  aria-label="Close parameters"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto">{sidebarContent}</div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Mobile FAB ──────────────────────────────────── */}
+        <button
+          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg"
+          style={{
+            bottom: "24px",
+            right: "16px",
+            height: "48px",
+            paddingLeft: "16px",
+            paddingRight: "18px",
+            borderRadius: "24px",
+            backgroundColor: "var(--color-accent)",
+            color: "#FFFFFF",
+            fontFamily: "Inter, sans-serif",
+            fontSize: "14px",
+            fontWeight: 600,
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={() => setMobileParamsOpen(true)}
+          aria-label="Open parameters"
+        >
+          <SlidersHorizontal size={18} />
+          {t("mobileSheet.parameters", "Parameters")}
+        </button>
+
+        {/* ── Right content area ──────────────────────────── */}
+        <main className="flex-1 min-w-0" style={{ backgroundColor: "#0F1114" }}>
+          <div className="px-4 md:px-6">
+            {/* ── Hero section (matching list page) ─────────── */}
+            <div
+              className="relative mb-6 md:mb-12 rounded-lg overflow-hidden"
+              style={{
+                background: "#0A0D12",
+                backgroundImage: "url('/hero-map.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              {/* Gradient overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
+                }}
+              />
+
+              <div
+                className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
+                style={{ minHeight: "160px" }}
+              >
+                {/* Eyebrow with dots (list page style) */}
+                <div className="flex items-center gap-2 mb-2 md:mb-3">
+                  {t("budget.eyebrow", "BUDGET MATCHER")
+                    .split("·")
+                    .map((word, i) => (
+                      <span
+                        key={i}
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          gap: "6px",
+                          gap: "8px",
                         }}
                       >
-                        <div
+                        <span
                           style={{
-                            width: "8px",
-                            height: "8px",
+                            width: "4px",
+                            height: "4px",
                             borderRadius: "50%",
-                            backgroundColor: color,
+                            backgroundColor: "var(--color-accent-dim)",
                             flexShrink: 0,
+                            display: "inline-block",
                           }}
                         />
                         <span
                           style={{
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "12px",
-                            color: "#FFFFFF",
+                            fontFamily: "Geist, sans-serif",
+                            fontSize: "11px",
+                            fontWeight: 500,
+                            letterSpacing: "2.5px",
+                            textTransform: "uppercase",
+                            color: "var(--color-accent-dim)",
+                            lineHeight: 1,
                           }}
                         >
-                          {t(`budget.categories.${key}`)}
+                          {word.trim()}
                         </span>
-                      </div>
-                      <span
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "11px",
-                          color: "var(--color-accent-dim)",
-                        }}
-                      >
-                        {bs.categoryWeights[key]}
                       </span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0}
-                      max={100}
-                      value={bs.categoryWeights[key]}
-                      onChange={(e) =>
-                        bs.handleCategoryWeight(key, Number(e.target.value))
-                      }
-                      className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
+                    ))}
+                </div>
+                {/* H1 — responsive font (list page style) */}
+                <h1
+                  className="text-3xl md:text-6xl"
+                  style={{
+                    fontFamily: "Anton, sans-serif",
+                    fontWeight: 400,
+                    lineHeight: "0.95",
+                    color: "#FFFFFF",
+                    marginBottom: "8px",
+                  }}
+                >
+                  {t("budget.eyebrow", "BUDGET MATCHER")}
+                </h1>
+                {/* Tagline */}
+                <p
+                  className="hidden md:block"
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "15px",
+                    color: "#777777",
+                    maxWidth: "580px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  {t(
+                    "budget.subtitle",
+                    "Enter your monthly budget and discover which countries offer the best lifestyle for your money",
+                  )}
+                </p>
+                {/* Copper rule */}
+                <div
+                  className="hidden md:block"
+                  style={{
+                    width: "128px",
+                    height: "2px",
+                    backgroundColor: "var(--color-accent)",
+                    marginBottom: "16px",
+                  }}
+                />
+                {/* Stats row */}
+                <div className="flex items-center gap-4 md:gap-6">
+                  <div>
+                    <div
                       style={{
-                        background: `linear-gradient(to right, ${color} 0%, ${color} ${bs.categoryWeights[key]}%, #333333 ${bs.categoryWeights[key]}%, #333333 100%)`,
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        color: "var(--color-accent-dim)",
+                        lineHeight: "1",
                       }}
-                      aria-label={`${key} weight`}
-                    />
+                    >
+                      {matches.length || "—"}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "Geist, sans-serif",
+                        fontSize: "10px",
+                        color: "#444444",
+                        textTransform: "uppercase",
+                        letterSpacing: "1px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      {t("budget.matchedCountries", "COUNTRIES")}
+                    </div>
                   </div>
+                  <div
+                    className="w-px h-6 md:h-8"
+                    style={{ backgroundColor: "#333333" }}
+                  />
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        color: "var(--color-accent-dim)",
+                        lineHeight: "1",
+                      }}
+                    >
+                      ${bs.budget.toLocaleString()}
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "Geist, sans-serif",
+                        fontSize: "10px",
+                        color: "#444444",
+                        textTransform: "uppercase",
+                        letterSpacing: "1px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      {t("budget.perMonth", "/ MONTH")}
+                    </div>
+                  </div>
+                  <div
+                    className="w-px h-6 md:h-8"
+                    style={{ backgroundColor: "#333333" }}
+                  />
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: "18px",
+                        fontWeight: 600,
+                        color: "var(--color-accent-dim)",
+                        lineHeight: "1",
+                      }}
+                    >
+                      7
+                    </div>
+                    <div
+                      style={{
+                        fontFamily: "Geist, sans-serif",
+                        fontSize: "10px",
+                        color: "#444444",
+                        textTransform: "uppercase",
+                        letterSpacing: "1px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      {t("budget.categories.title", "CATEGORIES")}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Results ───────────────────────────────────── */}
+            {loading ? (
+              <div className="flex flex-col gap-2">
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-14 animate-pulse"
+                    style={{
+                      backgroundColor: "#1A1A1A",
+                      borderTop: "1px solid #333333",
+                    }}
+                  />
                 ))}
               </div>
-
-              {/* Reset */}
-              <button
-                onClick={bs.handleReset}
-                className="flex items-center justify-center gap-2"
+            ) : matches.length === 0 ? (
+              <p
+                className="text-center py-20"
                 style={{
-                  backgroundColor: "transparent",
-                  border: "1px solid #333",
-                  borderRadius: "6px",
-                  padding: "8px 16px",
-                  cursor: "pointer",
                   fontFamily: "Inter, sans-serif",
-                  fontSize: "12px",
-                  color: "var(--color-accent-dim)",
+                  fontSize: 14,
+                  color: "#666666",
                 }}
               >
-                <RotateCcw size={14} />
-                {t("budget.reset", "Reset")}
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* ── Results ─────────────────────────────────────────── */}
-        <div
-          className="flex items-center justify-between"
-          style={{ marginBottom: "12px" }}
-        >
-          <span
-            style={{
-              fontFamily: "Geist, sans-serif",
-              fontSize: "10px",
-              fontWeight: 700,
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-              color: "#888888",
-            }}
-          >
-            {t("budget.results", "Results")}
-          </span>
-          <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "12px",
-              color: "#555",
-            }}
-          >
-            {loading
-              ? "..."
-              : t("budget.countriesFound", "{{count}} countries", {
-                  count: matches.length,
-                })}
-          </span>
-        </div>
-
-        {/* Legend */}
-        <div className="flex flex-wrap gap-3" style={{ marginBottom: "12px" }}>
-          {BUDGET_CATEGORIES.map(({ key, color }) => (
-            <div key={key} className="flex items-center gap-1">
-              <div
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "2px",
-                  backgroundColor: color,
-                }}
-              />
-              <span
-                style={{
-                  fontFamily: "Geist, sans-serif",
-                  fontSize: "10px",
-                  color: "#666",
-                }}
-              >
-                {t(`budget.categories.${key}`)}
-              </span>
-            </div>
-          ))}
-          <div className="flex items-center gap-1">
-            <div
-              style={{
-                width: "8px",
-                height: "2px",
-                backgroundColor: "#FFFFFF",
-                opacity: 0.7,
-              }}
-            />
-            <span
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "10px",
-                color: "#666",
-              }}
-            >
-              {t("budget.budgetLine", "Budget")}
-            </span>
+                {t("budget.noResults", "No countries with cost data available")}
+              </p>
+            ) : (
+              <div className="flex flex-col">
+                <p
+                  className="text-xs text-right pr-1 my-4"
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    color: "#666666",
+                  }}
+                >
+                  {t("countryList.count", { count: matches.length })}
+                </p>
+                {/* Color legend */}
+                <div
+                  className="flex flex-wrap gap-x-4 gap-y-1 mb-3 px-1"
+                  style={{ marginTop: "-4px" }}
+                >
+                  {BUDGET_CATEGORIES.map(({ key }) => (
+                    <div key={key} className="flex items-center gap-1.5">
+                      <div
+                        style={{
+                          width: "8px",
+                          height: "8px",
+                          borderRadius: "50%",
+                          backgroundColor:
+                            {
+                              housing: "#8F5A3C",
+                              groceries: "#6B9E6B",
+                              dining: "#C2956A",
+                              transport: "#5B8FA8",
+                              utilities: "#7A9B6B",
+                              coworking: "#8B7BAD",
+                              healthInsurance: "#C07A9B",
+                            }[key] ?? "#555",
+                          flexShrink: 0,
+                        }}
+                      />
+                      <span
+                        style={{
+                          fontFamily: "Geist, sans-serif",
+                          fontSize: "11px",
+                          color: "#666666",
+                        }}
+                      >
+                        {t(`budget.categories.${key}`)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                {matches.map((m, i) => (
+                  <BudgetCountryCard
+                    key={m.country.code}
+                    match={m}
+                    budget={bs.budget}
+                    rank={i + 1}
+                    expanded={expandedCode === m.country.code}
+                    onToggle={() =>
+                      setExpandedCode((prev) =>
+                        prev === m.country.code ? null : m.country.code,
+                      )
+                    }
+                  />
+                ))}
+                <p
+                  className="text-xs text-right pr-1 my-4"
+                  style={{
+                    fontFamily: "Geist, sans-serif",
+                    color: "#666666",
+                  }}
+                >
+                  {t("countryList.count", { count: matches.length })}
+                </p>
+              </div>
+            )}
           </div>
-        </div>
-
-        <div
-          style={{
-            borderRadius: "8px",
-            overflow: "hidden",
-            border: "1px solid #222",
-          }}
-        >
-          {loading ? (
-            <div
-              className="flex items-center justify-center"
-              style={{
-                height: "200px",
-                color: "#555",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-              }}
-            >
-              {t("budget.loading", "Loading...")}
-            </div>
-          ) : matches.length === 0 ? (
-            <div
-              className="flex items-center justify-center"
-              style={{
-                height: "200px",
-                color: "#555",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-              }}
-            >
-              {t("budget.noResults", "No countries with cost data available")}
-            </div>
-          ) : (
-            matches.map((m, i) => (
-              <BudgetCountryCard
-                key={m.country.code}
-                match={m}
-                budget={bs.budget}
-                rank={i + 1}
-              />
-            ))
-          )}
-        </div>
-      </main>
+        </main>
+      </div>
     </Layout>
   );
 }

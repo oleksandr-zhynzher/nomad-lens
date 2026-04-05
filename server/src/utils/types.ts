@@ -49,8 +49,10 @@ export type CategoryKey =
 
 export interface CostOfLivingEntry {
   code: string;
-  rentCenter: number | null;
-  rentOutside: number | null;
+  rentMajorCity: number | null;
+  rentSmallerCity: number | null;
+  rent2br: number | null;
+  rent3br: number | null;
   groceries: number | null;
   dining: number | null;
   transport: number | null;

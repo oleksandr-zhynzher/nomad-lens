@@ -7,6 +7,7 @@ import {
   Briefcase,
   Building,
   Building2,
+  Bus,
   Calendar,
   Check,
   CloudSun,
@@ -15,9 +16,13 @@ import {
   ExternalLink,
   FileText,
   Globe,
+  Heart,
+  Home,
+  Laptop,
   MapPin,
   Plane,
   RefreshCw,
+  ShoppingCart,
   Snowflake,
   Sun,
   Thermometer,
@@ -25,6 +30,8 @@ import {
   TrendingUp,
   User,
   Users,
+  UtensilsCrossed,
+  Zap,
 } from "lucide-react";
 import { useCountries } from "../hooks/useCountries";
 import { useWeightState } from "../hooks/useWeightState";
@@ -415,31 +422,33 @@ export function CountryPage() {
           style={{
             backgroundColor: "#0D0D0F",
             padding: "24px 64px",
-            gap: "16px",
+            gap: "12px",
             display: "flex",
+            alignItems: "center",
           }}
         >
           <div
             style={{
               backgroundColor: "#111111",
-              borderRadius: "10px",
+              borderRadius: "8px",
               border: "1px solid #1E1E1E",
-              padding: "20px 24px",
+              padding: "14px 18px",
               display: "flex",
-              flexDirection: "column",
-              gap: "6px",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
               flex: 1,
             }}
           >
-            <TrendingUp size={16} color="#8F5A3C" />
+            <TrendingUp size={14} color="#8F5A3C" />
             <div
-              style={{ display: "flex", alignItems: "baseline", gap: "10px" }}
+              style={{ display: "flex", alignItems: "baseline", gap: "8px" }}
             >
               {finalScore != null && (
                 <span
                   style={{
                     fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: "28px",
+                    fontSize: "22px",
                     fontWeight: 700,
                     color: "#C2956A",
                   }}
@@ -450,7 +459,7 @@ export function CountryPage() {
               <span
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "14px",
+                  fontSize: "12px",
                   fontWeight: 400,
                   color: "#555555",
                 }}
@@ -458,113 +467,80 @@ export function CountryPage() {
                 #{rank}
               </span>
             </div>
-            <span
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "10px",
-                color: "#555555",
-              }}
-            >
-              {t("countryPage.globalRankScore")}
-            </span>
           </div>
           <div
             style={{
               backgroundColor: "#111111",
-              borderRadius: "10px",
+              borderRadius: "8px",
               border: "1px solid #1E1E1E",
-              padding: "20px 24px",
+              padding: "14px 18px",
               display: "flex",
-              flexDirection: "column",
-              gap: "6px",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
               flex: 1,
             }}
           >
-            <Users size={16} color="#5B8FA8" />
+            <Users size={14} color="#5B8FA8" />
             <span
               style={{
                 fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "28px",
+                fontSize: "22px",
                 fontWeight: 700,
                 color: "#E8E9EB",
               }}
             >
               {(c.population / 1_000_000).toFixed(1)}M
             </span>
-            <span
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "10px",
-                color: "#555555",
-              }}
-            >
-              {t("countryPage.population")}
-            </span>
           </div>
           <div
             style={{
               backgroundColor: "#111111",
-              borderRadius: "10px",
+              borderRadius: "8px",
               border: "1px solid #1E1E1E",
-              padding: "20px 24px",
+              padding: "14px 18px",
               display: "flex",
-              flexDirection: "column",
-              gap: "6px",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
               flex: 1,
             }}
           >
-            <Building size={16} color="#7A9B6B" />
+            <Building size={14} color="#7A9B6B" />
             <span
               style={{
                 fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "20px",
+                fontSize: "18px",
                 fontWeight: 700,
                 color: "#E8E9EB",
               }}
             >
               {locC.capital}
             </span>
-            <span
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "10px",
-                color: "#555555",
-              }}
-            >
-              {t("countryPage.capital")}
-            </span>
           </div>
           <div
             style={{
               backgroundColor: "#111111",
-              borderRadius: "10px",
+              borderRadius: "8px",
               border: "1px solid #1E1E1E",
-              padding: "20px 24px",
+              padding: "14px 18px",
               display: "flex",
-              flexDirection: "column",
-              gap: "6px",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "10px",
               flex: 1,
             }}
           >
-            <MapPin size={16} color="#C2956A" />
+            <MapPin size={14} color="#C2956A" />
             <span
               style={{
                 fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "20px",
+                fontSize: "18px",
                 fontWeight: 700,
                 color: "#E8E9EB",
               }}
             >
               {t(`regions.${regionKey(c.region)}`)}
-            </span>
-            <span
-              style={{
-                fontFamily: "Geist, sans-serif",
-                fontSize: "10px",
-                color: "#555555",
-              }}
-            >
-              {t("countryPage.region")}
             </span>
           </div>
         </div>
@@ -1226,6 +1202,268 @@ export function CountryPage() {
           </div>
 
           <ScoreBreakdown country={c} />
+
+          {/* ── Cost of Living ── */}
+          {c.costOfLiving && (
+            <>
+              <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
+              <div
+                style={{
+                  backgroundColor: "#0A0A0A",
+                  padding: "48px 64px",
+                  gap: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "0 -64px",
+                }}
+              >
+                <div
+                  style={{ display: "flex", gap: "12px", alignItems: "center" }}
+                >
+                  <h2
+                    style={{
+                      fontFamily: "Anton, sans-serif",
+                      fontSize: "32px",
+                      fontWeight: 400,
+                      color: "#E8E9EB",
+                      margin: 0,
+                    }}
+                  >
+                    {t("countryPage.costOfLivingSection", "Cost of Living")}
+                  </h2>
+                  <span
+                    style={{
+                      flex: 1,
+                      textAlign: "right",
+                      fontFamily: "Geist, sans-serif",
+                      fontSize: "12px",
+                      color: "#444444",
+                    }}
+                  >
+                    {t(
+                      "countryPage.costOfLivingSubtitle",
+                      "USD / month · single nomad",
+                    )}
+                  </span>
+                </div>
+
+                {/* Summary row */}
+                <div style={{ display: "flex", gap: "16px" }}>
+                  {c.costOfLiving.totalBasic !== null && (
+                    <div
+                      style={{
+                        backgroundColor: "#111111",
+                        borderRadius: "10px",
+                        border: "1px solid #1E1E1E",
+                        padding: "20px",
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "12px",
+                        }}
+                      >
+                        <TrendingUp size={16} color="#44CC66" />
+                        <span
+                          style={{
+                            fontFamily: "IBM Plex Mono, monospace",
+                            fontSize: "28px",
+                            fontWeight: 700,
+                            color: "#44CC66",
+                          }}
+                        >
+                          ${c.costOfLiving.totalBasic.toLocaleString()}
+                        </span>
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: "Geist, sans-serif",
+                          fontSize: "10px",
+                          color: "#555555",
+                        }}
+                      >
+                        {t("countryPage.colTotalBasic", "Basic Budget")}
+                      </span>
+                    </div>
+                  )}
+                  {c.costOfLiving.totalComfortable !== null && (
+                    <div
+                      style={{
+                        backgroundColor: "#111111",
+                        borderRadius: "10px",
+                        border: "1px solid #1E1E1E",
+                        padding: "20px",
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "12px",
+                        }}
+                      >
+                        <TrendingUp size={16} color="#5B8FA8" />
+                        <span
+                          style={{
+                            fontFamily: "IBM Plex Mono, monospace",
+                            fontSize: "28px",
+                            fontWeight: 700,
+                            color: "#5B8FA8",
+                          }}
+                        >
+                          ${c.costOfLiving.totalComfortable.toLocaleString()}
+                        </span>
+                      </div>
+                      <span
+                        style={{
+                          fontFamily: "Geist, sans-serif",
+                          fontSize: "10px",
+                          color: "#555555",
+                        }}
+                      >
+                        {t(
+                          "countryPage.colTotalComfortable",
+                          "Comfortable Budget",
+                        )}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Breakdown grid */}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(4, 1fr)",
+                    gap: "12px",
+                  }}
+                >
+                  {(
+                    [
+                      {
+                        key: "rentMajorCity" as const,
+                        icon: <Building2 size={14} color="#C2956A" />,
+                        label: t(
+                          "countryPage.colRentMajorCity",
+                          "Rent · Major City",
+                        ),
+                      },
+                      {
+                        key: "rentSmallerCity" as const,
+                        icon: <Home size={14} color="#C2956A" />,
+                        label: t(
+                          "countryPage.colRentSmallerCity",
+                          "Rent · Smaller City",
+                        ),
+                      },
+                      {
+                        key: "rent2br" as const,
+                        icon: <Building2 size={14} color="#A87A5A" />,
+                        label: t("countryPage.colRent2br", "Rent · 2 Bedroom"),
+                      },
+                      {
+                        key: "rent3br" as const,
+                        icon: <Building2 size={14} color="#8F5A3C" />,
+                        label: t("countryPage.colRent3br", "Rent · 3 Bedroom"),
+                      },
+                      {
+                        key: "groceries" as const,
+                        icon: <ShoppingCart size={14} color="#6BAF7A" />,
+                        label: t("countryPage.colGroceries", "Groceries"),
+                      },
+                      {
+                        key: "dining" as const,
+                        icon: <UtensilsCrossed size={14} color="#D4A05A" />,
+                        label: t("countryPage.colDining", "Dining Out"),
+                      },
+                      {
+                        key: "transport" as const,
+                        icon: <Bus size={14} color="#7BACC8" />,
+                        label: t("countryPage.colTransport", "Transport"),
+                      },
+                      {
+                        key: "utilities" as const,
+                        icon: <Zap size={14} color="#DDAA44" />,
+                        label: t(
+                          "countryPage.colUtilities",
+                          "Utilities & Internet",
+                        ),
+                      },
+                      {
+                        key: "coworking" as const,
+                        icon: <Laptop size={14} color="#8888CC" />,
+                        label: t("countryPage.colCoworking", "Coworking"),
+                      },
+                      {
+                        key: "healthInsurance" as const,
+                        icon: <Heart size={14} color="#CC6666" />,
+                        label: t(
+                          "countryPage.colHealthInsurance",
+                          "Health Insurance",
+                        ),
+                      },
+                    ] as const
+                  ).map(({ key, icon, label }) => {
+                    const val = c.costOfLiving![key];
+                    if (val === null || val === undefined) return null;
+                    return (
+                      <div
+                        key={key}
+                        style={{
+                          backgroundColor: "#111111",
+                          borderRadius: "8px",
+                          border: "1px solid #1E1E1E",
+                          padding: "16px",
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "6px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                          }}
+                        >
+                          {icon}
+                          <span
+                            style={{
+                              fontFamily: "IBM Plex Mono, monospace",
+                              fontSize: "20px",
+                              fontWeight: 700,
+                              color: "#E8E9EB",
+                            }}
+                          >
+                            ${val.toLocaleString()}
+                          </span>
+                        </div>
+                        <span
+                          style={{
+                            fontFamily: "Geist, sans-serif",
+                            fontSize: "10px",
+                            color: "#555555",
+                          }}
+                        >
+                          {label}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
 
           {/* ── Climate Data ── */}
           {c.climateData && (

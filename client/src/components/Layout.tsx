@@ -79,7 +79,7 @@ export function Layout({ children, activePage }: LayoutProps) {
   };
   return (
     <div
-      className="min-h-screen text-slate-100"
+      className="min-h-screen text-slate-100 flex flex-col"
       style={{ backgroundColor: "var(--color-bg)" }}
     >
       <header
@@ -631,7 +631,9 @@ export function Layout({ children, activePage }: LayoutProps) {
 
       <main
         className={
-          activeView === "compare" ? "" : "max-w-7xl mx-auto px-4 py-4 md:py-6"
+          activeView === "compare" || pathname.endsWith("/budget-matcher")
+            ? ""
+            : "max-w-7xl mx-auto px-4 py-4 md:py-6"
         }
       >
         {children}

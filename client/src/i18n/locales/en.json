@@ -222,6 +222,20 @@
     "performanceBreakdown": "Performance breakdown",
     "categoriesSubtitle": "{{count}} categories · {{name}}",
     "annualAverages": "Annual averages",
+    "costOfLivingSection": "Cost of Living",
+    "costOfLivingSubtitle": "USD / month · single nomad",
+    "colTotalBasic": "Basic Budget",
+    "colTotalComfortable": "Comfortable Budget",
+    "colRentMajorCity": "Rent · Major City",
+    "colRentSmallerCity": "Rent · Smaller City",
+    "colRent2br": "Rent · 2 Bedroom",
+    "colRent3br": "Rent · 3 Bedroom",
+    "colGroceries": "Groceries",
+    "colDining": "Dining Out",
+    "colTransport": "Transport",
+    "colUtilities": "Utilities & Internet",
+    "colCoworking": "Coworking",
+    "colHealthInsurance": "Health Insurance",
     "climateDataSection": "Climate data",
     "annualMeanTemp": "Annual Mean Temp",
     "annualPrecipitation": "Annual Precipitation",
@@ -515,14 +529,29 @@
     "budgetLabel": "Monthly Budget",
     "perMonth": "/ month",
     "housing": {
-      "label": "Housing",
-      "center": "City Center",
-      "outside": "Outside Center"
+      "label": "Location",
+      "majorCity": "Major City",
+      "smallerCity": "Region / Smaller City"
     },
+    "household": {
+      "label": "Household"
+    },
+    "people": {
+      "label": "People"
+    },
+    "bedrooms": {
+      "label": "Apartment",
+      "1": "1 BR",
+      "2": "2 BR",
+      "3": "3 BR"
+    },
+    "lifestyleProfile": "LIFESTYLE PROFILE",
     "settings": "Settings",
-    "qualityBlend": "Quality Blend",
-    "pureAffordability": "Afford.",
-    "qualityFocus": "Quality",
+    "qualityBlend": "Quality blend",
+    "qualityBlendTooltip": "Controls the balance between pure cost-of-living affordability and overall country quality (safety, healthcare, internet, infrastructure). At 0% only price matters; at 100% only quality matters.",
+    "pureAffordability": "Pure Affordability",
+    "qualityFocus": "Country Quality",
+    "blendHint": "Balances lowest cost vs. highest-quality destinations",
     "categoryWeights": "Category Weights",
     "categories": {
       "housing": "Housing",
@@ -538,6 +567,9 @@
     "countriesFound": "{{count}} countries",
     "noResults": "No countries with cost data available",
     "loading": "Loading...",
-    "budgetLine": "Budget"
+    "budgetLine": "Budget",
+    "monthlyBreakdown": "Monthly breakdown",
+    "surplus": "surplus",
+    "comfortScore": "Comfort score"
   }
 }

@@ -210,6 +210,7 @@ export function CountryCard({
             backgroundColor: "#111113",
           }}
         >
+          <ScoreBreakdown country={country} />
           <Link
             to={`${langPrefix}/country/${country.code.toLowerCase()}`}
             className="w-full flex items-center justify-center gap-2 transition-colors"
@@ -224,14 +225,13 @@ export function CountryCard({
               fontWeight: 500,
               color: "var(--color-accent-dim)",
               textDecoration: "none",
-              marginBottom: "16px",
+              marginTop: "16px",
             }}
             onClick={(e) => e.stopPropagation()}
           >
             <User size={14} />
             {t("countryPage.viewProfile", "View Country Details")}
           </Link>
-          <ScoreBreakdown country={country} />
         </div>
       )}
     </div>

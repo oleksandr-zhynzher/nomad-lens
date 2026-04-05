@@ -222,6 +222,20 @@
     "performanceBreakdown": "Аналіз показників",
     "categoriesSubtitle": "{{count}} категорії · {{name}}",
     "annualAverages": "Річні середні",
+    "costOfLivingSection": "Вартість життя",
+    "costOfLivingSubtitle": "USD / місяць · один номад",
+    "colTotalBasic": "Базовий бюджет",
+    "colTotalComfortable": "Комфортний бюджет",
+    "colRentMajorCity": "Оренда · Велике місто",
+    "colRentSmallerCity": "Оренда · Менше місто",
+    "colRent2br": "Оренда · 2 кімнати",
+    "colRent3br": "Оренда · 3 кімнати",
+    "colGroceries": "Продукти",
+    "colDining": "Їжа в ресторанах",
+    "colTransport": "Транспорт",
+    "colUtilities": "Комунальні та інтернет",
+    "colCoworking": "Коворкінг",
+    "colHealthInsurance": "Медичне страхування",
     "climateDataSection": "Кліматичні дані",
     "annualMeanTemp": "Середня температура",
     "annualPrecipitation": "Річна кількість опадів",
@@ -515,14 +529,29 @@
     "budgetLabel": "Місячний бюджет",
     "perMonth": "/ місяць",
     "housing": {
-      "label": "Житло",
-      "center": "Центр міста",
-      "outside": "За межами центру"
+      "label": "Розташування",
+      "majorCity": "Велике місто",
+      "smallerCity": "Регіон / Менше місто"
     },
+    "household": {
+      "label": "Сім’я"
+    },
+    "people": {
+      "label": "Люди"
+    },
+    "bedrooms": {
+      "label": "Квартира",
+      "1": "1 кімн.",
+      "2": "2 кімн.",
+      "3": "3 кімн."
+    },
+    "lifestyleProfile": "ПРОФІЛЬ СТИЛЮ ЖИТТЯ",
     "settings": "Налаштування",
     "qualityBlend": "Баланс якості",
-    "pureAffordability": "Ціна",
-    "qualityFocus": "Якість",
+    "qualityBlendTooltip": "Регулює баланс між чистою доступністю за вартістю життя та загальною якістю країни (безпека, медицина, інтернет, інфраструктура). При 0% враховується лише ціна; при 100% — лише якість.",
+    "pureAffordability": "Мінімум витрат",
+    "qualityFocus": "Якість країни",
+    "blendHint": "Баланс між низькою вартістю та якістю життя",
     "categoryWeights": "Ваги категорій",
     "categories": {
       "housing": "Житло",
@@ -538,6 +567,9 @@
     "countriesFound": "{{count}} країн",
     "noResults": "Немає країн з даними про вартість життя",
     "loading": "Завантаження...",
-    "budgetLine": "Бюджет"
+    "budgetLine": "Бюджет",
+    "monthlyBreakdown": "Місячна розбивка",
+    "surplus": "залишок",
+    "comfortScore": "Оцінка комфорту"
   }
 }
