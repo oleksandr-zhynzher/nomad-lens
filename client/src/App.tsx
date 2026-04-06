@@ -870,6 +870,7 @@ export default function App() {
               onToggleExpanded={(code) =>
                 setExpandedCode((c) => (c === code ? null : code))
               }
+              showAll={search.trim().length > 0}
             />
           </div>
         </main>

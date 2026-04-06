@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import type { RankedCountry } from "../utils/types";
 import { CountryCard } from "./CountryCard";
@@ -13,6 +13,8 @@ interface CountryListProps {
   highlightedCode?: string | null;
   expandedCode?: string | null;
   onToggleExpanded?: (code: string) => void;
+  /** When true (e.g. active search), all items are rendered without pagination */
+  showAll?: boolean;
 }
 
 export function CountryList({
@@ -23,6 +25,7 @@ export function CountryList({
   highlightedCode,
   expandedCode,
   onToggleExpanded,
+  showAll = false,
 }: CountryListProps) {
   const { t } = useTranslation();
 
@@ -36,6 +39,29 @@ export function CountryList({
   if (prevRanked !== ranked) {
     setPagination({ prevRanked: ranked, visibleCount: PAGE_SIZE });
   }
+
+  // Sentinel element observed to auto-load the next page on scroll
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (showAll) return;
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setPagination((s) =>
+            s.visibleCount < s.prevRanked.length
+              ? { ...s, visibleCount: s.visibleCount + PAGE_SIZE }
+              : s,
+          );
+        }
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [showAll, ranked]);
 
   if (loading) {
     return (
@@ -96,8 +122,8 @@ export function CountryList({
     );
   }
 
-  const visible = ranked.slice(0, visibleCount);
-  const hasMore = visibleCount < ranked.length;
+  const visible = showAll ? ranked : ranked.slice(0, visibleCount);
+  const hasMore = !showAll && visibleCount < ranked.length;
 
   return (
     <div className="flex flex-col">
@@ -117,31 +143,8 @@ export function CountryList({
           onToggle={() => onToggleExpanded?.(r.country.code)}
         />
       ))}
-      {hasMore && (
-        <button
-          onClick={() =>
-            setPagination((s) => ({
-              ...s,
-              visibleCount: s.visibleCount + PAGE_SIZE,
-            }))
-          }
-          className="w-full py-3 transition-colors"
-          style={{
-            backgroundColor: "transparent",
-            border: "1px solid #252525",
-            borderTop: "none",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "13px",
-            color: "#555555",
-            cursor: "pointer",
-          }}
-        >
-          {t("countryList.showMore", {
-            shown: visible.length,
-            total: ranked.length,
-          })}
-        </button>
-      )}
+      {/* Invisible sentinel — entering the viewport triggers the next page load */}
+      {hasMore && <div ref={sentinelRef} style={{ height: "1px" }} />}
     </div>
   );
 }

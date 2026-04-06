@@ -157,8 +157,7 @@
   "countryList": {
     "noResults": "Ни одна страна не соответствует вашему запросу.",
     "retry": "Повторить",
-    "count": "{{count}} стран",
-    "showMore": "Показать больше ({{shown}} из {{total}})"
+    "count": "{{count}} стран"
   },
   "countryPage": {
     "notFound": "Страна не найдена",

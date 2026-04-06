@@ -157,8 +157,7 @@
   "countryList": {
     "noResults": "No countries match your search.",
     "retry": "Retry",
-    "count": "{{count}} countries",
-    "showMore": "Show more ({{shown}} of {{total}})"
+    "count": "{{count}} countries"
   },
   "countryPage": {
     "notFound": "Country not found",
