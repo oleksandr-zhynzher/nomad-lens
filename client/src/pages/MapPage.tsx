@@ -37,7 +37,7 @@ export function MapPage() {
       <div className="px-2 py-2 md:px-6 md:py-6">
         <div
           className={`grid gap-4 md:gap-6 ${
-            showWeights ? "grid-cols-1 lg:grid-cols-[300px_1fr]" : "grid-cols-1"
+            showWeights ? "grid-cols-1 lg:grid-cols-[340px_1fr]" : "grid-cols-1"
           }`}
         >
           {showWeights && (
