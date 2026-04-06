@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { RankedCountry } from "../utils/types";
 import { CountryCard } from "./CountryCard";
+
+const PAGE_SIZE = 50;
 
 interface CountryListProps {
   ranked: RankedCountry[];
@@ -22,6 +25,18 @@ export function CountryList({
   onToggleExpanded,
 }: CountryListProps) {
   const { t } = useTranslation();
+
+  // Track visible count and reset it whenever the ranked list identity changes.
+  // Storing prevRanked in state is the React-recommended pattern for deriving
+  // state from props without a useEffect.
+  const [{ prevRanked, visibleCount }, setPagination] = useState({
+    prevRanked: ranked,
+    visibleCount: PAGE_SIZE,
+  });
+  if (prevRanked !== ranked) {
+    setPagination({ prevRanked: ranked, visibleCount: PAGE_SIZE });
+  }
+
   if (loading) {
     return (
       <div className="flex flex-col gap-2">
@@ -81,6 +96,9 @@ export function CountryList({
     );
   }
 
+  const visible = ranked.slice(0, visibleCount);
+  const hasMore = visibleCount < ranked.length;
+
   return (
     <div className="flex flex-col">
       <p
@@ -89,7 +107,7 @@ export function CountryList({
       >
         {t("countryList.count", { count: ranked.length })}
       </p>
-      {ranked.map((r, index) => (
+      {visible.map((r, index) => (
         <CountryCard
           key={r.country.code}
           ranked={r}
@@ -99,6 +117,31 @@ export function CountryList({
           onToggle={() => onToggleExpanded?.(r.country.code)}
         />
       ))}
+      {hasMore && (
+        <button
+          onClick={() =>
+            setPagination((s) => ({
+              ...s,
+              visibleCount: s.visibleCount + PAGE_SIZE,
+            }))
+          }
+          className="w-full py-3 transition-colors"
+          style={{
+            backgroundColor: "transparent",
+            border: "1px solid #252525",
+            borderTop: "none",
+            fontFamily: "Inter, sans-serif",
+            fontSize: "13px",
+            color: "#555555",
+            cursor: "pointer",
+          }}
+        >
+          {t("countryList.showMore", {
+            shown: visible.length,
+            total: ranked.length,
+          })}
+        </button>
+      )}
     </div>
   );
 }
