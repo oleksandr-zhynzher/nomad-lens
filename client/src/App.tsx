@@ -251,13 +251,43 @@ export default function App() {
         {mobileParamsOpen && (
           <div
             className="md:hidden fixed inset-0 z-50 flex flex-col"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t("mobileSheet.weightsAndPreferences")}
             onClick={() => setMobileParamsOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                setMobileParamsOpen(false);
+                return;
+              }
+              if (e.key !== "Tab") return;
+              const sheet = e.currentTarget.querySelector<HTMLElement>(
+                "[data-mobile-sheet]",
+              );
+              if (!sheet) return;
+              const focusable = Array.from(
+                sheet.querySelectorAll<HTMLElement>(
+                  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+                ),
+              ).filter((el) => !el.hasAttribute("disabled"));
+              if (focusable.length === 0) return;
+              const first = focusable[0];
+              const last = focusable[focusable.length - 1];
+              if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+              } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+              }
+            }}
           >
             <div
               className="flex-1"
               style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
             />
             <div
+              data-mobile-sheet
               className="relative flex flex-col"
               style={{
                 height: "85vh",
