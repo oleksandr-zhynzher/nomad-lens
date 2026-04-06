@@ -95,7 +95,7 @@ export function BudgetCountryCard({
           {/* Flag */}
           <img
             src={country.flagUrl}
-            alt=""
+            alt={locC.name}
             style={{
               width: "24px",
               height: "16px",
