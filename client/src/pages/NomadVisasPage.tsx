@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -7,6 +7,9 @@ import {
   ChevronUp,
   ExternalLink,
   ChevronsUpDown,
+  GitCompare,
+  X,
+  ArrowRight,
 } from "lucide-react";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
@@ -60,6 +63,42 @@ export function NomadVisasPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortField, setSortField] = useState<SortField>("country");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+
+  // Compare mode
+  const [compareMode, setCompareMode] = useState(false);
+  const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
+
+  const toggleSelect = (code: string) =>
+    setSelectedCodes((prev) => {
+      const next = new Set(prev);
+      if (next.has(code)) next.delete(code);
+      else next.add(code);
+      return next;
+    });
+
+  const exitCompareMode = () => {
+    setCompareMode(false);
+    setSelectedCodes(new Set());
+  };
+
+  const handleCompare = () => {
+    if (selectedCodes.size < 2) return;
+    navigate(`${langPrefix}/compare?c=${Array.from(selectedCodes).join(",")}`);
+  };
+
+  // Sticky search bar — measure its height so thead sticks just below it
+  const searchBarRef = useRef<HTMLDivElement>(null);
+  const [theadTop, setTheadTop] = useState(136); // 56 nav + ~80 search bar
+
+  useEffect(() => {
+    const el = searchBarRef.current;
+    if (!el) return;
+    const update = () => setTheadTop(56 + el.offsetHeight);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   // All countries with nomad visas (for stats)
   const allVisaCountries = useMemo(
@@ -247,12 +286,19 @@ export function NomadVisasPage() {
         )}
       </HeroSection>
 
-      {/* Search */}
+      {/* Sentinel for sticky detection (not needed for logic here, reserved) */}
+      <div style={{ height: 0 }} />
+
+      {/* Sticky search + compare bar */}
       <div
+        ref={searchBarRef}
         style={{
+          position: "sticky",
+          top: "56px",
+          zIndex: 20,
           backgroundColor: "#0D0D0F",
-          padding: "16px 16px",
-          borderBottom: "1px solid #141414",
+          padding: "12px 16px",
+          borderBottom: "1px solid #1a1a1a",
         }}
       >
         <div
@@ -261,16 +307,17 @@ export function NomadVisasPage() {
             margin: "0 auto",
             display: "flex",
             alignItems: "center",
-            gap: "12px",
+            gap: "10px",
           }}
         >
+          {/* Search input */}
           <div style={{ position: "relative", flex: 1 }}>
             <Search
-              size={18}
-              color="#666666"
+              size={16}
+              color="#555555"
               style={{
                 position: "absolute",
-                left: "14px",
+                left: "12px",
                 top: "50%",
                 transform: "translateY(-50%)",
                 pointerEvents: "none",
@@ -283,19 +330,139 @@ export function NomadVisasPage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
                 width: "100%",
-                height: "48px",
-                paddingLeft: "42px",
-                paddingRight: "14px",
+                height: "40px",
+                paddingLeft: "36px",
+                paddingRight: searchQuery ? "36px" : "12px",
                 fontFamily: "Inter, sans-serif",
                 fontSize: "14px",
                 color: "#FFFFFF",
-                backgroundColor: "#1A1A1A",
-                border: "1px solid #252525",
+                backgroundColor: "#161616",
+                border: "1px solid #1E1E22",
                 borderRadius: "6px",
                 outline: "none",
               }}
             />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                style={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: "22px",
+                  height: "22px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "3px",
+                  border: "none",
+                  cursor: "pointer",
+                  backgroundColor: "#2A2A2A",
+                  color: "#CCCCCC",
+                }}
+                aria-label="Clear search"
+              >
+                <X size={12} />
+              </button>
+            )}
           </div>
+
+          {/* Compare mode controls */}
+          {compareMode ? (
+            <>
+              {/* Compare CTA */}
+              <button
+                onClick={handleCompare}
+                disabled={selectedCodes.size < 2}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  height: "40px",
+                  paddingLeft: "14px",
+                  paddingRight: "14px",
+                  borderRadius: "6px",
+                  border: "none",
+                  cursor: selectedCodes.size < 2 ? "default" : "pointer",
+                  backgroundColor:
+                    selectedCodes.size < 2 ? "#1E1E1E" : "var(--color-accent)",
+                  color: selectedCodes.size < 2 ? "#444444" : "#FFFFFF",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  whiteSpace: "nowrap",
+                  transition: "all 0.15s ease",
+                  flexShrink: 0,
+                }}
+              >
+                <GitCompare size={15} />
+                {t("nomadVisasPage.compareSelected", "Compare")}
+                {selectedCodes.size > 0 && (
+                  <span
+                    style={{
+                      backgroundColor:
+                        selectedCodes.size < 2
+                          ? "#333333"
+                          : "rgba(255,255,255,0.25)",
+                      borderRadius: "10px",
+                      padding: "1px 7px",
+                      fontSize: "12px",
+                    }}
+                  >
+                    {selectedCodes.size}
+                  </span>
+                )}
+                {selectedCodes.size >= 2 && <ArrowRight size={13} />}
+              </button>
+
+              {/* Exit compare mode */}
+              <button
+                onClick={exitCompareMode}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "6px",
+                  border: "1px solid #2A2A2A",
+                  cursor: "pointer",
+                  backgroundColor: "transparent",
+                  color: "#666666",
+                  flexShrink: 0,
+                }}
+                aria-label="Exit compare mode"
+              >
+                <X size={16} />
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => setCompareMode(true)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                height: "40px",
+                paddingLeft: "14px",
+                paddingRight: "14px",
+                borderRadius: "6px",
+                border: "1px solid #2A2A2A",
+                cursor: "pointer",
+                backgroundColor: "transparent",
+                color: "#888888",
+                fontFamily: "Inter, sans-serif",
+                fontSize: "13px",
+                fontWeight: 500,
+                whiteSpace: "nowrap",
+                flexShrink: 0,
+              }}
+            >
+              <GitCompare size={15} />
+              {t("nomadVisasPage.compareMode", "Compare")}
+            </button>
+          )}
         </div>
       </div>
 
@@ -342,12 +509,22 @@ export function NomadVisasPage() {
             <thead
               style={{
                 position: "sticky",
-                top: "56px",
+                top: `${theadTop}px`,
                 zIndex: 10,
                 backgroundColor: "var(--color-bg)",
               }}
             >
               <tr style={{ borderBottom: "2px solid #333333" }}>
+                {/* Checkbox column — compare mode only */}
+                {compareMode && (
+                  <th
+                    style={{
+                      padding: "16px 4px 16px 12px",
+                      width: "36px",
+                      backgroundColor: "var(--color-bg)",
+                    }}
+                  />
+                )}
                 <th
                   onClick={() => handleSort("country")}
                   style={{
@@ -501,34 +678,66 @@ export function NomadVisasPage() {
                   TAX_STATUS_COLORS.standard;
                 const isHighlighted = highlightCode === country.code;
 
+                const isSelected = selectedCodes.has(country.code);
+
                 return (
                   <tr
                     key={country.code}
                     data-country-code={country.code.toLowerCase()}
                     style={{
                       borderBottom: "1px solid #1E1E1E",
-                      backgroundColor: isHighlighted
-                        ? "#1A1208"
-                        : "transparent",
-                      transition: "background-color 0.2s",
+                      backgroundColor: isSelected
+                        ? "#1A2A1A"
+                        : isHighlighted
+                          ? "#1A1208"
+                          : "transparent",
+                      transition: "background-color 0.15s",
                       cursor: "pointer",
                     }}
-                    onClick={() =>
-                      navigate(
-                        `${langPrefix}/country/${country.code.toLowerCase()}`,
-                      )
-                    }
+                    onClick={() => {
+                      if (compareMode) {
+                        toggleSelect(country.code);
+                      } else {
+                        navigate(
+                          `${langPrefix}/country/${country.code.toLowerCase()}`,
+                        );
+                      }
+                    }}
                     onMouseEnter={(e) => {
-                      if (!isHighlighted) {
+                      if (!isHighlighted && !isSelected) {
                         e.currentTarget.style.backgroundColor = "#1A1A1A";
                       }
                     }}
                     onMouseLeave={(e) => {
-                      if (!isHighlighted) {
+                      if (!isHighlighted && !isSelected) {
                         e.currentTarget.style.backgroundColor = "transparent";
                       }
                     }}
                   >
+                    {/* Checkbox — compare mode only */}
+                    {compareMode && (
+                      <td
+                        style={{ padding: "16px 4px 16px 12px", width: "36px" }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleSelect(country.code);
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => toggleSelect(country.code)}
+                          style={{
+                            cursor: "pointer",
+                            accentColor: "var(--color-accent)",
+                            width: "16px",
+                            height: "16px",
+                          }}
+                          aria-label={`Select ${localizeCountry(country, lang).name}`}
+                        />
+                      </td>
+                    )}
+
                     {/* Country */}
                     <td style={{ padding: "16px 12px" }}>
                       <Link
