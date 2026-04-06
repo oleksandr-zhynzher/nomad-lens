@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
+import { DATA_SOURCE_KEYS } from "../utils/dataSources";
 
 interface DataSourceCardProps {
   name: string;
@@ -110,15 +111,6 @@ function DataSourceCard({
     </div>
   );
 }
-
-/** Rows of translation keys — names/categories/etc. come from i18n */
-const DATA_SOURCE_KEYS: string[][] = [
-  ["worldBank", "who"],
-  ["undp", "itu"],
-  ["yaleEpi", "iep"],
-  ["worldHappiness", "ef"],
-  ["fao", "ndGain"],
-];
 
 export function DataSourcesPage() {
   const { t } = useTranslation();

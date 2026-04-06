@@ -20,6 +20,7 @@ import { useLangPrefix } from "./hooks/useLangPrefix";
 import { useWeightState } from "./hooks/useWeightState";
 import { localizeCountry } from "./utils/localize";
 import { VISIBLE_CATEGORY_KEYS, AI_CATEGORY_KEYS } from "./utils/types";
+import { DATA_SOURCE_KEYS } from "./utils/dataSources";
 import "./index.css";
 
 export default function App() {
@@ -565,7 +566,7 @@ export default function App() {
                           lineHeight: "1",
                         }}
                       >
-                        10
+                        {DATA_SOURCE_KEYS.flat().length}
                       </div>
                       <div
                         style={{
