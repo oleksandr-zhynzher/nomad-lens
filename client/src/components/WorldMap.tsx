@@ -41,6 +41,7 @@ export function WorldMap({
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState<[number, number]>([0, 20]);
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
+  const [geoLoading, setGeoLoading] = useState(true);
 
   // Build alpha2 → ranked country map for fast lookup
   const scoreByAlpha2: Map<string, RankedCountry> = new Map(
@@ -105,6 +106,23 @@ export function WorldMap({
 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
+      {geoLoading && (
+        <div
+          className="absolute inset-0 z-20 flex items-center justify-center"
+          style={{ backgroundColor: "#0F1114" }}
+        >
+          <div
+            className="animate-spin"
+            style={{
+              width: "32px",
+              height: "32px",
+              border: "3px solid #2A2A2A",
+              borderTopColor: "var(--color-accent-dim)",
+              borderRadius: "50%",
+            }}
+          />
+        </div>
+      )}
       {/* Zoom controls */}
       <div
         className="absolute top-2 left-2 md:top-3 md:left-3 z-10 flex flex-col overflow-hidden"
@@ -221,8 +239,9 @@ export function WorldMap({
           <Sphere fill="#0F1114" stroke="#1A1A1A" strokeWidth={0.5} />
           <Graticule stroke="#1A1A1A" strokeWidth={0.3} />
           <Geographies geography={GEO_URL}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
+            {({ geographies, loading }) => {
+              if (!loading && geoLoading) setGeoLoading(false);
+              return geographies.map((geo) => {
                 const alpha2 = geoToAlpha2(geo);
                 const isSelected = alpha2 === selectedCode;
                 return (
@@ -248,8 +267,8 @@ export function WorldMap({
                     onClick={() => handleClick(geo)}
                   />
                 );
-              })
-            }
+              });
+            }}
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
