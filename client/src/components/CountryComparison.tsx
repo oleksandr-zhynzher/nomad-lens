@@ -325,7 +325,18 @@ export function CountryComparison({
             onClick={() => {
               if (!dropdownOpen && addBtnRef.current) {
                 const rect = addBtnRef.current.getBoundingClientRect();
-                setDropdownPos({ top: rect.bottom + 8, left: rect.left });
+                const dropdownWidth = 320;
+                const dropdownMaxHeight = 370;
+                const left = Math.max(
+                  8,
+                  Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
+                );
+                const fitsBelow =
+                  rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
+                const top = fitsBelow
+                  ? rect.bottom + 8
+                  : rect.top - dropdownMaxHeight - 8;
+                setDropdownPos({ top, left });
               }
               setDropdownOpen((p) => !p);
             }}
