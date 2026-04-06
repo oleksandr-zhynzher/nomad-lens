@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   House,
   ShoppingCart,
@@ -13,6 +13,7 @@ import {
   SlidersHorizontal,
   X,
   Info,
+  Search,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -24,6 +25,8 @@ import { useCountries } from "../hooks/useCountries";
 import { useBudgetState } from "../hooks/useBudgetState";
 import type { BudgetCategoryWeights } from "../hooks/useBudgetState";
 import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
+import { COST_COLORS } from "../utils/budgetColors";
+import { localizeCountry } from "../utils/localize";
 
 const BUDGET_CATEGORIES: {
   key: keyof BudgetCategoryWeights;
@@ -90,12 +93,15 @@ function ToggleGroup<T extends string | number>({
 }
 
 export function BudgetMatcherPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const { countries, loading } = useCountries();
   const bs = useBudgetState();
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const matches = useBudgetMatcher(
     countries,
@@ -106,6 +112,15 @@ export function BudgetMatcherPage() {
     bs.categoryWeights,
     bs.qualityBlend,
   );
+
+  const query = search.trim().toLowerCase();
+  const filteredMatches = query
+    ? matches.filter((m) =>
+        localizeCountry(m.country, i18n.language)
+          .name.toLowerCase()
+          .includes(query),
+      )
+    : matches;
 
   const budgetPct = ((bs.budget - 300) / 9700) * 100;
 
@@ -980,9 +995,92 @@ export function BudgetMatcherPage() {
               </div>
             </div>
 
+            {/* ── Sentinel + sticky search bar ──────────────── */}
+            <div ref={sentinelRef} style={{ height: 0 }} />
+            <div
+              className="sticky z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-3"
+              style={{
+                top: "56px",
+                backgroundColor: "#0F1114",
+                borderBottom: "1px solid #1a1a1a",
+              }}
+            >
+              {/* Search input */}
+              <div className="relative mb-3">
+                <Search
+                  className="absolute left-3 top-1/2 -translate-y-1/2"
+                  size={16}
+                  style={{ color: "#555555", pointerEvents: "none" }}
+                />
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  placeholder={t("search.placeholder", "Search countries…")}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pl-9 pr-9 py-2.5 rounded-md focus:outline-none"
+                  style={{
+                    backgroundColor: "#161616",
+                    border: "1px solid #1E1E22",
+                    color: "#FFFFFF",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "14px",
+                  }}
+                />
+                {search.length > 0 && (
+                  <button
+                    onClick={() => setSearch("")}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center"
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      borderRadius: "3px",
+                      border: "none",
+                      cursor: "pointer",
+                      backgroundColor: "#2A2A2A",
+                      color: "#CCCCCC",
+                    }}
+                    aria-label="Clear search"
+                  >
+                    <X size={13} />
+                  </button>
+                )}
+              </div>
+
+              {/* Color legend — always visible below search */}
+              <Link
+                to={`${langPrefix}/budget-categories`}
+                className="flex flex-wrap gap-x-4 gap-y-1 px-0.5"
+                style={{ textDecoration: "none" }}
+              >
+                {BUDGET_CATEGORIES.map(({ key }) => (
+                  <div key={key} className="flex items-center gap-1.5">
+                    <div
+                      style={{
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "50%",
+                        backgroundColor: COST_COLORS[key] ?? "#555",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "11px",
+                        color: "#666666",
+                      }}
+                    >
+                      {t(`budget.categories.${key}`)}
+                    </span>
+                  </div>
+                ))}
+              </Link>
+            </div>
+
             {/* ── Results ───────────────────────────────────── */}
             {loading ? (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 mt-4">
                 {Array.from({ length: 8 }).map((_, i) => (
                   <div
                     key={i}
@@ -1014,69 +1112,35 @@ export function BudgetMatcherPage() {
                     color: "#666666",
                   }}
                 >
-                  {t("countryList.count", { count: matches.length })}
+                  {t("countryList.count", { count: filteredMatches.length })}
                 </p>
-                {/* Color legend */}
-                <Link
-                  to={`${langPrefix}/budget-categories`}
-                  className="flex flex-wrap gap-x-4 gap-y-1 mb-3 px-1"
-                  style={{ marginTop: "-4px", textDecoration: "none" }}
-                >
-                  {BUDGET_CATEGORIES.map(({ key }) => (
-                    <div key={key} className="flex items-center gap-1.5">
-                      <div
-                        style={{
-                          width: "8px",
-                          height: "8px",
-                          borderRadius: "50%",
-                          backgroundColor:
-                            {
-                              housing: "#8F5A3C",
-                              groceries: "#6B9E6B",
-                              dining: "#C2956A",
-                              transport: "#5B8FA8",
-                              utilities: "#7A9B6B",
-                              coworking: "#8B7BAD",
-                              healthInsurance: "#C07A9B",
-                            }[key] ?? "#555",
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "11px",
-                          color: "#666666",
-                        }}
-                      >
-                        {t(`budget.categories.${key}`)}
-                      </span>
-                    </div>
-                  ))}
-                </Link>
-                {matches.map((m, i) => (
-                  <BudgetCountryCard
-                    key={m.country.code}
-                    match={m}
-                    budget={bs.budget}
-                    rank={i + 1}
-                    expanded={expandedCode === m.country.code}
-                    onToggle={() =>
-                      setExpandedCode((prev) =>
-                        prev === m.country.code ? null : m.country.code,
-                      )
-                    }
-                  />
-                ))}
-                <p
-                  className="text-xs text-right pr-1 my-4"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    color: "#666666",
-                  }}
-                >
-                  {t("countryList.count", { count: matches.length })}
-                </p>
+                {filteredMatches.length === 0 ? (
+                  <p
+                    className="text-center py-20"
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: 14,
+                      color: "#666666",
+                    }}
+                  >
+                    {t("countryList.noResults")}
+                  </p>
+                ) : (
+                  filteredMatches.map((m, i) => (
+                    <BudgetCountryCard
+                      key={m.country.code}
+                      match={m}
+                      budget={bs.budget}
+                      rank={i + 1}
+                      expanded={expandedCode === m.country.code}
+                      onToggle={() =>
+                        setExpandedCode((prev) =>
+                          prev === m.country.code ? null : m.country.code,
+                        )
+                      }
+                    />
+                  ))
+                )}
               </div>
             )}
           </div>
