@@ -164,6 +164,8 @@ export function CountryCard({
               <Tooltip key={key} content={tooltipContent} side="top">
                 <div
                   className="rounded-full cursor-default"
+                  role="img"
+                  aria-label={`${label}: ${val !== null ? val.toFixed(1) : "N/A"}`}
                   style={{
                     width: "12px",
                     height: "12px",
