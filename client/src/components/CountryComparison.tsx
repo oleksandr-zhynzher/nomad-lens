@@ -206,160 +206,169 @@ export function CountryComparison({
 
   return (
     <div>
-      {/* Country selector — horizontal scroll */}
-      <div
-        className="flex items-stretch gap-3 pb-2"
-        style={{ overflowX: "auto", scrollbarWidth: "thin" }}
-      >
-        {selectedCountries.map((slot) => {
-          const score = computeScore(slot.country, weights);
-          const sColor = scoreColour(score);
-          return (
-            <div
-              key={slot.country.code}
-              className="shrink-0 w-[140px] md:w-[180px]"
-              onClick={() =>
-                navigate(
-                  `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
-                )
-              }
-              style={{ cursor: "pointer" }}
-            >
+      {/* Country selector — horizontal scroll with fade hint */}
+      <div className="relative">
+        <div
+          className="flex items-stretch gap-3 pb-2"
+          style={{ overflowX: "auto", scrollbarWidth: "thin" }}
+        >
+          {selectedCountries.map((slot) => {
+            const score = computeScore(slot.country, weights);
+            const sColor = scoreColour(score);
+            return (
               <div
-                className="relative rounded-lg p-4 flex flex-col items-center gap-3"
-                style={{
-                  backgroundColor: "#1A1A1C",
-                  border: "1px solid #2E2E30",
-                  height: "100%",
-                }}
+                key={slot.country.code}
+                className="shrink-0 w-[140px] md:w-[180px]"
+                onClick={() =>
+                  navigate(
+                    `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
+                  )
+                }
+                style={{ cursor: "pointer" }}
               >
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleRemove(slot.index);
-                  }}
-                  className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
+                <div
+                  className="relative rounded-lg p-4 flex flex-col items-center gap-3"
                   style={{
-                    opacity: 0.6,
-                    color: "#FFFFFF",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "11px",
+                    backgroundColor: "#1A1A1C",
+                    border: "1px solid #2E2E30",
+                    height: "100%",
                   }}
                 >
-                  <X size={14} />
-                </button>
-
-                <img
-                  src={slot.country.flagUrl}
-                  alt={localizeCountry(slot.country, lang).name}
-                  className="rounded-full object-cover w-9 h-9"
-                />
-
-                <div className="flex items-center justify-center gap-1.5">
-                  <span
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemove(slot.index);
+                    }}
+                    className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
                     style={{
+                      opacity: 0.6,
+                      color: "#FFFFFF",
                       fontFamily: "Inter, sans-serif",
-                      fontSize: "15px",
-                      fontWeight: 600,
-                      color: "#E8E9EB",
-                      textAlign: "center",
+                      fontSize: "11px",
                     }}
                   >
-                    {localizeCountry(slot.country, lang).name}
-                  </span>
-                  {slot.country.hasNomadVisa && (
-                    <Tooltip
-                      content={t(
-                        "countryDetail.nomadVisa",
-                        "Nomad Visa Available",
-                      )}
-                      side="top"
+                    <X size={14} />
+                  </button>
+
+                  <img
+                    src={slot.country.flagUrl}
+                    alt={localizeCountry(slot.country, lang).name}
+                    className="rounded-full object-cover w-9 h-9"
+                  />
+
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "15px",
+                        fontWeight: 600,
+                        color: "#E8E9EB",
+                        textAlign: "center",
+                      }}
                     >
-                      <Link
-                        to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
-                        style={{
-                          color: "var(--color-accent)",
-                          flexShrink: 0,
-                          lineHeight: 1,
-                          display: "inline-flex",
-                        }}
+                      {localizeCountry(slot.country, lang).name}
+                    </span>
+                    {slot.country.hasNomadVisa && (
+                      <Tooltip
+                        content={t(
+                          "countryDetail.nomadVisa",
+                          "Nomad Visa Available",
+                        )}
+                        side="top"
                       >
-                        <Plane size={13} />
-                      </Link>
-                    </Tooltip>
-                  )}
+                        <Link
+                          to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
+                          style={{
+                            color: "var(--color-accent)",
+                            flexShrink: 0,
+                            lineHeight: 1,
+                            display: "inline-flex",
+                          }}
+                        >
+                          <Plane size={13} />
+                        </Link>
+                      </Tooltip>
+                    )}
+                  </div>
+
+                  <span
+                    className="text-[32px]"
+                    style={{
+                      fontFamily: "Oswald, sans-serif",
+                      fontWeight: 700,
+                      color: sColor,
+                      lineHeight: 1,
+                    }}
+                  >
+                    {score.toFixed(1)}
+                  </span>
+
+                  <span
+                    className="px-2 py-0.5 rounded-full"
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "10px",
+                      color: "#999999",
+                      backgroundColor: "#1C1C1C",
+                      border: "1px solid #2C2C2C",
+                    }}
+                  >
+                    {t(`regions.${regionKey(slot.country.region)}`)}
+                  </span>
                 </div>
-
-                <span
-                  className="text-[32px]"
-                  style={{
-                    fontFamily: "Oswald, sans-serif",
-                    fontWeight: 700,
-                    color: sColor,
-                    lineHeight: 1,
-                  }}
-                >
-                  {score.toFixed(1)}
-                </span>
-
-                <span
-                  className="px-2 py-0.5 rounded-full"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    color: "#999999",
-                    backgroundColor: "#1C1C1C",
-                    border: "1px solid #2C2C2C",
-                  }}
-                >
-                  {t(`regions.${regionKey(slot.country.region)}`)}
-                </span>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
 
-        {/* Add button */}
-        <div ref={addBtnRef} className="shrink-0 w-[140px] md:w-[180px]">
-          <button
-            onClick={() => {
-              if (!dropdownOpen && addBtnRef.current) {
-                const rect = addBtnRef.current.getBoundingClientRect();
-                const dropdownWidth = 320;
-                const dropdownMaxHeight = 370;
-                const left = Math.max(
-                  8,
-                  Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
-                );
-                const fitsBelow =
-                  rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
-                const top = fitsBelow
-                  ? rect.bottom + 8
-                  : rect.top - dropdownMaxHeight - 8;
-                setDropdownPos({ top, left });
-              }
-              setDropdownOpen((p) => !p);
-            }}
-            className="w-full rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
-            style={{
-              backgroundColor: "#141416",
-              border: "1px dashed #252525",
-              minHeight: "180px",
-              cursor: "pointer",
-            }}
-          >
-            <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
-            <span
+          {/* Add button */}
+          <div ref={addBtnRef} className="shrink-0 w-[140px] md:w-[180px]">
+            <button
+              onClick={() => {
+                if (!dropdownOpen && addBtnRef.current) {
+                  const rect = addBtnRef.current.getBoundingClientRect();
+                  const dropdownWidth = 320;
+                  const dropdownMaxHeight = 370;
+                  const left = Math.max(
+                    8,
+                    Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
+                  );
+                  const fitsBelow =
+                    rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
+                  const top = fitsBelow
+                    ? rect.bottom + 8
+                    : rect.top - dropdownMaxHeight - 8;
+                  setDropdownPos({ top, left });
+                }
+                setDropdownOpen((p) => !p);
+              }}
+              className="w-full rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
               style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                color: "#E8E9EB",
+                backgroundColor: "#141416",
+                border: "1px dashed #252525",
+                minHeight: "180px",
+                cursor: "pointer",
               }}
             >
-              {t("compare.addCountry")}
-            </span>
-          </button>
+              <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "12px",
+                  color: "#E8E9EB",
+                }}
+              >
+                {t("compare.addCountry")}
+              </span>
+            </button>
+          </div>
         </div>
+        {/* Right-edge fade — hints at horizontal scrollability on mobile */}
+        <div
+          className="pointer-events-none absolute top-0 right-0 bottom-0 w-12"
+          style={{
+            background: "linear-gradient(to right, transparent, #0F1114)",
+          }}
+        />
       </div>
 
       {/* Dropdown — fixed-positioned under the Add Country card */}
