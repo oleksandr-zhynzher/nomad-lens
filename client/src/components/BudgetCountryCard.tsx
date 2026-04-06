@@ -15,6 +15,7 @@ import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
 import { BudgetBreakdownChart } from "./BudgetBreakdownChart";
+import { COST_COLORS } from "../utils/budgetColors";
 
 function scoreColor(score: number): string {
   if (score >= 70) return "#4CAF50";
@@ -253,37 +254,41 @@ export function BudgetCountryCard({
               [
                 {
                   key: "housing" as const,
-                  icon: <House size={14} color="#C2956A" />,
+                  icon: <House size={14} color={COST_COLORS.housing} />,
                   label: t("budget.categories.housing"),
                 },
                 {
                   key: "groceries" as const,
-                  icon: <ShoppingCart size={14} color="#6BAF7A" />,
+                  icon: (
+                    <ShoppingCart size={14} color={COST_COLORS.groceries} />
+                  ),
                   label: t("budget.categories.groceries"),
                 },
                 {
                   key: "dining" as const,
-                  icon: <UtensilsCrossed size={14} color="#D4A05A" />,
+                  icon: (
+                    <UtensilsCrossed size={14} color={COST_COLORS.dining} />
+                  ),
                   label: t("budget.categories.dining"),
                 },
                 {
                   key: "transport" as const,
-                  icon: <Bus size={14} color="#7BACC8" />,
+                  icon: <Bus size={14} color={COST_COLORS.transport} />,
                   label: t("budget.categories.transport"),
                 },
                 {
                   key: "utilities" as const,
-                  icon: <Zap size={14} color="#DDAA44" />,
+                  icon: <Zap size={14} color={COST_COLORS.utilities} />,
                   label: t("budget.categories.utilities"),
                 },
                 {
                   key: "coworking" as const,
-                  icon: <Laptop size={14} color="#8888CC" />,
+                  icon: <Laptop size={14} color={COST_COLORS.coworking} />,
                   label: t("budget.categories.coworking"),
                 },
                 {
                   key: "healthInsurance" as const,
-                  icon: <Heart size={14} color="#CC6666" />,
+                  icon: <Heart size={14} color={COST_COLORS.healthInsurance} />,
                   label: t("budget.categories.healthInsurance"),
                 },
               ] as const

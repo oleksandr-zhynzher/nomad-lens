@@ -12,18 +12,11 @@ import type { ComponentType, SVGProps } from "react";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
+import { COST_COLORS } from "../utils/budgetColors";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
-const CATEGORY_COLORS: Record<string, string> = {
-  housing: "#8F5A3C",
-  groceries: "#6B9E6B",
-  dining: "#C2956A",
-  transport: "#5B8FA8",
-  utilities: "#7A9B6B",
-  coworking: "#8B7BAD",
-  healthInsurance: "#C07A9B",
-};
+const CATEGORY_COLORS = COST_COLORS;
 
 interface BudgetCategoryCardProps {
   Icon: IconType;
