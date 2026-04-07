@@ -1032,7 +1032,7 @@ export function BudgetMatcherPage() {
               }}
             >
               {/* Search + compare row */}
-              <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-1">
                 {/* Search input */}
                 <div className="relative flex-1">
                   <Search
@@ -1075,95 +1075,84 @@ export function BudgetMatcherPage() {
                   )}
                 </div>
 
-                {/* Compare mode controls */}
+                {/* Compare buttons */}
                 {compareMode ? (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={handleCompare}
-                        disabled={selectedCodes.size < 2}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "6px",
-                          height: "40px",
-                          paddingLeft: "14px",
-                          paddingRight: "14px",
-                          borderRadius: "6px",
-                          border:
-                            selectedCodes.size < 2
-                              ? "1px solid var(--color-accent-dim)"
-                              : "none",
-                          cursor:
-                            selectedCodes.size < 2 ? "default" : "pointer",
-                          backgroundColor:
-                            selectedCodes.size < 2
-                              ? "transparent"
-                              : "var(--color-accent)",
-                          color:
-                            selectedCodes.size < 2
-                              ? "var(--color-accent-dim)"
-                              : "#FFFFFF",
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "13px",
-                          fontWeight: 600,
-                          whiteSpace: "nowrap",
-                          transition: "all 0.15s ease",
-                          flexShrink: 0,
-                        }}
-                      >
-                        <GitCompare size={15} />
-                        {t("nomadVisasPage.compareSelected", "Compare")}
-                        {selectedCodes.size > 0 && (
-                          <span
-                            style={{
-                              backgroundColor:
-                                selectedCodes.size < 2
-                                  ? "rgba(194,149,106,0.2)"
-                                  : "rgba(255,255,255,0.25)",
-                              borderRadius: "10px",
-                              padding: "1px 7px",
-                              fontSize: "12px",
-                            }}
-                          >
-                            {selectedCodes.size}
-                          </span>
-                        )}
-                      </button>
-                      <button
-                        onClick={exitCompareMode}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          width: "40px",
-                          height: "40px",
-                          borderRadius: "6px",
-                          border: "1px solid #2A2A2A",
-                          cursor: "pointer",
-                          backgroundColor: "transparent",
-                          color: "#8A8A8A",
-                          flexShrink: 0,
-                        }}
-                        aria-label="Exit compare mode"
-                      >
-                        <X size={16} />
-                      </button>
-                    </div>
-                    <p
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <button
+                      onClick={handleCompare}
+                      disabled={selectedCodes.size < 2}
                       style={{
-                        marginTop: "8px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        height: "40px",
+                        paddingLeft: "14px",
+                        paddingRight: "14px",
+                        borderRadius: "6px",
+                        border:
+                          selectedCodes.size < 2
+                            ? "1px solid var(--color-accent-dim)"
+                            : "none",
+                        cursor: selectedCodes.size < 2 ? "default" : "pointer",
+                        backgroundColor:
+                          selectedCodes.size < 2
+                            ? "transparent"
+                            : "var(--color-accent)",
+                        color:
+                          selectedCodes.size < 2
+                            ? "var(--color-accent-dim)"
+                            : "#FFFFFF",
                         fontFamily: "Inter, sans-serif",
-                        fontSize: "12px",
-                        color: "#8A8A8A",
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        whiteSpace: "nowrap",
+                        transition: "all 0.15s ease",
                       }}
                     >
-                      {t(
-                        "compare.helperText",
-                        "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+                      <GitCompare size={15} />
+                      {t("nomadVisasPage.compareSelected", "Compare")}
+                      {selectedCodes.size > 0 && (
+                        <span
+                          style={{
+                            backgroundColor:
+                              selectedCodes.size < 2
+                                ? "rgba(194,149,106,0.2)"
+                                : "rgba(255,255,255,0.25)",
+                            borderRadius: "10px",
+                            padding: "1px 7px",
+                            fontSize: "12px",
+                          }}
+                        >
+                          {selectedCodes.size}
+                        </span>
                       )}
-                    </p>
-                  </>
+                    </button>
+                    <button
+                      onClick={exitCompareMode}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "6px",
+                        border: "1px solid #2A2A2A",
+                        cursor: "pointer",
+                        backgroundColor: "transparent",
+                        color: "#8A8A8A",
+                      }}
+                      aria-label="Exit compare mode"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
                 ) : (
                   <button
                     onClick={() => setCompareMode(true)}
@@ -1191,6 +1180,23 @@ export function BudgetMatcherPage() {
                   </button>
                 )}
               </div>
+
+              {/* Helper text — full width, below search+buttons row */}
+              {compareMode && (
+                <p
+                  style={{
+                    margin: "0 0 8px",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    color: "#8A8A8A",
+                  }}
+                >
+                  {t(
+                    "compare.helperText",
+                    "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+                  )}
+                </p>
+              )}
 
               {/* Color legend — always visible below search */}
               <Link
@@ -1284,78 +1290,13 @@ export function BudgetMatcherPage() {
                     return (
                       <div
                         key={m.country.code}
-                        style={{
-                          position: "relative",
-                          paddingLeft: compareMode ? "38px" : 0,
-                        }}
                         onClick={
                           compareMode
                             ? () => toggleSelect(m.country.code)
                             : undefined
                         }
+                        style={{ cursor: compareMode ? "pointer" : undefined }}
                       >
-                        {compareMode && (
-                          <div
-                            style={{
-                              position: "absolute",
-                              inset: 0,
-                              zIndex: 2,
-                              cursor: "pointer",
-                              backgroundColor: isSelected
-                                ? "rgba(26,42,26,0.35)"
-                                : "transparent",
-                              borderRadius: "4px",
-                            }}
-                          />
-                        )}
-                        {compareMode && (
-                          <div
-                            style={{
-                              position: "absolute",
-                              left: "10px",
-                              top: "50%",
-                              transform: "translateY(-50%)",
-                              zIndex: 3,
-                              width: "20px",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <div
-                              style={{
-                                width: "16px",
-                                height: "16px",
-                                borderRadius: "3px",
-                                border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
-                                backgroundColor: isSelected
-                                  ? "var(--color-accent)"
-                                  : "transparent",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                transition: "all 0.1s ease",
-                              }}
-                            >
-                              {isSelected && (
-                                <svg
-                                  width="9"
-                                  height="7"
-                                  viewBox="0 0 9 7"
-                                  fill="none"
-                                >
-                                  <path
-                                    d="M1 3.5L3.5 6L8 1"
-                                    stroke="white"
-                                    strokeWidth="1.5"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  />
-                                </svg>
-                              )}
-                            </div>
-                          </div>
-                        )}
                         <BudgetCountryCard
                           match={m}
                           budget={bs.budget}
@@ -1373,6 +1314,8 @@ export function BudgetMatcherPage() {
                                       : m.country.code,
                                   )
                           }
+                          compareMode={compareMode}
+                          isSelected={isSelected}
                         />
                       </div>
                     );

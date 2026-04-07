@@ -38,14 +38,15 @@ export function CountryCard({
 
   // Alternating backgrounds
   const isEven = index % 2 === 0;
-  const bgColor = isEven ? "#1A1A1C" : "#161618";
+  const bgColor = selected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618";
   const hoverBg = isEven ? "#252528" : "#202022";
   const borderColor = isEven ? "#252527" : "#1F1F21";
 
   return (
     <div
       data-country-code={country.code}
-      className={`country-row overflow-hidden transition-colors duration-150`}
+      data-selected={selected ? "true" : undefined}
+      className={`country-row overflow-hidden ${compareMode ? "" : "transition-colors duration-150"}`}
       style={{
         backgroundColor: bgColor,
         borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
@@ -58,20 +59,6 @@ export function CountryCard({
         }),
       }}
     >
-      {compareMode && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 1,
-            cursor: "pointer",
-            backgroundColor: selected ? "rgba(26,42,26,0.35)" : "transparent",
-            borderRadius: "4px",
-          }}
-          onClick={onSelectToggle}
-        />
-      )}
-
       {compareMode && (
         <div
           style={{
@@ -180,7 +167,15 @@ export function CountryCard({
                 to={`${langPrefix}/country/${country.code.toLowerCase()}`}
                 className="shrink-0 inline-flex items-center justify-center"
                 style={{ color: "var(--color-accent)", lineHeight: 1 }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  if (compareMode) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onSelectToggle?.();
+                  } else {
+                    e.stopPropagation();
+                  }
+                }}
               >
                 <Plane size={13} />
               </Link>

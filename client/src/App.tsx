@@ -20,7 +20,7 @@ import { useScoring } from "./hooks/useScoring";
 import { useLangPrefix } from "./hooks/useLangPrefix";
 import { useWeightState } from "./hooks/useWeightState";
 import { localizeCountry } from "./utils/localize";
-import { VISIBLE_CATEGORY_KEYS, AI_CATEGORY_KEYS } from "./utils/types";
+import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "./utils/types";
 import { DATA_SOURCE_KEYS } from "./utils/dataSources";
 import "./index.css";
 
@@ -565,7 +565,7 @@ export default function App() {
                           lineHeight: "1",
                         }}
                       >
-                        {VISIBLE_CATEGORY_KEYS.length}
+                        {DISPLAYED_CORE_CATEGORY_KEYS.length}
                       </div>
                       <div
                         style={{

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ComposableMap,
@@ -8,6 +8,7 @@ import {
   Sphere,
   Graticule,
 } from "react-simple-maps";
+import type { Geography as GeographyType } from "react-simple-maps";
 import type { RankedCountry } from "../utils/types";
 import { localizeCountry } from "../utils/localize";
 import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
@@ -28,6 +29,85 @@ interface HoverInfo {
   score: number | null;
   x: number;
   y: number;
+}
+
+interface MapGeographiesProps {
+  geographies: GeographyType[];
+  geoLoading: boolean;
+  selectedCode: string | null;
+  zoom: number;
+  fillColour: (alpha2: string) => string;
+  geoToAlpha2: (geo: {
+    id?: unknown;
+    properties: Record<string, unknown>;
+  }) => string;
+  handleMouseEnter: (
+    geo: { id?: unknown; properties: Record<string, unknown> },
+    e: React.MouseEvent,
+  ) => void;
+  handleMouseLeave: () => void;
+  handleClick: (geo: {
+    id?: unknown;
+    properties: Record<string, unknown>;
+  }) => void;
+  setGeoLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function MapGeographies({
+  geographies,
+  geoLoading,
+  selectedCode,
+  zoom,
+  fillColour,
+  geoToAlpha2,
+  handleMouseEnter,
+  handleMouseLeave,
+  handleClick,
+  setGeoLoading,
+}: MapGeographiesProps) {
+  useEffect(() => {
+    if (geoLoading && geographies.length > 0) {
+      setGeoLoading(false);
+    }
+  }, [geoLoading, geographies.length, setGeoLoading]);
+
+  return geographies.map((geo) => {
+    const alpha2 = geoToAlpha2(
+      geo as { id?: unknown; properties: Record<string, unknown> },
+    );
+    const isSelected = alpha2 === selectedCode;
+
+    return (
+      <Geography
+        key={geo.rsmKey}
+        geography={geo}
+        fill={fillColour(alpha2)}
+        stroke={isSelected ? "var(--color-accent)" : "#0F1114"}
+        strokeWidth={isSelected ? 1.5 / zoom : 0.4}
+        style={{
+          default: { outline: "none" },
+          hover: {
+            outline: "none",
+            filter: "brightness(1.25)",
+            cursor: "pointer",
+          },
+          pressed: { outline: "none" },
+        }}
+        onMouseEnter={(e: React.MouseEvent) =>
+          handleMouseEnter(
+            geo as { id?: unknown; properties: Record<string, unknown> },
+            e,
+          )
+        }
+        onMouseLeave={() => handleMouseLeave()}
+        onClick={() =>
+          handleClick(
+            geo as { id?: unknown; properties: Record<string, unknown> },
+          )
+        }
+      />
+    );
+  });
 }
 
 export function WorldMap({
@@ -239,36 +319,20 @@ export function WorldMap({
           <Sphere fill="#0F1114" stroke="#1A1A1A" strokeWidth={0.5} />
           <Graticule stroke="#1A1A1A" strokeWidth={0.3} />
           <Geographies geography={GEO_URL}>
-            {({ geographies, loading }) => {
-              if (!loading && geoLoading) setGeoLoading(false);
-              return geographies.map((geo) => {
-                const alpha2 = geoToAlpha2(geo);
-                const isSelected = alpha2 === selectedCode;
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={fillColour(alpha2)}
-                    stroke={isSelected ? "var(--color-accent)" : "#0F1114"}
-                    strokeWidth={isSelected ? 1.5 / zoom : 0.4}
-                    style={{
-                      default: { outline: "none" },
-                      hover: {
-                        outline: "none",
-                        filter: "brightness(1.25)",
-                        cursor: "pointer",
-                      },
-                      pressed: { outline: "none" },
-                    }}
-                    onMouseEnter={(e: React.MouseEvent) =>
-                      handleMouseEnter(geo, e)
-                    }
-                    onMouseLeave={() => handleMouseLeave()}
-                    onClick={() => handleClick(geo)}
-                  />
-                );
-              });
-            }}
+            {({ geographies }) => (
+              <MapGeographies
+                geographies={geographies}
+                geoLoading={geoLoading}
+                selectedCode={selectedCode}
+                zoom={zoom}
+                fillColour={fillColour}
+                geoToAlpha2={geoToAlpha2}
+                handleMouseEnter={handleMouseEnter}
+                handleMouseLeave={handleMouseLeave}
+                handleClick={handleClick}
+                setGeoLoading={setGeoLoading}
+              />
+            )}
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>

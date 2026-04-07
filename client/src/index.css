@@ -31,7 +31,7 @@
     box-sizing: border-box;
   }
 
-  .country-row:hover {
+  .country-row:not([data-selected="true"]):hover {
     background-color: var(--row-hover-bg) !important;
   }
 

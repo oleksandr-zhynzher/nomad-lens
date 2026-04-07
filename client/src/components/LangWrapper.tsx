@@ -12,18 +12,20 @@ function isSupportedLang(lang: string): lang is SupportedLang {
 export function LangWrapper() {
   const { lang } = useParams<{ lang?: string }>();
 
-  // If a lang segment is present but not supported, redirect to root
-  if (lang !== undefined && !isSupportedLang(lang)) {
-    return <Navigate to="/" replace />;
-  }
+  const isInvalidLang = lang !== undefined && !isSupportedLang(lang);
+  const activeLang = isInvalidLang ? "en" : (lang ?? "en");
 
-  const activeLang = lang ?? "en";
-
+  // Always call hooks unconditionally before any early return
   useEffect(() => {
-    if (i18n.language !== activeLang) {
+    if (!isInvalidLang && i18n.language !== activeLang) {
       i18n.changeLanguage(activeLang);
     }
-  }, [activeLang]);
+  }, [activeLang, isInvalidLang]);
+
+  // If a lang segment is present but not supported, redirect to root
+  if (isInvalidLang) {
+    return <Navigate to="/" replace />;
+  }
 
   return <Outlet />;
 }

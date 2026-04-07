@@ -39,14 +39,8 @@ import { useScoring } from "../hooks/useScoring";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails, NomadVisaLocalization } from "../utils/types";
-import { VISIBLE_CATEGORY_KEYS, type ClimatePreferences } from "../utils/types";
+import { VISIBLE_CATEGORY_KEYS } from "../utils/types";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
-
-const DEFAULT_CLIMATE: ClimatePreferences = {
-  seasonType: "any",
-  minTemp: -10,
-  maxTemp: 45,
-};
 
 type SeasonLabelKey =
   | "four_seasons"
@@ -61,7 +55,7 @@ export function CountryPage() {
   const navigate = useNavigate();
   const langPrefix = useLangPrefix();
   const { countries, loading, error } = useCountries();
-  const { weights } = useWeightState();
+  const { weights, climatePrefs } = useWeightState();
 
   // Helper: pick the localised string array/value for the active language,
   // falling back to the English default when a translation is missing.
@@ -88,7 +82,7 @@ export function CountryPage() {
     false,
     false,
     null,
-    DEFAULT_CLIMATE,
+    climatePrefs,
   );
 
   const { c, rank, finalScore } = useMemo(() => {

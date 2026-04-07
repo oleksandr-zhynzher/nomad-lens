@@ -37,6 +37,8 @@ interface Props {
   rank: number;
   expanded?: boolean;
   onToggle?: () => void;
+  compareMode?: boolean;
+  isSelected?: boolean;
 }
 
 export function BudgetCountryCard({
@@ -45,6 +47,8 @@ export function BudgetCountryCard({
   rank,
   expanded = false,
   onToggle,
+  compareMode = false,
+  isSelected = false,
 }: Props) {
   const { country, comfortScore, monthlyCost, surplus, breakdown } = match;
   const { t } = useTranslation();
@@ -54,14 +58,62 @@ export function BudgetCountryCard({
   const isEven = rank % 2 === 0;
   const borderColor = isEven ? "#252527" : "#1F1F21";
 
+  const rowBg = isSelected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618";
+
   return (
     <div
       className="overflow-hidden transition-colors duration-150"
       style={{
-        backgroundColor: isEven ? "#1A1A1C" : "#161618",
+        position: "relative",
+        backgroundColor: rowBg,
         borderBottom: "1px solid #222",
       }}
     >
+      {/* Compare mode: checkbox */}
+      {compareMode && (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              left: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 3,
+              pointerEvents: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "16px",
+                height: "16px",
+                borderRadius: "3px",
+                border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
+                backgroundColor: isSelected ? "var(--color-accent)" : rowBg,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "all 0.1s ease",
+              }}
+            >
+              {isSelected && (
+                <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
+                  <path
+                    d="M1 3.5L3.5 6L8 1"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+
       {/* Main row — clickable button */}
       <button
         className="w-full text-left transition-colors"
@@ -69,9 +121,10 @@ export function BudgetCountryCard({
           display: "flex",
           flexDirection: "column",
           padding: "12px 16px",
+          paddingLeft: compareMode ? "38px" : "16px",
           background: "transparent",
           border: "none",
-          cursor: "pointer",
+          cursor: compareMode ? "pointer" : "pointer",
           width: "100%",
         }}
         onClick={onToggle}

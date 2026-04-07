@@ -67,6 +67,7 @@ interface Props {
   matches?: BudgetMatch[];
   selectedCodes: string[];
   onSelectedCodesChange: (codes: string[]) => void;
+  sortTrigger?: number;
 }
 
 export function BudgetComparison({
@@ -74,6 +75,7 @@ export function BudgetComparison({
   matches = [],
   selectedCodes,
   onSelectedCodesChange,
+  sortTrigger = 0,
 }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState<{
@@ -128,6 +130,28 @@ export function BudgetComparison({
     setDropdownOpen(false);
     setQuery("");
   };
+
+  useEffect(() => {
+    if (sortTrigger <= 0) return;
+
+    const sortedCodes = [...selectedCodes].sort((codeA, codeB) => {
+      const matchA = matchMap.get(codeA);
+      const matchB = matchMap.get(codeB);
+
+      if (!matchA && !matchB) return 0;
+      if (!matchA) return 1;
+      if (!matchB) return -1;
+
+      if (matchA.monthlyCost !== matchB.monthlyCost) {
+        return matchA.monthlyCost - matchB.monthlyCost;
+      }
+
+      return matchB.surplus - matchA.surplus;
+    });
+
+    onSelectedCodesChange(sortedCodes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortTrigger]);
 
   const filtered = countries
     .filter(

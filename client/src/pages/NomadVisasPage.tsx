@@ -306,82 +306,87 @@ export function NomadVisasPage() {
           position: "sticky",
           top: "56px",
           zIndex: 20,
-          backgroundColor: "#0D0D0F",
-          padding: "12px 16px",
-          borderBottom: "1px solid #1a1a1a",
+          backgroundColor: "var(--color-bg)",
+          padding: "12px 0",
         }}
       >
         <div
           style={{
             maxWidth: "1200px",
             margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
+            padding: "0 16px",
           }}
         >
-          {/* Search input */}
-          <div style={{ position: "relative", flex: 1 }}>
-            <Search
-              size={16}
-              color="#808080"
-              style={{
-                position: "absolute",
-                left: "12px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                pointerEvents: "none",
-              }}
-            />
-            <input
-              type="text"
-              placeholder={t("nomadVisasPage.search", "Search countries...")}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: "100%",
-                height: "40px",
-                paddingLeft: "36px",
-                paddingRight: searchQuery ? "36px" : "12px",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-                color: "#FFFFFF",
-                backgroundColor: "#161616",
-                border: "1px solid #1E1E22",
-                borderRadius: "6px",
-                outline: "none",
-              }}
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
+          {/* Row 1: search + compare buttons */}
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            {/* Search input */}
+            <div style={{ position: "relative", flex: 1 }}>
+              <Search
+                size={16}
+                color="#808080"
                 style={{
                   position: "absolute",
-                  right: "10px",
+                  left: "12px",
                   top: "50%",
                   transform: "translateY(-50%)",
-                  width: "22px",
-                  height: "22px",
+                  pointerEvents: "none",
+                }}
+              />
+              <input
+                type="text"
+                placeholder={t("nomadVisasPage.search", "Search countries...")}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{
+                  width: "100%",
+                  height: "40px",
+                  paddingLeft: "36px",
+                  paddingRight: searchQuery ? "36px" : "12px",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "14px",
+                  color: "#FFFFFF",
+                  backgroundColor: "#161616",
+                  border: "1px solid #1E1E22",
+                  borderRadius: "6px",
+                  outline: "none",
+                }}
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: "22px",
+                    height: "22px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "3px",
+                    border: "none",
+                    cursor: "pointer",
+                    backgroundColor: "#2A2A2A",
+                    color: "#CCCCCC",
+                  }}
+                  aria-label="Clear search"
+                >
+                  <X size={12} />
+                </button>
+              )}
+            </div>
+
+            {/* Compare mode buttons */}
+            {compareMode ? (
+              <div
+                style={{
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "3px",
-                  border: "none",
-                  cursor: "pointer",
-                  backgroundColor: "#2A2A2A",
-                  color: "#CCCCCC",
+                  gap: "8px",
+                  flexShrink: 0,
                 }}
-                aria-label="Clear search"
               >
-                <X size={12} />
-              </button>
-            )}
-          </div>
-
-          {/* Compare mode controls */}
-          {compareMode ? (
-            <>
-              <div className="flex items-center gap-2">
                 {/* Compare CTA */}
                 <button
                   onClick={handleCompare}
@@ -412,7 +417,6 @@ export function NomadVisasPage() {
                     fontWeight: 600,
                     whiteSpace: "nowrap",
                     transition: "all 0.15s ease",
-                    flexShrink: 0,
                   }}
                 >
                   <GitCompare size={15} />
@@ -433,7 +437,6 @@ export function NomadVisasPage() {
                     </span>
                   )}
                 </button>
-
                 {/* Exit compare mode */}
                 <button
                   onClick={exitCompareMode}
@@ -448,52 +451,55 @@ export function NomadVisasPage() {
                     cursor: "pointer",
                     backgroundColor: "transparent",
                     color: "#8A8A8A",
-                    flexShrink: 0,
                   }}
                   aria-label="Exit compare mode"
                 >
                   <X size={16} />
                 </button>
               </div>
-              <p
+            ) : (
+              <button
+                onClick={() => setCompareMode(true)}
                 style={{
-                  marginTop: "8px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  height: "40px",
+                  paddingLeft: "14px",
+                  paddingRight: "14px",
+                  borderRadius: "6px",
+                  border: "1px solid #2A2A2A",
+                  cursor: "pointer",
+                  backgroundColor: "transparent",
+                  color: "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
-                  fontSize: "12px",
-                  color: "#8A8A8A",
+                  fontSize: "13px",
+                  fontWeight: 500,
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
                 }}
               >
-                {t(
-                  "compare.helperText",
-                  "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
-                )}
-              </p>
-            </>
-          ) : (
-            <button
-              onClick={() => setCompareMode(true)}
+                <GitCompare size={15} />
+                {t("nomadVisasPage.compareMode", "Compare")}
+              </button>
+            )}
+          </div>
+
+          {/* Row 2: helper text below the entire search+buttons row */}
+          {compareMode && (
+            <p
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                height: "40px",
-                paddingLeft: "14px",
-                paddingRight: "14px",
-                borderRadius: "6px",
-                border: "1px solid #2A2A2A",
-                cursor: "pointer",
-                backgroundColor: "transparent",
-                color: "#9E9E9E",
+                margin: "6px 0 0",
                 fontFamily: "Inter, sans-serif",
-                fontSize: "13px",
-                fontWeight: 500,
-                whiteSpace: "nowrap",
-                flexShrink: 0,
+                fontSize: "12px",
+                color: "#8A8A8A",
               }}
             >
-              <GitCompare size={15} />
-              {t("nomadVisasPage.compareMode", "Compare")}
-            </button>
+              {t(
+                "compare.helperText",
+                "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+              )}
+            </p>
           )}
         </div>
       </div>
@@ -842,6 +848,13 @@ export function NomadVisasPage() {
                                   alignItems: "center",
                                   gap: "10px",
                                   textDecoration: "none",
+                                }}
+                                onClick={(e) => {
+                                  if (compareMode) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    toggleSelect(country.code);
+                                  }
                                 }}
                               >
                                 <img

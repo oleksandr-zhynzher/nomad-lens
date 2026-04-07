@@ -42,7 +42,11 @@ import type {
   CategoryKey,
 } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { computeScore, scoreColour } from "../utils/scoring";
+import {
+  computeClimateScore,
+  computeScore,
+  scoreColour,
+} from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { Tooltip } from "./Tooltip";
 
@@ -107,9 +111,27 @@ interface Props {
   onSelectionCount?: (count: number) => void;
 }
 
+function applyClimate(
+  country: CountryData,
+  climatePrefs: ClimatePreferences,
+): CountryData {
+  if (!country.climateData) return country;
+  return {
+    ...country,
+    scores: {
+      ...country.scores,
+      climate: {
+        ...country.scores.climate,
+        value: computeClimateScore(country.climateData, climatePrefs),
+      },
+    },
+  };
+}
+
 export function CountryComparison({
   countries,
   weights,
+  climatePrefs,
   selectedCodes,
   onSelectedCodesChange,
   sortTrigger = 0,
@@ -177,7 +199,8 @@ export function CountryComparison({
         const countryB = countries.find((c) => c.code === b);
         if (!countryA || !countryB) return 0;
         return (
-          computeScore(countryB, weights) - computeScore(countryA, weights)
+          computeScore(applyClimate(countryB, climatePrefs), weights) -
+          computeScore(applyClimate(countryA, climatePrefs), weights)
         );
       });
       onSelectedCodesChange(sorted);
@@ -213,7 +236,10 @@ export function CountryComparison({
           style={{ overflowX: "auto", scrollbarWidth: "thin" }}
         >
           {selectedCountries.map((slot) => {
-            const score = computeScore(slot.country, weights);
+            const score = computeScore(
+              applyClimate(slot.country, climatePrefs),
+              weights,
+            );
             const sColor = scoreColour(score);
             return (
               <div
@@ -402,7 +428,10 @@ export function CountryComparison({
           />
           <div style={{ maxHeight: "320px", overflowY: "auto" }}>
             {filtered.map((c) => {
-              const score = computeScore(c, weights);
+              const score = computeScore(
+                applyClimate(c, climatePrefs),
+                weights,
+              );
               return (
                 <button
                   key={c.code}

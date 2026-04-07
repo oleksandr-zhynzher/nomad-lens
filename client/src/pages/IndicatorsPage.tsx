@@ -21,11 +21,13 @@ import {
   Briefcase,
   Plane,
   Stethoscope,
+  Sparkles,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
+import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "../utils/types";
 
 interface IndicatorCardProps {
   Icon: ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
@@ -168,16 +170,94 @@ const INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
   ],
 ];
 
+const AI_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
+  [
+    [Users, "nomadCommunity"],
+    [Globe, "visaFriendliness"],
+  ],
+  [
+    [Wallet, "costEfficiency"],
+    [Smile, "workLifeBalance"],
+  ],
+  [
+    [Wifi, "digitalReadiness"],
+    [Heart, "culturalFit"],
+  ],
+];
+
 export function IndicatorsPage() {
   const { t } = useTranslation();
+  const coreIndicatorCount = DISPLAYED_CORE_CATEGORY_KEYS.length;
+  const aiIndicatorCount = AI_CATEGORY_KEYS.length;
+
   return (
     <Layout activePage="indicators">
       <HeroSection
         backgroundImage="/hero-map.png"
         eyebrow={t("indicatorsPage.eyebrow")}
         title={t("indicatorsPage.title")}
-        subtitle={t("indicatorsPage.subtitle")}
-      />
+        subtitle={t("indicatorsPage.subtitle", {
+          coreCount: coreIndicatorCount,
+          aiCount: aiIndicatorCount,
+        })}
+      >
+        <div className="flex items-center gap-4 md:gap-6">
+          <div>
+            <div
+              style={{
+                fontFamily: "IBM Plex Mono, monospace",
+                fontSize: "18px",
+                fontWeight: 600,
+                color: "var(--color-accent-dim)",
+                lineHeight: "1",
+              }}
+            >
+              {coreIndicatorCount}
+            </div>
+            <div
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "10px",
+                color: "#757575",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                marginTop: "4px",
+              }}
+            >
+              {t("hero.indicators")}
+            </div>
+          </div>
+          <div
+            className="w-px h-6 md:h-8"
+            style={{ backgroundColor: "#333333" }}
+          />
+          <div>
+            <div
+              style={{
+                fontFamily: "IBM Plex Mono, monospace",
+                fontSize: "18px",
+                fontWeight: 600,
+                color: "var(--color-accent-dim)",
+                lineHeight: "1",
+              }}
+            >
+              {aiIndicatorCount}
+            </div>
+            <div
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "10px",
+                color: "#757575",
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                marginTop: "4px",
+              }}
+            >
+              {t("hero.aiIndicators")}
+            </div>
+          </div>
+        </div>
+      </HeroSection>
 
       {/* Content zone */}
       <div
@@ -206,6 +286,69 @@ export function IndicatorsPage() {
             ))}
           </div>
         ))}
+
+        {/* AI indicators section */}
+        <div style={{ marginTop: "16px" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              marginBottom: "16px",
+              paddingBottom: "12px",
+              borderBottom: "1px solid #1E1E20",
+            }}
+          >
+            <Sparkles size={14} color="#C084FC" />
+            <span
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "1.5px",
+                textTransform: "uppercase",
+                color: "#C084FC",
+              }}
+            >
+              {t("indicatorsPage.aiSection", "AI-Powered Indicators")}
+            </span>
+            <span
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "11px",
+                color: "#606060",
+              }}
+            >
+              {t(
+                "indicatorsPage.aiSectionNote",
+                "— off by default, enable in the weight panel",
+              )}
+            </span>
+          </div>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+          >
+            {AI_INDICATOR_ICONS.map((row, rowIdx) => (
+              <div
+                key={rowIdx}
+                className="flex flex-col md:flex-row gap-4 md:gap-5 w-full"
+              >
+                {row.map(([Icon, key]) => (
+                  <IndicatorCard
+                    key={key}
+                    Icon={Icon}
+                    name={t(`indicatorsPage.indicators.${key}.name`)}
+                    description={t(
+                      `indicatorsPage.indicators.${key}.description`,
+                    )}
+                    source={t(`indicatorsPage.indicators.${key}.source`)}
+                    weight={t(`indicatorsPage.indicators.${key}.weight`)}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </Layout>
   );

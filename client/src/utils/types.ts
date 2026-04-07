@@ -87,6 +87,14 @@ export const AI_CATEGORY_KEYS: CategoryKey[] = [
   "culturalFit",
 ];
 
+export const CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
+  (key) => !AI_CATEGORY_KEYS.includes(key),
+);
+
+export const DISPLAYED_CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
+  (key) => key !== "culturalHeritage" && !AI_CATEGORY_KEYS.includes(key),
+);
+
 /** Categories computed by the server but hidden from the UI. */
 export const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
   "culturalHeritage",

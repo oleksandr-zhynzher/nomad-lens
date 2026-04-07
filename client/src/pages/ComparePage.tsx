@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet } from "lucide-react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { WeightPanel } from "../components/WeightPanel";
@@ -11,9 +11,11 @@ import { BudgetComparison } from "../components/BudgetComparison";
 import { BudgetFilterPanel } from "../components/BudgetFilterPanel";
 import { PageHeroBanner } from "../components/PageHeroBanner";
 import { useCountries } from "../hooks/useCountries";
+import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useWeightState } from "../hooks/useWeightState";
 import { useBudgetState } from "../hooks/useBudgetState";
 import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
+import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "../utils/types";
 
 export function ComparePage() {
   const { t } = useTranslation();
@@ -32,8 +34,10 @@ export function ComparePage() {
   const [sortTrigger, setSortTrigger] = useState(0);
   const [countrySelectionCount, setCountrySelectionCount] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [sorted, setSorted] = useState(false);
 
   const ws = useWeightState();
+  const langPrefix = useLangPrefix();
   const { countries } = useCountries();
   const bs = useBudgetState();
   const budgetMatches = useBudgetMatcher(
@@ -45,6 +49,8 @@ export function ComparePage() {
     bs.categoryWeights,
     bs.qualityBlend,
   );
+  const coreIndicatorCount = DISPLAYED_CORE_CATEGORY_KEYS.length;
+  const aiIndicatorCount = AI_CATEGORY_KEYS.length;
 
   // Keep the weight panel sized to fit from its current position to the viewport bottom
   const panelRef = useRef<HTMLDivElement>(null);
@@ -105,6 +111,12 @@ export function ComparePage() {
     setTimeout(() => setCopied(false), 3000);
   };
 
+  const handleSortByScore = () => {
+    setSortTrigger((previous) => previous + 1);
+    setSorted(true);
+    setTimeout(() => setSorted(false), 3000);
+  };
+
   return (
     <Layout>
       <div>
@@ -122,7 +134,10 @@ export function ComparePage() {
           }
           subtitle={
             compareMode === "countries"
-              ? t("compare.countrySubtitle")
+              ? t("compare.countrySubtitle", {
+                  coreCount: coreIndicatorCount,
+                  aiCount: aiIndicatorCount,
+                })
               : compareMode === "regions"
                 ? t("compare.regionSubtitle")
                 : compareMode === "budget"
@@ -163,60 +178,104 @@ export function ComparePage() {
               className="w-px h-6 md:h-8"
               style={{ backgroundColor: "#333333" }}
             />
-            <div>
-              <div
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  color: "var(--color-accent-dim)",
-                  lineHeight: "1",
-                }}
-              >
-                {countries.filter((c) => c.hasNomadVisa).length}
+            <Link
+              to={`${langPrefix}/nomad-visas`}
+              style={{ textDecoration: "none" }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontFamily: "IBM Plex Mono, monospace",
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "var(--color-accent-dim)",
+                    lineHeight: "1",
+                  }}
+                >
+                  {countries.filter((c) => c.hasNomadVisa).length}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "10px",
+                    color: "#757575",
+                    textTransform: "uppercase",
+                    letterSpacing: "1px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {t("compare.nomadVisas")}
+                </div>
               </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "10px",
-                  color: "#757575",
-                  textTransform: "uppercase",
-                  letterSpacing: "1px",
-                  marginTop: "4px",
-                }}
-              >
-                {t("compare.nomadVisas")}
-              </div>
-            </div>
+            </Link>
             <div
               className="w-px h-6 md:h-8"
               style={{ backgroundColor: "#333333" }}
             />
-            <div>
-              <div
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  color: "var(--color-accent-dim)",
-                  lineHeight: "1",
-                }}
-              >
-                {Object.keys(countries[0]?.scores ?? {}).length || 29}
+            <Link
+              to={`${langPrefix}/indicators`}
+              style={{ textDecoration: "none" }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontFamily: "IBM Plex Mono, monospace",
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "var(--color-accent-dim)",
+                    lineHeight: "1",
+                  }}
+                >
+                  {coreIndicatorCount}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "10px",
+                    color: "#757575",
+                    textTransform: "uppercase",
+                    letterSpacing: "1px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {t("hero.indicators")}
+                </div>
               </div>
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "10px",
-                  color: "#757575",
-                  textTransform: "uppercase",
-                  letterSpacing: "1px",
-                  marginTop: "4px",
-                }}
-              >
-                {t("hero.indicators")}
+            </Link>
+            <div
+              className="w-px h-6 md:h-8"
+              style={{ backgroundColor: "#333333" }}
+            />
+            <Link
+              to={`${langPrefix}/ai-indicators`}
+              style={{ textDecoration: "none" }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontFamily: "IBM Plex Mono, monospace",
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "var(--color-accent-dim)",
+                    lineHeight: "1",
+                  }}
+                >
+                  {aiIndicatorCount}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "10px",
+                    color: "#757575",
+                    textTransform: "uppercase",
+                    letterSpacing: "1px",
+                    marginTop: "4px",
+                  }}
+                >
+                  {t("hero.aiIndicators")}
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </PageHeroBanner>
 
@@ -307,7 +366,7 @@ export function ComparePage() {
               </button>
             </div>
 
-            {/* Parameters + Share grouped controls */}
+            {/* Parameters + Sort + Share grouped controls */}
             <div
               className="flex w-full sm:w-auto rounded-md p-1"
               style={{
@@ -343,6 +402,41 @@ export function ComparePage() {
                     />
                   </svg>
                   {t("compare.parameters")}
+                </button>
+              )}
+
+              {((compareMode === "countries" && countrySelectionCount > 1) ||
+                (compareMode === "budget" && selectedCodes.length > 1)) && (
+                <button
+                  onClick={handleSortByScore}
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                  style={{
+                    backgroundColor: sorted ? "#2A4A2A" : "transparent",
+                    color: sorted ? "#88CC88" : "#8A8A8A",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "13px",
+                    fontWeight: sorted ? 500 : 400,
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  {sorted ? (
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  ) : (
+                    <ArrowDownWideNarrow size={16} />
+                  )}
+                  {sorted
+                    ? t("compare.sorted")
+                    : compareMode === "budget"
+                      ? t("compare.sortByBudget")
+                      : t("compare.sortByScore")}
                 </button>
               )}
 
@@ -386,24 +480,6 @@ export function ComparePage() {
                 {copied ? t("weights.linkCopied") : t("compare.share")}
               </button>
             </div>
-
-            {/* Sort button — visible when 2+ countries in country mode */}
-            {compareMode === "countries" && countrySelectionCount > 1 && (
-              <button
-                onClick={() => setSortTrigger((p) => p + 1)}
-                className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors hover:border-[#555555]"
-                style={{
-                  backgroundColor: "#1A1A1A",
-                  borderColor: "#333333",
-                  color: "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  cursor: "pointer",
-                }}
-              >
-                <ArrowDownWideNarrow size={16} />
-                {t("compare.sortByScore")}
-              </button>
-            )}
           </div>
 
           <div
@@ -466,6 +542,7 @@ export function ComparePage() {
                   matches={budgetMatches}
                   selectedCodes={selectedCodes}
                   onSelectedCodesChange={handleSelectedCodesChange}
+                  sortTrigger={sortTrigger}
                 />
               ) : (
                 <CountryComparison

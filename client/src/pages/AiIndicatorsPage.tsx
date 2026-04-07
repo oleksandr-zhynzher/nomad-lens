@@ -11,6 +11,7 @@ import type { ComponentType, SVGProps } from "react";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
+import { AI_CATEGORY_KEYS } from "../utils/types";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
@@ -178,6 +179,7 @@ const AI_INDICATOR_ROWS: Array<Array<[IconType, string]>> = [
 
 export function AiIndicatorsPage() {
   const { t } = useTranslation();
+  const aiIndicatorCount = AI_CATEGORY_KEYS.length;
 
   return (
     <Layout activePage="ai-indicators">
@@ -185,7 +187,7 @@ export function AiIndicatorsPage() {
         backgroundImage="/hero-map.png"
         eyebrow={t("aiIndicatorsPage.eyebrow")}
         title={t("aiIndicatorsPage.title")}
-        subtitle={t("aiIndicatorsPage.subtitle")}
+        subtitle={t("aiIndicatorsPage.subtitle", { count: aiIndicatorCount })}
       />
 
       {/* Content zone */}
@@ -223,7 +225,7 @@ export function AiIndicatorsPage() {
               lineHeight: 1.6,
             }}
           >
-            {t("aiIndicatorsPage.disclaimer")}
+            {t("aiIndicatorsPage.disclaimer", { count: aiIndicatorCount })}
           </div>
         </div>
 

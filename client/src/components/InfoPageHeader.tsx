@@ -39,6 +39,7 @@ export function InfoPageHeader({ activePage }: InfoPageHeaderProps) {
               display: "flex",
               alignItems: "center",
               height: "32px",
+              marginTop: "-4px",
             }}
           >
             NOMAD LENS

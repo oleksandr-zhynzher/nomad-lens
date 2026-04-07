@@ -109,6 +109,7 @@ export function Layout({ children }: LayoutProps) {
               cursor: "pointer",
               padding: 0,
               height: "32px",
+              marginTop: "-4px",
             }}
           >
             <LogoMark size={32} />
@@ -123,6 +124,7 @@ export function Layout({ children }: LayoutProps) {
                 display: "flex",
                 alignItems: "center",
                 height: "32px",
+                marginTop: "-4px",
               }}
             >
               NOMAD LENS
