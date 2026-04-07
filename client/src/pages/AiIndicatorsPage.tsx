@@ -77,7 +77,7 @@ function AiIndicatorCard({
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "13px",
-          color: "#666666",
+          color: "#8A8A8A",
           lineHeight: 1.6,
         }}
       >
@@ -91,7 +91,7 @@ function AiIndicatorCard({
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "10px",
-              color: "#555555",
+              color: "#808080",
               textTransform: "uppercase",
               letterSpacing: "0.5px",
             }}
@@ -219,7 +219,7 @@ export function AiIndicatorsPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "13px",
-              color: "#999999",
+              color: "#9E9E9E",
               lineHeight: 1.6,
             }}
           >

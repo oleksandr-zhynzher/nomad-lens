@@ -3,6 +3,7 @@ import { BarChart3, List, Map, Menu, Plane, Wallet, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
+import { LogoMark } from "./LogoMark";
 
 interface LayoutProps {
   children: ReactNode;
@@ -97,105 +98,31 @@ export function Layout({ children }: LayoutProps) {
           height: "56px",
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
+        <div className="w-full max-w-[1200px] mx-auto px-4 h-full flex items-center justify-between">
           {/* Logo */}
           <button
             onClick={() => handleViewClick("list")}
-            className="flex items-center gap-2.5"
+            className="flex items-center gap-2.5 leading-none"
             style={{
               background: "none",
               border: "none",
               cursor: "pointer",
               padding: 0,
+              height: "32px",
             }}
           >
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Outer compass circle */}
-              <circle
-                cx="16"
-                cy="16"
-                r="15"
-                stroke="#8F5A3C"
-                strokeWidth="1.5"
-                fill="none"
-                opacity="0.6"
-              />
-
-              {/* Compass needle - North (pointing up) */}
-              <path d="M16 4 L20 16 L16 14 L12 16 Z" fill="#C2956A" />
-
-              {/* Compass needle - South (pointing down) */}
-              <path
-                d="M16 28 L12 16 L16 18 L20 16 Z"
-                fill="#8F5A3C"
-                opacity="0.7"
-              />
-
-              {/* Center pivot point */}
-              <circle cx="16" cy="16" r="2.5" fill="#C8B89A" />
-              <circle cx="16" cy="16" r="1" fill="#0D0E10" />
-
-              {/* Cardinal direction markers */}
-              <line
-                x1="16"
-                y1="1"
-                x2="16"
-                y2="3"
-                stroke="#C2956A"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <line
-                x1="16"
-                y1="29"
-                x2="16"
-                y2="31"
-                stroke="#C2956A"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <line
-                x1="1"
-                y1="16"
-                x2="3"
-                y2="16"
-                stroke="#C2956A"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <line
-                x1="29"
-                y1="16"
-                x2="31"
-                y2="16"
-                stroke="#C2956A"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-
-              {/* Subtle path/journey arc */}
-              <path
-                d="M 8 24 Q 12 20, 16 16 Q 20 12, 24 8"
-                stroke="#C8B89A"
-                strokeWidth="1"
-                fill="none"
-                opacity="0.4"
-                strokeDasharray="2 2"
-              />
-            </svg>
+            <LogoMark size={32} />
             <span
               style={{
                 fontFamily: "Oswald, sans-serif",
                 fontSize: "20px",
                 fontWeight: 700,
                 letterSpacing: "2px",
+                lineHeight: 1,
                 textTransform: "uppercase",
+                display: "flex",
+                alignItems: "center",
+                height: "32px",
               }}
             >
               NOMAD LENS
@@ -217,7 +144,7 @@ export function Layout({ children }: LayoutProps) {
                     activeView === "list"
                       ? "var(--color-accent)"
                       : "transparent",
-                  color: activeView === "list" ? "#FFFFFF" : "#999999",
+                  color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: activeView === "list" ? 500 : 400,
@@ -234,7 +161,7 @@ export function Layout({ children }: LayoutProps) {
                     activeView === "map"
                       ? "var(--color-accent)"
                       : "transparent",
-                  color: activeView === "map" ? "#FFFFFF" : "#999999",
+                  color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: activeView === "map" ? 500 : 400,
@@ -251,7 +178,7 @@ export function Layout({ children }: LayoutProps) {
                     activeView === "compare"
                       ? "var(--color-accent)"
                       : "transparent",
-                  color: activeView === "compare" ? "#FFFFFF" : "#999999",
+                  color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: activeView === "compare" ? 500 : 400,
@@ -269,7 +196,7 @@ export function Layout({ children }: LayoutProps) {
                     : "transparent",
                   color: pathname.endsWith("/nomad-visas")
                     ? "#FFFFFF"
-                    : "#999999",
+                    : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
@@ -288,7 +215,7 @@ export function Layout({ children }: LayoutProps) {
                     : "transparent",
                   color: pathname.endsWith("/budget-matcher")
                     ? "#FFFFFF"
-                    : "#999999",
+                    : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
@@ -301,10 +228,20 @@ export function Layout({ children }: LayoutProps) {
             </div>
 
             {/* Language switcher – text button + dropdown */}
-            <div style={{ position: "relative" }} ref={langRef}>
+            <div
+              style={{
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+              }}
+              ref={langRef}
+            >
               <button
                 onClick={() => setLangDropdownOpen((p) => !p)}
                 style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   background: "none",
                   border: "none",
                   cursor: "pointer",
@@ -312,8 +249,11 @@ export function Layout({ children }: LayoutProps) {
                   fontSize: "12px",
                   fontWeight: 700,
                   letterSpacing: "1px",
-                  color: langDropdownOpen ? "#C2956A" : "#555555",
-                  padding: "4px 2px",
+                  lineHeight: 1,
+                  color: langDropdownOpen ? "#C2956A" : "#808080",
+                  minWidth: "32px",
+                  height: "32px",
+                  padding: "0 6px",
                 }}
               >
                 {currentLang.code.toUpperCase()}
@@ -324,7 +264,8 @@ export function Layout({ children }: LayoutProps) {
                   style={{
                     position: "absolute",
                     top: "calc(100% + 6px)",
-                    right: 0,
+                    left: "50%",
+                    transform: "translateX(-50%)",
                     backgroundColor: "#111111",
                     border: "1px solid #252525",
                     borderRadius: "8px",
@@ -340,14 +281,19 @@ export function Layout({ children }: LayoutProps) {
                         to={langSwitchPath(opt.code)}
                         onClick={() => setLangDropdownOpen(false)}
                         style={{
-                          display: "block",
-                          padding: "8px 16px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          minWidth: "56px",
+                          height: "32px",
+                          padding: "0 16px",
                           textDecoration: "none",
                           fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
                           fontWeight: 600,
                           letterSpacing: "1px",
-                          color: "#888888",
+                          lineHeight: 1,
+                          color: "#9E9E9E",
                           borderTop: i === 0 ? "none" : "1px solid #1E1E1E",
                         }}
                       >
@@ -368,7 +314,7 @@ export function Layout({ children }: LayoutProps) {
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "13px",
-                color: "#999999",
+                color: "#9E9E9E",
               }}
             >
               <svg
@@ -390,7 +336,7 @@ export function Layout({ children }: LayoutProps) {
           {/* Mobile hamburger button */}
           <button
             className="md:hidden flex items-center justify-center"
-            style={{ width: "40px", height: "40px", color: "#999999" }}
+            style={{ width: "40px", height: "40px", color: "#9E9E9E" }}
             onClick={() => setMobileMenuOpen((p) => !p)}
             aria-label="Toggle menu"
           >
@@ -419,7 +365,7 @@ export function Layout({ children }: LayoutProps) {
                     fontWeight: 600,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
-                    color: "#444444",
+                    color: "#757575",
                     marginBottom: "4px",
                   }}
                 >
@@ -434,7 +380,7 @@ export function Layout({ children }: LayoutProps) {
                         activeView === "list"
                           ? "var(--color-accent)"
                           : "#2A2A2A",
-                      color: activeView === "list" ? "#FFFFFF" : "#999999",
+                      color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: activeView === "list" ? 500 : 400,
@@ -451,7 +397,7 @@ export function Layout({ children }: LayoutProps) {
                         activeView === "map"
                           ? "var(--color-accent)"
                           : "#2A2A2A",
-                      color: activeView === "map" ? "#FFFFFF" : "#999999",
+                      color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: activeView === "map" ? 500 : 400,
@@ -468,7 +414,7 @@ export function Layout({ children }: LayoutProps) {
                         activeView === "compare"
                           ? "var(--color-accent)"
                           : "#2A2A2A",
-                      color: activeView === "compare" ? "#FFFFFF" : "#999999",
+                      color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: activeView === "compare" ? 500 : 400,
@@ -487,7 +433,7 @@ export function Layout({ children }: LayoutProps) {
                         : "#2A2A2A",
                       color: pathname.endsWith("/nomad-visas")
                         ? "#FFFFFF"
-                        : "#999999",
+                        : "#9E9E9E",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
@@ -507,7 +453,7 @@ export function Layout({ children }: LayoutProps) {
                         : "#2A2A2A",
                       color: pathname.endsWith("/budget-matcher")
                         ? "#FFFFFF"
-                        : "#999999",
+                        : "#9E9E9E",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
                       fontWeight: pathname.endsWith("/budget-matcher")
@@ -537,7 +483,7 @@ export function Layout({ children }: LayoutProps) {
                     fontFamily: "Inter, sans-serif",
                     fontSize: "13px",
                     fontWeight: i18n.language === lng ? 700 : 400,
-                    color: i18n.language === lng ? "#C2956A" : "#555555",
+                    color: i18n.language === lng ? "#C2956A" : "#808080",
                     textDecoration: "none",
                   }}
                 >
@@ -554,7 +500,7 @@ export function Layout({ children }: LayoutProps) {
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "14px",
-                color: "#999999",
+                color: "#9E9E9E",
                 textDecoration: "none",
               }}
             >
@@ -588,7 +534,7 @@ export function Layout({ children }: LayoutProps) {
 
       <footer
         className="border-t mt-16 py-6 text-center text-xs px-4"
-        style={{ borderColor: "#333333", color: "#666666" }}
+        style={{ borderColor: "#333333", color: "#8A8A8A" }}
       >
         {t("footer.data")}
       </footer>

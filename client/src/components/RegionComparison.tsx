@@ -244,7 +244,7 @@ export function RegionComparison({
                   return Icon ? (
                     <Icon
                       size={20}
-                      style={{ color: active ? r.color : "#555555" }}
+                      style={{ color: active ? r.color : "#808080" }}
                     />
                   ) : null;
                 })()}
@@ -253,7 +253,7 @@ export function RegionComparison({
                     fontFamily: "Inter, sans-serif",
                     fontSize: "15px",
                     fontWeight: 600,
-                    color: active ? "#E8E9EB" : "#555555",
+                    color: active ? "#E8E9EB" : "#808080",
                     textAlign: "center",
                   }}
                 >
@@ -265,7 +265,7 @@ export function RegionComparison({
                     fontFamily: "Oswald, sans-serif",
                     fontSize: "32px",
                     fontWeight: 700,
-                    color: active ? scoreColour(r.overall) : "#333333",
+                    color: active ? scoreColour(r.overall) : "#757575",
                     lineHeight: 1,
                   }}
                 >
@@ -277,7 +277,7 @@ export function RegionComparison({
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontSize: "10px",
-                    color: active ? "#999999" : "#444444",
+                    color: active ? "#9E9E9E" : "#757575",
                     backgroundColor: "#1C1C1C",
                     border: "1px solid #2C2C2C",
                   }}
@@ -318,7 +318,7 @@ export function RegionComparison({
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",
-                    color: "#333333",
+                    color: "#757575",
                     textTransform: "uppercase",
                   }}
                 >
@@ -357,7 +357,7 @@ export function RegionComparison({
               }}
             >
               <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                <TrendingUp size={16} style={{ color: "#888888" }} />
+                <TrendingUp size={16} style={{ color: "#9E9E9E" }} />
                 <span
                   style={{
                     fontFamily: "Inter, sans-serif",
@@ -398,12 +398,12 @@ export function RegionComparison({
                   }}
                 >
                   <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                    <Icon size={16} style={{ color: "#555555" }} />
+                    <Icon size={16} style={{ color: "#808080" }} />
                     <span
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "13px",
-                        color: "#777777",
+                        color: "#8A8A8A",
                       }}
                     >
                       {t(

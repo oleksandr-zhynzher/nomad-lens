@@ -129,7 +129,7 @@ export function CountryDetailPanel({
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
-                    color: "#999999",
+                    color: "#9E9E9E",
                   }}
                 >
                   {t(`regions.${regionKey(c.region)}`)}
@@ -159,7 +159,7 @@ export function CountryDetailPanel({
                 height: "32px",
                 backgroundColor: "#333333",
                 borderRadius: "4px",
-                color: "#999999",
+                color: "#9E9E9E",
               }}
               aria-label="Close panel"
             >
@@ -200,7 +200,7 @@ export function CountryDetailPanel({
                 fontWeight: 600,
                 letterSpacing: "1.5px",
                 textTransform: "uppercase",
-                color: "#666666",
+                color: "#8A8A8A",
                 marginBottom: "12px",
               }}
             >
@@ -232,15 +232,15 @@ export function CountryDetailPanel({
                       fontWeight: 600,
                       letterSpacing: "1.5px",
                       textTransform: "uppercase",
-                      color: "#666666",
+                      color: "#8A8A8A",
                     }}
                   >
                     {t("countryDetail.nomadVisaDetails", "Digital Nomad Visa")}
                   </h3>
                   {visaExpanded ? (
-                    <ChevronUp size={16} color="#666666" />
+                    <ChevronUp size={16} color="#8A8A8A" />
                   ) : (
-                    <ChevronDown size={16} color="#666666" />
+                    <ChevronDown size={16} color="#8A8A8A" />
                   )}
                 </button>
 
@@ -267,7 +267,7 @@ export function CountryDetailPanel({
                         style={{
                           fontFamily: "IBM Plex Mono, monospace",
                           fontSize: "11px",
-                          color: "#999999",
+                          color: "#9E9E9E",
                           marginTop: "2px",
                         }}
                       >
@@ -315,7 +315,7 @@ export function CountryDetailPanel({
                           style={{
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "10px",
-                            color: "#666666",
+                            color: "#8A8A8A",
                             marginTop: "2px",
                           }}
                         >

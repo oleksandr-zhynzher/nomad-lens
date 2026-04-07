@@ -54,7 +54,7 @@ function DataSourceCard({
           fontSize: "10px",
           fontWeight: "normal" as const,
           letterSpacing: "1px",
-          color: "#555555",
+          color: "#808080",
         }}
       >
         {category}
@@ -65,7 +65,7 @@ function DataSourceCard({
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "13px",
-          color: "#666666",
+          color: "#8A8A8A",
           lineHeight: 1.5,
         }}
       >
@@ -102,7 +102,7 @@ function DataSourceCard({
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: "11px",
-            color: "#444444",
+            color: "#757575",
           }}
         >
           Updated annually

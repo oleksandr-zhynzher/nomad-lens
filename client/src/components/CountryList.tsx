@@ -15,6 +15,9 @@ interface CountryListProps {
   onToggleExpanded?: (code: string) => void;
   /** When true (e.g. active search), all items are rendered without pagination */
   showAll?: boolean;
+  compareMode?: boolean;
+  selectedCodes?: Set<string>;
+  onToggleSelect?: (code: string) => void;
 }
 
 export function CountryList({
@@ -26,6 +29,9 @@ export function CountryList({
   expandedCode,
   onToggleExpanded,
   showAll = false,
+  compareMode = false,
+  selectedCodes = new Set<string>(),
+  onToggleSelect,
 }: CountryListProps) {
   const { t } = useTranslation();
 
@@ -114,7 +120,7 @@ export function CountryList({
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "14px",
-          color: "#666666",
+          color: "#8A8A8A",
         }}
       >
         {t("countryList.noResults")}
@@ -127,12 +133,22 @@ export function CountryList({
 
   return (
     <div className="flex flex-col">
-      <p
-        className="text-xs text-right pr-1 my-4"
-        style={{ fontFamily: "Inter, sans-serif", color: "#666666" }}
+      <div
+        className="flex items-center justify-between px-1 my-4"
+        style={{ fontFamily: "Inter, sans-serif", fontSize: "12px" }}
       >
-        {t("countryList.count", { count: ranked.length })}
-      </p>
+        <span style={{ color: "#9E9E9E" }}>
+          {compareMode
+            ? t(
+                "compare.countrySubtitle",
+                "Select countries to compare across all indicators",
+              )
+            : t("countryList.clickHint", "Click on a country to view details")}
+        </span>
+        <span style={{ color: "#8A8A8A" }}>
+          {t("countryList.count", { count: ranked.length })}
+        </span>
+      </div>
       {visible.map((r, index) => (
         <CountryCard
           key={r.country.code}
@@ -141,6 +157,9 @@ export function CountryList({
           index={index}
           expanded={expandedCode === r.country.code}
           onToggle={() => onToggleExpanded?.(r.country.code)}
+          compareMode={compareMode}
+          selected={selectedCodes.has(r.country.code)}
+          onSelectToggle={() => onToggleSelect?.(r.country.code)}
         />
       ))}
       {/* Invisible sentinel — entering the viewport triggers the next page load */}

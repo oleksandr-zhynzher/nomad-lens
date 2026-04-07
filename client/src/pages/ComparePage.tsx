@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Flag, Globe, ArrowDownWideNarrow, Plane } from "lucide-react";
+import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
@@ -7,19 +7,44 @@ import { WeightPanel } from "../components/WeightPanel";
 import { CountryComparison } from "../components/CountryComparison";
 import { RegionComparison } from "../components/RegionComparison";
 import { NomadVisaComparison } from "../components/NomadVisaComparison";
+import { BudgetComparison } from "../components/BudgetComparison";
+import { BudgetFilterPanel } from "../components/BudgetFilterPanel";
+import { PageHeroBanner } from "../components/PageHeroBanner";
 import { useCountries } from "../hooks/useCountries";
 import { useWeightState } from "../hooks/useWeightState";
+import { useBudgetState } from "../hooks/useBudgetState";
+import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
 
 export function ComparePage() {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [showWeights, setShowWeights] = useState(false);
+  const compareMode: "countries" | "regions" | "nomadVisas" | "budget" =
+    searchParams.get("m") === "regions"
+      ? "regions"
+      : searchParams.get("m") === "nomadVisas"
+        ? "nomadVisas"
+        : searchParams.get("m") === "budget"
+          ? "budget"
+          : "countries";
+  const selectedCodes = searchParams.get("c")?.split(",").filter(Boolean) ?? [];
+
+  const [showWeights, setShowWeights] = useState(compareMode === "budget");
   const [sortTrigger, setSortTrigger] = useState(0);
   const [countrySelectionCount, setCountrySelectionCount] = useState(0);
   const [copied, setCopied] = useState(false);
 
   const ws = useWeightState();
   const { countries } = useCountries();
+  const bs = useBudgetState();
+  const budgetMatches = useBudgetMatcher(
+    countries,
+    bs.budget,
+    bs.housing,
+    bs.bedrooms,
+    bs.peopleCount,
+    bs.categoryWeights,
+    bs.qualityBlend,
+  );
 
   // Keep the weight panel sized to fit from its current position to the viewport bottom
   const panelRef = useRef<HTMLDivElement>(null);
@@ -42,16 +67,12 @@ export function ComparePage() {
     };
   }, [showWeights, syncPanelHeight]);
 
-  // URL-driven compare state — persisted so links are shareable
-  const compareMode: "countries" | "regions" | "nomadVisas" =
-    searchParams.get("m") === "regions"
-      ? "regions"
-      : searchParams.get("m") === "nomadVisas"
-        ? "nomadVisas"
-        : "countries";
-  const selectedCodes = searchParams.get("c")?.split(",").filter(Boolean) ?? [];
-
-  const setCompareMode = (mode: "countries" | "regions" | "nomadVisas") => {
+  const setCompareMode = (
+    mode: "countries" | "regions" | "nomadVisas" | "budget",
+  ) => {
+    if (mode === "budget") {
+      setShowWeights(true);
+    }
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
@@ -87,210 +108,117 @@ export function ComparePage() {
   return (
     <Layout>
       <div>
-        {/* Hero banner — constrained to 1200px like NomadVisasPage */}
-        <div
-          style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }}
+        <PageHeroBanner
+          backgroundImage="/hero-map.png"
+          eyebrow={t("compare.eyebrow")}
+          title={
+            compareMode === "countries"
+              ? t("compare.countryTitle")
+              : compareMode === "regions"
+                ? t("compare.regionTitle")
+                : compareMode === "budget"
+                  ? t("compare.budgetTitle", "Budget Comparison")
+                  : t("compare.nomadVisaTitle")
+          }
+          subtitle={
+            compareMode === "countries"
+              ? t("compare.countrySubtitle")
+              : compareMode === "regions"
+                ? t("compare.regionSubtitle")
+                : compareMode === "budget"
+                  ? t(
+                      "compare.budgetSubtitle",
+                      "Compare monthly cost of living across countries side by side",
+                    )
+                  : t("compare.nomadVisaSubtitle")
+          }
         >
-          <div
-            className="relative mb-6 md:mb-8 overflow-hidden rounded-lg"
-            style={{
-              background: "#0A0D12",
-              backgroundImage: "url('/hero-map.png')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            {/* Gradient overlay */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
-              }}
-            />
-
-            <div
-              className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
-              style={{ minHeight: "160px" }}
-            >
-              {/* Eyebrow with dots */}
-              <div className="flex items-center gap-2 mb-2 md:mb-3">
-                {t("compare.eyebrow")
-                  .split("·")
-                  .map((word, i) => (
-                    <span
-                      key={i}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "8px",
-                      }}
-                    >
-                      <span
-                        style={{
-                          width: "4px",
-                          height: "4px",
-                          borderRadius: "50%",
-                          backgroundColor: "var(--color-accent-dim)",
-                          flexShrink: 0,
-                          display: "inline-block",
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "11px",
-                          fontWeight: 500,
-                          letterSpacing: "2.5px",
-                          textTransform: "uppercase",
-                          color: "var(--color-accent-dim)",
-                          lineHeight: 1,
-                        }}
-                      >
-                        {word.trim()}
-                      </span>
-                    </span>
-                  ))}
-              </div>
-
-              {/* Title */}
-              <h1
-                className="text-3xl md:text-6xl"
+          <div className="flex items-center gap-4 md:gap-6">
+            <div>
+              <div
                 style={{
-                  fontFamily: "Oswald, sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.95",
-                  color: "#FFFFFF",
-                  marginBottom: "8px",
+                  fontFamily: "IBM Plex Mono, monospace",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "var(--color-accent-dim)",
+                  lineHeight: "1",
                 }}
               >
-                {compareMode === "countries"
-                  ? t("compare.countryTitle")
-                  : compareMode === "regions"
-                    ? t("compare.regionTitle")
-                    : t("compare.nomadVisaTitle")}
-              </h1>
-
-              {/* Subtitle */}
-              <p
-                className="hidden md:block"
+                {countries.length}
+              </div>
+              <div
                 style={{
                   fontFamily: "Inter, sans-serif",
-                  fontSize: "15px",
-                  color: "#777777",
-                  maxWidth: "580px",
-                  marginBottom: "20px",
+                  fontSize: "10px",
+                  color: "#757575",
+                  textTransform: "uppercase",
+                  letterSpacing: "1px",
+                  marginTop: "4px",
                 }}
               >
-                {compareMode === "countries"
-                  ? t("compare.countrySubtitle")
-                  : compareMode === "regions"
-                    ? t("compare.regionSubtitle")
-                    : t("compare.nomadVisaSubtitle")}
-              </p>
-
-              {/* Copper rule */}
+                {t("hero.countries")}
+              </div>
+            </div>
+            <div
+              className="w-px h-6 md:h-8"
+              style={{ backgroundColor: "#333333" }}
+            />
+            <div>
               <div
-                className="hidden md:block"
                 style={{
-                  width: "128px",
-                  height: "2px",
-                  backgroundColor: "var(--color-accent)",
-                  marginBottom: "16px",
+                  fontFamily: "IBM Plex Mono, monospace",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "var(--color-accent-dim)",
+                  lineHeight: "1",
                 }}
-              />
-
-              {/* Stats row */}
-              <div className="flex items-center gap-4 md:gap-6">
-                <div>
-                  <div
-                    style={{
-                      fontFamily: "IBM Plex Mono, monospace",
-                      fontSize: "18px",
-                      fontWeight: 600,
-                      color: "var(--color-accent-dim)",
-                      lineHeight: "1",
-                    }}
-                  >
-                    {countries.length}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#444444",
-                      textTransform: "uppercase",
-                      letterSpacing: "1px",
-                      marginTop: "4px",
-                    }}
-                  >
-                    {t("hero.countries")}
-                  </div>
-                </div>
-                <div
-                  className="w-px h-6 md:h-8"
-                  style={{ backgroundColor: "#333333" }}
-                />
-                <div>
-                  <div
-                    style={{
-                      fontFamily: "IBM Plex Mono, monospace",
-                      fontSize: "18px",
-                      fontWeight: 600,
-                      color: "var(--color-accent-dim)",
-                      lineHeight: "1",
-                    }}
-                  >
-                    {countries.filter((c) => c.hasNomadVisa).length}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#444444",
-                      textTransform: "uppercase",
-                      letterSpacing: "1px",
-                      marginTop: "4px",
-                    }}
-                  >
-                    {t("compare.nomadVisas")}
-                  </div>
-                </div>
-                <div
-                  className="w-px h-6 md:h-8"
-                  style={{ backgroundColor: "#333333" }}
-                />
-                <div>
-                  <div
-                    style={{
-                      fontFamily: "IBM Plex Mono, monospace",
-                      fontSize: "18px",
-                      fontWeight: 600,
-                      color: "var(--color-accent-dim)",
-                      lineHeight: "1",
-                    }}
-                  >
-                    {Object.keys(countries[0]?.scores ?? {}).length || 29}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#444444",
-                      textTransform: "uppercase",
-                      letterSpacing: "1px",
-                      marginTop: "4px",
-                    }}
-                  >
-                    {t("hero.indicators")}
-                  </div>
-                </div>
+              >
+                {countries.filter((c) => c.hasNomadVisa).length}
+              </div>
+              <div
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "10px",
+                  color: "#757575",
+                  textTransform: "uppercase",
+                  letterSpacing: "1px",
+                  marginTop: "4px",
+                }}
+              >
+                {t("compare.nomadVisas")}
+              </div>
+            </div>
+            <div
+              className="w-px h-6 md:h-8"
+              style={{ backgroundColor: "#333333" }}
+            />
+            <div>
+              <div
+                style={{
+                  fontFamily: "IBM Plex Mono, monospace",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "var(--color-accent-dim)",
+                  lineHeight: "1",
+                }}
+              >
+                {Object.keys(countries[0]?.scores ?? {}).length || 29}
+              </div>
+              <div
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "10px",
+                  color: "#757575",
+                  textTransform: "uppercase",
+                  letterSpacing: "1px",
+                  marginTop: "4px",
+                }}
+              >
+                {t("hero.indicators")}
               </div>
             </div>
           </div>
-        </div>
-        {/* end 1200px hero wrapper */}
+        </PageHeroBanner>
 
         <div
           style={{
@@ -299,7 +227,7 @@ export function ComparePage() {
             padding: "16px 16px 24px",
           }}
         >
-          {/* Mode toggle + Parameters row */}
+          {/* Mode toggle + actions row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
             {/* Compare mode toggle pills */}
             <div
@@ -317,7 +245,7 @@ export function ComparePage() {
                     compareMode === "countries"
                       ? "var(--color-accent)"
                       : "transparent",
-                  color: compareMode === "countries" ? "#FFFFFF" : "#777777",
+                  color: compareMode === "countries" ? "#FFFFFF" : "#8A8A8A",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: compareMode === "countries" ? 500 : 400,
@@ -334,7 +262,7 @@ export function ComparePage() {
                     compareMode === "regions"
                       ? "var(--color-accent)"
                       : "transparent",
-                  color: compareMode === "regions" ? "#FFFFFF" : "#777777",
+                  color: compareMode === "regions" ? "#FFFFFF" : "#8A8A8A",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: compareMode === "regions" ? 500 : 400,
@@ -351,7 +279,7 @@ export function ComparePage() {
                     compareMode === "nomadVisas"
                       ? "var(--color-accent)"
                       : "transparent",
-                  color: compareMode === "nomadVisas" ? "#FFFFFF" : "#777777",
+                  color: compareMode === "nomadVisas" ? "#FFFFFF" : "#8A8A8A",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: compareMode === "nomadVisas" ? 500 : 400,
@@ -360,38 +288,104 @@ export function ComparePage() {
                 <Plane size={14} />
                 {t("compare.nomadVisas")}
               </button>
-            </div>
-
-            {/* Weights toggle */}
-            {compareMode !== "nomadVisas" && (
               <button
-                onClick={() => setShowWeights((p) => !p)}
-                className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors"
+                onClick={() => setCompareMode("budget")}
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                 style={{
-                  backgroundColor: showWeights
-                    ? "var(--color-accent)"
-                    : "#1A1A1A",
-                  borderColor: showWeights ? "var(--color-accent)" : "#333333",
-                  color: showWeights ? "#FFFFFF" : "#999999",
+                  backgroundColor:
+                    compareMode === "budget"
+                      ? "var(--color-accent)"
+                      : "transparent",
+                  color: compareMode === "budget" ? "#FFFFFF" : "#8A8A8A",
                   fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: compareMode === "budget" ? 500 : 400,
                 }}
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                  />
-                </svg>
-                {t("compare.parameters")}
+                <Wallet size={14} />
+                {t("compare.budget", "Budget")}
               </button>
-            )}
+            </div>
+
+            {/* Parameters + Share grouped controls */}
+            <div
+              className="flex w-full sm:w-auto rounded-md p-1"
+              style={{
+                backgroundColor: "#1A1A1A",
+                border: "1px solid #252525",
+              }}
+            >
+              {compareMode !== "nomadVisas" && (
+                <button
+                  onClick={() => setShowWeights((p) => !p)}
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                  style={{
+                    backgroundColor: showWeights
+                      ? "var(--color-accent)"
+                      : "transparent",
+                    color: showWeights ? "#FFFFFF" : "#8A8A8A",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "13px",
+                    fontWeight: showWeights ? 500 : 400,
+                  }}
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                    />
+                  </svg>
+                  {t("compare.parameters")}
+                </button>
+              )}
+
+              <button
+                onClick={handleShare}
+                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                style={{
+                  backgroundColor: copied ? "#2A4A2A" : "transparent",
+                  color: copied ? "#88CC88" : "#8A8A8A",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: copied ? 500 : 400,
+                  transition: "all 0.15s ease",
+                }}
+              >
+                {copied ? (
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                    />
+                  </svg>
+                )}
+                {copied ? t("weights.linkCopied") : t("compare.share")}
+              </button>
+            </div>
 
             {/* Sort button — visible when 2+ countries in country mode */}
             {compareMode === "countries" && countrySelectionCount > 1 && (
@@ -401,7 +395,7 @@ export function ComparePage() {
                 style={{
                   backgroundColor: "#1A1A1A",
                   borderColor: "#333333",
-                  color: "#999999",
+                  color: "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   cursor: "pointer",
                 }}
@@ -410,47 +404,6 @@ export function ComparePage() {
                 {t("compare.sortByScore")}
               </button>
             )}
-
-            {/* Share button */}
-            <button
-              onClick={handleShare}
-              className="flex items-center gap-1.5 px-4 py-2 rounded border text-sm font-medium transition-colors"
-              style={{
-                backgroundColor: copied ? "#2A4A2A" : "#1A1A1A",
-                borderColor: copied ? "#4A8A4A" : "#333333",
-                color: copied ? "#88CC88" : "#999999",
-                fontFamily: "Inter, sans-serif",
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-              }}
-            >
-              {copied ? (
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              ) : (
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                  />
-                </svg>
-              )}
-              {copied ? t("weights.linkCopied") : t("compare.share")}
-            </button>
           </div>
 
           <div
@@ -467,27 +420,31 @@ export function ComparePage() {
                 style={{
                   position: "sticky",
                   top: "16px",
-                  overflow: "hidden",
+                  overflow: compareMode === "budget" ? "auto" : "hidden",
                   borderRadius: "8px",
                 }}
               >
-                <WeightPanel
-                  weights={ws.weights}
-                  onChange={ws.handleWeightChange}
-                  onReset={ws.handleReset}
-                  weightsAreDefault={ws.weightsAreDefault}
-                  onShare={handleShare}
-                  climatePrefs={ws.climatePrefs}
-                  onClimatePrefsChange={ws.setClimatePrefs}
-                  nomadVisaOnly={ws.nomadVisaOnly}
-                  onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-                  schengenOnly={ws.schengenOnly}
-                  onSchengenOnlyChange={ws.setSchengenOnly}
-                  minTouristDays={ws.minTouristDays}
-                  onMinTouristDaysChange={ws.setMinTouristDays}
-                  weightMode={ws.weightMode}
-                  onWeightModeChange={ws.handleWeightModeChange}
-                />
+                {compareMode === "budget" ? (
+                  <BudgetFilterPanel bs={bs} />
+                ) : (
+                  <WeightPanel
+                    weights={ws.weights}
+                    onChange={ws.handleWeightChange}
+                    onReset={ws.handleReset}
+                    weightsAreDefault={ws.weightsAreDefault}
+                    onShare={handleShare}
+                    climatePrefs={ws.climatePrefs}
+                    onClimatePrefsChange={ws.setClimatePrefs}
+                    nomadVisaOnly={ws.nomadVisaOnly}
+                    onNomadVisaOnlyChange={ws.setNomadVisaOnly}
+                    schengenOnly={ws.schengenOnly}
+                    onSchengenOnlyChange={ws.setSchengenOnly}
+                    minTouristDays={ws.minTouristDays}
+                    onMinTouristDaysChange={ws.setMinTouristDays}
+                    weightMode={ws.weightMode}
+                    onWeightModeChange={ws.handleWeightModeChange}
+                  />
+                )}
               </div>
             )}
             <div style={{ minWidth: 0 }}>
@@ -500,6 +457,13 @@ export function ComparePage() {
               ) : compareMode === "nomadVisas" ? (
                 <NomadVisaComparison
                   countries={countries}
+                  selectedCodes={selectedCodes}
+                  onSelectedCodesChange={handleSelectedCodesChange}
+                />
+              ) : compareMode === "budget" ? (
+                <BudgetComparison
+                  countries={countries}
+                  matches={budgetMatches}
                   selectedCodes={selectedCodes}
                   onSelectedCodesChange={handleSelectedCodesChange}
                 />

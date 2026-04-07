@@ -75,7 +75,7 @@ function IndicatorCard({
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "13px",
-          color: "#666666",
+          color: "#8A8A8A",
           lineHeight: 1.6,
         }}
       >

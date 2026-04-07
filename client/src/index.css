@@ -8,11 +8,11 @@
     --color-surface-3: #141414;
     --color-border: #333333;
     --color-text: #FFFFFF;
-    --color-text-secondary: #CCCCCC;
-    --color-text-muted: #999999;
-    --color-text-dim: #666666;
-    --color-text-dimmer: #555555;
-    --color-text-dimmest: #444444;
+    --color-text-secondary: #D1D1D1;
+    --color-text-muted: #9E9E9E;
+    --color-text-dim: #8A8A8A;
+    --color-text-dimmer: #808080;
+    --color-text-dimmest: #757575;
     --color-accent: #8F5A3C;
     --color-accent-dim: #C2956A;
     --color-success: #4CAF50;
@@ -70,5 +70,14 @@
   /* Prevent text selection on interactive elements */
   button, a {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Hide scrollbar while keeping scroll functionality */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

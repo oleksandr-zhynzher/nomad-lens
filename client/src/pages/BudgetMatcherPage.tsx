@@ -14,9 +14,10 @@ import {
   X,
   Info,
   Search,
+  GitCompare,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { Tooltip } from "../components/Tooltip";
@@ -79,7 +80,7 @@ function ToggleGroup<T extends string | number>({
               fontSize: 12,
               fontWeight: active ? 500 : 400,
               backgroundColor: active ? "var(--color-accent)" : "transparent",
-              color: active ? "#FFFFFF" : "#666666",
+              color: active ? "#FFFFFF" : "#8A8A8A",
               textAlign: "center",
               transition: "all 0.15s ease",
             }}
@@ -95,6 +96,7 @@ function ToggleGroup<T extends string | number>({
 export function BudgetMatcherPage() {
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
+  const navigate = useNavigate();
   const { countries, loading } = useCountries();
   const bs = useBudgetState();
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
@@ -102,6 +104,30 @@ export function BudgetMatcherPage() {
   const [search, setSearch] = useState("");
   const sentinelRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Compare mode
+  const [compareMode, setCompareMode] = useState(false);
+  const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
+
+  const toggleSelect = (code: string) =>
+    setSelectedCodes((prev) => {
+      const next = new Set(prev);
+      if (next.has(code)) next.delete(code);
+      else next.add(code);
+      return next;
+    });
+
+  const exitCompareMode = () => {
+    setCompareMode(false);
+    setSelectedCodes(new Set());
+  };
+
+  const handleCompare = () => {
+    if (selectedCodes.size < 2) return;
+    navigate(
+      `${langPrefix}/compare?m=budget&c=${Array.from(selectedCodes).join(",")}`,
+    );
+  };
 
   const matches = useBudgetMatcher(
     countries,
@@ -158,7 +184,7 @@ export function BudgetMatcherPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: 12,
-              color: "#555555",
+              color: "#808080",
               paddingBottom: 2,
             }}
           >
@@ -185,7 +211,7 @@ export function BudgetMatcherPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: 10,
-              color: "#555555",
+              color: "#808080",
             }}
           >
             $300
@@ -194,7 +220,7 @@ export function BudgetMatcherPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: 10,
-              color: "#555555",
+              color: "#808080",
             }}
           >
             $10,000
@@ -272,7 +298,7 @@ export function BudgetMatcherPage() {
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: 10,
-                color: "#555555",
+                color: "#808080",
               }}
             >
               {t("budget.pureAffordability", "Pure Affordability")}
@@ -281,7 +307,7 @@ export function BudgetMatcherPage() {
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: 10,
-                color: "#555555",
+                color: "#808080",
               }}
             >
               {t("budget.qualityFocus", "Country Quality")}
@@ -310,7 +336,7 @@ export function BudgetMatcherPage() {
               fontWeight: 600,
               letterSpacing: 1.5,
               textTransform: "uppercase",
-              color: "#888888",
+              color: "#9E9E9E",
               flex: 1,
               textAlign: "left",
             }}
@@ -320,7 +346,7 @@ export function BudgetMatcherPage() {
           <ChevronDown
             size={14}
             style={{
-              color: "#555555",
+              color: "#808080",
               transform: !collapsed.lifestyle
                 ? "rotate(0deg)"
                 : "rotate(-90deg)",
@@ -486,7 +512,7 @@ export function BudgetMatcherPage() {
               fontWeight: 600,
               letterSpacing: 1.5,
               textTransform: "uppercase",
-              color: "#888888",
+              color: "#9E9E9E",
               flex: 1,
               textAlign: "left",
             }}
@@ -519,7 +545,7 @@ export function BudgetMatcherPage() {
           <ChevronDown
             size={14}
             style={{
-              color: "#555555",
+              color: "#808080",
               transform: !collapsed.categories
                 ? "rotate(0deg)"
                 : "rotate(-90deg)",
@@ -542,7 +568,7 @@ export function BudgetMatcherPage() {
                         gap: 6,
                       }}
                     >
-                      <Icon size={14} color="#888888" />
+                      <Icon size={14} color="#9E9E9E" />
                       <Link
                         to={`${langPrefix}/budget-categories`}
                         style={{
@@ -744,7 +770,7 @@ export function BudgetMatcherPage() {
                     fontWeight: 700,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
-                    color: "#999999",
+                    color: "#9E9E9E",
                   }}
                 >
                   {t("budget.eyebrow", "BUDGET MATCHER")}
@@ -757,7 +783,7 @@ export function BudgetMatcherPage() {
                     height: "32px",
                     borderRadius: "4px",
                     backgroundColor: "#333333",
-                    color: "#999999",
+                    color: "#9E9E9E",
                     border: "none",
                     cursor: "pointer",
                   }}
@@ -881,7 +907,7 @@ export function BudgetMatcherPage() {
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontSize: "15px",
-                    color: "#777777",
+                    color: "#8A8A8A",
                     maxWidth: "580px",
                     marginBottom: "20px",
                   }}
@@ -919,7 +945,7 @@ export function BudgetMatcherPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
-                        color: "#444444",
+                        color: "#757575",
                         textTransform: "uppercase",
                         letterSpacing: "1px",
                         marginTop: "4px",
@@ -948,7 +974,7 @@ export function BudgetMatcherPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
-                        color: "#444444",
+                        color: "#757575",
                         textTransform: "uppercase",
                         letterSpacing: "1px",
                         marginTop: "4px",
@@ -981,7 +1007,7 @@ export function BudgetMatcherPage() {
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
-                          color: "#444444",
+                          color: "#757575",
                           textTransform: "uppercase",
                           letterSpacing: "1px",
                           marginTop: "4px",
@@ -1005,44 +1031,163 @@ export function BudgetMatcherPage() {
                 borderBottom: "1px solid #1a1a1a",
               }}
             >
-              {/* Search input */}
-              <div className="relative mb-3">
-                <Search
-                  className="absolute left-3 top-1/2 -translate-y-1/2"
-                  size={16}
-                  style={{ color: "#555555", pointerEvents: "none" }}
-                />
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  placeholder={t("search.placeholder", "Search countries…")}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-9 pr-9 py-2.5 rounded-md focus:outline-none"
-                  style={{
-                    backgroundColor: "#161616",
-                    border: "1px solid #1E1E22",
-                    color: "#FFFFFF",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "14px",
-                  }}
-                />
-                {search.length > 0 && (
-                  <button
-                    onClick={() => setSearch("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center"
+              {/* Search + compare row */}
+              <div className="flex items-center gap-2 mb-3">
+                {/* Search input */}
+                <div className="relative flex-1">
+                  <Search
+                    className="absolute left-3 top-1/2 -translate-y-1/2"
+                    size={16}
+                    style={{ color: "#808080", pointerEvents: "none" }}
+                  />
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder={t("search.placeholder", "Search countries…")}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="w-full pl-9 pr-9 py-2.5 rounded-md focus:outline-none"
                     style={{
-                      width: "22px",
-                      height: "22px",
-                      borderRadius: "3px",
-                      border: "none",
-                      cursor: "pointer",
-                      backgroundColor: "#2A2A2A",
-                      color: "#CCCCCC",
+                      backgroundColor: "#161616",
+                      border: "1px solid #1E1E22",
+                      color: "#FFFFFF",
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "14px",
                     }}
-                    aria-label="Clear search"
+                  />
+                  {search.length > 0 && (
+                    <button
+                      onClick={() => setSearch("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center"
+                      style={{
+                        width: "22px",
+                        height: "22px",
+                        borderRadius: "3px",
+                        border: "none",
+                        cursor: "pointer",
+                        backgroundColor: "#2A2A2A",
+                        color: "#CCCCCC",
+                      }}
+                      aria-label="Clear search"
+                    >
+                      <X size={13} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Compare mode controls */}
+                {compareMode ? (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleCompare}
+                        disabled={selectedCodes.size < 2}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          height: "40px",
+                          paddingLeft: "14px",
+                          paddingRight: "14px",
+                          borderRadius: "6px",
+                          border:
+                            selectedCodes.size < 2
+                              ? "1px solid var(--color-accent-dim)"
+                              : "none",
+                          cursor:
+                            selectedCodes.size < 2 ? "default" : "pointer",
+                          backgroundColor:
+                            selectedCodes.size < 2
+                              ? "transparent"
+                              : "var(--color-accent)",
+                          color:
+                            selectedCodes.size < 2
+                              ? "var(--color-accent-dim)"
+                              : "#FFFFFF",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "13px",
+                          fontWeight: 600,
+                          whiteSpace: "nowrap",
+                          transition: "all 0.15s ease",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <GitCompare size={15} />
+                        {t("nomadVisasPage.compareSelected", "Compare")}
+                        {selectedCodes.size > 0 && (
+                          <span
+                            style={{
+                              backgroundColor:
+                                selectedCodes.size < 2
+                                  ? "rgba(194,149,106,0.2)"
+                                  : "rgba(255,255,255,0.25)",
+                              borderRadius: "10px",
+                              padding: "1px 7px",
+                              fontSize: "12px",
+                            }}
+                          >
+                            {selectedCodes.size}
+                          </span>
+                        )}
+                      </button>
+                      <button
+                        onClick={exitCompareMode}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "6px",
+                          border: "1px solid #2A2A2A",
+                          cursor: "pointer",
+                          backgroundColor: "transparent",
+                          color: "#8A8A8A",
+                          flexShrink: 0,
+                        }}
+                        aria-label="Exit compare mode"
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "8px",
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "12px",
+                        color: "#8A8A8A",
+                      }}
+                    >
+                      {t(
+                        "compare.helperText",
+                        "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+                      )}
+                    </p>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => setCompareMode(true)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                      height: "40px",
+                      paddingLeft: "14px",
+                      paddingRight: "14px",
+                      borderRadius: "6px",
+                      border: "1px solid #2A2A2A",
+                      cursor: "pointer",
+                      backgroundColor: "transparent",
+                      color: "#9E9E9E",
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      whiteSpace: "nowrap",
+                      flexShrink: 0,
+                    }}
                   >
-                    <X size={13} />
+                    <GitCompare size={15} />
+                    {t("nomadVisasPage.compareMode", "Compare")}
                   </button>
                 )}
               </div>
@@ -1068,7 +1213,7 @@ export function BudgetMatcherPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "11px",
-                        color: "#666666",
+                        color: "#8A8A8A",
                       }}
                     >
                       {t(`budget.categories.${key}`)}
@@ -1098,48 +1243,140 @@ export function BudgetMatcherPage() {
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: 14,
-                  color: "#666666",
+                  color: "#8A8A8A",
                 }}
               >
                 {t("budget.noResults", "No countries with cost data available")}
               </p>
             ) : (
               <div className="flex flex-col">
-                <p
-                  className="text-xs text-right pr-1 my-4"
+                <div
+                  className="flex items-center justify-between px-1 my-4"
                   style={{
                     fontFamily: "Inter, sans-serif",
-                    color: "#666666",
+                    fontSize: "12px",
                   }}
                 >
-                  {t("countryList.count", { count: filteredMatches.length })}
-                </p>
+                  <span style={{ color: "#9E9E9E" }}>
+                    {t(
+                      "countryList.clickHint",
+                      "Click on a country to view details",
+                    )}
+                  </span>
+                  <span style={{ color: "#8A8A8A" }}>
+                    {t("countryList.count", { count: filteredMatches.length })}
+                  </span>
+                </div>
                 {filteredMatches.length === 0 ? (
                   <p
                     className="text-center py-20"
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: 14,
-                      color: "#666666",
+                      color: "#8A8A8A",
                     }}
                   >
                     {t("countryList.noResults")}
                   </p>
                 ) : (
-                  filteredMatches.map((m, i) => (
-                    <BudgetCountryCard
-                      key={m.country.code}
-                      match={m}
-                      budget={bs.budget}
-                      rank={i + 1}
-                      expanded={expandedCode === m.country.code}
-                      onToggle={() =>
-                        setExpandedCode((prev) =>
-                          prev === m.country.code ? null : m.country.code,
-                        )
-                      }
-                    />
-                  ))
+                  filteredMatches.map((m, i) => {
+                    const isSelected = selectedCodes.has(m.country.code);
+                    return (
+                      <div
+                        key={m.country.code}
+                        style={{
+                          position: "relative",
+                          paddingLeft: compareMode ? "38px" : 0,
+                        }}
+                        onClick={
+                          compareMode
+                            ? () => toggleSelect(m.country.code)
+                            : undefined
+                        }
+                      >
+                        {compareMode && (
+                          <div
+                            style={{
+                              position: "absolute",
+                              inset: 0,
+                              zIndex: 2,
+                              cursor: "pointer",
+                              backgroundColor: isSelected
+                                ? "rgba(26,42,26,0.35)"
+                                : "transparent",
+                              borderRadius: "4px",
+                            }}
+                          />
+                        )}
+                        {compareMode && (
+                          <div
+                            style={{
+                              position: "absolute",
+                              left: "10px",
+                              top: "50%",
+                              transform: "translateY(-50%)",
+                              zIndex: 3,
+                              width: "20px",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: "16px",
+                                height: "16px",
+                                borderRadius: "3px",
+                                border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
+                                backgroundColor: isSelected
+                                  ? "var(--color-accent)"
+                                  : "transparent",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                transition: "all 0.1s ease",
+                              }}
+                            >
+                              {isSelected && (
+                                <svg
+                                  width="9"
+                                  height="7"
+                                  viewBox="0 0 9 7"
+                                  fill="none"
+                                >
+                                  <path
+                                    d="M1 3.5L3.5 6L8 1"
+                                    stroke="white"
+                                    strokeWidth="1.5"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                        <BudgetCountryCard
+                          match={m}
+                          budget={bs.budget}
+                          rank={i + 1}
+                          expanded={
+                            !compareMode && expandedCode === m.country.code
+                          }
+                          onToggle={
+                            compareMode
+                              ? undefined
+                              : () =>
+                                  setExpandedCode((prev) =>
+                                    prev === m.country.code
+                                      ? null
+                                      : m.country.code,
+                                  )
+                          }
+                        />
+                      </div>
+                    );
+                  })
                 )}
               </div>
             )}

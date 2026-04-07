@@ -51,21 +51,24 @@
     "countriesScored": "{{count}} стран в рейтинге · нажмите для деталей"
   },
   "compare": {
-    "eyebrow": "СРАВНИТЬ",
-    "countryTitle": "СРАВНЕНИЕ СТРАН",
-    "regionTitle": "СРАВНЕНИЕ РЕГИОНОВ",
+    "eyebrow": "Сравнить",
+    "countryTitle": "Сравнение стран",
+    "regionTitle": "Сравнение регионов",
     "countrySubtitle": "Выберите страны для сравнения по всем показателям",
     "regionSubtitle": "Сравните средние баллы по регионам мира",
     "countries": "Страны",
     "regions": "Регионы",
     "parameters": "Параметры",
+    "compareMode": "Сравнить",
+    "compareSelected": "Сравнить",
+    "helperText": "Выберите страны с помощью флажков в списке, затем нажмите «Сравнить», чтобы открыть страницу сравнения.",
     "sortByScore": "Сортировать по баллу",
     "share": "Поделиться",
     "addCountry": "Добавить страну",
     "searchCountry": "Поиск страны…",
     "noCountriesFound": "Страны не найдены",
     "nomadVisas": "Номад-визы",
-    "nomadVisaTitle": "СРАВНЕНИЕ НОМАД-ВИЗ",
+    "nomadVisaTitle": "Сравнение номад-виз",
     "nomadVisaSubtitle": "Сравните программы цифровых номад-виз",
     "visaDetail": "Детали визы",
     "visaFields": {
@@ -157,7 +160,8 @@
   "countryList": {
     "noResults": "Ни одна страна не соответствует вашему запросу.",
     "retry": "Повторить",
-    "count": "{{count}} стран"
+    "count": "{{count}} стран",
+    "clickHint": "Нажмите на страну для просмотра деталей"
   },
   "countryPage": {
     "notFound": "Страна не найдена",

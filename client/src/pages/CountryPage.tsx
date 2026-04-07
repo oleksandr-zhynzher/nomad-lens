@@ -117,7 +117,7 @@ export function CountryPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "14px",
-              color: "#666666",
+              color: "#8A8A8A",
             }}
           >
             {t("loading")}
@@ -144,7 +144,7 @@ export function CountryPage() {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "14px",
-              color: "#999999",
+              color: "#9E9E9E",
             }}
           >
             {error ?? t("countryPage.notFound")}
@@ -207,10 +207,10 @@ export function CountryPage() {
           {/* Back button */}
           <button
             onClick={() => navigate(-1)}
+            className="left-4 md:left-8"
             style={{
               position: "absolute",
               top: "20px",
-              left: "32px",
               zIndex: 10,
               display: "flex",
               alignItems: "center",
@@ -232,22 +232,21 @@ export function CountryPage() {
 
           {/* Bottom content: flag + name + badges */}
           <div
+            className="px-4 pb-6 md:px-16 md:pb-8"
             style={{
               position: "absolute",
               inset: 0,
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-end",
-              padding: "32px 64px",
               gap: "16px",
             }}
           >
             {/* Flag + name row */}
-            <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <div className="flex items-center gap-3 md:gap-6 flex-wrap">
               <div
+                className="w-16 h-11 md:w-[100px] md:h-[67px]"
                 style={{
-                  width: "100px",
-                  height: "67px",
                   borderRadius: "6px",
                   overflow: "hidden",
                   flexShrink: 0,
@@ -276,6 +275,7 @@ export function CountryPage() {
                   {t("countryPage.countryDetailLabel")}
                 </span>
                 <h1
+                  className="text-2xl md:text-4xl"
                   style={{
                     fontFamily: "Oswald, sans-serif",
                     fontWeight: 700,
@@ -287,8 +287,9 @@ export function CountryPage() {
                   {locC.name}
                 </h1>
               </div>
-              <div style={{ flex: 1 }} />
+              <div className="hidden md:block" style={{ flex: 1 }} />
               <div
+                className="hidden md:block"
                 style={{
                   backgroundColor: "rgba(26,26,26,0.8)",
                   borderRadius: "6px",
@@ -300,7 +301,7 @@ export function CountryPage() {
                   style={{
                     fontFamily: "IBM Plex Mono, monospace",
                     fontSize: "14px",
-                    color: "#555555",
+                    color: "#808080",
                   }}
                 >
                   {c.code}
@@ -418,12 +419,11 @@ export function CountryPage() {
 
         {/* ── statsRow ── */}
         <div
+          className="px-4 md:px-16 grid grid-cols-2 md:flex md:items-center gap-3"
           style={{
             backgroundColor: "#0D0D0F",
-            padding: "24px 64px",
-            gap: "12px",
-            display: "flex",
-            alignItems: "center",
+            paddingTop: "24px",
+            paddingBottom: "24px",
           }}
         >
           <div
@@ -460,7 +460,7 @@ export function CountryPage() {
                   fontFamily: "IBM Plex Mono, monospace",
                   fontSize: "12px",
                   fontWeight: 400,
-                  color: "#555555",
+                  color: "#808080",
                 }}
               >
                 #{rank}
@@ -547,15 +547,17 @@ export function CountryPage() {
         {/* ── visa-section ── */}
         {visa && (
           <div
+            className="px-4 md:px-16"
             style={{
               backgroundColor: "#0D0D0F",
-              padding: "48px 64px",
+              paddingTop: "32px",
+              paddingBottom: "32px",
               gap: "32px",
               display: "flex",
               flexDirection: "column",
             }}
           >
-            <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+            <div className="flex flex-col md:flex-row gap-3 md:items-center">
               <h2
                 style={{
                   fontFamily: "Oswald, sans-serif",
@@ -588,22 +590,21 @@ export function CountryPage() {
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
-                  color: "#444444",
+                  color: "#757575",
                 }}
               >
                 {t("countryPage.updated", { date: visa.lastUpdated })}
               </span>
             </div>
 
-            <div style={{ display: "flex", gap: "24px" }}>
+            <div className="flex flex-col md:flex-row gap-5 md:gap-6">
               {/* Left column – 440px */}
               <div
+                className="w-full md:w-[440px] md:flex-shrink-0"
                 style={{
-                  width: "440px",
                   display: "flex",
                   flexDirection: "column",
                   gap: "20px",
-                  flexShrink: 0,
                 }}
               >
                 {/* Duration & Cost */}
@@ -622,7 +623,7 @@ export function CountryPage() {
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
-                      color: "#555555",
+                      color: "#808080",
                       letterSpacing: "1.5px",
                       textTransform: "uppercase",
                     }}
@@ -708,7 +709,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "11px",
-                        color: "#666666",
+                        color: "#8A8A8A",
                       }}
                     >
                       {t("countryPage.applicationFee")}
@@ -728,7 +729,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "9px",
-                        color: "#444444",
+                        color: "#757575",
                         letterSpacing: "1px",
                         textTransform: "uppercase",
                       }}
@@ -753,7 +754,7 @@ export function CountryPage() {
                           style={{
                             fontFamily: "Inter, sans-serif",
                             fontSize: "11px",
-                            color: "#666666",
+                            color: "#8A8A8A",
                           }}
                         >
                           {visa.incomeRequirement.currency}{" "}
@@ -807,7 +808,7 @@ export function CountryPage() {
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
-                      color: "#555555",
+                      color: "#808080",
                       letterSpacing: "1.5px",
                       textTransform: "uppercase",
                     }}
@@ -853,7 +854,7 @@ export function CountryPage() {
                         style={{
                           fontFamily: "IBM Plex Mono, monospace",
                           fontSize: "13px",
-                          color: "#666666",
+                          color: "#8A8A8A",
                         }}
                       >
                         {" · "}
@@ -866,7 +867,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "12px",
-                        color: "#555555",
+                        color: "#808080",
                         margin: 0,
                       }}
                     >
@@ -891,7 +892,7 @@ export function CountryPage() {
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
-                      color: "#555555",
+                      color: "#808080",
                       letterSpacing: "1.5px",
                       textTransform: "uppercase",
                     }}
@@ -905,12 +906,12 @@ export function CountryPage() {
                       alignItems: "center",
                     }}
                   >
-                    <User size={14} color="#555555" />
+                    <User size={14} color="#808080" />
                     <span
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "13px",
-                        color: "#777777",
+                        color: "#8A8A8A",
                       }}
                     >
                       {t("countryPage.minimumAge", {
@@ -941,7 +942,7 @@ export function CountryPage() {
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
-                          color: "#888888",
+                          color: "#9E9E9E",
                           flex: 1,
                         }}
                       >
@@ -978,7 +979,7 @@ export function CountryPage() {
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
-                      color: "#555555",
+                      color: "#808080",
                       letterSpacing: "1.5px",
                       textTransform: "uppercase",
                     }}
@@ -1029,7 +1030,7 @@ export function CountryPage() {
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
-                      color: "#555555",
+                      color: "#808080",
                       letterSpacing: "1.5px",
                       textTransform: "uppercase",
                     }}
@@ -1068,7 +1069,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "13px",
-                        color: "#888888",
+                        color: "#9E9E9E",
                       }}
                     >
                       {t("countryPage.processing", {
@@ -1085,7 +1086,7 @@ export function CountryPage() {
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "9px",
-                      color: "#444444",
+                      color: "#757575",
                       letterSpacing: "1px",
                       textTransform: "uppercase",
                     }}
@@ -1105,12 +1106,12 @@ export function CountryPage() {
                         alignItems: "center",
                       }}
                     >
-                      <FileText size={13} color="#555555" />
+                      <FileText size={13} color="#808080" />
                       <span
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "12px",
-                          color: "#777777",
+                          color: "#8A8A8A",
                         }}
                       >
                         {doc}
@@ -1150,7 +1151,7 @@ export function CountryPage() {
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "11px",
-                      color: "#555555",
+                      color: "#808080",
                     }}
                   >
                     {getHostname(visa.officialUrl)}
@@ -1163,15 +1164,17 @@ export function CountryPage() {
 
         {/* ── scores-section + climate ── */}
         <div
+          className="px-4 md:px-16"
           style={{
             backgroundColor: "#0D0D0F",
-            padding: "48px 64px",
+            paddingTop: "32px",
+            paddingBottom: "32px",
             gap: "32px",
             display: "flex",
             flexDirection: "column",
           }}
         >
-          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+          <div className="flex flex-col md:flex-row gap-3 md:items-center">
             <h2
               style={{
                 fontFamily: "Oswald, sans-serif",
@@ -1188,7 +1191,7 @@ export function CountryPage() {
                 textAlign: "right",
                 fontFamily: "Inter, sans-serif",
                 fontSize: "12px",
-                color: "#444444",
+                color: "#757575",
               }}
             >
               {t("countryPage.categoriesSubtitle", {
@@ -1205,18 +1208,17 @@ export function CountryPage() {
             <>
               <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
               <div
+                className="-mx-4 px-4 md:-mx-16 md:px-16"
                 style={{
                   backgroundColor: "#0A0A0A",
-                  padding: "48px 64px",
+                  paddingTop: "32px",
+                  paddingBottom: "32px",
                   gap: "24px",
                   display: "flex",
                   flexDirection: "column",
-                  margin: "0 -64px",
                 }}
               >
-                <div
-                  style={{ display: "flex", gap: "12px", alignItems: "center" }}
-                >
+                <div className="flex flex-col md:flex-row gap-3 md:items-center">
                   <h2
                     style={{
                       fontFamily: "Oswald, sans-serif",
@@ -1233,7 +1235,7 @@ export function CountryPage() {
                       textAlign: "right",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
-                      color: "#444444",
+                      color: "#757575",
                     }}
                   >
                     {t(
@@ -1244,7 +1246,7 @@ export function CountryPage() {
                 </div>
 
                 {/* Summary row */}
-                <div style={{ display: "flex", gap: "16px" }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {c.costOfLiving.totalBasic !== null && (
                     <div
                       style={{
@@ -1281,7 +1283,7 @@ export function CountryPage() {
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
-                          color: "#555555",
+                          color: "#808080",
                         }}
                       >
                         {t("countryPage.colTotalBasic", "Basic Budget")}
@@ -1324,7 +1326,7 @@ export function CountryPage() {
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
-                          color: "#555555",
+                          color: "#808080",
                         }}
                       >
                         {t(
@@ -1337,13 +1339,7 @@ export function CountryPage() {
                 </div>
 
                 {/* Breakdown grid */}
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(4, 1fr)",
-                    gap: "12px",
-                  }}
-                >
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {(
                     [
                       {
@@ -1448,7 +1444,7 @@ export function CountryPage() {
                           style={{
                             fontFamily: "Inter, sans-serif",
                             fontSize: "10px",
-                            color: "#555555",
+                            color: "#808080",
                           }}
                         >
                           {label}
@@ -1466,18 +1462,17 @@ export function CountryPage() {
             <>
               <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
               <div
+                className="-mx-4 px-4 md:-mx-16 md:px-16"
                 style={{
                   backgroundColor: "#0A0A0A",
-                  padding: "48px 64px",
+                  paddingTop: "32px",
+                  paddingBottom: "32px",
                   gap: "24px",
                   display: "flex",
                   flexDirection: "column",
-                  margin: "0 -64px",
                 }}
               >
-                <div
-                  style={{ display: "flex", gap: "12px", alignItems: "center" }}
-                >
+                <div className="flex flex-col md:flex-row gap-3 md:items-center">
                   <h2
                     style={{
                       fontFamily: "Oswald, sans-serif",
@@ -1494,21 +1489,20 @@ export function CountryPage() {
                       textAlign: "right",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
-                      color: "#444444",
+                      color: "#757575",
                     }}
                   >
                     {seasonLabel} · {t("countryPage.annualAverages")}
                   </span>
                 </div>
 
-                <div style={{ display: "flex", gap: "16px" }}>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div
                     style={{
                       backgroundColor: "#111111",
                       borderRadius: "10px",
                       border: "1px solid #1E1E1E",
                       padding: "20px",
-                      flex: 1,
                       display: "flex",
                       flexDirection: "column",
                       gap: "8px",
@@ -1529,7 +1523,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
-                        color: "#555555",
+                        color: "#808080",
                       }}
                     >
                       {t("countryPage.annualMeanTemp")}
@@ -1541,7 +1535,6 @@ export function CountryPage() {
                       borderRadius: "10px",
                       border: "1px solid #1E1E1E",
                       padding: "20px",
-                      flex: 1,
                       display: "flex",
                       flexDirection: "column",
                       gap: "8px",
@@ -1562,7 +1555,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
-                        color: "#555555",
+                        color: "#808080",
                       }}
                     >
                       {t("countryPage.annualPrecipitation")}
@@ -1574,7 +1567,6 @@ export function CountryPage() {
                       borderRadius: "10px",
                       border: "1px solid #1E1E1E",
                       padding: "20px",
-                      flex: 1,
                       display: "flex",
                       flexDirection: "column",
                       gap: "8px",
@@ -1595,7 +1587,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
-                        color: "#555555",
+                        color: "#808080",
                       }}
                     >
                       {t("countryPage.hottestMonth")}
@@ -1607,7 +1599,6 @@ export function CountryPage() {
                       borderRadius: "10px",
                       border: "1px solid #1E1E1E",
                       padding: "20px",
-                      flex: 1,
                       display: "flex",
                       flexDirection: "column",
                       gap: "8px",
@@ -1628,7 +1619,7 @@ export function CountryPage() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
-                        color: "#555555",
+                        color: "#808080",
                       }}
                     >
                       {t("countryPage.coldestMonth")}

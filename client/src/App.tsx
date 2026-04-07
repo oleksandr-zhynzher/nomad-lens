@@ -7,8 +7,9 @@ import {
   ChevronDown,
   Filter,
   List,
+  GitCompare,
 } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
@@ -24,6 +25,7 @@ import { DATA_SOURCE_KEYS } from "./utils/dataSources";
 import "./index.css";
 
 export default function App() {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
@@ -37,6 +39,8 @@ export default function App() {
   const [searchMode, setSearchMode] = useState<"filter" | "highlight">(
     "filter",
   );
+  const [compareMode, setCompareMode] = useState(false);
+  const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -231,6 +235,25 @@ export default function App() {
         ? (allCodes[navCursor] ?? null)
         : highlightedCode;
 
+  const toggleSelect = useCallback((code: string) => {
+    setSelectedCodes((prev) => {
+      const next = new Set(prev);
+      if (next.has(code)) next.delete(code);
+      else next.add(code);
+      return next;
+    });
+  }, []);
+
+  const exitCompareMode = useCallback(() => {
+    setCompareMode(false);
+    setSelectedCodes(new Set());
+  }, []);
+
+  const handleCompare = useCallback(() => {
+    if (selectedCodes.size < 2) return;
+    navigate(`${langPrefix}/compare?c=${Array.from(selectedCodes).join(",")}`);
+  }, [selectedCodes, navigate, langPrefix]);
+
   return (
     <Layout>
       <div className="flex">
@@ -328,7 +351,7 @@ export default function App() {
                     fontWeight: 700,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
-                    color: "#999999",
+                    color: "#9E9E9E",
                   }}
                 >
                   {t("mobileSheet.weightsAndPreferences")}
@@ -341,7 +364,7 @@ export default function App() {
                     height: "32px",
                     borderRadius: "4px",
                     backgroundColor: "#333333",
-                    color: "#999999",
+                    color: "#9E9E9E",
                   }}
                   aria-label="Close parameters"
                 >
@@ -480,7 +503,7 @@ export default function App() {
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontSize: "15px",
-                    color: "#777777",
+                    color: "#8A8A8A",
                     maxWidth: "580px",
                     marginBottom: "20px",
                   }}
@@ -515,7 +538,7 @@ export default function App() {
                       style={{
                         fontFamily: "Inter, sans-serif",
                         fontSize: "10px",
-                        color: "#444444",
+                        color: "#757575",
                         textTransform: "uppercase",
                         letterSpacing: "1px",
                         marginTop: "4px",
@@ -548,7 +571,7 @@ export default function App() {
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
-                          color: "#444444",
+                          color: "#757575",
                           textTransform: "uppercase",
                           letterSpacing: "1px",
                           marginTop: "4px",
@@ -582,7 +605,7 @@ export default function App() {
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
-                          color: "#444444",
+                          color: "#757575",
                           textTransform: "uppercase",
                           letterSpacing: "1px",
                           marginTop: "4px",
@@ -616,7 +639,7 @@ export default function App() {
                         style={{
                           fontFamily: "Inter, sans-serif",
                           fontSize: "10px",
-                          color: "#444444",
+                          color: "#757575",
                           textTransform: "uppercase",
                           letterSpacing: "1px",
                           marginTop: "4px",
@@ -642,160 +665,284 @@ export default function App() {
                 borderBottom: "1px solid #1a1a1a",
               }}
             >
-              {/* Search bar */}
-              <div className={`relative${isSticky ? "" : " mb-4"}`}>
-                <Search
-                  className="absolute left-4 top-1/2 -translate-y-1/2"
-                  size={18}
-                  style={{ color: "#666666" }}
-                />
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  placeholder={t("search.placeholder")}
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-12 py-3 rounded-md focus:outline-none"
-                  style={{
-                    paddingRight:
-                      search.length === 0
-                        ? "16px"
-                        : searchMode === "highlight" &&
-                            search.trim().length >= 1
-                          ? "164px"
-                          : "72px",
-                    backgroundColor: "#161616",
-                    border: "1px solid #1E1E22",
-                    color: "#FFFFFF",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "14px",
-                  }}
-                />
-                {search.length > 0 && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                    <button
-                      onClick={() => setSearch("")}
-                      className="flex items-center justify-center"
+              {/* Search + compare row */}
+              <div className={`${isSticky ? "" : " mb-4"}`}>
+                <div className="flex items-center gap-2">
+                  <div className="relative flex-1 min-w-0">
+                    <Search
+                      className="absolute left-4 top-1/2 -translate-y-1/2"
+                      size={18}
+                      style={{ color: "#8A8A8A" }}
+                    />
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      placeholder={t("search.placeholder")}
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="w-full pl-12 rounded-md focus:outline-none"
                       style={{
-                        width: "24px",
-                        height: "24px",
-                        borderRadius: "3px",
-                        border: "none",
-                        cursor: "pointer",
-                        backgroundColor: "#2A2A2A",
-                        color: "#CCCCCC",
+                        height: "40px",
+                        paddingRight:
+                          search.length === 0
+                            ? "16px"
+                            : searchMode === "highlight" &&
+                                search.trim().length >= 1
+                              ? "164px"
+                              : "72px",
+                        backgroundColor: "#161616",
+                        border: "1px solid #1E1E22",
+                        color: "#FFFFFF",
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "14px",
                       }}
-                      aria-label="Clear search"
-                    >
-                      <X size={14} />
-                    </button>
-                    {searchMode === "highlight" &&
-                      search.trim().length >= 1 && (
-                        <>
-                          <span
-                            style={{
-                              fontFamily: "IBM Plex Mono, monospace",
-                              fontSize: "11px",
-                              color: "#666666",
-                              minWidth: "36px",
-                              textAlign: "right",
-                            }}
-                          >
-                            {matchingCodes.length > 0
-                              ? `${matchCursor + 1}/${matchingCodes.length}`
-                              : "0/0"}
-                          </span>
+                    />
+                    {search.length > 0 && (
+                      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                        <button
+                          onClick={() => setSearch("")}
+                          className="flex items-center justify-center"
+                          style={{
+                            width: "24px",
+                            height: "24px",
+                            borderRadius: "3px",
+                            border: "none",
+                            cursor: "pointer",
+                            backgroundColor: "#2A2A2A",
+                            color: "#CCCCCC",
+                          }}
+                          aria-label="Clear search"
+                        >
+                          <X size={14} />
+                        </button>
+                        {searchMode === "highlight" &&
+                          search.trim().length >= 1 && (
+                            <>
+                              <span
+                                style={{
+                                  fontFamily: "IBM Plex Mono, monospace",
+                                  fontSize: "11px",
+                                  color: "#8A8A8A",
+                                  minWidth: "36px",
+                                  textAlign: "right",
+                                }}
+                              >
+                                {matchingCodes.length > 0
+                                  ? `${matchCursor + 1}/${matchingCodes.length}`
+                                  : "0/0"}
+                              </span>
+                              <button
+                                onClick={goPrev}
+                                disabled={matchingCodes.length === 0}
+                                className="flex items-center justify-center"
+                                style={{
+                                  width: "24px",
+                                  height: "24px",
+                                  borderRadius: "3px",
+                                  border: "none",
+                                  cursor: matchingCodes.length
+                                    ? "pointer"
+                                    : "default",
+                                  backgroundColor: "#2A2A2A",
+                                  color: matchingCodes.length
+                                    ? "#CCCCCC"
+                                    : "#757575",
+                                }}
+                                aria-label="Previous match"
+                              >
+                                <ChevronUp size={14} />
+                              </button>
+                              <button
+                                onClick={goNext}
+                                disabled={matchingCodes.length === 0}
+                                className="flex items-center justify-center"
+                                style={{
+                                  width: "24px",
+                                  height: "24px",
+                                  borderRadius: "3px",
+                                  border: "none",
+                                  cursor: matchingCodes.length
+                                    ? "pointer"
+                                    : "default",
+                                  backgroundColor: "#2A2A2A",
+                                  color: matchingCodes.length
+                                    ? "#CCCCCC"
+                                    : "#757575",
+                                }}
+                                aria-label="Next match"
+                              >
+                                <ChevronDown size={14} />
+                              </button>
+                            </>
+                          )}
+                        <Tooltip
+                          side="bottom"
+                          content={
+                            searchMode === "filter" ? (
+                              <span>
+                                Switch to <strong>scroll mode</strong> — shows
+                                all countries, scrolls to each match.
+                              </span>
+                            ) : (
+                              <span>
+                                Switch to <strong>filter mode</strong> — hides
+                                non-matching countries.
+                              </span>
+                            )
+                          }
+                        >
                           <button
-                            onClick={goPrev}
-                            disabled={matchingCodes.length === 0}
+                            onClick={() => {
+                              setSearchMode((m) =>
+                                m === "filter" ? "highlight" : "filter",
+                              );
+                              setMatchCursor(0);
+                            }}
                             className="flex items-center justify-center"
                             style={{
                               width: "24px",
                               height: "24px",
                               borderRadius: "3px",
                               border: "none",
-                              cursor: matchingCodes.length
-                                ? "pointer"
-                                : "default",
+                              cursor: "pointer",
                               backgroundColor: "#2A2A2A",
-                              color: matchingCodes.length
-                                ? "#CCCCCC"
-                                : "#444444",
+                              color: "#9E9E9E",
                             }}
-                            aria-label="Previous match"
+                            aria-label={
+                              searchMode === "filter"
+                                ? "Switch to scroll mode"
+                                : "Switch to filter mode"
+                            }
                           >
-                            <ChevronUp size={14} />
+                            {searchMode === "filter" ? (
+                              <List size={13} />
+                            ) : (
+                              <Filter size={13} />
+                            )}
                           </button>
-                          <button
-                            onClick={goNext}
-                            disabled={matchingCodes.length === 0}
-                            className="flex items-center justify-center"
-                            style={{
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "3px",
-                              border: "none",
-                              cursor: matchingCodes.length
-                                ? "pointer"
-                                : "default",
-                              backgroundColor: "#2A2A2A",
-                              color: matchingCodes.length
-                                ? "#CCCCCC"
-                                : "#444444",
-                            }}
-                            aria-label="Next match"
-                          >
-                            <ChevronDown size={14} />
-                          </button>
-                        </>
-                      )}
-                    <Tooltip
-                      side="bottom"
-                      content={
-                        searchMode === "filter" ? (
-                          <span>
-                            Switch to <strong>scroll mode</strong> — shows all
-                            countries, scrolls to each match.
-                          </span>
-                        ) : (
-                          <span>
-                            Switch to <strong>filter mode</strong> — hides
-                            non-matching countries.
-                          </span>
-                        )
-                      }
-                    >
-                      <button
-                        onClick={() => {
-                          setSearchMode((m) =>
-                            m === "filter" ? "highlight" : "filter",
-                          );
-                          setMatchCursor(0);
-                        }}
-                        className="flex items-center justify-center"
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          borderRadius: "3px",
-                          border: "none",
-                          cursor: "pointer",
-                          backgroundColor: "#2A2A2A",
-                          color: "#888888",
-                        }}
-                        aria-label={
-                          searchMode === "filter"
-                            ? "Switch to scroll mode"
-                            : "Switch to filter mode"
-                        }
-                      >
-                        {searchMode === "filter" ? (
-                          <List size={13} />
-                        ) : (
-                          <Filter size={13} />
-                        )}
-                      </button>
-                    </Tooltip>
+                        </Tooltip>
+                      </div>
+                    )}
                   </div>
+
+                  <div className="flex items-center justify-end gap-2 shrink-0">
+                    {compareMode ? (
+                      <>
+                        <button
+                          onClick={handleCompare}
+                          disabled={selectedCodes.size < 2}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "6px",
+                            height: "40px",
+                            paddingLeft: "14px",
+                            paddingRight: "14px",
+                            borderRadius: "6px",
+                            border:
+                              selectedCodes.size < 2
+                                ? "1px solid var(--color-accent-dim)"
+                                : "none",
+                            cursor:
+                              selectedCodes.size < 2 ? "default" : "pointer",
+                            backgroundColor:
+                              selectedCodes.size < 2
+                                ? "transparent"
+                                : "var(--color-accent)",
+                            color:
+                              selectedCodes.size < 2
+                                ? "var(--color-accent-dim)"
+                                : "#FFFFFF",
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: "13px",
+                            fontWeight: 600,
+                            whiteSpace: "nowrap",
+                            transition: "all 0.15s ease",
+                            flexShrink: 0,
+                          }}
+                        >
+                          <GitCompare size={15} />
+                          {t("compare.compareSelected", "Compare")}
+                          {selectedCodes.size > 0 && (
+                            <span
+                              style={{
+                                backgroundColor:
+                                  selectedCodes.size < 2
+                                    ? "rgba(143,90,60,0.2)"
+                                    : "rgba(255,255,255,0.25)",
+                                borderRadius: "10px",
+                                padding: "1px 7px",
+                                fontSize: "12px",
+                              }}
+                            >
+                              {selectedCodes.size}
+                            </span>
+                          )}
+                        </button>
+                        <button
+                          onClick={exitCompareMode}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            width: "40px",
+                            height: "40px",
+                            borderRadius: "6px",
+                            border: "1px solid #2A2A2A",
+                            cursor: "pointer",
+                            backgroundColor: "transparent",
+                            color: "#8A8A8A",
+                            flexShrink: 0,
+                          }}
+                          aria-label="Exit compare mode"
+                        >
+                          <X size={16} />
+                        </button>
+                      </>
+                    ) : (
+                      <button
+                        onClick={() => setCompareMode(true)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          height: "40px",
+                          paddingLeft: "14px",
+                          paddingRight: "14px",
+                          borderRadius: "6px",
+                          border: "1px solid #2A2A2A",
+                          cursor: "pointer",
+                          backgroundColor: "transparent",
+                          color: "#9E9E9E",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "13px",
+                          fontWeight: 500,
+                          whiteSpace: "nowrap",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <GitCompare size={15} />
+                        {t("compare.compareMode", "Compare")}
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {compareMode && (
+                  <p
+                    style={{
+                      marginTop: "8px",
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      color: "#8A8A8A",
+                      paddingLeft: "2px",
+                    }}
+                  >
+                    {t(
+                      "compare.helperText",
+                      "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+                    )}
+                  </p>
                 )}
               </div>
 
@@ -809,7 +956,7 @@ export default function App() {
                       fontWeight: 700,
                       letterSpacing: "2px",
                       textTransform: "uppercase",
-                      color: "#888888",
+                      color: "#9E9E9E",
                       marginBottom: "12px",
                     }}
                   >
@@ -829,7 +976,7 @@ export default function App() {
                         backgroundColor:
                           ws.selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
                         color:
-                          ws.selectedRegions.size === 0 ? "#FFFFFF" : "#999999",
+                          ws.selectedRegions.size === 0 ? "#FFFFFF" : "#9E9E9E",
                       }}
                     >
                       {t("regions.all")}
@@ -858,7 +1005,7 @@ export default function App() {
                             : "#2A2A2A",
                           color: ws.selectedRegions.has(r)
                             ? "#FFFFFF"
-                            : "#999999",
+                            : "#9E9E9E",
                         }}
                       >
                         {t(`regions.${r.replace(/\s/g, "")}`, r)}
@@ -876,11 +1023,16 @@ export default function App() {
               error={error}
               onRetry={refresh}
               highlightedCode={activeHighlight}
-              expandedCode={expandedCode}
-              onToggleExpanded={(code) =>
-                setExpandedCode((c) => (c === code ? null : code))
+              expandedCode={compareMode ? null : expandedCode}
+              onToggleExpanded={
+                compareMode
+                  ? undefined
+                  : (code) => setExpandedCode((c) => (c === code ? null : code))
               }
               showAll={search.trim().length > 0}
+              compareMode={compareMode}
+              selectedCodes={selectedCodes}
+              onToggleSelect={toggleSelect}
             />
           </div>
         </main>

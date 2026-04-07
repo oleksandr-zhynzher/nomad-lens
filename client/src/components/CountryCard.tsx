@@ -16,6 +16,9 @@ interface CountryCardProps {
   index: number;
   expanded?: boolean;
   onToggle?: () => void;
+  compareMode?: boolean;
+  selected?: boolean;
+  onSelectToggle?: () => void;
 }
 
 export function CountryCard({
@@ -24,6 +27,9 @@ export function CountryCard({
   index,
   expanded = false,
   onToggle,
+  compareMode = false,
+  selected = false,
+  onSelectToggle,
 }: CountryCardProps) {
   const { country, finalScore, rank } = ranked;
   const { t } = useTranslation();
@@ -44,12 +50,70 @@ export function CountryCard({
         backgroundColor: bgColor,
         borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
         ["--row-hover-bg" as string]: hoverBg,
+        position: "relative",
+        paddingLeft: compareMode ? "38px" : 0,
         ...(highlighted && {
           outline: `2px solid var(--color-accent)`,
           outlineOffset: "-1px",
         }),
       }}
     >
+      {compareMode && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 1,
+            cursor: "pointer",
+            backgroundColor: selected ? "rgba(26,42,26,0.35)" : "transparent",
+            borderRadius: "4px",
+          }}
+          onClick={onSelectToggle}
+        />
+      )}
+
+      {compareMode && (
+        <div
+          style={{
+            position: "absolute",
+            left: "10px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            zIndex: 2,
+            width: "20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              width: "16px",
+              height: "16px",
+              borderRadius: "3px",
+              border: `2px solid ${selected ? "var(--color-accent)" : "#404040"}`,
+              backgroundColor: selected ? "var(--color-accent)" : "transparent",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.1s ease",
+            }}
+          >
+            {selected && (
+              <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
+                <path
+                  d="M1 3.5L3.5 6L8 1"
+                  stroke="white"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Main row */}
       <button
         className="w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 transition-all text-left cursor-pointer"
@@ -57,8 +121,10 @@ export function CountryCard({
           minHeight: "56px",
           backgroundColor: "transparent",
           border: "none",
+          position: "relative",
+          zIndex: compareMode ? 0 : 1,
         }}
-        onClick={onToggle}
+        onClick={compareMode ? onSelectToggle : onToggle}
         aria-expanded={expanded}
       >
         {/* Rank */}
@@ -103,7 +169,7 @@ export function CountryCard({
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "11px",
-              color: "#555555",
+              color: "#808080",
             }}
           >
             {t(`regions.${regionKey(country.region)}`)}
@@ -195,16 +261,21 @@ export function CountryCard({
         <ChevronRight
           size={20}
           style={{
-            color: "#333333",
+            color: "#757575",
             transition: "transform 0.2s",
-            transform: expanded ? "rotate(90deg)" : "rotate(0deg)",
+            transform: compareMode
+              ? "rotate(0deg)"
+              : expanded
+                ? "rotate(90deg)"
+                : "rotate(0deg)",
+            opacity: compareMode ? 0.35 : 1,
           }}
           className="shrink-0"
         />
       </button>
 
       {/* Expanded breakdown */}
-      {expanded && (
+      {expanded && !compareMode && (
         <div
           className="px-4 py-4"
           style={{

@@ -125,7 +125,7 @@ export function BudgetCountryCard({
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "11px",
-                color: "#555555",
+                color: "#808080",
               }}
             >
               {t(`regions.${regionKey(country.region)}`)}
@@ -175,7 +175,7 @@ export function BudgetCountryCard({
           <ChevronRight
             size={18}
             style={{
-              color: "#333333",
+              color: "#757575",
               transition: "transform 0.2s",
               transform: expanded ? "rotate(90deg)" : "rotate(0deg)",
             }}
@@ -330,7 +330,7 @@ export function BudgetCountryCard({
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "10px",
-                      color: "#555555",
+                      color: "#808080",
                     }}
                   >
                     {label}

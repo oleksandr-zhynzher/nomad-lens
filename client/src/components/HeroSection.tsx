@@ -88,7 +88,7 @@ export function HeroSection({
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: "15px",
-            color: "#888888",
+            color: "#9E9E9E",
             margin: 0,
           }}
         >

@@ -51,21 +51,24 @@
     "countriesScored": "{{count}} countries scored · click a country for details"
   },
   "compare": {
-    "eyebrow": "COMPARE",
-    "countryTitle": "COUNTRY COMPARISON",
-    "regionTitle": "REGION COMPARISON",
+    "eyebrow": "Compare",
+    "countryTitle": "Country Comparison",
+    "regionTitle": "Region Comparison",
     "countrySubtitle": "Select countries to compare across all indicators",
     "regionSubtitle": "Compare average scores across world regions",
     "countries": "Countries",
     "regions": "Regions",
     "parameters": "Parameters",
+    "compareMode": "Compare",
+    "compareSelected": "Compare",
+    "helperText": "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
     "sortByScore": "Sort by Score",
     "share": "Share",
     "addCountry": "Add Country",
     "searchCountry": "Search country…",
     "noCountriesFound": "No countries found",
     "nomadVisas": "Nomad Visas",
-    "nomadVisaTitle": "NOMAD VISA COMPARISON",
+    "nomadVisaTitle": "Nomad Visa Comparison",
     "nomadVisaSubtitle": "Compare digital nomad visa programs side by side",
     "visaDetail": "Visa Detail",
     "visaFields": {
@@ -157,7 +160,8 @@
   "countryList": {
     "noResults": "No countries match your search.",
     "retry": "Retry",
-    "count": "{{count}} countries"
+    "count": "{{count}} countries",
+    "clickHint": "Click on a country to view details"
   },
   "countryPage": {
     "notFound": "Country not found",

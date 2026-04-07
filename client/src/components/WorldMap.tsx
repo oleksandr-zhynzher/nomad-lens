@@ -131,7 +131,7 @@ export function WorldMap({
         <button
           onClick={() => setZoom((z) => Math.min(z * 1.5, 12))}
           className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
-          style={{ color: "#999999", borderBottom: "1px solid #333333" }}
+          style={{ color: "#9E9E9E", borderBottom: "1px solid #333333" }}
           aria-label="Zoom in"
         >
           +
@@ -140,7 +140,7 @@ export function WorldMap({
           onClick={() => setZoom((z) => Math.max(z / 1.5, 1))}
           className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
           style={{
-            color: "#999999",
+            color: "#9E9E9E",
             borderBottom: onToggleWeights ? "1px solid #333333" : undefined,
           }}
           aria-label="Zoom out"
@@ -186,7 +186,7 @@ export function WorldMap({
             fontWeight: 600,
             letterSpacing: "1.5px",
             textTransform: "uppercase",
-            color: "#666666",
+            color: "#8A8A8A",
             marginBottom: "2px",
           }}
         >
@@ -214,7 +214,7 @@ export function WorldMap({
                 color: "#CCCCCC",
               }}
             >
-              {label} <span style={{ color: "#666666" }}>{range}</span>
+              {label} <span style={{ color: "#8A8A8A" }}>{range}</span>
             </span>
           </div>
         ))}
@@ -305,14 +305,14 @@ export function WorldMap({
               }}
             >
               {hover.score.toFixed(1)}{" "}
-              <span style={{ fontWeight: 400, color: "#666666" }}>/ 100</span>
+              <span style={{ fontWeight: 400, color: "#8A8A8A" }}>/ 100</span>
             </p>
           ) : (
             <p
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "12px",
-                color: "#666666",
+                color: "#8A8A8A",
                 marginTop: "2px",
               }}
             >
@@ -327,7 +327,7 @@ export function WorldMap({
         style={{
           fontFamily: "Inter, sans-serif",
           fontSize: "11px",
-          color: "#555555",
+          color: "#808080",
           textAlign: "right",
           marginTop: "8px",
           paddingRight: "4px",

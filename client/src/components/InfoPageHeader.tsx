@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { LogoMark } from "./LogoMark";
 
 interface InfoPageHeaderProps {
   activePage: "data-sources" | "indicators";
@@ -17,91 +18,27 @@ export function InfoPageHeader({ activePage }: InfoPageHeaderProps) {
       style={{ backgroundColor: "#0D0E10", borderColor: "#252525" }}
     >
       <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between"
+        className="w-full max-w-[1200px] mx-auto px-4 flex items-center justify-between"
         style={{ height: "56px" }}
       >
         {/* Logo */}
         <Link
           to="/"
-          className="flex items-center gap-2.5"
-          style={{ textDecoration: "none" }}
+          className="flex items-center gap-2.5 leading-none"
+          style={{ textDecoration: "none", height: "32px" }}
         >
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="16"
-              cy="16"
-              r="15"
-              stroke="#8F5A3C"
-              strokeWidth="1.5"
-              fill="none"
-              opacity="0.6"
-            />
-            <path d="M16 4 L20 16 L16 14 L12 16 Z" fill="#C2956A" />
-            <path
-              d="M16 28 L12 16 L16 18 L20 16 Z"
-              fill="#8F5A3C"
-              opacity="0.7"
-            />
-            <circle cx="16" cy="16" r="2.5" fill="#C8B89A" />
-            <circle cx="16" cy="16" r="1" fill="#0D0E10" />
-            <line
-              x1="16"
-              y1="1"
-              x2="16"
-              y2="3"
-              stroke="#C2956A"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-            <line
-              x1="16"
-              y1="29"
-              x2="16"
-              y2="31"
-              stroke="#C2956A"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-            <line
-              x1="1"
-              y1="16"
-              x2="3"
-              y2="16"
-              stroke="#C2956A"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-            <line
-              x1="29"
-              y1="16"
-              x2="31"
-              y2="16"
-              stroke="#C2956A"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-            <path
-              d="M 8 24 Q 12 20, 16 16 Q 20 12, 24 8"
-              stroke="#C8B89A"
-              strokeWidth="1"
-              fill="none"
-              opacity="0.4"
-              strokeDasharray="2 2"
-            />
-          </svg>
+          <LogoMark size={32} />
           <span
             style={{
               fontFamily: "Oswald, sans-serif",
               fontSize: "20px",
               letterSpacing: "2px",
+              lineHeight: 1,
               textTransform: "uppercase",
               color: "#FFFFFF",
+              display: "flex",
+              alignItems: "center",
+              height: "32px",
             }}
           >
             NOMAD LENS
@@ -145,7 +82,7 @@ export function InfoPageHeader({ activePage }: InfoPageHeaderProps) {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "13px",
-              color: "#999999",
+              color: "#9E9E9E",
             }}
           >
             <svg
@@ -216,7 +153,7 @@ export function InfoPageHeader({ activePage }: InfoPageHeaderProps) {
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "14px",
-              color: "#999999",
+              color: "#9E9E9E",
               textDecoration: "none",
             }}
           >

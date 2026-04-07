@@ -184,7 +184,7 @@ export function NomadVisaComparison({
             }}
           >
             {visa.duration.initial}
-            <span style={{ fontSize: "12px", color: "#666666", marginLeft: 2 }}>
+            <span style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}>
               {t("countryPage.visa.months")}
             </span>
           </span>
@@ -196,14 +196,14 @@ export function NomadVisaComparison({
               fontFamily: "IBM Plex Mono, monospace",
               fontSize: "20px",
               fontWeight: 600,
-              color: visa.duration.maxExtension > 0 ? "#5B8FA8" : "#333333",
+              color: visa.duration.maxExtension > 0 ? "#5B8FA8" : "#757575",
             }}
           >
             {visa.duration.maxExtension > 0 ? (
               <>
                 +{visa.duration.maxExtension}
                 <span
-                  style={{ fontSize: "12px", color: "#666666", marginLeft: 2 }}
+                  style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}
                 >
                   {t("countryPage.visa.months")}
                 </span>
@@ -217,7 +217,7 @@ export function NomadVisaComparison({
         return visa.duration.renewable ? (
           <CheckCircle2 size={20} style={{ color: "#44CC66" }} />
         ) : (
-          <XCircle size={20} style={{ color: "#555555" }} />
+          <XCircle size={20} style={{ color: "#808080" }} />
         );
       case "cost":
         return (
@@ -280,7 +280,7 @@ export function NomadVisaComparison({
           >
             {cur}
             {monthly ? monthly.toLocaleString() : annual?.toLocaleString()}
-            <span style={{ fontSize: "12px", color: "#666666", marginLeft: 2 }}>
+            <span style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}>
               /{monthly ? t("countryPage.visa.mo") : t("countryPage.visa.yr")}
             </span>
           </span>
@@ -290,7 +290,7 @@ export function NomadVisaComparison({
         const status = visa.tax.status;
         const colors = TAX_STATUS_COLORS[status] ?? {
           bg: "#2A2A2A",
-          text: "#888888",
+          text: "#9E9E9E",
         };
         const label =
           status === "exempt"
@@ -332,7 +332,7 @@ export function NomadVisaComparison({
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: "11px",
-                  color: "#777777",
+                  color: "#8A8A8A",
                   lineHeight: 1.4,
                   textAlign: "center",
                   maxWidth: "260px",
@@ -360,12 +360,12 @@ export function NomadVisaComparison({
           </div>
         ) : (
           <div className="flex items-center gap-1.5">
-            <XCircle size={16} style={{ color: "#888888" }} />
+            <XCircle size={16} style={{ color: "#9E9E9E" }} />
             <span
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "12px",
-                color: "#888888",
+                color: "#9E9E9E",
               }}
             >
               {t("compare.inPerson")}
@@ -395,7 +395,7 @@ export function NomadVisaComparison({
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: "11px",
-                  color: "#999999",
+                  color: "#9E9E9E",
                   lineHeight: 1.3,
                 }}
               >
@@ -481,7 +481,7 @@ export function NomadVisaComparison({
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: "11px",
-                  color: "#888888",
+                  color: "#9E9E9E",
                   textAlign: "center",
                   lineHeight: 1.3,
                 }}
@@ -494,7 +494,7 @@ export function NomadVisaComparison({
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: "10px",
-                  color: "#999999",
+                  color: "#9E9E9E",
                   backgroundColor: "#1C1C1C",
                   border: "1px solid #2C2C2C",
                 }}
@@ -584,7 +584,7 @@ export function NomadVisaComparison({
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontSize: "11px",
-                    color: "#555555",
+                    color: "#808080",
                   }}
                 >
                   {t(`regions.${regionKey(c.region)}`)}
@@ -598,7 +598,7 @@ export function NomadVisaComparison({
                 style={{
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
-                  color: "#555555",
+                  color: "#808080",
                 }}
               >
                 {t("compare.noCountriesFound")}
@@ -635,7 +635,7 @@ export function NomadVisaComparison({
                     fontSize: "10px",
                     fontWeight: 600,
                     letterSpacing: "1.5px",
-                    color: "#333333",
+                    color: "#757575",
                     textTransform: "uppercase",
                   }}
                 >
@@ -680,12 +680,12 @@ export function NomadVisaComparison({
                 }}
               >
                 <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                  <Icon size={16} style={{ color: "#555555" }} />
+                  <Icon size={16} style={{ color: "#808080" }} />
                   <span
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "13px",
-                      color: "#777777",
+                      color: "#8A8A8A",
                     }}
                   >
                     {t(`compare.visaFields.${key}`)}

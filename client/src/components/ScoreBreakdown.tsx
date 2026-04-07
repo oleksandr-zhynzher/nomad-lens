@@ -82,7 +82,7 @@ export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
                   fontSize: "10px",
-                  color: "#666666",
+                  color: "#8A8A8A",
                   marginTop: "2px",
                 }}
               >

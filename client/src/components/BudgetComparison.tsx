@@ -1,50 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useLangPrefix } from "../hooks/useLangPrefix";
 import {
   CirclePlus,
   X,
-  TrendingUp,
-  Coins,
-  Wheat,
-  HeartPulse,
-  GraduationCap,
-  Leaf,
-  CloudSun,
-  Shield,
+  House,
+  ShoppingCart,
+  UtensilsCrossed,
+  Bus,
   Wifi,
-  Smile,
-  Users,
-  Landmark,
-  Languages,
-  ShieldCheck,
-  UserCheck,
-  Truck,
-  Trees,
-  Heart,
-  Receipt,
-  Rocket,
-  Plane,
-  Theater,
-  Stethoscope,
-  UsersRound,
-  Stamp,
-  BadgeDollarSign,
-  Coffee,
-  Smartphone,
-  Handshake,
+  Laptop,
+  HeartPulse,
+  Wallet,
+  TrendingUp,
 } from "lucide-react";
-import type {
-  CountryData,
-  WeightMap,
-  ClimatePreferences,
-  CategoryKey,
-} from "../utils/types";
-import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { computeScore, scoreColour } from "../utils/scoring";
+import type { CountryData } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
-import { Tooltip } from "./Tooltip";
+import { COST_COLORS } from "../utils/budgetColors";
+import type { BudgetMatch } from "../hooks/useBudgetMatcher";
 
 const SLOT_COLORS = [
   "#8F5A3C",
@@ -61,59 +33,47 @@ const SLOT_COLORS = [
   "#4CAF8B",
 ] as const;
 
-function getSlotColor(index: number) {
-  return SLOT_COLORS[index % SLOT_COLORS.length];
+function getSlotColor(i: number) {
+  return SLOT_COLORS[i % SLOT_COLORS.length];
 }
 
-const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
-  economy: TrendingUp,
-  affordability: Coins,
-  foodSecurity: Wheat,
-  healthcare: HeartPulse,
-  education: GraduationCap,
-  environment: Leaf,
-  climate: CloudSun,
-  safety: Shield,
-  infrastructure: Wifi,
-  happiness: Smile,
-  humanDevelopment: Users,
-  governance: Landmark,
-  englishProficiency: Languages,
-  digitalFreedom: ShieldCheck,
-  personalFreedom: UserCheck,
-  logistics: Truck,
-  biodiversity: Trees,
-  socialTolerance: Heart,
-  taxFriendliness: Receipt,
-  startupEnvironment: Rocket,
-  airConnectivity: Plane,
-  culturalHeritage: Theater,
-  healthcareCost: Stethoscope,
-  nomadCommunity: UsersRound,
-  visaFriendliness: Stamp,
-  costEfficiency: BadgeDollarSign,
-  workLifeBalance: Coffee,
-  digitalReadiness: Smartphone,
-  culturalFit: Handshake,
-};
+function surplusColor(surplus: number): string {
+  if (surplus > 200) return "#4CAF50";
+  if (surplus >= 0) return "#8BC34A";
+  if (surplus >= -200) return "#FFC107";
+  return "#FF5722";
+}
+
+function costColor(value: number, min: number): string {
+  if (value <= min) return "#4CAF50";
+  return "#FFFFFF";
+}
+
+const BREAKDOWN_ROWS: {
+  key: keyof import("../hooks/useBudgetMatcher").BudgetBreakdown;
+  icon: typeof House;
+}[] = [
+  { key: "housing", icon: House },
+  { key: "groceries", icon: ShoppingCart },
+  { key: "dining", icon: UtensilsCrossed },
+  { key: "transport", icon: Bus },
+  { key: "utilities", icon: Wifi },
+  { key: "coworking", icon: Laptop },
+  { key: "healthInsurance", icon: HeartPulse },
+];
 
 interface Props {
   countries: CountryData[];
-  weights: WeightMap;
-  climatePrefs: ClimatePreferences;
+  matches?: BudgetMatch[];
   selectedCodes: string[];
   onSelectedCodesChange: (codes: string[]) => void;
-  sortTrigger?: number;
-  onSelectionCount?: (count: number) => void;
 }
 
-export function CountryComparison({
+export function BudgetComparison({
   countries,
-  weights,
+  matches = [],
   selectedCodes,
   onSelectedCodesChange,
-  sortTrigger = 0,
-  onSelectionCount,
 }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState<{
@@ -125,11 +85,11 @@ export function CountryComparison({
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const { t, i18n } = useTranslation();
-  const langPrefix = useLangPrefix();
-  const navigate = useNavigate();
   const lang = i18n.language;
 
-  // Sync horizontal scroll between sticky header and body
+  const matchMap = new Map(matches.map((m) => [m.country.code, m]));
+
+  // Sync horizontal scroll
   useEffect(() => {
     const header = headerRef.current;
     const body = bodyRef.current;
@@ -148,7 +108,7 @@ export function CountryComparison({
     };
   }, []);
 
-  const selectedCountries = selectedCodes
+  const selectedSlots = selectedCodes
     .map((code, i) => {
       const country = countries.find((c) => c.code === code);
       return country ? { country, color: getSlotColor(i), index: i } : null;
@@ -169,30 +129,10 @@ export function CountryComparison({
     setQuery("");
   };
 
-  // Sort when parent triggers it
-  useEffect(() => {
-    if (sortTrigger > 0) {
-      const sorted = [...selectedCodes].sort((a, b) => {
-        const countryA = countries.find((c) => c.code === a);
-        const countryB = countries.find((c) => c.code === b);
-        if (!countryA || !countryB) return 0;
-        return (
-          computeScore(countryB, weights) - computeScore(countryA, weights)
-        );
-      });
-      onSelectedCodesChange(sorted);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortTrigger]);
-
-  // Report selection count to parent
-  useEffect(() => {
-    onSelectionCount?.(selectedCodes.length);
-  }, [selectedCodes.length, onSelectionCount]);
-
   const filtered = countries
     .filter(
       (c) =>
+        c.costOfLiving &&
         !selectedCodes.includes(c.code) &&
         localizeCountry(c, lang)
           .name.toLowerCase()
@@ -204,27 +144,41 @@ export function CountryComparison({
       ),
     );
 
+  // Cheapest value per row across selected countries
+  const minBreakdown: Record<string, number> = {};
+  const maxBreakdown: Record<string, number> = {};
+  BREAKDOWN_ROWS.forEach(({ key }) => {
+    const values = selectedSlots.map(
+      (slot) => matchMap.get(slot.country.code)?.breakdown[key] ?? 0,
+    );
+    minBreakdown[key] = values.length > 0 ? Math.min(...values) : 0;
+    maxBreakdown[key] = Math.max(1, ...values);
+  });
+  const minTotal =
+    selectedSlots.length > 0
+      ? Math.min(
+          ...selectedSlots.map(
+            (slot) => matchMap.get(slot.country.code)?.monthlyCost ?? 0,
+          ),
+        )
+      : 0;
+
   return (
     <div>
-      {/* Country selector — horizontal scroll with fade hint */}
+      {/* ── Country selector ─────────────────────────────────── */}
       <div className="relative">
         <div
           className="flex items-stretch gap-3 pb-2"
           style={{ overflowX: "auto", scrollbarWidth: "thin" }}
         >
-          {selectedCountries.map((slot) => {
-            const score = computeScore(slot.country, weights);
-            const sColor = scoreColour(score);
+          {selectedSlots.map((slot) => {
+            const match = matchMap.get(slot.country.code);
+            const cost = match?.monthlyCost;
+            const surplus = match != null ? match.surplus : null;
             return (
               <div
                 key={slot.country.code}
                 className="shrink-0 w-[140px] md:w-[180px]"
-                onClick={() =>
-                  navigate(
-                    `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
-                  )
-                }
-                style={{ cursor: "pointer" }}
               >
                 <div
                   className="relative rounded-lg p-4 flex flex-col items-center gap-3"
@@ -235,10 +189,7 @@ export function CountryComparison({
                   }}
                 >
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemove(slot.index);
-                    }}
+                    onClick={() => handleRemove(slot.index)}
                     className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
                     style={{
                       opacity: 0.6,
@@ -256,52 +207,44 @@ export function CountryComparison({
                     className="rounded-full object-cover w-9 h-9"
                   />
 
-                  <div className="flex items-center justify-center gap-1.5">
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "15px",
-                        fontWeight: 600,
-                        color: "#E8E9EB",
-                        textAlign: "center",
-                      }}
-                    >
-                      {localizeCountry(slot.country, lang).name}
-                    </span>
-                    {slot.country.hasNomadVisa && (
-                      <Tooltip
-                        content={t(
-                          "countryDetail.nomadVisa",
-                          "Nomad Visa Available",
-                        )}
-                        side="top"
-                      >
-                        <Link
-                          to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
-                          style={{
-                            color: "var(--color-accent)",
-                            flexShrink: 0,
-                            lineHeight: 1,
-                            display: "inline-flex",
-                          }}
-                        >
-                          <Plane size={13} />
-                        </Link>
-                      </Tooltip>
-                    )}
-                  </div>
+                  <span
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "15px",
+                      fontWeight: 600,
+                      color: "#E8E9EB",
+                      textAlign: "center",
+                    }}
+                  >
+                    {localizeCountry(slot.country, lang).name}
+                  </span>
 
                   <span
-                    className="text-[32px]"
+                    className="text-[28px]"
                     style={{
                       fontFamily: "Oswald, sans-serif",
                       fontWeight: 700,
-                      color: sColor,
+                      color: cost != null ? "#C2956A" : "#555",
                       lineHeight: 1,
                     }}
                   >
-                    {score.toFixed(1)}
+                    {cost != null ? `$${cost.toLocaleString()}` : "—"}
                   </span>
+
+                  {surplus != null && (
+                    <span
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "11px",
+                        fontWeight: 600,
+                        color: surplusColor(surplus),
+                      }}
+                    >
+                      {surplus >= 0
+                        ? `+$${surplus.toLocaleString()} left`
+                        : `-$${Math.abs(surplus).toLocaleString()} over`}
+                    </span>
+                  )}
 
                   <span
                     className="px-2 py-0.5 rounded-full"
@@ -362,7 +305,8 @@ export function CountryComparison({
             </button>
           </div>
         </div>
-        {/* Right-edge fade — hints at horizontal scrollability on mobile */}
+
+        {/* Right-edge fade */}
         <div
           className="pointer-events-none absolute top-0 right-0 bottom-0 w-12"
           style={{
@@ -371,7 +315,7 @@ export function CountryComparison({
         />
       </div>
 
-      {/* Dropdown — fixed-positioned under the Add Country card */}
+      {/* Dropdown */}
       {dropdownOpen && dropdownPos && (
         <div
           className="z-50 rounded-lg overflow-hidden w-[320px]"
@@ -402,7 +346,8 @@ export function CountryComparison({
           />
           <div style={{ maxHeight: "320px", overflowY: "auto" }}>
             {filtered.map((c) => {
-              const score = computeScore(c, weights);
+              const match = matchMap.get(c.code);
+              const cost = match?.monthlyCost ?? c.costOfLiving?.totalBasic;
               return (
                 <button
                   key={c.code}
@@ -439,10 +384,10 @@ export function CountryComparison({
                       fontFamily: "IBM Plex Mono, monospace",
                       fontSize: "13px",
                       fontWeight: 600,
-                      color: scoreColour(score),
+                      color: "#C2956A",
                     }}
                   >
-                    {score.toFixed(1)}
+                    {cost != null ? `$${cost.toLocaleString()}` : "—"}
                   </span>
                 </button>
               );
@@ -463,13 +408,12 @@ export function CountryComparison({
         </div>
       )}
 
-      {/* Indicator grid */}
-      {selectedCountries.length > 0 && (
+      {/* Data grid */}
+      {selectedSlots.length > 0 && (
         <div className="mt-8">
-          {/* Separator */}
           <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
-          {/* Sticky column header — own overflow wrapper, synced with body */}
+          {/* Sticky column header */}
           <div
             ref={headerRef}
             className="sticky z-10"
@@ -495,10 +439,10 @@ export function CountryComparison({
                     textTransform: "uppercase",
                   }}
                 >
-                  {t("compare.indicatorHeader")}
+                  {t("compare.indicatorHeader", "Category")}
                 </span>
               </div>
-              {selectedCountries.map((slot) => (
+              {selectedSlots.map((slot) => (
                 <div
                   key={slot.index}
                   className="flex-1 flex items-center justify-center gap-1.5"
@@ -524,11 +468,92 @@ export function CountryComparison({
             </div>
           </div>
 
-          {/* Scrollable data rows */}
+          {/* Scrollable rows */}
           <div ref={bodyRef} style={{ overflowX: "auto" }}>
-            {/* Indicator rows */}
-            {VISIBLE_CATEGORY_KEYS.map((key) => {
-              const Icon = CATEGORY_ICONS[key];
+            {/* Monthly total row */}
+            <div
+              className="flex items-center"
+              style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}
+            >
+              <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
+                <Wallet size={16} style={{ color: "#C2956A", flexShrink: 0 }} />
+                <span
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "13px",
+                    color: "#8A8A8A",
+                  }}
+                >
+                  {t("budget.totalMonthly", "Monthly Total")}
+                </span>
+              </div>
+              {selectedSlots.map((slot) => {
+                const val = matchMap.get(slot.country.code)?.monthlyCost;
+                return (
+                  <div key={slot.index} className="flex-1 text-center">
+                    <span
+                      style={{
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: "22px",
+                        fontWeight: 600,
+                        color:
+                          val != null ? costColor(val, minTotal) : "#333333",
+                      }}
+                    >
+                      {val != null ? `$${val.toLocaleString()}` : "—"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Surplus row */}
+            <div
+              className="flex items-center"
+              style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}
+            >
+              <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
+                <TrendingUp
+                  size={16}
+                  style={{ color: "#4CAF50", flexShrink: 0 }}
+                />
+                <span
+                  style={{
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "13px",
+                    color: "#8A8A8A",
+                  }}
+                >
+                  {t("budget.surplus", "Surplus")}
+                </span>
+              </div>
+              {selectedSlots.map((slot) => {
+                const match = matchMap.get(slot.country.code);
+                const val = match?.surplus;
+                return (
+                  <div key={slot.index} className="flex-1 text-center">
+                    <span
+                      style={{
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: "22px",
+                        fontWeight: 600,
+                        color: val != null ? surplusColor(val) : "#333333",
+                      }}
+                    >
+                      {val != null
+                        ? val >= 0
+                          ? `+$${val.toLocaleString()}`
+                          : `-$${Math.abs(val).toLocaleString()}`
+                        : "—"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Breakdown rows */}
+            {BREAKDOWN_ROWS.map(({ key, icon: Icon }) => {
+              const dotColor = COST_COLORS[key] ?? "#888";
               return (
                 <div
                   key={key}
@@ -539,7 +564,7 @@ export function CountryComparison({
                   }}
                 >
                   <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                    <Icon size={16} style={{ color: "#808080" }} />
+                    <Icon size={16} style={{ color: dotColor }} />
                     <span
                       style={{
                         fontFamily: "Inter, sans-serif",
@@ -547,14 +572,11 @@ export function CountryComparison({
                         color: "#8A8A8A",
                       }}
                     >
-                      {t(
-                        `indicatorsPage.indicators.${key}.name`,
-                        CATEGORY_LABELS[key],
-                      )}
+                      {t(`budget.categories.${key}`, key)}
                     </span>
                   </div>
-                  {selectedCountries.map((slot) => {
-                    const val = slot.country.scores[key]?.value;
+                  {selectedSlots.map((slot) => {
+                    const val = matchMap.get(slot.country.code)?.breakdown[key];
                     return (
                       <div key={slot.index} className="flex-1 text-center">
                         <span
@@ -562,10 +584,13 @@ export function CountryComparison({
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "22px",
                             fontWeight: 600,
-                            color: val != null ? scoreColour(val) : "#333333",
+                            color:
+                              val != null
+                                ? costColor(val, minBreakdown[key])
+                                : "#333333",
                           }}
                         >
-                          {val != null ? val.toFixed(1) : "—"}
+                          {val != null ? `$${val.toLocaleString()}` : "—"}
                         </span>
                       </div>
                     );

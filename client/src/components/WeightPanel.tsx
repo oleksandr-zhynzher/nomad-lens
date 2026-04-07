@@ -127,7 +127,7 @@ function WeightSlider({
                   {label}
                 </div>
                 <div style={{ marginBottom: "8px" }}>{description}</div>
-                <div style={{ fontSize: "10px", color: "#888888" }}>
+                <div style={{ fontSize: "10px", color: "#9E9E9E" }}>
                   Source: {dataSource}
                 </div>
               </div>
@@ -331,7 +331,7 @@ export function WeightPanel({
             style={{
               fontFamily: "Inter, sans-serif",
               fontSize: "10px",
-              color: "#666666",
+              color: "#8A8A8A",
               marginTop: "6px",
               lineHeight: "1.5",
             }}
@@ -385,7 +385,7 @@ export function WeightPanel({
                       weightMode === "independent"
                         ? "var(--color-accent)"
                         : "transparent",
-                    color: weightMode === "independent" ? "#FFFFFF" : "#999999",
+                    color: weightMode === "independent" ? "#FFFFFF" : "#9E9E9E",
                     transition: "all 0.15s ease",
                   }}
                 >
@@ -430,7 +430,7 @@ export function WeightPanel({
                       weightMode === "balanced"
                         ? "var(--color-accent)"
                         : "transparent",
-                    color: weightMode === "balanced" ? "#FFFFFF" : "#999999",
+                    color: weightMode === "balanced" ? "#FFFFFF" : "#9E9E9E",
                     transition: "all 0.15s ease",
                   }}
                 >
@@ -480,7 +480,7 @@ export function WeightPanel({
                     fontWeight: 600,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
-                    color: "#888888",
+                    color: "#9E9E9E",
                     flex: 1,
                     textAlign: "left",
                   }}
@@ -525,7 +525,7 @@ export function WeightPanel({
                 <ChevronDown
                   size={14}
                   style={{
-                    color: "#555555",
+                    color: "#808080",
                     transform: isOpen ? "rotate(0deg)" : "rotate(-90deg)",
                     transition: "transform 0.15s ease",
                     flexShrink: 0,
@@ -588,7 +588,7 @@ export function WeightPanel({
                                       backgroundColor: active
                                         ? "#8F5A3C"
                                         : "#2A2A2A",
-                                      color: active ? "#FFFFFF" : "#666666",
+                                      color: active ? "#FFFFFF" : "#8A8A8A",
                                       textAlign: "center",
                                     }}
                                   >
@@ -604,7 +604,7 @@ export function WeightPanel({
                               style={{
                                 fontFamily: "Inter, sans-serif",
                                 fontSize: "12px",
-                                color: "#777777",
+                                color: "#8A8A8A",
                               }}
                             >
                               {t("climate.temperatureRange")}
@@ -627,7 +627,7 @@ export function WeightPanel({
                                 style={{
                                   fontFamily: "Inter, sans-serif",
                                   fontSize: "12px",
-                                  color: "#555555",
+                                  color: "#808080",
                                   width: "32px",
                                 }}
                               >
@@ -658,7 +658,7 @@ export function WeightPanel({
                                 style={{
                                   fontFamily: "IBM Plex Mono, monospace",
                                   fontSize: "12px",
-                                  color: "#999999",
+                                  color: "#9E9E9E",
                                   width: "36px",
                                   textAlign: "right",
                                 }}
@@ -671,7 +671,7 @@ export function WeightPanel({
                                 style={{
                                   fontFamily: "Inter, sans-serif",
                                   fontSize: "12px",
-                                  color: "#555555",
+                                  color: "#808080",
                                   width: "32px",
                                 }}
                               >
@@ -702,7 +702,7 @@ export function WeightPanel({
                                 style={{
                                   fontFamily: "IBM Plex Mono, monospace",
                                   fontSize: "12px",
-                                  color: "#999999",
+                                  color: "#9E9E9E",
                                   width: "36px",
                                   textAlign: "right",
                                 }}
@@ -746,7 +746,7 @@ export function WeightPanel({
                     fontWeight: 600,
                     letterSpacing: "1.5px",
                     textTransform: "uppercase",
-                    color: "#888888",
+                    color: "#9E9E9E",
                     flex: 1,
                     textAlign: "left",
                   }}
@@ -777,7 +777,7 @@ export function WeightPanel({
                 <ChevronDown
                   size={14}
                   style={{
-                    color: "#555555",
+                    color: "#808080",
                     transform: isOpen ? "rotate(0deg)" : "rotate(-90deg)",
                     transition: "transform 0.15s ease",
                     flexShrink: 0,
@@ -993,7 +993,7 @@ export function WeightPanel({
                               fontFamily: "Inter, sans-serif",
                               fontSize: "10px",
                               backgroundColor: active ? "#8F5A3C" : "#2A2A2A",
-                              color: active ? "#FFFFFF" : "#666666",
+                              color: active ? "#FFFFFF" : "#8A8A8A",
                               textAlign: "center",
                             }}
                           >
