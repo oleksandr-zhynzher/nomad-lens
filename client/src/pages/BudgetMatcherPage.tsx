@@ -946,8 +946,8 @@ export function BudgetMatcherPage() {
                   }}
                 />
                 {/* Stats row */}
-                <div className="flex items-center gap-4 md:gap-6">
-                  <div>
+                <div className="grid grid-cols-2 gap-x-5 gap-y-3 md:flex md:items-center md:gap-6">
+                  <div className="min-w-0">
                     <div
                       style={{
                         fontFamily: "IBM Plex Mono, monospace",
@@ -973,10 +973,10 @@ export function BudgetMatcherPage() {
                     </div>
                   </div>
                   <div
-                    className="w-px h-6 md:h-8"
+                    className="hidden md:block w-px h-6 md:h-8"
                     style={{ backgroundColor: "#333333" }}
                   />
-                  <div>
+                  <div className="min-w-0">
                     <div
                       style={{
                         fontFamily: "IBM Plex Mono, monospace",
@@ -1002,11 +1002,12 @@ export function BudgetMatcherPage() {
                     </div>
                   </div>
                   <div
-                    className="w-px h-6 md:h-8"
+                    className="hidden md:block w-px h-6 md:h-8"
                     style={{ backgroundColor: "#333333" }}
                   />
                   <Link
                     to={`${langPrefix}/budget-categories`}
+                    className="min-w-0"
                     style={{ textDecoration: "none" }}
                   >
                     <div>
@@ -1050,9 +1051,9 @@ export function BudgetMatcherPage() {
               }}
             >
               {/* Search + compare row */}
-              <div className="flex items-center gap-2 mb-1">
+              <div className="mb-1 flex flex-col gap-2 sm:flex-row sm:items-center">
                 {/* Search input */}
-                <div className="relative flex-1">
+                <div className="relative flex-1 min-w-0">
                   <Search
                     className="absolute left-3 top-1/2 -translate-y-1/2"
                     size={16}
@@ -1096,16 +1097,16 @@ export function BudgetMatcherPage() {
                 {/* Compare buttons */}
                 {compareMode ? (
                   <div
+                    className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto"
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "8px",
-                      flexShrink: 0,
                     }}
                   >
                     <button
                       onClick={handleCompare}
                       disabled={selectedCodes.size < 2}
+                      className="flex-1 justify-center sm:flex-none"
                       style={{
                         display: "flex",
                         alignItems: "center",
@@ -1174,6 +1175,7 @@ export function BudgetMatcherPage() {
                 ) : (
                   <button
                     onClick={() => setCompareMode(true)}
+                    className="w-full justify-center sm:w-auto"
                     style={{
                       display: "flex",
                       alignItems: "center",
