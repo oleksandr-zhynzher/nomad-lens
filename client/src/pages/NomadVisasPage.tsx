@@ -188,6 +188,8 @@ export function NomadVisasPage() {
     }
   };
 
+  const tableMinWidth = compareMode ? "940px" : "892px";
+
   return (
     <Layout>
       <PageHeroBanner
@@ -380,17 +382,17 @@ export function NomadVisasPage() {
             {/* Compare mode buttons */}
             {compareMode ? (
               <div
-                  className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto"
+                className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto"
                 style={{
                   display: "flex",
-                    alignItems: "center",
+                  alignItems: "center",
                 }}
               >
                 {/* Compare CTA */}
                 <button
                   onClick={handleCompare}
                   disabled={selectedCodes.size < 2}
-                    className="flex-1 justify-center sm:flex-none"
+                  className="flex-1 justify-center sm:flex-none"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -541,7 +543,7 @@ export function NomadVisasPage() {
             const colgroup = (
               <colgroup>
                 {compareMode && <col style={{ width: "48px" }} />}
-                <col />
+                <col style={{ width: "190px" }} />
                 <col style={{ width: "160px" }} />
                 <col style={{ width: "90px" }} />
                 <col style={{ width: "110px" }} />
@@ -567,7 +569,8 @@ export function NomadVisasPage() {
                 >
                   <table
                     style={{
-                      width: "100%",
+                      width: tableMinWidth,
+                      minWidth: tableMinWidth,
                       tableLayout: "fixed",
                       borderCollapse: "separate",
                       borderSpacing: 0,
@@ -739,7 +742,8 @@ export function NomadVisasPage() {
                 >
                   <table
                     style={{
-                      width: "100%",
+                      width: tableMinWidth,
+                      minWidth: tableMinWidth,
                       tableLayout: "fixed",
                       borderCollapse: "separate",
                       borderSpacing: 0,

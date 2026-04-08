@@ -14,9 +14,9 @@ export function PageHeroBanner({
   children,
 }: PageHeroBannerProps) {
   return (
-    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }}>
+    <div className="md:px-4" style={{ maxWidth: "1200px", margin: "0 auto" }}>
       <div
-        className="relative mb-6 md:mb-8 overflow-hidden rounded-lg"
+        className="relative mb-6 overflow-hidden md:mb-8 md:rounded-lg"
         style={{
           background: "#0A0D12",
           backgroundImage: `url('${backgroundImage}')`,

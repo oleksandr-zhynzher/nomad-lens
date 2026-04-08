@@ -439,7 +439,7 @@ export default function App() {
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
-              className="relative mb-6 md:mb-6 rounded-lg overflow-hidden"
+              className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
               style={{
                 background: "#0A0D12",
                 backgroundImage: `url('/hero-map.png')`,

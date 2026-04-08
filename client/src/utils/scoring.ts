@@ -109,12 +109,7 @@ export function redistributeWeights(
   const clamped = Math.max(0, Math.min(100, Math.round(newValue)));
   const result = { ...weights, [changedKey]: clamped };
 
-  // AI metrics are always independent — even in balanced mode
-  if (AI_CATEGORIES.has(changedKey)) return result;
-
-  const others = VISIBLE_CATEGORY_KEYS.filter(
-    (k) => k !== changedKey && !AI_CATEGORIES.has(k),
-  );
+  const others = VISIBLE_CATEGORY_KEYS.filter((k) => k !== changedKey);
   const remaining = 100 - clamped;
 
   if (others.length === 0) return result;
