@@ -62,6 +62,8 @@ const BREAKDOWN_ROWS: {
   { key: "healthInsurance", icon: HeartPulse },
 ];
 
+const BUDGET_COMPARISON_COLUMN_WIDTH = "112px";
+
 interface Props {
   countries: CountryData[];
   matches?: BudgetMatch[];
@@ -192,8 +194,8 @@ export function BudgetComparison({
       {/* ── Country selector ─────────────────────────────────── */}
       <div className="relative">
         <div
-          className="flex items-stretch gap-3 pb-2"
-          style={{ overflowX: "auto", scrollbarWidth: "thin" }}
+          className="grid grid-cols-2 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
+          style={{ scrollbarWidth: "thin" }}
         >
           {selectedSlots.map((slot) => {
             const match = matchMap.get(slot.country.code);
@@ -202,7 +204,7 @@ export function BudgetComparison({
             return (
               <div
                 key={slot.country.code}
-                className="shrink-0 w-[140px] md:w-[180px]"
+                className="min-w-0 w-full md:shrink-0 md:w-[180px]"
               >
                 <div
                   className="relative rounded-lg p-4 flex flex-col items-center gap-3"
@@ -288,7 +290,10 @@ export function BudgetComparison({
           })}
 
           {/* Add button */}
-          <div ref={addBtnRef} className="shrink-0 w-[140px] md:w-[180px]">
+          <div
+            ref={addBtnRef}
+            className="min-w-0 w-full md:shrink-0 md:w-[180px]"
+          >
             <button
               onClick={() => {
                 if (!dropdownOpen && addBtnRef.current) {
@@ -308,11 +313,10 @@ export function BudgetComparison({
                 }
                 setDropdownOpen((p) => !p);
               }}
-              className="w-full rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
+              className="flex min-h-[160px] w-full flex-col items-center justify-center gap-2 rounded-lg p-4 transition-colors hover:border-[#3A3A3A] md:min-h-[180px]"
               style={{
                 backgroundColor: "#141416",
                 border: "1px dashed #252525",
-                minHeight: "180px",
                 cursor: "pointer",
               }}
             >
@@ -332,7 +336,7 @@ export function BudgetComparison({
 
         {/* Right-edge fade */}
         <div
-          className="pointer-events-none absolute top-0 right-0 bottom-0 w-12"
+          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block"
           style={{
             background: "linear-gradient(to right, transparent, #0F1114)",
           }}
@@ -469,7 +473,8 @@ export function BudgetComparison({
               {selectedSlots.map((slot) => (
                 <div
                   key={slot.index}
-                  className="flex-1 flex items-center justify-center gap-1.5"
+                  className="flex shrink-0 items-center justify-center gap-1.5"
+                  style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
                 >
                   <img
                     src={slot.country.flagUrl}
@@ -478,11 +483,13 @@ export function BudgetComparison({
                     style={{ width: "18px", height: "18px" }}
                   />
                   <span
+                    className="truncate"
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       fontWeight: 600,
                       color: "#FFFFFF",
+                      maxWidth: "76px",
                     }}
                   >
                     {localizeCountry(slot.country, lang).name}
@@ -514,7 +521,11 @@ export function BudgetComparison({
               {selectedSlots.map((slot) => {
                 const val = matchMap.get(slot.country.code)?.monthlyCost;
                 return (
-                  <div key={slot.index} className="flex-1 text-center">
+                  <div
+                    key={slot.index}
+                    className="shrink-0 text-center"
+                    style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
+                  >
                     <span
                       style={{
                         fontFamily: "IBM Plex Mono, monospace",
@@ -555,7 +566,11 @@ export function BudgetComparison({
                 const match = matchMap.get(slot.country.code);
                 const val = match?.surplus;
                 return (
-                  <div key={slot.index} className="flex-1 text-center">
+                  <div
+                    key={slot.index}
+                    className="shrink-0 text-center"
+                    style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
+                  >
                     <span
                       style={{
                         fontFamily: "IBM Plex Mono, monospace",
@@ -602,7 +617,11 @@ export function BudgetComparison({
                   {selectedSlots.map((slot) => {
                     const val = matchMap.get(slot.country.code)?.breakdown[key];
                     return (
-                      <div key={slot.index} className="flex-1 text-center">
+                      <div
+                        key={slot.index}
+                        className="shrink-0 text-center"
+                        style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
+                      >
                         <span
                           style={{
                             fontFamily: "IBM Plex Mono, monospace",

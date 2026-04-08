@@ -310,93 +310,88 @@ export function ComparePage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
             {/* Compare mode toggle pills */}
             <div
-              className="w-full overflow-x-auto no-scrollbar rounded-md p-1 sm:w-auto"
+              className="w-full rounded-md p-1 sm:w-auto"
               style={{
                 backgroundColor: "#1A1A1A",
                 border: "1px solid #252525",
               }}
             >
-              <div className="flex min-w-max">
-              <button
-                onClick={() => setCompareMode("countries")}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
-                style={{
-                  backgroundColor:
-                    compareMode === "countries"
-                      ? "var(--color-accent)"
-                      : "transparent",
-                  color: compareMode === "countries" ? "#FFFFFF" : "#8A8A8A",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: compareMode === "countries" ? 500 : 400,
-                }}
-              >
-                <Flag size={14} />
-                {t("compare.countries")}
-              </button>
-              <button
-                onClick={() => setCompareMode("regions")}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
-                style={{
-                  backgroundColor:
-                    compareMode === "regions"
-                      ? "var(--color-accent)"
-                      : "transparent",
-                  color: compareMode === "regions" ? "#FFFFFF" : "#8A8A8A",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: compareMode === "regions" ? 500 : 400,
-                }}
-              >
-                <Globe size={14} />
-                {t("compare.regions")}
-              </button>
-              <button
-                onClick={() => setCompareMode("nomadVisas")}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
-                style={{
-                  backgroundColor:
-                    compareMode === "nomadVisas"
-                      ? "var(--color-accent)"
-                      : "transparent",
-                  color: compareMode === "nomadVisas" ? "#FFFFFF" : "#8A8A8A",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: compareMode === "nomadVisas" ? 500 : 400,
-                }}
-              >
-                <Plane size={14} />
-                {t("compare.nomadVisas")}
-              </button>
-              <button
-                onClick={() => setCompareMode("budget")}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
-                style={{
-                  backgroundColor:
-                    compareMode === "budget"
-                      ? "var(--color-accent)"
-                      : "transparent",
-                  color: compareMode === "budget" ? "#FFFFFF" : "#8A8A8A",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: compareMode === "budget" ? 500 : 400,
-                }}
-              >
-                <Wallet size={14} />
-                {t("compare.budget", "Budget")}
-              </button>
+              <div className="grid grid-cols-2 gap-1 sm:flex sm:w-auto">
+                <button
+                  onClick={() => setCompareMode("countries")}
+                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  style={{
+                    backgroundColor:
+                      compareMode === "countries"
+                        ? "var(--color-accent)"
+                        : "transparent",
+                    color: compareMode === "countries" ? "#FFFFFF" : "#8A8A8A",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    fontWeight: compareMode === "countries" ? 500 : 400,
+                  }}
+                >
+                  <Flag size={14} />
+                  {t("compare.countries")}
+                </button>
+                <button
+                  onClick={() => setCompareMode("regions")}
+                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  style={{
+                    backgroundColor:
+                      compareMode === "regions"
+                        ? "var(--color-accent)"
+                        : "transparent",
+                    color: compareMode === "regions" ? "#FFFFFF" : "#8A8A8A",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    fontWeight: compareMode === "regions" ? 500 : 400,
+                  }}
+                >
+                  <Globe size={14} />
+                  {t("compare.regions")}
+                </button>
+                <button
+                  onClick={() => setCompareMode("nomadVisas")}
+                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  style={{
+                    backgroundColor:
+                      compareMode === "nomadVisas"
+                        ? "var(--color-accent)"
+                        : "transparent",
+                    color: compareMode === "nomadVisas" ? "#FFFFFF" : "#8A8A8A",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    fontWeight: compareMode === "nomadVisas" ? 500 : 400,
+                    lineHeight: 1.2,
+                    textAlign: "center",
+                  }}
+                >
+                  <Plane size={14} />
+                  {t("compare.nomadVisas")}
+                </button>
+                <button
+                  onClick={() => setCompareMode("budget")}
+                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  style={{
+                    backgroundColor:
+                      compareMode === "budget"
+                        ? "var(--color-accent)"
+                        : "transparent",
+                    color: compareMode === "budget" ? "#FFFFFF" : "#8A8A8A",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    fontWeight: compareMode === "budget" ? 500 : 400,
+                  }}
+                >
+                  <Wallet size={14} />
+                  {t("compare.budget", "Budget")}
+                </button>
               </div>
             </div>
 
-            {/* Parameters + Sort + Share grouped controls */}
-            <div
-              className="w-full overflow-x-auto no-scrollbar rounded-md p-1 sm:w-auto"
-              style={{
-                backgroundColor: "#1A1A1A",
-                border: "1px solid #252525",
-              }}
-            >
-              <div className="flex min-w-max w-full sm:w-auto">
+            {/* Parameters + Sort + Share controls */}
+            <div className="flex w-full flex-wrap gap-2 sm:w-auto">
               {compareMode !== "nomadVisas" && (
                 <button
                   onClick={() => {
@@ -406,11 +401,21 @@ export function ComparePage() {
                       setShowWeights((p) => !p);
                     }
                   }}
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                  className="w-full justify-center sm:w-auto"
                   style={{
-                    backgroundColor: showWeights && window.innerWidth >= 768
-                      ? "var(--color-accent)"
-                      : "transparent",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    height: "40px",
+                    paddingLeft: "14px",
+                    paddingRight: "14px",
+                    borderRadius: "6px",
+                    border: "1px solid #2A2A2A",
+                    cursor: "pointer",
+                    backgroundColor:
+                      showWeights && window.innerWidth >= 768
+                        ? "var(--color-accent)"
+                        : "transparent",
                     color:
                       showWeights && window.innerWidth >= 768
                         ? "#FFFFFF"
@@ -419,6 +424,8 @@ export function ComparePage() {
                     fontSize: "13px",
                     fontWeight:
                       showWeights && window.innerWidth >= 768 ? 500 : 400,
+                    whiteSpace: "nowrap",
+                    flexShrink: 0,
                   }}
                 >
                   <svg
@@ -442,13 +449,26 @@ export function ComparePage() {
                 (compareMode === "budget" && selectedCodes.length > 1)) && (
                 <button
                   onClick={handleSortByScore}
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                  className="w-full justify-center sm:w-auto"
                   style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    height: "40px",
+                    paddingLeft: "14px",
+                    paddingRight: "14px",
+                    borderRadius: "6px",
+                    border: sorted
+                      ? "1px solid rgba(136,204,136,0.35)"
+                      : "1px solid #2A2A2A",
+                    cursor: "pointer",
                     backgroundColor: sorted ? "#2A4A2A" : "transparent",
                     color: sorted ? "#88CC88" : "#8A8A8A",
                     fontFamily: "Inter, sans-serif",
                     fontSize: "13px",
                     fontWeight: sorted ? 500 : 400,
+                    whiteSpace: "nowrap",
+                    flexShrink: 0,
                     transition: "all 0.15s ease",
                   }}
                 >
@@ -475,13 +495,26 @@ export function ComparePage() {
 
               <button
                 onClick={handleShare}
-                className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
+                className="w-full justify-center sm:w-auto"
                 style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  height: "40px",
+                  paddingLeft: "14px",
+                  paddingRight: "14px",
+                  borderRadius: "6px",
+                  border: copied
+                    ? "1px solid rgba(136,204,136,0.35)"
+                    : "1px solid #2A2A2A",
+                  cursor: "pointer",
                   backgroundColor: copied ? "#2A4A2A" : "transparent",
                   color: copied ? "#88CC88" : "#8A8A8A",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: copied ? 500 : 400,
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
                   transition: "all 0.15s ease",
                 }}
               >
@@ -512,7 +545,6 @@ export function ComparePage() {
                 )}
                 {copied ? t("weights.linkCopied") : t("compare.share")}
               </button>
-              </div>
             </div>
           </div>
 

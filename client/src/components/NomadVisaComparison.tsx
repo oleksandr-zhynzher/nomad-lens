@@ -43,6 +43,8 @@ const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   special: { bg: "#4A3A1A", text: "#DDAA44" },
 };
 
+const VISA_COMPARISON_COLUMN_WIDTH = "128px";
+
 interface Props {
   countries: CountryData[];
   selectedCodes: string[];
@@ -412,13 +414,13 @@ export function NomadVisaComparison({
     <div>
       {/* Country selector — horizontal scroll */}
       <div
-        className="flex items-stretch gap-3 pb-2"
-        style={{ overflowX: "auto", scrollbarWidth: "thin" }}
+        className="grid grid-cols-2 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
+        style={{ scrollbarWidth: "thin" }}
       >
         {selectedCountries.map((slot) => (
           <div
             key={slot.country.code}
-            className="shrink-0 w-[140px] md:w-[180px]"
+            className="min-w-0 w-full md:shrink-0 md:w-[180px]"
             onClick={() =>
               navigate(
                 `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
@@ -506,14 +508,13 @@ export function NomadVisaComparison({
         ))}
 
         {/* Add button */}
-        <div className="shrink-0 w-[140px] md:w-[180px]">
+        <div className="min-w-0 w-full md:shrink-0 md:w-[180px]">
           <button
             onClick={() => setDropdownOpen((p) => !p)}
-            className="w-full rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-colors hover:border-[#3A3A3A]"
+            className="flex min-h-[160px] w-full flex-col items-center justify-center gap-2 rounded-lg p-4 transition-colors hover:border-[#3A3A3A] md:min-h-[180px]"
             style={{
               backgroundColor: "#141416",
               border: "1px dashed #252525",
-              minHeight: "180px",
               cursor: "pointer",
             }}
           >
@@ -645,7 +646,8 @@ export function NomadVisaComparison({
               {selectedCountries.map((slot) => (
                 <div
                   key={slot.index}
-                  className="flex-1 flex items-center justify-center gap-1.5"
+                  className="flex shrink-0 items-center justify-center gap-1.5"
+                  style={{ width: VISA_COMPARISON_COLUMN_WIDTH }}
                 >
                   <img
                     src={slot.country.flagUrl}
@@ -654,11 +656,13 @@ export function NomadVisaComparison({
                     style={{ width: "18px", height: "18px" }}
                   />
                   <span
+                    className="truncate"
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       fontWeight: 600,
                       color: "#FFFFFF",
+                      maxWidth: "92px",
                     }}
                   >
                     {localizeCountry(slot.country, lang).name}
@@ -694,7 +698,8 @@ export function NomadVisaComparison({
                 {selectedCountries.map((slot) => (
                   <div
                     key={slot.index}
-                    className="flex-1 flex items-center justify-center"
+                    className="flex shrink-0 items-center justify-center"
+                    style={{ width: VISA_COMPARISON_COLUMN_WIDTH }}
                   >
                     {renderCell(slot, key)}
                   </div>

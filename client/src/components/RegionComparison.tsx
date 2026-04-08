@@ -71,6 +71,8 @@ const REGION_ICONS: Record<string, typeof Sun> = {
   Oceania: Waves,
 };
 
+const REGION_COLUMN_WIDTH = "108px";
+
 const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
   economy: TrendingUp,
   affordability: Coins,
@@ -223,12 +225,15 @@ export function RegionComparison({
 
   return (
     <div>
-      {/* Region cards — fill full width */}
-      <div className="flex gap-3 pb-2">
+      {/* Region cards — horizontally scrollable on small screens */}
+      <div
+        className="flex gap-3 pb-2"
+        style={{ overflowX: "auto", scrollbarWidth: "thin" }}
+      >
         {regionStats.map((r) => {
           const active = enabled.has(r.name);
           return (
-            <div key={r.name} className="flex-1 min-w-0">
+            <div key={r.name} className="shrink-0 w-[148px] md:w-[180px]">
               <button
                 onClick={() => toggleRegion(r.name)}
                 className="w-full rounded-lg p-4 flex flex-col items-center gap-3 transition-all"
@@ -328,14 +333,17 @@ export function RegionComparison({
               {activeRegions.map((r) => (
                 <div
                   key={r.name}
-                  className="flex-1 flex items-center justify-center"
+                  className="flex shrink-0 items-center justify-center"
+                  style={{ width: REGION_COLUMN_WIDTH }}
                 >
                   <span
+                    className="truncate text-center"
                     style={{
                       fontFamily: "Inter, sans-serif",
                       fontSize: "12px",
                       fontWeight: 600,
                       color: "#FFFFFF",
+                      maxWidth: "84px",
                     }}
                   >
                     {t(`regions.${regionKey(r.name)}`)}
@@ -370,7 +378,11 @@ export function RegionComparison({
                 </span>
               </div>
               {activeRegions.map((r) => (
-                <div key={r.name} className="flex-1 text-center">
+                <div
+                  key={r.name}
+                  className="shrink-0 text-center"
+                  style={{ width: REGION_COLUMN_WIDTH }}
+                >
                   <span
                     style={{
                       fontFamily: "IBM Plex Mono, monospace",
@@ -415,7 +427,11 @@ export function RegionComparison({
                   {activeRegions.map((r) => {
                     const val = r.categories[key].avg;
                     return (
-                      <div key={r.name} className="flex-1 text-center">
+                      <div
+                        key={r.name}
+                        className="shrink-0 text-center"
+                        style={{ width: REGION_COLUMN_WIDTH }}
+                      >
                         <span
                           style={{
                             fontFamily: "IBM Plex Mono, monospace",
