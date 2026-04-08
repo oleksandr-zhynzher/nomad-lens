@@ -201,8 +201,8 @@ export function NomadVisasPage() {
         )}
       >
         {!loading && allVisaCountries.length > 0 && (
-          <div className="flex items-center gap-4 md:gap-6">
-            <div>
+          <div className="grid grid-cols-2 gap-x-5 gap-y-3 md:flex md:items-center md:gap-6">
+            <div className="min-w-0">
               <div
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
@@ -228,10 +228,10 @@ export function NomadVisasPage() {
               </div>
             </div>
             <div
-              className="w-px h-6 md:h-8"
+              className="hidden md:block w-px h-6 md:h-8"
               style={{ backgroundColor: "#333333" }}
             />
-            <div>
+            <div className="min-w-0">
               <div
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
@@ -261,10 +261,10 @@ export function NomadVisasPage() {
               </div>
             </div>
             <div
-              className="w-px h-6 md:h-8"
+              className="hidden md:block w-px h-6 md:h-8"
               style={{ backgroundColor: "#333333" }}
             />
-            <div>
+            <div className="min-w-0">
               <div
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
@@ -318,9 +318,9 @@ export function NomadVisasPage() {
           }}
         >
           {/* Row 1: search + compare buttons */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             {/* Search input */}
-            <div style={{ position: "relative", flex: 1 }}>
+            <div className="relative flex-1 min-w-0">
               <Search
                 size={16}
                 color="#808080"
@@ -380,17 +380,17 @@ export function NomadVisasPage() {
             {/* Compare mode buttons */}
             {compareMode ? (
               <div
+                  className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto"
                 style={{
                   display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  flexShrink: 0,
+                    alignItems: "center",
                 }}
               >
                 {/* Compare CTA */}
                 <button
                   onClick={handleCompare}
                   disabled={selectedCodes.size < 2}
+                    className="flex-1 justify-center sm:flex-none"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -460,6 +460,7 @@ export function NomadVisasPage() {
             ) : (
               <button
                 onClick={() => setCompareMode(true)}
+                className="w-full justify-center sm:w-auto"
                 style={{
                   display: "flex",
                   alignItems: "center",
