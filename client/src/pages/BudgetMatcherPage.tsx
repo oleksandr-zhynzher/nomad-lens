@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   House,
   ShoppingCart,
@@ -157,6 +157,15 @@ export function BudgetMatcherPage() {
   const [copied, setCopied] = useState(false);
   const toggle = (key: string) =>
     setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
+
+  useEffect(() => {
+    if (!mobileParamsOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileParamsOpen]);
 
   /* ── Sidebar content (shared between desktop & mobile) ── */
   const sidebarContent = (
@@ -733,20 +742,26 @@ export function BudgetMatcherPage() {
         {/* ── Mobile parameters bottom sheet ──────────────── */}
         {mobileParamsOpen && (
           <div
-            className="md:hidden fixed inset-0 z-50 flex flex-col"
+            className="md:hidden fixed inset-0 z-50 flex"
             onClick={() => setMobileParamsOpen(false)}
           >
             <div
-              className="flex-1"
-              style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+              className="absolute inset-0"
+              style={{
+                backgroundColor: "rgba(0,0,0,0.72)",
+                backdropFilter: "blur(6px)",
+              }}
             />
             <div
-              className="relative flex flex-col"
+              className="relative mt-auto flex w-full flex-col overflow-hidden"
               style={{
-                height: "85vh",
+                minHeight: "70vh",
+                maxHeight: "calc(100dvh - 16px)",
                 backgroundColor: "#1A1A1A",
-                borderTopLeftRadius: "12px",
-                borderTopRightRadius: "12px",
+                borderTopLeftRadius: "24px",
+                borderTopRightRadius: "24px",
+                borderTop: "1px solid #2A2A2A",
+                boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
               }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -801,7 +816,7 @@ export function BudgetMatcherPage() {
         <button
           className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg"
           style={{
-            bottom: "24px",
+            bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
             right: "16px",
             height: "48px",
             paddingLeft: "16px",
@@ -823,7 +838,10 @@ export function BudgetMatcherPage() {
         </button>
 
         {/* ── Right content area ──────────────────────────── */}
-        <main className="flex-1 min-w-0" style={{ backgroundColor: "#0F1114" }}>
+        <main
+          className="flex-1 min-w-0 pb-28 md:pb-0"
+          style={{ backgroundColor: "#0F1114" }}
+        >
           <div className="px-4 md:px-6">
             {/* ── Hero section (matching list page) ─────────── */}
             <div

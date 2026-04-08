@@ -228,6 +228,15 @@ export default function App() {
     navCursor,
   ]);
 
+  useEffect(() => {
+    if (!mobileParamsOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileParamsOpen]);
+
   const activeHighlight =
     searchMode === "highlight" && search.trim().length >= 1
       ? (matchingCodes[matchCursor] ?? null)
@@ -284,7 +293,7 @@ export default function App() {
         {/* Mobile parameters bottom sheet */}
         {mobileParamsOpen && (
           <div
-            className="md:hidden fixed inset-0 z-50 flex flex-col"
+            className="md:hidden fixed inset-0 z-50 flex"
             role="dialog"
             aria-modal="true"
             aria-label={t("mobileSheet.weightsAndPreferences")}
@@ -317,17 +326,23 @@ export default function App() {
             }}
           >
             <div
-              className="flex-1"
-              style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+              className="absolute inset-0"
+              style={{
+                backgroundColor: "rgba(0,0,0,0.72)",
+                backdropFilter: "blur(6px)",
+              }}
             />
             <div
               data-mobile-sheet
-              className="relative flex flex-col"
+              className="relative mt-auto flex w-full flex-col overflow-hidden"
               style={{
-                height: "85vh",
+                minHeight: "70vh",
+                maxHeight: "calc(100dvh - 16px)",
                 backgroundColor: "#1A1A1A",
-                borderTopLeftRadius: "12px",
-                borderTopRightRadius: "12px",
+                borderTopLeftRadius: "24px",
+                borderTopRightRadius: "24px",
+                borderTop: "1px solid #2A2A2A",
+                boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
               }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -397,7 +412,7 @@ export default function App() {
         <button
           className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg"
           style={{
-            bottom: "24px",
+            bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
             right: "16px",
             height: "48px",
             paddingLeft: "16px",
@@ -417,7 +432,10 @@ export default function App() {
         </button>
 
         {/* Right content area */}
-        <main className="flex-1 min-w-0" style={{ backgroundColor: "#0F1114" }}>
+        <main
+          className="flex-1 min-w-0 pb-28 md:pb-0"
+          style={{ backgroundColor: "#0F1114" }}
+        >
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
@@ -521,8 +539,8 @@ export default function App() {
                   }}
                 />
                 {/* Stats row */}
-                <div className="flex items-center gap-4 md:gap-6">
-                  <div>
+                <div className="grid grid-cols-2 gap-x-5 gap-y-3 md:flex md:items-center md:gap-6">
+                  <div className="min-w-0">
                     <div
                       style={{
                         fontFamily: "IBM Plex Mono, monospace",
@@ -548,11 +566,12 @@ export default function App() {
                     </div>
                   </div>
                   <div
-                    className="w-px h-6 md:h-8"
+                    className="hidden md:block w-px h-6 md:h-8"
                     style={{ backgroundColor: "#333333" }}
                   />
                   <Link
                     to={`${langPrefix}/indicators`}
+                    className="min-w-0"
                     style={{ textDecoration: "none" }}
                   >
                     <div>
@@ -582,11 +601,12 @@ export default function App() {
                     </div>
                   </Link>
                   <div
-                    className="w-px h-6 md:h-8"
+                    className="hidden md:block w-px h-6 md:h-8"
                     style={{ backgroundColor: "#333333" }}
                   />
                   <Link
                     to={`${langPrefix}/data-sources`}
+                    className="min-w-0"
                     style={{ textDecoration: "none" }}
                   >
                     <div>
@@ -616,11 +636,12 @@ export default function App() {
                     </div>
                   </Link>
                   <div
-                    className="w-px h-6 md:h-8"
+                    className="hidden md:block w-px h-6 md:h-8"
                     style={{ backgroundColor: "#333333" }}
                   />
                   <Link
                     to={`${langPrefix}/ai-indicators`}
+                    className="min-w-0"
                     style={{ textDecoration: "none" }}
                   >
                     <div>
@@ -667,7 +688,7 @@ export default function App() {
             >
               {/* Search + compare row */}
               <div className={`${isSticky ? "" : " mb-4"}`}>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                   <div className="relative flex-1 min-w-0">
                     <Search
                       className="absolute left-4 top-1/2 -translate-y-1/2"
@@ -825,11 +846,12 @@ export default function App() {
                     )}
                   </div>
 
-                  <div className="flex items-center justify-end gap-2 shrink-0">
+                  <div className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto">
                     {compareMode ? (
                       <>
                         <button
                           onClick={handleCompare}
+                          className="flex-1 justify-center sm:flex-none"
                           disabled={selectedCodes.size < 2}
                           style={{
                             display: "flex",
@@ -902,6 +924,7 @@ export default function App() {
                     ) : (
                       <button
                         onClick={() => setCompareMode(true)}
+                        className="w-full justify-center sm:w-auto"
                         style={{
                           display: "flex",
                           alignItems: "center",

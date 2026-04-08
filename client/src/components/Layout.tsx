@@ -46,6 +46,15 @@ export function Layout({ children }: LayoutProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [langDropdownOpen]);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileMenuOpen]);
+
   const LANG_OPTIONS = [
     { code: "en" as const, flagCode: "gb", label: "English" },
     { code: "ua" as const, flagCode: "ua", label: "Українська" },
@@ -350,13 +359,23 @@ export function Layout({ children }: LayoutProps) {
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden fixed inset-x-0 top-14 z-20"
+          className="md:hidden fixed inset-x-0 top-14 bottom-0 z-20 px-3 pb-3"
           style={{
-            backgroundColor: "#0D0E10",
-            borderBottom: "1px solid #252525",
+            backgroundColor: "rgba(0, 0, 0, 0.56)",
+            backdropFilter: "blur(8px)",
           }}
+          onClick={() => setMobileMenuOpen(false)}
         >
-          <div className="flex flex-col gap-1 px-4 py-3">
+          <div
+            className="flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(20,20,22,0.98) 0%, rgba(13,14,16,0.98) 100%)",
+              borderColor: "#252525",
+              boxShadow: "0 20px 48px rgba(0,0,0,0.45)",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* View toggle */}
             {showViewToggle && (
               <>
