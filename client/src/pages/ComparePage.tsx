@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet } from "lucide-react";
+import {
+  Flag,
+  Globe,
+  ArrowDownWideNarrow,
+  Plane,
+  Wallet,
+  X,
+} from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
@@ -35,6 +42,7 @@ export function ComparePage() {
   const [countrySelectionCount, setCountrySelectionCount] = useState(0);
   const [copied, setCopied] = useState(false);
   const [sorted, setSorted] = useState(false);
+  const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
 
   const ws = useWeightState();
   const langPrefix = useLangPrefix();
@@ -72,6 +80,15 @@ export function ComparePage() {
       window.removeEventListener("resize", syncPanelHeight);
     };
   }, [showWeights, syncPanelHeight]);
+
+  useEffect(() => {
+    if (!mobileParamsOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileParamsOpen]);
 
   const setCompareMode = (
     mode: "countries" | "regions" | "nomadVisas" | "budget",
@@ -148,8 +165,8 @@ export function ComparePage() {
                   : t("compare.nomadVisaSubtitle")
           }
         >
-          <div className="flex items-center gap-4 md:gap-6">
-            <div>
+          <div className="grid grid-cols-2 gap-x-5 gap-y-3 md:flex md:items-center md:gap-6">
+            <div className="min-w-0">
               <div
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
@@ -175,11 +192,12 @@ export function ComparePage() {
               </div>
             </div>
             <div
-              className="w-px h-6 md:h-8"
+              className="hidden md:block w-px h-6 md:h-8"
               style={{ backgroundColor: "#333333" }}
             />
             <Link
               to={`${langPrefix}/nomad-visas`}
+              className="min-w-0"
               style={{ textDecoration: "none" }}
             >
               <div>
@@ -209,11 +227,12 @@ export function ComparePage() {
               </div>
             </Link>
             <div
-              className="w-px h-6 md:h-8"
+              className="hidden md:block w-px h-6 md:h-8"
               style={{ backgroundColor: "#333333" }}
             />
             <Link
               to={`${langPrefix}/indicators`}
+              className="min-w-0"
               style={{ textDecoration: "none" }}
             >
               <div>
@@ -243,11 +262,12 @@ export function ComparePage() {
               </div>
             </Link>
             <div
-              className="w-px h-6 md:h-8"
+              className="hidden md:block w-px h-6 md:h-8"
               style={{ backgroundColor: "#333333" }}
             />
             <Link
               to={`${langPrefix}/ai-indicators`}
+              className="min-w-0"
               style={{ textDecoration: "none" }}
             >
               <div>
@@ -290,12 +310,13 @@ export function ComparePage() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
             {/* Compare mode toggle pills */}
             <div
-              className="flex w-full sm:w-auto rounded-md p-1"
+              className="w-full overflow-x-auto no-scrollbar rounded-md p-1 sm:w-auto"
               style={{
                 backgroundColor: "#1A1A1A",
                 border: "1px solid #252525",
               }}
             >
+              <div className="flex min-w-max">
               <button
                 onClick={() => setCompareMode("countries")}
                 className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
@@ -364,28 +385,40 @@ export function ComparePage() {
                 <Wallet size={14} />
                 {t("compare.budget", "Budget")}
               </button>
+              </div>
             </div>
 
             {/* Parameters + Sort + Share grouped controls */}
             <div
-              className="flex w-full sm:w-auto rounded-md p-1"
+              className="w-full overflow-x-auto no-scrollbar rounded-md p-1 sm:w-auto"
               style={{
                 backgroundColor: "#1A1A1A",
                 border: "1px solid #252525",
               }}
             >
+              <div className="flex min-w-max w-full sm:w-auto">
               {compareMode !== "nomadVisas" && (
                 <button
-                  onClick={() => setShowWeights((p) => !p)}
+                  onClick={() => {
+                    if (window.innerWidth < 768) {
+                      setMobileParamsOpen(true);
+                    } else {
+                      setShowWeights((p) => !p);
+                    }
+                  }}
                   className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-1.5 rounded transition-colors"
                   style={{
-                    backgroundColor: showWeights
+                    backgroundColor: showWeights && window.innerWidth >= 768
                       ? "var(--color-accent)"
                       : "transparent",
-                    color: showWeights ? "#FFFFFF" : "#8A8A8A",
+                    color:
+                      showWeights && window.innerWidth >= 768
+                        ? "#FFFFFF"
+                        : "#8A8A8A",
                     fontFamily: "Inter, sans-serif",
                     fontSize: "13px",
-                    fontWeight: showWeights ? 500 : 400,
+                    fontWeight:
+                      showWeights && window.innerWidth >= 768 ? 500 : 400,
                   }}
                 >
                   <svg
@@ -479,8 +512,105 @@ export function ComparePage() {
                 )}
                 {copied ? t("weights.linkCopied") : t("compare.share")}
               </button>
+              </div>
             </div>
           </div>
+
+          {mobileParamsOpen && compareMode !== "nomadVisas" && (
+            <div
+              className="md:hidden fixed inset-0 z-50 flex"
+              role="dialog"
+              aria-modal="true"
+              aria-label={t("compare.parameters")}
+              onClick={() => setMobileParamsOpen(false)}
+            >
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundColor: "rgba(0,0,0,0.72)",
+                  backdropFilter: "blur(6px)",
+                }}
+              />
+              <div
+                className="relative mt-auto flex w-full flex-col overflow-hidden"
+                style={{
+                  minHeight: "70vh",
+                  maxHeight: "calc(100dvh - 16px)",
+                  backgroundColor: "#1A1A1A",
+                  borderTopLeftRadius: "24px",
+                  borderTopRightRadius: "24px",
+                  borderTop: "1px solid #2A2A2A",
+                  boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex justify-center pt-3 pb-1 shrink-0">
+                  <div
+                    style={{
+                      width: "36px",
+                      height: "4px",
+                      borderRadius: "2px",
+                      backgroundColor: "#444444",
+                    }}
+                  />
+                </div>
+                <div className="flex items-center justify-between px-4 pb-2 shrink-0">
+                  <span
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      fontWeight: 700,
+                      letterSpacing: "1.5px",
+                      textTransform: "uppercase",
+                      color: "#9E9E9E",
+                    }}
+                  >
+                    {t("compare.parameters")}
+                  </span>
+                  <button
+                    onClick={() => setMobileParamsOpen(false)}
+                    className="flex items-center justify-center"
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "4px",
+                      backgroundColor: "#333333",
+                      color: "#9E9E9E",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    aria-label="Close parameters"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+                <div className="flex-1 overflow-y-auto">
+                  {compareMode === "budget" ? (
+                    <BudgetFilterPanel bs={bs} />
+                  ) : (
+                    <WeightPanel
+                      weights={ws.weights}
+                      onChange={ws.handleWeightChange}
+                      onReset={ws.handleReset}
+                      weightsAreDefault={ws.weightsAreDefault}
+                      onShare={handleShare}
+                      climatePrefs={ws.climatePrefs}
+                      onClimatePrefsChange={ws.setClimatePrefs}
+                      nomadVisaOnly={ws.nomadVisaOnly}
+                      onNomadVisaOnlyChange={ws.setNomadVisaOnly}
+                      schengenOnly={ws.schengenOnly}
+                      onSchengenOnlyChange={ws.setSchengenOnly}
+                      minTouristDays={ws.minTouristDays}
+                      onMinTouristDaysChange={ws.setMinTouristDays}
+                      weightMode={ws.weightMode}
+                      onWeightModeChange={ws.handleWeightModeChange}
+                      mobile
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           <div
             className={`grid gap-4 md:gap-6 ${
