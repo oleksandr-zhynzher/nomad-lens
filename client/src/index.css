@@ -37,6 +37,10 @@
     background-color: #333333;
   }
 
+  .hero-banner-stats {
+    margin-top: 0.75rem;
+  }
+
   @media (min-width: 1025px) {
     .hero-stats-row {
       gap: 1.5rem;
@@ -46,6 +50,10 @@
 
     .hero-stat-divider {
       height: 2rem;
+    }
+
+    .hero-banner-stats {
+      margin-top: 0;
     }
   }
 }

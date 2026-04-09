@@ -844,45 +844,6 @@ export function BudgetMatcherPage() {
                 className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
                 style={{ minHeight: "160px" }}
               >
-                {/* Eyebrow with dots (list page style) */}
-                <div className="flex items-center gap-2 mb-2 md:mb-3">
-                  {t("budget.eyebrow", "BUDGET MATCHER")
-                    .split("·")
-                    .map((word, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: "4px",
-                            height: "4px",
-                            borderRadius: "50%",
-                            backgroundColor: "var(--color-accent-dim)",
-                            flexShrink: 0,
-                            display: "inline-block",
-                          }}
-                        />
-                        <span
-                          style={{
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "11px",
-                            fontWeight: 500,
-                            letterSpacing: "2.5px",
-                            textTransform: "uppercase",
-                            color: "var(--color-accent-dim)",
-                            lineHeight: 1,
-                          }}
-                        >
-                          {word.trim()}
-                        </span>
-                      </span>
-                    ))}
-                </div>
                 {/* H1 — responsive font (list page style) */}
                 <h1
                   className="text-3xl md:text-6xl"
@@ -923,7 +884,7 @@ export function BudgetMatcherPage() {
                   }}
                 />
                 {/* Stats row */}
-                <div className="hero-stats-row">
+                <div className="hero-stats-row hero-banner-stats">
                   <div className="min-w-0">
                     <div
                       style={{

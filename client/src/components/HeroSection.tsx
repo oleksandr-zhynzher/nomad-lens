@@ -8,7 +8,6 @@ interface HeroSectionProps {
 
 export function HeroSection({
   backgroundImage,
-  eyebrow,
   title,
   subtitle,
   children,
@@ -59,18 +58,6 @@ export function HeroSection({
           paddingBottom: children ? "24px" : undefined,
         }}
       >
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "2px",
-            color: "#8F5A3C",
-            textTransform: "uppercase",
-          }}
-        >
-          {eyebrow}
-        </span>
         <h1
           className="text-3xl md:text-[56px]"
           style={{

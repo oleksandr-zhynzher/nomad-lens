@@ -148,27 +148,7 @@ export function IndicatorsPage() {
           coreCount: coreIndicatorCount,
           aiCount: aiIndicatorCount,
         })}
-      >
-        <div className="flex items-center gap-4 md:gap-6">
-          <div>
-            <div className="[font-family:'IBM_Plex_Mono',monospace] text-lg leading-none font-semibold text-[var(--color-accent-dim)]">
-              {coreIndicatorCount}
-            </div>
-            <div className="mt-1 text-[10px] uppercase tracking-[1px] text-[#757575]">
-              {t("hero.indicators")}
-            </div>
-          </div>
-          <div className="h-6 w-px bg-[#333333] md:h-8" />
-          <div>
-            <div className="[font-family:'IBM_Plex_Mono',monospace] text-lg leading-none font-semibold text-[var(--color-accent-dim)]">
-              {aiIndicatorCount}
-            </div>
-            <div className="mt-1 text-[10px] uppercase tracking-[1px] text-[#757575]">
-              {t("hero.aiIndicators")}
-            </div>
-          </div>
-        </div>
-      </HeroSection>
+      />
 
       {/* Content zone */}
       <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">

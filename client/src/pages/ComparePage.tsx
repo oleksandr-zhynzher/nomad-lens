@@ -207,7 +207,7 @@ export function ComparePage() {
                   : t("compare.nomadVisaSubtitle")
           }
         >
-          <div className="hero-stats-row">
+          <div className="hero-stats-row hero-banner-stats">
             <div className="min-w-0">
               <div
                 style={{

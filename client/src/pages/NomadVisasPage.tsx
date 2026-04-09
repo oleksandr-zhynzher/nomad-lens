@@ -203,7 +203,7 @@ export function NomadVisasPage() {
         )}
       >
         {!loading && allVisaCountries.length > 0 && (
-          <div className="hero-stats-row">
+          <div className="hero-stats-row hero-banner-stats">
             <div className="min-w-0">
               <div
                 style={{
