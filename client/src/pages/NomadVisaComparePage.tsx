@@ -170,7 +170,7 @@ export function NomadVisaComparePage() {
           }}
         >
           <ArrowLeft size={14} />
-          {t("nomadVisasPage.backToVisas", "Back to Nomad Visas")}
+          {t("nomadVisasPage.backToVisas", "Back to Nomad")}
         </Link>
 
         <h1

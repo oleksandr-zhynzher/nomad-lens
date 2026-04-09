@@ -31,6 +31,9 @@ import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "../utils/types";
 export function ComparePage() {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [sortDirection, setSortDirection] = useState<"desc" | "asc" | null>(
+    null,
+  );
   const compareMode: "countries" | "regions" | "nomadVisas" | "budget" =
     searchParams.get("m") === "regions"
       ? "regions"
@@ -44,7 +47,7 @@ export function ComparePage() {
   const [sortTrigger, setSortTrigger] = useState(0);
   const [countrySelectionCount, setCountrySelectionCount] = useState(0);
   const [copied, setCopied] = useState(false);
-  const [sorted, setSorted] = useState(false);
+  const [sortFeedbackActive, setSortFeedbackActive] = useState(false);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
 
   const ws = useWeightState();
@@ -159,9 +162,10 @@ export function ComparePage() {
   };
 
   const handleSortByScore = () => {
+    setSortDirection((previous) => (previous === "desc" ? "asc" : "desc"));
     setSortTrigger((previous) => previous + 1);
-    setSorted(true);
-    setTimeout(() => setSorted(false), 3000);
+    setSortFeedbackActive(true);
+    setTimeout(() => setSortFeedbackActive(false), 1000);
   };
 
   const showParametersAction = compareMode !== "nomadVisas";
@@ -175,6 +179,13 @@ export function ComparePage() {
       : showParametersAction || showSortAction
         ? "grid-cols-2"
         : "grid-cols-1";
+  const sortButtonLabel = sortFeedbackActive
+    ? t("compare.sorted")
+    : compareMode === "budget"
+      ? t("compare.sortByBudget")
+      : t("compare.sortByScore");
+  const sortButtonIconClassName =
+    sortDirection === "asc" ? "rotate-180" : "rotate-0";
 
   return (
     <Layout>
@@ -349,10 +360,10 @@ export function ComparePage() {
                 border: "1px solid #252525",
               }}
             >
-              <div className="grid grid-cols-2 gap-1 sm:flex sm:w-auto">
+              <div className="flex w-full gap-1">
                 <button
                   onClick={() => setCompareMode("countries")}
-                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "countries"
@@ -369,7 +380,7 @@ export function ComparePage() {
                 </button>
                 <button
                   onClick={() => setCompareMode("regions")}
-                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "regions"
@@ -386,7 +397,7 @@ export function ComparePage() {
                 </button>
                 <button
                   onClick={() => setCompareMode("nomadVisas")}
-                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "nomadVisas"
@@ -405,7 +416,7 @@ export function ComparePage() {
                 </button>
                 <button
                   onClick={() => setCompareMode("budget")}
-                  className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "budget"
@@ -490,34 +501,23 @@ export function ComparePage() {
                       className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-all sm:flex-initial sm:px-4 sm:py-1.5"
                       style={{
                         cursor: "pointer",
-                        backgroundColor: sorted ? "#2A4A2A" : "transparent",
-                        color: sorted ? "#88CC88" : "#8A8A8A",
+                        backgroundColor: sortFeedbackActive
+                          ? "#2A4A2A"
+                          : "transparent",
+                        color: sortFeedbackActive ? "#88CC88" : "#8A8A8A",
                         fontFamily: "Inter, sans-serif",
                         fontSize: "12px",
-                        fontWeight: sorted ? 500 : 400,
+                        fontWeight: sortFeedbackActive ? 500 : 400,
                         lineHeight: 1.2,
                         flexShrink: 0,
                         transition: "all 0.15s ease",
                       }}
                     >
-                      {sorted ? (
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
-                      ) : (
-                        <ArrowDownWideNarrow size={16} />
-                      )}
-                      {sorted
-                        ? t("compare.sorted")
-                        : compareMode === "budget"
-                          ? t("compare.sortByBudget")
-                          : t("compare.sortByScore")}
+                      <ArrowDownWideNarrow
+                        size={16}
+                        className={`transition-transform ${sortButtonIconClassName}`}
+                      />
+                      {sortButtonLabel}
                     </button>
                   )}
 
@@ -724,6 +724,7 @@ export function ComparePage() {
                   selectedCodes={selectedCodes}
                   onSelectedCodesChange={handleSelectedCodesChange}
                   sortTrigger={sortTrigger}
+                  sortDirection={sortDirection}
                 />
               ) : (
                 <CountryComparison
@@ -733,6 +734,7 @@ export function ComparePage() {
                   selectedCodes={selectedCodes}
                   onSelectedCodesChange={handleSelectedCodesChange}
                   sortTrigger={sortTrigger}
+                  sortDirection={sortDirection}
                   onSelectionCount={setCountrySelectionCount}
                 />
               )}

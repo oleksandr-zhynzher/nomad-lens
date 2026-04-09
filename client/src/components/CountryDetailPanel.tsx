@@ -9,6 +9,7 @@ import {
   TrendingUp,
   Shield,
   User,
+  List,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -530,7 +531,7 @@ export function CountryDetailPanel({
                 onViewInList();
                 onClose();
               }}
-              className="w-full flex items-center justify-center gap-2 transition-colors"
+              className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
               style={{
                 height: "40px",
                 backgroundColor: "transparent",
@@ -542,12 +543,13 @@ export function CountryDetailPanel({
                 color: "var(--color-accent-dim)",
               }}
             >
+              <List size={14} />
               {t("countryDetail.viewInList")}
             </button>
             <Link
               to={`${langPrefix}/country/${c.code.toLowerCase()}`}
               onClick={onClose}
-              className="w-full flex items-center justify-center gap-2 transition-colors"
+              className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
               style={{
                 display: "flex",
                 height: "40px",

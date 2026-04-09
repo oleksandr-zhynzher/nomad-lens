@@ -59,14 +59,17 @@ export function BudgetCountryCard({
   const borderColor = isEven ? "#252527" : "#1F1F21";
 
   const rowBg = isSelected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618";
+  const hoverBg = isEven ? "#232326" : "#202023";
 
   return (
     <div
-      className="overflow-hidden transition-colors duration-150"
+      data-selected={isSelected ? "true" : undefined}
+      className="country-row overflow-hidden transition-colors duration-150"
       style={{
         position: "relative",
         backgroundColor: rowBg,
         borderBottom: "1px solid #222",
+        ["--row-hover-bg" as string]: hoverBg,
       }}
     >
       {/* Compare mode: checkbox */}
@@ -395,7 +398,7 @@ export function BudgetCountryCard({
           {/* View country details button — at the bottom */}
           <Link
             to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-            className="w-full flex items-center justify-center gap-2 transition-colors"
+            className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
             style={{
               display: "flex",
               height: "40px",

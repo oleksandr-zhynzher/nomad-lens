@@ -779,7 +779,7 @@ export function NomadVisasPage() {
                             onMouseEnter={(e) => {
                               if (!isHighlighted && !isSelected) {
                                 e.currentTarget.style.backgroundColor =
-                                  "#1A1A1A";
+                                  "#232326";
                               }
                             }}
                             onMouseLeave={(e) => {

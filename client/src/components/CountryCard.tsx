@@ -39,14 +39,14 @@ export function CountryCard({
   // Alternating backgrounds
   const isEven = index % 2 === 0;
   const bgColor = selected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618";
-  const hoverBg = isEven ? "#252528" : "#202022";
+  const hoverBg = isEven ? "#232326" : "#202023";
   const borderColor = isEven ? "#252527" : "#1F1F21";
 
   return (
     <div
       data-country-code={country.code}
       data-selected={selected ? "true" : undefined}
-      className={`country-row overflow-hidden ${compareMode ? "" : "transition-colors duration-150"}`}
+      className="country-row overflow-hidden transition-colors duration-150"
       style={{
         backgroundColor: bgColor,
         borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
@@ -281,7 +281,7 @@ export function CountryCard({
           <ScoreBreakdown country={country} />
           <Link
             to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-            className="w-full flex items-center justify-center gap-2 transition-colors"
+            className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
             style={{
               display: "flex",
               height: "40px",

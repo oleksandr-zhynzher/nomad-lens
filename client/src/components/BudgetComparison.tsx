@@ -70,6 +70,7 @@ interface Props {
   selectedCodes: string[];
   onSelectedCodesChange: (codes: string[]) => void;
   sortTrigger?: number;
+  sortDirection?: "desc" | "asc" | null;
 }
 
 export function BudgetComparison({
@@ -78,6 +79,7 @@ export function BudgetComparison({
   selectedCodes,
   onSelectedCodesChange,
   sortTrigger = 0,
+  sortDirection = null,
 }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState<{
@@ -134,26 +136,28 @@ export function BudgetComparison({
   };
 
   useEffect(() => {
-    if (sortTrigger <= 0) return;
+    if (sortTrigger <= 0 || sortDirection == null) return;
 
     const sortedCodes = [...selectedCodes].sort((codeA, codeB) => {
       const matchA = matchMap.get(codeA);
       const matchB = matchMap.get(codeB);
 
       if (!matchA && !matchB) return 0;
-      if (!matchA) return 1;
-      if (!matchB) return -1;
+      if (!matchA) return sortDirection === "desc" ? 1 : -1;
+      if (!matchB) return sortDirection === "desc" ? -1 : 1;
 
       if (matchA.monthlyCost !== matchB.monthlyCost) {
-        return matchA.monthlyCost - matchB.monthlyCost;
+        const costDelta = matchB.monthlyCost - matchA.monthlyCost;
+        return sortDirection === "desc" ? costDelta : -costDelta;
       }
 
-      return matchB.surplus - matchA.surplus;
+      const surplusDelta = matchB.surplus - matchA.surplus;
+      return sortDirection === "desc" ? surplusDelta : -surplusDelta;
     });
 
     onSelectedCodesChange(sortedCodes);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortTrigger]);
+  }, [sortDirection, sortTrigger]);
 
   const filtered = countries
     .filter(

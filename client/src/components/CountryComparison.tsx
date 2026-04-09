@@ -110,6 +110,7 @@ interface Props {
   selectedCodes: string[];
   onSelectedCodesChange: (codes: string[]) => void;
   sortTrigger?: number;
+  sortDirection?: "desc" | "asc" | null;
   onSelectionCount?: (count: number) => void;
 }
 
@@ -137,6 +138,7 @@ export function CountryComparison({
   selectedCodes,
   onSelectedCodesChange,
   sortTrigger = 0,
+  sortDirection = null,
   onSelectionCount,
 }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -195,20 +197,23 @@ export function CountryComparison({
 
   // Sort when parent triggers it
   useEffect(() => {
-    if (sortTrigger > 0) {
-      const sorted = [...selectedCodes].sort((a, b) => {
-        const countryA = countries.find((c) => c.code === a);
-        const countryB = countries.find((c) => c.code === b);
-        if (!countryA || !countryB) return 0;
-        return (
-          computeScore(applyClimate(countryB, climatePrefs), weights) -
-          computeScore(applyClimate(countryA, climatePrefs), weights)
-        );
-      });
-      onSelectedCodesChange(sorted);
-    }
+    if (sortTrigger <= 0 || sortDirection == null) return;
+
+    const sorted = [...selectedCodes].sort((a, b) => {
+      const countryA = countries.find((c) => c.code === a);
+      const countryB = countries.find((c) => c.code === b);
+      if (!countryA || !countryB) return 0;
+
+      const scoreDelta =
+        computeScore(applyClimate(countryB, climatePrefs), weights) -
+        computeScore(applyClimate(countryA, climatePrefs), weights);
+
+      return sortDirection === "desc" ? scoreDelta : -scoreDelta;
+    });
+
+    onSelectedCodesChange(sorted);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortTrigger]);
+  }, [sortDirection, sortTrigger]);
 
   // Report selection count to parent
   useEffect(() => {
@@ -234,8 +239,8 @@ export function CountryComparison({
       {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
         <div
-          className="grid grid-cols-2 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
-          style={{ scrollbarWidth: "thin" }}
+          className="flex gap-3 pb-2"
+          style={{ overflowX: "auto", scrollbarWidth: "thin" }}
         >
           {selectedCountries.map((slot) => {
             const score = computeScore(
@@ -246,7 +251,7 @@ export function CountryComparison({
             return (
               <div
                 key={slot.country.code}
-                className="min-w-0 w-full md:shrink-0 md:w-[180px]"
+                className="shrink-0 w-[148px] md:w-[180px]"
                 onClick={() =>
                   navigate(
                     `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
@@ -349,10 +354,7 @@ export function CountryComparison({
           })}
 
           {/* Add button */}
-          <div
-            ref={addBtnRef}
-            className="min-w-0 w-full md:shrink-0 md:w-[180px]"
-          >
+          <div ref={addBtnRef} className="shrink-0 w-[148px] md:w-[180px]">
             <button
               onClick={() => {
                 if (!dropdownOpen && addBtnRef.current) {

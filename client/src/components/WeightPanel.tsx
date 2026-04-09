@@ -463,7 +463,7 @@ export function WeightPanel({
             >
               {/* Group header */}
               <button
-                className="w-full flex items-center"
+                className="button-hover-exempt weight-panel-group-button w-full flex items-center"
                 style={{
                   height: "40px",
                   padding: "0 14px",
@@ -729,7 +729,7 @@ export function WeightPanel({
           return (
             <div style={{ borderBottom: "1px solid #242424" }}>
               <button
-                className="w-full flex items-center"
+                className="button-hover-exempt weight-panel-group-button w-full flex items-center"
                 style={{
                   height: "40px",
                   padding: "0 14px",
@@ -1019,7 +1019,7 @@ export function WeightPanel({
           {!weightsAreDefault && (
             <button
               onClick={handleShare}
-              className="w-full flex items-center justify-center gap-2 rounded transition-colors"
+              className="button-hover-exempt weight-panel-share-button w-full flex items-center justify-center gap-2 rounded transition-colors"
               style={{
                 backgroundColor: copied ? "#2A4A2A" : "#1A2A1A",
                 color: copied ? "#88CC88" : "#6B9E6B",
@@ -1071,7 +1071,7 @@ export function WeightPanel({
           )}
           <button
             onClick={onReset}
-            className="w-full flex items-center justify-center gap-2 rounded transition-colors"
+            className="button-hover-exempt weight-panel-reset-button w-full flex items-center justify-center gap-2 rounded transition-colors"
             style={{
               backgroundColor: "transparent",
               color: "var(--color-accent-dim)",

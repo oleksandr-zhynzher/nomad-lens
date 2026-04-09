@@ -23,9 +23,7 @@ export function Layout({ children }: LayoutProps) {
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
 
-  /** Strip current lang prefix from pathname, then prepend the target one */
   const langSwitchPath = (targetLang: string) => {
-    // Remove current lang prefix (/ua or /ru) from the start of the path
     let rest = pathname;
     if (langPrefix && rest.startsWith(langPrefix)) {
       rest = rest.slice(langPrefix.length) || "/";
@@ -35,14 +33,16 @@ export function Layout({ children }: LayoutProps) {
   };
 
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
         setLangDropdownOpen(false);
       }
     }
+
     if (langDropdownOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
+
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [langDropdownOpen]);
 
@@ -56,13 +56,14 @@ export function Layout({ children }: LayoutProps) {
   }, [mobileMenuOpen]);
 
   const LANG_OPTIONS = [
-    { code: "en" as const, flagCode: "gb", label: "English" },
-    { code: "ua" as const, flagCode: "ua", label: "Українська" },
-    { code: "ru" as const, flagCode: "ru", label: "Русский" },
+    { code: "en" as const, label: "English" },
+    { code: "ua" as const, label: "Українська" },
+    { code: "ru" as const, label: "Русский" },
   ];
 
   const currentLang =
-    LANG_OPTIONS.find((l) => l.code === i18n.language) ?? LANG_OPTIONS[0];
+    LANG_OPTIONS.find((language) => language.code === i18n.language) ??
+    LANG_OPTIONS[0];
 
   const INFO_PAGES = [
     "/indicators",
@@ -72,7 +73,7 @@ export function Layout({ children }: LayoutProps) {
     "/ai-indicators",
     "/budget-categories",
   ];
-  const isInfoPage = INFO_PAGES.some((p) => pathname.endsWith(p));
+  const isInfoPage = INFO_PAGES.some((pagePath) => pathname.endsWith(pagePath));
 
   const activeView: "list" | "map" | "compare" | null = pathname.endsWith(
     "/map",
@@ -84,31 +85,29 @@ export function Layout({ children }: LayoutProps) {
         ? null
         : "list";
 
-  const showViewToggle = !isInfoPage;
-
-  const handleViewClick = (v: "list" | "map" | "compare") => {
-    if (v === "list") {
+  const handleViewClick = (view: "list" | "map" | "compare") => {
+    if (view === "list") {
       navigate(langPrefix || "/");
     } else {
-      navigate(`${langPrefix}/${v}`);
+      navigate(`${langPrefix}/${view}`);
     }
     setMobileMenuOpen(false);
   };
+
   return (
     <div
-      className="min-h-screen text-slate-100 flex flex-col"
+      className="min-h-screen flex flex-col text-slate-100"
       style={{ backgroundColor: "var(--color-bg)" }}
     >
       <header
-        className="border-b sticky top-0 z-30"
+        className="sticky top-0 z-30 border-b"
         style={{
           backgroundColor: "#0D0E10",
           borderColor: "#252525",
           height: "56px",
         }}
       >
-        <div className="w-full max-w-[1200px] mx-auto px-4 h-full flex items-center justify-between">
-          {/* Logo */}
+        <div className="mx-auto flex h-full w-full max-w-[1200px] items-center justify-between px-4">
           <button
             onClick={() => handleViewClick("list")}
             className="flex items-center gap-2.5 leading-none"
@@ -140,16 +139,15 @@ export function Layout({ children }: LayoutProps) {
             </span>
           </button>
 
-          {/* Desktop: right side nav links + view toggle + GitHub */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* View toggle - segmented control */}
+          <div className="hidden items-center gap-4 md:flex">
             <div
               className="flex rounded-md p-1"
               style={{ backgroundColor: "#2A2A2A", gap: "4px" }}
             >
               <button
                 onClick={() => handleViewClick("list")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
+                data-active={activeView === "list" ? "true" : undefined}
                 style={{
                   backgroundColor:
                     activeView === "list"
@@ -166,7 +164,8 @@ export function Layout({ children }: LayoutProps) {
               </button>
               <button
                 onClick={() => handleViewClick("map")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
+                data-active={activeView === "map" ? "true" : undefined}
                 style={{
                   backgroundColor:
                     activeView === "map"
@@ -183,7 +182,8 @@ export function Layout({ children }: LayoutProps) {
               </button>
               <button
                 onClick={() => handleViewClick("compare")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
+                data-active={activeView === "compare" ? "true" : undefined}
                 style={{
                   backgroundColor:
                     activeView === "compare"
@@ -200,7 +200,10 @@ export function Layout({ children }: LayoutProps) {
               </button>
               <Link
                 to={`${langPrefix}/nomad-visas`}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
+                data-active={
+                  pathname.endsWith("/nomad-visas") ? "true" : undefined
+                }
                 style={{
                   backgroundColor: pathname.endsWith("/nomad-visas")
                     ? "var(--color-accent)"
@@ -219,7 +222,10 @@ export function Layout({ children }: LayoutProps) {
               </Link>
               <Link
                 to={`${langPrefix}/budget-matcher`}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded transition-colors"
+                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
+                data-active={
+                  pathname.endsWith("/budget-matcher") ? "true" : undefined
+                }
                 style={{
                   backgroundColor: pathname.endsWith("/budget-matcher")
                     ? "var(--color-accent)"
@@ -238,17 +244,16 @@ export function Layout({ children }: LayoutProps) {
               </Link>
             </div>
 
-            {/* Language switcher – text button + dropdown */}
             <div
+              ref={langRef}
               style={{
                 position: "relative",
                 display: "flex",
                 alignItems: "center",
               }}
-              ref={langRef}
             >
               <button
-                onClick={() => setLangDropdownOpen((p) => !p)}
+                onClick={() => setLangDropdownOpen((previous) => !previous)}
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -285,43 +290,42 @@ export function Layout({ children }: LayoutProps) {
                     zIndex: 50,
                   }}
                 >
-                  {LANG_OPTIONS.filter((o) => o.code !== i18n.language).map(
-                    (opt, i) => (
-                      <Link
-                        key={opt.code}
-                        to={langSwitchPath(opt.code)}
-                        onClick={() => setLangDropdownOpen(false)}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          minWidth: "56px",
-                          height: "32px",
-                          padding: "0 16px",
-                          textDecoration: "none",
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "12px",
-                          fontWeight: 600,
-                          letterSpacing: "1px",
-                          lineHeight: 1,
-                          color: "#9E9E9E",
-                          borderTop: i === 0 ? "none" : "1px solid #1E1E1E",
-                        }}
-                      >
-                        {opt.code.toUpperCase()}
-                      </Link>
-                    ),
-                  )}
+                  {LANG_OPTIONS.filter(
+                    (option) => option.code !== i18n.language,
+                  ).map((option, index) => (
+                    <Link
+                      key={option.code}
+                      to={langSwitchPath(option.code)}
+                      onClick={() => setLangDropdownOpen(false)}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        minWidth: "56px",
+                        height: "32px",
+                        padding: "0 16px",
+                        textDecoration: "none",
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "12px",
+                        fontWeight: 600,
+                        letterSpacing: "1px",
+                        lineHeight: 1,
+                        color: "#9E9E9E",
+                        borderTop: index === 0 ? "none" : "1px solid #1E1E1E",
+                      }}
+                    >
+                      {option.code.toUpperCase()}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>
 
-            {/* GitHub link */}
             <a
               href="https://github.com/oleksandr-zhynzher/nomad-lens"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 hover:text-slate-200 transition-colors"
+              className="flex items-center gap-1.5 transition-colors hover:text-slate-200"
               style={{
                 fontFamily: "Inter, sans-serif",
                 fontSize: "13px",
@@ -344,11 +348,10 @@ export function Layout({ children }: LayoutProps) {
             </a>
           </div>
 
-          {/* Mobile hamburger button */}
           <button
-            className="md:hidden flex items-center justify-center"
+            className="flex items-center justify-center md:hidden"
             style={{ width: "40px", height: "40px", color: "#9E9E9E" }}
-            onClick={() => setMobileMenuOpen((p) => !p)}
+            onClick={() => setMobileMenuOpen((previous) => !previous)}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -356,14 +359,10 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
         <div
-          className="md:hidden fixed inset-x-0 top-14 bottom-0 z-20 px-3 pb-3"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0.56)",
-            backdropFilter: "blur(8px)",
-          }}
+          className="fixed inset-x-0 top-14 bottom-0 z-40 px-3 pb-3 md:hidden"
+          style={{ backgroundColor: "#0D0E10" }}
           onClick={() => setMobileMenuOpen(false)}
         >
           <div
@@ -374,141 +373,129 @@ export function Layout({ children }: LayoutProps) {
               borderColor: "#252525",
               boxShadow: "0 20px 48px rgba(0,0,0,0.45)",
             }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(event) => event.stopPropagation()}
           >
-            {/* View toggle */}
-            {showViewToggle && (
-              <>
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    fontWeight: 600,
-                    letterSpacing: "1.5px",
-                    textTransform: "uppercase",
-                    color: "#757575",
-                    marginBottom: "4px",
-                  }}
-                >
-                  {t("views.viewLabel")}
-                </p>
-                <div className="grid grid-cols-2 gap-2 mb-3">
-                  <button
-                    onClick={() => handleViewClick("list")}
-                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
-                    style={{
-                      backgroundColor:
-                        activeView === "list"
-                          ? "var(--color-accent)"
-                          : "#2A2A2A",
-                      color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      fontWeight: activeView === "list" ? 500 : 400,
-                    }}
-                  >
-                    <List size={16} />
-                    {t("views.list")}
-                  </button>
-                  <button
-                    onClick={() => handleViewClick("map")}
-                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
-                    style={{
-                      backgroundColor:
-                        activeView === "map"
-                          ? "var(--color-accent)"
-                          : "#2A2A2A",
-                      color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      fontWeight: activeView === "map" ? 500 : 400,
-                    }}
-                  >
-                    <Map size={16} />
-                    {t("views.map")}
-                  </button>
-                  <button
-                    onClick={() => handleViewClick("compare")}
-                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
-                    style={{
-                      backgroundColor:
-                        activeView === "compare"
-                          ? "var(--color-accent)"
-                          : "#2A2A2A",
-                      color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      fontWeight: activeView === "compare" ? 500 : 400,
-                    }}
-                  >
-                    <BarChart3 size={16} />
-                    {t("views.compare")}
-                  </button>
-                  <Link
-                    to={`${langPrefix}/nomad-visas`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
-                    style={{
-                      backgroundColor: pathname.endsWith("/nomad-visas")
-                        ? "var(--color-accent)"
-                        : "#2A2A2A",
-                      color: pathname.endsWith("/nomad-visas")
-                        ? "#FFFFFF"
-                        : "#9E9E9E",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Plane size={16} />
-                    {t("nav.nomadVisas")}
-                  </Link>
-                  <Link
-                    to={`${langPrefix}/budget-matcher`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-3 py-2 rounded transition-colors"
-                    style={{
-                      backgroundColor: pathname.endsWith("/budget-matcher")
-                        ? "var(--color-accent)"
-                        : "#2A2A2A",
-                      color: pathname.endsWith("/budget-matcher")
-                        ? "#FFFFFF"
-                        : "#9E9E9E",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      fontWeight: pathname.endsWith("/budget-matcher")
-                        ? 500
-                        : 400,
-                      textDecoration: "none",
-                    }}
-                  >
-                    <Wallet size={16} />
-                    {t("nav.budgetMatcher")}
-                  </Link>
-                </div>
-              </>
-            )}
+            <p
+              style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: "10px",
+                fontWeight: 600,
+                letterSpacing: "1.5px",
+                textTransform: "uppercase",
+                color: "#757575",
+                marginBottom: "4px",
+              }}
+            >
+              {t("views.viewLabel")}
+            </p>
+            <div className="mb-3 grid grid-cols-2 gap-2">
+              <button
+                onClick={() => handleViewClick("list")}
+                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
+                style={{
+                  backgroundColor:
+                    activeView === "list" ? "var(--color-accent)" : "#2A2A2A",
+                  color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: activeView === "list" ? 500 : 400,
+                }}
+              >
+                <List size={16} />
+                {t("views.list")}
+              </button>
+              <button
+                onClick={() => handleViewClick("map")}
+                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
+                style={{
+                  backgroundColor:
+                    activeView === "map" ? "var(--color-accent)" : "#2A2A2A",
+                  color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: activeView === "map" ? 500 : 400,
+                }}
+              >
+                <Map size={16} />
+                {t("views.map")}
+              </button>
+              <button
+                onClick={() => handleViewClick("compare")}
+                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
+                style={{
+                  backgroundColor:
+                    activeView === "compare"
+                      ? "var(--color-accent)"
+                      : "#2A2A2A",
+                  color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: activeView === "compare" ? 500 : 400,
+                }}
+              >
+                <BarChart3 size={16} />
+                {t("views.compare")}
+              </button>
+              <Link
+                to={`${langPrefix}/nomad-visas`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
+                style={{
+                  backgroundColor: pathname.endsWith("/nomad-visas")
+                    ? "var(--color-accent)"
+                    : "#2A2A2A",
+                  color: pathname.endsWith("/nomad-visas")
+                    ? "#FFFFFF"
+                    : "#9E9E9E",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
+                  textDecoration: "none",
+                }}
+              >
+                <Plane size={16} />
+                {t("nav.nomadVisas")}
+              </Link>
+              <Link
+                to={`${langPrefix}/budget-matcher`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
+                style={{
+                  backgroundColor: pathname.endsWith("/budget-matcher")
+                    ? "var(--color-accent)"
+                    : "#2A2A2A",
+                  color: pathname.endsWith("/budget-matcher")
+                    ? "#FFFFFF"
+                    : "#9E9E9E",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
+                  textDecoration: "none",
+                }}
+              >
+                <Wallet size={16} />
+                {t("nav.budgetMatcher")}
+              </Link>
+            </div>
 
-            {/* Language switcher */}
             <div
               className="flex items-center gap-3 py-3"
               style={{ borderBottom: "1px solid #1E1E1E" }}
             >
-              {(["en", "ua", "ru"] as const).map((lng) => (
+              {(["en", "ua", "ru"] as const).map((language) => (
                 <Link
-                  key={lng}
-                  to={langSwitchPath(lng)}
+                  key={language}
+                  to={langSwitchPath(language)}
                   onClick={() => setMobileMenuOpen(false)}
                   style={{
                     fontFamily: "Inter, sans-serif",
                     fontSize: "13px",
-                    fontWeight: i18n.language === lng ? 700 : 400,
-                    color: i18n.language === lng ? "#C2956A" : "#808080",
+                    fontWeight: i18n.language === language ? 700 : 400,
+                    color: i18n.language === language ? "#C2956A" : "#808080",
                     textDecoration: "none",
                   }}
                 >
-                  {t(`langSwitcher.${lng}`)}
+                  {t(`langSwitcher.${language}`)}
                 </Link>
               ))}
             </div>
@@ -547,14 +534,14 @@ export function Layout({ children }: LayoutProps) {
         className={
           activeView === "compare"
             ? ""
-            : "w-full max-w-7xl mx-auto px-4 py-4 md:py-6"
+            : "mx-auto w-full max-w-7xl px-4 py-4 md:py-6"
         }
       >
         {children}
       </main>
 
       <footer
-        className="border-t mt-16 py-6 text-center text-xs px-4"
+        className="mt-16 border-t px-4 py-6 text-center text-xs"
         style={{ borderColor: "#333333", color: "#8A8A8A" }}
       >
         {t("footer.data")}
