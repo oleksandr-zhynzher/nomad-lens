@@ -30,7 +30,7 @@
     "aiIndicators": "AI Показники"
   },
   "search": {
-    "placeholder": "Пошук за назвою країни або ISO кодом…"
+    "placeholder": "Пошук за назвою країни…"
   },
   "regions": {
     "label": "РЕГІОНИ",
@@ -67,7 +67,7 @@
     "sorted": "Відсортовано",
     "share": "Поділитися",
     "addCountry": "Додати країну",
-    "searchCountry": "Пошук країни…",
+    "searchCountry": "Пошук за назвою країни…",
     "noCountriesFound": "Країни не знайдено",
     "nomadVisas": "Номад",
     "nomadVisaTitle": "Порівняння номад-віз",
@@ -528,7 +528,7 @@
     "freeVisas": "Безкошт. візи",
     "compareMode": "Порівняти",
     "compareSelected": "Порівняти",
-    "search": "Пошук країн...",
+    "search": "Пошук за назвою країни...",
     "noResults": "Країни не знайдено",
     "table": {
       "country": "Країна",

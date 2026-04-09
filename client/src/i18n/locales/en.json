@@ -30,7 +30,7 @@
     "aiIndicators": "AI Indicators"
   },
   "search": {
-    "placeholder": "Search by country name or ISO code…"
+    "placeholder": "Search by country name…"
   },
   "regions": {
     "label": "REGIONS",
@@ -67,7 +67,7 @@
     "sorted": "Sorted",
     "share": "Share",
     "addCountry": "Add Country",
-    "searchCountry": "Search country…",
+    "searchCountry": "Search by country name…",
     "noCountriesFound": "No countries found",
     "nomadVisas": "Nomad",
     "nomadVisaTitle": "Nomad Visa Comparison",
@@ -526,7 +526,7 @@
     "countries": "Countries",
     "taxExempt": "Tax Exempt",
     "freeVisas": "Free Visas",
-    "search": "Search countries...",
+    "search": "Search by country name...",
     "noResults": "No countries found",
     "compareMode": "Compare",
     "compareSelected": "Compare",

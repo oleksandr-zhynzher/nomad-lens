@@ -30,7 +30,7 @@
     "aiIndicators": "AI Показатели"
   },
   "search": {
-    "placeholder": "Поиск по названию страны или ISO коду…"
+    "placeholder": "Поиск по названию страны…"
   },
   "regions": {
     "label": "РЕГИОНЫ",
@@ -67,7 +67,7 @@
     "sorted": "Отсортировано",
     "share": "Поделиться",
     "addCountry": "Добавить страну",
-    "searchCountry": "Поиск страны…",
+    "searchCountry": "Поиск по названию страны…",
     "noCountriesFound": "Страны не найдены",
     "nomadVisas": "Номад",
     "nomadVisaTitle": "Сравнение номад-виз",
@@ -528,7 +528,7 @@
     "freeVisas": "Бесплатные визы",
     "compareMode": "Сравнить",
     "compareSelected": "Сравнить",
-    "search": "Поиск стран...",
+    "search": "Поиск по названию страны...",
     "noResults": "Страны не найдены",
     "table": {
       "country": "Страна",
