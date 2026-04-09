@@ -528,29 +528,6 @@ export function BudgetMatcherPage() {
           >
             {t("budget.categoryWeights", "CATEGORY WEIGHTS")}
           </span>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "#291608",
-              borderRadius: 3,
-              padding: "3px 8px",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: 11,
-                color: "#C2956A",
-              }}
-            >
-              Avg{" "}
-              {Math.round(
-                Object.values(bs.categoryWeights).reduce((a, b) => a + b, 0) /
-                  BUDGET_CATEGORIES.length,
-              )}
-            </span>
-          </div>
           <ChevronDown
             size={14}
             style={{

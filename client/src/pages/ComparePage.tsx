@@ -164,6 +164,17 @@ export function ComparePage() {
     setTimeout(() => setSorted(false), 3000);
   };
 
+  const showParametersAction = compareMode !== "nomadVisas";
+  const showSortAction =
+    (compareMode === "countries" && countrySelectionCount > 1) ||
+    (compareMode === "budget" && selectedCodes.length > 1);
+  const actionGridClassName =
+    showParametersAction && showSortAction
+      ? "grid-cols-3"
+      : showParametersAction || showSortAction
+        ? "grid-cols-2"
+        : "grid-cols-1";
+
   return (
     <Layout>
       <div>
@@ -421,160 +432,141 @@ export function ComparePage() {
             </div>
 
             {/* Parameters + Sort + Share controls */}
-            <div className="flex w-full flex-wrap gap-2 sm:w-auto">
-              {compareMode !== "nomadVisas" && (
-                <button
-                  onClick={() => {
-                    if (window.innerWidth < 768) {
-                      setMobileParamsOpen(true);
-                    } else {
-                      setShowWeights((p) => !p);
-                    }
-                  }}
-                  className="w-full justify-center sm:w-auto"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    height: "40px",
-                    paddingLeft: "14px",
-                    paddingRight: "14px",
-                    borderRadius: "6px",
-                    border: "1px solid #2A2A2A",
-                    cursor: "pointer",
-                    backgroundColor:
-                      showWeights && window.innerWidth >= 768
-                        ? "var(--color-accent)"
-                        : "transparent",
-                    color:
-                      showWeights && window.innerWidth >= 768
-                        ? "#FFFFFF"
-                        : "#8A8A8A",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    fontWeight:
-                      showWeights && window.innerWidth >= 768 ? 500 : 400,
-                    whiteSpace: "nowrap",
-                    flexShrink: 0,
-                  }}
-                >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                    />
-                  </svg>
-                  {t("compare.parameters")}
-                </button>
-              )}
-
-              {((compareMode === "countries" && countrySelectionCount > 1) ||
-                (compareMode === "budget" && selectedCodes.length > 1)) && (
-                <button
-                  onClick={handleSortByScore}
-                  className="w-full justify-center sm:w-auto"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    height: "40px",
-                    paddingLeft: "14px",
-                    paddingRight: "14px",
-                    borderRadius: "6px",
-                    border: sorted
-                      ? "1px solid rgba(136,204,136,0.35)"
-                      : "1px solid #2A2A2A",
-                    cursor: "pointer",
-                    backgroundColor: sorted ? "#2A4A2A" : "transparent",
-                    color: sorted ? "#88CC88" : "#8A8A8A",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: sorted ? 500 : 400,
-                    whiteSpace: "nowrap",
-                    flexShrink: 0,
-                    transition: "all 0.15s ease",
-                  }}
-                >
-                  {sorted ? (
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  ) : (
-                    <ArrowDownWideNarrow size={16} />
-                  )}
-                  {sorted
-                    ? t("compare.sorted")
-                    : compareMode === "budget"
-                      ? t("compare.sortByBudget")
-                      : t("compare.sortByScore")}
-                </button>
-              )}
-
-              <button
-                onClick={handleShare}
-                className="w-full justify-center sm:w-auto"
+            <div className="w-full sm:w-auto">
+              <div
+                className="w-full rounded-md p-1 sm:w-auto"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  height: "40px",
-                  paddingLeft: "14px",
-                  paddingRight: "14px",
-                  borderRadius: "6px",
-                  border: copied
-                    ? "1px solid rgba(136,204,136,0.35)"
-                    : "1px solid #2A2A2A",
-                  cursor: "pointer",
-                  backgroundColor: copied ? "#2A4A2A" : "transparent",
-                  color: copied ? "#88CC88" : "#8A8A8A",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: copied ? 500 : 400,
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                  transition: "all 0.15s ease",
+                  backgroundColor: "#1A1A1A",
+                  border: "1px solid #252525",
                 }}
               >
-                {copied ? (
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
+                <div
+                  className={`grid gap-1 sm:flex sm:w-auto ${actionGridClassName}`}
+                >
+                  {showParametersAction && (
+                    <button
+                      onClick={() => {
+                        if (window.innerWidth < 768) {
+                          setMobileParamsOpen(true);
+                        } else {
+                          setShowWeights((p) => !p);
+                        }
+                      }}
+                      className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-colors sm:flex-initial sm:px-4 sm:py-1.5"
+                      style={{
+                        cursor: "pointer",
+                        backgroundColor:
+                          showWeights && window.innerWidth >= 768
+                            ? "var(--color-accent)"
+                            : "transparent",
+                        color:
+                          showWeights && window.innerWidth >= 768
+                            ? "#FFFFFF"
+                            : "#8A8A8A",
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "12px",
+                        fontWeight:
+                          showWeights && window.innerWidth >= 768 ? 500 : 400,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                        />
+                      </svg>
+                      {t("compare.parameters")}
+                    </button>
+                  )}
+
+                  {showSortAction && (
+                    <button
+                      onClick={handleSortByScore}
+                      className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-all sm:flex-initial sm:px-4 sm:py-1.5"
+                      style={{
+                        cursor: "pointer",
+                        backgroundColor: sorted ? "#2A4A2A" : "transparent",
+                        color: sorted ? "#88CC88" : "#8A8A8A",
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "12px",
+                        fontWeight: sorted ? 500 : 400,
+                        lineHeight: 1.2,
+                        flexShrink: 0,
+                        transition: "all 0.15s ease",
+                      }}
+                    >
+                      {sorted ? (
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      ) : (
+                        <ArrowDownWideNarrow size={16} />
+                      )}
+                      {sorted
+                        ? t("compare.sorted")
+                        : compareMode === "budget"
+                          ? t("compare.sortByBudget")
+                          : t("compare.sortByScore")}
+                    </button>
+                  )}
+
+                  <button
+                    onClick={handleShare}
+                    className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-all sm:flex-initial sm:px-4 sm:py-1.5"
+                    style={{
+                      cursor: "pointer",
+                      backgroundColor: copied ? "#2A4A2A" : "transparent",
+                      color: copied ? "#88CC88" : "#8A8A8A",
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      fontWeight: copied ? 500 : 400,
+                      flexShrink: 0,
+                      transition: "all 0.15s ease",
+                    }}
                   >
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                ) : (
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    />
-                  </svg>
-                )}
-                {copied ? t("weights.linkCopied") : t("compare.share")}
-              </button>
+                    {copied ? (
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    ) : (
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                        />
+                      </svg>
+                    )}
+                    {copied ? t("weights.linkCopied") : t("compare.share")}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
