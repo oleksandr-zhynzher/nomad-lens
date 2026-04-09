@@ -119,6 +119,7 @@ export function BudgetFilterPanel({ bs }: Props) {
           </span>
         </div>
         <input
+          name="compare-budget-amount"
           type="range"
           min={300}
           max={10000}
@@ -207,6 +208,7 @@ export function BudgetFilterPanel({ bs }: Props) {
             </span>
           </div>
           <input
+            name="compare-budget-quality-blend"
             type="range"
             min={0}
             max={100}
@@ -501,6 +503,7 @@ export function BudgetFilterPanel({ bs }: Props) {
                     </span>
                   </div>
                   <input
+                    name={`${key}-compare-budget-weight`}
                     type="range"
                     min={0}
                     max={100}

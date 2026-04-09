@@ -104,6 +104,8 @@ export function BudgetMatcherPage() {
   const [search, setSearch] = useState("");
   const sentinelRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const mobileSheetRef = useRef<HTMLDivElement>(null);
+  const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
 
   // Compare mode
   const [compareMode, setCompareMode] = useState(false);
@@ -161,9 +163,50 @@ export function BudgetMatcherPage() {
   useEffect(() => {
     if (!mobileParamsOpen) return;
     const previousOverflow = document.body.style.overflow;
+    const previousFocusedElement =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     document.body.style.overflow = "hidden";
+
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileParamsOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const sheet = mobileSheetRef.current;
+      if (!sheet) return;
+
+      const focusable = Array.from(
+        sheet.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => !el.hasAttribute("disabled"));
+
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", trapFocus);
+    requestAnimationFrame(() => mobileSheetCloseButtonRef.current?.focus());
+
     return () => {
+      window.removeEventListener("keydown", trapFocus);
       document.body.style.overflow = previousOverflow;
+      previousFocusedElement?.focus();
     };
   }, [mobileParamsOpen]);
 
@@ -202,6 +245,7 @@ export function BudgetMatcherPage() {
         </div>
 
         <input
+          name="budget-amount"
           type="range"
           min={300}
           max={10000}
@@ -291,6 +335,7 @@ export function BudgetMatcherPage() {
             </span>
           </div>
           <input
+            name="budget-quality-blend"
             type="range"
             min={0}
             max={100}
@@ -579,6 +624,7 @@ export function BudgetMatcherPage() {
                     </span>
                   </div>
                   <input
+                    name={`${key}-budget-weight`}
                     type="range"
                     min={0}
                     max={100}
@@ -720,6 +766,9 @@ export function BudgetMatcherPage() {
         {mobileParamsOpen && (
           <div
             className="md:hidden fixed inset-0 z-50 flex"
+            role="dialog"
+            aria-modal="true"
+            aria-label={t("budget.eyebrow", "BUDGET MATCHER")}
             onClick={() => setMobileParamsOpen(false)}
           >
             <div
@@ -730,6 +779,8 @@ export function BudgetMatcherPage() {
               }}
             />
             <div
+              ref={mobileSheetRef}
+              tabIndex={-1}
               className="relative mt-auto flex w-full flex-col overflow-hidden"
               style={{
                 minHeight: "70vh",
@@ -768,6 +819,7 @@ export function BudgetMatcherPage() {
                   {t("budget.eyebrow", "BUDGET MATCHER")}
                 </span>
                 <button
+                  ref={mobileSheetCloseButtonRef}
                   onClick={() => setMobileParamsOpen(false)}
                   className="flex items-center justify-center"
                   style={{
@@ -997,6 +1049,7 @@ export function BudgetMatcherPage() {
                   />
                   <input
                     ref={searchInputRef}
+                    name="budget-country-search"
                     type="text"
                     placeholder={t("search.placeholder", "Search countries…")}
                     value={search}

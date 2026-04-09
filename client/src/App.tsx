@@ -44,6 +44,8 @@ export default function App() {
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const mobileSheetRef = useRef<HTMLDivElement>(null);
+  const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
   const [isSticky, setIsSticky] = useState(false);
 
   // Detect sticky state by reading the sentinel's actual position on every
@@ -231,9 +233,50 @@ export default function App() {
   useEffect(() => {
     if (!mobileParamsOpen) return;
     const previousOverflow = document.body.style.overflow;
+    const previousFocusedElement =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     document.body.style.overflow = "hidden";
+
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileParamsOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const sheet = mobileSheetRef.current;
+      if (!sheet) return;
+
+      const focusable = Array.from(
+        sheet.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => !el.hasAttribute("disabled"));
+
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", trapFocus);
+    requestAnimationFrame(() => mobileSheetCloseButtonRef.current?.focus());
+
     return () => {
+      window.removeEventListener("keydown", trapFocus);
       document.body.style.overflow = previousOverflow;
+      previousFocusedElement?.focus();
     };
   }, [mobileParamsOpen]);
 
@@ -298,32 +341,6 @@ export default function App() {
             aria-modal="true"
             aria-label={t("mobileSheet.weightsAndPreferences")}
             onClick={() => setMobileParamsOpen(false)}
-            onKeyDown={(e) => {
-              if (e.key === "Escape") {
-                setMobileParamsOpen(false);
-                return;
-              }
-              if (e.key !== "Tab") return;
-              const sheet = e.currentTarget.querySelector<HTMLElement>(
-                "[data-mobile-sheet]",
-              );
-              if (!sheet) return;
-              const focusable = Array.from(
-                sheet.querySelectorAll<HTMLElement>(
-                  'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-                ),
-              ).filter((el) => !el.hasAttribute("disabled"));
-              if (focusable.length === 0) return;
-              const first = focusable[0];
-              const last = focusable[focusable.length - 1];
-              if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault();
-                last.focus();
-              } else if (!e.shiftKey && document.activeElement === last) {
-                e.preventDefault();
-                first.focus();
-              }
-            }}
           >
             <div
               className="absolute inset-0"
@@ -333,7 +350,9 @@ export default function App() {
               }}
             />
             <div
+              ref={mobileSheetRef}
               data-mobile-sheet
+              tabIndex={-1}
               className="relative mt-auto flex w-full flex-col overflow-hidden"
               style={{
                 minHeight: "70vh",
@@ -372,6 +391,7 @@ export default function App() {
                   {t("mobileSheet.weightsAndPreferences")}
                 </span>
                 <button
+                  ref={mobileSheetCloseButtonRef}
                   onClick={() => setMobileParamsOpen(false)}
                   className="flex items-center justify-center"
                   style={{
@@ -695,6 +715,7 @@ export default function App() {
                     />
                     <input
                       ref={searchInputRef}
+                      name="country-search"
                       type="text"
                       placeholder={t("search.placeholder")}
                       value={search}
@@ -1050,7 +1071,7 @@ export default function App() {
                   ? undefined
                   : (code) => setExpandedCode((c) => (c === code ? null : code))
               }
-              showAll={search.trim().length > 0}
+              showAll={search.trim().length > 0 || highlightedCode !== null}
               compareMode={compareMode}
               selectedCodes={selectedCodes}
               onToggleSelect={toggleSelect}

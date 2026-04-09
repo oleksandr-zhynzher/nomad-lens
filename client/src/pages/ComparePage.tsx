@@ -49,6 +49,8 @@ export function ComparePage() {
   const [copied, setCopied] = useState(false);
   const [sortFeedbackActive, setSortFeedbackActive] = useState(false);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
+  const mobileSheetRef = useRef<HTMLDivElement>(null);
+  const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
 
   const ws = useWeightState();
   const langPrefix = useLangPrefix();
@@ -111,9 +113,50 @@ export function ComparePage() {
   useEffect(() => {
     if (!mobileParamsOpen) return;
     const previousOverflow = document.body.style.overflow;
+    const previousFocusedElement =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     document.body.style.overflow = "hidden";
+
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileParamsOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const sheet = mobileSheetRef.current;
+      if (!sheet) return;
+
+      const focusable = Array.from(
+        sheet.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => !el.hasAttribute("disabled"));
+
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", trapFocus);
+    requestAnimationFrame(() => mobileSheetCloseButtonRef.current?.focus());
+
     return () => {
+      window.removeEventListener("keydown", trapFocus);
       document.body.style.overflow = previousOverflow;
+      previousFocusedElement?.focus();
     };
   }, [mobileParamsOpen]);
 
@@ -439,7 +482,7 @@ export function ComparePage() {
                     fontWeight: compareMode === "countries" ? 500 : 400,
                   }}
                 >
-                  <Flag size={14} />
+                  <Flag size={14} className="shrink-0" />
                   {t("compare.countries")}
                 </button>
                 <button
@@ -456,7 +499,7 @@ export function ComparePage() {
                     fontWeight: compareMode === "regions" ? 500 : 400,
                   }}
                 >
-                  <Globe size={14} />
+                  <Globe size={16} className="shrink-0" />
                   {t("compare.regions")}
                 </button>
                 <button
@@ -475,7 +518,7 @@ export function ComparePage() {
                     textAlign: "center",
                   }}
                 >
-                  <Plane size={14} />
+                  <Plane size={14} className="shrink-0" />
                   {t("compare.nomadVisas")}
                 </button>
                 <button
@@ -492,7 +535,7 @@ export function ComparePage() {
                     fontWeight: compareMode === "budget" ? 500 : 400,
                   }}
                 >
-                  <Wallet size={14} />
+                  <Wallet size={14} className="shrink-0" />
                   {t("compare.budget", "Budget")}
                 </button>
               </div>
@@ -647,6 +690,8 @@ export function ComparePage() {
                 }}
               />
               <div
+                ref={mobileSheetRef}
+                tabIndex={-1}
                 className="relative mt-auto flex w-full flex-col overflow-hidden"
                 style={{
                   minHeight: "70vh",
@@ -683,6 +728,7 @@ export function ComparePage() {
                     {t("compare.parameters")}
                   </span>
                   <button
+                    ref={mobileSheetCloseButtonRef}
                     onClick={() => setMobileParamsOpen(false)}
                     className="flex items-center justify-center"
                     style={{

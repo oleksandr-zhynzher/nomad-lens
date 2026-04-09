@@ -361,6 +361,7 @@ export function BudgetComparison({
           }}
         >
           <input
+            name="budget-comparison-search"
             type="text"
             autoFocus
             placeholder={t("compare.searchCountry")}

@@ -152,6 +152,7 @@ function WeightSlider({
         </span>
       </div>
       <input
+        name={`${categoryKey}-weight`}
         type="range"
         min={0}
         max={100}
@@ -634,6 +635,7 @@ export function WeightPanel({
                                 {t("climate.min")}
                               </span>
                               <input
+                                name="climate-min-temperature"
                                 type="range"
                                 min={-10}
                                 max={45}
@@ -678,6 +680,7 @@ export function WeightPanel({
                                 {t("climate.max")}
                               </span>
                               <input
+                                name="climate-max-temperature"
                                 type="range"
                                 min={-10}
                                 max={45}

@@ -426,6 +426,7 @@ export function NomadVisasPage() {
                 }}
               />
               <input
+                name="visa-country-search"
                 type="text"
                 placeholder={t("nomadVisasPage.search", "Search countries...")}
                 value={searchQuery}

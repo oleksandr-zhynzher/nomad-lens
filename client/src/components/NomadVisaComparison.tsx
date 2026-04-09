@@ -614,6 +614,7 @@ export function NomadVisaComparison({
           }}
         >
           <input
+            name="visa-comparison-search"
             type="text"
             autoFocus
             placeholder={t("compare.searchCountry")}

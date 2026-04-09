@@ -417,6 +417,7 @@ export function CountryComparison({
           }}
         >
           <input
+            name="country-comparison-search"
             type="text"
             autoFocus
             placeholder={t("compare.searchCountry")}
