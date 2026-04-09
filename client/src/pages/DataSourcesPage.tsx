@@ -17,96 +17,32 @@ function DataSourceCard({
   tags,
 }: DataSourceCardProps) {
   return (
-    <div
-      style={{
-        flex: 1,
-        backgroundColor: "#141416",
-        borderRadius: "6px",
-        border: "1px solid #1E1E20",
-        padding: "24px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
-      }}
-    >
+    <div className="flex flex-1 flex-col gap-3 rounded-md border border-[#1E1E20] bg-[#141416] p-6">
       {/* Title */}
-      <div
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "16px",
-          fontWeight: 600,
-          color: "#E8E9EB",
-        }}
-      >
-        {name}
-      </div>
+      <div className="text-base font-semibold text-[#E8E9EB]">{name}</div>
 
       {/* Category badge */}
-      <div
-        style={{
-          display: "inline-flex",
-          alignSelf: "flex-start",
-          backgroundColor: "#1A1A1A",
-          border: "1px solid #252525",
-          borderRadius: "4px",
-          padding: "3px 8px",
-          fontFamily: "Inter, sans-serif",
-          fontSize: "10px",
-          fontWeight: "normal" as const,
-          letterSpacing: "1px",
-          color: "#808080",
-        }}
-      >
+      <div className="inline-flex self-start rounded-[4px] border border-[#252525] bg-[#1A1A1A] px-2 py-[3px] text-[10px] font-normal tracking-[1px] text-[#808080]">
         {category}
       </div>
 
       {/* Description */}
-      <div
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "13px",
-          color: "#8A8A8A",
-          lineHeight: 1.5,
-        }}
-      >
+      <div className="text-[13px] leading-[1.5] text-[#8A8A8A]">
         {description}
       </div>
 
       {/* Footer row */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "6px",
-          marginTop: "auto",
-        }}
-      >
+      <div className="mt-auto flex items-center gap-1.5">
         {tags.map((tag) => (
           <span
             key={tag}
-            style={{
-              backgroundColor: "#1D1008",
-              border: "1px solid #4A2C1A",
-              borderRadius: "3px",
-              padding: "2px 6px",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "10px",
-              color: "#C2956A",
-            }}
+            className="rounded-[3px] border border-[#4A2C1A] bg-[#1D1008] px-1.5 py-0.5 text-[10px] text-[#C2956A]"
           >
             {tag}
           </span>
         ))}
-        <div style={{ flex: 1 }} />
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "11px",
-            color: "#757575",
-          }}
-        >
-          Updated annually
-        </span>
+        <div className="flex-1" />
+        <span className="text-[11px] text-[#757575]">Updated annually</span>
       </div>
     </div>
   );
@@ -124,15 +60,7 @@ export function DataSourcesPage() {
       />
 
       {/* Content zone */}
-      <div
-        className="px-4 py-6 md:px-12 md:py-8"
-        style={{
-          backgroundColor: "#0D0D0F",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-        }}
-      >
+      <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
         {DATA_SOURCE_KEYS.map((row, rowIdx) => (
           <div key={rowIdx} className="flex flex-col md:flex-row gap-4 w-full">
             {row.map((key) => (

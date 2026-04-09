@@ -45,76 +45,24 @@ function IndicatorCard({
   weight,
 }: IndicatorCardProps) {
   return (
-    <div
-      style={{
-        flex: 1,
-        backgroundColor: "#141416",
-        borderRadius: "6px",
-        border: "1px solid #1E1E20",
-        padding: "24px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "14px",
-      }}
-    >
+    <div className="flex flex-1 flex-col gap-3.5 rounded-md border border-[#1E1E20] bg-[#141416] p-6">
       {/* Header row: icon + title */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+      <div className="flex items-center gap-3">
         <Icon size={20} color="#8F5A3C" />
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "16px",
-            fontWeight: 700,
-            color: "#E8E9EB",
-          }}
-        >
-          {name}
-        </span>
+        <span className="text-base font-bold text-[#E8E9EB]">{name}</span>
       </div>
 
       {/* Description */}
-      <div
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "13px",
-          color: "#8A8A8A",
-          lineHeight: 1.6,
-        }}
-      >
+      <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">
         {description}
       </div>
 
       {/* Footer row: source badge + weight */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          marginTop: "auto",
-        }}
-      >
-        <span
-          style={{
-            backgroundColor: "#1A1A1A",
-            border: "1px solid #252525",
-            borderRadius: "4px",
-            padding: "3px 8px",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "10px",
-            color: "#8F5A3C",
-          }}
-        >
+      <div className="mt-auto flex items-center gap-2">
+        <span className="rounded-[4px] border border-[#252525] bg-[#1A1A1A] px-2 py-[3px] text-[10px] text-[#8F5A3C]">
           {source}
         </span>
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "11px",
-            color: "#3A3A3A",
-          }}
-        >
-          {weight}
-        </span>
+        <span className="text-[11px] text-[#3A3A3A]">{weight}</span>
       </div>
     </div>
   );
@@ -203,56 +151,19 @@ export function IndicatorsPage() {
       >
         <div className="flex items-center gap-4 md:gap-6">
           <div>
-            <div
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "18px",
-                fontWeight: 600,
-                color: "var(--color-accent-dim)",
-                lineHeight: "1",
-              }}
-            >
+            <div className="[font-family:'IBM_Plex_Mono',monospace] text-lg leading-none font-semibold text-[var(--color-accent-dim)]">
               {coreIndicatorCount}
             </div>
-            <div
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "10px",
-                color: "#757575",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                marginTop: "4px",
-              }}
-            >
+            <div className="mt-1 text-[10px] uppercase tracking-[1px] text-[#757575]">
               {t("hero.indicators")}
             </div>
           </div>
-          <div
-            className="w-px h-6 md:h-8"
-            style={{ backgroundColor: "#333333" }}
-          />
+          <div className="h-6 w-px bg-[#333333] md:h-8" />
           <div>
-            <div
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "18px",
-                fontWeight: 600,
-                color: "var(--color-accent-dim)",
-                lineHeight: "1",
-              }}
-            >
+            <div className="[font-family:'IBM_Plex_Mono',monospace] text-lg leading-none font-semibold text-[var(--color-accent-dim)]">
               {aiIndicatorCount}
             </div>
-            <div
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "10px",
-                color: "#757575",
-                textTransform: "uppercase",
-                letterSpacing: "1px",
-                marginTop: "4px",
-              }}
-            >
+            <div className="mt-1 text-[10px] uppercase tracking-[1px] text-[#757575]">
               {t("hero.aiIndicators")}
             </div>
           </div>
@@ -260,15 +171,7 @@ export function IndicatorsPage() {
       </HeroSection>
 
       {/* Content zone */}
-      <div
-        className="px-4 py-6 md:px-12 md:py-8"
-        style={{
-          backgroundColor: "#0D0D0F",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-        }}
-      >
+      <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
         {INDICATOR_ICONS.map((row, rowIdx) => (
           <div
             key={rowIdx}
@@ -288,46 +191,20 @@ export function IndicatorsPage() {
         ))}
 
         {/* AI indicators section */}
-        <div style={{ marginTop: "16px" }}>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              marginBottom: "16px",
-              paddingBottom: "12px",
-              borderBottom: "1px solid #1E1E20",
-            }}
-          >
+        <div className="mt-4">
+          <div className="mb-4 flex items-center gap-2 border-b border-[#1E1E20] pb-3">
             <Sparkles size={14} color="#C084FC" />
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "11px",
-                fontWeight: 600,
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
-                color: "#C084FC",
-              }}
-            >
+            <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#C084FC]">
               {t("indicatorsPage.aiSection", "AI-Powered Indicators")}
             </span>
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "11px",
-                color: "#606060",
-              }}
-            >
+            <span className="text-[11px] text-[#606060]">
               {t(
                 "indicatorsPage.aiSectionNote",
                 "— off by default, enable in the weight panel",
               )}
             </span>
           </div>
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
-          >
+          <div className="flex flex-col gap-4">
             {AI_INDICATOR_ICONS.map((row, rowIdx) => (
               <div
                 key={rowIdx}

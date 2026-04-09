@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Flag,
   Globe,
@@ -22,6 +22,10 @@ import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useWeightState } from "../hooks/useWeightState";
 import { useBudgetState } from "../hooks/useBudgetState";
 import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
+import {
+  normalizeCountryCodes,
+  tokenizeCountryCodesParam,
+} from "../utils/countryCodeSelection";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "../utils/types";
 
 export function ComparePage() {
@@ -35,7 +39,6 @@ export function ComparePage() {
         : searchParams.get("m") === "budget"
           ? "budget"
           : "countries";
-  const selectedCodes = searchParams.get("c")?.split(",").filter(Boolean) ?? [];
 
   const [showWeights, setShowWeights] = useState(compareMode === "budget");
   const [sortTrigger, setSortTrigger] = useState(0);
@@ -47,6 +50,18 @@ export function ComparePage() {
   const ws = useWeightState();
   const langPrefix = useLangPrefix();
   const { countries } = useCountries();
+  const validCountryCodes = useMemo(
+    () => new Set(countries.map((country) => country.code.toUpperCase())),
+    [countries],
+  );
+  const rawSelectedCodes = useMemo(
+    () => tokenizeCountryCodesParam(searchParams.get("c")),
+    [searchParams],
+  );
+  const selectedCodes = useMemo(
+    () => normalizeCountryCodes(rawSelectedCodes, validCountryCodes),
+    [rawSelectedCodes, validCountryCodes],
+  );
   const bs = useBudgetState();
   const budgetMatches = useBudgetMatcher(
     countries,
@@ -90,6 +105,20 @@ export function ComparePage() {
     };
   }, [mobileParamsOpen]);
 
+  useEffect(() => {
+    if (!countries.length) return;
+    if (rawSelectedCodes.join(",") === selectedCodes.join(",")) return;
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (selectedCodes.length === 0) next.delete("c");
+        else next.set("c", selectedCodes.join(","));
+        return next;
+      },
+      { replace: true },
+    );
+  }, [countries.length, rawSelectedCodes, selectedCodes, setSearchParams]);
+
   const setCompareMode = (
     mode: "countries" | "regions" | "nomadVisas" | "budget",
   ) => {
@@ -108,11 +137,12 @@ export function ComparePage() {
   };
 
   const handleSelectedCodesChange = (codes: string[]) => {
+    const nextCodes = normalizeCountryCodes(codes, validCountryCodes);
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
-        if (codes.length === 0) next.delete("c");
-        else next.set("c", codes.join(","));
+        if (nextCodes.length === 0) next.delete("c");
+        else next.set("c", nextCodes.join(","));
         return next;
       },
       { replace: true },

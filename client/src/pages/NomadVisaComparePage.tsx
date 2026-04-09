@@ -1,10 +1,14 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ExternalLink, ArrowLeft } from "lucide-react";
 import { Layout } from "../components/Layout";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
+import {
+  normalizeCountryCodes,
+  tokenizeCountryCodesParam,
+} from "../utils/countryCodeSelection";
 import { localizeCountry } from "../utils/localize";
 import type { CountryData, NomadVisaDetails } from "../utils/types";
 
@@ -98,15 +102,41 @@ function Cell({
 export function NomadVisaComparePage() {
   const { t, i18n } = useTranslation();
   const { countries, loading } = useCountries();
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const langPrefix = useLangPrefix();
   const lang = i18n.language;
 
-  const codes = useMemo(
+  const validVisaCodes = useMemo(
     () =>
-      (searchParams.get("c") ?? "").toUpperCase().split(",").filter(Boolean),
+      new Set(
+        countries
+          .filter((country) => Boolean(country.nomadVisa))
+          .map((country) => country.code.toUpperCase()),
+      ),
+    [countries],
+  );
+  const rawCodes = useMemo(
+    () => tokenizeCountryCodesParam(searchParams.get("c")),
     [searchParams],
   );
+  const codes = useMemo(
+    () => normalizeCountryCodes(rawCodes, validVisaCodes),
+    [rawCodes, validVisaCodes],
+  );
+
+  useEffect(() => {
+    if (!countries.length) return;
+    if (rawCodes.join(",") === codes.join(",")) return;
+    setSearchParams(
+      (prev) => {
+        const next = new URLSearchParams(prev);
+        if (codes.length === 0) next.delete("c");
+        else next.set("c", codes.join(","));
+        return next;
+      },
+      { replace: true },
+    );
+  }, [codes, countries.length, rawCodes, setSearchParams]);
 
   const selected = useMemo<VisaCountry[]>(() => {
     return codes
@@ -168,7 +198,7 @@ export function NomadVisaComparePage() {
           >
             {t("loading", "Loading…")}
           </div>
-        ) : count === 0 ? (
+        ) : count < 2 ? (
           <div
             style={{
               textAlign: "center",

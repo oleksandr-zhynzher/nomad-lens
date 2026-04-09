@@ -31,93 +31,32 @@ function AiIndicatorCard({
   subIndicators,
 }: AiIndicatorCardProps) {
   return (
-    <div
-      style={{
-        flex: 1,
-        backgroundColor: "#141416",
-        borderRadius: "6px",
-        border: "1px solid #1E1E20",
-        padding: "24px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "14px",
-      }}
-    >
+    <div className="flex flex-1 flex-col gap-3.5 rounded-md border border-[#1E1E20] bg-[#141416] p-6">
       {/* Header row: icon + title + AI badge */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+      <div className="flex items-center gap-3">
         <Icon size={20} color="#C084FC" />
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "16px",
-            fontWeight: 700,
-            color: "#E8E9EB",
-          }}
-        >
-          {name}
-        </span>
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "9px",
-            fontWeight: 600,
-            color: "#C084FC",
-            backgroundColor: "rgba(192, 132, 252, 0.12)",
-            padding: "1px 5px",
-            borderRadius: "4px",
-            letterSpacing: "0.5px",
-            lineHeight: "16px",
-          }}
-        >
+        <span className="text-base font-bold text-[#E8E9EB]">{name}</span>
+        <span className="rounded-[4px] bg-[rgba(192,132,252,0.12)] px-[5px] py-px text-[9px] leading-4 font-semibold tracking-[0.5px] text-[#C084FC]">
           AI
         </span>
       </div>
 
       {/* Description */}
-      <div
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "13px",
-          color: "#8A8A8A",
-          lineHeight: 1.6,
-        }}
-      >
+      <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">
         {description}
       </div>
 
       {/* Sub-indicators */}
       {subIndicators.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "10px",
-              color: "#808080",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-            }}
-          >
+        <div className="flex flex-col gap-1.5">
+          <span className="text-[10px] uppercase tracking-[0.5px] text-[#808080]">
             Sub-indicators
           </span>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "6px",
-            }}
-          >
+          <div className="flex flex-wrap gap-1.5">
             {subIndicators.map((sub) => (
               <span
                 key={sub}
-                style={{
-                  backgroundColor: "rgba(192, 132, 252, 0.06)",
-                  border: "1px solid rgba(192, 132, 252, 0.15)",
-                  borderRadius: "4px",
-                  padding: "2px 8px",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "10px",
-                  color: "#C084FC",
-                }}
+                className="rounded-[4px] border border-[rgba(192,132,252,0.15)] bg-[rgba(192,132,252,0.06)] px-2 py-0.5 text-[10px] text-[#C084FC]"
               >
                 {sub}
               </span>
@@ -127,34 +66,11 @@ function AiIndicatorCard({
       )}
 
       {/* Footer: source badge */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          marginTop: "auto",
-        }}
-      >
-        <span
-          style={{
-            backgroundColor: "#1A1A1A",
-            border: "1px solid #252525",
-            borderRadius: "4px",
-            padding: "3px 8px",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "10px",
-            color: "#C084FC",
-          }}
-        >
+      <div className="mt-auto flex items-center gap-2">
+        <span className="rounded-[4px] border border-[#252525] bg-[#1A1A1A] px-2 py-[3px] text-[10px] text-[#C084FC]">
           {source}
         </span>
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "11px",
-            color: "#3A3A3A",
-          }}
-        >
+        <span className="text-[11px] text-[#3A3A3A]">
           AI metric — off by default
         </span>
       </div>
@@ -191,40 +107,15 @@ export function AiIndicatorsPage() {
       />
 
       {/* Content zone */}
-      <div
-        className="px-4 py-6 md:px-12 md:py-8"
-        style={{
-          backgroundColor: "#0D0D0F",
-          display: "flex",
-          flexDirection: "column",
-          gap: "16px",
-        }}
-      >
+      <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
         {/* Disclaimer banner */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            gap: "12px",
-            backgroundColor: "rgba(192, 132, 252, 0.06)",
-            border: "1px solid rgba(192, 132, 252, 0.2)",
-            borderRadius: "8px",
-            padding: "16px 20px",
-          }}
-        >
+        <div className="flex items-start gap-3 rounded-lg border border-[rgba(192,132,252,0.2)] bg-[rgba(192,132,252,0.06)] px-5 py-4">
           <AlertTriangle
             size={18}
             color="#C084FC"
-            style={{ flexShrink: 0, marginTop: "2px" }}
+            className="mt-0.5 shrink-0"
           />
-          <div
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              color: "#9E9E9E",
-              lineHeight: 1.6,
-            }}
-          >
+          <div className="text-[13px] leading-[1.6] text-[#9E9E9E]">
             {t("aiIndicatorsPage.disclaimer", { count: aiIndicatorCount })}
           </div>
         </div>
