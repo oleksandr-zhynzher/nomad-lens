@@ -817,14 +817,14 @@ export function BudgetMatcherPage() {
         {/* ── Right content area ──────────────────────────── */}
         <main
           className="flex-1 min-w-0 pb-28 md:pb-0"
-          style={{ backgroundColor: "#0F1114" }}
+          style={{ backgroundColor: "#000000" }}
         >
           <div className="px-4 md:px-6">
             {/* ── Hero section (matching list page) ─────────── */}
             <div
               className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
               style={{
-                background: "#0A0D12",
+                background: "#000000",
                 backgroundImage: "url('/hero-map.png')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -982,7 +982,7 @@ export function BudgetMatcherPage() {
               className="sticky z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-3"
               style={{
                 top: "56px",
-                backgroundColor: "#0F1114",
+                backgroundColor: "#000000",
                 borderBottom: "1px solid #1a1a1a",
               }}
             >
@@ -1058,7 +1058,7 @@ export function BudgetMatcherPage() {
                         cursor: selectedCodes.size < 2 ? "default" : "pointer",
                         backgroundColor:
                           selectedCodes.size < 2
-                            ? "transparent"
+                            ? "#161616"
                             : "var(--color-accent)",
                         color:
                           selectedCodes.size < 2
@@ -1100,7 +1100,7 @@ export function BudgetMatcherPage() {
                         borderRadius: "6px",
                         border: "1px solid #2A2A2A",
                         cursor: "pointer",
-                        backgroundColor: "transparent",
+                        backgroundColor: "#161616",
                         color: "#8A8A8A",
                       }}
                       aria-label="Exit compare mode"
@@ -1122,7 +1122,7 @@ export function BudgetMatcherPage() {
                       borderRadius: "6px",
                       border: "1px solid #2A2A2A",
                       cursor: "pointer",
-                      backgroundColor: "transparent",
+                      backgroundColor: "#161616",
                       color: "#9E9E9E",
                       fontFamily: "Inter, sans-serif",
                       fontSize: "13px",

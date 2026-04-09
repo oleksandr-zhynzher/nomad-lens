@@ -626,6 +626,9 @@ export function NomadVisasPage() {
           style={{
             width: "100%",
             padding: "0 16px 48px",
+            maxWidth: "1200px",
+            margin: "0 auto",
+            boxSizing: "border-box",
           }}
         >
           {/* Shared colgroup definition */}
@@ -661,7 +664,7 @@ export function NomadVisasPage() {
                 >
                   <table
                     style={{
-                      width: tableMinWidth,
+                      width: "100%",
                       minWidth: tableMinWidth,
                       tableLayout: "fixed",
                       borderCollapse: "separate",
@@ -888,7 +891,7 @@ export function NomadVisasPage() {
                 >
                   <table
                     style={{
-                      width: tableMinWidth,
+                      width: "100%",
                       minWidth: tableMinWidth,
                       tableLayout: "fixed",
                       borderCollapse: "separate",
