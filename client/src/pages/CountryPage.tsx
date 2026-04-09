@@ -175,7 +175,7 @@ export function CountryPage() {
 
   return (
     <Layout>
-      <div style={{ backgroundColor: "#0D0D0F", minHeight: "100vh" }}>
+      <div style={{ backgroundColor: "var(--color-bg)", minHeight: "100vh" }}>
         {/* ── heroBanner ── */}
         <div
           style={{
@@ -413,9 +413,9 @@ export function CountryPage() {
 
         {/* ── statsRow ── */}
         <div
-          className="px-4 md:px-16 grid grid-cols-2 md:flex md:items-center gap-3"
+          className="grid grid-cols-2 gap-3 md:flex md:items-center"
           style={{
-            backgroundColor: "#0D0D0F",
+            backgroundColor: "var(--color-bg)",
             paddingTop: "24px",
             paddingBottom: "24px",
           }}
@@ -541,9 +541,8 @@ export function CountryPage() {
         {/* ── visa-section ── */}
         {visa && (
           <div
-            className="px-4 md:px-16"
             style={{
-              backgroundColor: "#0D0D0F",
+              backgroundColor: "var(--color-bg)",
               paddingTop: "32px",
               paddingBottom: "32px",
               gap: "32px",
@@ -711,7 +710,7 @@ export function CountryPage() {
                   </div>
                   <div
                     style={{
-                      backgroundColor: "#0A0A0A",
+                      backgroundColor: "var(--color-bg)",
                       borderRadius: "8px",
                       padding: "12px 16px",
                       display: "flex",
@@ -988,7 +987,7 @@ export function CountryPage() {
                           display: "flex",
                           gap: "10px",
                           alignItems: "center",
-                          backgroundColor: "#0A0A0A",
+                          backgroundColor: "var(--color-bg)",
                           borderRadius: "8px",
                           padding: "10px 12px",
                         }}
@@ -1158,9 +1157,8 @@ export function CountryPage() {
 
         {/* ── scores-section + climate ── */}
         <div
-          className="px-4 md:px-16"
           style={{
-            backgroundColor: "#0D0D0F",
+            backgroundColor: "var(--color-bg)",
             paddingTop: "32px",
             paddingBottom: "32px",
             gap: "32px",
@@ -1195,16 +1193,15 @@ export function CountryPage() {
             </span>
           </div>
 
-          <ScoreBreakdown country={c} />
+          <ScoreBreakdown country={c} columns={4} />
 
           {/* ── Cost of Living ── */}
           {c.costOfLiving && (
             <>
               <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
               <div
-                className="-mx-4 px-4 md:-mx-16 md:px-16"
                 style={{
-                  backgroundColor: "#0A0A0A",
+                  backgroundColor: "var(--color-bg)",
                   paddingTop: "32px",
                   paddingBottom: "32px",
                   gap: "24px",
@@ -1456,9 +1453,8 @@ export function CountryPage() {
             <>
               <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
               <div
-                className="-mx-4 px-4 md:-mx-16 md:px-16"
                 style={{
-                  backgroundColor: "#0A0A0A",
+                  backgroundColor: "var(--color-bg)",
                   paddingTop: "32px",
                   paddingBottom: "32px",
                   gap: "24px",

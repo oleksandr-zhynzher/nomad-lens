@@ -75,6 +75,8 @@
     "visaDetail": "Деталі візи",
     "visaFields": {
       "visaName": "Назва візи",
+      "overallScore": "Загальний бал",
+      "monthlyBudget": "Місячний бюджет",
       "duration": "Початковий термін",
       "maxExtension": "Макс. продовження",
       "renewable": "Поновлювана",
@@ -533,6 +535,8 @@
     "table": {
       "country": "Країна",
       "visaName": "Назва візи",
+      "overallScore": "Загальний бал",
+      "monthlyBudget": "Місячний бюджет",
       "duration": "Тривалість",
       "cost": "Вартість",
       "income": "Мін. дохід",

@@ -168,7 +168,7 @@ export function ComparePage() {
     setTimeout(() => setSortFeedbackActive(false), 1000);
   };
 
-  const showParametersAction = compareMode !== "nomadVisas";
+  const showParametersAction = true;
   const showSortAction =
     (compareMode === "countries" && countrySelectionCount > 1) ||
     (compareMode === "budget" && selectedCodes.length > 1);
@@ -186,6 +186,59 @@ export function ComparePage() {
       : t("compare.sortByScore");
   const sortButtonIconClassName =
     sortDirection === "asc" ? "rotate-180" : "rotate-0";
+
+  const renderParametersPanel = (mobile = false) => {
+    if (compareMode === "budget") {
+      return <BudgetFilterPanel bs={bs} />;
+    }
+
+    if (compareMode === "nomadVisas") {
+      return (
+        <div className="flex flex-col gap-4">
+          <WeightPanel
+            weights={ws.weights}
+            onChange={ws.handleWeightChange}
+            onReset={ws.handleReset}
+            weightsAreDefault={ws.weightsAreDefault}
+            onShare={handleShare}
+            climatePrefs={ws.climatePrefs}
+            onClimatePrefsChange={ws.setClimatePrefs}
+            nomadVisaOnly={ws.nomadVisaOnly}
+            onNomadVisaOnlyChange={ws.setNomadVisaOnly}
+            schengenOnly={ws.schengenOnly}
+            onSchengenOnlyChange={ws.setSchengenOnly}
+            minTouristDays={ws.minTouristDays}
+            onMinTouristDaysChange={ws.setMinTouristDays}
+            weightMode={ws.weightMode}
+            onWeightModeChange={ws.handleWeightModeChange}
+            mobile={mobile}
+          />
+          <BudgetFilterPanel bs={bs} />
+        </div>
+      );
+    }
+
+    return (
+      <WeightPanel
+        weights={ws.weights}
+        onChange={ws.handleWeightChange}
+        onReset={ws.handleReset}
+        weightsAreDefault={ws.weightsAreDefault}
+        onShare={handleShare}
+        climatePrefs={ws.climatePrefs}
+        onClimatePrefsChange={ws.setClimatePrefs}
+        nomadVisaOnly={ws.nomadVisaOnly}
+        onNomadVisaOnlyChange={ws.setNomadVisaOnly}
+        schengenOnly={ws.schengenOnly}
+        onSchengenOnlyChange={ws.setSchengenOnly}
+        minTouristDays={ws.minTouristDays}
+        onMinTouristDaysChange={ws.setMinTouristDays}
+        weightMode={ws.weightMode}
+        onWeightModeChange={ws.handleWeightModeChange}
+        mobile={mobile}
+      />
+    );
+  };
 
   return (
     <Layout>
@@ -347,7 +400,7 @@ export function ComparePage() {
           style={{
             maxWidth: "1200px",
             margin: "0 auto",
-            padding: "16px 16px 24px",
+            padding: "0 16px 24px",
           }}
         >
           {/* Mode toggle + actions row */}
@@ -567,7 +620,7 @@ export function ComparePage() {
             </div>
           </div>
 
-          {mobileParamsOpen && compareMode !== "nomadVisas" && (
+          {mobileParamsOpen && (
             <div
               className="md:hidden fixed inset-0 z-50 flex"
               role="dialog"
@@ -636,28 +689,7 @@ export function ComparePage() {
                   </button>
                 </div>
                 <div className="flex-1 overflow-y-auto">
-                  {compareMode === "budget" ? (
-                    <BudgetFilterPanel bs={bs} />
-                  ) : (
-                    <WeightPanel
-                      weights={ws.weights}
-                      onChange={ws.handleWeightChange}
-                      onReset={ws.handleReset}
-                      weightsAreDefault={ws.weightsAreDefault}
-                      onShare={handleShare}
-                      climatePrefs={ws.climatePrefs}
-                      onClimatePrefsChange={ws.setClimatePrefs}
-                      nomadVisaOnly={ws.nomadVisaOnly}
-                      onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-                      schengenOnly={ws.schengenOnly}
-                      onSchengenOnlyChange={ws.setSchengenOnly}
-                      minTouristDays={ws.minTouristDays}
-                      onMinTouristDaysChange={ws.setMinTouristDays}
-                      weightMode={ws.weightMode}
-                      onWeightModeChange={ws.handleWeightModeChange}
-                      mobile
-                    />
-                  )}
+                  {renderParametersPanel(true)}
                 </div>
               </div>
             </div>
@@ -677,31 +709,14 @@ export function ComparePage() {
                 style={{
                   position: "sticky",
                   top: "16px",
-                  overflow: compareMode === "budget" ? "auto" : "hidden",
+                  overflow:
+                    compareMode === "budget" || compareMode === "nomadVisas"
+                      ? "auto"
+                      : "hidden",
                   borderRadius: "8px",
                 }}
               >
-                {compareMode === "budget" ? (
-                  <BudgetFilterPanel bs={bs} />
-                ) : (
-                  <WeightPanel
-                    weights={ws.weights}
-                    onChange={ws.handleWeightChange}
-                    onReset={ws.handleReset}
-                    weightsAreDefault={ws.weightsAreDefault}
-                    onShare={handleShare}
-                    climatePrefs={ws.climatePrefs}
-                    onClimatePrefsChange={ws.setClimatePrefs}
-                    nomadVisaOnly={ws.nomadVisaOnly}
-                    onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-                    schengenOnly={ws.schengenOnly}
-                    onSchengenOnlyChange={ws.setSchengenOnly}
-                    minTouristDays={ws.minTouristDays}
-                    onMinTouristDaysChange={ws.setMinTouristDays}
-                    weightMode={ws.weightMode}
-                    onWeightModeChange={ws.handleWeightModeChange}
-                  />
-                )}
+                {renderParametersPanel()}
               </div>
             )}
             <div style={{ minWidth: 0 }}>
@@ -714,6 +729,9 @@ export function ComparePage() {
               ) : compareMode === "nomadVisas" ? (
                 <NomadVisaComparison
                   countries={countries}
+                  weights={ws.weights}
+                  climatePrefs={ws.climatePrefs}
+                  budgetMatches={budgetMatches}
                   selectedCodes={selectedCodes}
                   onSelectedCodesChange={handleSelectedCodesChange}
                 />

@@ -75,6 +75,8 @@
     "visaDetail": "Visa Detail",
     "visaFields": {
       "visaName": "Visa Name",
+      "overallScore": "Overall Score",
+      "monthlyBudget": "Monthly Budget",
       "duration": "Initial Duration",
       "maxExtension": "Max Extension",
       "renewable": "Renewable",
@@ -533,6 +535,8 @@
     "table": {
       "country": "Country",
       "visaName": "Visa Name",
+      "overallScore": "Overall Score",
+      "monthlyBudget": "Monthly Budget",
       "duration": "Duration",
       "cost": "Cost",
       "income": "Income Req.",

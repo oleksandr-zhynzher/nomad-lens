@@ -198,7 +198,7 @@ export function BudgetComparison({
       {/* ── Country selector ─────────────────────────────────── */}
       <div className="relative">
         <div
-          className="grid grid-cols-2 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
+          className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
           style={{ scrollbarWidth: "thin" }}
         >
           {selectedSlots.map((slot) => {

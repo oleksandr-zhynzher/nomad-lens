@@ -670,7 +670,7 @@ export default function App() {
 
             {/* Search bar + Region chips — sticky below header */}
             <div
-              className="sticky z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-4"
+              className="sticky z-20 -mx-4 px-4 pt-0 pb-4 md:-mx-6 md:px-6"
               style={{
                 top: "56px",
                 backgroundColor: "#0F1114",

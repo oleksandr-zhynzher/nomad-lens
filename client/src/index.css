@@ -60,7 +60,7 @@
 
 @layer base {
   :root {
-    --color-bg: #0F1114;
+    --color-bg: #000000;
     --color-surface: #1A1A1A;
     --color-surface-2: #222222;
     --color-surface-3: #141414;

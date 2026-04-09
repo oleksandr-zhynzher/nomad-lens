@@ -5,12 +5,18 @@ import { scoreColour } from "../utils/scoring";
 
 interface ScoreBreakdownProps {
   country: CountryData;
+  columns?: 3 | 4;
 }
 
-export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
+export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
   const { t } = useTranslation();
+  const gridClassName =
+    columns === 4
+      ? "grid grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3"
+      : "grid grid-cols-3 gap-2 md:gap-3";
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+    <div className={gridClassName}>
       {VISIBLE_CATEGORY_KEYS.map((key) => {
         const category = country.scores[key];
         const value = category?.value ?? null;
@@ -32,7 +38,7 @@ export function ScoreBreakdown({ country }: ScoreBreakdownProps) {
         return (
           <div
             key={key}
-            className="flex flex-col gap-1 p-3 rounded"
+            className="flex flex-col gap-1 p-2 md:p-3 rounded"
             style={{ backgroundColor: "#222222" }}
           >
             <div className="flex items-center justify-between gap-2">

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
+import type { BudgetMatch } from "../hooks/useBudgetMatcher";
 import {
   CirclePlus,
   X,
@@ -15,8 +16,17 @@ import {
   CheckCircle2,
   XCircle,
 } from "lucide-react";
-import type { CountryData } from "../utils/types";
+import {
+  computeClimateScore,
+  computeScore,
+  scoreColour,
+} from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
+import type {
+  ClimatePreferences,
+  CountryData,
+  WeightMap,
+} from "../utils/types";
 
 const SLOT_COLORS = [
   "#8F5A3C",
@@ -43,16 +53,22 @@ const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   special: { bg: "#4A3A1A", text: "#DDAA44" },
 };
 
-const VISA_COMPARISON_COLUMN_WIDTH = "128px";
+const VISA_COMPARISON_COLUMN_WIDTH = "200px";
+const VISA_COMPARISON_COLUMN_GAP = "16px";
 
 interface Props {
   countries: CountryData[];
+  weights: WeightMap;
+  climatePrefs: ClimatePreferences;
+  budgetMatches: BudgetMatch[];
   selectedCodes: string[];
   onSelectedCodesChange: (codes: string[]) => void;
 }
 
 type VisaField =
   | "visaName"
+  | "overallScore"
+  | "monthlyBudget"
   | "duration"
   | "maxExtension"
   | "renewable"
@@ -73,11 +89,16 @@ const VISA_FIELDS: { key: VisaField; icon: typeof Clock }[] = [
   { key: "taxStatus", icon: Receipt },
   { key: "online", icon: Globe },
   { key: "processingTime", icon: FileCheck },
+  { key: "overallScore", icon: FileCheck },
+  { key: "monthlyBudget", icon: Wallet },
   { key: "benefits", icon: Plane },
 ];
 
 export function NomadVisaComparison({
   countries,
+  weights,
+  climatePrefs,
+  budgetMatches,
   selectedCodes,
   onSelectedCodesChange,
 }: Props) {
@@ -89,6 +110,9 @@ export function NomadVisaComparison({
   const langPrefix = useLangPrefix();
   const navigate = useNavigate();
   const lang = i18n.language;
+  const budgetMatchByCode = new Map(
+    budgetMatches.map((match) => [match.country.code, match]),
+  );
 
   // Sync horizontal scroll between sticky header and body
   useEffect(() => {
@@ -156,6 +180,21 @@ export function NomadVisaComparison({
     return { visa, loc };
   }
 
+  function applyClimate(country: CountryData): CountryData {
+    if (!country.climateData) return country;
+
+    return {
+      ...country,
+      scores: {
+        ...country.scores,
+        climate: {
+          ...country.scores.climate,
+          value: computeClimateScore(country.climateData, climatePrefs),
+        },
+      },
+    };
+  }
+
   function renderCell(
     slot: (typeof selectedCountries)[number],
     field: VisaField,
@@ -175,6 +214,38 @@ export function NomadVisaComparison({
             {visa.visaName}
           </span>
         );
+      case "overallScore": {
+        const overallScore = computeScore(applyClimate(slot.country), weights);
+        return (
+          <span
+            style={{
+              fontFamily: "IBM Plex Mono, monospace",
+              fontSize: "20px",
+              fontWeight: 600,
+              color: scoreColour(overallScore),
+            }}
+          >
+            {overallScore.toFixed(1)}
+          </span>
+        );
+      }
+      case "monthlyBudget": {
+        const monthlyBudget = budgetMatchByCode.get(
+          slot.country.code,
+        )?.monthlyCost;
+        return (
+          <span
+            style={{
+              fontFamily: "IBM Plex Mono, monospace",
+              fontSize: "20px",
+              fontWeight: 600,
+              color: monthlyBudget != null ? "#E8E9EB" : "#757575",
+            }}
+          >
+            {monthlyBudget != null ? `$${monthlyBudget.toLocaleString()}` : "—"}
+          </span>
+        );
+      }
       case "duration":
         return (
           <span
@@ -414,7 +485,7 @@ export function NomadVisaComparison({
     <div>
       {/* Country selector — horizontal scroll */}
       <div
-        className="grid grid-cols-2 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
+        className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
         style={{ scrollbarWidth: "thin" }}
       >
         {selectedCountries.map((slot) => (
@@ -627,7 +698,11 @@ export function NomadVisaComparison({
           >
             <div
               className="flex items-center"
-              style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}
+              style={{
+                borderBottom: "1px solid #1C1C1C",
+                padding: "14px 0",
+                gap: VISA_COMPARISON_COLUMN_GAP,
+              }}
             >
               <div className="w-[160px] md:w-[240px] shrink-0">
                 <span
@@ -662,7 +737,7 @@ export function NomadVisaComparison({
                       fontSize: "12px",
                       fontWeight: 600,
                       color: "#FFFFFF",
-                      maxWidth: "92px",
+                      maxWidth: "150px",
                     }}
                   >
                     {localizeCountry(slot.country, lang).name}
@@ -681,6 +756,7 @@ export function NomadVisaComparison({
                 style={{
                   borderBottom: "1px solid #1C1C1C",
                   padding: "16px 0",
+                  gap: VISA_COMPARISON_COLUMN_GAP,
                 }}
               >
                 <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">

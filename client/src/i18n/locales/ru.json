@@ -75,6 +75,8 @@
     "visaDetail": "Детали визы",
     "visaFields": {
       "visaName": "Название визы",
+      "overallScore": "Общий балл",
+      "monthlyBudget": "Месячный бюджет",
       "duration": "Начальный срок",
       "maxExtension": "Макс. продление",
       "renewable": "Возобновляемая",
@@ -533,6 +535,8 @@
     "table": {
       "country": "Страна",
       "visaName": "Название визы",
+      "overallScore": "Общий балл",
+      "monthlyBudget": "Месячный бюджет",
       "duration": "Длительность",
       "cost": "Стоимость",
       "income": "Мин. доход",

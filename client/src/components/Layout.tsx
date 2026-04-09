@@ -534,7 +534,7 @@ export function Layout({ children }: LayoutProps) {
         className={
           activeView === "compare"
             ? ""
-            : "mx-auto w-full max-w-7xl px-4 py-4 md:py-6"
+            : "mx-auto w-full max-w-7xl px-4 pb-4 md:pb-6"
         }
       >
         {children}

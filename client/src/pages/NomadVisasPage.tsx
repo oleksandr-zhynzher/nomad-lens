@@ -12,10 +12,22 @@ import {
 } from "lucide-react";
 import { Layout } from "../components/Layout";
 import { PageHeroBanner } from "../components/PageHeroBanner";
+import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
+import { useBudgetState } from "../hooks/useBudgetState";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
+import { useWeightState } from "../hooks/useWeightState";
 import { localizeCountry } from "../utils/localize";
-import type { CountryData } from "../utils/types";
+import {
+  computeClimateScore,
+  computeScore,
+  scoreColour,
+} from "../utils/scoring";
+import type {
+  ClimatePreferences,
+  CountryData,
+  WeightMap,
+} from "../utils/types";
 
 const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   exempt: { bg: "#1A4A2A", text: "#44CC66" },
@@ -23,8 +35,37 @@ const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   special: { bg: "#4A3A1A", text: "#DDAA44" },
 };
 
-type SortField = "country" | "duration" | "cost" | "income" | "tax";
+type SortField =
+  | "country"
+  | "overallScore"
+  | "monthlyBudget"
+  | "duration"
+  | "cost"
+  | "income"
+  | "tax";
 type SortDirection = "asc" | "desc";
+
+function applyClimate(
+  country: CountryData,
+  climatePrefs: ClimatePreferences,
+): CountryData {
+  if (!country.climateData) return country;
+
+  return {
+    ...country,
+    scores: {
+      ...country.scores,
+      climate: {
+        ...country.scores.climate,
+        value: computeClimateScore(country.climateData, climatePrefs),
+      },
+    },
+  };
+}
+
+function computeOverallScore(country: CountryData, weights: WeightMap) {
+  return computeScore(country, weights);
+}
 
 function SortIcon({
   field,
@@ -55,6 +96,17 @@ export function NomadVisasPage() {
   const { countries, loading } = useCountries();
   const langPrefix = useLangPrefix();
   const navigate = useNavigate();
+  const ws = useWeightState();
+  const bs = useBudgetState();
+  const budgetMatches = useBudgetMatcher(
+    countries,
+    bs.budget,
+    bs.housing,
+    bs.bedrooms,
+    bs.peopleCount,
+    bs.categoryWeights,
+    bs.qualityBlend,
+  );
   const lang = i18n.language;
   const [searchParams] = useSearchParams();
   const highlightCode = searchParams.get("country")?.toUpperCase() ?? null;
@@ -62,6 +114,10 @@ export function NomadVisasPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortField, setSortField] = useState<SortField>("country");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  const budgetMatchByCode = useMemo(
+    () => new Map(budgetMatches.map((match) => [match.country.code, match])),
+    [budgetMatches],
+  );
 
   // Compare mode
   const [compareMode, setCompareMode] = useState(false);
@@ -137,38 +193,61 @@ export function NomadVisasPage() {
   }, [allVisaCountries, searchQuery, lang]);
 
   const sortedCountries = useMemo(() => {
-    const sorted = [...visaCountries];
+    const sorted = visaCountries.map((country) => {
+      const climateAdjustedCountry = applyClimate(country, ws.climatePrefs);
+      return {
+        country,
+        overallScore: computeOverallScore(climateAdjustedCountry, ws.weights),
+        monthlyBudget: budgetMatchByCode.get(country.code)?.monthlyCost ?? null,
+      };
+    });
+
     sorted.sort((a, b) => {
       let comparison = 0;
 
       switch (sortField) {
         case "country":
-          comparison = localizeCountry(a, lang).name.localeCompare(
-            localizeCountry(b, lang).name,
+          comparison = localizeCountry(a.country, lang).name.localeCompare(
+            localizeCountry(b.country, lang).name,
           );
+          break;
+        case "overallScore":
+          comparison = a.overallScore - b.overallScore;
+          break;
+        case "monthlyBudget":
+          comparison =
+            a.monthlyBudget == null && b.monthlyBudget == null
+              ? 0
+              : a.monthlyBudget == null
+                ? 1
+                : b.monthlyBudget == null
+                  ? -1
+                  : a.monthlyBudget - b.monthlyBudget;
           break;
         case "duration":
           comparison =
-            a.nomadVisa.duration.initial - b.nomadVisa.duration.initial;
+            a.country.nomadVisa.duration.initial -
+            b.country.nomadVisa.duration.initial;
           break;
         case "cost":
-          comparison = a.nomadVisa.cost.amount - b.nomadVisa.cost.amount;
+          comparison =
+            a.country.nomadVisa.cost.amount - b.country.nomadVisa.cost.amount;
           break;
         case "income": {
           const aIncome =
-            a.nomadVisa.incomeRequirement.monthly ??
-            a.nomadVisa.incomeRequirement.annual ??
+            a.country.nomadVisa.incomeRequirement.monthly ??
+            a.country.nomadVisa.incomeRequirement.annual ??
             0;
           const bIncome =
-            b.nomadVisa.incomeRequirement.monthly ??
-            b.nomadVisa.incomeRequirement.annual ??
+            b.country.nomadVisa.incomeRequirement.monthly ??
+            b.country.nomadVisa.incomeRequirement.annual ??
             0;
           comparison = aIncome - bIncome;
           break;
         }
         case "tax":
-          comparison = a.nomadVisa.tax.status.localeCompare(
-            b.nomadVisa.tax.status,
+          comparison = a.country.nomadVisa.tax.status.localeCompare(
+            b.country.nomadVisa.tax.status,
           );
           break;
       }
@@ -177,7 +256,15 @@ export function NomadVisasPage() {
     });
 
     return sorted;
-  }, [visaCountries, sortField, sortDirection, lang]);
+  }, [
+    budgetMatchByCode,
+    lang,
+    sortField,
+    sortDirection,
+    visaCountries,
+    ws.climatePrefs,
+    ws.weights,
+  ]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -188,7 +275,7 @@ export function NomadVisasPage() {
     }
   };
 
-  const tableMinWidth = compareMode ? "940px" : "892px";
+  const tableMinWidth = compareMode ? "1170px" : "1122px";
 
   return (
     <Layout>
@@ -527,8 +614,7 @@ export function NomadVisasPage() {
       ) : (
         <div
           style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
+            width: "100%",
             padding: "0 16px 48px",
           }}
         >
@@ -537,8 +623,10 @@ export function NomadVisasPage() {
             const colgroup = (
               <colgroup>
                 {compareMode && <col style={{ width: "48px" }} />}
-                <col style={{ width: "190px" }} />
+                <col style={{ width: "200px" }} />
                 <col style={{ width: "160px" }} />
+                <col style={{ width: "110px" }} />
+                <col style={{ width: "130px" }} />
                 <col style={{ width: "90px" }} />
                 <col style={{ width: "110px" }} />
                 <col style={{ width: "150px" }} />
@@ -620,6 +708,60 @@ export function NomadVisasPage() {
                           }}
                         >
                           {t("nomadVisasPage.table.visaName", "Visa Name")}
+                        </th>
+                        <th
+                          onClick={() => handleSort("overallScore")}
+                          style={{
+                            padding: "16px 12px",
+                            textAlign: "right",
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: "11px",
+                            fontWeight: 600,
+                            letterSpacing: "1px",
+                            textTransform: "uppercase",
+                            color: "#9E9E9E",
+                            cursor: "pointer",
+                            userSelect: "none",
+                            backgroundColor: "var(--color-bg)",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {t(
+                            "nomadVisasPage.table.overallScore",
+                            "Overall Score",
+                          )}{" "}
+                          <SortIcon
+                            field="overallScore"
+                            sortField={sortField}
+                            sortDirection={sortDirection}
+                          />
+                        </th>
+                        <th
+                          onClick={() => handleSort("monthlyBudget")}
+                          style={{
+                            padding: "16px 12px",
+                            textAlign: "right",
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: "11px",
+                            fontWeight: 600,
+                            letterSpacing: "1px",
+                            textTransform: "uppercase",
+                            color: "#9E9E9E",
+                            cursor: "pointer",
+                            userSelect: "none",
+                            backgroundColor: "var(--color-bg)",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {t(
+                            "nomadVisasPage.table.monthlyBudget",
+                            "Monthly Budget",
+                          )}{" "}
+                          <SortIcon
+                            field="monthlyBudget"
+                            sortField={sortField}
+                            sortDirection={sortDirection}
+                          />
                         </th>
                         <th
                           onClick={() => handleSort("duration")}
@@ -745,333 +887,381 @@ export function NomadVisasPage() {
                   >
                     {colgroup}
                     <tbody>
-                      {sortedCountries.map((country) => {
-                        const visa = country.nomadVisa;
-                        const taxColors =
-                          TAX_STATUS_COLORS[visa.tax.status] ??
-                          TAX_STATUS_COLORS.standard;
-                        const isHighlighted = highlightCode === country.code;
-                        const isSelected = selectedCodes.has(country.code);
+                      {sortedCountries.map(
+                        ({ country, overallScore, monthlyBudget }) => {
+                          const visa = country.nomadVisa;
+                          const taxColors =
+                            TAX_STATUS_COLORS[visa.tax.status] ??
+                            TAX_STATUS_COLORS.standard;
+                          const isHighlighted = highlightCode === country.code;
+                          const isSelected = selectedCodes.has(country.code);
 
-                        return (
-                          <tr
-                            key={country.code}
-                            data-country-code={country.code.toLowerCase()}
-                            style={{
-                              borderBottom: "1px solid #1E1E1E",
-                              backgroundColor: isSelected
-                                ? "#1A2A1A"
-                                : isHighlighted
-                                  ? "#1A1208"
-                                  : "transparent",
-                              transition: "background-color 0.15s",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => {
-                              if (compareMode) {
-                                toggleSelect(country.code);
-                              } else {
-                                navigate(
-                                  `${langPrefix}/country/${country.code.toLowerCase()}`,
-                                );
-                              }
-                            }}
-                            onMouseEnter={(e) => {
-                              if (!isHighlighted && !isSelected) {
-                                e.currentTarget.style.backgroundColor =
-                                  "#232326";
-                              }
-                            }}
-                            onMouseLeave={(e) => {
-                              if (!isHighlighted && !isSelected) {
-                                e.currentTarget.style.backgroundColor =
-                                  "transparent";
-                              }
-                            }}
-                          >
-                            {/* Checkbox — compare mode only */}
-                            {compareMode && (
-                              <td
-                                style={{
-                                  padding: "16px 4px 16px 12px",
-                                }}
-                                onClick={(e) => {
-                                  e.stopPropagation();
+                          return (
+                            <tr
+                              key={country.code}
+                              data-country-code={country.code.toLowerCase()}
+                              style={{
+                                borderBottom: "1px solid #1E1E1E",
+                                backgroundColor: isSelected
+                                  ? "#1A2A1A"
+                                  : isHighlighted
+                                    ? "#1A1208"
+                                    : "transparent",
+                                transition: "background-color 0.15s",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                if (compareMode) {
                                   toggleSelect(country.code);
-                                }}
-                              >
-                                <div
-                                  aria-label={`Select ${localizeCountry(country, lang).name}`}
+                                } else {
+                                  navigate(
+                                    `${langPrefix}/country/${country.code.toLowerCase()}`,
+                                  );
+                                }
+                              }}
+                              onMouseEnter={(e) => {
+                                if (!isHighlighted && !isSelected) {
+                                  e.currentTarget.style.backgroundColor =
+                                    "#232326";
+                                }
+                              }}
+                              onMouseLeave={(e) => {
+                                if (!isHighlighted && !isSelected) {
+                                  e.currentTarget.style.backgroundColor =
+                                    "transparent";
+                                }
+                              }}
+                            >
+                              {/* Checkbox — compare mode only */}
+                              {compareMode && (
+                                <td
                                   style={{
-                                    width: "16px",
-                                    height: "16px",
-                                    borderRadius: "3px",
-                                    border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
-                                    backgroundColor: isSelected
-                                      ? "var(--color-accent)"
-                                      : "transparent",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    flexShrink: 0,
-                                    transition: "all 0.1s ease",
-                                    pointerEvents: "none",
+                                    padding: "16px 4px 16px 12px",
                                   }}
-                                >
-                                  {isSelected && (
-                                    <svg
-                                      width="9"
-                                      height="7"
-                                      viewBox="0 0 9 7"
-                                      fill="none"
-                                    >
-                                      <path
-                                        d="M1 3.5L3.5 6L8 1"
-                                        stroke="white"
-                                        strokeWidth="1.5"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                      />
-                                    </svg>
-                                  )}
-                                </div>
-                              </td>
-                            )}
-
-                            {/* Country */}
-                            <td style={{ padding: "16px 12px" }}>
-                              <Link
-                                to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "10px",
-                                  textDecoration: "none",
-                                }}
-                                onClick={(e) => {
-                                  if (compareMode) {
-                                    e.preventDefault();
+                                  onClick={(e) => {
                                     e.stopPropagation();
                                     toggleSelect(country.code);
-                                  }
-                                }}
-                              >
-                                <img
-                                  src={country.flagUrl}
-                                  alt={`${localizeCountry(country, lang).name} flag`}
-                                  style={{
-                                    width: "28px",
-                                    height: "19px",
-                                    borderRadius: "3px",
-                                    objectFit: "cover",
-                                    flexShrink: 0,
-                                  }}
-                                  loading="lazy"
-                                />
-                                <span
-                                  style={{
-                                    fontFamily: "Inter, sans-serif",
-                                    fontSize: "14px",
-                                    fontWeight: 500,
-                                    color: "#FFFFFF",
                                   }}
                                 >
-                                  {localizeCountry(country, lang).name}
-                                </span>
-                              </Link>
-                            </td>
-
-                            {/* Visa Name */}
-                            <td style={{ padding: "16px 12px" }}>
-                              <span
-                                style={{
-                                  fontFamily: "Inter, sans-serif",
-                                  fontSize: "13px",
-                                  color: "#CCCCCC",
-                                }}
-                              >
-                                {visa.visaName}
-                              </span>
-                            </td>
-
-                            {/* Duration */}
-                            <td style={{ padding: "16px 12px" }}>
-                              <span
-                                style={{
-                                  fontFamily: "IBM Plex Mono, monospace",
-                                  fontSize: "14px",
-                                  fontWeight: 600,
-                                  color: "#FFFFFF",
-                                }}
-                              >
-                                {visa.duration.initial}
-                              </span>
-                              <span
-                                style={{
-                                  fontFamily: "Inter, sans-serif",
-                                  fontSize: "12px",
-                                  color: "#8A8A8A",
-                                  marginLeft: "3px",
-                                }}
-                              >
-                                {t("countryPage.visa.mo")}
-                              </span>
-                              {visa.duration.maxExtension > 0 && (
-                                <span
-                                  style={{
-                                    fontFamily: "Inter, sans-serif",
-                                    fontSize: "11px",
-                                    color: "#808080",
-                                    marginLeft: "4px",
-                                  }}
-                                >
-                                  +{visa.duration.maxExtension}
-                                </span>
-                              )}
-                            </td>
-
-                            {/* Cost */}
-                            <td
-                              style={{
-                                padding: "16px 12px",
-                                textAlign: "right",
-                              }}
-                            >
-                              <span
-                                style={{
-                                  fontFamily: "IBM Plex Mono, monospace",
-                                  fontSize: "14px",
-                                  fontWeight: 600,
-                                  color:
-                                    visa.cost.amount === 0
-                                      ? "#44CC66"
-                                      : "#FFFFFF",
-                                }}
-                              >
-                                {visa.cost.amount === 0
-                                  ? t("countryPage.visa.free", "Free")
-                                  : `${visa.cost.currency} ${visa.cost.amount.toLocaleString()}`}
-                              </span>
-                            </td>
-
-                            {/* Income */}
-                            <td
-                              style={{
-                                padding: "16px 12px",
-                                textAlign: "right",
-                              }}
-                            >
-                              {visa.incomeRequirement.monthly ? (
-                                <>
-                                  <span
+                                  <div
+                                    aria-label={`Select ${localizeCountry(country, lang).name}`}
                                     style={{
-                                      fontFamily: "IBM Plex Mono, monospace",
-                                      fontSize: "14px",
-                                      fontWeight: 600,
-                                      color: "#FFFFFF",
+                                      width: "16px",
+                                      height: "16px",
+                                      borderRadius: "3px",
+                                      border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
+                                      backgroundColor: isSelected
+                                        ? "var(--color-accent)"
+                                        : "transparent",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      flexShrink: 0,
+                                      transition: "all 0.1s ease",
+                                      pointerEvents: "none",
                                     }}
                                   >
-                                    {visa.incomeRequirement.currency}{" "}
-                                    {visa.incomeRequirement.monthly.toLocaleString()}
-                                  </span>
+                                    {isSelected && (
+                                      <svg
+                                        width="9"
+                                        height="7"
+                                        viewBox="0 0 9 7"
+                                        fill="none"
+                                      >
+                                        <path
+                                          d="M1 3.5L3.5 6L8 1"
+                                          stroke="white"
+                                          strokeWidth="1.5"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                        />
+                                      </svg>
+                                    )}
+                                  </div>
+                                </td>
+                              )}
+
+                              {/* Country */}
+                              <td style={{ padding: "16px 12px" }}>
+                                <Link
+                                  to={`${langPrefix}/country/${country.code.toLowerCase()}`}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                    textDecoration: "none",
+                                  }}
+                                  onClick={(e) => {
+                                    if (compareMode) {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      toggleSelect(country.code);
+                                    }
+                                  }}
+                                >
+                                  <img
+                                    src={country.flagUrl}
+                                    alt={`${localizeCountry(country, lang).name} flag`}
+                                    style={{
+                                      width: "28px",
+                                      height: "19px",
+                                      borderRadius: "3px",
+                                      objectFit: "cover",
+                                      flexShrink: 0,
+                                    }}
+                                    loading="lazy"
+                                  />
                                   <span
                                     style={{
                                       fontFamily: "Inter, sans-serif",
-                                      fontSize: "12px",
-                                      color: "#8A8A8A",
-                                      marginLeft: "2px",
+                                      fontSize: "14px",
+                                      fontWeight: 500,
+                                      color: "#FFFFFF",
                                     }}
                                   >
-                                    /{t("countryPage.visa.mo")}
+                                    {localizeCountry(country, lang).name}
                                   </span>
-                                </>
-                              ) : visa.incomeRequirement.annual ? (
-                                <>
+                                </Link>
+                              </td>
+
+                              {/* Visa Name */}
+                              <td style={{ padding: "16px 12px" }}>
+                                <span
+                                  style={{
+                                    fontFamily: "Inter, sans-serif",
+                                    fontSize: "13px",
+                                    color: "#CCCCCC",
+                                  }}
+                                >
+                                  {visa.visaName}
+                                </span>
+                              </td>
+
+                              {/* Overall score */}
+                              <td
+                                style={{
+                                  padding: "16px 12px",
+                                  textAlign: "right",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    fontFamily: "IBM Plex Mono, monospace",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    color: scoreColour(overallScore),
+                                  }}
+                                >
+                                  {overallScore.toFixed(1)}
+                                </span>
+                              </td>
+
+                              {/* Monthly budget */}
+                              <td
+                                style={{
+                                  padding: "16px 12px",
+                                  textAlign: "right",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    fontFamily: "IBM Plex Mono, monospace",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    color:
+                                      monthlyBudget != null &&
+                                      monthlyBudget <= bs.budget
+                                        ? "#44CC66"
+                                        : monthlyBudget != null
+                                          ? "#FFFFFF"
+                                          : "#757575",
+                                  }}
+                                >
+                                  {monthlyBudget != null
+                                    ? `$${monthlyBudget.toLocaleString()}`
+                                    : "—"}
+                                </span>
+                              </td>
+
+                              {/* Duration */}
+                              <td style={{ padding: "16px 12px" }}>
+                                <span
+                                  style={{
+                                    fontFamily: "IBM Plex Mono, monospace",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    color: "#FFFFFF",
+                                  }}
+                                >
+                                  {visa.duration.initial}
+                                </span>
+                                <span
+                                  style={{
+                                    fontFamily: "Inter, sans-serif",
+                                    fontSize: "12px",
+                                    color: "#8A8A8A",
+                                    marginLeft: "3px",
+                                  }}
+                                >
+                                  {t("countryPage.visa.mo")}
+                                </span>
+                                {visa.duration.maxExtension > 0 && (
+                                  <span
+                                    style={{
+                                      fontFamily: "Inter, sans-serif",
+                                      fontSize: "11px",
+                                      color: "#808080",
+                                      marginLeft: "4px",
+                                    }}
+                                  >
+                                    +{visa.duration.maxExtension}
+                                  </span>
+                                )}
+                              </td>
+
+                              {/* Cost */}
+                              <td
+                                style={{
+                                  padding: "16px 12px",
+                                  textAlign: "right",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    fontFamily: "IBM Plex Mono, monospace",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    color:
+                                      visa.cost.amount === 0
+                                        ? "#44CC66"
+                                        : "#FFFFFF",
+                                  }}
+                                >
+                                  {visa.cost.amount === 0
+                                    ? t("countryPage.visa.free", "Free")
+                                    : `${visa.cost.currency} ${visa.cost.amount.toLocaleString()}`}
+                                </span>
+                              </td>
+
+                              {/* Income */}
+                              <td
+                                style={{
+                                  padding: "16px 12px",
+                                  textAlign: "right",
+                                }}
+                              >
+                                {visa.incomeRequirement.monthly ? (
+                                  <>
+                                    <span
+                                      style={{
+                                        fontFamily: "IBM Plex Mono, monospace",
+                                        fontSize: "14px",
+                                        fontWeight: 600,
+                                        color: "#FFFFFF",
+                                      }}
+                                    >
+                                      {visa.incomeRequirement.currency}{" "}
+                                      {visa.incomeRequirement.monthly.toLocaleString()}
+                                    </span>
+                                    <span
+                                      style={{
+                                        fontFamily: "Inter, sans-serif",
+                                        fontSize: "12px",
+                                        color: "#8A8A8A",
+                                        marginLeft: "2px",
+                                      }}
+                                    >
+                                      /{t("countryPage.visa.mo")}
+                                    </span>
+                                  </>
+                                ) : visa.incomeRequirement.annual ? (
+                                  <>
+                                    <span
+                                      style={{
+                                        fontFamily: "IBM Plex Mono, monospace",
+                                        fontSize: "13px",
+                                        fontWeight: 600,
+                                        color: "#FFFFFF",
+                                      }}
+                                    >
+                                      {visa.incomeRequirement.currency}{" "}
+                                      {visa.incomeRequirement.annual.toLocaleString()}
+                                    </span>
+                                    <span
+                                      style={{
+                                        fontFamily: "Inter, sans-serif",
+                                        fontSize: "12px",
+                                        color: "#8A8A8A",
+                                        marginLeft: "2px",
+                                      }}
+                                    >
+                                      /{t("countryPage.visa.yr")}
+                                    </span>
+                                  </>
+                                ) : (
                                   <span
                                     style={{
                                       fontFamily: "IBM Plex Mono, monospace",
                                       fontSize: "13px",
                                       fontWeight: 600,
-                                      color: "#FFFFFF",
+                                      color: "#44CC66",
                                     }}
                                   >
-                                    {visa.incomeRequirement.currency}{" "}
-                                    {visa.incomeRequirement.annual.toLocaleString()}
+                                    {t("countryPage.visa.noMinimum", "None")}
                                   </span>
-                                  <span
-                                    style={{
-                                      fontFamily: "Inter, sans-serif",
-                                      fontSize: "12px",
-                                      color: "#8A8A8A",
-                                      marginLeft: "2px",
-                                    }}
-                                  >
-                                    /{t("countryPage.visa.yr")}
-                                  </span>
-                                </>
-                              ) : (
+                                )}
+                              </td>
+
+                              {/* Tax */}
+                              <td
+                                style={{
+                                  padding: "16px 12px",
+                                  textAlign: "center",
+                                }}
+                              >
                                 <span
+                                  className="inline-flex items-center px-2 py-1 rounded-full"
                                   style={{
                                     fontFamily: "IBM Plex Mono, monospace",
-                                    fontSize: "13px",
+                                    fontSize: "11px",
                                     fontWeight: 600,
-                                    color: "#44CC66",
+                                    backgroundColor: taxColors.bg,
+                                    color: taxColors.text,
+                                    whiteSpace: "nowrap",
                                   }}
                                 >
-                                  {t("countryPage.visa.noMinimum", "None")}
+                                  {visa.tax.status === "exempt"
+                                    ? t("countryPage.taxExemptLabel")
+                                    : visa.tax.status === "special"
+                                      ? t("countryPage.specialTaxLabel")
+                                      : t("countryPage.standardTaxLabel")}
                                 </span>
-                              )}
-                            </td>
+                              </td>
 
-                            {/* Tax */}
-                            <td
-                              style={{
-                                padding: "16px 12px",
-                                textAlign: "center",
-                              }}
-                            >
-                              <span
-                                className="inline-flex items-center px-2 py-1 rounded-full"
+                              {/* Link */}
+                              <td
                                 style={{
-                                  fontFamily: "IBM Plex Mono, monospace",
-                                  fontSize: "11px",
-                                  fontWeight: 600,
-                                  backgroundColor: taxColors.bg,
-                                  color: taxColors.text,
-                                  whiteSpace: "nowrap",
+                                  padding: "16px 12px",
+                                  textAlign: "center",
                                 }}
                               >
-                                {visa.tax.status === "exempt"
-                                  ? t("countryPage.taxExemptLabel")
-                                  : visa.tax.status === "special"
-                                    ? t("countryPage.specialTaxLabel")
-                                    : t("countryPage.standardTaxLabel")}
-                              </span>
-                            </td>
-
-                            {/* Link */}
-                            <td
-                              style={{
-                                padding: "16px 12px",
-                                textAlign: "center",
-                              }}
-                            >
-                              <a
-                                href={visa.officialUrl}
-                                target="_blank"
-                                rel="noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                style={{
-                                  color: "var(--color-accent)",
-                                  display: "inline-flex",
-                                }}
-                              >
-                                <ExternalLink size={16} />
-                              </a>
-                            </td>
-                          </tr>
-                        );
-                      })}
+                                <a
+                                  href={visa.officialUrl}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  style={{
+                                    color: "var(--color-accent)",
+                                    display: "inline-flex",
+                                  }}
+                                >
+                                  <ExternalLink size={16} />
+                                </a>
+                              </td>
+                            </tr>
+                          );
+                        },
+                      )}
                     </tbody>
                   </table>
                 </div>
