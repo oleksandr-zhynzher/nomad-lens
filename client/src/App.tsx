@@ -539,7 +539,7 @@ export default function App() {
                   }}
                 />
                 {/* Stats row */}
-                <div className="grid grid-cols-2 gap-x-5 gap-y-3 md:flex md:items-center md:gap-6">
+                <div className="hero-stats-row">
                   <div className="min-w-0">
                     <div
                       style={{
@@ -565,10 +565,7 @@ export default function App() {
                       {t("hero.countries")}
                     </div>
                   </div>
-                  <div
-                    className="hidden md:block w-px h-6 md:h-8"
-                    style={{ backgroundColor: "#333333" }}
-                  />
+                  <div className="hero-stat-divider" />
                   <Link
                     to={`${langPrefix}/indicators`}
                     className="min-w-0"
@@ -600,10 +597,7 @@ export default function App() {
                       </div>
                     </div>
                   </Link>
-                  <div
-                    className="hidden md:block w-px h-6 md:h-8"
-                    style={{ backgroundColor: "#333333" }}
-                  />
+                  <div className="hero-stat-divider" />
                   <Link
                     to={`${langPrefix}/data-sources`}
                     className="min-w-0"
@@ -635,10 +629,7 @@ export default function App() {
                       </div>
                     </div>
                   </Link>
-                  <div
-                    className="hidden md:block w-px h-6 md:h-8"
-                    style={{ backgroundColor: "#333333" }}
-                  />
+                  <div className="hero-stat-divider" />
                   <Link
                     to={`${langPrefix}/ai-indicators`}
                     className="min-w-0"

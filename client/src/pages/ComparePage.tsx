@@ -168,6 +168,7 @@ export function ComparePage() {
   const showSortAction =
     (compareMode === "countries" && countrySelectionCount > 1) ||
     (compareMode === "budget" && selectedCodes.length > 1);
+  const mobileViewportMaxWidth = 1024;
   const actionGridClassName =
     showParametersAction && showSortAction
       ? "grid-cols-3"
@@ -206,7 +207,7 @@ export function ComparePage() {
                   : t("compare.nomadVisaSubtitle")
           }
         >
-          <div className="grid grid-cols-2 gap-x-5 gap-y-3 md:flex md:items-center md:gap-6">
+          <div className="hero-stats-row">
             <div className="min-w-0">
               <div
                 style={{
@@ -232,10 +233,7 @@ export function ComparePage() {
                 {t("hero.countries")}
               </div>
             </div>
-            <div
-              className="hidden md:block w-px h-6 md:h-8"
-              style={{ backgroundColor: "#333333" }}
-            />
+            <div className="hero-stat-divider" />
             <Link
               to={`${langPrefix}/nomad-visas`}
               className="min-w-0"
@@ -267,10 +265,7 @@ export function ComparePage() {
                 </div>
               </div>
             </Link>
-            <div
-              className="hidden md:block w-px h-6 md:h-8"
-              style={{ backgroundColor: "#333333" }}
-            />
+            <div className="hero-stat-divider" />
             <Link
               to={`${langPrefix}/indicators`}
               className="min-w-0"
@@ -302,10 +297,7 @@ export function ComparePage() {
                 </div>
               </div>
             </Link>
-            <div
-              className="hidden md:block w-px h-6 md:h-8"
-              style={{ backgroundColor: "#333333" }}
-            />
+            <div className="hero-stat-divider" />
             <Link
               to={`${langPrefix}/ai-indicators`}
               className="min-w-0"
@@ -446,7 +438,7 @@ export function ComparePage() {
                   {showParametersAction && (
                     <button
                       onClick={() => {
-                        if (window.innerWidth < 768) {
+                        if (window.innerWidth <= mobileViewportMaxWidth) {
                           setMobileParamsOpen(true);
                         } else {
                           setShowWeights((p) => !p);
@@ -456,17 +448,22 @@ export function ComparePage() {
                       style={{
                         cursor: "pointer",
                         backgroundColor:
-                          showWeights && window.innerWidth >= 768
+                          showWeights &&
+                          window.innerWidth > mobileViewportMaxWidth
                             ? "var(--color-accent)"
                             : "transparent",
                         color:
-                          showWeights && window.innerWidth >= 768
+                          showWeights &&
+                          window.innerWidth > mobileViewportMaxWidth
                             ? "#FFFFFF"
                             : "#8A8A8A",
                         fontFamily: "Inter, sans-serif",
                         fontSize: "12px",
                         fontWeight:
-                          showWeights && window.innerWidth >= 768 ? 500 : 400,
+                          showWeights &&
+                          window.innerWidth > mobileViewportMaxWidth
+                            ? 500
+                            : 400,
                         flexShrink: 0,
                       }}
                     >

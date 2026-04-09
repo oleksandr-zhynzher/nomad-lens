@@ -1,5 +1,55 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-sm: 64.0625rem;
+  --breakpoint-md: 64.0625rem;
+  --breakpoint-lg: 64.0625rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+}
+
+@layer components {
+  .hero-stats-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    overflow-x: auto;
+    padding-bottom: 0.125rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .hero-stats-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-stats-row > * {
+    flex: 0 0 auto;
+  }
+
+  .hero-stats-row > :not(.hero-stat-divider) {
+    min-width: max-content;
+  }
+
+  .hero-stat-divider {
+    width: 1px;
+    height: 1.5rem;
+    background-color: #333333;
+  }
+
+  @media (min-width: 1025px) {
+    .hero-stats-row {
+      gap: 1.5rem;
+      overflow: visible;
+      padding-bottom: 0;
+    }
+
+    .hero-stat-divider {
+      height: 2rem;
+    }
+  }
+}
+
 @layer base {
   :root {
     --color-bg: #0F1114;
@@ -56,7 +106,7 @@
   }
 
   /* Mobile touch optimizations */
-  @media (max-width: 767px) {
+  @media (max-width: 1024px) {
     input[type="range"]::-webkit-slider-thumb {
       width: 22px;
       height: 22px;

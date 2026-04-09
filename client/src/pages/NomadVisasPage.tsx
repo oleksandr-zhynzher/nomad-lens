@@ -203,7 +203,7 @@ export function NomadVisasPage() {
         )}
       >
         {!loading && allVisaCountries.length > 0 && (
-          <div className="grid grid-cols-2 gap-x-5 gap-y-3 md:flex md:items-center md:gap-6">
+          <div className="hero-stats-row">
             <div className="min-w-0">
               <div
                 style={{
@@ -229,10 +229,7 @@ export function NomadVisasPage() {
                 {t("nomadVisasPage.countries", "Countries")}
               </div>
             </div>
-            <div
-              className="hidden md:block w-px h-6 md:h-8"
-              style={{ backgroundColor: "#333333" }}
-            />
+            <div className="hero-stat-divider" />
             <div className="min-w-0">
               <div
                 style={{
@@ -262,10 +259,7 @@ export function NomadVisasPage() {
                 {t("nomadVisasPage.taxExempt", "Tax Exempt")}
               </div>
             </div>
-            <div
-              className="hidden md:block w-px h-6 md:h-8"
-              style={{ backgroundColor: "#333333" }}
-            />
+            <div className="hero-stat-divider" />
             <div className="min-w-0">
               <div
                 style={{
