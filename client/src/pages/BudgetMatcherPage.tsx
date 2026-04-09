@@ -907,7 +907,9 @@ export function BudgetMatcherPage() {
                         marginTop: "4px",
                       }}
                     >
-                      {t("budget.matchedCountries")}
+                      {t("budget.stats.matchedCountries", {
+                        count: matches.length,
+                      })}
                     </div>
                   </div>
                   <div className="hero-stat-divider" />
@@ -964,7 +966,9 @@ export function BudgetMatcherPage() {
                           marginTop: "4px",
                         }}
                       >
-                        {t("budget.categories.title")}
+                        {t("budget.stats.categories", {
+                          count: BUDGET_CATEGORIES.length,
+                        })}
                       </div>
                     </div>
                   </Link>

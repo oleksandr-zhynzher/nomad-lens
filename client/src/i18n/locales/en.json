@@ -27,7 +27,17 @@
     "countries": "Countries",
     "indicators": "Indicators",
     "dataSources": "Data Sources",
-    "aiIndicators": "AI Indicators"
+    "aiIndicators": "AI Indicators",
+    "stats": {
+      "countries_one": "Country",
+      "countries_other": "Countries",
+      "indicators_one": "Indicator",
+      "indicators_other": "Indicators",
+      "dataSources_one": "Data Source",
+      "dataSources_other": "Data Sources",
+      "aiIndicators_one": "AI Indicator",
+      "aiIndicators_other": "AI Indicators"
+    }
   },
   "search": {
     "placeholder": "Search by country name…"
@@ -48,13 +58,18 @@
     "moderate": "Moderate",
     "low": "Low",
     "noData": "No data",
-    "countriesScored": "{{count}} countries scored · click a country for details"
+    "countriesScored_one": "{{count}} country scored · click a country for details",
+    "countriesScored_other": "{{count}} countries scored · click a country for details"
   },
   "compare": {
     "eyebrow": "Compare",
     "countryTitle": "Country Comparison",
     "regionTitle": "Region Comparison",
-    "countrySubtitle": "Select countries to compare across {{coreCount}} core indicators and {{aiCount}} AI indicators",
+    "countrySubtitle": "Select countries to compare across {{coreIndicatorsLabel}} and {{aiIndicatorsLabel}}",
+    "coreIndicatorsLabel_one": "{{count}} core indicator",
+    "coreIndicatorsLabel_other": "{{count}} core indicators",
+    "aiIndicatorsLabel_one": "{{count}} AI indicator",
+    "aiIndicatorsLabel_other": "{{count}} AI indicators",
     "regionSubtitle": "Compare average scores across world regions",
     "countries": "Countries",
     "regions": "Regions",
@@ -70,6 +85,8 @@
     "searchCountry": "Search by country name…",
     "noCountriesFound": "No countries found",
     "nomadVisas": "Nomad",
+    "nomadVisaCountries_one": "Country with Nomad visa",
+    "nomadVisaCountries_other": "Countries with Nomad visa",
     "nomadVisaTitle": "Nomad Visa Comparison",
     "nomadVisaSubtitle": "Compare digital nomad visa programs side by side",
     "visaDetail": "Visa Detail",
@@ -164,7 +181,8 @@
   "countryList": {
     "noResults": "No countries match your search.",
     "retry": "Retry",
-    "count": "{{count}} countries",
+    "count_one": "{{count}} country",
+    "count_other": "{{count}} countries",
     "clickHint": "Click on a country to view details"
   },
   "countryPage": {
@@ -203,7 +221,8 @@
     "backToCountries": "← Back to Countries",
     "countryDetailLabel": "COUNTRY DETAIL",
     "nomadVisaBadge": "Nomad Visa",
-    "touristVisaBadge": "{{days}} day tourist visa",
+    "touristVisaBadge_one": "{{count}}-day tourist visa",
+    "touristVisaBadge_other": "{{count}}-day tourist visa",
     "globalRankScore": "Global Rank · Score",
     "population": "Population",
     "capital": "Capital",
@@ -233,7 +252,8 @@
     "officialVisaWebsite": "Official Visa Website",
     "free": "Free",
     "performanceBreakdown": "Performance breakdown",
-    "categoriesSubtitle": "{{count}} categories · {{name}}",
+    "categoriesSubtitle_one": "{{count}} category · {{name}}",
+    "categoriesSubtitle_other": "{{count}} categories · {{name}}",
     "annualAverages": "Annual averages",
     "costOfLivingSection": "Cost of Living",
     "costOfLivingSubtitle": "USD / month · single nomad",
@@ -277,7 +297,11 @@
   "indicatorsPage": {
     "eyebrow": "REFERENCE",
     "title": "INDICATORS",
-    "subtitle": "How each of the {{coreCount}} core indicators is calculated — data sources, methodology, and weighting. {{aiCount}} AI indicators are documented separately.",
+    "subtitle": "How each of the {{coreIndicatorsLabel}} is calculated — data sources, methodology, and weighting. {{aiIndicatorsLabel}} are documented separately.",
+    "coreIndicatorsLabel_one": "{{count}} core indicator",
+    "coreIndicatorsLabel_other": "{{count}} core indicators",
+    "aiIndicatorsLabel_one": "{{count}} AI indicator",
+    "aiIndicatorsLabel_other": "{{count}} AI indicators",
     "aiSection": "AI-Powered Indicators",
     "aiSectionNote": "— off by default, enable in the weight panel",
     "indicators": {
@@ -522,12 +546,21 @@
   "loading": "Loading…",
   "nomadVisasPage": {
     "eyebrow": "TRAVEL & WORK",
-    "subtitle": "Compare digital nomad visa programs across {{count}} countries",
+    "subtitle_one": "Compare digital nomad visa programs across {{count}} country",
+    "subtitle_other": "Compare digital nomad visa programs across {{count}} countries",
     "backToVisas": "Back to Nomad",
     "compareTitle": "Nomad Visa Comparison",
     "countries": "Countries",
     "taxExempt": "Tax Exempt",
     "freeVisas": "Free Visas",
+    "stats": {
+      "countries_one": "Country",
+      "countries_other": "Countries",
+      "taxExempt_one": "Tax-exempt country",
+      "taxExempt_other": "Tax-exempt countries",
+      "freeVisas_one": "Free visa",
+      "freeVisas_other": "Free visas"
+    },
     "search": "Search by country name...",
     "noResults": "No countries found",
     "compareMode": "Compare",
@@ -586,20 +619,29 @@
     },
     "reset": "Reset",
     "results": "Results",
-    "countriesFound": "{{count}} countries",
+    "countriesFound_one": "{{count}} country found",
+    "countriesFound_other": "{{count}} countries found",
     "noResults": "No countries with cost data available",
     "loading": "Loading...",
     "budgetLine": "Budget",
     "monthlyBreakdown": "Monthly breakdown",
     "surplus": "surplus",
     "comfortScore": "Comfort score",
-    "matchedCountries": "COUNTRIES"
+    "matchedCountries": "COUNTRIES",
+    "stats": {
+      "categories_one": "CATEGORY",
+      "categories_other": "CATEGORIES",
+      "matchedCountries_one": "Country",
+      "matchedCountries_other": "Countries"
+    }
   },
   "aiIndicatorsPage": {
     "eyebrow": "AI METHODOLOGY",
     "title": "AI INDICATORS",
-    "subtitle": "How each of the {{count}} AI-generated composite scores is built — sub-indicators, data sources, and methodology.",
-    "disclaimer": "These {{count}} indicators are generated by AI (Claude Opus 4.6, Anthropic). Each score is a 0–100 composite synthesized from multiple publicly available data sources, structured datasets, and qualitative assessment. Scores are designed to be reproducible within ±5 points. They are disabled by default in the ranking and can be enabled in the weight panel. AI-generated scores may contain inaccuracies — always verify critical decisions with official sources.",
+    "subtitle_one": "How the {{count}} AI-generated composite score is built — sub-indicators, data sources, and methodology.",
+    "subtitle_other": "How the {{count}} AI-generated composite scores are built — sub-indicators, data sources, and methodology.",
+    "disclaimer_one": "This AI-generated indicator was created by AI (Claude Opus 4.6, Anthropic). The score is a 0–100 composite synthesized from multiple publicly available data sources, structured datasets, and qualitative assessment. Scores are designed to be reproducible within ±5 points. They are disabled by default in the ranking and can be enabled in the weight panel. AI-generated scores may contain inaccuracies — always verify critical decisions with official sources.",
+    "disclaimer_other": "These {{count}} indicators are generated by AI (Claude Opus 4.6, Anthropic). Each score is a 0–100 composite synthesized from multiple publicly available data sources, structured datasets, and qualitative assessment. Scores are designed to be reproducible within ±5 points. They are disabled by default in the ranking and can be enabled in the weight panel. AI-generated scores may contain inaccuracies — always verify critical decisions with official sources.",
     "indicators": {
       "nomadCommunity": {
         "name": "Nomad & Expat Community",

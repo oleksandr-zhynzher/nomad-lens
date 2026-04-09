@@ -562,7 +562,7 @@ export default function App() {
                         marginTop: "4px",
                       }}
                     >
-                      {t("hero.countries")}
+                      {t("hero.stats.countries", { count: countries.length })}
                     </div>
                   </div>
                   <div className="hero-stat-divider" />
@@ -593,7 +593,9 @@ export default function App() {
                           marginTop: "4px",
                         }}
                       >
-                        {t("hero.indicators")}
+                        {t("hero.stats.indicators", {
+                          count: DISPLAYED_CORE_CATEGORY_KEYS.length,
+                        })}
                       </div>
                     </div>
                   </Link>
@@ -625,7 +627,9 @@ export default function App() {
                           marginTop: "4px",
                         }}
                       >
-                        {t("hero.dataSources")}
+                        {t("hero.stats.dataSources", {
+                          count: DATA_SOURCE_KEYS.flat().length,
+                        })}
                       </div>
                     </div>
                   </Link>
@@ -657,7 +661,9 @@ export default function App() {
                           marginTop: "4px",
                         }}
                       >
-                        {t("hero.aiIndicators")}
+                        {t("hero.stats.aiIndicators", {
+                          count: AI_CATEGORY_KEYS.length,
+                        })}
                       </div>
                     </div>
                   </Link>

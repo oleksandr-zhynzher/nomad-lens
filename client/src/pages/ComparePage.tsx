@@ -77,6 +77,15 @@ export function ComparePage() {
   );
   const coreIndicatorCount = DISPLAYED_CORE_CATEGORY_KEYS.length;
   const aiIndicatorCount = AI_CATEGORY_KEYS.length;
+  const nomadVisaCountryCount = countries.filter(
+    (country) => country.hasNomadVisa,
+  ).length;
+  const compareCoreIndicatorsLabel = t("compare.coreIndicatorsLabel", {
+    count: coreIndicatorCount,
+  });
+  const compareAiIndicatorsLabel = t("compare.aiIndicatorsLabel", {
+    count: aiIndicatorCount,
+  });
 
   // Keep the weight panel sized to fit from its current position to the viewport bottom
   const panelRef = useRef<HTMLDivElement>(null);
@@ -258,8 +267,8 @@ export function ComparePage() {
           subtitle={
             compareMode === "countries"
               ? t("compare.countrySubtitle", {
-                  coreCount: coreIndicatorCount,
-                  aiCount: aiIndicatorCount,
+                  coreIndicatorsLabel: compareCoreIndicatorsLabel,
+                  aiIndicatorsLabel: compareAiIndicatorsLabel,
                 })
               : compareMode === "regions"
                 ? t("compare.regionSubtitle")
@@ -294,7 +303,7 @@ export function ComparePage() {
                   marginTop: "4px",
                 }}
               >
-                {t("hero.countries")}
+                {t("hero.stats.countries", { count: countries.length })}
               </div>
             </div>
             <div className="hero-stat-divider" />
@@ -313,7 +322,7 @@ export function ComparePage() {
                     lineHeight: "1",
                   }}
                 >
-                  {countries.filter((c) => c.hasNomadVisa).length}
+                  {nomadVisaCountryCount}
                 </div>
                 <div
                   style={{
@@ -325,7 +334,9 @@ export function ComparePage() {
                     marginTop: "4px",
                   }}
                 >
-                  {t("compare.nomadVisas")}
+                  {t("compare.nomadVisaCountries", {
+                    count: nomadVisaCountryCount,
+                  })}
                 </div>
               </div>
             </Link>
@@ -357,7 +368,7 @@ export function ComparePage() {
                     marginTop: "4px",
                   }}
                 >
-                  {t("hero.indicators")}
+                  {t("hero.stats.indicators", { count: coreIndicatorCount })}
                 </div>
               </div>
             </Link>
@@ -389,7 +400,7 @@ export function ComparePage() {
                     marginTop: "4px",
                   }}
                 >
-                  {t("hero.aiIndicators")}
+                  {t("hero.stats.aiIndicators", { count: aiIndicatorCount })}
                 </div>
               </div>
             </Link>

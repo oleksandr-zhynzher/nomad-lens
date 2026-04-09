@@ -310,7 +310,8 @@ export function NomadVisaComparePage() {
                       }}
                     >
                       +{c.nomadVisa.duration.maxExtension}{" "}
-                      {t("countryPage.visa.mo")} ext.
+                      {t("countryPage.visa.mo")}{" "}
+                      {t("countryPage.visa.extension")}
                     </span>
                   )}
                 </Cell>

@@ -313,7 +313,9 @@ export function NomadVisasPage() {
                   marginTop: "4px",
                 }}
               >
-                {t("nomadVisasPage.countries", "Countries")}
+                {t("nomadVisasPage.stats.countries", {
+                  count: allVisaCountries.length,
+                })}
               </div>
             </div>
             <div className="hero-stat-divider" />
@@ -343,7 +345,11 @@ export function NomadVisasPage() {
                   marginTop: "4px",
                 }}
               >
-                {t("nomadVisasPage.taxExempt", "Tax Exempt")}
+                {t("nomadVisasPage.stats.taxExempt", {
+                  count: allVisaCountries.filter(
+                    (c) => c.nomadVisa.tax.status === "exempt",
+                  ).length,
+                })}
               </div>
             </div>
             <div className="hero-stat-divider" />
@@ -372,7 +378,11 @@ export function NomadVisasPage() {
                   marginTop: "4px",
                 }}
               >
-                {t("nomadVisasPage.freeVisas", "Free Visas")}
+                {t("nomadVisasPage.stats.freeVisas", {
+                  count: allVisaCountries.filter(
+                    (c) => c.nomadVisa.cost.amount === 0,
+                  ).length,
+                })}
               </div>
             </div>
           </div>

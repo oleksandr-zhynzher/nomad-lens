@@ -137,6 +137,12 @@ export function IndicatorsPage() {
   const { t } = useTranslation();
   const coreIndicatorCount = DISPLAYED_CORE_CATEGORY_KEYS.length;
   const aiIndicatorCount = AI_CATEGORY_KEYS.length;
+  const coreIndicatorsLabel = t("indicatorsPage.coreIndicatorsLabel", {
+    count: coreIndicatorCount,
+  });
+  const aiIndicatorsLabel = t("indicatorsPage.aiIndicatorsLabel", {
+    count: aiIndicatorCount,
+  });
 
   return (
     <Layout activePage="indicators">
@@ -145,8 +151,8 @@ export function IndicatorsPage() {
         eyebrow={t("indicatorsPage.eyebrow")}
         title={t("indicatorsPage.title")}
         subtitle={t("indicatorsPage.subtitle", {
-          coreCount: coreIndicatorCount,
-          aiCount: aiIndicatorCount,
+          coreIndicatorsLabel,
+          aiIndicatorsLabel,
         })}
       />
 

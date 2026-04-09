@@ -377,7 +377,7 @@ export function CountryPage() {
                     }}
                   >
                     {t("countryPage.touristVisaBadge", {
-                      days: c.touristVisaDays,
+                      count: c.touristVisaDays,
                     })}
                   </span>
                 </div>
