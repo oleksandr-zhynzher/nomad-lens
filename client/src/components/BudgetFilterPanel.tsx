@@ -453,7 +453,7 @@ export function BudgetFilterPanel({ bs }: Props) {
                 color: "#C2956A",
               }}
             >
-              Avg{" "}
+              {t("weights.averageBadge")}{" "}
               {Math.round(
                 Object.values(bs.categoryWeights).reduce((a, b) => a + b, 0) /
                   BUDGET_CATEGORY_KEYS.length,

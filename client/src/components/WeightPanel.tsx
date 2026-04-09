@@ -453,7 +453,7 @@ export function WeightPanel({
           );
           const groupBadge =
             weightMode === "independent"
-              ? `Avg ${Math.round(groupTotal / group.keys.length)}`
+              ? `${t("weights.averageBadge")} ${Math.round(groupTotal / group.keys.length)}`
               : `${groupTotal}%`;
 
           return (

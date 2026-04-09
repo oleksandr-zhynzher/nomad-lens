@@ -189,7 +189,7 @@ export function WorldMap({
       {geoLoading && (
         <div
           className="absolute inset-0 z-20 flex items-center justify-center"
-          style={{ backgroundColor: "#0F1114" }}
+          style={{ backgroundColor: "#000000" }}
         >
           <div
             className="animate-spin"
@@ -256,7 +256,7 @@ export function WorldMap({
 
       {/* Legend */}
       <div
-        className="absolute bottom-2 left-2 md:bottom-3 md:left-3 z-10 px-2 py-1.5 md:px-3 md:py-2 flex flex-col gap-1 md:gap-1.5"
+        className="hidden absolute bottom-2 left-2 z-10 md:bottom-3 md:left-3 md:flex md:flex-col md:gap-1.5 md:px-3 md:py-2"
         style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}
       >
         <p
@@ -305,7 +305,7 @@ export function WorldMap({
         projectionConfig={{ scale: 160 }}
         width={900}
         height={460}
-        style={{ width: "100%", height: "auto", background: "#0F1114" }}
+        style={{ width: "100%", height: "auto", background: "#000000" }}
       >
         <ZoomableGroup
           zoom={zoom}
@@ -316,7 +316,7 @@ export function WorldMap({
             setZoom(p.zoom);
           }}
         >
-          <Sphere fill="#0F1114" stroke="#1A1A1A" strokeWidth={0.5} />
+          <Sphere fill="#000000" stroke="#1A1A1A" strokeWidth={0.5} />
           <Graticule stroke="#1A1A1A" strokeWidth={0.3} />
           <Geographies geography={GEO_URL}>
             {({ geographies }) => (

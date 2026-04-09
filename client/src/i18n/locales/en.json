@@ -116,6 +116,7 @@
   "weights": {
     "title": "WEIGHTS & PREFERENCES",
     "hint": "Click a group to expand and adjust its indicator weights.",
+    "averageBadge": "Avg",
     "independentMode": "Independent",
     "balancedMode": "Balanced",
     "independentTitle": "Independent Mode",
