@@ -1,22 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import {
   CirclePlus,
   X,
-  House,
-  ShoppingCart,
+  Shield,
+  Theater,
+  TreePine,
+  Bed,
   UtensilsCrossed,
+  Sun,
   Bus,
+  Plane,
   Wifi,
-  Laptop,
-  HeartPulse,
-  Wallet,
-  TrendingUp,
+  Smile,
 } from "lucide-react";
 import type { CountryData } from "../utils/types";
+import { TOURISM_CATEGORY_KEYS } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
-import { COST_COLORS } from "../utils/budgetColors";
-import type { BudgetMatch } from "../hooks/useBudgetMatcher";
+import {
+  computeTourismScore,
+  tourismScoreColour,
+} from "../utils/tourismScoring";
+import { useLangPrefix } from "../hooks/useLangPrefix";
 
 const SLOT_COLORS = [
   "#8F5A3C",
@@ -33,53 +39,54 @@ const SLOT_COLORS = [
   "#4CAF8B",
 ] as const;
 
-function getSlotColor(i: number) {
-  return SLOT_COLORS[i % SLOT_COLORS.length];
+const COMPARISON_COLUMN_WIDTH = "112px";
+
+function getSlotColor(index: number) {
+  return SLOT_COLORS[index % SLOT_COLORS.length];
 }
 
-function surplusColor(surplus: number): string {
-  if (surplus > 200) return "#4CAF50";
-  if (surplus >= 0) return "#8BC34A";
-  if (surplus >= -200) return "#FFC107";
-  return "#FF5722";
-}
+const TOURISM_ICONS: Record<string, typeof Shield> = {
+  tourismSafety: Shield,
+  culturalAttractions: Theater,
+  naturalAttractions: TreePine,
+  accommodationCost: Bed,
+  foodAndDining: UtensilsCrossed,
+  seasonalAppeal: Sun,
+  transportCost: Bus,
+  travelAccessibility: Plane,
+  tourismInfrastructure: Wifi,
+  localFriendliness: Smile,
+};
 
-function costColor(value: number, min: number): string {
-  if (value <= min) return "#4CAF50";
-  return "#FFFFFF";
-}
-
-const BREAKDOWN_ROWS: {
-  key: keyof import("../hooks/useBudgetMatcher").BudgetBreakdown;
-  icon: typeof House;
-}[] = [
-  { key: "housing", icon: House },
-  { key: "groceries", icon: ShoppingCart },
-  { key: "dining", icon: UtensilsCrossed },
-  { key: "transport", icon: Bus },
-  { key: "utilities", icon: Wifi },
-  { key: "coworking", icon: Laptop },
-  { key: "healthInsurance", icon: HeartPulse },
-];
-
-const BUDGET_COMPARISON_COLUMN_WIDTH = "112px";
+const TOURISM_LABELS: Record<string, string> = {
+  tourismSafety: "Tourism Safety",
+  culturalAttractions: "Cultural Attractions",
+  naturalAttractions: "Natural Attractions",
+  accommodationCost: "Accommodation Cost",
+  foodAndDining: "Food & Dining",
+  seasonalAppeal: "Seasonal Appeal",
+  transportCost: "Transport Cost",
+  travelAccessibility: "Travel Accessibility",
+  tourismInfrastructure: "Tourism Infrastructure",
+  localFriendliness: "Local Friendliness",
+};
 
 interface Props {
   countries: CountryData[];
-  matches?: BudgetMatch[];
   selectedCodes: string[];
   onSelectedCodesChange: (codes: string[]) => void;
   sortTrigger?: number;
   sortDirection?: "desc" | "asc" | null;
+  onSelectionCount?: (count: number) => void;
 }
 
-export function BudgetComparison({
+export function TourismComparison({
   countries,
-  matches = [],
   selectedCodes,
   onSelectedCodesChange,
   sortTrigger = 0,
   sortDirection = null,
+  onSelectionCount,
 }: Props) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownPos, setDropdownPos] = useState<{
@@ -91,11 +98,11 @@ export function BudgetComparison({
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const { t, i18n } = useTranslation();
+  const langPrefix = useLangPrefix();
+  const navigate = useNavigate();
   const lang = i18n.language;
 
-  const matchMap = new Map(matches.map((m) => [m.country.code, m]));
-
-  // Sync horizontal scroll
+  // Sync horizontal scroll between sticky header and body
   useEffect(() => {
     const header = headerRef.current;
     const body = bodyRef.current;
@@ -114,7 +121,7 @@ export function BudgetComparison({
     };
   }, []);
 
-  const selectedSlots = selectedCodes
+  const selectedCountries = selectedCodes
     .map((code, i) => {
       const country = countries.find((c) => c.code === code);
       return country ? { country, color: getSlotColor(i), index: i } : null;
@@ -135,34 +142,34 @@ export function BudgetComparison({
     setQuery("");
   };
 
+  // Sort when parent triggers it
   useEffect(() => {
     if (sortTrigger <= 0 || sortDirection == null) return;
 
-    const sortedCodes = [...selectedCodes].sort((codeA, codeB) => {
-      const matchA = matchMap.get(codeA);
-      const matchB = matchMap.get(codeB);
+    const sorted = [...selectedCodes].sort((a, b) => {
+      const countryA = countries.find((c) => c.code === a);
+      const countryB = countries.find((c) => c.code === b);
+      if (!countryA || !countryB) return 0;
 
-      if (!matchA && !matchB) return 0;
-      if (!matchA) return sortDirection === "desc" ? 1 : -1;
-      if (!matchB) return sortDirection === "desc" ? -1 : 1;
+      const scoreA = computeTourismScore(countryA) ?? 0;
+      const scoreB = computeTourismScore(countryB) ?? 0;
+      const scoreDelta = scoreB - scoreA;
 
-      if (matchA.monthlyCost !== matchB.monthlyCost) {
-        const costDelta = matchB.monthlyCost - matchA.monthlyCost;
-        return sortDirection === "desc" ? costDelta : -costDelta;
-      }
-
-      const surplusDelta = matchB.surplus - matchA.surplus;
-      return sortDirection === "desc" ? surplusDelta : -surplusDelta;
+      return sortDirection === "desc" ? scoreDelta : -scoreDelta;
     });
 
-    onSelectedCodesChange(sortedCodes);
+    onSelectedCodesChange(sorted);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortDirection, sortTrigger]);
+
+  // Report selection count to parent
+  useEffect(() => {
+    onSelectionCount?.(selectedCodes.length);
+  }, [selectedCodes.length, onSelectionCount]);
 
   const filtered = countries
     .filter(
       (c) =>
-        c.costOfLiving &&
         !selectedCodes.includes(c.code) &&
         localizeCountry(c, lang)
           .name.toLowerCase()
@@ -174,41 +181,28 @@ export function BudgetComparison({
       ),
     );
 
-  // Cheapest value per row across selected countries
-  const minBreakdown: Record<string, number> = {};
-  const maxBreakdown: Record<string, number> = {};
-  BREAKDOWN_ROWS.forEach(({ key }) => {
-    const values = selectedSlots.map(
-      (slot) => matchMap.get(slot.country.code)?.breakdown[key] ?? 0,
-    );
-    minBreakdown[key] = values.length > 0 ? Math.min(...values) : 0;
-    maxBreakdown[key] = Math.max(1, ...values);
-  });
-  const minTotal =
-    selectedSlots.length > 0
-      ? Math.min(
-          ...selectedSlots.map(
-            (slot) => matchMap.get(slot.country.code)?.monthlyCost ?? 0,
-          ),
-        )
-      : 0;
-
   return (
     <div>
-      {/* ── Country selector ─────────────────────────────────── */}
+      {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
         <div
-          className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
-          style={{ scrollbarWidth: "thin" }}
+          className="flex gap-3 pb-2"
+          style={{ overflowX: "auto", scrollbarWidth: "thin" }}
         >
-          {selectedSlots.map((slot) => {
-            const match = matchMap.get(slot.country.code);
-            const cost = match?.monthlyCost;
-            const surplus = match != null ? match.surplus : null;
+          {selectedCountries.map((slot) => {
+            const score = computeTourismScore(slot.country);
+            const sColor =
+              score != null ? tourismScoreColour(score) : "#333333";
             return (
               <div
                 key={slot.country.code}
-                className="min-w-0 w-full md:shrink-0 md:w-[180px]"
+                className="shrink-0 w-[148px] md:w-[180px]"
+                onClick={() =>
+                  navigate(
+                    `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
+                  )
+                }
+                style={{ cursor: "pointer" }}
               >
                 <div
                   className="relative rounded-lg p-4 flex flex-col items-center gap-3"
@@ -219,7 +213,10 @@ export function BudgetComparison({
                   }}
                 >
                   <button
-                    onClick={() => handleRemove(slot.index)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleRemove(slot.index);
+                    }}
                     className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
                     style={{
                       opacity: 0.6,
@@ -237,44 +234,31 @@ export function BudgetComparison({
                     className="rounded-full object-cover w-9 h-9"
                   />
 
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "15px",
-                      fontWeight: 600,
-                      color: "#E8E9EB",
-                      textAlign: "center",
-                    }}
-                  >
-                    {localizeCountry(slot.country, lang).name}
-                  </span>
-
-                  <span
-                    className="text-[28px]"
-                    style={{
-                      fontFamily: "Oswald, sans-serif",
-                      fontWeight: 700,
-                      color: cost != null ? "#C2956A" : "#555",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {cost != null ? `$${cost.toLocaleString()}` : "—"}
-                  </span>
-
-                  {surplus != null && (
+                  <div className="flex items-center justify-center gap-1.5">
                     <span
                       style={{
                         fontFamily: "Inter, sans-serif",
-                        fontSize: "11px",
+                        fontSize: "15px",
                         fontWeight: 600,
-                        color: surplusColor(surplus),
+                        color: "#E8E9EB",
+                        textAlign: "center",
                       }}
                     >
-                      {surplus >= 0
-                        ? `+$${surplus.toLocaleString()} left`
-                        : `-$${Math.abs(surplus).toLocaleString()} over`}
+                      {localizeCountry(slot.country, lang).name}
                     </span>
-                  )}
+                  </div>
+
+                  <span
+                    className="text-[32px]"
+                    style={{
+                      fontFamily: "Oswald, sans-serif",
+                      fontWeight: 700,
+                      color: sColor,
+                      lineHeight: 1,
+                    }}
+                  >
+                    {score != null ? score.toFixed(1) : "—"}
+                  </span>
 
                   <span
                     className="px-2 py-0.5 rounded-full"
@@ -294,10 +278,7 @@ export function BudgetComparison({
           })}
 
           {/* Add button */}
-          <div
-            ref={addBtnRef}
-            className="min-w-0 w-full md:shrink-0 md:w-[180px]"
-          >
+          <div ref={addBtnRef} className="shrink-0 w-[148px] md:w-[180px]">
             <button
               onClick={() => {
                 if (!dropdownOpen && addBtnRef.current) {
@@ -337,7 +318,6 @@ export function BudgetComparison({
             </button>
           </div>
         </div>
-
         {/* Right-edge fade */}
         <div
           className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block"
@@ -347,7 +327,7 @@ export function BudgetComparison({
         />
       </div>
 
-      {/* Dropdown */}
+      {/* Dropdown — fixed-positioned under the Add Country card */}
       {dropdownOpen && dropdownPos && (
         <div
           className="z-50 rounded-lg overflow-hidden w-[320px]"
@@ -361,7 +341,7 @@ export function BudgetComparison({
           }}
         >
           <input
-            name="budget-comparison-search"
+            name="tourism-comparison-search"
             type="text"
             autoFocus
             placeholder={t("compare.searchCountry")}
@@ -379,8 +359,7 @@ export function BudgetComparison({
           />
           <div style={{ maxHeight: "320px", overflowY: "auto" }}>
             {filtered.map((c) => {
-              const match = matchMap.get(c.code);
-              const cost = match?.monthlyCost ?? c.costOfLiving?.totalBasic;
+              const score = computeTourismScore(c);
               return (
                 <button
                   key={c.code}
@@ -417,10 +396,11 @@ export function BudgetComparison({
                       fontFamily: "IBM Plex Mono, monospace",
                       fontSize: "13px",
                       fontWeight: 600,
-                      color: "#C2956A",
+                      color:
+                        score != null ? tourismScoreColour(score) : "#333333",
                     }}
                   >
-                    {cost != null ? `$${cost.toLocaleString()}` : "—"}
+                    {score != null ? score.toFixed(1) : "—"}
                   </span>
                 </button>
               );
@@ -441,9 +421,10 @@ export function BudgetComparison({
         </div>
       )}
 
-      {/* Data grid */}
-      {selectedSlots.length > 0 && (
+      {/* Indicator grid */}
+      {selectedCountries.length > 0 && (
         <div className="mt-8">
+          {/* Separator */}
           <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
           {/* Sticky column header */}
@@ -471,14 +452,14 @@ export function BudgetComparison({
                     textTransform: "uppercase",
                   }}
                 >
-                  {t("compare.indicatorHeader", "Category")}
+                  {t("compare.indicatorHeader")}
                 </span>
               </div>
-              {selectedSlots.map((slot) => (
+              {selectedCountries.map((slot) => (
                 <div
                   key={slot.index}
                   className="flex shrink-0 items-center justify-center gap-1.5"
-                  style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
+                  style={{ width: COMPARISON_COLUMN_WIDTH }}
                 >
                   <img
                     src={slot.country.flagUrl}
@@ -503,100 +484,10 @@ export function BudgetComparison({
             </div>
           </div>
 
-          {/* Scrollable rows */}
+          {/* Scrollable data rows */}
           <div ref={bodyRef} style={{ overflowX: "auto" }}>
-            {/* Monthly total row */}
-            <div
-              className="flex items-center"
-              style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}
-            >
-              <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                <Wallet size={16} style={{ color: "#C2956A", flexShrink: 0 }} />
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    color: "#8A8A8A",
-                  }}
-                >
-                  {t("budget.totalMonthly", "Monthly Total")}
-                </span>
-              </div>
-              {selectedSlots.map((slot) => {
-                const val = matchMap.get(slot.country.code)?.monthlyCost;
-                return (
-                  <div
-                    key={slot.index}
-                    className="shrink-0 text-center"
-                    style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "22px",
-                        fontWeight: 600,
-                        color:
-                          val != null ? costColor(val, minTotal) : "#333333",
-                      }}
-                    >
-                      {val != null ? `$${val.toLocaleString()}` : "—"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Surplus row */}
-            <div
-              className="flex items-center"
-              style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}
-            >
-              <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                <TrendingUp
-                  size={16}
-                  style={{ color: "#4CAF50", flexShrink: 0 }}
-                />
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    color: "#8A8A8A",
-                  }}
-                >
-                  {t("budget.surplus", "Surplus")}
-                </span>
-              </div>
-              {selectedSlots.map((slot) => {
-                const match = matchMap.get(slot.country.code);
-                const val = match?.surplus;
-                return (
-                  <div
-                    key={slot.index}
-                    className="shrink-0 text-center"
-                    style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "22px",
-                        fontWeight: 600,
-                        color: val != null ? surplusColor(val) : "#333333",
-                      }}
-                    >
-                      {val != null
-                        ? val >= 0
-                          ? `+$${val.toLocaleString()}`
-                          : `-$${Math.abs(val).toLocaleString()}`
-                        : "—"}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Breakdown rows */}
-            {BREAKDOWN_ROWS.map(({ key, icon: Icon }) => {
-              const dotColor = COST_COLORS[key] ?? "#888";
+            {TOURISM_CATEGORY_KEYS.map((key) => {
+              const Icon = TOURISM_ICONS[key];
               return (
                 <div
                   key={key}
@@ -607,7 +498,7 @@ export function BudgetComparison({
                   }}
                 >
                   <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                    <Icon size={16} style={{ color: dotColor }} />
+                    {Icon && <Icon size={16} style={{ color: "#808080" }} />}
                     <span
                       style={{
                         fontFamily: "Inter, sans-serif",
@@ -615,16 +506,16 @@ export function BudgetComparison({
                         color: "#8A8A8A",
                       }}
                     >
-                      {t(`budget.categories.${key}`, key)}
+                      {t(`tourism.metrics.${key}`, TOURISM_LABELS[key] ?? key)}
                     </span>
                   </div>
-                  {selectedSlots.map((slot) => {
-                    const val = matchMap.get(slot.country.code)?.breakdown[key];
+                  {selectedCountries.map((slot) => {
+                    const val = slot.country.scores[key]?.value;
                     return (
                       <div
                         key={slot.index}
                         className="shrink-0 text-center"
-                        style={{ width: BUDGET_COMPARISON_COLUMN_WIDTH }}
+                        style={{ width: COMPARISON_COLUMN_WIDTH }}
                       >
                         <span
                           style={{
@@ -632,12 +523,10 @@ export function BudgetComparison({
                             fontSize: "22px",
                             fontWeight: 600,
                             color:
-                              val != null
-                                ? costColor(val, minBreakdown[key])
-                                : "#333333",
+                              val != null ? tourismScoreColour(val) : "#333333",
                           }}
                         >
-                          {val != null ? `$${val.toLocaleString()}` : "—"}
+                          {val != null ? val.toFixed(1) : "—"}
                         </span>
                       </div>
                     );

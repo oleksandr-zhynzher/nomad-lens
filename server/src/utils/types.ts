@@ -38,6 +38,16 @@ export type CategoryKey =
   | "airConnectivity"
   | "culturalHeritage"
   | "healthcareCost"
+  | "tourismSafety"
+  | "culturalAttractions"
+  | "naturalAttractions"
+  | "accommodationCost"
+  | "foodAndDining"
+  | "seasonalAppeal"
+  | "transportCost"
+  | "travelAccessibility"
+  | "tourismInfrastructure"
+  | "localFriendliness"
   | "nomadCommunity"
   | "visaFriendliness"
   | "costEfficiency"
@@ -61,6 +71,8 @@ export interface CostOfLivingEntry {
   healthInsurance: number | null;
   totalBasic: number | null;
   totalComfortable: number | null;
+  mealBudget: number | null;
+  mealMidRange: number | null;
 }
 
 // ─── AI Metrics ───────────────────────────────────────────────────────────────
@@ -73,6 +85,22 @@ export interface AiMetricsEntry {
   workLifeBalance: number | null;
   digitalReadiness: number | null;
   culturalFit: number | null;
+}
+
+// ─── Tourism AI Metrics ───────────────────────────────────────────────────────
+
+export interface TourismAiMetricsEntry {
+  code: string;
+  nightlifeEntertainment: number | null;
+  touristScamSafety: number | null;
+  streetFoodCuisine: number | null;
+  beachWaterQuality: number | null;
+  walkabilityScenicBeauty: number | null;
+  shoppingMarkets: number | null;
+  photographySpots: number | null;
+  familyFriendliness: number | null;
+  adventureSports: number | null;
+  historicalSites: number | null;
 }
 
 // ─── Nomad Visa Details ───────────────────────────────────────────────────────
@@ -170,6 +198,10 @@ export interface CountryData {
   isSchengen: boolean;
   touristVisaDays: number | null;
   nomadVisa?: NomadVisaDetails;
+  landlocked?: boolean;
+  tourismTags?: string[];
+  tourismTagScores?: Record<string, number>;
+  tourismTagSeasonality?: Record<string, number[]>;
   climateData?: ClimateData;
   costOfLiving?: CostOfLivingEntry | null;
   scores: Record<CategoryKey, CategoryScore>;
@@ -313,8 +345,8 @@ export interface RestCountry {
   population: number;
   flags: { svg: string; png: string };
   capital?: string[];
-  capitalInfo?: { latlng?: [number, number] };
   latlng?: [number, number];
+  landlocked?: boolean;
 }
 
 // ─── WHO GHO ─────────────────────────────────────────────────────────────────

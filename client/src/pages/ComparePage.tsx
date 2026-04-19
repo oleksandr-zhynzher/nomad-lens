@@ -5,6 +5,7 @@ import {
   ArrowDownWideNarrow,
   Plane,
   Wallet,
+  Palmtree,
   X,
 } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -16,10 +17,13 @@ import { RegionComparison } from "../components/RegionComparison";
 import { NomadVisaComparison } from "../components/NomadVisaComparison";
 import { BudgetComparison } from "../components/BudgetComparison";
 import { BudgetFilterPanel } from "../components/BudgetFilterPanel";
+import { TourismComparison } from "../components/TourismComparison";
+import { TourismWeightPanel } from "../components/TourismWeightPanel";
 import { PageHeroBanner } from "../components/PageHeroBanner";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useWeightState } from "../hooks/useWeightState";
+import { useTourismWeightState } from "../hooks/useTourismWeightState";
 import { useBudgetState } from "../hooks/useBudgetState";
 import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
 import {
@@ -34,14 +38,21 @@ export function ComparePage() {
   const [sortDirection, setSortDirection] = useState<"desc" | "asc" | null>(
     null,
   );
-  const compareMode: "countries" | "regions" | "nomadVisas" | "budget" =
+  const compareMode:
+    | "countries"
+    | "regions"
+    | "nomadVisas"
+    | "budget"
+    | "tourism" =
     searchParams.get("m") === "regions"
       ? "regions"
       : searchParams.get("m") === "nomadVisas"
         ? "nomadVisas"
         : searchParams.get("m") === "budget"
           ? "budget"
-          : "countries";
+          : searchParams.get("m") === "tourism"
+            ? "tourism"
+            : "countries";
 
   const [showWeights, setShowWeights] = useState(compareMode === "budget");
   const [sortTrigger, setSortTrigger] = useState(0);
@@ -53,6 +64,7 @@ export function ComparePage() {
   const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
 
   const ws = useWeightState();
+  const tws = useTourismWeightState();
   const langPrefix = useLangPrefix();
   const { countries } = useCountries();
   const validCountryCodes = useMemo(
@@ -175,9 +187,12 @@ export function ComparePage() {
   }, [countries.length, rawSelectedCodes, selectedCodes, setSearchParams]);
 
   const setCompareMode = (
-    mode: "countries" | "regions" | "nomadVisas" | "budget",
+    mode: "countries" | "regions" | "nomadVisas" | "budget" | "tourism",
   ) => {
     if (mode === "budget") {
+      setShowWeights(true);
+    }
+    if (mode === "tourism") {
       setShowWeights(true);
     }
     setSearchParams(
@@ -223,7 +238,8 @@ export function ComparePage() {
   const showParametersAction = true;
   const showSortAction =
     (compareMode === "countries" && countrySelectionCount > 1) ||
-    (compareMode === "budget" && selectedCodes.length > 1);
+    (compareMode === "budget" && selectedCodes.length > 1) ||
+    (compareMode === "tourism" && countrySelectionCount > 1);
   const mobileViewportMaxWidth = 1024;
   const actionGridClassName =
     showParametersAction && showSortAction
@@ -240,6 +256,20 @@ export function ComparePage() {
     sortDirection === "asc" ? "rotate-180" : "rotate-0";
 
   const renderParametersPanel = (mobile = false) => {
+    if (compareMode === "tourism") {
+      return (
+        <TourismWeightPanel
+          weights={tws.weights}
+          onChange={tws.handleWeightChange}
+          onReset={tws.handleReset}
+          weightsAreDefault={tws.weightsAreDefault}
+          budgetState={tws.budgetState}
+          onBudgetChange={tws.setBudgetField}
+          mobile={mobile}
+        />
+      );
+    }
+
     if (compareMode === "budget") {
       return <BudgetFilterPanel bs={bs} />;
     }
@@ -305,7 +335,9 @@ export function ComparePage() {
                 ? t("compare.regionTitle")
                 : compareMode === "budget"
                   ? t("compare.budgetTitle", "Budget Comparison")
-                  : t("compare.nomadVisaTitle")
+                  : compareMode === "tourism"
+                    ? t("compare.tourismTitle", "Tourism Comparison")
+                    : t("compare.nomadVisaTitle")
           }
           subtitle={
             compareMode === "countries"
@@ -320,7 +352,12 @@ export function ComparePage() {
                       "compare.budgetSubtitle",
                       "Compare monthly cost of living across countries side by side",
                     )
-                  : t("compare.nomadVisaSubtitle")
+                  : compareMode === "tourism"
+                    ? t(
+                        "compare.tourismSubtitle",
+                        "Compare tourism appeal across countries side by side",
+                      )
+                    : t("compare.nomadVisaSubtitle")
           }
         >
           <div className="hero-stats-row hero-banner-stats">
@@ -458,7 +495,7 @@ export function ComparePage() {
           }}
         >
           {/* Mode toggle + actions row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6 sm:sticky sm:top-14 sm:z-20 sm:bg-[#0F1114] sm:-mx-4 sm:px-4 sm:py-2 sm:border-b sm:border-[#1C1C1C]">
             {/* Compare mode toggle pills */}
             <div
               className="w-full rounded-md p-1 sm:w-auto"
@@ -470,7 +507,7 @@ export function ComparePage() {
               <div className="flex w-full gap-1">
                 <button
                   onClick={() => setCompareMode("countries")}
-                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "countries"
@@ -487,7 +524,7 @@ export function ComparePage() {
                 </button>
                 <button
                   onClick={() => setCompareMode("regions")}
-                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "regions"
@@ -504,7 +541,7 @@ export function ComparePage() {
                 </button>
                 <button
                   onClick={() => setCompareMode("nomadVisas")}
-                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "nomadVisas"
@@ -523,7 +560,7 @@ export function ComparePage() {
                 </button>
                 <button
                   onClick={() => setCompareMode("budget")}
-                  className="flex min-w-0 flex-1 basis-1/4 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
+                  className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
                       compareMode === "budget"
@@ -537,6 +574,23 @@ export function ComparePage() {
                 >
                   <Wallet size={14} className="shrink-0" />
                   {t("compare.budget", "Budget")}
+                </button>
+                <button
+                  onClick={() => setCompareMode("tourism")}
+                  className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
+                  style={{
+                    backgroundColor:
+                      compareMode === "tourism"
+                        ? "var(--color-accent)"
+                        : "transparent",
+                    color: compareMode === "tourism" ? "#FFFFFF" : "#8A8A8A",
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: "12px",
+                    fontWeight: compareMode === "tourism" ? 500 : 400,
+                  }}
+                >
+                  <Palmtree size={14} className="shrink-0" />
+                  {t("compare.tourism", "Tourism")}
                 </button>
               </div>
             </div>
@@ -800,6 +854,15 @@ export function ComparePage() {
                   onSelectedCodesChange={handleSelectedCodesChange}
                   sortTrigger={sortTrigger}
                   sortDirection={sortDirection}
+                />
+              ) : compareMode === "tourism" ? (
+                <TourismComparison
+                  countries={countries}
+                  selectedCodes={selectedCodes}
+                  onSelectedCodesChange={handleSelectedCodesChange}
+                  sortTrigger={sortTrigger}
+                  sortDirection={sortDirection}
+                  onSelectionCount={setCountrySelectionCount}
                 />
               ) : (
                 <CountryComparison

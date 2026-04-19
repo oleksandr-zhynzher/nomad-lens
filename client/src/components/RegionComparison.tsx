@@ -36,6 +36,15 @@ import {
   Coffee,
   Smartphone,
   Handshake,
+  Bed,
+  UtensilsCrossed,
+  Bus,
+  Music,
+  ShieldAlert,
+  Footprints,
+  ShoppingBag,
+  Camera,
+  Baby,
 } from "lucide-react";
 import type {
   CategoryKey,
@@ -103,6 +112,21 @@ const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
   workLifeBalance: Coffee,
   digitalReadiness: Smartphone,
   culturalFit: Handshake,
+  tourismSafety: Shield,
+  accommodationCost: Bed,
+  transportCost: Bus,
+  tourismInfrastructure: Wifi,
+  localFriendliness: Smile,
+  nightlifeEntertainment: Music,
+  touristScamSafety: ShieldAlert,
+  streetFoodCuisine: UtensilsCrossed,
+  beachWaterQuality: Waves,
+  walkabilityScenicBeauty: Footprints,
+  shoppingMarkets: ShoppingBag,
+  photographySpots: Camera,
+  familyFriendliness: Baby,
+  adventureSports: Mountain,
+  historicalSites: Castle,
 };
 
 interface RegionStats {
@@ -304,9 +328,8 @@ export function RegionComparison({
           {/* Sticky column header — own overflow wrapper, synced with body */}
           <div
             ref={headerRef}
-            className="sticky z-10"
+            className="sticky z-10 top-14 sm:top-[112px]"
             style={{
-              top: "56px",
               overflowX: "auto",
               scrollbarWidth: "none",
               backgroundColor: "#0F1114",

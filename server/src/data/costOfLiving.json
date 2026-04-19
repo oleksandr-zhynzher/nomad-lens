@@ -17,7 +17,9 @@
       "coworking": 200,
       "healthInsurance": 120,
       "totalBasic": 1270,
-      "totalComfortable": 1970
+      "totalComfortable": 1970,
+      "mealBudget": 14.0,
+      "mealMidRange": 28.0
     },
     {
       "code": "AE",
@@ -32,7 +34,9 @@
       "coworking": 280,
       "healthInsurance": 150,
       "totalBasic": 1710,
-      "totalComfortable": 2820
+      "totalComfortable": 2820,
+      "mealBudget": 10.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "AF",
@@ -47,7 +51,9 @@
       "coworking": null,
       "healthInsurance": 60,
       "totalBasic": 351,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 2.5,
+      "mealMidRange": 6.0
     },
     {
       "code": "AG",
@@ -62,7 +68,9 @@
       "coworking": null,
       "healthInsurance": 65,
       "totalBasic": 845,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 10.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "AL",
@@ -77,7 +85,9 @@
       "coworking": 90,
       "healthInsurance": 55,
       "totalBasic": 585,
-      "totalComfortable": 915
+      "totalComfortable": 915,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "AM",
@@ -92,7 +102,9 @@
       "coworking": 80,
       "healthInsurance": 50,
       "totalBasic": 570,
-      "totalComfortable": 900
+      "totalComfortable": 900,
+      "mealBudget": 5.0,
+      "mealMidRange": 13.0
     },
     {
       "code": "AO",
@@ -107,7 +119,9 @@
       "coworking": null,
       "healthInsurance": 35,
       "totalBasic": 610,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "AR",
@@ -115,14 +129,16 @@
       "rentSmallerCity": 240,
       "rent2br": 460,
       "rent3br": 620,
-      "groceries": 165,
-      "dining": 50,
+      "groceries": 175,
+      "dining": 55,
       "transport": 15,
       "utilities": 60,
       "coworking": 80,
       "healthInsurance": 55,
-      "totalBasic": 480,
-      "totalComfortable": 775
+      "totalBasic": 490,
+      "totalComfortable": 790,
+      "mealBudget": 6.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "AS",
@@ -137,7 +153,9 @@
       "coworking": null,
       "healthInsurance": 80,
       "totalBasic": 1010,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 12.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "AT",
@@ -152,7 +170,9 @@
       "coworking": 220,
       "healthInsurance": 130,
       "totalBasic": 1415,
-      "totalComfortable": 2175
+      "totalComfortable": 2175,
+      "mealBudget": 14.0,
+      "mealMidRange": 30.0
     },
     {
       "code": "AU",
@@ -167,7 +187,9 @@
       "coworking": 280,
       "healthInsurance": 170,
       "totalBasic": 1871,
-      "totalComfortable": 2805
+      "totalComfortable": 2805,
+      "mealBudget": 18.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "AW",
@@ -182,7 +204,9 @@
       "coworking": 100,
       "healthInsurance": 70,
       "totalBasic": 895,
-      "totalComfortable": 1365
+      "totalComfortable": 1365,
+      "mealBudget": 12.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "AZ",
@@ -197,7 +221,9 @@
       "coworking": 90,
       "healthInsurance": 50,
       "totalBasic": 590,
-      "totalComfortable": 925
+      "totalComfortable": 925,
+      "mealBudget": 5.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "BA",
@@ -212,7 +238,9 @@
       "coworking": 80,
       "healthInsurance": 50,
       "totalBasic": 565,
-      "totalComfortable": 860
+      "totalComfortable": 860,
+      "mealBudget": 5.5,
+      "mealMidRange": 12.0
     },
     {
       "code": "BB",
@@ -227,7 +255,9 @@
       "coworking": 120,
       "healthInsurance": 80,
       "totalBasic": 870,
-      "totalComfortable": 1350
+      "totalComfortable": 1350,
+      "mealBudget": 12.0,
+      "mealMidRange": 28.0
     },
     {
       "code": "BD",
@@ -236,13 +266,15 @@
       "rent2br": 270,
       "rent3br": 370,
       "groceries": 100,
-      "dining": 18,
+      "dining": 25,
       "transport": 8,
       "utilities": 35,
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 273,
-      "totalComfortable": 446
+      "totalComfortable": 453,
+      "mealBudget": 2.0,
+      "mealMidRange": 6.0
     },
     {
       "code": "BE",
@@ -257,7 +289,9 @@
       "coworking": 230,
       "healthInsurance": 135,
       "totalBasic": 1435,
-      "totalComfortable": 2240
+      "totalComfortable": 2240,
+      "mealBudget": 18.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "BF",
@@ -266,28 +300,32 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 100,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": 30,
       "healthInsurance": 18,
-      "totalBasic": 251,
-      "totalComfortable": 394
+      "totalBasic": 253,
+      "totalComfortable": 399,
+      "mealBudget": 2.5,
+      "mealMidRange": 7.0
     },
     {
       "code": "BG",
-      "rentMajorCity": 724,
+      "rentMajorCity": 600,
       "rentSmallerCity": 410,
-      "rent2br": 594,
-      "rent3br": 734,
+      "rent2br": 656,
+      "rent3br": 884,
       "groceries": 230,
-      "dining": 133,
+      "dining": 100,
       "transport": 28,
-      "utilities": 159,
+      "utilities": 130,
       "coworking": 90,
       "healthInsurance": 65,
-      "totalBasic": 827,
-      "totalComfortable": 1429
+      "totalBasic": 798,
+      "totalComfortable": 1243,
+      "mealBudget": 7.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "BH",
@@ -302,7 +340,9 @@
       "coworking": 150,
       "healthInsurance": 90,
       "totalBasic": 940,
-      "totalComfortable": 1500
+      "totalComfortable": 1500,
+      "mealBudget": 6.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "BI",
@@ -311,13 +351,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 90,
-      "dining": 12,
-      "transport": 5,
+      "dining": 18,
+      "transport": 8,
       "utilities": 20,
       "coworking": null,
       "healthInsurance": 15,
-      "totalBasic": 235,
-      "totalComfortable": null
+      "totalBasic": 238,
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "BJ",
@@ -326,13 +368,15 @@
       "rent2br": 280,
       "rent3br": 380,
       "groceries": 100,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": 30,
       "healthInsurance": 18,
-      "totalBasic": 271,
-      "totalComfortable": 414
+      "totalBasic": 273,
+      "totalComfortable": 419,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "BM",
@@ -347,7 +391,9 @@
       "coworking": 280,
       "healthInsurance": 120,
       "totalBasic": 3625,
-      "totalComfortable": 5976
+      "totalComfortable": 5976,
+      "mealBudget": 25.0,
+      "mealMidRange": 50.0
     },
     {
       "code": "BN",
@@ -362,7 +408,9 @@
       "coworking": null,
       "healthInsurance": 50,
       "totalBasic": 670,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "BO",
@@ -377,7 +425,9 @@
       "coworking": 50,
       "healthInsurance": 35,
       "totalBasic": 355,
-      "totalComfortable": 580
+      "totalComfortable": 580,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "BR",
@@ -387,12 +437,14 @@
       "rent3br": 715,
       "groceries": 195,
       "dining": 60,
-      "transport": 25,
+      "transport": 38,
       "utilities": 90,
       "coworking": 100,
       "healthInsurance": 65,
-      "totalBasic": 590,
-      "totalComfortable": 935
+      "totalBasic": 603,
+      "totalComfortable": 948,
+      "mealBudget": 5.5,
+      "mealMidRange": 15.0
     },
     {
       "code": "BS",
@@ -407,7 +459,9 @@
       "coworking": 150,
       "healthInsurance": 100,
       "totalBasic": 1085,
-      "totalComfortable": 1655
+      "totalComfortable": 1655,
+      "mealBudget": 15.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "BT",
@@ -422,7 +476,9 @@
       "coworking": null,
       "healthInsurance": 50,
       "totalBasic": 421,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "BW",
@@ -437,7 +493,9 @@
       "coworking": 70,
       "healthInsurance": 45,
       "totalBasic": 520,
-      "totalComfortable": 805
+      "totalComfortable": 805,
+      "mealBudget": 5.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "BY",
@@ -452,7 +510,9 @@
       "coworking": 70,
       "healthInsurance": 40,
       "totalBasic": 462,
-      "totalComfortable": 737
+      "totalComfortable": 737,
+      "mealBudget": 6.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "BZ",
@@ -467,7 +527,9 @@
       "coworking": 80,
       "healthInsurance": 55,
       "totalBasic": 605,
-      "totalComfortable": 945
+      "totalComfortable": 945,
+      "mealBudget": 7.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "CA",
@@ -482,7 +544,9 @@
       "coworking": 270,
       "healthInsurance": 170,
       "totalBasic": 1960,
-      "totalComfortable": 2970
+      "totalComfortable": 2970,
+      "mealBudget": 18.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "CD",
@@ -497,7 +561,9 @@
       "coworking": null,
       "healthInsurance": 25,
       "totalBasic": 410,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "CF",
@@ -512,7 +578,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 298,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "CG",
@@ -527,7 +595,9 @@
       "coworking": null,
       "healthInsurance": 30,
       "totalBasic": 497,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "CH",
@@ -542,7 +612,9 @@
       "coworking": 380,
       "healthInsurance": 90,
       "totalBasic": 2532,
-      "totalComfortable": 4417
+      "totalComfortable": 4417,
+      "mealBudget": 32.0,
+      "mealMidRange": 55.0
     },
     {
       "code": "CI",
@@ -557,7 +629,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 375,
-      "totalComfortable": 590
+      "totalComfortable": 590,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "CL",
@@ -572,7 +646,9 @@
       "coworking": 120,
       "healthInsurance": 75,
       "totalBasic": 765,
-      "totalComfortable": 1210
+      "totalComfortable": 1210,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "CM",
@@ -587,7 +663,9 @@
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 308,
-      "totalComfortable": 493
+      "totalComfortable": 493,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "CN",
@@ -602,7 +680,9 @@
       "coworking": 120,
       "healthInsurance": 70,
       "totalBasic": 725,
-      "totalComfortable": 1240
+      "totalComfortable": 1240,
+      "mealBudget": 4.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "CO",
@@ -613,11 +693,13 @@
       "groceries": 200,
       "dining": 58,
       "transport": 39,
-      "utilities": 111,
+      "utilities": 80,
       "coworking": 110,
       "healthInsurance": 70,
-      "totalBasic": 650,
-      "totalComfortable": 973
+      "totalBasic": 619,
+      "totalComfortable": 942,
+      "mealBudget": 4.0,
+      "mealMidRange": 11.0
     },
     {
       "code": "CR",
@@ -626,13 +708,15 @@
       "rent2br": 725,
       "rent3br": 980,
       "groceries": 250,
-      "dining": 80,
+      "dining": 65,
       "transport": 25,
       "utilities": 80,
       "coworking": 110,
       "healthInsurance": 80,
       "totalBasic": 735,
-      "totalComfortable": 1175
+      "totalComfortable": 1160,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "CU",
@@ -647,7 +731,9 @@
       "coworking": null,
       "healthInsurance": 40,
       "totalBasic": 430,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "CV",
@@ -662,7 +748,9 @@
       "coworking": null,
       "healthInsurance": 30,
       "totalBasic": 462,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "CW",
@@ -677,7 +765,9 @@
       "coworking": 90,
       "healthInsurance": 65,
       "totalBasic": 850,
-      "totalComfortable": 1280
+      "totalComfortable": 1280,
+      "mealBudget": 10.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "CY",
@@ -692,7 +782,9 @@
       "coworking": 160,
       "healthInsurance": 95,
       "totalBasic": 1035,
-      "totalComfortable": 1620
+      "totalComfortable": 1620,
+      "mealBudget": 12.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "CZ",
@@ -703,11 +795,13 @@
       "groceries": 280,
       "dining": 102,
       "transport": 23,
-      "utilities": 310,
+      "utilities": 240,
       "coworking": 160,
       "healthInsurance": 95,
-      "totalBasic": 1223,
-      "totalComfortable": 1715
+      "totalBasic": 1153,
+      "totalComfortable": 1645,
+      "mealBudget": 9.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "DE",
@@ -722,7 +816,9 @@
       "coworking": 230,
       "healthInsurance": 140,
       "totalBasic": 1514,
-      "totalComfortable": 2287
+      "totalComfortable": 2287,
+      "mealBudget": 16.5,
+      "mealMidRange": 36.0
     },
     {
       "code": "DJ",
@@ -737,7 +833,9 @@
       "coworking": null,
       "healthInsurance": 30,
       "totalBasic": 527,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 6.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "DK",
@@ -752,7 +850,9 @@
       "coworking": 280,
       "healthInsurance": 150,
       "totalBasic": 1715,
-      "totalComfortable": 2755
+      "totalComfortable": 2755,
+      "mealBudget": 24.0,
+      "mealMidRange": 43.0
     },
     {
       "code": "DM",
@@ -767,7 +867,9 @@
       "coworking": null,
       "healthInsurance": 50,
       "totalBasic": 643,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "DO",
@@ -782,7 +884,9 @@
       "coworking": 90,
       "healthInsurance": 60,
       "totalBasic": 605,
-      "totalComfortable": 960
+      "totalComfortable": 960,
+      "mealBudget": 5.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "DZ",
@@ -797,7 +901,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 335,
-      "totalComfortable": 530
+      "totalComfortable": 530,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "EC",
@@ -812,7 +918,9 @@
       "coworking": 90,
       "healthInsurance": 60,
       "totalBasic": 568,
-      "totalComfortable": 888
+      "totalComfortable": 888,
+      "mealBudget": 4.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "EE",
@@ -823,11 +931,13 @@
       "groceries": 280,
       "dining": 110,
       "transport": 30,
-      "utilities": 220,
+      "utilities": 180,
       "coworking": 160,
       "healthInsurance": 90,
-      "totalBasic": 1030,
-      "totalComfortable": 1590
+      "totalBasic": 990,
+      "totalComfortable": 1550,
+      "mealBudget": 10.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "EG",
@@ -836,13 +946,15 @@
       "rent2br": 255,
       "rent3br": 350,
       "groceries": 110,
-      "dining": 20,
+      "dining": 40,
       "transport": 10,
-      "utilities": 40,
+      "utilities": 28,
       "coworking": 50,
       "healthInsurance": 30,
-      "totalBasic": 290,
-      "totalComfortable": 460
+      "totalBasic": 278,
+      "totalComfortable": 468,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "ER",
@@ -851,13 +963,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 90,
-      "dining": 12,
-      "transport": 5,
+      "dining": 18,
+      "transport": 8,
       "utilities": 20,
       "coworking": null,
       "healthInsurance": 15,
-      "totalBasic": 235,
-      "totalComfortable": null
+      "totalBasic": 238,
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "ES",
@@ -866,13 +980,15 @@
       "rent2br": 1355,
       "rent3br": 1835,
       "groceries": 320,
-      "dining": 196,
+      "dining": 170,
       "transport": 36,
       "utilities": 155,
       "coworking": 190,
       "healthInsurance": 115,
       "totalBasic": 1271,
-      "totalComfortable": 1997
+      "totalComfortable": 1971,
+      "mealBudget": 14.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "ET",
@@ -887,7 +1003,9 @@
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 303,
-      "totalComfortable": 488
+      "totalComfortable": 488,
+      "mealBudget": 2.5,
+      "mealMidRange": 7.0
     },
     {
       "code": "FI",
@@ -902,7 +1020,9 @@
       "coworking": 240,
       "healthInsurance": 135,
       "totalBasic": 1410,
-      "totalComfortable": 2255
+      "totalComfortable": 2255,
+      "mealBudget": 16.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "FJ",
@@ -917,7 +1037,9 @@
       "coworking": 70,
       "healthInsurance": 45,
       "totalBasic": 530,
-      "totalComfortable": 815
+      "totalComfortable": 815,
+      "mealBudget": 6.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "FM",
@@ -932,7 +1054,9 @@
       "coworking": null,
       "healthInsurance": 50,
       "totalBasic": 710,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "FO",
@@ -947,7 +1071,9 @@
       "coworking": null,
       "healthInsurance": 140,
       "totalBasic": 1440,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 20.0,
+      "mealMidRange": 40.0
     },
     {
       "code": "FR",
@@ -962,7 +1088,9 @@
       "coworking": 280,
       "healthInsurance": 80,
       "totalBasic": 1440,
-      "totalComfortable": 2670
+      "totalComfortable": 2670,
+      "mealBudget": 16.0,
+      "mealMidRange": 32.0
     },
     {
       "code": "GA",
@@ -977,7 +1105,9 @@
       "coworking": null,
       "healthInsurance": 40,
       "totalBasic": 635,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "GB",
@@ -992,7 +1122,9 @@
       "coworking": 280,
       "healthInsurance": 150,
       "totalBasic": 1943,
-      "totalComfortable": 2857
+      "totalComfortable": 2857,
+      "mealBudget": 17.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "GD",
@@ -1007,14 +1139,16 @@
       "coworking": null,
       "healthInsurance": 55,
       "totalBasic": 715,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 7.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "GE",
-      "rentMajorCity": 450,
+      "rentMajorCity": 520,
       "rentSmallerCity": 300,
-      "rent2br": 585,
-      "rent3br": 790,
+      "rent2br": 533,
+      "rent3br": 718,
       "groceries": 190,
       "dining": 50,
       "transport": 15,
@@ -1022,7 +1156,9 @@
       "coworking": 90,
       "healthInsurance": 55,
       "totalBasic": 585,
-      "totalComfortable": 930
+      "totalComfortable": 1000,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "GH",
@@ -1037,7 +1173,9 @@
       "coworking": 70,
       "healthInsurance": 40,
       "totalBasic": 440,
-      "totalComfortable": 715
+      "totalComfortable": 715,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "GI",
@@ -1052,7 +1190,9 @@
       "coworking": 250,
       "healthInsurance": 140,
       "totalBasic": 1750,
-      "totalComfortable": 2740
+      "totalComfortable": 2740,
+      "mealBudget": 15.0,
+      "mealMidRange": 30.0
     },
     {
       "code": "GL",
@@ -1067,7 +1207,9 @@
       "coworking": null,
       "healthInsurance": 150,
       "totalBasic": 1540,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 22.0,
+      "mealMidRange": 45.0
     },
     {
       "code": "GM",
@@ -1076,13 +1218,15 @@
       "rent2br": 280,
       "rent3br": 380,
       "groceries": 100,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": 30,
       "healthInsurance": 18,
-      "totalBasic": 271,
-      "totalComfortable": 414
+      "totalBasic": 273,
+      "totalComfortable": 419,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "GN",
@@ -1097,7 +1241,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 298,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "GQ",
@@ -1112,7 +1258,9 @@
       "coworking": null,
       "healthInsurance": 40,
       "totalBasic": 720,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 20.0
     },
     {
       "code": "GR",
@@ -1121,13 +1269,15 @@
       "rent2br": 855,
       "rent3br": 1155,
       "groceries": 290,
-      "dining": 130,
+      "dining": 110,
       "transport": 35,
       "utilities": 170,
       "coworking": 160,
       "healthInsurance": 100,
       "totalBasic": 945,
-      "totalComfortable": 1535
+      "totalComfortable": 1515,
+      "mealBudget": 12.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "GT",
@@ -1142,7 +1292,9 @@
       "coworking": 70,
       "healthInsurance": 45,
       "totalBasic": 480,
-      "totalComfortable": 775
+      "totalComfortable": 775,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "GU",
@@ -1157,7 +1309,9 @@
       "coworking": null,
       "healthInsurance": 110,
       "totalBasic": 1350,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 15.0,
+      "mealMidRange": 30.0
     },
     {
       "code": "GW",
@@ -1166,13 +1320,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 90,
-      "dining": 12,
-      "transport": 5,
+      "dining": 18,
+      "transport": 8,
       "utilities": 20,
       "coworking": null,
       "healthInsurance": 15,
-      "totalBasic": 235,
-      "totalComfortable": null
+      "totalBasic": 238,
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "GY",
@@ -1187,7 +1343,9 @@
       "coworking": 60,
       "healthInsurance": 40,
       "totalBasic": 465,
-      "totalComfortable": 735
+      "totalComfortable": 735,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "HK",
@@ -1202,7 +1360,9 @@
       "coworking": 320,
       "healthInsurance": 140,
       "totalBasic": 2135,
-      "totalComfortable": 3325
+      "totalComfortable": 3325,
+      "mealBudget": 8.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "HN",
@@ -1217,7 +1377,9 @@
       "coworking": 60,
       "healthInsurance": 40,
       "totalBasic": 447,
-      "totalComfortable": 712
+      "totalComfortable": 712,
+      "mealBudget": 4.5,
+      "mealMidRange": 10.0
     },
     {
       "code": "HR",
@@ -1228,11 +1390,13 @@
       "groceries": 280,
       "dining": 110,
       "transport": 35,
-      "utilities": 210,
+      "utilities": 170,
       "coworking": 150,
       "healthInsurance": 90,
-      "totalBasic": 1025,
-      "totalComfortable": 1575
+      "totalBasic": 985,
+      "totalComfortable": 1535,
+      "mealBudget": 10.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "HT",
@@ -1247,7 +1411,9 @@
       "coworking": null,
       "healthInsurance": 25,
       "totalBasic": 365,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "HU",
@@ -1258,26 +1424,30 @@
       "groceries": 240,
       "dining": 90,
       "transport": 25,
-      "utilities": 240,
+      "utilities": 190,
       "coworking": 130,
       "healthInsurance": 80,
-      "totalBasic": 925,
-      "totalComfortable": 1405
+      "totalBasic": 875,
+      "totalComfortable": 1355,
+      "mealBudget": 8.0,
+      "mealMidRange": 17.0
     },
     {
       "code": "ID",
-      "rentMajorCity": 380,
+      "rentMajorCity": 420,
       "rentSmallerCity": 220,
-      "rent2br": 465,
-      "rent3br": 630,
+      "rent2br": 416,
+      "rent3br": 560,
       "groceries": 155,
-      "dining": 30,
+      "dining": 36,
       "transport": 15,
       "utilities": 65,
       "coworking": 80,
       "healthInsurance": 50,
       "totalBasic": 455,
-      "totalComfortable": 775
+      "totalComfortable": 821,
+      "mealBudget": 2.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "IE",
@@ -1292,7 +1462,9 @@
       "coworking": 300,
       "healthInsurance": 155,
       "totalBasic": 2090,
-      "totalComfortable": 3235
+      "totalComfortable": 3235,
+      "mealBudget": 18.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "IL",
@@ -1307,7 +1479,9 @@
       "coworking": 250,
       "healthInsurance": 140,
       "totalBasic": 1745,
-      "totalComfortable": 2705
+      "totalComfortable": 2705,
+      "mealBudget": 26.0,
+      "mealMidRange": 42.0
     },
     {
       "code": "IM",
@@ -1322,7 +1496,9 @@
       "coworking": 200,
       "healthInsurance": 120,
       "totalBasic": 1340,
-      "totalComfortable": 2060
+      "totalComfortable": 2060,
+      "mealBudget": 16.0,
+      "mealMidRange": 32.0
     },
     {
       "code": "IN",
@@ -1331,13 +1507,15 @@
       "rent2br": 365,
       "rent3br": 495,
       "groceries": 135,
-      "dining": 25,
+      "dining": 38,
       "transport": 15,
       "utilities": 50,
       "coworking": 70,
       "healthInsurance": 35,
       "totalBasic": 370,
-      "totalComfortable": 630
+      "totalComfortable": 643,
+      "mealBudget": 2.5,
+      "mealMidRange": 8.0
     },
     {
       "code": "IQ",
@@ -1352,7 +1530,9 @@
       "coworking": 60,
       "healthInsurance": 35,
       "totalBasic": 392,
-      "totalComfortable": 632
+      "totalComfortable": 632,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "IR",
@@ -1367,7 +1547,9 @@
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 313,
-      "totalComfortable": 498
+      "totalComfortable": 498,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "IS",
@@ -1382,7 +1564,9 @@
       "coworking": 280,
       "healthInsurance": 160,
       "totalBasic": 1855,
-      "totalComfortable": 2975
+      "totalComfortable": 2975,
+      "mealBudget": 22.0,
+      "mealMidRange": 45.0
     },
     {
       "code": "IT",
@@ -1397,7 +1581,9 @@
       "coworking": 200,
       "healthInsurance": 115,
       "totalBasic": 1190,
-      "totalComfortable": 1925
+      "totalComfortable": 1925,
+      "mealBudget": 15.0,
+      "mealMidRange": 30.0
     },
     {
       "code": "JM",
@@ -1412,7 +1598,9 @@
       "coworking": 90,
       "healthInsurance": 60,
       "totalBasic": 625,
-      "totalComfortable": 980
+      "totalComfortable": 980,
+      "mealBudget": 6.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "JO",
@@ -1421,13 +1609,15 @@
       "rent2br": 585,
       "rent3br": 790,
       "groceries": 240,
-      "dining": 60,
+      "dining": 65,
       "transport": 25,
       "utilities": 90,
       "coworking": 120,
       "healthInsurance": 65,
       "totalBasic": 655,
-      "totalComfortable": 1050
+      "totalComfortable": 1055,
+      "mealBudget": 5.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "JP",
@@ -1435,14 +1625,16 @@
       "rentSmallerCity": 700,
       "rent2br": 871,
       "rent3br": 1369,
-      "groceries": 200,
+      "groceries": 290,
       "dining": 97,
       "transport": 74,
-      "utilities": 197,
+      "utilities": 155,
       "coworking": 160,
       "healthInsurance": 75,
-      "totalBasic": 1171,
-      "totalComfortable": 2025
+      "totalBasic": 1219,
+      "totalComfortable": 2073,
+      "mealBudget": 8.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "KE",
@@ -1451,13 +1643,15 @@
       "rent2br": 445,
       "rent3br": 600,
       "groceries": 150,
-      "dining": 35,
+      "dining": 40,
       "transport": 20,
       "utilities": 60,
       "coworking": 80,
       "healthInsurance": 45,
       "totalBasic": 450,
-      "totalComfortable": 740
+      "totalComfortable": 745,
+      "mealBudget": 3.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "KG",
@@ -1472,7 +1666,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 328,
-      "totalComfortable": 523
+      "totalComfortable": 523,
+      "mealBudget": 3.5,
+      "mealMidRange": 8.0
     },
     {
       "code": "KH",
@@ -1481,13 +1677,15 @@
       "rent2br": 465,
       "rent3br": 630,
       "groceries": 170,
-      "dining": 30,
+      "dining": 36,
       "transport": 15,
       "utilities": 60,
       "coworking": 80,
       "healthInsurance": 45,
       "totalBasic": 465,
-      "totalComfortable": 780
+      "totalComfortable": 786,
+      "mealBudget": 3.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "KI",
@@ -1502,7 +1700,9 @@
       "coworking": null,
       "healthInsurance": 40,
       "totalBasic": 605,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "KM",
@@ -1517,7 +1717,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 318,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "KN",
@@ -1532,7 +1734,9 @@
       "coworking": null,
       "healthInsurance": 65,
       "totalBasic": 835,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 20.0
     },
     {
       "code": "KP",
@@ -1547,7 +1751,9 @@
       "coworking": null,
       "healthInsurance": null,
       "totalBasic": null,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "KR",
@@ -1555,14 +1761,16 @@
       "rentSmallerCity": 500,
       "rent2br": 1000,
       "rent3br": 1375,
-      "groceries": 340,
+      "groceries": 290,
       "dining": 90,
       "transport": 40,
-      "utilities": 140,
+      "utilities": 120,
       "coworking": 170,
       "healthInsurance": 100,
-      "totalBasic": 1020,
-      "totalComfortable": 1630
+      "totalBasic": 950,
+      "totalComfortable": 1560,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "KW",
@@ -1577,7 +1785,9 @@
       "coworking": 200,
       "healthInsurance": 110,
       "totalBasic": 1160,
-      "totalComfortable": 1840
+      "totalComfortable": 1840,
+      "mealBudget": 6.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "KY",
@@ -1592,7 +1802,9 @@
       "coworking": 300,
       "healthInsurance": 220,
       "totalBasic": 2360,
-      "totalComfortable": 3680
+      "totalComfortable": 3680,
+      "mealBudget": 20.0,
+      "mealMidRange": 40.0
     },
     {
       "code": "KZ",
@@ -1607,7 +1819,9 @@
       "coworking": 80,
       "healthInsurance": 45,
       "totalBasic": 545,
-      "totalComfortable": 840
+      "totalComfortable": 840,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "LA",
@@ -1622,22 +1836,26 @@
       "coworking": 50,
       "healthInsurance": 35,
       "totalBasic": 375,
-      "totalComfortable": 605
+      "totalComfortable": 605,
+      "mealBudget": 2.5,
+      "mealMidRange": 8.0
     },
     {
       "code": "LB",
-      "rentMajorCity": 450,
+      "rentMajorCity": 400,
       "rentSmallerCity": 300,
-      "rent2br": 585,
-      "rent3br": 790,
+      "rent2br": 455,
+      "rent3br": 612,
       "groceries": 240,
-      "dining": 55,
+      "dining": 50,
       "transport": 20,
       "utilities": 80,
       "coworking": 100,
       "healthInsurance": 60,
       "totalBasic": 640,
-      "totalComfortable": 1005
+      "totalComfortable": 950,
+      "mealBudget": 6.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "LC",
@@ -1652,7 +1870,9 @@
       "coworking": null,
       "healthInsurance": 55,
       "totalBasic": 715,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "LI",
@@ -1667,7 +1887,9 @@
       "coworking": 330,
       "healthInsurance": 230,
       "totalBasic": 2420,
-      "totalComfortable": 3750
+      "totalComfortable": 3750,
+      "mealBudget": 30.0,
+      "mealMidRange": 50.0
     },
     {
       "code": "LK",
@@ -1676,13 +1898,15 @@
       "rent2br": 350,
       "rent3br": 475,
       "groceries": 130,
-      "dining": 25,
+      "dining": 30,
       "transport": 10,
       "utilities": 45,
       "coworking": 60,
       "healthInsurance": 35,
       "totalBasic": 355,
-      "totalComfortable": 585
+      "totalComfortable": 590,
+      "mealBudget": 2.5,
+      "mealMidRange": 8.0
     },
     {
       "code": "LR",
@@ -1697,7 +1921,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 298,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "LS",
@@ -1712,7 +1938,9 @@
       "coworking": 30,
       "healthInsurance": 20,
       "totalBasic": 298,
-      "totalComfortable": 468
+      "totalComfortable": 468,
+      "mealBudget": 3.5,
+      "mealMidRange": 8.0
     },
     {
       "code": "LT",
@@ -1723,11 +1951,13 @@
       "groceries": 260,
       "dining": 95,
       "transport": 25,
-      "utilities": 200,
+      "utilities": 165,
       "coworking": 140,
       "healthInsurance": 80,
-      "totalBasic": 905,
-      "totalComfortable": 1400
+      "totalBasic": 870,
+      "totalComfortable": 1365,
+      "mealBudget": 9.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "LU",
@@ -1742,7 +1972,9 @@
       "coworking": 300,
       "healthInsurance": 150,
       "totalBasic": 2040,
-      "totalComfortable": 3150
+      "totalComfortable": 3150,
+      "mealBudget": 18.0,
+      "mealMidRange": 38.0
     },
     {
       "code": "LV",
@@ -1753,11 +1985,13 @@
       "groceries": 250,
       "dining": 90,
       "transport": 25,
-      "utilities": 190,
+      "utilities": 155,
       "coworking": 130,
       "healthInsurance": 80,
-      "totalBasic": 865,
-      "totalComfortable": 1345
+      "totalBasic": 830,
+      "totalComfortable": 1310,
+      "mealBudget": 10.0,
+      "mealMidRange": 20.0
     },
     {
       "code": "LY",
@@ -1772,7 +2006,9 @@
       "coworking": null,
       "healthInsurance": 25,
       "totalBasic": 323,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "MA",
@@ -1781,13 +2017,15 @@
       "rent2br": 450,
       "rent3br": 610,
       "groceries": 160,
-      "dining": 40,
+      "dining": 45,
       "transport": 15,
       "utilities": 60,
       "coworking": 80,
       "healthInsurance": 45,
       "totalBasic": 465,
-      "totalComfortable": 750
+      "totalComfortable": 755,
+      "mealBudget": 3.5,
+      "mealMidRange": 10.0
     },
     {
       "code": "MC",
@@ -1802,7 +2040,9 @@
       "coworking": 400,
       "healthInsurance": 280,
       "totalBasic": 3830,
-      "totalComfortable": 5610
+      "totalComfortable": 5610,
+      "mealBudget": 25.0,
+      "mealMidRange": 50.0
     },
     {
       "code": "MD",
@@ -1817,7 +2057,9 @@
       "coworking": 60,
       "healthInsurance": 35,
       "totalBasic": 410,
-      "totalComfortable": 645
+      "totalComfortable": 645,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "ME",
@@ -1832,7 +2074,9 @@
       "coworking": 120,
       "healthInsurance": 70,
       "totalBasic": 730,
-      "totalComfortable": 1150
+      "totalComfortable": 1150,
+      "mealBudget": 7.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "MF",
@@ -1847,7 +2091,9 @@
       "coworking": null,
       "healthInsurance": 90,
       "totalBasic": 1190,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 15.0,
+      "mealMidRange": 30.0
     },
     {
       "code": "MG",
@@ -1856,13 +2102,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 90,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": 30,
       "healthInsurance": 20,
-      "totalBasic": 241,
-      "totalComfortable": 386
+      "totalBasic": 243,
+      "totalComfortable": 391,
+      "mealBudget": 2.5,
+      "mealMidRange": 7.0
     },
     {
       "code": "MH",
@@ -1877,7 +2125,9 @@
       "coworking": null,
       "healthInsurance": 60,
       "totalBasic": 850,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "MK",
@@ -1892,7 +2142,9 @@
       "coworking": 80,
       "healthInsurance": 50,
       "totalBasic": 545,
-      "totalComfortable": 835
+      "totalComfortable": 835,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "ML",
@@ -1901,13 +2153,15 @@
       "rent2br": 280,
       "rent3br": 380,
       "groceries": 100,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": 30,
       "healthInsurance": 18,
-      "totalBasic": 271,
-      "totalComfortable": 414
+      "totalBasic": 273,
+      "totalComfortable": 419,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "MM",
@@ -1922,7 +2176,9 @@
       "coworking": null,
       "healthInsurance": 30,
       "totalBasic": 313,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 2.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "MN",
@@ -1937,7 +2193,9 @@
       "coworking": 70,
       "healthInsurance": 40,
       "totalBasic": 460,
-      "totalComfortable": 725
+      "totalComfortable": 725,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "MO",
@@ -1952,7 +2210,9 @@
       "coworking": 200,
       "healthInsurance": 100,
       "totalBasic": 1330,
-      "totalComfortable": 2080
+      "totalComfortable": 2080,
+      "mealBudget": 7.0,
+      "mealMidRange": 20.0
     },
     {
       "code": "MP",
@@ -1967,7 +2227,9 @@
       "coworking": null,
       "healthInsurance": 90,
       "totalBasic": 1135,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 12.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "MR",
@@ -1982,7 +2244,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 313,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 9.0
     },
     {
       "code": "MT",
@@ -1997,7 +2261,9 @@
       "coworking": 180,
       "healthInsurance": 100,
       "totalBasic": 1110,
-      "totalComfortable": 1760
+      "totalComfortable": 1760,
+      "mealBudget": 13.0,
+      "mealMidRange": 28.0
     },
     {
       "code": "MU",
@@ -2012,7 +2278,9 @@
       "coworking": 90,
       "healthInsurance": 55,
       "totalBasic": 655,
-      "totalComfortable": 1000
+      "totalComfortable": 1000,
+      "mealBudget": 6.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "MV",
@@ -2027,7 +2295,9 @@
       "coworking": 80,
       "healthInsurance": 50,
       "totalBasic": 760,
-      "totalComfortable": 1150
+      "totalComfortable": 1150,
+      "mealBudget": 6.0,
+      "mealMidRange": 20.0
     },
     {
       "code": "MW",
@@ -2036,13 +2306,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 90,
-      "dining": 12,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": 30,
       "healthInsurance": 18,
-      "totalBasic": 241,
-      "totalComfortable": 381
+      "totalBasic": 243,
+      "totalComfortable": 389,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "MX",
@@ -2050,14 +2322,16 @@
       "rentSmallerCity": 385,
       "rent2br": 785,
       "rent3br": 1070,
-      "groceries": 240,
-      "dining": 131,
+      "groceries": 225,
+      "dining": 100,
       "transport": 33,
       "utilities": 74,
       "coworking": 110,
       "healthInsurance": 75,
-      "totalBasic": 732,
-      "totalComfortable": 1293
+      "totalBasic": 717,
+      "totalComfortable": 1247,
+      "mealBudget": 10.0,
+      "mealMidRange": 20.0
     },
     {
       "code": "MY",
@@ -2072,7 +2346,9 @@
       "coworking": 100,
       "healthInsurance": 55,
       "totalBasic": 575,
-      "totalComfortable": 920
+      "totalComfortable": 920,
+      "mealBudget": 3.5,
+      "mealMidRange": 10.0
     },
     {
       "code": "MZ",
@@ -2087,7 +2363,9 @@
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 355,
-      "totalComfortable": 560
+      "totalComfortable": 560,
+      "mealBudget": 3.5,
+      "mealMidRange": 8.0
     },
     {
       "code": "NA",
@@ -2102,7 +2380,9 @@
       "coworking": 60,
       "healthInsurance": 40,
       "totalBasic": 465,
-      "totalComfortable": 720
+      "totalComfortable": 720,
+      "mealBudget": 5.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "NC",
@@ -2117,7 +2397,9 @@
       "coworking": null,
       "healthInsurance": 90,
       "totalBasic": 1195,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 16.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "NE",
@@ -2126,13 +2408,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 90,
-      "dining": 12,
-      "transport": 5,
+      "dining": 18,
+      "transport": 8,
       "utilities": 20,
       "coworking": null,
       "healthInsurance": 15,
-      "totalBasic": 235,
-      "totalComfortable": null
+      "totalBasic": 238,
+      "totalComfortable": null,
+      "mealBudget": 2.5,
+      "mealMidRange": 6.0
     },
     {
       "code": "NG",
@@ -2147,7 +2431,9 @@
       "coworking": 70,
       "healthInsurance": 40,
       "totalBasic": 370,
-      "totalComfortable": 625
+      "totalComfortable": 625,
+      "mealBudget": 3.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "NI",
@@ -2162,7 +2448,9 @@
       "coworking": 50,
       "healthInsurance": 35,
       "totalBasic": 405,
-      "totalComfortable": 640
+      "totalComfortable": 640,
+      "mealBudget": 4.0,
+      "mealMidRange": 9.0
     },
     {
       "code": "NL",
@@ -2177,7 +2465,9 @@
       "coworking": 300,
       "healthInsurance": 80,
       "totalBasic": 2219,
-      "totalComfortable": 3781
+      "totalComfortable": 3781,
+      "mealBudget": 17.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "NO",
@@ -2192,7 +2482,9 @@
       "coworking": 300,
       "healthInsurance": 160,
       "totalBasic": 1820,
-      "totalComfortable": 2910
+      "totalComfortable": 2910,
+      "mealBudget": 24.0,
+      "mealMidRange": 45.0
     },
     {
       "code": "NP",
@@ -2201,13 +2493,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 100,
-      "dining": 20,
+      "dining": 28,
       "transport": 8,
       "utilities": 35,
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 263,
-      "totalComfortable": 428
+      "totalComfortable": 436,
+      "mealBudget": 2.5,
+      "mealMidRange": 7.0
     },
     {
       "code": "NR",
@@ -2222,7 +2516,9 @@
       "coworking": null,
       "healthInsurance": 50,
       "totalBasic": 745,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 8.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "NZ",
@@ -2237,7 +2533,9 @@
       "coworking": 260,
       "healthInsurance": 155,
       "totalBasic": 1645,
-      "totalComfortable": 2540
+      "totalComfortable": 2540,
+      "mealBudget": 14.0,
+      "mealMidRange": 30.0
     },
     {
       "code": "OM",
@@ -2252,7 +2550,9 @@
       "coworking": 150,
       "healthInsurance": 80,
       "totalBasic": 855,
-      "totalComfortable": 1345
+      "totalComfortable": 1345,
+      "mealBudget": 6.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "PA",
@@ -2267,22 +2567,26 @@
       "coworking": 130,
       "healthInsurance": 85,
       "totalBasic": 870,
-      "totalComfortable": 1395
+      "totalComfortable": 1395,
+      "mealBudget": 7.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "PE",
-      "rentMajorCity": 656,
+      "rentMajorCity": 530,
       "rentSmallerCity": 320,
-      "rent2br": 486,
-      "rent3br": 828,
+      "rent2br": 552,
+      "rent3br": 744,
       "groceries": 162,
-      "dining": 49,
+      "dining": 55,
       "transport": 21,
-      "utilities": 84,
+      "utilities": 75,
       "coworking": 65,
       "healthInsurance": 65,
-      "totalBasic": 587,
-      "totalComfortable": 1102
+      "totalBasic": 578,
+      "totalComfortable": 973,
+      "mealBudget": 4.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "PF",
@@ -2297,7 +2601,9 @@
       "coworking": null,
       "healthInsurance": 100,
       "totalBasic": 1290,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 16.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "PG",
@@ -2312,22 +2618,26 @@
       "coworking": null,
       "healthInsurance": 35,
       "totalBasic": 502,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "PH",
-      "rentMajorCity": 562,
-      "rentSmallerCity": 430,
-      "rent2br": 442,
-      "rent3br": 681,
-      "groceries": 85,
-      "dining": 71,
-      "transport": 14,
-      "utilities": 140,
+      "rentMajorCity": 380,
+      "rentSmallerCity": 220,
+      "rent2br": 390,
+      "rent3br": 525,
+      "groceries": 130,
+      "dining": 50,
+      "transport": 20,
+      "utilities": 100,
       "coworking": 65,
       "healthInsurance": 65,
-      "totalBasic": 669,
-      "totalComfortable": 1002
+      "totalBasic": 470,
+      "totalComfortable": 810,
+      "mealBudget": 3.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "PK",
@@ -2336,13 +2646,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 105,
-      "dining": 18,
+      "dining": 28,
       "transport": 8,
       "utilities": 35,
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 268,
-      "totalComfortable": 431
+      "totalComfortable": 441,
+      "mealBudget": 2.0,
+      "mealMidRange": 6.0
     },
     {
       "code": "PL",
@@ -2353,11 +2665,13 @@
       "groceries": 260,
       "dining": 100,
       "transport": 25,
-      "utilities": 250,
+      "utilities": 210,
       "coworking": 140,
       "healthInsurance": 85,
-      "totalBasic": 1015,
-      "totalComfortable": 1540
+      "totalBasic": 975,
+      "totalComfortable": 1500,
+      "mealBudget": 8.0,
+      "mealMidRange": 17.0
     },
     {
       "code": "PR",
@@ -2372,7 +2686,9 @@
       "coworking": 200,
       "healthInsurance": 140,
       "totalBasic": 1460,
-      "totalComfortable": 2280
+      "totalComfortable": 2280,
+      "mealBudget": 12.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "PS",
@@ -2387,7 +2703,9 @@
       "coworking": 50,
       "healthInsurance": 35,
       "totalBasic": 455,
-      "totalComfortable": 675
+      "totalComfortable": 675,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "PT",
@@ -2398,11 +2716,13 @@
       "groceries": 300,
       "dining": 158,
       "transport": 44,
-      "utilities": 168,
+      "utilities": 148,
       "coworking": 170,
       "healthInsurance": 110,
-      "totalBasic": 1297,
-      "totalComfortable": 1940
+      "totalBasic": 1277,
+      "totalComfortable": 1920,
+      "mealBudget": 13.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "PW",
@@ -2417,7 +2737,9 @@
       "coworking": null,
       "healthInsurance": 70,
       "totalBasic": 965,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 10.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "PY",
@@ -2432,7 +2754,9 @@
       "coworking": 60,
       "healthInsurance": 40,
       "totalBasic": 402,
-      "totalComfortable": 647
+      "totalComfortable": 647,
+      "mealBudget": 4.5,
+      "mealMidRange": 11.0
     },
     {
       "code": "QA",
@@ -2447,7 +2771,9 @@
       "coworking": 250,
       "healthInsurance": 130,
       "totalBasic": 1500,
-      "totalComfortable": 2440
+      "totalComfortable": 2440,
+      "mealBudget": 8.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "RO",
@@ -2458,11 +2784,13 @@
       "groceries": 220,
       "dining": 80,
       "transport": 20,
-      "utilities": 200,
+      "utilities": 165,
       "coworking": 120,
       "healthInsurance": 75,
-      "totalBasic": 800,
-      "totalComfortable": 1235
+      "totalBasic": 765,
+      "totalComfortable": 1200,
+      "mealBudget": 7.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "RS",
@@ -2473,11 +2801,13 @@
       "groceries": 210,
       "dining": 70,
       "transport": 22,
-      "utilities": 180,
+      "utilities": 140,
       "coworking": 110,
       "healthInsurance": 70,
-      "totalBasic": 732,
-      "totalComfortable": 1142
+      "totalBasic": 692,
+      "totalComfortable": 1102,
+      "mealBudget": 6.5,
+      "mealMidRange": 14.0
     },
     {
       "code": "RU",
@@ -2486,13 +2816,15 @@
       "rent2br": 635,
       "rent3br": 860,
       "groceries": 220,
-      "dining": 50,
+      "dining": 60,
       "transport": 15,
       "utilities": 100,
       "coworking": 100,
       "healthInsurance": 50,
       "totalBasic": 655,
-      "totalComfortable": 1035
+      "totalComfortable": 1045,
+      "mealBudget": 7.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "RW",
@@ -2507,7 +2839,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 355,
-      "totalComfortable": 580
+      "totalComfortable": 580,
+      "mealBudget": 3.5,
+      "mealMidRange": 10.0
     },
     {
       "code": "SA",
@@ -2522,7 +2856,9 @@
       "coworking": 180,
       "healthInsurance": 100,
       "totalBasic": 1010,
-      "totalComfortable": 1640
+      "totalComfortable": 1640,
+      "mealBudget": 8.0,
+      "mealMidRange": 20.0
     },
     {
       "code": "SB",
@@ -2537,7 +2873,9 @@
       "coworking": null,
       "healthInsurance": 35,
       "totalBasic": 567,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "SC",
@@ -2552,7 +2890,9 @@
       "coworking": 100,
       "healthInsurance": 65,
       "totalBasic": 855,
-      "totalComfortable": 1290
+      "totalComfortable": 1290,
+      "mealBudget": 12.0,
+      "mealMidRange": 28.0
     },
     {
       "code": "SD",
@@ -2561,13 +2901,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 100,
-      "dining": 15,
+      "dining": 18,
       "transport": 8,
       "utilities": 30,
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 258,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "SE",
@@ -2582,7 +2924,9 @@
       "coworking": 260,
       "healthInsurance": 140,
       "totalBasic": 1525,
-      "totalComfortable": 2455
+      "totalComfortable": 2455,
+      "mealBudget": 16.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "SG",
@@ -2597,7 +2941,9 @@
       "coworking": 300,
       "healthInsurance": 140,
       "totalBasic": 2200,
-      "totalComfortable": 3390
+      "totalComfortable": 3390,
+      "mealBudget": 7.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "SI",
@@ -2612,7 +2958,9 @@
       "coworking": 170,
       "healthInsurance": 95,
       "totalBasic": 1115,
-      "totalComfortable": 1710
+      "totalComfortable": 1710,
+      "mealBudget": 11.0,
+      "mealMidRange": 25.0
     },
     {
       "code": "SK",
@@ -2623,11 +2971,13 @@
       "groceries": 260,
       "dining": 95,
       "transport": 25,
-      "utilities": 250,
+      "utilities": 200,
       "coworking": 140,
       "healthInsurance": 85,
-      "totalBasic": 1005,
-      "totalComfortable": 1505
+      "totalBasic": 955,
+      "totalComfortable": 1455,
+      "mealBudget": 8.0,
+      "mealMidRange": 18.0
     },
     {
       "code": "SL",
@@ -2642,7 +2992,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 298,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "SM",
@@ -2657,7 +3009,9 @@
       "coworking": 160,
       "healthInsurance": 100,
       "totalBasic": 1045,
-      "totalComfortable": 1625
+      "totalComfortable": 1625,
+      "mealBudget": 14.0,
+      "mealMidRange": 28.0
     },
     {
       "code": "SN",
@@ -2672,7 +3026,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 375,
-      "totalComfortable": 590
+      "totalComfortable": 590,
+      "mealBudget": 3.5,
+      "mealMidRange": 10.0
     },
     {
       "code": "SO",
@@ -2681,13 +3037,15 @@
       "rent2br": 315,
       "rent3br": 420,
       "groceries": 100,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": null,
       "healthInsurance": 18,
-      "totalBasic": 281,
-      "totalComfortable": null
+      "totalBasic": 283,
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "SR",
@@ -2702,7 +3060,9 @@
       "coworking": 60,
       "healthInsurance": 40,
       "totalBasic": 485,
-      "totalComfortable": 745
+      "totalComfortable": 745,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "SS",
@@ -2717,7 +3077,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 343,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "ST",
@@ -2732,7 +3094,9 @@
       "coworking": null,
       "healthInsurance": 25,
       "totalBasic": 400,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "SV",
@@ -2747,7 +3111,9 @@
       "coworking": 70,
       "healthInsurance": 45,
       "totalBasic": 515,
-      "totalComfortable": 810
+      "totalComfortable": 810,
+      "mealBudget": 5.0,
+      "mealMidRange": 11.0
     },
     {
       "code": "SX",
@@ -2762,7 +3128,9 @@
       "coworking": null,
       "healthInsurance": 90,
       "totalBasic": 1190,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 12.0,
+      "mealMidRange": 28.0
     },
     {
       "code": "SY",
@@ -2771,13 +3139,15 @@
       "rent2br": 190,
       "rent3br": 255,
       "groceries": 75,
-      "dining": 10,
-      "transport": 5,
+      "dining": 18,
+      "transport": 8,
       "utilities": 20,
       "coworking": null,
       "healthInsurance": 15,
-      "totalBasic": 190,
-      "totalComfortable": null
+      "totalBasic": 193,
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "SZ",
@@ -2792,7 +3162,9 @@
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 345,
-      "totalComfortable": 545
+      "totalComfortable": 545,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "TC",
@@ -2807,7 +3179,9 @@
       "coworking": null,
       "healthInsurance": 130,
       "totalBasic": 1490,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 14.0,
+      "mealMidRange": 30.0
     },
     {
       "code": "TD",
@@ -2822,7 +3196,9 @@
       "coworking": null,
       "healthInsurance": 20,
       "totalBasic": 298,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "TG",
@@ -2831,13 +3207,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 100,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 25,
       "coworking": 30,
       "healthInsurance": 18,
-      "totalBasic": 251,
-      "totalComfortable": 394
+      "totalBasic": 253,
+      "totalComfortable": 399,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "TH",
@@ -2848,11 +3226,13 @@
       "groceries": 200,
       "dining": 34,
       "transport": 31,
-      "utilities": 93,
+      "utilities": 105,
       "coworking": 90,
       "healthInsurance": 60,
-      "totalBasic": 589,
-      "totalComfortable": 953
+      "totalBasic": 601,
+      "totalComfortable": 965,
+      "mealBudget": 3.0,
+      "mealMidRange": 13.0
     },
     {
       "code": "TJ",
@@ -2861,13 +3241,15 @@
       "rent2br": 250,
       "rent3br": 335,
       "groceries": 100,
-      "dining": 15,
-      "transport": 6,
+      "dining": 18,
+      "transport": 8,
       "utilities": 30,
       "coworking": 30,
       "healthInsurance": 20,
-      "totalBasic": 256,
-      "totalComfortable": 401
+      "totalBasic": 258,
+      "totalComfortable": 406,
+      "mealBudget": 3.0,
+      "mealMidRange": 7.0
     },
     {
       "code": "TL",
@@ -2882,7 +3264,9 @@
       "coworking": null,
       "healthInsurance": 25,
       "totalBasic": 348,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 3.5,
+      "mealMidRange": 10.0
     },
     {
       "code": "TM",
@@ -2897,7 +3281,9 @@
       "coworking": null,
       "healthInsurance": 25,
       "totalBasic": 313,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "TN",
@@ -2912,7 +3298,9 @@
       "coworking": 60,
       "healthInsurance": 35,
       "totalBasic": 365,
-      "totalComfortable": 590
+      "totalComfortable": 590,
+      "mealBudget": 3.0,
+      "mealMidRange": 9.0
     },
     {
       "code": "TO",
@@ -2927,22 +3315,26 @@
       "coworking": null,
       "healthInsurance": 35,
       "totalBasic": 527,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 6.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "TR",
-      "rentMajorCity": 1076,
-      "rentSmallerCity": 600,
-      "rent2br": 980,
-      "rent3br": 1187,
-      "groceries": 140,
-      "dining": 168,
-      "transport": 77,
-      "utilities": 115,
+      "rentMajorCity": 750,
+      "rentSmallerCity": 420,
+      "rent2br": 760,
+      "rent3br": 1024,
+      "groceries": 195,
+      "dining": 95,
+      "transport": 40,
+      "utilities": 80,
       "coworking": 130,
       "healthInsurance": 65,
-      "totalBasic": 932,
-      "totalComfortable": 1771
+      "totalBasic": 735,
+      "totalComfortable": 1355,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "TT",
@@ -2957,7 +3349,9 @@
       "coworking": 100,
       "healthInsurance": 65,
       "totalBasic": 680,
-      "totalComfortable": 1055
+      "totalComfortable": 1055,
+      "mealBudget": 6.0,
+      "mealMidRange": 16.0
     },
     {
       "code": "TV",
@@ -2972,7 +3366,9 @@
       "coworking": null,
       "healthInsurance": 40,
       "totalBasic": 595,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "TW",
@@ -2987,7 +3383,9 @@
       "coworking": 140,
       "healthInsurance": 80,
       "totalBasic": 760,
-      "totalComfortable": 1225
+      "totalComfortable": 1225,
+      "mealBudget": 4.5,
+      "mealMidRange": 14.0
     },
     {
       "code": "TZ",
@@ -3002,7 +3400,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 345,
-      "totalComfortable": 560
+      "totalComfortable": 560,
+      "mealBudget": 3.0,
+      "mealMidRange": 9.0
     },
     {
       "code": "UA",
@@ -3010,14 +3410,16 @@
       "rentSmallerCity": 220,
       "rent2br": 445,
       "rent3br": 600,
-      "groceries": 170,
-      "dining": 40,
+      "groceries": 185,
+      "dining": 48,
       "transport": 12,
       "utilities": 80,
       "coworking": 70,
       "healthInsurance": 40,
-      "totalBasic": 482,
-      "totalComfortable": 762
+      "totalBasic": 497,
+      "totalComfortable": 785,
+      "mealBudget": 4.5,
+      "mealMidRange": 10.0
     },
     {
       "code": "UG",
@@ -3032,7 +3434,9 @@
       "coworking": 40,
       "healthInsurance": 25,
       "totalBasic": 310,
-      "totalComfortable": 495
+      "totalComfortable": 495,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "US",
@@ -3047,7 +3451,9 @@
       "coworking": 280,
       "healthInsurance": 180,
       "totalBasic": 2176,
-      "totalComfortable": 3191
+      "totalComfortable": 3191,
+      "mealBudget": 20.0,
+      "mealMidRange": 37.5
     },
     {
       "code": "UY",
@@ -3062,7 +3468,9 @@
       "coworking": 120,
       "healthInsurance": 75,
       "totalBasic": 725,
-      "totalComfortable": 1150
+      "totalComfortable": 1150,
+      "mealBudget": 10.0,
+      "mealMidRange": 22.0
     },
     {
       "code": "UZ",
@@ -3077,7 +3485,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 378,
-      "totalComfortable": 593
+      "totalComfortable": 593,
+      "mealBudget": 3.0,
+      "mealMidRange": 8.0
     },
     {
       "code": "VC",
@@ -3092,7 +3502,9 @@
       "coworking": null,
       "healthInsurance": 50,
       "totalBasic": 643,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 6.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "VE",
@@ -3107,7 +3519,9 @@
       "coworking": 60,
       "healthInsurance": 40,
       "totalBasic": 435,
-      "totalComfortable": 700
+      "totalComfortable": 700,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     },
     {
       "code": "VG",
@@ -3122,7 +3536,9 @@
       "coworking": null,
       "healthInsurance": 140,
       "totalBasic": 1520,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 18.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "VI",
@@ -3137,22 +3553,26 @@
       "coworking": 180,
       "healthInsurance": 150,
       "totalBasic": 1665,
-      "totalComfortable": 2545
+      "totalComfortable": 2545,
+      "mealBudget": 18.0,
+      "mealMidRange": 35.0
     },
     {
       "code": "VN",
       "rentMajorCity": 400,
-      "rentSmallerCity": 240,
-      "rent2br": 495,
-      "rent3br": 675,
+      "rentSmallerCity": 270,
+      "rent2br": 436,
+      "rent3br": 586,
       "groceries": 170,
       "dining": 30,
       "transport": 20,
-      "utilities": 70,
+      "utilities": 85,
       "coworking": 80,
       "healthInsurance": 50,
-      "totalBasic": 500,
-      "totalComfortable": 820
+      "totalBasic": 545,
+      "totalComfortable": 835,
+      "mealBudget": 2.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "VU",
@@ -3167,7 +3587,9 @@
       "coworking": null,
       "healthInsurance": 35,
       "totalBasic": 557,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 6.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "WS",
@@ -3182,7 +3604,9 @@
       "coworking": null,
       "healthInsurance": 40,
       "totalBasic": 565,
-      "totalComfortable": null
+      "totalComfortable": null,
+      "mealBudget": 6.0,
+      "mealMidRange": 14.0
     },
     {
       "code": "YE",
@@ -3191,13 +3615,15 @@
       "rent2br": 190,
       "rent3br": 255,
       "groceries": 75,
-      "dining": 10,
-      "transport": 5,
+      "dining": 18,
+      "transport": 8,
       "utilities": 20,
       "coworking": null,
       "healthInsurance": 15,
-      "totalBasic": 190,
-      "totalComfortable": null
+      "totalBasic": 193,
+      "totalComfortable": null,
+      "mealBudget": 3.0,
+      "mealMidRange": 6.0
     },
     {
       "code": "ZA",
@@ -3207,12 +3633,14 @@
       "rent3br": 800,
       "groceries": 200,
       "dining": 50,
-      "transport": 30,
+      "transport": 25,
       "utilities": 90,
       "coworking": 100,
       "healthInsurance": 65,
-      "totalBasic": 630,
-      "totalComfortable": 985
+      "totalBasic": 625,
+      "totalComfortable": 980,
+      "mealBudget": 6.0,
+      "mealMidRange": 15.0
     },
     {
       "code": "ZM",
@@ -3227,7 +3655,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 355,
-      "totalComfortable": 580
+      "totalComfortable": 580,
+      "mealBudget": 4.0,
+      "mealMidRange": 10.0
     },
     {
       "code": "ZW",
@@ -3242,7 +3672,9 @@
       "coworking": 50,
       "healthInsurance": 30,
       "totalBasic": 355,
-      "totalComfortable": 580
+      "totalComfortable": 580,
+      "mealBudget": 5.0,
+      "mealMidRange": 12.0
     }
   ]
 }

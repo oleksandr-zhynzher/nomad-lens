@@ -4,6 +4,7 @@
     "dataSources": "Джерела даних",
     "nomadVisas": "Номад",
     "budgetMatcher": "Бюджет",
+    "tourism": "Туризм",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -123,7 +124,10 @@
     "indicatorHeader": "Показник",
     "overallScore": "Загальний бал",
     "online": "Онлайн",
-    "inPerson": "Особисте подання"
+    "inPerson": "Особисте подання",
+    "tourism": "Туризм",
+    "tourismTitle": "Порівняння туризму",
+    "tourismSubtitle": "Порівняйте туристичну привабливість країн"
   },
   "mobileSheet": {
     "weightsAndPreferences": "Ваги та вподобання",
@@ -148,6 +152,7 @@
       "economic": "ЕКОНОМІКА",
       "healthWellbeing": "ЗДОРОВ'Я ТА ДОБРОБУТ",
       "safetyGovernance": "БЕЗПЕКА ТА УПРАВЛІННЯ",
+      "safetyFreedom": "БЕЗПЕКА ТА СВОБОДА",
       "educationDevelopment": "ОСВІТА ТА РОЗВИТОК",
       "environmentClimate": "ДОВКІЛЛЯ ТА КЛІМАТ",
       "connectivity": "ЦИФРОВЕ СЕРЕДОВИЩЕ",
@@ -185,6 +190,7 @@
     "compositeScore": "ПІДСУМКОВИЙ БАЛ",
     "nomadVisa": "Номад-віза",
     "scoreBreakdown": "РОЗБИВКА ЗА КАТЕГОРІЯМИ",
+    "tourismScores": "ТУРИСТИЧНИЙ БАЛ",
     "viewInList": "Повернутися до списку",
     "nomadVisaDetails": "Віза для цифрових кочівників",
     "climate": {
@@ -331,6 +337,11 @@
     "aiIndicatorsLabel_other": "{{count}} ШІ-показники",
     "aiSection": "ШІ-показники",
     "aiSectionNote": "— вимкнені за замовчуванням, увімкніть у панелі ваг",
+    "tourismSection": "Туристичні показники",
+    "tourismSectionNote": "— окремі метрики на сторінці Туризм",
+    "tourismIndicatorsLabel_one": "{{count}} туристичний показник",
+    "tourismIndicatorsLabel_few": "{{count}} туристичні показники",
+    "tourismIndicatorsLabel_many": "{{count}} туристичних показників",
     "indicators": {
       "economy": {
         "name": "Економіка",
@@ -499,6 +510,96 @@
         "description": "Дружелюбність до іноземців у повсякденному житті, мовна доступність, поширеність шахрайства та бюрократична простота.",
         "source": "ШІ-аналіз (Claude) — InterNations, NomadList, Світовий банк",
         "weight": "ШІ-метрика — вимкнено за замовчуванням"
+      },
+      "tourismSafety": {
+        "name": "Безпека для туристів",
+        "description": "Рівень вбивств, Глобальний індекс миру та політична стабільність — безпека для подорожуючих.",
+        "source": "UNODC · IEP · Світовий банк",
+        "weight": "Туристична метрика"
+      },
+      "accommodationCost": {
+        "name": "Вартість житла",
+        "description": "Інвертована вартість оренди у великих і малих містах — дешевше житло оцінюється вище.",
+        "source": "Numbeo · Livingcost.org",
+        "weight": "Туристична метрика"
+      },
+      "transportCost": {
+        "name": "Вартість транспорту",
+        "description": "Доступність місцевого транспорту та комунальних послуг — нижчі витрати полегшують пересування.",
+        "source": "Numbeo · Livingcost.org",
+        "weight": "Туристична метрика"
+      },
+      "tourismInfrastructure": {
+        "name": "Туристична інфраструктура",
+        "description": "Покриття інтернетом, доступ до електрики та коворкінги — практична інфраструктура для туристів.",
+        "source": "Світовий банк · Numbeo",
+        "weight": "Туристична метрика"
+      },
+      "localFriendliness": {
+        "name": "Привітність місцевих",
+        "description": "Знання англійської, соціальна толерантність та рівень щастя — наскільки місцеві привітні до іноземців.",
+        "source": "EF EPI · ILGA/Equaldex · ООН WHR",
+        "weight": "Туристична метрика"
+      },
+      "nightlifeEntertainment": {
+        "name": "Нічне життя та розваги",
+        "description": "Бари, клуби, жива музика, фестивалі та культурні заходи — якість і різноманітність нічних розваг.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "touristScamSafety": {
+        "name": "Безпека від шахрайства",
+        "description": "Захист від туристичних шахрайств, завищення цін та обману — вищий бал означає менше ризиків.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "streetFoodCuisine": {
+        "name": "Вулична їжа та кухня",
+        "description": "Якість і різноманітність вуличної їжі, продуктових ринків та місцевої кухні.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "beachWaterQuality": {
+        "name": "Пляжі та якість води",
+        "description": "Якість пляжів, прозорість води та статус «Блакитний прапор» — привабливість узбережжя.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "walkabilityScenicBeauty": {
+        "name": "Пішохідність та мальовничість",
+        "description": "Зручні для пішоходів міста, мальовничі старі квартали, оглядові майданчики та набережні.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "shoppingMarkets": {
+        "name": "Шопінг та ринки",
+        "description": "Базари, торгові центри, місцеві ремесла та сувеніри — можливості для шопінгу.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "photographySpots": {
+        "name": "Фото-локації",
+        "description": "Знакові пам’ятки, мальовничі краєвиди та унікальна архітектура.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "familyFriendliness": {
+        "name": "Для сімейного відпочинку",
+        "description": "Дитячі атракціони, парки розваг, безпека та сімейне житло.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "adventureSports": {
+        "name": "Екстремальний спорт",
+        "description": "Параглайдинг, банджі, серфінг, рафтинг, зіплайни, трекінг та дайвінг.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
+      },
+      "historicalSites": {
+        "name": "Історичні місця",
+        "description": "Руїни, замки, стародавні міста, щільність об’єктів ЮНЕСКО та археологічне багатство.",
+        "source": "ШІ-аналіз",
+        "weight": "Туристична метрика"
       }
     }
   },
@@ -808,5 +909,153 @@
         "methodology": "На основі опублікованих тарифів популярних номад-страховиків. Стандартний план для здорового дорослого 25-40 років з глобальним покриттям без США."
       }
     }
+  },
+  "tourism": {
+    "eyebrow": "ДОСЛІДЖУЙТЕ",
+    "title": "ТУРИСТИЧНИЙ РЕЙТИНГ",
+    "subtitle": "Відкрийте найкращі країни для подорожей — за безпекою, культурою, природою, вартістю та сезонністю.",
+    "metric": "Метрика",
+    "overallScore": "Туристичний бал",
+    "searchPlaceholder": "Пошук країн…",
+    "allRegions": "Усі регіони",
+    "compare": "Порівняти",
+    "countries_one": "{{count}} країна",
+    "countries_few": "{{count}} країни",
+    "countries_many": "{{count}} країн",
+    "loading": "Завантаження даних…",
+    "noResults": "Немає країн, що відповідають фільтрам.",
+    "viewCountry": "Профіль країни",
+    "metricCards": {
+      "tourismSafety": "Безпека",
+      "tourismInfrastructure": "Інфра",
+      "localFriendliness": "Привітність",
+      "englishProficiency": "Англійська",
+      "nightlifeEntertainment": "Нічне життя",
+      "touristScamSafety": "Антишахраї",
+      "streetFoodCuisine": "Вулична їжа",
+      "beachWaterQuality": "Пляжі",
+      "walkabilityScenicBeauty": "Прогулянки",
+      "shoppingMarkets": "Шопінг",
+      "photographySpots": "Фото-споти",
+      "familyFriendliness": "Для сімей",
+      "adventureSports": "Екстрим",
+      "historicalSites": "Історія"
+    },
+    "metricDesc": {
+      "tourismSafety": "Рівень злочинності, мир та політична стабільність",
+      "tourismInfrastructure": "Інтернет, електрика та коворкінги",
+      "localFriendliness": "Толерантність, щастя та гостинність",
+      "englishProficiency": "Володіння англійською за індексом EF EPI",
+      "nightlifeEntertainment": "Бари, клуби, жива музика та фестивалі",
+      "touristScamSafety": "Захист від шахрайства та завищення цін",
+      "streetFoodCuisine": "Вулична їжа, ринки та місцева кухня",
+      "beachWaterQuality": "Якість пляжів, води та статус Blue Flag",
+      "walkabilityScenicBeauty": "Пішохідні міста та мальовничі квартали",
+      "shoppingMarkets": "Базари, торгові центри та сувеніри",
+      "photographySpots": "Знакові місця та мальовничі краєвиди",
+      "familyFriendliness": "Дитячі атракціони, безпека та сімейне житло",
+      "adventureSports": "Серфінг, рафтинг, трекінг та дайвінг",
+      "historicalSites": "Руїни, замки, стародавні міста та спадщина ЮНЕСКО"
+    },
+    "metrics": {
+      "tourismSafety": "Безпека для туристів",
+      "tourismInfrastructure": "Туристична інфраструктура",
+      "localFriendliness": "Привітність місцевих",
+      "englishProficiency": "Володіння англійською",
+      "nightlifeEntertainment": "Нічне життя та розваги",
+      "touristScamSafety": "Безпека від шахрайства",
+      "streetFoodCuisine": "Вулична їжа та кухня",
+      "beachWaterQuality": "Пляжі та якість води",
+      "walkabilityScenicBeauty": "Пішохідність та мальовничість",
+      "shoppingMarkets": "Шопінг та ринки",
+      "photographySpots": "Фото-локації",
+      "familyFriendliness": "Для сімейного відпочинку",
+      "adventureSports": "Екстремальний спорт",
+      "historicalSites": "Історичні місця"
+    }
+  },
+  "tourismFilters": {
+    "seasideOnly": "Тільки біля моря",
+    "seasideDesc": "Виключити країни без виходу до моря",
+    "tropicalOnly": "Тільки тропіки",
+    "tropicalDesc": "Тільки країни з тропічним кліматом",
+    "visaFreeOnly": "Безвізовий в'їзд",
+    "visaFreeDesc": "Тільки країни з безвізовим туристичним в'їздом",
+    "englishFriendly": "Англомовні",
+    "englishFriendlyDesc": "Рівень англійської ≥ 50",
+    "budgetFriendly": "Бюджетні",
+    "budgetFriendlyDesc": "Базова вартість життя ≤ $1 500/міс",
+    "activityTags": "Активності",
+    "travelDates": "Дати подорожі",
+    "from": "З",
+    "to": "По",
+    "clearDates": "Скинути",
+    "seasonalHint": "Рейтинги скориговані для сезонної якості у вибрані дати."
+  },
+  "tourismTags": {
+    "beach": "Пляж і купання",
+    "island": "Острівні країни",
+    "ski": "Гірськолижні курорти",
+    "mountains": "Гори та хайкінг",
+    "historic": "Історичні міста",
+    "wildlife": "Дика природа та сафарі",
+    "diving": "Дайвінг та снорклінг",
+    "desert": "Пустелі та пригоди"
+  },
+  "tourismWeights": {
+    "title": "Ваги туризму",
+    "hint": "Налаштуйте важливість кожної туристичної метрики для персоналізації рейтингу.",
+    "groupLabel": "Туристичні метрики",
+    "metricsLabel": "Туристичні метрики",
+    "filtersLabel": "Фільтри",
+    "groups": {
+      "safetyPeople": "Безпека та люди",
+      "sightseeingNature": "Визначні місця та природа",
+      "activitiesLifestyle": "Активності та стиль життя"
+    }
+  },
+  "tourismBudget": {
+    "groupLabel": "Бюджет подорожі",
+    "enable": "Увімкнути оцінку за бюджетом",
+    "enableDesc": "При увімкненні країни ранжуються за поєднанням туристичної якості та доступності бюджету.",
+    "perDay": "/день",
+    "accommodation": "Житло",
+    "accomTypes": {
+      "hotel": "Готель",
+      "hotel5": "Готель ★★★★★",
+      "hotel4": "Готель ★★★★",
+      "hotel3": "Готель ★★★",
+      "hotel2": "Готель ★★",
+      "hotel1": "Готель ★",
+      "resort": "Курорт",
+      "hostel": "Хостел",
+      "airbnb": "Airbnb",
+      "rental": "Оренда"
+    },
+    "travellers": "Мандрівники",
+    "diningLabel": "Їжа та харчування",
+    "diningTypes": {
+      "market": "Ринок",
+      "casual": "Кафе",
+      "restaurants": "Ресторани"
+    },
+    "budgetBlend": "Баланс бюджету",
+    "budgetBlendDesc": "Контролює баланс між якістю туризму та доступністю бюджету в рейтингу.",
+    "tourismQuality": "Якість туризму",
+    "affordability": "Доступність",
+    "activityBlend": "Баланс активностей",
+    "activityBlendDesc": "Контролює, наскільки сильно обрані теги активностей впливають на рейтинг порівняно із загальними метриками туризму.",
+    "tourismMetrics": "Метрики туризму",
+    "activityQuality": "Якість активностей",
+    "dailyCost": "Вартість за день",
+    "costBreakdown": "Витрати за день",
+    "categories": {
+      "accommodation": "Житло",
+      "food": "Їжа та ресторани",
+      "transport": "Транспорт",
+      "activities": "Розваги"
+    },
+    "total": "Разом",
+    "surplus": "залишок"
   }
 }

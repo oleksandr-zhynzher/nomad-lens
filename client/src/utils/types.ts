@@ -38,6 +38,21 @@ export type CategoryKey =
   | "airConnectivity"
   | "culturalHeritage"
   | "healthcareCost"
+  | "tourismSafety"
+  | "accommodationCost"
+  | "transportCost"
+  | "tourismInfrastructure"
+  | "localFriendliness"
+  | "nightlifeEntertainment"
+  | "touristScamSafety"
+  | "streetFoodCuisine"
+  | "beachWaterQuality"
+  | "walkabilityScenicBeauty"
+  | "shoppingMarkets"
+  | "photographySpots"
+  | "familyFriendliness"
+  | "adventureSports"
+  | "historicalSites"
   | "nomadCommunity"
   | "visaFriendliness"
   | "costEfficiency"
@@ -69,6 +84,21 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   "airConnectivity",
   "culturalHeritage",
   "healthcareCost",
+  "tourismSafety",
+  "accommodationCost",
+  "transportCost",
+  "tourismInfrastructure",
+  "localFriendliness",
+  "nightlifeEntertainment",
+  "touristScamSafety",
+  "streetFoodCuisine",
+  "beachWaterQuality",
+  "walkabilityScenicBeauty",
+  "shoppingMarkets",
+  "photographySpots",
+  "familyFriendliness",
+  "adventureSports",
+  "historicalSites",
   "nomadCommunity",
   "visaFriendliness",
   "costEfficiency",
@@ -76,6 +106,46 @@ export const CATEGORY_KEYS: CategoryKey[] = [
   "digitalReadiness",
   "culturalFit",
 ];
+
+/** Tourism subcategory groups — logical groupings of tourism metrics. */
+export const TOURISM_GROUPS: Array<{
+  labelKey: string;
+  keys: CategoryKey[];
+}> = [
+  {
+    labelKey: "safetyPeople",
+    keys: [
+      "tourismSafety",
+      "touristScamSafety",
+      "localFriendliness",
+      "englishProficiency",
+    ],
+  },
+  {
+    labelKey: "sightseeingNature",
+    keys: [
+      "historicalSites",
+      "photographySpots",
+      "walkabilityScenicBeauty",
+      "beachWaterQuality",
+    ],
+  },
+  {
+    labelKey: "activitiesLifestyle",
+    keys: [
+      "nightlifeEntertainment",
+      "streetFoodCuisine",
+      "shoppingMarkets",
+      "adventureSports",
+      "familyFriendliness",
+    ],
+  },
+];
+
+/** Tourism category keys — standalone section, not in main ranking. */
+export const TOURISM_CATEGORY_KEYS: CategoryKey[] = TOURISM_GROUPS.flatMap(
+  (g) => g.keys,
+);
 
 /** AI-analyzed category keys — opt-in only (default weight 0). */
 export const AI_CATEGORY_KEYS: CategoryKey[] = [
@@ -88,11 +158,15 @@ export const AI_CATEGORY_KEYS: CategoryKey[] = [
 ];
 
 export const CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
-  (key) => !AI_CATEGORY_KEYS.includes(key),
+  (key) =>
+    !AI_CATEGORY_KEYS.includes(key) && !TOURISM_CATEGORY_KEYS.includes(key),
 );
 
 export const DISPLAYED_CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
-  (key) => key !== "culturalHeritage" && !AI_CATEGORY_KEYS.includes(key),
+  (key) =>
+    key !== "culturalHeritage" &&
+    !AI_CATEGORY_KEYS.includes(key) &&
+    !TOURISM_CATEGORY_KEYS.includes(key),
 );
 
 /** Categories computed by the server but hidden from the UI. */
@@ -100,6 +174,7 @@ export const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
   "culturalHeritage",
   "biodiversity",
   "digitalFreedom",
+  "governance",
 ]);
 
 /** AI metrics are visible but opt-in (default weight = 0). */
@@ -134,6 +209,21 @@ export const CATEGORY_LABELS: Record<CategoryKey, string> = {
   airConnectivity: "Air Connectivity",
   culturalHeritage: "Cultural Heritage",
   healthcareCost: "Healthcare Cost",
+  tourismSafety: "Tourism Safety",
+  accommodationCost: "Accommodation Cost",
+  transportCost: "Transport Cost",
+  tourismInfrastructure: "Tourism Infrastructure",
+  localFriendliness: "Local Friendliness",
+  nightlifeEntertainment: "Nightlife & Entertainment",
+  touristScamSafety: "Tourist Scam Safety",
+  streetFoodCuisine: "Street Food & Cuisine",
+  beachWaterQuality: "Beach & Water Quality",
+  walkabilityScenicBeauty: "Walkability & Scenic Beauty",
+  shoppingMarkets: "Shopping & Markets",
+  photographySpots: "Photography Spots",
+  familyFriendliness: "Family Friendliness",
+  adventureSports: "Adventure Sports",
+  historicalSites: "Historical Sites",
   nomadCommunity: "Nomad & Expat Community",
   visaFriendliness: "Visa & Stay Flexibility",
   costEfficiency: "Nomad Cost-Value Ratio",
@@ -181,6 +271,36 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
     "UNESCO World Heritage Sites, Intangible Cultural Heritage elements, and international tourism arrivals",
   healthcareCost:
     "Out-of-pocket health expenditure as % of total — lower costs mean more accessible care",
+  tourismSafety:
+    "Personal safety for tourists: crime rates, peacefulness, and political stability",
+  accommodationCost:
+    "Average accommodation costs for travelers — lower prices score higher",
+  transportCost:
+    "Local transport and utilities affordability — lower costs score higher",
+  tourismInfrastructure:
+    "Internet coverage, electricity access, and coworking spaces — practical infrastructure for tourists",
+  localFriendliness:
+    "English proficiency, social tolerance, and happiness — how welcoming locals are to visitors",
+  nightlifeEntertainment:
+    "Bars, clubs, live music, festivals, and cultural events — quality and variety of nighttime entertainment",
+  touristScamSafety:
+    "Safety from tourist scams, overcharging, and fraud — higher scores mean fewer risks",
+  streetFoodCuisine:
+    "Quality and variety of street food, food markets, and local cuisine reputation",
+  beachWaterQuality:
+    "Beach quality, water clarity, and Blue Flag status — coastal appeal for visitors",
+  walkabilityScenicBeauty:
+    "Pedestrian-friendly cities, scenic old towns, viewpoints, and promenades",
+  shoppingMarkets:
+    "Bazaars, malls, luxury outlets, local crafts, and souvenir shopping opportunities",
+  photographySpots:
+    "Iconic landmarks, photogenic landscapes, and unique architecture — density of photo-worthy locations",
+  familyFriendliness:
+    "Kid-friendly attractions, theme parks, safety, and family accommodation",
+  adventureSports:
+    "Paragliding, bungee, surfing, rafting, zip-lines, trekking, and diving opportunities",
+  historicalSites:
+    "Ruins, castles, ancient cities, UNESCO heritage density, and archaeological richness",
   nomadCommunity:
     "Coworking density, nomad hub presence, coliving availability, and expat community size",
   visaFriendliness:
@@ -225,6 +345,30 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   culturalHeritage:
     "UNESCO World Heritage Centre · UNESCO ICH · World Bank (ST.INT.ARVL)",
   healthcareCost: "World Bank — SH.XPD.OOPC.CH.ZS (out-of-pocket expenditure)",
+  tourismSafety:
+    "UNODC (homicide rate) · IEP Global Peace Index · World Bank WGI (political stability)",
+  accommodationCost: "Numbeo · Livingcost.org (monthly rent benchmarks)",
+  transportCost: "Numbeo · Livingcost.org (local transport & utilities costs)",
+  tourismInfrastructure:
+    "World Bank (internet users %, electricity access %) · Numbeo (coworking)",
+  localFriendliness:
+    "EF EPI (English proficiency) · ILGA/Equaldex (tolerance) · UN WHR (happiness)",
+  nightlifeEntertainment:
+    "AI composite (TripAdvisor, travel guides, festival data)",
+  touristScamSafety: "AI composite (safety indices, travel advisories, Numbeo)",
+  streetFoodCuisine: "AI composite (TasteAtlas, TripAdvisor, food guides)",
+  beachWaterQuality:
+    "AI composite (Blue Flag, TripAdvisor, water quality reports)",
+  walkabilityScenicBeauty:
+    "AI composite (Walk Score, travel guides, urban planning data)",
+  shoppingMarkets: "AI composite (TripAdvisor, travel guides, retail indices)",
+  photographySpots: "AI composite (Instagram data, travel guides, UNESCO)",
+  familyFriendliness:
+    "AI composite (family travel guides, safety data, TripAdvisor)",
+  adventureSports:
+    "AI composite (adventure tourism data, PADI, trekking guides)",
+  historicalSites:
+    "AI composite (UNESCO, archaeological databases, travel guides)",
   nomadCommunity:
     "AI-analyzed (Claude) — NomadList, Coworker.com, InterNations, UN DESA migrant stock",
   visaFriendliness:
@@ -263,6 +407,21 @@ export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
   airConnectivity: "AIR",
   culturalHeritage: "CUL",
   healthcareCost: "OOP",
+  tourismSafety: "TSF",
+  accommodationCost: "ACC",
+  transportCost: "TRN",
+  tourismInfrastructure: "TIF",
+  localFriendliness: "FRN",
+  nightlifeEntertainment: "NIT",
+  touristScamSafety: "SCM",
+  streetFoodCuisine: "SFC",
+  beachWaterQuality: "BCH",
+  walkabilityScenicBeauty: "WLK",
+  shoppingMarkets: "SHP",
+  photographySpots: "PHO",
+  familyFriendliness: "FAM",
+  adventureSports: "ADV",
+  historicalSites: "HIS",
   nomadCommunity: "NMD",
   visaFriendliness: "VIS",
   costEfficiency: "VAL",
@@ -373,6 +532,8 @@ export interface CostOfLivingData {
   healthInsurance: number | null;
   totalBasic: number | null;
   totalComfortable: number | null;
+  mealBudget: number | null;
+  mealMidRange: number | null;
 }
 
 // ─── Country ──────────────────────────────────────────────────────────────────
@@ -387,6 +548,10 @@ export interface CountryData {
   hasNomadVisa?: boolean;
   isSchengen?: boolean;
   touristVisaDays?: number | null;
+  landlocked?: boolean;
+  tourismTags?: string[];
+  tourismTagScores?: Record<string, number>;
+  tourismTagSeasonality?: Record<string, number[]>;
   nomadVisa?: NomadVisaDetails;
   climateData?: ClimateData;
   costOfLiving?: CostOfLivingData | null;

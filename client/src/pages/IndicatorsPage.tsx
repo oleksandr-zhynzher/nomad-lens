@@ -22,12 +22,22 @@ import {
   Plane,
   Stethoscope,
   Sparkles,
+  Shield,
+  Theater,
+  Bed,
+  UtensilsCrossed,
+  Sun,
+  Palmtree,
 } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
 import { HeroSection } from "../components/HeroSection";
-import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "../utils/types";
+import {
+  AI_CATEGORY_KEYS,
+  DISPLAYED_CORE_CATEGORY_KEYS,
+  TOURISM_CATEGORY_KEYS,
+} from "../utils/types";
 
 interface IndicatorCardProps {
   Icon: ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
@@ -133,15 +143,34 @@ const AI_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
   ],
 ];
 
+const TOURISM_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
+  [
+    [Shield, "tourismSafety"],
+    [Theater, "culturalAttractions"],
+  ],
+  [
+    [TreePine, "naturalAttractions"],
+    [Bed, "accommodationCost"],
+  ],
+  [
+    [UtensilsCrossed, "foodAndDining"],
+    [Sun, "seasonalAppeal"],
+  ],
+];
+
 export function IndicatorsPage() {
   const { t } = useTranslation();
   const coreIndicatorCount = DISPLAYED_CORE_CATEGORY_KEYS.length;
   const aiIndicatorCount = AI_CATEGORY_KEYS.length;
+  const tourismIndicatorCount = TOURISM_CATEGORY_KEYS.length;
   const coreIndicatorsLabel = t("indicatorsPage.coreIndicatorsLabel", {
     count: coreIndicatorCount,
   });
   const aiIndicatorsLabel = t("indicatorsPage.aiIndicatorsLabel", {
     count: aiIndicatorCount,
+  });
+  const tourismIndicatorsLabel = t("indicatorsPage.tourismIndicatorsLabel", {
+    count: tourismIndicatorCount,
   });
 
   return (
@@ -153,6 +182,7 @@ export function IndicatorsPage() {
         subtitle={t("indicatorsPage.subtitle", {
           coreIndicatorsLabel,
           aiIndicatorsLabel,
+          tourismIndicatorsLabel,
         })}
       />
 
@@ -192,6 +222,43 @@ export function IndicatorsPage() {
           </div>
           <div className="flex flex-col gap-4">
             {AI_INDICATOR_ICONS.map((row, rowIdx) => (
+              <div
+                key={rowIdx}
+                className="flex flex-col md:flex-row gap-4 md:gap-5 w-full"
+              >
+                {row.map(([Icon, key]) => (
+                  <IndicatorCard
+                    key={key}
+                    Icon={Icon}
+                    name={t(`indicatorsPage.indicators.${key}.name`)}
+                    description={t(
+                      `indicatorsPage.indicators.${key}.description`,
+                    )}
+                    source={t(`indicatorsPage.indicators.${key}.source`)}
+                    weight={t(`indicatorsPage.indicators.${key}.weight`)}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tourism indicators section */}
+        <div className="mt-4">
+          <div className="mb-4 flex items-center gap-2 border-b border-[#1E1E20] pb-3">
+            <Palmtree size={14} color="#6B9E6B" />
+            <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#6B9E6B]">
+              {t("indicatorsPage.tourismSection", "Tourism Indicators")}
+            </span>
+            <span className="text-[11px] text-[#606060]">
+              {t(
+                "indicatorsPage.tourismSectionNote",
+                "— standalone metrics on the Tourism page",
+              )}
+            </span>
+          </div>
+          <div className="flex flex-col gap-4">
+            {TOURISM_INDICATOR_ICONS.map((row, rowIdx) => (
               <div
                 key={rowIdx}
                 className="flex flex-col md:flex-row gap-4 md:gap-5 w-full"

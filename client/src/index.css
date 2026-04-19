@@ -235,4 +235,26 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+
+  /* Thin overlay scrollbar, visible while scrolling, no change on hover */
+  .auto-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+  }
+  .auto-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .auto-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .auto-scrollbar::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 2px;
+  }
+  .auto-scrollbar.scrolling {
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+  }
+  .auto-scrollbar.scrolling::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+  }
 }

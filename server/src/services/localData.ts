@@ -17,6 +17,7 @@ import culturalHeritageJson from "../data/culturalHeritage.json";
 import intangibleHeritageJson from "../data/intangibleHeritage.json";
 import biodiversityJson from "../data/biodiversity.json";
 import aiMetricsJson from "../data/ai-metrics.json";
+import tourismAiMetricsJson from "../data/tourism-ai-metrics.json";
 import costOfLivingJson from "../data/costOfLiving.json";
 import type {
   HdiEntry,
@@ -36,6 +37,7 @@ import type {
   BiodiversityEntry,
   NomadVisaDetails,
   AiMetricsEntry,
+  TourismAiMetricsEntry,
   CostOfLivingEntry,
 } from "../utils/types";
 
@@ -57,6 +59,7 @@ const heritageMap = new Map<string, HeritageEntry>();
 const intangibleHeritageMap = new Map<string, IntangibleHeritageEntry>();
 const biodiversityMap = new Map<string, BiodiversityEntry>();
 const aiMetricsMap = new Map<string, AiMetricsEntry>();
+const tourismAiMetricsMap = new Map<string, TourismAiMetricsEntry>();
 const costOfLivingMap = new Map<string, CostOfLivingEntry>();
 
 const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
@@ -118,6 +121,9 @@ const touristVisaDaysMap = visasJson.touristVisaDays as Record<
 (aiMetricsJson as unknown as JsonFile<AiMetricsEntry>).data.forEach((e) =>
   aiMetricsMap.set(e.code.toUpperCase(), e),
 );
+(
+  tourismAiMetricsJson as unknown as JsonFile<TourismAiMetricsEntry>
+).data.forEach((e) => tourismAiMetricsMap.set(e.code.toUpperCase(), e));
 (costOfLivingJson as unknown as JsonFile<CostOfLivingEntry>).data.forEach((e) =>
   costOfLivingMap.set(e.code.toUpperCase(), e),
 );
@@ -156,6 +162,8 @@ export const localData = {
   },
   getAiMetrics: (code: string): AiMetricsEntry | undefined =>
     aiMetricsMap.get(code.toUpperCase()),
+  getTourismAiMetrics: (code: string): TourismAiMetricsEntry | undefined =>
+    tourismAiMetricsMap.get(code.toUpperCase()),
   getCostOfLiving: (code: string): CostOfLivingEntry | undefined =>
     costOfLivingMap.get(code.toUpperCase()),
 };

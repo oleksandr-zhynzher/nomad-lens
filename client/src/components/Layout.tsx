@@ -1,5 +1,14 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import { BarChart3, List, Map, Menu, Plane, Wallet, X } from "lucide-react";
+import {
+  BarChart3,
+  List,
+  Map,
+  Menu,
+  Palmtree,
+  Plane,
+  Wallet,
+  X,
+} from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
@@ -72,6 +81,7 @@ export function Layout({ children }: LayoutProps) {
     "/budget-matcher",
     "/ai-indicators",
     "/budget-categories",
+    "/tourism",
   ];
   const isInfoPage = INFO_PAGES.some((pagePath) => pathname.endsWith(pagePath));
 
@@ -241,6 +251,24 @@ export function Layout({ children }: LayoutProps) {
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
+              </Link>
+              <Link
+                to={`${langPrefix}/tourism`}
+                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
+                data-active={pathname.endsWith("/tourism") ? "true" : undefined}
+                style={{
+                  backgroundColor: pathname.endsWith("/tourism")
+                    ? "var(--color-accent)"
+                    : "transparent",
+                  color: pathname.endsWith("/tourism") ? "#FFFFFF" : "#9E9E9E",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: pathname.endsWith("/tourism") ? 500 : 400,
+                  textDecoration: "none",
+                }}
+              >
+                <Palmtree size={16} />
+                {t("nav.tourism", "Tourism")}
               </Link>
             </div>
 
@@ -475,6 +503,24 @@ export function Layout({ children }: LayoutProps) {
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
+              </Link>
+              <Link
+                to={`${langPrefix}/tourism`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
+                style={{
+                  backgroundColor: pathname.endsWith("/tourism")
+                    ? "var(--color-accent)"
+                    : "#2A2A2A",
+                  color: pathname.endsWith("/tourism") ? "#FFFFFF" : "#9E9E9E",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: "13px",
+                  fontWeight: pathname.endsWith("/tourism") ? 500 : 400,
+                  textDecoration: "none",
+                }}
+              >
+                <Palmtree size={16} />
+                {t("nav.tourism", "Tourism")}
               </Link>
             </div>
 

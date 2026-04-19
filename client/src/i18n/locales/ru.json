@@ -4,6 +4,7 @@
     "dataSources": "Источники данных",
     "nomadVisas": "Номад",
     "budgetMatcher": "Бюджет",
+    "tourism": "Туризм",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -123,7 +124,10 @@
     "indicatorHeader": "Показатель",
     "overallScore": "Общий балл",
     "online": "Онлайн",
-    "inPerson": "Личная подача"
+    "inPerson": "Личная подача",
+    "tourism": "Туризм",
+    "tourismTitle": "Сравнение туризма",
+    "tourismSubtitle": "Сравните туристическую привлекательность стран"
   },
   "mobileSheet": {
     "weightsAndPreferences": "Веса и предпочтения",
@@ -148,6 +152,7 @@
       "economic": "ЭКОНОМИКА",
       "healthWellbeing": "ЗДОРОВЬЕ И БЛАГОПОЛУЧИЕ",
       "safetyGovernance": "БЕЗОПАСНОСТЬ И УПРАВЛЕНИЕ",
+      "safetyFreedom": "БЕЗОПАСНОСТЬ И СВОБОДА",
       "educationDevelopment": "ОБРАЗОВАНИЕ И РАЗВИТИЕ",
       "environmentClimate": "ЭКОЛОГИЯ И КЛИМАТ",
       "connectivity": "ЦИФРОВАЯ СРЕДА",
@@ -185,6 +190,7 @@
     "compositeScore": "ИТОГОВЫЙ БАЛЛ",
     "nomadVisa": "Номад-виза",
     "scoreBreakdown": "РАЗБИВКА ПО КАТЕГОРИЯМ",
+    "tourismScores": "ТУРИСТИЧЕСКИЙ БАЛЛ",
     "viewInList": "Вернуться к списку",
     "nomadVisaDetails": "Виза для цифровых кочевников",
     "climate": {
@@ -331,6 +337,11 @@
     "aiIndicatorsLabel_other": "{{count}} ИИ-показателя",
     "aiSection": "ИИ-показатели",
     "aiSectionNote": "— отключены по умолчанию, включите в панели весов",
+    "tourismSection": "Туристические показатели",
+    "tourismSectionNote": "— отдельные метрики на странице Туризм",
+    "tourismIndicatorsLabel_one": "{{count}} туристический показатель",
+    "tourismIndicatorsLabel_few": "{{count}} туристических показателя",
+    "tourismIndicatorsLabel_many": "{{count}} туристических показателей",
     "indicators": {
       "economy": {
         "name": "Экономика",
@@ -499,6 +510,96 @@
         "description": "Дружелюбность к иностранцам в повседневной жизни, языковая доступность, распространённость мошенничества и бюрократическая простота.",
         "source": "ИИ-анализ (Claude) — InterNations, NomadList, Мировой банк",
         "weight": "ИИ-метрика — выключено по умолчанию"
+      },
+      "tourismSafety": {
+        "name": "Безопасность для туристов",
+        "description": "Уровень убийств, Глобальный индекс мира и политическая стабильность — безопасность для путешественников.",
+        "source": "UNODC · IEP · Мировой банк",
+        "weight": "Туристическая метрика"
+      },
+      "accommodationCost": {
+        "name": "Стоимость жилья",
+        "description": "Инвертированная стоимость аренды в крупных и малых городах — более дешёвое жильё оценивается выше.",
+        "source": "Numbeo · Livingcost.org",
+        "weight": "Туристическая метрика"
+      },
+      "transportCost": {
+        "name": "Стоимость транспорта",
+        "description": "Доступность местного транспорта и коммунальных услуг — более низкие расходы облегчают перемещение.",
+        "source": "Numbeo · Livingcost.org",
+        "weight": "Туристическая метрика"
+      },
+      "tourismInfrastructure": {
+        "name": "Туристическая инфраструктура",
+        "description": "Покрытие интернетом, доступ к электричеству и коворкинги — практическая инфраструктура для туристов.",
+        "source": "Мировой банк · Numbeo",
+        "weight": "Туристическая метрика"
+      },
+      "localFriendliness": {
+        "name": "Дружелюбие местных",
+        "description": "Знание английского, социальная толерантность и уровень счастья — насколько местные приветливы к иностранцам.",
+        "source": "EF EPI · ILGA/Equaldex · ООН WHR",
+        "weight": "Туристическая метрика"
+      },
+      "nightlifeEntertainment": {
+        "name": "Ночная жизнь и развлечения",
+        "description": "Бары, клубы, живая музыка, фестивали и культурные мероприятия — качество и разнообразие ночных развлечений.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "touristScamSafety": {
+        "name": "Безопасность от мошенничества",
+        "description": "Защита от туристических мошенничеств, завышения цен и обмана — чем выше балл, тем меньше рисков.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "streetFoodCuisine": {
+        "name": "Уличная еда и кухня",
+        "description": "Качество и разнообразие уличной еды, продуктовых рынков и местной кухни.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "beachWaterQuality": {
+        "name": "Пляжи и качество воды",
+        "description": "Качество пляжей, прозрачность воды и статус «Голубой флаг» — привлекательность побережья.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "walkabilityScenicBeauty": {
+        "name": "Пешеходность и живописность",
+        "description": "Удобные для пешеходов города, живописные старые кварталы, смотровые площадки и набережные.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "shoppingMarkets": {
+        "name": "Шопинг и рынки",
+        "description": "Базары, торговые центры, местные ремёсла и сувениры — возможности для шопинга.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "photographySpots": {
+        "name": "Фото-локации",
+        "description": "Знаковые достопримечательности, живописные пейзажи и уникальная архитектура.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "familyFriendliness": {
+        "name": "Для семейного отдыха",
+        "description": "Детские аттракционы, парки развлечений, безопасность и семейное жильё.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "adventureSports": {
+        "name": "Экстремальный спорт",
+        "description": "Параглайдинг, банджи, сёрфинг, рафтинг, зиплайны, трекинг и дайвинг.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
+      },
+      "historicalSites": {
+        "name": "Исторические места",
+        "description": "Руины, замки, древние города, плотность объектов ЮНЕСКО и археологическое богатство.",
+        "source": "ИИ-анализ",
+        "weight": "Туристическая метрика"
       }
     }
   },
@@ -808,5 +909,153 @@
         "methodology": "На основе опубликованных тарифов популярных номад-страховщиков. Стандартный план для здорового взрослого 25-40 лет с глобальным покрытием без США."
       }
     }
+  },
+  "tourism": {
+    "eyebrow": "ИССЛЕДУЙТЕ",
+    "title": "ТУРИСТИЧЕСКИЙ РЕЙТИНГ",
+    "subtitle": "Откройте лучшие страны для путешествий — по безопасности, культуре, природе, стоимости и сезонности.",
+    "metric": "Метрика",
+    "overallScore": "Туристический балл",
+    "searchPlaceholder": "Поиск стран…",
+    "allRegions": "Все регионы",
+    "compare": "Сравнить",
+    "countries_one": "{{count}} страна",
+    "countries_few": "{{count}} страны",
+    "countries_many": "{{count}} стран",
+    "loading": "Загрузка данных…",
+    "noResults": "Нет стран, соответствующих фильтрам.",
+    "viewCountry": "Профиль страны",
+    "metricCards": {
+      "tourismSafety": "Безопасность",
+      "tourismInfrastructure": "Инфра",
+      "localFriendliness": "Дружелюбие",
+      "englishProficiency": "Английский",
+      "nightlifeEntertainment": "Ночная жизнь",
+      "touristScamSafety": "Антимошенники",
+      "streetFoodCuisine": "Уличная еда",
+      "beachWaterQuality": "Пляжи",
+      "walkabilityScenicBeauty": "Прогулки",
+      "shoppingMarkets": "Шопинг",
+      "photographySpots": "Фото-споты",
+      "familyFriendliness": "Для семей",
+      "adventureSports": "Экстрим",
+      "historicalSites": "История"
+    },
+    "metricDesc": {
+      "tourismSafety": "Уровень преступности, мир и политическая стабильность",
+      "tourismInfrastructure": "Интернет, электричество и коворкинги",
+      "localFriendliness": "Толерантность, счастье и гостеприимство",
+      "englishProficiency": "Владение английским по индексу EF EPI",
+      "nightlifeEntertainment": "Бары, клубы, живая музыка и фестивали",
+      "touristScamSafety": "Защита от мошенничества и завышения цен",
+      "streetFoodCuisine": "Уличная еда, рынки и местная кухня",
+      "beachWaterQuality": "Качество пляжей, воды и статус Blue Flag",
+      "walkabilityScenicBeauty": "Пешеходные города и живописные кварталы",
+      "shoppingMarkets": "Базары, торговые центры и сувениры",
+      "photographySpots": "Знаковые места и живописные пейзажи",
+      "familyFriendliness": "Детские аттракционы, безопасность и семейное жильё",
+      "adventureSports": "Сёрфинг, рафтинг, трекинг и дайвинг",
+      "historicalSites": "Руины, замки, древние города и наследие ЮНЕСКО"
+    },
+    "metrics": {
+      "tourismSafety": "Безопасность для туристов",
+      "tourismInfrastructure": "Туристическая инфраструктура",
+      "localFriendliness": "Дружелюбие местных",
+      "englishProficiency": "Владение английским",
+      "nightlifeEntertainment": "Ночная жизнь и развлечения",
+      "touristScamSafety": "Безопасность от мошенничества",
+      "streetFoodCuisine": "Уличная еда и кухня",
+      "beachWaterQuality": "Пляжи и качество воды",
+      "walkabilityScenicBeauty": "Пешеходность и живописность",
+      "shoppingMarkets": "Шопинг и рынки",
+      "photographySpots": "Фото-локации",
+      "familyFriendliness": "Для семейного отдыха",
+      "adventureSports": "Экстремальный спорт",
+      "historicalSites": "Исторические места"
+    }
+  },
+  "tourismFilters": {
+    "seasideOnly": "Только у моря",
+    "seasideDesc": "Исключить страны без выхода к морю",
+    "tropicalOnly": "Только тропики",
+    "tropicalDesc": "Только страны с тропическим климатом",
+    "visaFreeOnly": "Безвизовый въезд",
+    "visaFreeDesc": "Только страны с безвизовым туристическим въездом",
+    "englishFriendly": "Англоязычные",
+    "englishFriendlyDesc": "Уровень английского ≥ 50",
+    "budgetFriendly": "Бюджетные",
+    "budgetFriendlyDesc": "Базовая стоимость жизни ≤ $1 500/мес",
+    "activityTags": "Активности",
+    "travelDates": "Даты поездки",
+    "from": "С",
+    "to": "По",
+    "clearDates": "Сбросить",
+    "seasonalHint": "Рейтинги скорректированы для сезонного качества в выбранные даты."
+  },
+  "tourismTags": {
+    "beach": "Пляж и купание",
+    "island": "Островные страны",
+    "ski": "Горнолыжные курорты",
+    "mountains": "Горы и хайкинг",
+    "historic": "Исторические города",
+    "wildlife": "Дикая природа и сафари",
+    "diving": "Дайвинг и снорклинг",
+    "desert": "Пустыни и приключения"
+  },
+  "tourismWeights": {
+    "title": "Веса туризма",
+    "hint": "Настройте важность каждой туристической метрики для персонализации рейтинга.",
+    "groupLabel": "Туристические метрики",
+    "metricsLabel": "Туристические метрики",
+    "filtersLabel": "Фильтры",
+    "groups": {
+      "safetyPeople": "Безопасность и люди",
+      "sightseeingNature": "Достопримечательности и природа",
+      "activitiesLifestyle": "Активности и образ жизни"
+    }
+  },
+  "tourismBudget": {
+    "groupLabel": "Бюджет путешествия",
+    "enable": "Включить оценку по бюджету",
+    "enableDesc": "При включении страны ранжируются по сочетанию туристического качества и доступности бюджета.",
+    "perDay": "/день",
+    "accommodation": "Жильё",
+    "accomTypes": {
+      "hotel": "Отель",
+      "hotel5": "Отель ★★★★★",
+      "hotel4": "Отель ★★★★",
+      "hotel3": "Отель ★★★",
+      "hotel2": "Отель ★★",
+      "hotel1": "Отель ★",
+      "resort": "Курорт",
+      "hostel": "Хостел",
+      "airbnb": "Airbnb",
+      "rental": "Аренда"
+    },
+    "travellers": "Путешественники",
+    "diningLabel": "Еда и питание",
+    "diningTypes": {
+      "market": "Рынок",
+      "casual": "Кафе",
+      "restaurants": "Рестораны"
+    },
+    "budgetBlend": "Баланс бюджета",
+    "budgetBlendDesc": "Контролирует баланс между качеством туризма и доступностью бюджета в рейтинге.",
+    "tourismQuality": "Качество туризма",
+    "affordability": "Доступность",
+    "activityBlend": "Баланс активностей",
+    "activityBlendDesc": "Контролирует, насколько сильно выбранные теги активностей влияют на рейтинг по сравнению с общими метриками туризма.",
+    "tourismMetrics": "Метрики туризма",
+    "activityQuality": "Качество активностей",
+    "dailyCost": "Дневная стоимость",
+    "costBreakdown": "Расходы за день",
+    "categories": {
+      "accommodation": "Жильё",
+      "food": "Еда и рестораны",
+      "transport": "Транспорт",
+      "activities": "Развлечения"
+    },
+    "total": "Итого",
+    "surplus": "остаток"
   }
 }

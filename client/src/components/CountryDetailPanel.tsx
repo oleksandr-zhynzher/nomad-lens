@@ -16,7 +16,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { RankedCountry } from "../utils/types";
+import { TOURISM_GROUPS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
+import {
+  computeTourismScore,
+  tourismScoreColour,
+} from "../utils/tourismScoring";
+import { TOURISM_COLORS } from "../utils/tourismColors";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
 
@@ -208,6 +214,127 @@ export function CountryDetailPanel({
               {t("countryDetail.scoreBreakdown")}
             </h3>
             <ScoreBreakdown country={c} />
+
+            {/* Tourism Scores Section */}
+            {(() => {
+              const tScore = computeTourismScore(c);
+              if (tScore == null) return null;
+              return (
+                <div style={{ marginTop: "24px" }}>
+                  <h3
+                    style={{
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "11px",
+                      fontWeight: 600,
+                      letterSpacing: "1.5px",
+                      textTransform: "uppercase",
+                      color: "#6B9E6B",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    {t("countryDetail.tourismScores", "Tourism Score")}
+                    <span
+                      style={{
+                        marginLeft: "8px",
+                        fontFamily: "IBM Plex Mono, monospace",
+                        fontSize: "13px",
+                        fontWeight: 700,
+                        color: tourismScoreColour(tScore),
+                      }}
+                    >
+                      {tScore.toFixed(1)}
+                    </span>
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    {TOURISM_GROUPS.map((group) => {
+                      const visibleKeys = group.keys.filter(
+                        (k) => c.scores[k]?.value != null,
+                      );
+                      if (visibleKeys.length === 0) return null;
+                      return (
+                        <div key={group.labelKey}>
+                          <div
+                            style={{
+                              fontFamily: "Inter, sans-serif",
+                              fontSize: "9px",
+                              fontWeight: 600,
+                              letterSpacing: "1px",
+                              textTransform: "uppercase",
+                              color: "#666",
+                              marginBottom: "6px",
+                            }}
+                          >
+                            {t(
+                              `tourismWeights.groups.${group.labelKey}`,
+                              group.labelKey,
+                            )}
+                          </div>
+                          <div className="flex flex-col gap-1.5">
+                            {visibleKeys.map((key) => {
+                              const val = c.scores[key]!.value!;
+                              const color = TOURISM_COLORS[key] ?? "#888";
+                              return (
+                                <div
+                                  key={key}
+                                  className="flex items-center gap-2"
+                                  style={{ height: "22px" }}
+                                >
+                                  <span
+                                    style={{
+                                      fontFamily: "Inter, sans-serif",
+                                      fontSize: "11px",
+                                      color: "#9E9E9E",
+                                      width: "130px",
+                                      flexShrink: 0,
+                                    }}
+                                  >
+                                    {t(
+                                      `tourism.metrics.${key}`,
+                                      CATEGORY_LABELS[key],
+                                    )}
+                                  </span>
+                                  <div
+                                    style={{
+                                      flex: 1,
+                                      height: "6px",
+                                      borderRadius: "3px",
+                                      backgroundColor: "#2A2A2A",
+                                      overflow: "hidden",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        width: `${val}%`,
+                                        height: "100%",
+                                        backgroundColor: color,
+                                        borderRadius: "3px",
+                                      }}
+                                    />
+                                  </div>
+                                  <span
+                                    style={{
+                                      fontFamily: "IBM Plex Mono, monospace",
+                                      fontSize: "11px",
+                                      fontWeight: 600,
+                                      color: "#E8E9EB",
+                                      width: "28px",
+                                      textAlign: "right",
+                                      flexShrink: 0,
+                                    }}
+                                  >
+                                    {val.toFixed(0)}
+                                  </span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
 
             {/* Nomad Visa Section */}
             {c.nomadVisa && (

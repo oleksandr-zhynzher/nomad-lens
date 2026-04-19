@@ -689,9 +689,8 @@ export function NomadVisaComparison({
           {/* Sticky header */}
           <div
             ref={headerRef}
-            className="sticky z-10"
+            className="sticky z-10 top-14 sm:top-[112px]"
             style={{
-              top: "56px",
               overflowX: "auto",
               scrollbarWidth: "none",
               backgroundColor: "#0F1114",

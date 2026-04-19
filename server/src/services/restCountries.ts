@@ -1,9 +1,9 @@
-import type { RestCountry } from '../utils/types';
-import { cache } from '../middleware/cache';
+import type { RestCountry } from "../utils/types";
+import { cache } from "../middleware/cache";
 
-const CACHE_KEY = 'restcountries:all';
+const CACHE_KEY = "restcountries:all";
 const API_URL =
-  'https://restcountries.com/v3.1/all?fields=name,cca2,cca3,region,subregion,population,flags,capital,capitalInfo,latlng';
+  "https://restcountries.com/v3.1/all?fields=name,cca2,cca3,region,subregion,population,flags,capital,latlng,landlocked";
 
 export async function fetchRestCountries(): Promise<RestCountry[]> {
   const cached = cache.get<RestCountry[]>(CACHE_KEY);

@@ -23,7 +23,7 @@ export const api = {
       return Promise.resolve(window.__NOMAD_LENS_DATA__);
     }
     if (BASE_URL === "") {
-      return Promise.resolve(localCountriesData as CountryData[]);
+      return Promise.resolve(localCountriesData as unknown as CountryData[]);
     }
     return get<CountryData[]>("/api/countries");
   },

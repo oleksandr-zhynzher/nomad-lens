@@ -182,3 +182,8 @@
     border-right-color: var(--border);
   }
 }
+
+/* Remove blue focus outline from date inputs in weight panel */
+input[type="date"]:focus {
+  outline: none;
+}

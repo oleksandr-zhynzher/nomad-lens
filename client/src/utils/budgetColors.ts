@@ -8,3 +8,11 @@ export const COST_COLORS: Record<string, string> = {
   coworking: "#8B7BAD",
   healthInsurance: "#C07A9B",
 };
+
+/** Color palette for tourism daily-budget breakdown */
+export const TOURISM_COST_COLORS: Record<string, string> = {
+  accommodation: "#8F5A3C",
+  food: "#6B9E6B",
+  transport: "#5B8FA8",
+  activities: "#C2956A",
+};

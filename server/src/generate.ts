@@ -25,6 +25,11 @@ import {
   average,
   climateScore,
 } from "./utils/normalize";
+import {
+  computeTourismTags,
+  computeTourismTagScores,
+  computeTourismTagSeasonality,
+} from "./utils/tourismTags";
 
 // Country name + capital translations (Ukrainian / Russian) from Wikidata
 const countriesI18n: Record<
@@ -75,7 +80,7 @@ async function generate(): Promise<void> {
     const batch = countries.slice(i, i + CLIMATE_BATCH);
     await Promise.all(
       batch.map(async (c) => {
-        const latLng = c.capitalInfo?.latlng ?? c.latlng;
+        const latLng = c.latlng;
         if (!latLng) return;
         const result = await fetchClimate(latLng[0], latLng[1]).catch(
           () => null,
@@ -640,8 +645,110 @@ async function generate(): Promise<void> {
       },
     };
 
+    // ── Tourism Safety ───────────────────────────────────────────────────
+    // Reuses crime/peace (from safety) and polStab (from governance).
+    const tourismSafety: CategoryScore = {
+      value: average([
+        invertMinMax(crime?.homicideRate ?? null, 0.5, 50),
+        invertMinMax(peace?.score ?? null, 1, 3.5),
+        minMax(polStab?.value ?? null, -2.5, 2.5),
+      ]),
+      indicators: {
+        ...(crime
+          ? { homicideRate: ind(crime.homicideRate, "per 100k", crime.year) }
+          : {}),
+        ...(peace ? { peaceIndex: ind(peace.score, "index", peace.year) } : {}),
+        ...(polStab?.value != null
+          ? { politicalStability: ind(polStab.value, "WGI", polStab.year) }
+          : {}),
+      },
+    };
+
+    // ── Accommodation Cost ───────────────────────────────────────────────
+    const col = localData.getCostOfLiving(iso2);
+
+    const accommodationCost: CategoryScore = {
+      value: average([
+        invertMinMax(col?.rentMajorCity ?? null, 150, 3000),
+        invertMinMax(col?.rentSmallerCity ?? null, 100, 2000),
+      ]),
+      indicators: {
+        ...(col?.rentMajorCity != null
+          ? { rentMajorCity: ind(col.rentMajorCity, "USD/mo", 2025) }
+          : {}),
+        ...(col?.rentSmallerCity != null
+          ? { rentSmallerCity: ind(col.rentSmallerCity, "USD/mo", 2025) }
+          : {}),
+      },
+    };
+
+    // ── Transport Cost ───────────────────────────────────────────────────
+    // Local transport affordability for travellers.
+    const transportCost: CategoryScore = {
+      value: average([
+        invertMinMax(col?.transport ?? null, 10, 200),
+        invertMinMax(col?.utilities ?? null, 20, 300),
+      ]),
+      indicators: {
+        ...(col?.transport != null
+          ? { transportCost: ind(col.transport, "USD/mo", 2025) }
+          : {}),
+        ...(col?.utilities != null
+          ? { utilitiesCost: ind(col.utilities, "USD/mo", 2025) }
+          : {}),
+      },
+    };
+
+    // ── Tourism Infrastructure ───────────────────────────────────────────
+    // Internet, electricity, coworking — practical infrastructure for tourists.
+    const tourismInfrastructure: CategoryScore = {
+      value: average([
+        minMax(internet?.value ?? null, 0, 100),
+        minMax(elec?.value ?? null, 50, 100),
+        invertMinMax(col?.coworking ?? null, 20, 400),
+      ]),
+      indicators: {
+        ...(internet?.value != null
+          ? { internetUsers: ind(internet.value, "%", internet.year) }
+          : {}),
+        ...(elec?.value != null
+          ? { electricityAccess: ind(elec.value, "%", elec.year) }
+          : {}),
+        ...(col?.coworking != null
+          ? { coworkingCost: ind(col.coworking, "USD/mo", 2025) }
+          : {}),
+      },
+    };
+
+    // ── Local Friendliness ───────────────────────────────────────────────
+    // English proficiency, social tolerance, and happiness — how welcoming
+    // the locals are to tourists.
+    const localFriendliness: CategoryScore = {
+      value: average([
+        minMax(epiEntry?.score ?? null, 200, 700),
+        minMax(socTol?.score ?? null, 0, 100),
+        minMax(hap?.score ?? null, 2, 8),
+      ]),
+      indicators: {
+        ...(epiEntry
+          ? {
+              englishProficiency: ind(
+                epiEntry.score,
+                "EPI score",
+                epiEntry.year,
+              ),
+            }
+          : {}),
+        ...(socTol
+          ? { socialTolerance: ind(socTol.score, "score", socTol.year) }
+          : {}),
+        ...(hap ? { happinessScore: ind(hap.score, "score", hap.year) } : {}),
+      },
+    };
+
     // ── AI-Analyzed Metrics ──────────────────────────────────────────────
     const ai = localData.getAiMetrics(iso2);
+    const tourismAi = localData.getTourismAiMetrics(iso2);
 
     const nomadCommunity: CategoryScore = {
       value: ai?.nomadCommunity ?? null,
@@ -697,6 +804,109 @@ async function generate(): Promise<void> {
       },
     };
 
+    // ── Tourism AI Metrics ───────────────────────────────────────────────
+    const nightlifeEntertainment: CategoryScore = {
+      value: tourismAi?.nightlifeEntertainment ?? null,
+      indicators: {
+        ...(tourismAi?.nightlifeEntertainment != null
+          ? {
+              aiComposite: ind(
+                tourismAi.nightlifeEntertainment,
+                "AI score",
+                2026,
+              ),
+            }
+          : {}),
+      },
+    };
+
+    const touristScamSafety: CategoryScore = {
+      value: tourismAi?.touristScamSafety ?? null,
+      indicators: {
+        ...(tourismAi?.touristScamSafety != null
+          ? { aiComposite: ind(tourismAi.touristScamSafety, "AI score", 2026) }
+          : {}),
+      },
+    };
+
+    const streetFoodCuisine: CategoryScore = {
+      value: tourismAi?.streetFoodCuisine ?? null,
+      indicators: {
+        ...(tourismAi?.streetFoodCuisine != null
+          ? { aiComposite: ind(tourismAi.streetFoodCuisine, "AI score", 2026) }
+          : {}),
+      },
+    };
+
+    const beachWaterQuality: CategoryScore = {
+      value: tourismAi?.beachWaterQuality ?? null,
+      indicators: {
+        ...(tourismAi?.beachWaterQuality != null
+          ? { aiComposite: ind(tourismAi.beachWaterQuality, "AI score", 2026) }
+          : {}),
+      },
+    };
+
+    const walkabilityScenicBeauty: CategoryScore = {
+      value: tourismAi?.walkabilityScenicBeauty ?? null,
+      indicators: {
+        ...(tourismAi?.walkabilityScenicBeauty != null
+          ? {
+              aiComposite: ind(
+                tourismAi.walkabilityScenicBeauty,
+                "AI score",
+                2026,
+              ),
+            }
+          : {}),
+      },
+    };
+
+    const shoppingMarkets: CategoryScore = {
+      value: tourismAi?.shoppingMarkets ?? null,
+      indicators: {
+        ...(tourismAi?.shoppingMarkets != null
+          ? { aiComposite: ind(tourismAi.shoppingMarkets, "AI score", 2026) }
+          : {}),
+      },
+    };
+
+    const photographySpots: CategoryScore = {
+      value: tourismAi?.photographySpots ?? null,
+      indicators: {
+        ...(tourismAi?.photographySpots != null
+          ? { aiComposite: ind(tourismAi.photographySpots, "AI score", 2026) }
+          : {}),
+      },
+    };
+
+    const familyFriendliness: CategoryScore = {
+      value: tourismAi?.familyFriendliness ?? null,
+      indicators: {
+        ...(tourismAi?.familyFriendliness != null
+          ? { aiComposite: ind(tourismAi.familyFriendliness, "AI score", 2026) }
+          : {}),
+      },
+    };
+
+    const adventureSports: CategoryScore = {
+      value: tourismAi?.adventureSports ?? null,
+      indicators: {
+        ...(tourismAi?.adventureSports != null
+          ? { aiComposite: ind(tourismAi.adventureSports, "AI score", 2026) }
+          : {}),
+      },
+    };
+
+    const historicalSites: CategoryScore = {
+      value: tourismAi?.historicalSites ?? null,
+      indicators: {
+        ...(tourismAi?.historicalSites != null
+          ? { aiComposite: ind(tourismAi.historicalSites, "AI score", 2026) }
+          : {}),
+      },
+    };
+
     // ── Assemble & filter ────────────────────────────────────────────────
     const scores = {
       economy,
@@ -722,6 +932,21 @@ async function generate(): Promise<void> {
       airConnectivity,
       culturalHeritage,
       healthcareCost,
+      tourismSafety,
+      accommodationCost,
+      transportCost,
+      tourismInfrastructure,
+      localFriendliness,
+      nightlifeEntertainment,
+      touristScamSafety,
+      streetFoodCuisine,
+      beachWaterQuality,
+      walkabilityScenicBeauty,
+      shoppingMarkets,
+      photographySpots,
+      familyFriendliness,
+      adventureSports,
+      historicalSites,
       nomadCommunity,
       visaFriendliness,
       costEfficiency,
@@ -754,6 +979,23 @@ async function generate(): Promise<void> {
       };
     }
 
+    const tourismTags = computeTourismTags(
+      iso2,
+      rc.landlocked ?? false,
+      clim?.hottestMonth,
+    );
+    const tourismTagScores = computeTourismTagScores(iso2, tourismTags);
+    const tourismTagSeasonality =
+      tourismTags.length > 0 && clim
+        ? computeTourismTagSeasonality(
+            iso2,
+            tourismTags,
+            rc.latlng?.[0] ?? 0,
+            clim.annualMeanTemp,
+            clim.tempRange,
+          )
+        : undefined;
+
     data.push({
       code: iso2,
       name: rc.name.common,
@@ -761,14 +1003,18 @@ async function generate(): Promise<void> {
       population: rc.population,
       flagUrl: rc.flags.svg || rc.flags.png,
       capital: rc.capital?.[0] ?? "",
-      lat: rc.capitalInfo?.latlng?.[0] ?? rc.latlng?.[0] ?? 0,
-      lng: rc.capitalInfo?.latlng?.[1] ?? rc.latlng?.[1] ?? 0,
+      lat: rc.latlng?.[0] ?? 0,
+      lng: rc.latlng?.[1] ?? 0,
       hasNomadVisa: localData.hasNomadVisa(iso2),
       isSchengen: localData.isSchengen(iso2),
       touristVisaDays: localData.getTouristVisaDays(iso2),
+      landlocked: rc.landlocked ?? false,
+      tourismTags,
+      tourismTagScores,
+      tourismTagSeasonality,
       nomadVisa: localData.getNomadVisaDetails(iso2) ?? undefined,
       climateData: clim ?? undefined,
-      costOfLiving: localData.getCostOfLiving(iso2) ?? null,
+      costOfLiving: col ?? null,
       scores,
       ...(Object.keys(countryI18n).length > 0 ? { i18n: countryI18n } : {}),
     });

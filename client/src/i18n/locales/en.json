@@ -4,6 +4,7 @@
     "dataSources": "Data Sources",
     "nomadVisas": "Nomad",
     "budgetMatcher": "Budget",
+    "tourism": "Tourism",
     "github": "GitHub"
   },
   "langSwitcher": {
@@ -107,7 +108,10 @@
     "indicatorHeader": "Indicator",
     "overallScore": "Overall Score",
     "online": "Online",
-    "inPerson": "In-person"
+    "inPerson": "In-person",
+    "tourism": "Tourism",
+    "tourismTitle": "Tourism Comparison",
+    "tourismSubtitle": "Compare tourism appeal across countries side by side"
   },
   "mobileSheet": {
     "weightsAndPreferences": "Weights & Preferences",
@@ -132,6 +136,7 @@
       "economic": "ECONOMIC",
       "healthWellbeing": "HEALTH & WELLBEING",
       "safetyGovernance": "SAFETY & GOVERNANCE",
+      "safetyFreedom": "SAFETY & FREEDOM",
       "educationDevelopment": "EDUCATION & DEVELOPMENT",
       "environmentClimate": "ENVIRONMENT & CLIMATE",
       "connectivity": "CONNECTIVITY",
@@ -169,6 +174,7 @@
     "compositeScore": "COMPOSITE SCORE",
     "nomadVisa": "Nomad Visa",
     "scoreBreakdown": "SCORE BREAKDOWN",
+    "tourismScores": "TOURISM SCORE",
     "viewInList": "View in List",
     "nomadVisaDetails": "Digital Nomad Visa",
     "climate": {
@@ -305,6 +311,10 @@
     "aiIndicatorsLabel_other": "{{count}} AI indicators",
     "aiSection": "AI-Powered Indicators",
     "aiSectionNote": "— off by default, enable in the weight panel",
+    "tourismSection": "Tourism Indicators",
+    "tourismSectionNote": "— standalone metrics on the Tourism page",
+    "tourismIndicatorsLabel_one": "{{count}} tourism indicator",
+    "tourismIndicatorsLabel_other": "{{count}} tourism indicators",
     "indicators": {
       "economy": {
         "name": "Economy",
@@ -473,6 +483,96 @@
         "description": "Daily-life friendliness to foreigners, language accessibility for non-speakers, scam prevalence, and bureaucratic ease — real friction for remote workers, not tourist experience.",
         "source": "AI-analyzed (Claude) — InterNations, NomadList, World Bank, travel advisories",
         "weight": "AI metric — off by default"
+      },
+      "tourismSafety": {
+        "name": "Tourism Safety",
+        "description": "Personal safety for travellers combining homicide rate, Global Peace Index, and political stability — lower crime and conflict exposure scores higher.",
+        "source": "UNODC · IEP · World Bank WGI",
+        "weight": "Tourism metric"
+      },
+      "accommodationCost": {
+        "name": "Accommodation Cost",
+        "description": "Inverted rental costs in major and smaller cities — cheaper accommodation scores higher, ideal for budget-conscious travellers.",
+        "source": "Numbeo · Livingcost.org",
+        "weight": "Tourism metric"
+      },
+      "transportCost": {
+        "name": "Transport Cost",
+        "description": "Local transport and utilities affordability — lower costs mean easier day-to-day travel for visitors.",
+        "source": "Numbeo · Livingcost.org",
+        "weight": "Tourism metric"
+      },
+      "tourismInfrastructure": {
+        "name": "Tourism Infrastructure",
+        "description": "Internet coverage, electricity access, and coworking availability — practical infrastructure for tourists and remote workers.",
+        "source": "World Bank · Numbeo",
+        "weight": "Tourism metric"
+      },
+      "localFriendliness": {
+        "name": "Local Friendliness",
+        "description": "English proficiency, social tolerance, and happiness — how welcoming and accessible locals are to foreign visitors.",
+        "source": "EF EPI · ILGA/Equaldex · UN WHR",
+        "weight": "Tourism metric"
+      },
+      "nightlifeEntertainment": {
+        "name": "Nightlife & Entertainment",
+        "description": "Bars, clubs, live music, festivals, and cultural events — quality and variety of evening and nighttime entertainment.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "touristScamSafety": {
+        "name": "Tourist Scam Safety",
+        "description": "Safety from tourist scams, overcharging, and fraud — higher scores mean fewer risks for visitors.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "streetFoodCuisine": {
+        "name": "Street Food & Cuisine",
+        "description": "Quality and variety of street food, food markets, and local cuisine reputation — a food lover's paradise score.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "beachWaterQuality": {
+        "name": "Beach & Water Quality",
+        "description": "Beach quality, water clarity, and Blue Flag status — coastal appeal for sun-seekers. Null for landlocked countries.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "walkabilityScenicBeauty": {
+        "name": "Walkability & Scenic Beauty",
+        "description": "Pedestrian-friendly cities, scenic old towns, viewpoints, and promenades — how pleasant it is to explore on foot.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "shoppingMarkets": {
+        "name": "Shopping & Markets",
+        "description": "Bazaars, malls, luxury outlets, local crafts, and souvenir shopping — retail therapy and market exploration.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "photographySpots": {
+        "name": "Photography Spots",
+        "description": "Iconic landmarks, photogenic landscapes, and unique architecture — density of Instagram-worthy locations.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "familyFriendliness": {
+        "name": "Family Friendliness",
+        "description": "Kid-friendly attractions, theme parks, safety, and family accommodation — suitability for travelling with children.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "adventureSports": {
+        "name": "Adventure Sports",
+        "description": "Paragliding, bungee, surfing, rafting, zip-lines, trekking, and diving — adrenaline activities and outdoor adventures.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
+      },
+      "historicalSites": {
+        "name": "Historical Sites",
+        "description": "Ruins, castles, ancient cities, UNESCO heritage density, and archaeological richness — deep history to explore.",
+        "source": "AI composite",
+        "weight": "Tourism metric"
       }
     }
   },
@@ -764,5 +864,152 @@
         "methodology": "Based on published rates from popular nomad health insurance providers. Represents a standard plan for a healthy adult aged 25-40 with global coverage excluding the US."
       }
     }
+  },
+  "tourism": {
+    "eyebrow": "EXPLORE",
+    "title": "TOURISM EXPLORER",
+    "subtitle": "Discover the best countries to visit — ranked by safety, culture, nature, cost, and seasonal appeal.",
+    "metric": "Metric",
+    "overallScore": "Tourism Score",
+    "searchPlaceholder": "Search countries…",
+    "allRegions": "All Regions",
+    "compare": "Compare",
+    "countries_one": "{{count}} country",
+    "countries_other": "{{count}} countries",
+    "loading": "Loading tourism data…",
+    "noResults": "No countries match your filters.",
+    "viewCountry": "View Profile",
+    "metricCards": {
+      "tourismSafety": "Safety",
+      "tourismInfrastructure": "Infra",
+      "localFriendliness": "Friendliness",
+      "englishProficiency": "English",
+      "nightlifeEntertainment": "Nightlife",
+      "touristScamSafety": "Scam Safety",
+      "streetFoodCuisine": "Street Food",
+      "beachWaterQuality": "Beaches",
+      "walkabilityScenicBeauty": "Walkability",
+      "shoppingMarkets": "Shopping",
+      "photographySpots": "Photo Spots",
+      "familyFriendliness": "Family",
+      "adventureSports": "Adventure",
+      "historicalSites": "History"
+    },
+    "metricDesc": {
+      "tourismSafety": "Crime rate, peace score & political stability",
+      "tourismInfrastructure": "Internet, electricity & coworking availability",
+      "localFriendliness": "Social tolerance, happiness & hospitality",
+      "englishProficiency": "English fluency measured by EF EPI index",
+      "nightlifeEntertainment": "Bars, clubs, live music & cultural events",
+      "touristScamSafety": "Safety from scams, overcharging & fraud",
+      "streetFoodCuisine": "Street food, food markets & local cuisine quality",
+      "beachWaterQuality": "Beach quality, water clarity & Blue Flag status",
+      "walkabilityScenicBeauty": "Pedestrian-friendly cities & scenic old towns",
+      "shoppingMarkets": "Bazaars, malls, crafts & souvenir shopping",
+      "photographySpots": "Iconic landmarks & photogenic landscapes",
+      "familyFriendliness": "Kid-friendly attractions, safety & family stays",
+      "adventureSports": "Surfing, rafting, trekking, diving & zip-lines",
+      "historicalSites": "Ruins, castles, ancient cities & UNESCO heritage"
+    },
+    "metrics": {
+      "tourismSafety": "Tourism Safety",
+      "tourismInfrastructure": "Tourism Infrastructure",
+      "localFriendliness": "Local Friendliness",
+      "englishProficiency": "English Proficiency",
+      "nightlifeEntertainment": "Nightlife & Entertainment",
+      "touristScamSafety": "Tourist Scam Safety",
+      "streetFoodCuisine": "Street Food & Cuisine",
+      "beachWaterQuality": "Beach & Water Quality",
+      "walkabilityScenicBeauty": "Walkability & Scenic Beauty",
+      "shoppingMarkets": "Shopping & Markets",
+      "photographySpots": "Photography Spots",
+      "familyFriendliness": "Family Friendliness",
+      "adventureSports": "Adventure Sports",
+      "historicalSites": "Historical Sites"
+    }
+  },
+  "tourismFilters": {
+    "seasideOnly": "Seaside only",
+    "seasideDesc": "Exclude landlocked countries",
+    "tropicalOnly": "Tropical only",
+    "tropicalDesc": "Only countries with tropical climate",
+    "visaFreeOnly": "Visa-free entry",
+    "visaFreeDesc": "Only countries with visa-free tourist entry",
+    "englishFriendly": "English-friendly",
+    "englishFriendlyDesc": "English proficiency score ≥ 50",
+    "budgetFriendly": "Budget-friendly",
+    "budgetFriendlyDesc": "Basic cost of living ≤ $1,500/mo",
+    "activityTags": "Activities",
+    "travelDates": "Travel Dates",
+    "from": "From",
+    "to": "To",
+    "clearDates": "Clear",
+    "seasonalHint": "Rankings are adjusted for seasonal quality during your travel dates."
+  },
+  "tourismTags": {
+    "beach": "Beach & Swimming",
+    "island": "Island Nations",
+    "ski": "Ski Resorts",
+    "mountains": "Mountains & Hiking",
+    "historic": "Historic Cities",
+    "wildlife": "Wildlife & Safari",
+    "diving": "Diving & Snorkeling",
+    "desert": "Desert Adventure"
+  },
+  "tourismWeights": {
+    "title": "Tourism Weights",
+    "hint": "Adjust the importance of each tourism metric to personalise the ranking.",
+    "groupLabel": "Tourism Metrics",
+    "metricsLabel": "Tourism Metrics",
+    "filtersLabel": "Filters",
+    "groups": {
+      "safetyPeople": "Safety & People",
+      "sightseeingNature": "Sightseeing & Nature",
+      "activitiesLifestyle": "Activities & Lifestyle"
+    }
+  },
+  "tourismBudget": {
+    "groupLabel": "Travel Budget",
+    "enable": "Enable budget scoring",
+    "enableDesc": "When enabled, countries are ranked by a blend of tourism quality and budget affordability.",
+    "perDay": "/day",
+    "accommodation": "Accommodation",
+    "accomTypes": {
+      "hotel": "Hotel",
+      "hotel5": "Hotel ★★★★★",
+      "hotel4": "Hotel ★★★★",
+      "hotel3": "Hotel ★★★",
+      "hotel2": "Hotel ★★",
+      "hotel1": "Hotel ★",
+      "resort": "Resort",
+      "hostel": "Hostel",
+      "airbnb": "Airbnb",
+      "rental": "Rental"
+    },
+    "travellers": "Travellers",
+    "diningLabel": "Food & Dining",
+    "diningTypes": {
+      "market": "Market",
+      "casual": "Casual",
+      "restaurants": "Restaurants"
+    },
+    "budgetBlend": "Budget blend",
+    "budgetBlendDesc": "Controls the balance between tourism quality scores and budget affordability in the ranking.",
+    "tourismQuality": "Tourism Quality",
+    "affordability": "Affordability",
+    "activityBlend": "Activity blend",
+    "activityBlendDesc": "Controls how much selected activity tags influence the ranking versus general tourism metrics.",
+    "tourismMetrics": "Tourism Metrics",
+    "activityQuality": "Activity Quality",
+    "dailyCost": "Daily cost",
+    "costBreakdown": "Daily Cost Breakdown",
+    "categories": {
+      "accommodation": "Accommodation",
+      "food": "Food & Dining",
+      "transport": "Transport",
+      "activities": "Activities"
+    },
+    "total": "Total",
+    "surplus": "surplus"
   }
 }

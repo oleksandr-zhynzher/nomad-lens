@@ -218,10 +218,10 @@ const WEIGHT_GROUPS: Array<{
     keys: ["healthcare", "healthcareCost", "foodSecurity", "happiness"],
   },
   {
-    label: "SAFETY & GOVERNANCE",
-    labelKey: "weights.groups.safetyGovernance",
+    label: "SAFETY & FREEDOM",
+    labelKey: "weights.groups.safetyFreedom",
     icon: <ShieldCheck size={16} color="#6B9E6B" />,
-    keys: ["safety", "governance", "personalFreedom", "socialTolerance"],
+    keys: ["safety", "personalFreedom", "socialTolerance"],
   },
   {
     label: "EDUCATION & DEVELOPMENT",
