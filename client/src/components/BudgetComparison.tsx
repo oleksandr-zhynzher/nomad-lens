@@ -155,9 +155,21 @@ export function BudgetComparison({
       return sortDirection === "desc" ? surplusDelta : -surplusDelta;
     });
 
+    if (
+      sortedCodes.length === selectedCodes.length &&
+      sortedCodes.every((code, index) => code === selectedCodes[index])
+    ) {
+      return;
+    }
+
     onSelectedCodesChange(sortedCodes);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortDirection, sortTrigger]);
+  }, [
+    matchMap,
+    onSelectedCodesChange,
+    selectedCodes,
+    sortDirection,
+    sortTrigger,
+  ]);
 
   const filtered = countries
     .filter(
