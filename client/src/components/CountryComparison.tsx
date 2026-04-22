@@ -238,9 +238,23 @@ export function CountryComparison({
       return sortDirection === "desc" ? scoreDelta : -scoreDelta;
     });
 
+    if (
+      sorted.length === selectedCodes.length &&
+      sorted.every((code, index) => code === selectedCodes[index])
+    ) {
+      return;
+    }
+
     onSelectedCodesChange(sorted);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortDirection, sortTrigger]);
+  }, [
+    climatePrefs,
+    countries,
+    onSelectedCodesChange,
+    selectedCodes,
+    sortDirection,
+    sortTrigger,
+    weights,
+  ]);
 
   // Report selection count to parent
   useEffect(() => {
