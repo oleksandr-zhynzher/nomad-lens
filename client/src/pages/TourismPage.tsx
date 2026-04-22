@@ -58,11 +58,27 @@ export function TourismPage() {
   // Mobile focus trap
   useEffect(() => {
     if (!mobileParamsOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const previousFocusedElement =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+
+    document.body.style.overflow = "hidden";
     mobileSheetCloseButtonRef.current?.focus();
-    const sheet = mobileSheetRef.current;
-    if (!sheet) return;
+
     const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMobileParamsOpen(false);
+        return;
+      }
+
       if (e.key !== "Tab") return;
+
+      const sheet = mobileSheetRef.current;
+      if (!sheet) return;
+
       const focusable = sheet.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       );
@@ -78,7 +94,12 @@ export function TourismPage() {
       }
     };
     document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
+
+    return () => {
+      document.removeEventListener("keydown", handler);
+      document.body.style.overflow = previousOverflow;
+      previousFocusedElement?.focus();
+    };
   }, [mobileParamsOpen]);
 
   // Search — matching codes for highlight mode
