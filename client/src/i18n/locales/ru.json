@@ -284,6 +284,8 @@
     "categoriesSubtitle_few": "{{count}} категории · {{name}}",
     "categoriesSubtitle_many": "{{count}} категорий · {{name}}",
     "categoriesSubtitle_other": "{{count}} категории · {{name}}",
+    "tourismProfileSubtitle": "Туристический профиль {{name}} по безопасности, впечатлениям и активностям.",
+    "tourismProfileUnavailable": "Для этой страны туристические индикаторы пока недоступны.",
     "annualAverages": "Средние значения за год",
     "costOfLivingSection": "Стоимость жизни",
     "costOfLivingSubtitle": "USD в месяц · на одного человека",

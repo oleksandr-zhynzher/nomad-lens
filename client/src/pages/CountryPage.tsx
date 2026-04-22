@@ -39,8 +39,17 @@ import { useScoring } from "../hooks/useScoring";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails, NomadVisaLocalization } from "../utils/types";
-import { VISIBLE_CATEGORY_KEYS } from "../utils/types";
+import {
+  CATEGORY_LABELS,
+  TOURISM_GROUPS,
+  VISIBLE_CATEGORY_KEYS,
+} from "../utils/types";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
+import {
+  computeTourismScore,
+  tourismScoreColour,
+} from "../utils/tourismScoring";
+import { TOURISM_COLORS } from "../utils/tourismColors";
 
 type SeasonLabelKey =
   | "four_seasons"
@@ -172,6 +181,27 @@ export function CountryPage() {
       return url;
     }
   };
+
+  const tourismScore = computeTourismScore(c);
+  const tourismGroups = TOURISM_GROUPS.map((group) => ({
+    labelKey: group.labelKey,
+    metrics: group.keys
+      .map((key) => ({ key, value: c.scores[key]?.value ?? null }))
+      .filter(
+        (
+          metric,
+        ): metric is { key: (typeof group.keys)[number]; value: number } =>
+          metric.value != null,
+      ),
+  })).filter((group) => group.metrics.length > 0);
+  const tourismMetricCount = tourismGroups.reduce(
+    (count, group) => count + group.metrics.length,
+    0,
+  );
+  const tourismTags = Array.from(new Set(c.tourismTags ?? [])).sort(
+    (left, right) =>
+      (c.tourismTagScores?.[right] ?? 0) - (c.tourismTagScores?.[left] ?? 0),
+  );
 
   return (
     <Layout>
@@ -1194,6 +1224,274 @@ export function CountryPage() {
           </div>
 
           <ScoreBreakdown country={c} columns={4} />
+
+          {tourismMetricCount > 0 && (
+            <>
+              <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
+              <div
+                style={{
+                  backgroundColor: "var(--color-bg)",
+                  paddingTop: "32px",
+                  paddingBottom: "32px",
+                  gap: "24px",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div className="flex flex-col md:flex-row gap-3 md:items-center">
+                  <h2
+                    style={{
+                      fontFamily: "Oswald, sans-serif",
+                      fontWeight: 700,
+                      color: "#E8E9EB",
+                      margin: 0,
+                    }}
+                  >
+                    {t("nav.tourism", "Tourism")}
+                  </h2>
+                  <span
+                    style={{
+                      flex: 1,
+                      textAlign: "right",
+                      fontFamily: "Inter, sans-serif",
+                      fontSize: "12px",
+                      color: "#757575",
+                    }}
+                  >
+                    {t("indicatorsPage.tourismIndicatorsLabel", {
+                      count: tourismMetricCount,
+                    })}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                  <div
+                    style={{
+                      backgroundColor: "#111111",
+                      borderRadius: "12px",
+                      border: "1px solid #1E1E1E",
+                      padding: "24px",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "16px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: "12px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "10px",
+                          color: "#808080",
+                          letterSpacing: "1.5px",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {t("countryDetail.tourismScores", "Tourism Score")}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: "IBM Plex Mono, monospace",
+                          fontSize: "12px",
+                          color: "#666666",
+                        }}
+                      >
+                        {tourismMetricCount}
+                      </span>
+                    </div>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "baseline",
+                        gap: "10px",
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "Oswald, sans-serif",
+                          fontSize: "42px",
+                          fontWeight: 700,
+                          lineHeight: 1,
+                          color:
+                            tourismScore != null
+                              ? tourismScoreColour(tourismScore)
+                              : "#757575",
+                        }}
+                      >
+                        {tourismScore != null ? tourismScore.toFixed(1) : "—"}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "12px",
+                          color: "#8A8A8A",
+                        }}
+                      >
+                        {t("tourismWeights.metricsLabel", "Tourism Metrics")}
+                      </span>
+                    </div>
+
+                    <p
+                      style={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "12px",
+                        color: "#8A8A8A",
+                        margin: 0,
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {tourismScore != null
+                        ? t(
+                            "countryPage.tourismProfileSubtitle",
+                            "{{name}}'s tourism profile across safety, sightseeing, and activities.",
+                            { name: locC.name },
+                          )
+                        : t(
+                            "countryPage.tourismProfileUnavailable",
+                            "Tourism indicators are not available for this country yet.",
+                          )}
+                    </p>
+
+                    {tourismTags.length > 0 && (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "10px",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: "10px",
+                            color: "#808080",
+                            letterSpacing: "1.5px",
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {t("tourismFilters.activityTags", "Activities")}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
+                          {tourismTags.map((tag) => (
+                            <span
+                              key={tag}
+                              style={{
+                                fontFamily: "Inter, sans-serif",
+                                fontSize: "11px",
+                                fontWeight: 600,
+                                padding: "6px 10px",
+                                borderRadius: "999px",
+                                backgroundColor: "#1A1A1C",
+                                border: "1px solid #252525",
+                                color: "#CFCFCF",
+                              }}
+                            >
+                              {t(`tourismTags.${tag}`, tag)}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {tourismGroups.map((group) => (
+                    <div
+                      key={group.labelKey}
+                      style={{
+                        backgroundColor: "#111111",
+                        borderRadius: "12px",
+                        border: "1px solid #1E1E1E",
+                        padding: "24px",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "14px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "10px",
+                          color: "#808080",
+                          letterSpacing: "1.5px",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {t(
+                          `tourismWeights.groups.${group.labelKey}`,
+                          group.labelKey,
+                        )}
+                      </div>
+
+                      <div className="flex flex-col gap-3">
+                        {group.metrics.map((metric) => (
+                          <div key={metric.key} className="flex flex-col gap-2">
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                gap: "8px",
+                              }}
+                            >
+                              <span
+                                style={{
+                                  fontFamily: "Inter, sans-serif",
+                                  fontSize: "12px",
+                                  color: "#CFCFCF",
+                                }}
+                              >
+                                {t(
+                                  `tourism.metrics.${metric.key}`,
+                                  CATEGORY_LABELS[metric.key],
+                                )}
+                              </span>
+                              <span
+                                style={{
+                                  fontFamily: "IBM Plex Mono, monospace",
+                                  fontSize: "12px",
+                                  fontWeight: 700,
+                                  color: "#E8E9EB",
+                                  flexShrink: 0,
+                                }}
+                              >
+                                {metric.value.toFixed(0)}
+                              </span>
+                            </div>
+
+                            <div
+                              style={{
+                                height: "8px",
+                                borderRadius: "999px",
+                                backgroundColor: "#232323",
+                                overflow: "hidden",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: `${metric.value}%`,
+                                  height: "100%",
+                                  borderRadius: "999px",
+                                  backgroundColor:
+                                    TOURISM_COLORS[metric.key] ?? "#8F5A3C",
+                                }}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
 
           {/* ── Cost of Living ── */}
           {c.costOfLiving && (

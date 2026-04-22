@@ -284,6 +284,8 @@
     "categoriesSubtitle_few": "{{count}} категорії · {{name}}",
     "categoriesSubtitle_many": "{{count}} категорій · {{name}}",
     "categoriesSubtitle_other": "{{count}} категорії · {{name}}",
+    "tourismProfileSubtitle": "Туристичний профіль {{name}} за безпекою, враженнями та активностями.",
+    "tourismProfileUnavailable": "Для цієї країни туристичні індикатори ще недоступні.",
     "annualAverages": "Середні значення за рік",
     "costOfLivingSection": "Вартість життя",
     "costOfLivingSubtitle": "USD на місяць · на одну людину",

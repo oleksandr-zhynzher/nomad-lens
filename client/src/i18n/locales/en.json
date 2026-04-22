@@ -262,6 +262,8 @@
     "performanceBreakdown": "Performance breakdown",
     "categoriesSubtitle_one": "{{count}} category · {{name}}",
     "categoriesSubtitle_other": "{{count}} categories · {{name}}",
+    "tourismProfileSubtitle": "{{name}}'s tourism profile across safety, sightseeing, and activities.",
+    "tourismProfileUnavailable": "Tourism indicators are not available for this country yet.",
     "annualAverages": "Annual averages",
     "costOfLivingSection": "Cost of Living",
     "costOfLivingSubtitle": "USD / month · single nomad",
