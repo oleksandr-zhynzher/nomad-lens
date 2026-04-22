@@ -276,7 +276,10 @@ export function TourismPage() {
                     backgroundColor: "#333333",
                     color: "#9E9E9E",
                   }}
-                  aria-label="Close parameters"
+                  aria-label={t(
+                    "tourism.a11y.closeParameters",
+                    "Close parameters",
+                  )}
                 >
                   <X size={18} />
                 </button>
@@ -315,7 +318,7 @@ export function TourismPage() {
             fontWeight: 600,
           }}
           onClick={() => setMobileParamsOpen(true)}
-          aria-label="Open parameters"
+          aria-label={t("tourism.a11y.openParameters", "Open parameters")}
         >
           <SlidersHorizontal size={18} />
           {t("mobileSheet.parameters", "Parameters")}
@@ -622,7 +625,10 @@ export function TourismPage() {
                                   ? "#CCCCCC"
                                   : "#757575",
                               }}
-                              aria-label="Previous match"
+                              aria-label={t(
+                                "tourism.a11y.previousMatch",
+                                "Previous match",
+                              )}
                             >
                               <ChevronUp size={14} />
                             </button>
@@ -643,7 +649,10 @@ export function TourismPage() {
                                   ? "#CCCCCC"
                                   : "#757575",
                               }}
-                              aria-label="Next match"
+                              aria-label={t(
+                                "tourism.a11y.nextMatch",
+                                "Next match",
+                              )}
                             >
                               <ChevronDown size={14} />
                             </button>
@@ -654,13 +663,17 @@ export function TourismPage() {
                         content={
                           searchMode === "filter" ? (
                             <span>
-                              Switch to <strong>scroll mode</strong> — shows all
-                              countries, scrolls to each match.
+                              {t(
+                                "tourism.searchModeScrollTooltip",
+                                "Switch to scroll mode - shows all countries and scrolls to each match.",
+                              )}
                             </span>
                           ) : (
                             <span>
-                              Switch to <strong>filter mode</strong> — hides
-                              non-matching countries.
+                              {t(
+                                "tourism.searchModeFilterTooltip",
+                                "Switch to filter mode - hides non-matching countries.",
+                              )}
                             </span>
                           )
                         }
@@ -684,8 +697,14 @@ export function TourismPage() {
                           }}
                           aria-label={
                             searchMode === "filter"
-                              ? "Switch to scroll mode"
-                              : "Switch to filter mode"
+                              ? t(
+                                  "tourism.a11y.switchToScrollMode",
+                                  "Switch to scroll mode",
+                                )
+                              : t(
+                                  "tourism.a11y.switchToFilterMode",
+                                  "Switch to filter mode",
+                                )
                           }
                         >
                           {searchMode === "filter" ? (
@@ -769,7 +788,10 @@ export function TourismPage() {
                           color: "#8A8A8A",
                           flexShrink: 0,
                         }}
-                        aria-label="Exit compare mode"
+                        aria-label={t(
+                          "tourism.a11y.exitCompareMode",
+                          "Exit compare mode",
+                        )}
                       >
                         <X size={16} />
                       </button>

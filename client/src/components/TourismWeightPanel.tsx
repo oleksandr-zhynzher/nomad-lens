@@ -100,7 +100,10 @@ function TourismWeightSlider({
         style={{
           background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${value}%, #333333 ${value}%, #333333 100%)`,
         }}
-        aria-label={`${label} weight`}
+        aria-label={t("tourismWeights.weightAriaLabel", {
+          label,
+          defaultValue: "{{label}} weight",
+        })}
       />
     </div>
   );
@@ -139,7 +142,14 @@ export function TourismWeightPanel({
   travelDates,
   onTravelDatesChange,
 }: TourismWeightPanelProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const monthLabelLocale = i18n.language === "ua" ? "uk" : i18n.language;
+  const monthOptions = Array.from({ length: 12 }, (_, index) => ({
+    value: String(index + 1).padStart(2, "0"),
+    label: new Intl.DateTimeFormat(monthLabelLocale, {
+      month: "short",
+    }).format(new Date(2000, index, 1)),
+  }));
 
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({
     TOURISM: false,
@@ -318,7 +328,10 @@ export function TourismWeightPanel({
                     style={{
                       background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((budgetState.dailyBudget - 10) / 490) * 100}%, #333333 ${((budgetState.dailyBudget - 10) / 490) * 100}%, #333333 100%)`,
                     }}
-                    aria-label="Daily budget slider"
+                    aria-label={t(
+                      "tourismBudget.dailyBudgetLabel",
+                      "Daily budget",
+                    )}
                   />
                   <div className="flex justify-between mt-1.5">
                     <span
@@ -411,7 +424,7 @@ export function TourismWeightPanel({
                     style={{
                       background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${budgetState.budgetBlend}%, #333333 ${budgetState.budgetBlend}%, #333333 100%)`,
                     }}
-                    aria-label="Budget blend"
+                    aria-label={t("tourismBudget.budgetBlend", "Budget blend")}
                   />
                   <div className="flex justify-between">
                     <span
@@ -881,29 +894,17 @@ export function TourismWeightPanel({
                           }}
                           style={{ ...selectStyle, flex: 2 }}
                           aria-label={
-                            id === "start" ? "Start month" : "End month"
+                            id === "start"
+                              ? t("tourismFilters.startMonth", "Start month")
+                              : t("tourismFilters.endMonth", "End month")
                           }
                         >
-                          <option value="">Mon</option>
-                          {[
-                            "Jan",
-                            "Feb",
-                            "Mar",
-                            "Apr",
-                            "May",
-                            "Jun",
-                            "Jul",
-                            "Aug",
-                            "Sep",
-                            "Oct",
-                            "Nov",
-                            "Dec",
-                          ].map((m, i) => (
-                            <option
-                              key={m}
-                              value={String(i + 1).padStart(2, "0")}
-                            >
-                              {m}
+                          <option value="">
+                            {t("tourismFilters.monthPlaceholder", "Month")}
+                          </option>
+                          {monthOptions.map((month) => (
+                            <option key={month.value} value={month.value}>
+                              {month.label}
                             </option>
                           ))}
                         </select>
@@ -921,7 +922,11 @@ export function TourismWeightPanel({
                             flex: 1.2,
                             opacity: curMM ? 1 : 0.4,
                           }}
-                          aria-label={id === "start" ? "Start day" : "End day"}
+                          aria-label={
+                            id === "start"
+                              ? t("tourismFilters.startDay", "Start day")
+                              : t("tourismFilters.endDay", "End day")
+                          }
                         >
                           {Array.from(
                             { length: daysInMonth },

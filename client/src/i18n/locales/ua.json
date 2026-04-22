@@ -926,6 +926,18 @@
     "loading": "Завантаження даних…",
     "noResults": "Немає країн, що відповідають фільтрам.",
     "viewCountry": "Профіль країни",
+    "searchModeScrollTooltip": "Перейдіть у режим прокрутки - буде показано всі країни з переходом до кожного збігу.",
+    "searchModeFilterTooltip": "Перейдіть у режим фільтрації - країни без збігів буде приховано.",
+    "a11y": {
+      "openParameters": "Відкрити параметри",
+      "closeParameters": "Закрити параметри",
+      "previousMatch": "Попередній збіг",
+      "nextMatch": "Наступний збіг",
+      "switchToScrollMode": "Перейти в режим прокрутки",
+      "switchToFilterMode": "Перейти в режим фільтрації",
+      "exitCompareMode": "Вийти з режиму порівняння",
+      "flagAlt": "Прапор {{country}}"
+    },
     "metricCards": {
       "tourismSafety": "Безпека",
       "tourismInfrastructure": "Інфра",
@@ -990,6 +1002,11 @@
     "travelDates": "Дати подорожі",
     "from": "З",
     "to": "По",
+    "startMonth": "Початковий місяць",
+    "endMonth": "Кінцевий місяць",
+    "startDay": "Початковий день",
+    "endDay": "Кінцевий день",
+    "monthPlaceholder": "Місяць",
     "clearDates": "Скинути",
     "seasonalHint": "Рейтинги скориговані для сезонної якості у вибрані дати."
   },
@@ -1008,6 +1025,7 @@
     "hint": "Налаштуйте важливість кожної туристичної метрики для персоналізації рейтингу.",
     "groupLabel": "Туристичні метрики",
     "metricsLabel": "Туристичні метрики",
+    "weightAriaLabel": "вага для {{label}}",
     "filtersLabel": "Фільтри",
     "groups": {
       "safetyPeople": "Безпека та люди",
@@ -1019,6 +1037,7 @@
     "groupLabel": "Бюджет подорожі",
     "enable": "Увімкнути оцінку за бюджетом",
     "enableDesc": "При увімкненні країни ранжуються за поєднанням туристичної якості та доступності бюджету.",
+    "dailyBudgetLabel": "Щоденний бюджет",
     "perDay": "/день",
     "accommodation": "Житло",
     "accomTypes": {

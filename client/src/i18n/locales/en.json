@@ -880,6 +880,18 @@
     "loading": "Loading tourism data…",
     "noResults": "No countries match your filters.",
     "viewCountry": "View Profile",
+    "searchModeScrollTooltip": "Switch to scroll mode - shows all countries and scrolls to each match.",
+    "searchModeFilterTooltip": "Switch to filter mode - hides non-matching countries.",
+    "a11y": {
+      "openParameters": "Open parameters",
+      "closeParameters": "Close parameters",
+      "previousMatch": "Previous match",
+      "nextMatch": "Next match",
+      "switchToScrollMode": "Switch to scroll mode",
+      "switchToFilterMode": "Switch to filter mode",
+      "exitCompareMode": "Exit compare mode",
+      "flagAlt": "{{country}} flag"
+    },
     "metricCards": {
       "tourismSafety": "Safety",
       "tourismInfrastructure": "Infra",
@@ -944,6 +956,11 @@
     "travelDates": "Travel Dates",
     "from": "From",
     "to": "To",
+    "startMonth": "Start month",
+    "endMonth": "End month",
+    "startDay": "Start day",
+    "endDay": "End day",
+    "monthPlaceholder": "Month",
     "clearDates": "Clear",
     "seasonalHint": "Rankings are adjusted for seasonal quality during your travel dates."
   },
@@ -962,6 +979,7 @@
     "hint": "Adjust the importance of each tourism metric to personalise the ranking.",
     "groupLabel": "Tourism Metrics",
     "metricsLabel": "Tourism Metrics",
+    "weightAriaLabel": "{{label}} weight",
     "filtersLabel": "Filters",
     "groups": {
       "safetyPeople": "Safety & People",
@@ -973,6 +991,7 @@
     "groupLabel": "Travel Budget",
     "enable": "Enable budget scoring",
     "enableDesc": "When enabled, countries are ranked by a blend of tourism quality and budget affordability.",
+    "dailyBudgetLabel": "Daily budget",
     "perDay": "/day",
     "accommodation": "Accommodation",
     "accomTypes": {

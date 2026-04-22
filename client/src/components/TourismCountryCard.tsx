@@ -137,7 +137,10 @@ export function TourismCountryCard({
           {/* Flag */}
           <img
             src={country.flagUrl}
-            alt={`${locC.name} flag`}
+            alt={t("tourism.a11y.flagAlt", {
+              country: locC.name,
+              defaultValue: "{{country}} flag",
+            })}
             className="object-cover shrink-0"
             style={{ width: "24px", height: "16px", borderRadius: "2px" }}
             loading="lazy"
