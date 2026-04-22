@@ -855,8 +855,8 @@ export function TourismPage() {
               <span style={{ color: "#9E9E9E" }}>
                 {compareMode
                   ? t(
-                      "compare.countrySubtitle",
-                      "Select countries to compare across all indicators",
+                      "compare.tourismSelectionSubtitle",
+                      "Select countries to compare tourism appeal side by side",
                     )
                   : t(
                       "countryList.clickHint",

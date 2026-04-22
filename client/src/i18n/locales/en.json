@@ -111,6 +111,7 @@
     "inPerson": "In-person",
     "tourism": "Tourism",
     "tourismTitle": "Tourism Comparison",
+    "tourismSelectionSubtitle": "Select countries to compare tourism appeal side by side",
     "tourismSubtitle": "Compare tourism appeal across countries side by side"
   },
   "mobileSheet": {
