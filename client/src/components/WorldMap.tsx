@@ -212,7 +212,7 @@ export function WorldMap({
           onClick={() => setZoom((z) => Math.min(z * 1.5, 12))}
           className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
           style={{ color: "#9E9E9E", borderBottom: "1px solid #333333" }}
-          aria-label="Zoom in"
+          aria-label={t("a11y.zoomIn", "Zoom in")}
         >
           +
         </button>
@@ -223,7 +223,7 @@ export function WorldMap({
             color: "#9E9E9E",
             borderBottom: onToggleWeights ? "1px solid #333333" : undefined,
           }}
-          aria-label="Zoom out"
+          aria-label={t("a11y.zoomOut", "Zoom out")}
         >
           −
         </button>
@@ -234,7 +234,7 @@ export function WorldMap({
             style={{
               color: showWeights ? "var(--color-accent-dim)" : "#999999",
             }}
-            aria-label="Toggle parameters"
+            aria-label={t("a11y.toggleParameters", "Toggle parameters")}
           >
             <svg
               width="16"

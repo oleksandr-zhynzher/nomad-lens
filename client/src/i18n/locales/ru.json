@@ -51,6 +51,29 @@
   "search": {
     "placeholder": "Поиск по названию страны…"
   },
+  "a11y": {
+    "toggleMenu": "Переключить меню",
+    "openParameters": "Открыть параметры",
+    "closeParameters": "Закрыть параметры",
+    "clearSearch": "Очистить поиск",
+    "previousMatch": "Предыдущее совпадение",
+    "nextMatch": "Следующее совпадение",
+    "switchToScrollMode": "Переключить в режим прокрутки",
+    "switchToFilterMode": "Переключить в режим фильтрации",
+    "searchModeScrollTooltip": "Переключить в режим прокрутки - будут показаны все страны с переходом к каждому совпадению.",
+    "searchModeFilterTooltip": "Переключить в режим фильтрации - страны без совпадений будут скрыты.",
+    "exitCompareMode": "Выйти из режима сравнения",
+    "zoomIn": "Увеличить",
+    "zoomOut": "Уменьшить",
+    "toggleParameters": "Переключить параметры",
+    "closePanel": "Закрыть панель",
+    "minimumPreferredTemperature": "Минимальная желаемая температура",
+    "maximumPreferredTemperature": "Максимальная желаемая температура",
+    "budgetSlider": "Ползунок бюджета",
+    "qualityBlend": "Баланс качества",
+    "nomadVisaAvailable": "Доступна виза цифрового кочевника",
+    "flagAlt": "Флаг {{country}}"
+  },
   "regions": {
     "label": "РЕГИОНЫ",
     "all": "Все",

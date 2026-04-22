@@ -654,7 +654,10 @@ export function WeightPanel({
                                 style={{
                                   background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((climatePrefs.minTemp + 10) / 55) * 100}%, #333333 ${((climatePrefs.minTemp + 10) / 55) * 100}%, #333333 100%)`,
                                 }}
-                                aria-label="Minimum preferred temperature"
+                                aria-label={t(
+                                  "a11y.minimumPreferredTemperature",
+                                  "Minimum preferred temperature",
+                                )}
                               />
                               <span
                                 style={{
@@ -699,7 +702,10 @@ export function WeightPanel({
                                 style={{
                                   background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((climatePrefs.maxTemp + 10) / 55) * 100}%, #333333 ${((climatePrefs.maxTemp + 10) / 55) * 100}%, #333333 100%)`,
                                 }}
-                                aria-label="Maximum preferred temperature"
+                                aria-label={t(
+                                  "a11y.maximumPreferredTemperature",
+                                  "Maximum preferred temperature",
+                                )}
                               />
                               <span
                                 style={{

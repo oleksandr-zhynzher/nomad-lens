@@ -794,7 +794,7 @@ export function ComparePage() {
                       border: "none",
                       cursor: "pointer",
                     }}
-                    aria-label="Close parameters"
+                    aria-label={t("a11y.closeParameters", "Close parameters")}
                   >
                     <X size={18} />
                   </button>

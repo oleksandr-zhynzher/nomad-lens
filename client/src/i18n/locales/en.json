@@ -43,6 +43,29 @@
   "search": {
     "placeholder": "Search by country name…"
   },
+  "a11y": {
+    "toggleMenu": "Toggle menu",
+    "openParameters": "Open parameters",
+    "closeParameters": "Close parameters",
+    "clearSearch": "Clear search",
+    "previousMatch": "Previous match",
+    "nextMatch": "Next match",
+    "switchToScrollMode": "Switch to scroll mode",
+    "switchToFilterMode": "Switch to filter mode",
+    "searchModeScrollTooltip": "Switch to scroll mode - shows all countries and scrolls to each match.",
+    "searchModeFilterTooltip": "Switch to filter mode - hides non-matching countries.",
+    "exitCompareMode": "Exit compare mode",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "toggleParameters": "Toggle parameters",
+    "closePanel": "Close panel",
+    "minimumPreferredTemperature": "Minimum preferred temperature",
+    "maximumPreferredTemperature": "Maximum preferred temperature",
+    "budgetSlider": "Budget slider",
+    "qualityBlend": "Quality blend",
+    "nomadVisaAvailable": "Nomad Visa Available",
+    "flagAlt": "{{country}} flag"
+  },
   "regions": {
     "label": "REGIONS",
     "all": "All",

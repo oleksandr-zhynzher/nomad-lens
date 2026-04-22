@@ -130,7 +130,7 @@ export function BudgetFilterPanel({ bs }: Props) {
           style={{
             background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${budgetPct}%, #333333 ${budgetPct}%, #333333 100%)`,
           }}
-          aria-label="Budget slider"
+          aria-label={t("a11y.budgetSlider", "Budget slider")}
         />
         <div className="flex justify-between mt-1.5">
           <span
@@ -218,7 +218,7 @@ export function BudgetFilterPanel({ bs }: Props) {
             style={{
               background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${bs.qualityBlend}%, #333333 ${bs.qualityBlend}%, #333333 100%)`,
             }}
-            aria-label="Quality blend"
+            aria-label={t("a11y.qualityBlend", "Quality blend")}
           />
           <div className="flex justify-between">
             <span

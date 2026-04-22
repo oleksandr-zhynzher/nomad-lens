@@ -464,7 +464,7 @@ export function NomadVisasPage() {
                     backgroundColor: "#2A2A2A",
                     color: "#CCCCCC",
                   }}
-                  aria-label="Clear search"
+                  aria-label={t("a11y.clearSearch", "Clear search")}
                 >
                   <X size={12} />
                 </button>
@@ -546,7 +546,7 @@ export function NomadVisasPage() {
                     backgroundColor: "transparent",
                     color: "#8A8A8A",
                   }}
-                  aria-label="Exit compare mode"
+                  aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
                 >
                   <X size={16} />
                 </button>
@@ -1015,7 +1015,10 @@ export function NomadVisasPage() {
                                 >
                                   <img
                                     src={country.flagUrl}
-                                    alt={`${localizeCountry(country, lang).name} flag`}
+                                    alt={t("a11y.flagAlt", "{{country}} flag", {
+                                      country: localizeCountry(country, lang)
+                                        .name,
+                                    })}
                                     style={{
                                       width: "28px",
                                       height: "19px",

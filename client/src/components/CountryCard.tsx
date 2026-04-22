@@ -132,7 +132,7 @@ export function CountryCard({
         {/* Flag */}
         <img
           src={country.flagUrl}
-          alt={`${locC.name} flag`}
+          alt={t("a11y.flagAlt", "{{country}} flag", { country: locC.name })}
           className="object-cover shrink-0"
           style={{ width: "24px", height: "16px", borderRadius: "2px" }}
           loading="lazy"
@@ -162,7 +162,10 @@ export function CountryCard({
             {t(`regions.${regionKey(country.region)}`)}
           </span>
           {country.hasNomadVisa && (
-            <Tooltip content="Nomad Visa Available" side="top">
+            <Tooltip
+              content={t("a11y.nomadVisaAvailable", "Nomad Visa Available")}
+              side="top"
+            >
               <Link
                 to={`${langPrefix}/country/${country.code.toLowerCase()}`}
                 className="shrink-0 inline-flex items-center justify-center"

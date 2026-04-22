@@ -22,6 +22,11 @@ export function LangWrapper() {
     }
   }, [activeLang, isInvalidLang]);
 
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    document.documentElement.lang = activeLang === "ua" ? "uk" : activeLang;
+  }, [activeLang]);
+
   // If a lang segment is present but not supported, redirect to root
   if (isInvalidLang) {
     return <Navigate to="/" replace />;

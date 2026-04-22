@@ -256,7 +256,7 @@ export function BudgetMatcherPage() {
           style={{
             background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${budgetPct}%, #333333 ${budgetPct}%, #333333 100%)`,
           }}
-          aria-label="Budget slider"
+          aria-label={t("a11y.budgetSlider", "Budget slider")}
         />
 
         <div className="flex justify-between mt-1.5">
@@ -345,7 +345,7 @@ export function BudgetMatcherPage() {
             style={{
               background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${bs.qualityBlend}%, #333333 ${bs.qualityBlend}%, #333333 100%)`,
             }}
-            aria-label="Quality blend"
+            aria-label={t("a11y.qualityBlend", "Quality blend")}
           />
           <div className="flex justify-between">
             <span
@@ -831,7 +831,7 @@ export function BudgetMatcherPage() {
                     border: "none",
                     cursor: "pointer",
                   }}
-                  aria-label="Close parameters"
+                  aria-label={t("a11y.closeParameters", "Close parameters")}
                 >
                   <X size={18} />
                 </button>
@@ -860,7 +860,7 @@ export function BudgetMatcherPage() {
             cursor: "pointer",
           }}
           onClick={() => setMobileParamsOpen(true)}
-          aria-label="Open parameters"
+          aria-label={t("a11y.openParameters", "Open parameters")}
         >
           <SlidersHorizontal size={18} />
           {t("mobileSheet.parameters", "Parameters")}
@@ -1076,7 +1076,7 @@ export function BudgetMatcherPage() {
                         backgroundColor: "#2A2A2A",
                         color: "#CCCCCC",
                       }}
-                      aria-label="Clear search"
+                      aria-label={t("a11y.clearSearch", "Clear search")}
                     >
                       <X size={13} />
                     </button>
@@ -1156,7 +1156,10 @@ export function BudgetMatcherPage() {
                         backgroundColor: "#161616",
                         color: "#8A8A8A",
                       }}
-                      aria-label="Exit compare mode"
+                      aria-label={t(
+                        "a11y.exitCompareMode",
+                        "Exit compare mode",
+                      )}
                     >
                       <X size={16} />
                     </button>

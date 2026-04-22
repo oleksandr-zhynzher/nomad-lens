@@ -279,7 +279,9 @@ export function CountryPage() {
               >
                 <img
                   src={c.flagUrl}
-                  alt={`${locC.name} flag`}
+                  alt={t("a11y.flagAlt", "{{country}} flag", {
+                    country: locC.name,
+                  })}
                   style={{ objectFit: "cover", width: "100%", height: "100%" }}
                 />
               </div>

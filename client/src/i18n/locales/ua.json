@@ -51,6 +51,29 @@
   "search": {
     "placeholder": "Пошук за назвою країни…"
   },
+  "a11y": {
+    "toggleMenu": "Перемкнути меню",
+    "openParameters": "Відкрити параметри",
+    "closeParameters": "Закрити параметри",
+    "clearSearch": "Очистити пошук",
+    "previousMatch": "Попередній збіг",
+    "nextMatch": "Наступний збіг",
+    "switchToScrollMode": "Перейти в режим прокрутки",
+    "switchToFilterMode": "Перейти в режим фільтрації",
+    "searchModeScrollTooltip": "Перейдіть у режим прокрутки - буде показано всі країни з переходом до кожного збігу.",
+    "searchModeFilterTooltip": "Перейдіть у режим фільтрації - країни без збігів буде приховано.",
+    "exitCompareMode": "Вийти з режиму порівняння",
+    "zoomIn": "Збільшити",
+    "zoomOut": "Зменшити",
+    "toggleParameters": "Перемкнути параметри",
+    "closePanel": "Закрити панель",
+    "minimumPreferredTemperature": "Мінімальна бажана температура",
+    "maximumPreferredTemperature": "Максимальна бажана температура",
+    "budgetSlider": "Повзунок бюджету",
+    "qualityBlend": "Баланс якості",
+    "nomadVisaAvailable": "Доступна віза для цифрових кочівників",
+    "flagAlt": "Прапор {{country}}"
+  },
   "regions": {
     "label": "РЕГІОНИ",
     "all": "Всі",

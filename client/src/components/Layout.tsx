@@ -380,7 +380,7 @@ export function Layout({ children }: LayoutProps) {
             className="flex items-center justify-center md:hidden"
             style={{ width: "40px", height: "40px", color: "#9E9E9E" }}
             onClick={() => setMobileMenuOpen((previous) => !previous)}
-            aria-label="Toggle menu"
+            aria-label={t("a11y.toggleMenu", "Toggle menu")}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

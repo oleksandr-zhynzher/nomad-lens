@@ -111,7 +111,9 @@ export function CountryDetailPanel({
             <div className="flex items-center gap-3 flex-1 min-w-0">
               <img
                 src={c.flagUrl}
-                alt={`${locC.name} flag`}
+                alt={t("a11y.flagAlt", "{{country}} flag", {
+                  country: locC.name,
+                })}
                 className="object-cover shrink-0"
                 style={{
                   width: "36px",
@@ -168,7 +170,7 @@ export function CountryDetailPanel({
                 borderRadius: "4px",
                 color: "#9E9E9E",
               }}
-              aria-label="Close panel"
+              aria-label={t("a11y.closePanel", "Close panel")}
             >
               <X size={18} />
             </button>
