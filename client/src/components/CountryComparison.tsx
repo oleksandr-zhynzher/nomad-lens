@@ -193,8 +193,8 @@ export function CountryComparison({
     const onHeader = () => {
       body.scrollLeft = header.scrollLeft;
     };
-    body.addEventListener("scroll", onBody);
-    header.addEventListener("scroll", onHeader);
+    body.addEventListener("scroll", onBody, { passive: true });
+    header.addEventListener("scroll", onHeader, { passive: true });
     return () => {
       body.removeEventListener("scroll", onBody);
       header.removeEventListener("scroll", onHeader);

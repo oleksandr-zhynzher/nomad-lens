@@ -42,6 +42,7 @@ export default function App() {
   const [compareMode, setCompareMode] = useState(false);
   const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const initialHighlightRef = useRef(searchParams.get("highlight"));
   const searchInputRef = useRef<HTMLInputElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const mobileSheetRef = useRef<HTMLDivElement>(null);
@@ -83,7 +84,7 @@ export default function App() {
 
   // Handle ?highlight=XX coming from map page country click
   useEffect(() => {
-    const h = searchParams.get("highlight");
+    const h = initialHighlightRef.current;
     if (!h) return;
     setSearchParams(
       (prev) => {
@@ -94,14 +95,21 @@ export default function App() {
       { replace: true },
     );
     if (highlightTimer.current) clearTimeout(highlightTimer.current);
-    setHighlightedCode(h);
-    setTimeout(() => {
+    const scrollTimer = setTimeout(() => {
+      setHighlightedCode(h);
       const el = document.querySelector(`[data-country-code="${h}"]`);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
       highlightTimer.current = setTimeout(() => setHighlightedCode(null), 2500);
     }, 80);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    return () => {
+      clearTimeout(scrollTimer);
+      if (highlightTimer.current) {
+        clearTimeout(highlightTimer.current);
+        highlightTimer.current = null;
+      }
+    };
+  }, [setSearchParams]);
 
   const displayedRanked = useMemo(() => {
     if (searchMode === "filter" && search.trim().length >= 1) {
@@ -133,9 +141,10 @@ export default function App() {
       .map((r) => r.country.code);
   }, [ranked, search, lang]);
   const [matchCursor, setMatchCursor] = useState(0);
-  useEffect(() => {
+  const updateSearch = useCallback((value: string) => {
+    setSearch(value);
     setMatchCursor(0);
-  }, [search]);
+  }, []);
   useEffect(() => {
     const code = matchingCodes[matchCursor];
     if (!code) return;
@@ -162,16 +171,17 @@ export default function App() {
   // Free keyboard navigation (no search active)
   const [navCursor, setNavCursor] = useState<number | null>(null);
   const allCodes = useMemo(() => ranked.map((r) => r.country.code), [ranked]);
+  const activeNavCursor =
+    navCursor !== null && navCursor >= 0 && navCursor < allCodes.length
+      ? navCursor
+      : null;
   useEffect(() => {
-    setNavCursor(null);
-  }, [ranked]);
-  useEffect(() => {
-    if (navCursor === null) return;
-    const code = allCodes[navCursor];
+    if (activeNavCursor === null) return;
+    const code = allCodes[activeNavCursor];
     if (!code) return;
     const el = document.querySelector(`[data-country-code="${code}"]`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [navCursor, allCodes]);
+  }, [activeNavCursor, allCodes]);
 
   // Arrow key handler
   useEffect(() => {
@@ -182,8 +192,8 @@ export default function App() {
         const highlighted =
           search.trim().length >= 1
             ? (matchingCodes[matchCursor] ?? null)
-            : navCursor !== null
-              ? (allCodes[navCursor] ?? null)
+            : activeNavCursor !== null
+              ? (allCodes[activeNavCursor] ?? null)
               : null;
         if (highlighted) {
           e.preventDefault();
@@ -227,7 +237,7 @@ export default function App() {
     allCodes,
     matchingCodes,
     matchCursor,
-    navCursor,
+    activeNavCursor,
   ]);
 
   useEffect(() => {
@@ -340,14 +350,16 @@ export default function App() {
             role="dialog"
             aria-modal="true"
             aria-label={t("mobileSheet.weightsAndPreferences")}
-            onClick={() => setMobileParamsOpen(false)}
           >
-            <div
+            <button
+              type="button"
+              aria-label={t("mobileSheet.close", "Close preferences")}
               className="absolute inset-0"
               style={{
                 backgroundColor: "rgba(0,0,0,0.72)",
                 backdropFilter: "blur(6px)",
               }}
+              onClick={() => setMobileParamsOpen(false)}
             />
             <div
               ref={mobileSheetRef}
@@ -719,7 +731,7 @@ export default function App() {
                       type="text"
                       placeholder={t("search.placeholder")}
                       value={search}
-                      onChange={(e) => setSearch(e.target.value)}
+                      onChange={(e) => updateSearch(e.target.value)}
                       className="w-full pl-12 rounded-md focus:outline-none"
                       style={{
                         height: "40px",
@@ -740,7 +752,7 @@ export default function App() {
                     {search.length > 0 && (
                       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
                         <button
-                          onClick={() => setSearch("")}
+                          onClick={() => updateSearch("")}
                           className="flex items-center justify-center"
                           style={{
                             width: "24px",

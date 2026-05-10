@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { api } from "../services/api";
 import type { CountryData } from "../utils/types";
 
@@ -15,11 +15,7 @@ export function useCountries(): UseCountriesResult {
   const [error, setError] = useState<string | null>(null);
   const cancelRef = useRef(false);
 
-  const load = () => {
-    cancelRef.current = false;
-    setLoading(true);
-    setError(null);
-
+  const fetchCountries = useCallback(() => {
     api
       .getCountries()
       .then((data) => {
@@ -34,15 +30,22 @@ export function useCountries(): UseCountriesResult {
           setLoading(false);
         }
       });
-  };
+  }, []);
+
+  const load = useCallback(() => {
+    cancelRef.current = false;
+    setLoading(true);
+    setError(null);
+    fetchCountries();
+  }, [fetchCountries]);
 
   useEffect(() => {
-    load();
+    cancelRef.current = false;
+    fetchCountries();
     return () => {
       cancelRef.current = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [fetchCountries]);
 
   return { countries, loading, error, refresh: load };
 }
