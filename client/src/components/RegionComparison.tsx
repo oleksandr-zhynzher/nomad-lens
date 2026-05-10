@@ -46,12 +46,7 @@ import {
   Camera,
   Baby,
 } from "lucide-react";
-import type {
-  CategoryKey,
-  ClimatePreferences,
-  CountryData,
-  WeightMap,
-} from "../utils/types";
+import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { regionKey } from "../utils/localize";
@@ -137,19 +132,14 @@ interface RegionStats {
   categories: Record<CategoryKey, { avg: number | null; count: number }>;
 }
 
-export function RegionComparison({
-  countries,
-  weights,
-}: RegionComparisonProps) {
+export function RegionComparison({ countries, weights }: RegionComparisonProps) {
   const { t } = useTranslation();
   const allRegions = useMemo(
     () => [...new Set(countries.map((c) => c.region))].sort(),
     [countries],
   );
 
-  const [enabled, setEnabled] = useState<Set<string>>(
-    () => new Set(allRegions),
-  );
+  const [enabled, setEnabled] = useState<Set<string>>(() => new Set(allRegions));
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
@@ -200,10 +190,7 @@ export function RegionComparison({
         if (values.length === 0) {
           categories[key] = { avg: null, count: 0 };
         } else {
-          const avg =
-            Math.round(
-              (values.reduce((a, b) => a + b, 0) / values.length) * 10,
-            ) / 10;
+          const avg = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10) / 10;
           categories[key] = { avg, count: values.length };
         }
       }
@@ -218,8 +205,7 @@ export function RegionComparison({
         numerator += w * avg;
         denominator += w;
       }
-      const overall =
-        denominator === 0 ? 0 : Math.round((numerator / denominator) * 10) / 10;
+      const overall = denominator === 0 ? 0 : Math.round((numerator / denominator) * 10) / 10;
 
       stats.push({
         name: regionName,
@@ -250,10 +236,7 @@ export function RegionComparison({
   return (
     <div>
       {/* Region cards — horizontally scrollable on small screens */}
-      <div
-        className="flex gap-3 pb-2"
-        style={{ overflowX: "auto", scrollbarWidth: "thin" }}
-      >
+      <div className="flex gap-3 pb-2" style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
         {regionStats.map((r) => {
           const active = enabled.has(r.name);
           return (
@@ -271,10 +254,7 @@ export function RegionComparison({
                 {(() => {
                   const Icon = REGION_ICONS[r.name];
                   return Icon ? (
-                    <Icon
-                      size={20}
-                      style={{ color: active ? r.color : "#808080" }}
-                    />
+                    <Icon size={20} style={{ color: active ? r.color : "#808080" }} />
                   ) : null;
                 })()}
                 <span
@@ -441,10 +421,7 @@ export function RegionComparison({
                         color: "#8A8A8A",
                       }}
                     >
-                      {t(
-                        `indicatorsPage.indicators.${key}.name`,
-                        CATEGORY_LABELS[key],
-                      )}
+                      {t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
                     </span>
                   </div>
                   {activeRegions.map((r) => {

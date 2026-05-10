@@ -12,14 +12,7 @@ app.use('/api/countries', countriesRouter);
 app.use('/api/health', healthRouter);
 
 // Generic error handler
-app.use(
-  (
-    err: Error,
-    _req: express.Request,
-    res: express.Response,
-    _next: express.NextFunction,
-  ) => {
-    console.error(err);
-    res.status(500).json({ error: err.message ?? 'Internal server error' });
-  },
-);
+app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error(err);
+  res.status(500).json({ error: err.message ?? 'Internal server error' });
+});

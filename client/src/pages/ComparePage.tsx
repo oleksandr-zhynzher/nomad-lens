@@ -1,13 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import {
-  Flag,
-  Globe,
-  ArrowDownWideNarrow,
-  Plane,
-  Wallet,
-  Palmtree,
-  X,
-} from "lucide-react";
+import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet, Palmtree, X } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
@@ -26,24 +18,14 @@ import { useWeightState } from "../hooks/useWeightState";
 import { useTourismWeightState } from "../hooks/useTourismWeightState";
 import { useBudgetState } from "../hooks/useBudgetState";
 import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
-import {
-  normalizeCountryCodes,
-  tokenizeCountryCodesParam,
-} from "../utils/countryCodeSelection";
+import { normalizeCountryCodes, tokenizeCountryCodesParam } from "../utils/countryCodeSelection";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "../utils/types";
 
 export function ComparePage() {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [sortDirection, setSortDirection] = useState<"desc" | "asc" | null>(
-    null,
-  );
-  const compareMode:
-    | "countries"
-    | "regions"
-    | "nomadVisas"
-    | "budget"
-    | "tourism" =
+  const [sortDirection, setSortDirection] = useState<"desc" | "asc" | null>(null);
+  const compareMode: "countries" | "regions" | "nomadVisas" | "budget" | "tourism" =
     searchParams.get("m") === "regions"
       ? "regions"
       : searchParams.get("m") === "nomadVisas"
@@ -91,9 +73,7 @@ export function ComparePage() {
   );
   const coreIndicatorCount = DISPLAYED_CORE_CATEGORY_KEYS.length;
   const aiIndicatorCount = AI_CATEGORY_KEYS.length;
-  const nomadVisaCountryCount = countries.filter(
-    (country) => country.hasNomadVisa,
-  ).length;
+  const nomadVisaCountryCount = countries.filter((country) => country.hasNomadVisa).length;
   const compareCoreIndicatorsLabel = t("compare.coreIndicatorsLabel", {
     count: coreIndicatorCount,
   });
@@ -126,9 +106,7 @@ export function ComparePage() {
     if (!mobileParamsOpen) return;
     const previousOverflow = document.body.style.overflow;
     const previousFocusedElement =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
 
     const trapFocus = (event: KeyboardEvent) => {
@@ -186,9 +164,7 @@ export function ComparePage() {
     );
   }, [countries.length, rawSelectedCodes, selectedCodes, setSearchParams]);
 
-  const setCompareMode = (
-    mode: "countries" | "regions" | "nomadVisas" | "budget" | "tourism",
-  ) => {
+  const setCompareMode = (mode: "countries" | "regions" | "nomadVisas" | "budget" | "tourism") => {
     if (mode === "budget") {
       setShowWeights(true);
     }
@@ -252,8 +228,7 @@ export function ComparePage() {
     : compareMode === "budget"
       ? t("compare.sortByBudget")
       : t("compare.sortByScore");
-  const sortButtonIconClassName =
-    sortDirection === "asc" ? "rotate-180" : "rotate-0";
+  const sortButtonIconClassName = sortDirection === "asc" ? "rotate-180" : "rotate-0";
 
   const renderParametersPanel = (mobile = false) => {
     if (compareMode === "tourism") {
@@ -510,9 +485,7 @@ export function ComparePage() {
                   className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
-                      compareMode === "countries"
-                        ? "var(--color-accent)"
-                        : "transparent",
+                      compareMode === "countries" ? "var(--color-accent)" : "transparent",
                     color: compareMode === "countries" ? "#FFFFFF" : "#8A8A8A",
                     fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
@@ -527,9 +500,7 @@ export function ComparePage() {
                   className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
-                      compareMode === "regions"
-                        ? "var(--color-accent)"
-                        : "transparent",
+                      compareMode === "regions" ? "var(--color-accent)" : "transparent",
                     color: compareMode === "regions" ? "#FFFFFF" : "#8A8A8A",
                     fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
@@ -544,9 +515,7 @@ export function ComparePage() {
                   className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
-                      compareMode === "nomadVisas"
-                        ? "var(--color-accent)"
-                        : "transparent",
+                      compareMode === "nomadVisas" ? "var(--color-accent)" : "transparent",
                     color: compareMode === "nomadVisas" ? "#FFFFFF" : "#8A8A8A",
                     fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
@@ -563,9 +532,7 @@ export function ComparePage() {
                   className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
-                      compareMode === "budget"
-                        ? "var(--color-accent)"
-                        : "transparent",
+                      compareMode === "budget" ? "var(--color-accent)" : "transparent",
                     color: compareMode === "budget" ? "#FFFFFF" : "#8A8A8A",
                     fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
@@ -580,9 +547,7 @@ export function ComparePage() {
                   className="flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5"
                   style={{
                     backgroundColor:
-                      compareMode === "tourism"
-                        ? "var(--color-accent)"
-                        : "transparent",
+                      compareMode === "tourism" ? "var(--color-accent)" : "transparent",
                     color: compareMode === "tourism" ? "#FFFFFF" : "#8A8A8A",
                     fontFamily: "Inter, sans-serif",
                     fontSize: "12px",
@@ -604,9 +569,7 @@ export function ComparePage() {
                   border: "1px solid #252525",
                 }}
               >
-                <div
-                  className={`grid gap-1 sm:flex sm:w-auto ${actionGridClassName}`}
-                >
+                <div className={`grid gap-1 sm:flex sm:w-auto ${actionGridClassName}`}>
                   {showParametersAction && (
                     <button
                       onClick={() => {
@@ -620,22 +583,17 @@ export function ComparePage() {
                       style={{
                         cursor: "pointer",
                         backgroundColor:
-                          showWeights &&
-                          window.innerWidth > mobileViewportMaxWidth
+                          showWeights && window.innerWidth > mobileViewportMaxWidth
                             ? "var(--color-accent)"
                             : "transparent",
                         color:
-                          showWeights &&
-                          window.innerWidth > mobileViewportMaxWidth
+                          showWeights && window.innerWidth > mobileViewportMaxWidth
                             ? "#FFFFFF"
                             : "#8A8A8A",
                         fontFamily: "Inter, sans-serif",
                         fontSize: "12px",
                         fontWeight:
-                          showWeights &&
-                          window.innerWidth > mobileViewportMaxWidth
-                            ? 500
-                            : 400,
+                          showWeights && window.innerWidth > mobileViewportMaxWidth ? 500 : 400,
                         flexShrink: 0,
                       }}
                     >
@@ -662,9 +620,7 @@ export function ComparePage() {
                       className="flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-all sm:flex-initial sm:px-4 sm:py-1.5"
                       style={{
                         cursor: "pointer",
-                        backgroundColor: sortFeedbackActive
-                          ? "#2A4A2A"
-                          : "transparent",
+                        backgroundColor: sortFeedbackActive ? "#2A4A2A" : "transparent",
                         color: sortFeedbackActive ? "#88CC88" : "#8A8A8A",
                         fontFamily: "Inter, sans-serif",
                         fontSize: "12px",
@@ -799,18 +755,14 @@ export function ComparePage() {
                     <X size={18} />
                   </button>
                 </div>
-                <div className="flex-1 overflow-y-auto">
-                  {renderParametersPanel(true)}
-                </div>
+                <div className="flex-1 overflow-y-auto">{renderParametersPanel(true)}</div>
               </div>
             </div>
           )}
 
           <div
             className={`grid gap-4 md:gap-6 ${
-              showWeights
-                ? "grid-cols-1 lg:grid-cols-[340px_1fr]"
-                : "grid-cols-1"
+              showWeights ? "grid-cols-1 lg:grid-cols-[340px_1fr]" : "grid-cols-1"
             }`}
           >
             {showWeights && (
@@ -821,9 +773,7 @@ export function ComparePage() {
                   position: "sticky",
                   top: "16px",
                   overflow:
-                    compareMode === "budget" || compareMode === "nomadVisas"
-                      ? "auto"
-                      : "hidden",
+                    compareMode === "budget" || compareMode === "nomadVisas" ? "auto" : "hidden",
                   borderRadius: "8px",
                 }}
               >

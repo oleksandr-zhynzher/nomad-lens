@@ -95,7 +95,9 @@ async function main() {
 
   const outPath = path.join(__dirname, "..", "server", "src", "data", "countries-i18n.json");
   fs.writeFileSync(outPath, JSON.stringify(map, null, 2) + "\n");
-  console.log(`✅ Wrote ${Object.keys(map).length} country translations to ${path.relative(process.cwd(), outPath)}`);
+  console.log(
+    `✅ Wrote ${Object.keys(map).length} country translations to ${path.relative(process.cwd(), outPath)}`,
+  );
 }
 
 main().catch((err) => {

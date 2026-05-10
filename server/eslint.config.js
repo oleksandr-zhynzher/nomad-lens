@@ -1,31 +1,21 @@
-const tseslint = require("@typescript-eslint/eslint-plugin");
-const tsParser = require("@typescript-eslint/parser");
+const js = require("@eslint/js");
+const globals = require("globals");
+const tseslint = require("typescript-eslint");
 
 module.exports = [
+  { ignores: ["dist"] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    ignores: ["dist"],
-  },
-  {
-    files: ["src/**/*.ts"],
+    files: ["src/**/*.ts", "tests/**/*.ts"],
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: "commonjs",
-      parser: tsParser,
-      globals: {
-        Buffer: "readonly",
-        __dirname: "readonly",
-        console: "readonly",
-        process: "readonly",
-      },
-    },
-    plugins: {
-      "@typescript-eslint": tseslint,
+      globals: globals.node,
     },
     rules: {
-      ...tseslint.configs.recommended.rules,
       "@typescript-eslint/no-unused-vars": [
         "error",
-        { argsIgnorePattern: "^_" },
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
     },
   },

@@ -27,8 +27,7 @@ export function PageHeroBanner({
         <div
           className="absolute inset-0"
           style={{
-            background:
-              "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
+            background: "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
           }}
         />
 

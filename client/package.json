@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "doctor": "react-doctor . --offline --fail-on none",
     "doctor:ci": "node scripts/react-doctor-ci.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "i18next": "^26.0.3",

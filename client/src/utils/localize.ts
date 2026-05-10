@@ -12,8 +12,7 @@ export function useLocalizedCountry(country: CountryData | null | undefined) {
 
   return useMemo(() => {
     if (!country) return { name: "", capital: "", region: "" };
-    const loc =
-      lang === "ru" || lang === "ua" ? country.i18n?.[lang] : undefined;
+    const loc = lang === "ru" || lang === "ua" ? country.i18n?.[lang] : undefined;
     return {
       name: loc?.name ?? country.name,
       capital: loc?.capital ?? country.capital,
@@ -28,10 +27,7 @@ export function localizeCountry(
   country: CountryData,
   lang: string,
 ): { name: string; capital: string } {
-  const loc =
-    lang === "ru" || lang === "ua"
-      ? country.i18n?.[lang as "ru" | "ua"]
-      : undefined;
+  const loc = lang === "ru" || lang === "ua" ? country.i18n?.[lang as "ru" | "ua"] : undefined;
   return {
     name: loc?.name ?? country.name,
     capital: loc?.capital ?? country.capital,

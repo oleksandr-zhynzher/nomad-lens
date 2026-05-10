@@ -17,18 +17,8 @@ export function LogoMark({ size = 32, className }: LogoMarkProps) {
     >
       <circle cx="27" cy="27" r="20" stroke="#C99662" strokeWidth="2.75" />
       <circle cx="27" cy="27" r="13" stroke="#A5A3A7" strokeWidth="1.75" />
-      <path
-        d="M14 27H40"
-        stroke="#A5A3A7"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-      />
-      <path
-        d="M39.5 39.5L50.5 50.5"
-        stroke="#C99662"
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
+      <path d="M14 27H40" stroke="#A5A3A7" strokeWidth="1.75" strokeLinecap="round" />
+      <path d="M39.5 39.5L50.5 50.5" stroke="#C99662" strokeWidth="4" strokeLinecap="round" />
     </svg>
   );
 }

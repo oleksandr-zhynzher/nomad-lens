@@ -39,24 +39,12 @@ import { useScoring } from "../hooks/useScoring";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails, NomadVisaLocalization } from "../utils/types";
-import {
-  CATEGORY_LABELS,
-  TOURISM_GROUPS,
-  VISIBLE_CATEGORY_KEYS,
-} from "../utils/types";
+import { CATEGORY_LABELS, TOURISM_GROUPS, VISIBLE_CATEGORY_KEYS } from "../utils/types";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
-import {
-  computeTourismScore,
-  tourismScoreColour,
-} from "../utils/tourismScoring";
+import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring";
 import { TOURISM_COLORS } from "../utils/tourismColors";
 
-type SeasonLabelKey =
-  | "four_seasons"
-  | "mild_seasons"
-  | "tropical"
-  | "arid"
-  | "polar";
+type SeasonLabelKey = "four_seasons" | "mild_seasons" | "tropical" | "arid" | "polar";
 
 export function CountryPage() {
   const { t, i18n: i18nInstance } = useTranslation();
@@ -84,20 +72,10 @@ export function CountryPage() {
     return defaultValue;
   }
 
-  const ranked = useScoring(
-    countries,
-    weights,
-    new Set(),
-    false,
-    false,
-    null,
-    climatePrefs,
-  );
+  const ranked = useScoring(countries, weights, new Set(), false, false, null, climatePrefs);
 
   const { c, rank, finalScore } = useMemo(() => {
-    const entry = ranked.find(
-      (r) => r.country.code.toLowerCase() === code?.toLowerCase(),
-    );
+    const entry = ranked.find((r) => r.country.code.toLowerCase() === code?.toLowerCase());
     if (!entry) return { c: null, rank: null, finalScore: null };
     return { c: entry.country, rank: entry.rank, finalScore: entry.finalScore };
   }, [ranked, code]);
@@ -169,9 +147,7 @@ export function CountryPage() {
   }
 
   const seasonLabel = c.climateData
-    ? t(
-        `countryPage.seasonLabels.${c.climateData.seasonType as SeasonLabelKey}`,
-      )
+    ? t(`countryPage.seasonLabels.${c.climateData.seasonType as SeasonLabelKey}`)
     : null;
 
   const getHostname = (url: string) => {
@@ -188,9 +164,7 @@ export function CountryPage() {
     metrics: group.keys
       .map((key) => ({ key, value: c.scores[key]?.value ?? null }))
       .filter(
-        (
-          metric,
-        ): metric is { key: (typeof group.keys)[number]; value: number } =>
+        (metric): metric is { key: (typeof group.keys)[number]; value: number } =>
           metric.value != null,
       ),
   })).filter((group) => group.metrics.length > 0);
@@ -199,8 +173,7 @@ export function CountryPage() {
     0,
   );
   const tourismTags = Array.from(new Set(c.tourismTags ?? [])).sort(
-    (left, right) =>
-      (c.tourismTagScores?.[right] ?? 0) - (c.tourismTagScores?.[left] ?? 0),
+    (left, right) => (c.tourismTagScores?.[right] ?? 0) - (c.tourismTagScores?.[left] ?? 0),
   );
 
   const handleBack = () => {
@@ -294,9 +267,7 @@ export function CountryPage() {
                   style={{ objectFit: "cover", width: "100%", height: "100%" }}
                 />
               </div>
-              <div
-                style={{ display: "flex", flexDirection: "column", gap: "4px" }}
-              >
+              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                 <span
                   style={{
                     fontFamily: "Inter, sans-serif",
@@ -475,9 +446,7 @@ export function CountryPage() {
             }}
           >
             <TrendingUp size={14} color="#8F5A3C" />
-            <div
-              style={{ display: "flex", alignItems: "baseline", gap: "8px" }}
-            >
+            <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
               {finalScore != null && (
                 <span
                   style={{
@@ -792,9 +761,7 @@ export function CountryPage() {
                           }}
                         >
                           {visa.incomeRequirement.currency}{" "}
-                          {(
-                            visa.incomeRequirement.monthly * 12
-                          ).toLocaleString()}{" "}
+                          {(visa.incomeRequirement.monthly * 12).toLocaleString()}{" "}
                           {t("countryPage.perYear")}
                         </span>
                       </>
@@ -808,8 +775,7 @@ export function CountryPage() {
                         }}
                       >
                         {visa.incomeRequirement.currency}{" "}
-                        {visa.incomeRequirement.annual.toLocaleString()}{" "}
-                        {t("countryPage.perYear")}
+                        {visa.incomeRequirement.annual.toLocaleString()} {t("countryPage.perYear")}
                       </span>
                     ) : (
                       <span
@@ -958,10 +924,7 @@ export function CountryPage() {
                     visa,
                     (l) => l.eligibility?.requirements,
                   ).map((req, i) => (
-                    <div
-                      key={i}
-                      style={{ display: "flex", gap: "8px", paddingTop: "4px" }}
-                    >
+                    <div key={i} style={{ display: "flex", gap: "8px", paddingTop: "4px" }}>
                       <Check
                         size={13}
                         color="#6B9E6B"
@@ -1020,32 +983,30 @@ export function CountryPage() {
                   >
                     {t("countryPage.visaBenefits")}
                   </span>
-                  {localize(visa.benefits, visa, (l) => l.benefits).map(
-                    (benefit, i) => (
-                      <div
-                        key={i}
+                  {localize(visa.benefits, visa, (l) => l.benefits).map((benefit, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "center",
+                        backgroundColor: "var(--color-bg)",
+                        borderRadius: "8px",
+                        padding: "10px 12px",
+                      }}
+                    >
+                      <Briefcase size={16} color="#8F5A3C" />
+                      <span
                         style={{
-                          display: "flex",
-                          gap: "10px",
-                          alignItems: "center",
-                          backgroundColor: "var(--color-bg)",
-                          borderRadius: "8px",
-                          padding: "10px 12px",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "13px",
+                          color: "#CCCCCC",
                         }}
                       >
-                        <Briefcase size={16} color="#8F5A3C" />
-                        <span
-                          style={{
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "13px",
-                            color: "#CCCCCC",
-                          }}
-                        >
-                          {benefit}
-                        </span>
-                      </div>
-                    ),
-                  )}
+                        {benefit}
+                      </span>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Application Process */}
@@ -1331,9 +1292,7 @@ export function CountryPage() {
                           fontWeight: 700,
                           lineHeight: 1,
                           color:
-                            tourismScore != null
-                              ? tourismScoreColour(tourismScore)
-                              : "#757575",
+                            tourismScore != null ? tourismScoreColour(tourismScore) : "#757575",
                         }}
                       >
                         {tourismScore != null ? tourismScore.toFixed(1) : "—"}
@@ -1434,10 +1393,7 @@ export function CountryPage() {
                           textTransform: "uppercase",
                         }}
                       >
-                        {t(
-                          `tourismWeights.groups.${group.labelKey}`,
-                          group.labelKey,
-                        )}
+                        {t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
                       </div>
 
                       <div className="flex flex-col gap-3">
@@ -1458,10 +1414,7 @@ export function CountryPage() {
                                   color: "#CFCFCF",
                                 }}
                               >
-                                {t(
-                                  `tourism.metrics.${metric.key}`,
-                                  CATEGORY_LABELS[metric.key],
-                                )}
+                                {t(`tourism.metrics.${metric.key}`, CATEGORY_LABELS[metric.key])}
                               </span>
                               <span
                                 style={{
@@ -1489,8 +1442,7 @@ export function CountryPage() {
                                   width: `${metric.value}%`,
                                   height: "100%",
                                   borderRadius: "999px",
-                                  backgroundColor:
-                                    TOURISM_COLORS[metric.key] ?? "#8F5A3C",
+                                  backgroundColor: TOURISM_COLORS[metric.key] ?? "#8F5A3C",
                                 }}
                               />
                             </div>
@@ -1538,10 +1490,7 @@ export function CountryPage() {
                       color: "#757575",
                     }}
                   >
-                    {t(
-                      "countryPage.costOfLivingSubtitle",
-                      "USD / month · single nomad",
-                    )}
+                    {t("countryPage.costOfLivingSubtitle", "USD / month · single nomad")}
                   </span>
                 </div>
 
@@ -1629,10 +1578,7 @@ export function CountryPage() {
                           color: "#808080",
                         }}
                       >
-                        {t(
-                          "countryPage.colTotalComfortable",
-                          "Comfortable Budget",
-                        )}
+                        {t("countryPage.colTotalComfortable", "Comfortable Budget")}
                       </span>
                     </div>
                   )}
@@ -1645,18 +1591,12 @@ export function CountryPage() {
                       {
                         key: "rentMajorCity" as const,
                         icon: <Building2 size={14} color="#C2956A" />,
-                        label: t(
-                          "countryPage.colRentMajorCity",
-                          "Rent · Major City",
-                        ),
+                        label: t("countryPage.colRentMajorCity", "Rent · Major City"),
                       },
                       {
                         key: "rentSmallerCity" as const,
                         icon: <Home size={14} color="#C2956A" />,
-                        label: t(
-                          "countryPage.colRentSmallerCity",
-                          "Rent · Smaller City",
-                        ),
+                        label: t("countryPage.colRentSmallerCity", "Rent · Smaller City"),
                       },
                       {
                         key: "rent2br" as const,
@@ -1686,10 +1626,7 @@ export function CountryPage() {
                       {
                         key: "utilities" as const,
                         icon: <Zap size={14} color="#DDAA44" />,
-                        label: t(
-                          "countryPage.colUtilities",
-                          "Utilities & Internet",
-                        ),
+                        label: t("countryPage.colUtilities", "Utilities & Internet"),
                       },
                       {
                         key: "coworking" as const,
@@ -1699,10 +1636,7 @@ export function CountryPage() {
                       {
                         key: "healthInsurance" as const,
                         icon: <Heart size={14} color="#CC6666" />,
-                        label: t(
-                          "countryPage.colHealthInsurance",
-                          "Health Insurance",
-                        ),
+                        label: t("countryPage.colHealthInsurance", "Health Insurance"),
                       },
                     ] as const
                   ).map(({ key, icon, label }) => {

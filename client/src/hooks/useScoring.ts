@@ -13,8 +13,7 @@ export function useScoring(
 ): RankedCountry[] {
   return useMemo(() => {
     const filtered = countries.filter((c) => {
-      const matchesRegion =
-        regionFilter.size === 0 || regionFilter.has(c.region);
+      const matchesRegion = regionFilter.size === 0 || regionFilter.has(c.region);
 
       const matchesNomadVisa = !nomadVisaOnly || c.hasNomadVisa === true;
       const matchesSchengen = !schengenOnly || c.isSchengen === true;

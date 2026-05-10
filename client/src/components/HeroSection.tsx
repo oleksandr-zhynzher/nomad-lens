@@ -6,12 +6,7 @@ interface HeroSectionProps {
   children?: React.ReactNode;
 }
 
-export function HeroSection({
-  backgroundImage,
-  title,
-  subtitle,
-  children,
-}: HeroSectionProps) {
+export function HeroSection({ backgroundImage, title, subtitle, children }: HeroSectionProps) {
   return (
     <div
       style={{
@@ -20,9 +15,7 @@ export function HeroSection({
         backgroundColor: "#0F1114",
         overflow: "hidden",
       }}
-      className={
-        children ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"
-      }
+      className={children ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"}
     >
       {/* Background image */}
       <div
@@ -40,8 +33,7 @@ export function HeroSection({
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(180deg, #0D0D0F00 0%, #0D0D0FBB 60%, #0D0D0FFF 100%)",
+          background: "linear-gradient(180deg, #0D0D0F00 0%, #0D0D0FBB 60%, #0D0D0FFF 100%)",
         }}
       />
 

@@ -47,18 +47,9 @@ import {
   Mountain,
   Castle,
 } from "lucide-react";
-import type {
-  CountryData,
-  WeightMap,
-  ClimatePreferences,
-  CategoryKey,
-} from "../utils/types";
+import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import {
-  computeClimateScore,
-  computeScore,
-  scoreColour,
-} from "../utils/scoring";
+import { computeClimateScore, computeScore, scoreColour } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { Tooltip } from "./Tooltip";
 
@@ -141,10 +132,7 @@ interface Props {
   onSelectionCount?: (count: number) => void;
 }
 
-function applyClimate(
-  country: CountryData,
-  climatePrefs: ClimatePreferences,
-): CountryData {
+function applyClimate(country: CountryData, climatePrefs: ClimatePreferences): CountryData {
   if (!country.climateData) return country;
   return {
     ...country,
@@ -265,39 +253,23 @@ export function CountryComparison({
     .filter(
       (c) =>
         !selectedCodes.includes(c.code) &&
-        localizeCountry(c, lang)
-          .name.toLowerCase()
-          .includes(query.toLowerCase()),
+        localizeCountry(c, lang).name.toLowerCase().includes(query.toLowerCase()),
     )
-    .sort((a, b) =>
-      localizeCountry(a, lang).name.localeCompare(
-        localizeCountry(b, lang).name,
-      ),
-    );
+    .sort((a, b) => localizeCountry(a, lang).name.localeCompare(localizeCountry(b, lang).name));
 
   return (
     <div>
       {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
-        <div
-          className="flex gap-3 pb-2"
-          style={{ overflowX: "auto", scrollbarWidth: "thin" }}
-        >
+        <div className="flex gap-3 pb-2" style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
           {selectedCountries.map((slot) => {
-            const score = computeScore(
-              applyClimate(slot.country, climatePrefs),
-              weights,
-            );
+            const score = computeScore(applyClimate(slot.country, climatePrefs), weights);
             const sColor = scoreColour(score);
             return (
               <div
                 key={slot.country.code}
                 className="shrink-0 w-[148px] md:w-[180px]"
-                onClick={() =>
-                  navigate(
-                    `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
-                  )
-                }
+                onClick={() => navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)}
                 style={{ cursor: "pointer" }}
               >
                 <div
@@ -344,10 +316,7 @@ export function CountryComparison({
                     </span>
                     {slot.country.hasNomadVisa && (
                       <Tooltip
-                        content={t(
-                          "countryDetail.nomadVisa",
-                          "Nomad Visa Available",
-                        )}
+                        content={t("countryDetail.nomadVisa", "Nomad Visa Available")}
                         side="top"
                       >
                         <Link
@@ -406,11 +375,8 @@ export function CountryComparison({
                     8,
                     Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
                   );
-                  const fitsBelow =
-                    rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
-                  const top = fitsBelow
-                    ? rect.bottom + 8
-                    : rect.top - dropdownMaxHeight - 8;
+                  const fitsBelow = rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
+                  const top = fitsBelow ? rect.bottom + 8 : rect.top - dropdownMaxHeight - 8;
                   setDropdownPos({ top, left });
                 }
                 setDropdownOpen((p) => !p);
@@ -476,10 +442,7 @@ export function CountryComparison({
           />
           <div style={{ maxHeight: "320px", overflowY: "auto" }}>
             {filtered.map((c) => {
-              const score = computeScore(
-                applyClimate(c, climatePrefs),
-                weights,
-              );
+              const score = computeScore(applyClimate(c, climatePrefs), weights);
               return (
                 <button
                   key={c.code}
@@ -626,10 +589,7 @@ export function CountryComparison({
                         color: "#8A8A8A",
                       }}
                     >
-                      {t(
-                        `indicatorsPage.indicators.${key}.name`,
-                        CATEGORY_LABELS[key],
-                      )}
+                      {t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
                     </span>
                   </div>
                   {selectedCountries.map((slot) => {

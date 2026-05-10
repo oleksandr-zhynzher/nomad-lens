@@ -1,10 +1,6 @@
 import { useMemo } from "react";
 import type { CountryData, CostOfLivingData } from "../utils/types";
-import type {
-  BudgetCategoryWeights,
-  Bedrooms,
-  HousingPreference,
-} from "./useBudgetState";
+import type { BudgetCategoryWeights, Bedrooms, HousingPreference } from "./useBudgetState";
 
 export interface BudgetBreakdown {
   housing: number;
@@ -64,8 +60,7 @@ function getRent(
   if (major === null || smaller === null || smaller === 0) return base;
 
   const avg1BR = (major + smaller) / 2;
-  const scaleFactor =
-    housing === "majorCity" ? major / avg1BR : smaller / avg1BR;
+  const scaleFactor = housing === "majorCity" ? major / avg1BR : smaller / avg1BR;
   return Math.round(base * scaleFactor);
 }
 
@@ -77,12 +72,7 @@ function computeWeightedCost(
   weights: BudgetCategoryWeights,
 ): { total: number; breakdown: BudgetBreakdown } | null {
   const rent = getRent(col, housing, bedrooms);
-  if (
-    rent === null ||
-    col.groceries === null ||
-    col.transport === null ||
-    col.utilities === null
-  )
+  if (rent === null || col.groceries === null || col.transport === null || col.utilities === null)
     return null;
 
   const n = Math.max(1, peopleCount);
@@ -93,11 +83,7 @@ function computeWeightedCost(
     transport: scaleForPeople("transport", col.transport, n),
     utilities: scaleForPeople("utilities", col.utilities, n),
     coworking: scaleForPeople("coworking", col.coworking ?? 0, n),
-    healthInsurance: scaleForPeople(
-      "healthInsurance",
-      col.healthInsurance ?? 0,
-      n,
-    ),
+    healthInsurance: scaleForPeople("healthInsurance", col.healthInsurance ?? 0, n),
   };
 
   const breakdown: BudgetBreakdown = {
@@ -139,13 +125,7 @@ export function useBudgetMatcher(
       const col = country.costOfLiving;
       if (!col) continue;
 
-      const computed = computeWeightedCost(
-        col,
-        housing,
-        bedrooms,
-        peopleCount,
-        categoryWeights,
-      );
+      const computed = computeWeightedCost(col, housing, bedrooms, peopleCount, categoryWeights);
       if (!computed || computed.total <= 0) continue;
 
       const comfortRatio = budget / computed.total;
@@ -157,11 +137,8 @@ export function useBudgetMatcher(
           .map((s) => s.value)
           .filter((v): v is number => v !== null && v !== undefined);
         if (scoreValues.length > 0) {
-          const avgQuality =
-            scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length;
-          score =
-            score * (1 - qualityBlend / 100) +
-            avgQuality * (qualityBlend / 100);
+          const avgQuality = scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length;
+          score = score * (1 - qualityBlend / 100) + avgQuality * (qualityBlend / 100);
         }
       }
 
@@ -184,13 +161,5 @@ export function useBudgetMatcher(
 
     results.sort((a, b) => b.comfortScore - a.comfortScore);
     return results;
-  }, [
-    countries,
-    budget,
-    housing,
-    bedrooms,
-    peopleCount,
-    categoryWeights,
-    qualityBlend,
-  ]);
+  }, [countries, budget, housing, bedrooms, peopleCount, categoryWeights, qualityBlend]);
 }

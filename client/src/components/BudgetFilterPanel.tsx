@@ -79,8 +79,7 @@ export function BudgetFilterPanel({ bs }: Props) {
     lifestyle: false,
     categories: false,
   });
-  const toggle = (key: string) =>
-    setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggle = (key: string) => setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
 
   const budgetPct = ((bs.budget - 300) / 9700) * 100;
 
@@ -274,9 +273,7 @@ export function BudgetFilterPanel({ bs }: Props) {
             size={14}
             style={{
               color: "#808080",
-              transform: !collapsed.lifestyle
-                ? "rotate(0deg)"
-                : "rotate(-90deg)",
+              transform: !collapsed.lifestyle ? "rotate(0deg)" : "rotate(-90deg)",
               transition: "transform 0.15s ease",
               flexShrink: 0,
             }}
@@ -325,10 +322,7 @@ export function BudgetFilterPanel({ bs }: Props) {
                 value={bs.housing}
                 onChange={bs.setHousing}
                 labelFn={(v) =>
-                  t(
-                    `budget.housing.${v}`,
-                    v === "majorCity" ? "Major City" : "Smaller City",
-                  )
+                  t(`budget.housing.${v}`, v === "majorCity" ? "Major City" : "Smaller City")
                 }
               />
             </div>
@@ -348,9 +342,7 @@ export function BudgetFilterPanel({ bs }: Props) {
                 style={{ borderRadius: 6, height: 36, gap: 4 }}
               >
                 <button
-                  onClick={() =>
-                    bs.setPeopleCount(Math.max(1, bs.peopleCount - 1))
-                  }
+                  onClick={() => bs.setPeopleCount(Math.max(1, bs.peopleCount - 1))}
                   disabled={bs.peopleCount <= 1}
                   style={{
                     width: 32,
@@ -384,9 +376,7 @@ export function BudgetFilterPanel({ bs }: Props) {
                   {bs.peopleCount}
                 </span>
                 <button
-                  onClick={() =>
-                    bs.setPeopleCount(Math.min(20, bs.peopleCount + 1))
-                  }
+                  onClick={() => bs.setPeopleCount(Math.min(20, bs.peopleCount + 1))}
                   disabled={bs.peopleCount >= 20}
                   style={{
                     width: 32,
@@ -466,9 +456,7 @@ export function BudgetFilterPanel({ bs }: Props) {
             size={14}
             style={{
               color: "#808080",
-              transform: !collapsed.categories
-                ? "rotate(0deg)"
-                : "rotate(-90deg)",
+              transform: !collapsed.categories ? "rotate(0deg)" : "rotate(-90deg)",
               transition: "transform 0.15s ease",
               flexShrink: 0,
             }}
@@ -508,9 +496,7 @@ export function BudgetFilterPanel({ bs }: Props) {
                     min={0}
                     max={100}
                     value={bs.categoryWeights[key]}
-                    onChange={(e) =>
-                      bs.handleCategoryWeight(key, Number(e.target.value))
-                    }
+                    onChange={(e) => bs.handleCategoryWeight(key, Number(e.target.value))}
                     className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
                     style={{
                       background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${bs.categoryWeights[key]}%, #333333 ${bs.categoryWeights[key]}%, #333333 100%)`,

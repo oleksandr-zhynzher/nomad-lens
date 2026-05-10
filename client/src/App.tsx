@@ -36,9 +36,7 @@ export default function App() {
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
-  const [searchMode, setSearchMode] = useState<"filter" | "highlight">(
-    "filter",
-  );
+  const [searchMode, setSearchMode] = useState<"filter" | "highlight">("filter");
   const [compareMode, setCompareMode] = useState(false);
   const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -123,10 +121,7 @@ export default function App() {
     return ranked;
   }, [ranked, search, searchMode, lang]);
 
-  const regions = useMemo(
-    () => [...new Set(countries.map((c) => c.region))].sort(),
-    [countries],
-  );
+  const regions = useMemo(() => [...new Set(countries.map((c) => c.region))].sort(), [countries]);
 
   // Search navigation
   const matchingCodes = useMemo(() => {
@@ -152,18 +147,13 @@ export default function App() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [matchCursor, matchingCodes]);
   const goNext = useCallback(
-    () =>
-      setMatchCursor((c) =>
-        matchingCodes.length ? (c + 1) % matchingCodes.length : 0,
-      ),
+    () => setMatchCursor((c) => (matchingCodes.length ? (c + 1) % matchingCodes.length : 0)),
     [matchingCodes],
   );
   const goPrev = useCallback(
     () =>
       setMatchCursor((c) =>
-        matchingCodes.length
-          ? (c - 1 + matchingCodes.length) % matchingCodes.length
-          : 0,
+        matchingCodes.length ? (c - 1 + matchingCodes.length) % matchingCodes.length : 0,
       ),
     [matchingCodes],
   );
@@ -172,9 +162,7 @@ export default function App() {
   const [navCursor, setNavCursor] = useState<number | null>(null);
   const allCodes = useMemo(() => ranked.map((r) => r.country.code), [ranked]);
   const activeNavCursor =
-    navCursor !== null && navCursor >= 0 && navCursor < allCodes.length
-      ? navCursor
-      : null;
+    navCursor !== null && navCursor >= 0 && navCursor < allCodes.length ? navCursor : null;
   useEffect(() => {
     if (activeNavCursor === null) return;
     const code = allCodes[activeNavCursor];
@@ -205,8 +193,7 @@ export default function App() {
       if (e.key !== "ArrowDown" && e.key !== "ArrowUp") return;
       if (
         !isSearchInput &&
-        (e.target instanceof HTMLInputElement ||
-          e.target instanceof HTMLTextAreaElement)
+        (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)
       )
         return;
       e.preventDefault();
@@ -229,24 +216,13 @@ export default function App() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [
-    search,
-    searchMode,
-    goNext,
-    goPrev,
-    allCodes,
-    matchingCodes,
-    matchCursor,
-    activeNavCursor,
-  ]);
+  }, [search, searchMode, goNext, goPrev, allCodes, matchingCodes, matchCursor, activeNavCursor]);
 
   useEffect(() => {
     if (!mobileParamsOpen) return;
     const previousOverflow = document.body.style.overflow;
     const previousFocusedElement =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
 
     const trapFocus = (event: KeyboardEvent) => {
@@ -293,8 +269,8 @@ export default function App() {
   const activeHighlight =
     searchMode === "highlight" && search.trim().length >= 1
       ? (matchingCodes[matchCursor] ?? null)
-      : navCursor !== null
-        ? (allCodes[navCursor] ?? null)
+      : activeNavCursor !== null
+        ? (allCodes[activeNavCursor] ?? null)
         : highlightedCode;
 
   const toggleSelect = useCallback((code: string) => {
@@ -464,10 +440,7 @@ export default function App() {
         </button>
 
         {/* Right content area */}
-        <main
-          className="flex-1 min-w-0 pb-28 md:pb-0"
-          style={{ backgroundColor: "#000000" }}
-        >
+        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#000000" }}>
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
@@ -738,8 +711,7 @@ export default function App() {
                         paddingRight:
                           search.length === 0
                             ? "16px"
-                            : searchMode === "highlight" &&
-                                search.trim().length >= 1
+                            : searchMode === "highlight" && search.trim().length >= 1
                               ? "164px"
                               : "72px",
                         backgroundColor: "#161616",
@@ -767,69 +739,57 @@ export default function App() {
                         >
                           <X size={14} />
                         </button>
-                        {searchMode === "highlight" &&
-                          search.trim().length >= 1 && (
-                            <>
-                              <span
-                                style={{
-                                  fontFamily: "IBM Plex Mono, monospace",
-                                  fontSize: "11px",
-                                  color: "#8A8A8A",
-                                  minWidth: "36px",
-                                  textAlign: "right",
-                                }}
-                              >
-                                {matchingCodes.length > 0
-                                  ? `${matchCursor + 1}/${matchingCodes.length}`
-                                  : "0/0"}
-                              </span>
-                              <button
-                                onClick={goPrev}
-                                disabled={matchingCodes.length === 0}
-                                className="flex items-center justify-center"
-                                style={{
-                                  width: "24px",
-                                  height: "24px",
-                                  borderRadius: "3px",
-                                  border: "none",
-                                  cursor: matchingCodes.length
-                                    ? "pointer"
-                                    : "default",
-                                  backgroundColor: "#2A2A2A",
-                                  color: matchingCodes.length
-                                    ? "#CCCCCC"
-                                    : "#757575",
-                                }}
-                                aria-label={t(
-                                  "a11y.previousMatch",
-                                  "Previous match",
-                                )}
-                              >
-                                <ChevronUp size={14} />
-                              </button>
-                              <button
-                                onClick={goNext}
-                                disabled={matchingCodes.length === 0}
-                                className="flex items-center justify-center"
-                                style={{
-                                  width: "24px",
-                                  height: "24px",
-                                  borderRadius: "3px",
-                                  border: "none",
-                                  cursor: matchingCodes.length
-                                    ? "pointer"
-                                    : "default",
-                                  backgroundColor: "#2A2A2A",
-                                  color: matchingCodes.length
-                                    ? "#CCCCCC"
-                                    : "#757575",
-                                }}
-                                aria-label={t("a11y.nextMatch", "Next match")}
-                              >
-                                <ChevronDown size={14} />
-                              </button>
-                            </>
-                          )}
+                        {searchMode === "highlight" && search.trim().length >= 1 && (
+                          <>
+                            <span
+                              style={{
+                                fontFamily: "IBM Plex Mono, monospace",
+                                fontSize: "11px",
+                                color: "#8A8A8A",
+                                minWidth: "36px",
+                                textAlign: "right",
+                              }}
+                            >
+                              {matchingCodes.length > 0
+                                ? `${matchCursor + 1}/${matchingCodes.length}`
+                                : "0/0"}
+                            </span>
+                            <button
+                              onClick={goPrev}
+                              disabled={matchingCodes.length === 0}
+                              className="flex items-center justify-center"
+                              style={{
+                                width: "24px",
+                                height: "24px",
+                                borderRadius: "3px",
+                                border: "none",
+                                cursor: matchingCodes.length ? "pointer" : "default",
+                                backgroundColor: "#2A2A2A",
+                                color: matchingCodes.length ? "#CCCCCC" : "#757575",
+                              }}
+                              aria-label={t("a11y.previousMatch", "Previous match")}
+                            >
+                              <ChevronUp size={14} />
+                            </button>
+                            <button
+                              onClick={goNext}
+                              disabled={matchingCodes.length === 0}
+                              className="flex items-center justify-center"
+                              style={{
+                                width: "24px",
+                                height: "24px",
+                                borderRadius: "3px",
+                                border: "none",
+                                cursor: matchingCodes.length ? "pointer" : "default",
+                                backgroundColor: "#2A2A2A",
+                                color: matchingCodes.length ? "#CCCCCC" : "#757575",
+                              }}
+                              aria-label={t("a11y.nextMatch", "Next match")}
+                            >
+                              <ChevronDown size={14} />
+                            </button>
+                          </>
+                        )}
                         <Tooltip
                           side="bottom"
                           content={
@@ -852,9 +812,7 @@ export default function App() {
                         >
                           <button
                             onClick={() => {
-                              setSearchMode((m) =>
-                                m === "filter" ? "highlight" : "filter",
-                              );
+                              setSearchMode((m) => (m === "filter" ? "highlight" : "filter"));
                               setMatchCursor(0);
                             }}
                             className="flex items-center justify-center"
@@ -869,21 +827,11 @@ export default function App() {
                             }}
                             aria-label={
                               searchMode === "filter"
-                                ? t(
-                                    "a11y.switchToScrollMode",
-                                    "Switch to scroll mode",
-                                  )
-                                : t(
-                                    "a11y.switchToFilterMode",
-                                    "Switch to filter mode",
-                                  )
+                                ? t("a11y.switchToScrollMode", "Switch to scroll mode")
+                                : t("a11y.switchToFilterMode", "Switch to filter mode")
                             }
                           >
-                            {searchMode === "filter" ? (
-                              <List size={13} />
-                            ) : (
-                              <Filter size={13} />
-                            )}
+                            {searchMode === "filter" ? <List size={13} /> : <Filter size={13} />}
                           </button>
                         </Tooltip>
                       </div>
@@ -906,19 +854,11 @@ export default function App() {
                             paddingRight: "14px",
                             borderRadius: "6px",
                             border:
-                              selectedCodes.size < 2
-                                ? "1px solid var(--color-accent-dim)"
-                                : "none",
-                            cursor:
-                              selectedCodes.size < 2 ? "default" : "pointer",
+                              selectedCodes.size < 2 ? "1px solid var(--color-accent-dim)" : "none",
+                            cursor: selectedCodes.size < 2 ? "default" : "pointer",
                             backgroundColor:
-                              selectedCodes.size < 2
-                                ? "#161616"
-                                : "var(--color-accent)",
-                            color:
-                              selectedCodes.size < 2
-                                ? "var(--color-accent-dim)"
-                                : "#FFFFFF",
+                              selectedCodes.size < 2 ? "#161616" : "var(--color-accent)",
+                            color: selectedCodes.size < 2 ? "var(--color-accent-dim)" : "#FFFFFF",
                             fontFamily: "Inter, sans-serif",
                             fontSize: "13px",
                             fontWeight: 600,
@@ -960,10 +900,7 @@ export default function App() {
                             color: "#8A8A8A",
                             flexShrink: 0,
                           }}
-                          aria-label={t(
-                            "a11y.exitCompareMode",
-                            "Exit compare mode",
-                          )}
+                          aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
                         >
                           <X size={16} />
                         </button>
@@ -1043,10 +980,8 @@ export default function App() {
                         borderRadius: "3px",
                         border: "none",
                         cursor: "pointer",
-                        backgroundColor:
-                          ws.selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
-                        color:
-                          ws.selectedRegions.size === 0 ? "#FFFFFF" : "#9E9E9E",
+                        backgroundColor: ws.selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
+                        color: ws.selectedRegions.size === 0 ? "#FFFFFF" : "#9E9E9E",
                       }}
                     >
                       {t("regions.all")}
@@ -1070,12 +1005,8 @@ export default function App() {
                           borderRadius: "3px",
                           border: "none",
                           cursor: "pointer",
-                          backgroundColor: ws.selectedRegions.has(r)
-                            ? "#8F5A3C"
-                            : "#2A2A2A",
-                          color: ws.selectedRegions.has(r)
-                            ? "#FFFFFF"
-                            : "#9E9E9E",
+                          backgroundColor: ws.selectedRegions.has(r) ? "#8F5A3C" : "#2A2A2A",
+                          color: ws.selectedRegions.has(r) ? "#FFFFFF" : "#9E9E9E",
                         }}
                       >
                         {t(`regions.${r.replace(/\s/g, "")}`, r)}

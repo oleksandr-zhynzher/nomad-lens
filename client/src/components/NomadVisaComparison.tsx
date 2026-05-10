@@ -16,17 +16,9 @@ import {
   CheckCircle2,
   XCircle,
 } from "lucide-react";
-import {
-  computeClimateScore,
-  computeScore,
-  scoreColour,
-} from "../utils/scoring";
+import { computeClimateScore, computeScore, scoreColour } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
-import type {
-  ClimatePreferences,
-  CountryData,
-  WeightMap,
-} from "../utils/types";
+import type { ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 
 const SLOT_COLORS = [
   "#8F5A3C",
@@ -110,9 +102,7 @@ export function NomadVisaComparison({
   const langPrefix = useLangPrefix();
   const navigate = useNavigate();
   const lang = i18n.language;
-  const budgetMatchByCode = new Map(
-    budgetMatches.map((match) => [match.country.code, match]),
-  );
+  const budgetMatchByCode = new Map(budgetMatches.map((match) => [match.country.code, match]));
 
   // Sync horizontal scroll between sticky header and body
   useEffect(() => {
@@ -160,23 +150,14 @@ export function NomadVisaComparison({
     .filter(
       (c) =>
         !selectedCodes.includes(c.code) &&
-        localizeCountry(c, lang)
-          .name.toLowerCase()
-          .includes(query.toLowerCase()),
+        localizeCountry(c, lang).name.toLowerCase().includes(query.toLowerCase()),
     )
-    .sort((a, b) =>
-      localizeCountry(a, lang).name.localeCompare(
-        localizeCountry(b, lang).name,
-      ),
-    );
+    .sort((a, b) => localizeCountry(a, lang).name.localeCompare(localizeCountry(b, lang).name));
 
   /** Localize nomad visa fields that have i18n */
   function getLocalizedVisa(country: CountryData) {
     const visa = country.nomadVisa!;
-    const loc =
-      lang === "ru" || lang === "ua"
-        ? visa.i18n?.[lang as "ru" | "ua"]
-        : undefined;
+    const loc = lang === "ru" || lang === "ua" ? visa.i18n?.[lang as "ru" | "ua"] : undefined;
     return { visa, loc };
   }
 
@@ -195,10 +176,7 @@ export function NomadVisaComparison({
     };
   }
 
-  function renderCell(
-    slot: (typeof selectedCountries)[number],
-    field: VisaField,
-  ) {
+  function renderCell(slot: (typeof selectedCountries)[number], field: VisaField) {
     const { visa, loc } = getLocalizedVisa(slot.country);
 
     switch (field) {
@@ -230,9 +208,7 @@ export function NomadVisaComparison({
         );
       }
       case "monthlyBudget": {
-        const monthlyBudget = budgetMatchByCode.get(
-          slot.country.code,
-        )?.monthlyCost;
+        const monthlyBudget = budgetMatchByCode.get(slot.country.code)?.monthlyCost;
         return (
           <span
             style={{
@@ -275,9 +251,7 @@ export function NomadVisaComparison({
             {visa.duration.maxExtension > 0 ? (
               <>
                 +{visa.duration.maxExtension}
-                <span
-                  style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}
-                >
+                <span style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}>
                   {t("countryPage.visa.months")}
                 </span>
               </>
@@ -454,8 +428,7 @@ export function NomadVisaComparison({
               color: "#E8E9EB",
             }}
           >
-            {loc?.applicationProcess?.processingTime ??
-              visa.applicationProcess.processingTime}
+            {loc?.applicationProcess?.processingTime ?? visa.applicationProcess.processingTime}
           </span>
         );
       case "benefits": {
@@ -492,11 +465,7 @@ export function NomadVisaComparison({
           <div
             key={slot.country.code}
             className="min-w-0 w-full md:shrink-0 md:w-[180px]"
-            onClick={() =>
-              navigate(
-                `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
-              )
-            }
+            onClick={() => navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)}
             style={{ cursor: "pointer" }}
           >
             <div

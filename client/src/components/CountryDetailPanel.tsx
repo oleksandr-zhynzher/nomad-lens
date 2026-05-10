@@ -18,10 +18,7 @@ import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { RankedCountry } from "../utils/types";
 import { TOURISM_GROUPS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
-import {
-  computeTourismScore,
-  tourismScoreColour,
-} from "../utils/tourismScoring";
+import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring";
 import { TOURISM_COLORS } from "../utils/tourismColors";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
@@ -38,11 +35,7 @@ interface CountryDetailPanelProps {
   onViewInList: () => void;
 }
 
-export function CountryDetailPanel({
-  country,
-  onClose,
-  onViewInList,
-}: CountryDetailPanelProps) {
+export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDetailPanelProps) {
   const { t } = useTranslation();
   const langPrefix = useLangPrefix();
   const { country: c, finalScore, rank } = country;
@@ -248,9 +241,7 @@ export function CountryDetailPanel({
                   </h3>
                   <div className="flex flex-col gap-3">
                     {TOURISM_GROUPS.map((group) => {
-                      const visibleKeys = group.keys.filter(
-                        (k) => c.scores[k]?.value != null,
-                      );
+                      const visibleKeys = group.keys.filter((k) => c.scores[k]?.value != null);
                       if (visibleKeys.length === 0) return null;
                       return (
                         <div key={group.labelKey}>
@@ -265,10 +256,7 @@ export function CountryDetailPanel({
                               marginBottom: "6px",
                             }}
                           >
-                            {t(
-                              `tourismWeights.groups.${group.labelKey}`,
-                              group.labelKey,
-                            )}
+                            {t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
                           </div>
                           <div className="flex flex-col gap-1.5">
                             {visibleKeys.map((key) => {
@@ -289,10 +277,7 @@ export function CountryDetailPanel({
                                       flexShrink: 0,
                                     }}
                                   >
-                                    {t(
-                                      `tourism.metrics.${key}`,
-                                      CATEGORY_LABELS[key],
-                                    )}
+                                    {t(`tourism.metrics.${key}`, CATEGORY_LABELS[key])}
                                   </span>
                                   <div
                                     style={{
@@ -482,10 +467,7 @@ export function CountryDetailPanel({
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "12px",
                             fontWeight: 600,
-                            color:
-                              c.nomadVisa.cost.amount === 0
-                                ? "#44CC66"
-                                : "#FFFFFF",
+                            color: c.nomadVisa.cost.amount === 0 ? "#44CC66" : "#FFFFFF",
                           }}
                         >
                           {c.nomadVisa.cost.amount === 0
@@ -623,10 +605,7 @@ export function CountryDetailPanel({
                           marginBottom: "4px",
                         }}
                       >
-                        {t(
-                          "countryPage.visa.officialInfo",
-                          "Official Information",
-                        )}
+                        {t("countryPage.visa.officialInfo", "Official Information")}
                       </span>
                       <a
                         href={c.nomadVisa.officialUrl}

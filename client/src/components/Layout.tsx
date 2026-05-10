@@ -1,14 +1,5 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import {
-  BarChart3,
-  List,
-  Map,
-  Menu,
-  Palmtree,
-  Plane,
-  Wallet,
-  X,
-} from "lucide-react";
+import { BarChart3, List, Map, Menu, Palmtree, Plane, Wallet, X } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
@@ -16,11 +7,7 @@ import { LogoMark } from "./LogoMark";
 
 interface LayoutProps {
   children: ReactNode;
-  activePage?:
-    | "data-sources"
-    | "indicators"
-    | "ai-indicators"
-    | "budget-categories";
+  activePage?: "data-sources" | "indicators" | "ai-indicators" | "budget-categories";
 }
 
 export function Layout({ children }: LayoutProps) {
@@ -71,8 +58,7 @@ export function Layout({ children }: LayoutProps) {
   ];
 
   const currentLang =
-    LANG_OPTIONS.find((language) => language.code === i18n.language) ??
-    LANG_OPTIONS[0];
+    LANG_OPTIONS.find((language) => language.code === i18n.language) ?? LANG_OPTIONS[0];
 
   const INFO_PAGES = [
     "/indicators",
@@ -85,9 +71,7 @@ export function Layout({ children }: LayoutProps) {
   ];
   const isInfoPage = INFO_PAGES.some((pagePath) => pathname.endsWith(pagePath));
 
-  const activeView: "list" | "map" | "compare" | null = pathname.endsWith(
-    "/map",
-  )
+  const activeView: "list" | "map" | "compare" | null = pathname.endsWith("/map")
     ? "map"
     : pathname.endsWith("/compare")
       ? "compare"
@@ -150,19 +134,13 @@ export function Layout({ children }: LayoutProps) {
           </button>
 
           <div className="hidden items-center gap-4 md:flex">
-            <div
-              className="flex rounded-md p-1"
-              style={{ backgroundColor: "#2A2A2A", gap: "4px" }}
-            >
+            <div className="flex rounded-md p-1" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
               <button
                 onClick={() => handleViewClick("list")}
                 className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
                 data-active={activeView === "list" ? "true" : undefined}
                 style={{
-                  backgroundColor:
-                    activeView === "list"
-                      ? "var(--color-accent)"
-                      : "transparent",
+                  backgroundColor: activeView === "list" ? "var(--color-accent)" : "transparent",
                   color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
@@ -177,10 +155,7 @@ export function Layout({ children }: LayoutProps) {
                 className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
                 data-active={activeView === "map" ? "true" : undefined}
                 style={{
-                  backgroundColor:
-                    activeView === "map"
-                      ? "var(--color-accent)"
-                      : "transparent",
+                  backgroundColor: activeView === "map" ? "var(--color-accent)" : "transparent",
                   color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
@@ -195,10 +170,7 @@ export function Layout({ children }: LayoutProps) {
                 className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
                 data-active={activeView === "compare" ? "true" : undefined}
                 style={{
-                  backgroundColor:
-                    activeView === "compare"
-                      ? "var(--color-accent)"
-                      : "transparent",
+                  backgroundColor: activeView === "compare" ? "var(--color-accent)" : "transparent",
                   color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
@@ -211,16 +183,12 @@ export function Layout({ children }: LayoutProps) {
               <Link
                 to={`${langPrefix}/nomad-visas`}
                 className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={
-                  pathname.endsWith("/nomad-visas") ? "true" : undefined
-                }
+                data-active={pathname.endsWith("/nomad-visas") ? "true" : undefined}
                 style={{
                   backgroundColor: pathname.endsWith("/nomad-visas")
                     ? "var(--color-accent)"
                     : "transparent",
-                  color: pathname.endsWith("/nomad-visas")
-                    ? "#FFFFFF"
-                    : "#9E9E9E",
+                  color: pathname.endsWith("/nomad-visas") ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
@@ -233,16 +201,12 @@ export function Layout({ children }: LayoutProps) {
               <Link
                 to={`${langPrefix}/budget-matcher`}
                 className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={
-                  pathname.endsWith("/budget-matcher") ? "true" : undefined
-                }
+                data-active={pathname.endsWith("/budget-matcher") ? "true" : undefined}
                 style={{
                   backgroundColor: pathname.endsWith("/budget-matcher")
                     ? "var(--color-accent)"
                     : "transparent",
-                  color: pathname.endsWith("/budget-matcher")
-                    ? "#FFFFFF"
-                    : "#9E9E9E",
+                  color: pathname.endsWith("/budget-matcher") ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
@@ -318,33 +282,33 @@ export function Layout({ children }: LayoutProps) {
                     zIndex: 50,
                   }}
                 >
-                  {LANG_OPTIONS.filter(
-                    (option) => option.code !== i18n.language,
-                  ).map((option, index) => (
-                    <Link
-                      key={option.code}
-                      to={langSwitchPath(option.code)}
-                      onClick={() => setLangDropdownOpen(false)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        minWidth: "56px",
-                        height: "32px",
-                        padding: "0 16px",
-                        textDecoration: "none",
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "12px",
-                        fontWeight: 600,
-                        letterSpacing: "1px",
-                        lineHeight: 1,
-                        color: "#9E9E9E",
-                        borderTop: index === 0 ? "none" : "1px solid #1E1E1E",
-                      }}
-                    >
-                      {option.code.toUpperCase()}
-                    </Link>
-                  ))}
+                  {LANG_OPTIONS.filter((option) => option.code !== i18n.language).map(
+                    (option, index) => (
+                      <Link
+                        key={option.code}
+                        to={langSwitchPath(option.code)}
+                        onClick={() => setLangDropdownOpen(false)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          minWidth: "56px",
+                          height: "32px",
+                          padding: "0 16px",
+                          textDecoration: "none",
+                          fontFamily: "Inter, sans-serif",
+                          fontSize: "12px",
+                          fontWeight: 600,
+                          letterSpacing: "1px",
+                          lineHeight: 1,
+                          color: "#9E9E9E",
+                          borderTop: index === 0 ? "none" : "1px solid #1E1E1E",
+                        }}
+                      >
+                        {option.code.toUpperCase()}
+                      </Link>
+                    ),
+                  )}
                 </div>
               )}
             </div>
@@ -425,8 +389,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => handleViewClick("list")}
                 className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
                 style={{
-                  backgroundColor:
-                    activeView === "list" ? "var(--color-accent)" : "#2A2A2A",
+                  backgroundColor: activeView === "list" ? "var(--color-accent)" : "#2A2A2A",
                   color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
@@ -440,8 +403,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => handleViewClick("map")}
                 className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
                 style={{
-                  backgroundColor:
-                    activeView === "map" ? "var(--color-accent)" : "#2A2A2A",
+                  backgroundColor: activeView === "map" ? "var(--color-accent)" : "#2A2A2A",
                   color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
@@ -455,10 +417,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => handleViewClick("compare")}
                 className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
                 style={{
-                  backgroundColor:
-                    activeView === "compare"
-                      ? "var(--color-accent)"
-                      : "#2A2A2A",
+                  backgroundColor: activeView === "compare" ? "var(--color-accent)" : "#2A2A2A",
                   color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
@@ -476,9 +435,7 @@ export function Layout({ children }: LayoutProps) {
                   backgroundColor: pathname.endsWith("/nomad-visas")
                     ? "var(--color-accent)"
                     : "#2A2A2A",
-                  color: pathname.endsWith("/nomad-visas")
-                    ? "#FFFFFF"
-                    : "#9E9E9E",
+                  color: pathname.endsWith("/nomad-visas") ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
@@ -496,9 +453,7 @@ export function Layout({ children }: LayoutProps) {
                   backgroundColor: pathname.endsWith("/budget-matcher")
                     ? "var(--color-accent)"
                     : "#2A2A2A",
-                  color: pathname.endsWith("/budget-matcher")
-                    ? "#FFFFFF"
-                    : "#9E9E9E",
+                  color: pathname.endsWith("/budget-matcher") ? "#FFFFFF" : "#9E9E9E",
                   fontFamily: "Inter, sans-serif",
                   fontSize: "13px",
                   fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
@@ -581,11 +536,7 @@ export function Layout({ children }: LayoutProps) {
       )}
 
       <main
-        className={
-          activeView === "compare"
-            ? ""
-            : "mx-auto w-full max-w-7xl px-4 pb-4 md:pb-6"
-        }
+        className={activeView === "compare" ? "" : "mx-auto w-full max-w-7xl px-4 pb-4 md:pb-6"}
       >
         {children}
       </main>

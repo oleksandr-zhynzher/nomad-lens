@@ -163,28 +163,16 @@ export function BudgetComparison({
     }
 
     onSelectedCodesChange(sortedCodes);
-  }, [
-    matchMap,
-    onSelectedCodesChange,
-    selectedCodes,
-    sortDirection,
-    sortTrigger,
-  ]);
+  }, [matchMap, onSelectedCodesChange, selectedCodes, sortDirection, sortTrigger]);
 
   const filtered = countries
     .filter(
       (c) =>
         c.costOfLiving &&
         !selectedCodes.includes(c.code) &&
-        localizeCountry(c, lang)
-          .name.toLowerCase()
-          .includes(query.toLowerCase()),
+        localizeCountry(c, lang).name.toLowerCase().includes(query.toLowerCase()),
     )
-    .sort((a, b) =>
-      localizeCountry(a, lang).name.localeCompare(
-        localizeCountry(b, lang).name,
-      ),
-    );
+    .sort((a, b) => localizeCountry(a, lang).name.localeCompare(localizeCountry(b, lang).name));
 
   // Cheapest value per row across selected countries
   const minBreakdown: Record<string, number> = {};
@@ -198,11 +186,7 @@ export function BudgetComparison({
   });
   const minTotal =
     selectedSlots.length > 0
-      ? Math.min(
-          ...selectedSlots.map(
-            (slot) => matchMap.get(slot.country.code)?.monthlyCost ?? 0,
-          ),
-        )
+      ? Math.min(...selectedSlots.map((slot) => matchMap.get(slot.country.code)?.monthlyCost ?? 0))
       : 0;
 
   return (
@@ -218,10 +202,7 @@ export function BudgetComparison({
             const cost = match?.monthlyCost;
             const surplus = match != null ? match.surplus : null;
             return (
-              <div
-                key={slot.country.code}
-                className="min-w-0 w-full md:shrink-0 md:w-[180px]"
-              >
+              <div key={slot.country.code} className="min-w-0 w-full md:shrink-0 md:w-[180px]">
                 <div
                   className="relative rounded-lg p-4 flex flex-col items-center gap-3"
                   style={{
@@ -306,10 +287,7 @@ export function BudgetComparison({
           })}
 
           {/* Add button */}
-          <div
-            ref={addBtnRef}
-            className="min-w-0 w-full md:shrink-0 md:w-[180px]"
-          >
+          <div ref={addBtnRef} className="min-w-0 w-full md:shrink-0 md:w-[180px]">
             <button
               onClick={() => {
                 if (!dropdownOpen && addBtnRef.current) {
@@ -320,11 +298,8 @@ export function BudgetComparison({
                     8,
                     Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
                   );
-                  const fitsBelow =
-                    rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
-                  const top = fitsBelow
-                    ? rect.bottom + 8
-                    : rect.top - dropdownMaxHeight - 8;
+                  const fitsBelow = rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
+                  const top = fitsBelow ? rect.bottom + 8 : rect.top - dropdownMaxHeight - 8;
                   setDropdownPos({ top, left });
                 }
                 setDropdownOpen((p) => !p);
@@ -547,8 +522,7 @@ export function BudgetComparison({
                         fontFamily: "IBM Plex Mono, monospace",
                         fontSize: "22px",
                         fontWeight: 600,
-                        color:
-                          val != null ? costColor(val, minTotal) : "#333333",
+                        color: val != null ? costColor(val, minTotal) : "#333333",
                       }}
                     >
                       {val != null ? `$${val.toLocaleString()}` : "—"}
@@ -564,10 +538,7 @@ export function BudgetComparison({
               style={{ borderBottom: "1px solid #1C1C1C", padding: "16px 0" }}
             >
               <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                <TrendingUp
-                  size={16}
-                  style={{ color: "#4CAF50", flexShrink: 0 }}
-                />
+                <TrendingUp size={16} style={{ color: "#4CAF50", flexShrink: 0 }} />
                 <span
                   style={{
                     fontFamily: "Inter, sans-serif",
@@ -643,10 +614,7 @@ export function BudgetComparison({
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "22px",
                             fontWeight: 600,
-                            color:
-                              val != null
-                                ? costColor(val, minBreakdown[key])
-                                : "#333333",
+                            color: val != null ? costColor(val, minBreakdown[key]) : "#333333",
                           }}
                         >
                           {val != null ? `$${val.toLocaleString()}` : "—"}

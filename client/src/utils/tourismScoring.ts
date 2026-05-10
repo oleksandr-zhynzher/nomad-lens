@@ -34,14 +34,10 @@ export function computeTourismScore(country: CountryData): number | null {
  * Compute which months (0-11) a date range covers and the weight of each.
  * Returns a map of month index → fraction of days in that month.
  */
-function getMonthWeights(
-  startDate: string,
-  endDate: string,
-): Map<number, number> {
+function getMonthWeights(startDate: string, endDate: string): Map<number, number> {
   const start = new Date(startDate + "T00:00:00");
   const end = new Date(endDate + "T00:00:00");
-  if (isNaN(start.getTime()) || isNaN(end.getTime()) || end < start)
-    return new Map();
+  if (isNaN(start.getTime()) || isNaN(end.getTime()) || end < start) return new Map();
 
   const weights = new Map<number, number>();
   let totalDays = 0;
@@ -123,8 +119,7 @@ export function computeWeightedTourismScore(
       if (tagScore != null) {
         // Apply seasonal multiplier when travel dates are set
         if (monthWeights && monthWeights.size > 0) {
-          tagScore =
-            tagScore * getSeasonalMultiplier(country, tag, monthWeights);
+          tagScore = tagScore * getSeasonalMultiplier(country, tag, monthWeights);
         }
         numerator += tagWeight * tagScore;
         denominator += tagWeight;
@@ -143,10 +138,7 @@ export function computeWeightedTourismScore(
 export function getTourismRanking(countries: CountryData[]): TourismRanked[] {
   const scored = countries
     .map((c) => ({ country: c, tourismScore: computeTourismScore(c) }))
-    .filter(
-      (x): x is { country: CountryData; tourismScore: number } =>
-        x.tourismScore != null,
-    );
+    .filter((x): x is { country: CountryData; tourismScore: number } => x.tourismScore != null);
 
   scored.sort((a, b) => b.tourismScore - a.tourismScore);
 
@@ -166,9 +158,7 @@ export function getWeightedTourismRanking(
 
   const scored = countries
     .map((c) => {
-      const presentCount = activeKeys.filter(
-        (k) => c.scores[k]?.value != null,
-      ).length;
+      const presentCount = activeKeys.filter((k) => c.scores[k]?.value != null).length;
       return {
         country: c,
         tourismScore: computeWeightedTourismScore(
@@ -233,10 +223,7 @@ export interface TourismBudgetMatch {
  * Estimate a daily accommodation cost from the monthly cost-of-living data.
  * Different accommodation types use different multipliers on the rental data.
  */
-function getAccommodationDaily(
-  col: CostOfLivingData,
-  type: AccommodationType,
-): number | null {
+function getAccommodationDaily(col: CostOfLivingData, type: AccommodationType): number | null {
   // Use smaller city rent as baseline for tourist accommodation
   const monthlyRent = col.rentSmallerCity ?? col.rentMajorCity;
   if (monthlyRent == null) return null;
@@ -268,10 +255,7 @@ function getAccommodationDaily(
  * - casual: 3 meals/day at budget/inexpensive restaurants
  * - restaurants: 3 meals/day at mid-range restaurants
  */
-function getFoodDaily(
-  col: CostOfLivingData,
-  dining: DiningPreference,
-): number | null {
+function getFoodDaily(col: CostOfLivingData, dining: DiningPreference): number | null {
   switch (dining) {
     case "market":
       // Self-catering: groceries only, per day
@@ -379,8 +363,7 @@ export function getWeightedTourismBudgetRanking(
 
     // Blend: budgetBlend=0 → pure affordability, budgetBlend=100 → pure tourism quality
     const blendFactor = (100 - budget.budgetBlend) / 100;
-    const blendedScore =
-      tourismScore * (1 - blendFactor) + budgetScore * blendFactor;
+    const blendedScore = tourismScore * (1 - blendFactor) + budgetScore * blendFactor;
 
     results.push({
       country,

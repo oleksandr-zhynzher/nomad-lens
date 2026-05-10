@@ -10,12 +10,7 @@ interface DataSourceCardProps {
   tags: string[];
 }
 
-function DataSourceCard({
-  name,
-  category,
-  description,
-  tags,
-}: DataSourceCardProps) {
+function DataSourceCard({ name, category, description, tags }: DataSourceCardProps) {
   return (
     <div className="flex flex-1 flex-col gap-3 rounded-md border border-[#1E1E20] bg-[#141416] p-6">
       {/* Title */}
@@ -27,9 +22,7 @@ function DataSourceCard({
       </div>
 
       {/* Description */}
-      <div className="text-[13px] leading-[1.5] text-[#8A8A8A]">
-        {description}
-      </div>
+      <div className="text-[13px] leading-[1.5] text-[#8A8A8A]">{description}</div>
 
       {/* Footer row */}
       <div className="mt-auto flex items-center gap-1.5">

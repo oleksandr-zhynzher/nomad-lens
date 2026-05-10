@@ -236,22 +236,12 @@ export function TourismCountryCard({
                   const baseVal = country.tourismTagScores?.[tag] ?? null;
                   // Apply seasonal multiplier if travel dates are set
                   let val = baseVal;
-                  if (
-                    val !== null &&
-                    travelDates?.startDate &&
-                    travelDates?.endDate
-                  ) {
+                  if (val !== null && travelDates?.startDate && travelDates?.endDate) {
                     const seasonality = country.tourismTagSeasonality?.[tag];
                     if (seasonality && seasonality.length === 12) {
-                      const start = new Date(
-                        travelDates.startDate + "T00:00:00",
-                      );
+                      const start = new Date(travelDates.startDate + "T00:00:00");
                       const end = new Date(travelDates.endDate + "T00:00:00");
-                      if (
-                        !isNaN(start.getTime()) &&
-                        !isNaN(end.getTime()) &&
-                        end >= start
-                      ) {
+                      if (!isNaN(start.getTime()) && !isNaN(end.getTime()) && end >= start) {
                         let wSum = 0;
                         let days = 0;
                         const cursor = new Date(start);
@@ -260,8 +250,7 @@ export function TourismCountryCard({
                           days++;
                           cursor.setDate(cursor.getDate() + 1);
                         }
-                        if (days > 0)
-                          val = Math.round(val * (wSum / days / 100) * 10) / 10;
+                        if (days > 0) val = Math.round(val * (wSum / days / 100) * 10) / 10;
                       }
                     }
                   }
@@ -297,11 +286,7 @@ export function TourismCountryCard({
                     </div>
                   );
                   return (
-                    <Tooltip
-                      key={`tag-${tag}`}
-                      content={tooltipContent}
-                      side="top"
-                    >
+                    <Tooltip key={`tag-${tag}`} content={tooltipContent} side="top">
                       <div
                         className="cursor-default"
                         role="img"
@@ -322,10 +307,7 @@ export function TourismCountryCard({
 
           {/* Cost + surplus (daily) */}
           {ranked.budgetMatch && (
-            <div
-              className="hidden sm:flex flex-col items-end"
-              style={{ flexShrink: 0 }}
-            >
+            <div className="hidden sm:flex flex-col items-end" style={{ flexShrink: 0 }}>
               <span
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
@@ -339,12 +321,10 @@ export function TourismCountryCard({
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
                   fontSize: "11px",
-                  color:
-                    ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
+                  color: ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
                 }}
               >
-                {ranked.budgetMatch.surplus >= 0 ? "+" : ""}$
-                {ranked.budgetMatch.surplus}/d
+                {ranked.budgetMatch.surplus >= 0 ? "+" : ""}${ranked.budgetMatch.surplus}/d
               </span>
             </div>
           )}
@@ -369,11 +349,7 @@ export function TourismCountryCard({
             style={{
               color: "#757575",
               transition: "transform 0.2s",
-              transform: compareMode
-                ? "rotate(0deg)"
-                : expanded
-                  ? "rotate(90deg)"
-                  : "rotate(0deg)",
+              transform: compareMode ? "rotate(0deg)" : expanded ? "rotate(90deg)" : "rotate(0deg)",
               opacity: compareMode ? 0.35 : 1,
             }}
             className="shrink-0"
@@ -386,9 +362,7 @@ export function TourismCountryCard({
             <TourismBudgetBar
               breakdown={ranked.budgetMatch.breakdown}
               dailyCost={ranked.budgetMatch.dailyCost}
-              dailyBudget={
-                ranked.budgetMatch.dailyCost + ranked.budgetMatch.surplus
-              }
+              dailyBudget={ranked.budgetMatch.dailyCost + ranked.budgetMatch.surplus}
             />
           </div>
         )}
@@ -409,18 +383,14 @@ export function TourismCountryCard({
           {ranked.budgetMatch &&
             (() => {
               const totalDaily = ranked.budgetMatch.dailyCost;
-              const rows = (
-                ["accommodation", "food", "activities"] as const
-              ).map((cat) => {
+              const rows = (["accommodation", "food", "activities"] as const).map((cat) => {
                 const amount = ranked.budgetMatch!.breakdown[cat];
                 return {
                   cat,
                   amount,
                   color: TOURISM_COST_COLORS[cat] ?? "#666666",
                   width:
-                    totalDaily > 0
-                      ? Math.max(8, Math.min(100, (amount / totalDaily) * 100))
-                      : 0,
+                    totalDaily > 0 ? Math.max(8, Math.min(100, (amount / totalDaily) * 100)) : 0,
                 };
               });
 
@@ -488,10 +458,7 @@ export function TourismCountryCard({
                     </span>
                   </div>
 
-                  <div
-                    className="grid grid-cols-2 md:grid-cols-5"
-                    style={{ gap: "10px" }}
-                  >
+                  <div className="grid grid-cols-2 md:grid-cols-5" style={{ gap: "10px" }}>
                     {rows.map(({ cat, amount, color, width }) => {
                       const meta = cardMeta[cat];
                       return (
@@ -651,9 +618,7 @@ export function TourismCountryCard({
                       style={{
                         backgroundColor: "#0C0F13",
                         border: `1px solid ${
-                          ranked.budgetMatch.surplus >= 0
-                            ? "#2D6E3A"
-                            : "#6C3A2D"
+                          ranked.budgetMatch.surplus >= 0 ? "#2D6E3A" : "#6C3A2D"
                         }`,
                         borderRadius: "10px",
                         padding: "12px",
@@ -672,18 +637,11 @@ export function TourismCountryCard({
                             height: "28px",
                             borderRadius: "8px",
                             backgroundColor:
-                              ranked.budgetMatch.surplus >= 0
-                                ? "#17301D"
-                                : "#321A16",
+                              ranked.budgetMatch.surplus >= 0 ? "#17301D" : "#321A16",
                             border: `1px solid ${
-                              ranked.budgetMatch.surplus >= 0
-                                ? "#2D6E3A"
-                                : "#6C3A2D"
+                              ranked.budgetMatch.surplus >= 0 ? "#2D6E3A" : "#6C3A2D"
                             }`,
-                            color:
-                              ranked.budgetMatch.surplus >= 0
-                                ? "#58C26D"
-                                : "#FF7A59",
+                            color: ranked.budgetMatch.surplus >= 0 ? "#58C26D" : "#FF7A59",
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "12px",
                             fontWeight: 700,
@@ -697,10 +655,7 @@ export function TourismCountryCard({
                             fontSize: "17px",
                             lineHeight: 1,
                             fontWeight: 700,
-                            color:
-                              ranked.budgetMatch.surplus >= 0
-                                ? "#58C26D"
-                                : "#FF7A59",
+                            color: ranked.budgetMatch.surplus >= 0 ? "#58C26D" : "#FF7A59",
                           }}
                         >
                           {ranked.budgetMatch.surplus >= 0 ? "+" : "-"}$
@@ -735,9 +690,7 @@ export function TourismCountryCard({
                             height: "100%",
                             borderRadius: "999px",
                             backgroundColor:
-                              ranked.budgetMatch.surplus >= 0
-                                ? "#58C26D"
-                                : "#FF7A59",
+                              ranked.budgetMatch.surplus >= 0 ? "#58C26D" : "#FF7A59",
                           }}
                         />
                       </div>
@@ -783,8 +736,11 @@ function dotColour(value: number | null): string {
   return "#FF5722";
 }
 
-const TOURISM_BUDGET_KEYS: (keyof import("../utils/tourismScoring").TourismBudgetBreakdown)[] =
-  ["accommodation", "food", "activities"];
+const TOURISM_BUDGET_KEYS: (keyof import("../utils/tourismScoring").TourismBudgetBreakdown)[] = [
+  "accommodation",
+  "food",
+  "activities",
+];
 
 function TourismBudgetBar({
   breakdown,

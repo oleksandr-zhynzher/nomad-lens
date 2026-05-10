@@ -114,21 +114,11 @@ export const TOURISM_GROUPS: Array<{
 }> = [
   {
     labelKey: "safetyPeople",
-    keys: [
-      "tourismSafety",
-      "touristScamSafety",
-      "localFriendliness",
-      "englishProficiency",
-    ],
+    keys: ["tourismSafety", "touristScamSafety", "localFriendliness", "englishProficiency"],
   },
   {
     labelKey: "sightseeingNature",
-    keys: [
-      "historicalSites",
-      "photographySpots",
-      "walkabilityScenicBeauty",
-      "beachWaterQuality",
-    ],
+    keys: ["historicalSites", "photographySpots", "walkabilityScenicBeauty", "beachWaterQuality"],
   },
   {
     labelKey: "activitiesLifestyle",
@@ -143,9 +133,7 @@ export const TOURISM_GROUPS: Array<{
 ];
 
 /** Tourism category keys — standalone section, not in main ranking. */
-export const TOURISM_CATEGORY_KEYS: CategoryKey[] = TOURISM_GROUPS.flatMap(
-  (g) => g.keys,
-);
+export const TOURISM_CATEGORY_KEYS: CategoryKey[] = TOURISM_GROUPS.flatMap((g) => g.keys);
 
 /** AI-analyzed category keys — opt-in only (default weight 0). */
 export const AI_CATEGORY_KEYS: CategoryKey[] = [
@@ -158,8 +146,7 @@ export const AI_CATEGORY_KEYS: CategoryKey[] = [
 ];
 
 export const CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
-  (key) =>
-    !AI_CATEGORY_KEYS.includes(key) && !TOURISM_CATEGORY_KEYS.includes(key),
+  (key) => !AI_CATEGORY_KEYS.includes(key) && !TOURISM_CATEGORY_KEYS.includes(key),
 );
 
 export const DISPLAYED_CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
@@ -243,12 +230,10 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
   environment: "Air pollution (PM2.5), CO₂ emissions per capita",
   climate: "Average temperature & precipitation comfort range",
   safety: "Homicide rate, global peace index",
-  infrastructure:
-    "Internet penetration, electricity access, fixed broadband density",
+  infrastructure: "Internet penetration, electricity access, fixed broadband density",
   happiness: "World Happiness Report ladder score",
   humanDevelopment: "UNDP Human Development Index (HDI)",
-  governance:
-    "Corruption control, rule of law, political stability, government effectiveness",
+  governance: "Corruption control, rule of law, political stability, government effectiveness",
   englishProficiency:
     "EF English Proficiency Index 2025 — language accessibility for nomads (123 countries)",
   digitalFreedom:
@@ -257,8 +242,7 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
     "CATO Human Freedom Index personal sub-index — movement, expression, and association",
   logistics:
     "World Bank Logistics Performance Index — customs, infrastructure, and shipping efficiency",
-  biodiversity:
-    "Protected land area and forest coverage — nature access for nomads",
+  biodiversity: "Protected land area and forest coverage — nature access for nomads",
   socialTolerance:
     "LGBTQ+ rights composite — marriage equality, anti-discrimination protections, and legal status",
   taxFriendliness:
@@ -271,12 +255,9 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
     "UNESCO World Heritage Sites, Intangible Cultural Heritage elements, and international tourism arrivals",
   healthcareCost:
     "Out-of-pocket health expenditure as % of total — lower costs mean more accessible care",
-  tourismSafety:
-    "Personal safety for tourists: crime rates, peacefulness, and political stability",
-  accommodationCost:
-    "Average accommodation costs for travelers — lower prices score higher",
-  transportCost:
-    "Local transport and utilities affordability — lower costs score higher",
+  tourismSafety: "Personal safety for tourists: crime rates, peacefulness, and political stability",
+  accommodationCost: "Average accommodation costs for travelers — lower prices score higher",
+  transportCost: "Local transport and utilities affordability — lower costs score higher",
   tourismInfrastructure:
     "Internet coverage, electricity access, and coworking spaces — practical infrastructure for tourists",
   localFriendliness:
@@ -295,8 +276,7 @@ export const CATEGORY_DESCRIPTIONS: Record<CategoryKey, string> = {
     "Bazaars, malls, luxury outlets, local crafts, and souvenir shopping opportunities",
   photographySpots:
     "Iconic landmarks, photogenic landscapes, and unique architecture — density of photo-worthy locations",
-  familyFriendliness:
-    "Kid-friendly attractions, theme parks, safety, and family accommodation",
+  familyFriendliness: "Kid-friendly attractions, theme parks, safety, and family accommodation",
   adventureSports:
     "Paragliding, bungee, surfing, rafting, zip-lines, trekking, and diving opportunities",
   historicalSites:
@@ -325,8 +305,7 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   environment: "World Bank (PM2.5 air pollution, CO₂ per capita)",
   climate: "Open-Meteo (30-year climate normals — temperature & precipitation)",
   safety: "UNODC (homicide rate) · IEP Global Peace Index",
-  infrastructure:
-    "World Bank (internet users %, electricity access %, broadband subs/100)",
+  infrastructure: "World Bank (internet users %, electricity access %, broadband subs/100)",
   happiness: "UN World Happiness Report (Cantril ladder score)",
   humanDevelopment: "UNDP Human Development Index (HDI)",
   governance: "World Bank WGI · Transparency International CPI",
@@ -334,51 +313,38 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   digitalFreedom: "Freedom House — Freedom on the Net 2024",
   personalFreedom: "CATO Institute — Human Freedom Index 2024",
   logistics: "World Bank — Logistics Performance Index (LP.LPI.OVRL.XQ)",
-  biodiversity:
-    "World Bank (ER.LND.PTLD.ZS protected land, AG.LND.FRST.ZS forest area)",
+  biodiversity: "World Bank (ER.LND.PTLD.ZS protected land, AG.LND.FRST.ZS forest area)",
   socialTolerance: "ILGA World Database · Equaldex",
-  taxFriendliness:
-    "Heritage Foundation Tax Burden · World Bank (GC.TAX.TOTL.GD.ZS)",
+  taxFriendliness: "Heritage Foundation Tax Burden · World Bank (GC.TAX.TOTL.GD.ZS)",
   startupEnvironment: "Heritage Foundation — Business Freedom 2025",
-  airConnectivity:
-    "World Bank (IS.AIR.PSGR) · OpenFlights (destination countries)",
-  culturalHeritage:
-    "UNESCO World Heritage Centre · UNESCO ICH · World Bank (ST.INT.ARVL)",
+  airConnectivity: "World Bank (IS.AIR.PSGR) · OpenFlights (destination countries)",
+  culturalHeritage: "UNESCO World Heritage Centre · UNESCO ICH · World Bank (ST.INT.ARVL)",
   healthcareCost: "World Bank — SH.XPD.OOPC.CH.ZS (out-of-pocket expenditure)",
   tourismSafety:
     "UNODC (homicide rate) · IEP Global Peace Index · World Bank WGI (political stability)",
   accommodationCost: "Numbeo · Livingcost.org (monthly rent benchmarks)",
   transportCost: "Numbeo · Livingcost.org (local transport & utilities costs)",
-  tourismInfrastructure:
-    "World Bank (internet users %, electricity access %) · Numbeo (coworking)",
+  tourismInfrastructure: "World Bank (internet users %, electricity access %) · Numbeo (coworking)",
   localFriendliness:
     "EF EPI (English proficiency) · ILGA/Equaldex (tolerance) · UN WHR (happiness)",
-  nightlifeEntertainment:
-    "AI composite (TripAdvisor, travel guides, festival data)",
+  nightlifeEntertainment: "AI composite (TripAdvisor, travel guides, festival data)",
   touristScamSafety: "AI composite (safety indices, travel advisories, Numbeo)",
   streetFoodCuisine: "AI composite (TasteAtlas, TripAdvisor, food guides)",
-  beachWaterQuality:
-    "AI composite (Blue Flag, TripAdvisor, water quality reports)",
-  walkabilityScenicBeauty:
-    "AI composite (Walk Score, travel guides, urban planning data)",
+  beachWaterQuality: "AI composite (Blue Flag, TripAdvisor, water quality reports)",
+  walkabilityScenicBeauty: "AI composite (Walk Score, travel guides, urban planning data)",
   shoppingMarkets: "AI composite (TripAdvisor, travel guides, retail indices)",
   photographySpots: "AI composite (Instagram data, travel guides, UNESCO)",
-  familyFriendliness:
-    "AI composite (family travel guides, safety data, TripAdvisor)",
-  adventureSports:
-    "AI composite (adventure tourism data, PADI, trekking guides)",
-  historicalSites:
-    "AI composite (UNESCO, archaeological databases, travel guides)",
+  familyFriendliness: "AI composite (family travel guides, safety data, TripAdvisor)",
+  adventureSports: "AI composite (adventure tourism data, PADI, trekking guides)",
+  historicalSites: "AI composite (UNESCO, archaeological databases, travel guides)",
   nomadCommunity:
     "AI-analyzed (Claude) — NomadList, Coworker.com, InterNations, UN DESA migrant stock",
   visaFriendliness:
     "AI-analyzed (Claude) — Henley Passport Index, IATA Timatic, NomadList, government sources",
-  costEfficiency:
-    "AI-analyzed (Claude) — NomadList, Numbeo, Expatistan, Speedtest, Airbnb pricing",
+  costEfficiency: "AI-analyzed (Claude) — NomadList, Numbeo, Expatistan, Speedtest, Airbnb pricing",
   workLifeBalance:
     "AI-analyzed (Claude) — timezone data, NomadList, TripAdvisor, geographic analysis",
-  digitalReadiness:
-    "AI-analyzed (Claude) — Speedtest/Ookla, Opensignal, GSMA, NomadList, Airalo",
+  digitalReadiness: "AI-analyzed (Claude) — Speedtest/Ookla, Opensignal, GSMA, NomadList, Airalo",
   culturalFit:
     "AI-analyzed (Claude) — InterNations Expat Insider, NomadList, World Bank, travel advisories",
 };
@@ -494,12 +460,7 @@ export interface NomadVisaDetails {
 
 // ─── Climate ─────────────────────────────────────────────────────────────────
 
-export type SeasonType =
-  | "four_seasons"
-  | "mild_seasons"
-  | "tropical"
-  | "arid"
-  | "polar";
+export type SeasonType = "four_seasons" | "mild_seasons" | "tropical" | "arid" | "polar";
 
 export interface ClimateData {
   annualMeanTemp: number;
