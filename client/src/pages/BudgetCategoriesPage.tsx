@@ -48,9 +48,7 @@ function BudgetCategoryCard({
       </div>
 
       {/* Description */}
-      <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">
-        {description}
-      </div>
+      <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">{description}</div>
 
       {/* Methodology */}
       <div
@@ -71,10 +69,7 @@ function BudgetCategoryCard({
   );
 }
 
-const CATEGORY_ACCENT_CLASSES: Record<
-  string,
-  { border: string; text: string }
-> = {
+const CATEGORY_ACCENT_CLASSES: Record<string, { border: string; text: string }> = {
   housing: { border: "border-[#8F5A3C]", text: "text-[#8F5A3C]" },
   groceries: { border: "border-[#6B9E6B]", text: "text-[#6B9E6B]" },
   dining: { border: "border-[#C2956A]", text: "text-[#C2956A]" },
@@ -116,11 +111,7 @@ export function BudgetCategoriesPage() {
       <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
         {/* Disclaimer banner */}
         <div className="flex items-start gap-3 rounded-lg border border-[rgba(192,132,252,0.2)] bg-[rgba(192,132,252,0.06)] px-5 py-4">
-          <AlertTriangle
-            size={18}
-            color="#C084FC"
-            className="mt-0.5 shrink-0"
-          />
+          <AlertTriangle size={18} color="#C084FC" className="mt-0.5 shrink-0" />
           <div className="text-[13px] leading-[1.6] text-[#9E9E9E]">
             {t("budgetCategoriesPage.disclaimer")}
           </div>
@@ -128,10 +119,7 @@ export function BudgetCategoriesPage() {
 
         {/* Category cards */}
         {CATEGORY_ROWS.map((row, rowIdx) => (
-          <div
-            key={rowIdx}
-            className="flex flex-col md:flex-row gap-4 md:gap-5 w-full"
-          >
+          <div key={rowIdx} className="flex flex-col md:flex-row gap-4 md:gap-5 w-full">
             {row.map(([Icon, key]) => {
               const accentClasses = CATEGORY_ACCENT_CLASSES[key] ?? {
                 border: "border-[#555555]",
@@ -142,13 +130,9 @@ export function BudgetCategoriesPage() {
                   key={key}
                   Icon={Icon}
                   name={t(`budgetCategoriesPage.categories.${key}.name`)}
-                  description={t(
-                    `budgetCategoriesPage.categories.${key}.description`,
-                  )}
+                  description={t(`budgetCategoriesPage.categories.${key}.description`)}
                   source={t(`budgetCategoriesPage.categories.${key}.source`)}
-                  methodology={t(
-                    `budgetCategoriesPage.categories.${key}.methodology`,
-                  )}
+                  methodology={t(`budgetCategoriesPage.categories.${key}.methodology`)}
                   color={CATEGORY_COLORS[key] ?? "#555"}
                   accentBorderClassName={accentClasses.border}
                   accentTextClassName={accentClasses.text}

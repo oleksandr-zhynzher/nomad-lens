@@ -162,10 +162,7 @@ export function CountryCard({
             {t(`regions.${regionKey(country.region)}`)}
           </span>
           {country.hasNomadVisa && (
-            <Tooltip
-              content={t("a11y.nomadVisaAvailable", "Nomad Visa Available")}
-              side="top"
-            >
+            <Tooltip content={t("a11y.nomadVisaAvailable", "Nomad Visa Available")} side="top">
               <Link
                 to={`${langPrefix}/country/${country.code.toLowerCase()}`}
                 className="shrink-0 inline-flex items-center justify-center"
@@ -190,10 +187,7 @@ export function CountryCard({
         <div className="hidden sm:flex gap-1 items-center">
           {VISIBLE_CATEGORY_KEYS.map((key) => {
             const val = country.scores[key]?.value ?? null;
-            const label = t(
-              `indicatorsPage.indicators.${key}.name`,
-              CATEGORY_LABELS[key],
-            );
+            const label = t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key]);
             const tooltipContent = (
               <div
                 style={{
@@ -261,11 +255,7 @@ export function CountryCard({
           style={{
             color: "#757575",
             transition: "transform 0.2s",
-            transform: compareMode
-              ? "rotate(0deg)"
-              : expanded
-                ? "rotate(90deg)"
-                : "rotate(0deg)",
+            transform: compareMode ? "rotate(0deg)" : expanded ? "rotate(90deg)" : "rotate(0deg)",
             opacity: compareMode ? 0.35 : 1,
           }}
           className="shrink-0"

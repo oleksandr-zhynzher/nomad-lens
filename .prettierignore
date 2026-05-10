@@ -1,0 +1,14 @@
+node_modules/
+.husky/_/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+client/dist-standalone/
+client/src/data/
+server/src/data/
+infra/cdk.out/
+images/
+*.tsbuildinfo
+*.pen

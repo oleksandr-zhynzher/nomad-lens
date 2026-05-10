@@ -236,22 +236,12 @@ export function TourismCountryCard({
                   const baseVal = country.tourismTagScores?.[tag] ?? null;
                   // Apply seasonal multiplier if travel dates are set
                   let val = baseVal;
-                  if (
-                    val !== null &&
-                    travelDates?.startDate &&
-                    travelDates?.endDate
-                  ) {
+                  if (val !== null && travelDates?.startDate && travelDates?.endDate) {
                     const seasonality = country.tourismTagSeasonality?.[tag];
                     if (seasonality && seasonality.length === 12) {
-                      const start = new Date(
-                        travelDates.startDate + "T00:00:00",
-                      );
+                      const start = new Date(travelDates.startDate + "T00:00:00");
                       const end = new Date(travelDates.endDate + "T00:00:00");
-                      if (
-                        !isNaN(start.getTime()) &&
-                        !isNaN(end.getTime()) &&
-                        end >= start
-                      ) {
+                      if (!isNaN(start.getTime()) && !isNaN(end.getTime()) && end >= start) {
                         let wSum = 0;
                         let days = 0;
                         const cursor = new Date(start);
@@ -260,8 +250,7 @@ export function TourismCountryCard({
                           days++;
                           cursor.setDate(cursor.getDate() + 1);
                         }
-                        if (days > 0)
-                          val = Math.round(val * (wSum / days / 100) * 10) / 10;
+                        if (days > 0) val = Math.round(val * (wSum / days / 100) * 10) / 10;
                       }
                     }
                   }
@@ -297,11 +286,7 @@ export function TourismCountryCard({
                     </div>
                   );
                   return (
-                    <Tooltip
-                      key={`tag-${tag}`}
-                      content={tooltipContent}
-                      side="top"
-                    >
+                    <Tooltip key={`tag-${tag}`} content={tooltipContent} side="top">
                       <div
                         className="cursor-default"
                         role="img"
@@ -322,10 +307,7 @@ export function TourismCountryCard({
 
           {/* Cost + surplus (daily) */}
           {ranked.budgetMatch && (
-            <div
-              className="hidden sm:flex flex-col items-end"
-              style={{ flexShrink: 0 }}
-            >
+            <div className="hidden sm:flex flex-col items-end" style={{ flexShrink: 0 }}>
               <span
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
@@ -339,12 +321,10 @@ export function TourismCountryCard({
                 style={{
                   fontFamily: "IBM Plex Mono, monospace",
                   fontSize: "11px",
-                  color:
-                    ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
+                  color: ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
                 }}
               >
-                {ranked.budgetMatch.surplus >= 0 ? "+" : ""}$
-                {ranked.budgetMatch.surplus}/d
+                {ranked.budgetMatch.surplus >= 0 ? "+" : ""}${ranked.budgetMatch.surplus}/d
               </span>
             </div>
           )}
@@ -369,11 +349,7 @@ export function TourismCountryCard({
             style={{
               color: "#757575",
               transition: "transform 0.2s",
-              transform: compareMode
-                ? "rotate(0deg)"
-                : expanded
-                  ? "rotate(90deg)"
-                  : "rotate(0deg)",
+              transform: compareMode ? "rotate(0deg)" : expanded ? "rotate(90deg)" : "rotate(0deg)",
               opacity: compareMode ? 0.35 : 1,
             }}
             className="shrink-0"
@@ -386,9 +362,7 @@ export function TourismCountryCard({
             <TourismBudgetBar
               breakdown={ranked.budgetMatch.breakdown}
               dailyCost={ranked.budgetMatch.dailyCost}
-              dailyBudget={
-                ranked.budgetMatch.dailyCost + ranked.budgetMatch.surplus
-              }
+              dailyBudget={ranked.budgetMatch.dailyCost + ranked.budgetMatch.surplus}
             />
           </div>
         )}
@@ -482,8 +456,7 @@ export function TourismCountryCard({
                     fontFamily: "IBM Plex Mono, monospace",
                     fontSize: "13px",
                     fontWeight: 700,
-                    color:
-                      ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
+                    color: ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
                   }}
                 >
                   ${ranked.budgetMatch.dailyCost}/day
@@ -494,14 +467,12 @@ export function TourismCountryCard({
                   style={{
                     fontFamily: "IBM Plex Mono, monospace",
                     fontSize: "11px",
-                    color:
-                      ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
+                    color: ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
                     textAlign: "right",
                     marginTop: "4px",
                   }}
                 >
-                  {ranked.budgetMatch.surplus >= 0 ? "+" : ""}$
-                  {ranked.budgetMatch.surplus}{" "}
+                  {ranked.budgetMatch.surplus >= 0 ? "+" : ""}${ranked.budgetMatch.surplus}{" "}
                   {t("tourismBudget.surplus", "surplus")}
                 </div>
               )}
@@ -542,8 +513,11 @@ function dotColour(value: number | null): string {
   return "#FF5722";
 }
 
-const TOURISM_BUDGET_KEYS: (keyof import("../utils/tourismScoring").TourismBudgetBreakdown)[] =
-  ["accommodation", "food", "activities"];
+const TOURISM_BUDGET_KEYS: (keyof import("../utils/tourismScoring").TourismBudgetBreakdown)[] = [
+  "accommodation",
+  "food",
+  "activities",
+];
 
 function TourismBudgetBar({
   breakdown,

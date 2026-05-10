@@ -139,15 +139,10 @@ export function CountryList({
       >
         <span style={{ color: "#9E9E9E" }}>
           {compareMode
-            ? t(
-                "compare.countrySubtitle",
-                "Select countries to compare across all indicators",
-              )
+            ? t("compare.countrySubtitle", "Select countries to compare across all indicators")
             : t("countryList.clickHint", "Click on a country to view details")}
         </span>
-        <span style={{ color: "#8A8A8A" }}>
-          {t("countryList.count", { count: ranked.length })}
-        </span>
+        <span style={{ color: "#8A8A8A" }}>{t("countryList.count", { count: ranked.length })}</span>
       </div>
       {visible.map((r, index) => (
         <CountryCard

@@ -62,10 +62,7 @@ export class NomadLensStack extends cdk.Stack {
     httpApi.addRoutes({
       path: '/api/{proxy+}',
       methods: [apigwv2.HttpMethod.ANY],
-      integration: new apigwv2Integrations.HttpLambdaIntegration(
-        'ApiIntegration',
-        apiFn,
-      ),
+      integration: new apigwv2Integrations.HttpLambdaIntegration('ApiIntegration', apiFn),
     });
 
     // ── CloudFront distribution ────────────────────────────────────────────

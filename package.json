@@ -11,12 +11,23 @@
     "dev": "concurrently -n client,server -c cyan,yellow \"npm run dev -w client\" \"npm run dev -w server\"",
     "build": "npm run build -w client && npm run build -w server",
     "lint": "npm run lint -w client && npm run lint -w server",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "generate": "npm run generate -w server",
+    "doctor": "react-doctor client --offline --fail-on none --full",
+    "test": "npm run test:unit",
+    "test:unit": "npm run test -w client && npm run test -w server",
+    "test:e2e": "npm run build -w client && playwright test",
+    "test:e2e:headed": "npm run build -w client && playwright test --headed",
+    "quality:pr": "npm run format:check && npm run lint && npm run test:unit && npm run build",
+    "quality:main": "npm run quality:pr && npm run test:e2e && npm run doctor",
+    "quality:release": "npm run quality:main",
     "deploy": "[ -f server/src/data/countries.json ] || npm run generate -w server && npm run build -w server && npm run build -w client && cd infra && npx cdk deploy --require-approval never",
     "prepare": "husky",
     "commit": "cz"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "commitizen": "^4.3.1",
@@ -24,7 +35,9 @@
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
-    "prettier": "^3.8.1"
+    "prettier": "^3.8.1",
+    "react-doctor": "^0.1.6",
+    "vitest": "^4.0.15"
   },
   "config": {
     "commitizen": {

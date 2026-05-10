@@ -6,16 +6,16 @@ Compare countries across 9 dimensions — Economy, Healthcare, Education, Enviro
 
 ## Data Sources
 
-| Category | Source | Type |
-|---|---|---|
-| Economy, Healthcare, Education, Environment, Infrastructure | World Bank API | Live API |
-| Healthcare (supplemental) | WHO GHO | Live API |
-| Climate | Open-Meteo | Live API |
-| Country metadata | REST Countries | Live API |
-| Happiness | World Happiness Report | Local JSON |
-| Human Development | UNDP HDI | Local JSON |
-| Safety / Peace | Global Peace Index | Local JSON |
-| Crime | UNODC Homicide | Local JSON |
+| Category                                                    | Source                 | Type       |
+| ----------------------------------------------------------- | ---------------------- | ---------- |
+| Economy, Healthcare, Education, Environment, Infrastructure | World Bank API         | Live API   |
+| Healthcare (supplemental)                                   | WHO GHO                | Live API   |
+| Climate                                                     | Open-Meteo             | Live API   |
+| Country metadata                                            | REST Countries         | Live API   |
+| Happiness                                                   | World Happiness Report | Local JSON |
+| Human Development                                           | UNDP HDI               | Local JSON |
+| Safety / Peace                                              | Global Peace Index     | Local JSON |
+| Crime                                                       | UNODC Homicide         | Local JSON |
 
 ## Tech Stack
 
@@ -58,6 +58,24 @@ The files in `server/src/data/` are manually maintained JSON files. To update th
 All commits follow [Conventional Commits](https://www.conventionalcommits.org/). Use `npm run commit` for an interactive prompt.
 
 **Scopes:** `client` | `server` | `infra` | `data` | `deps` | `docker`
+
+### Quality workflow
+
+Run the fast PR gate before pushing:
+
+```bash
+npm run quality:pr
+```
+
+This blocks on Prettier formatting, ESLint, unit tests, and the client/server build. CI runs the same command for every pull request and for pushes to `main`.
+
+Slower smoke/regression coverage runs on `main` and release delivery:
+
+```bash
+npm run quality:main
+```
+
+This includes the PR gate, Playwright E2E smoke tests, and a React Doctor scan. React Doctor findings are currently informational in CI while the roadmap raises the score to the target threshold; Prettier, ESLint, unit tests, builds, and main/release E2E failures block delivery.
 
 ## License
 

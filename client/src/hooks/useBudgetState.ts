@@ -65,20 +65,14 @@ function clampNumber(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-function parseClampedInteger(
-  value: string | null,
-  min: number,
-  max: number,
-): number | null {
+function parseClampedInteger(value: string | null, min: number, max: number): number | null {
   if (value === null) return null;
   const parsed = Number(value);
   if (!Number.isFinite(parsed)) return null;
   return clampNumber(Math.round(parsed), min, max);
 }
 
-function sanitizeCategoryWeights(
-  weights?: Partial<BudgetCategoryWeights>,
-): BudgetCategoryWeights {
+function sanitizeCategoryWeights(weights?: Partial<BudgetCategoryWeights>): BudgetCategoryWeights {
   const next = { ...DEFAULT_CATEGORY_WEIGHTS };
 
   for (const key of CATEGORY_WEIGHT_KEYS) {
@@ -103,25 +97,15 @@ function loadStoredState(): StoredState {
             : fallback.budget,
         housing: parsed.housing === "smallerCity" ? "smallerCity" : "majorCity",
         peopleCount:
-          typeof parsed.peopleCount === "number" &&
-          Number.isFinite(parsed.peopleCount)
-            ? clampNumber(
-                Math.round(parsed.peopleCount),
-                MIN_PEOPLE_COUNT,
-                MAX_PEOPLE_COUNT,
-              )
+          typeof parsed.peopleCount === "number" && Number.isFinite(parsed.peopleCount)
+            ? clampNumber(Math.round(parsed.peopleCount), MIN_PEOPLE_COUNT, MAX_PEOPLE_COUNT)
             : fallback.peopleCount,
         bedrooms: ([1, 2, 3] as const).includes(parsed.bedrooms as Bedrooms)
           ? (parsed.bedrooms as Bedrooms)
           : fallback.bedrooms,
         qualityBlend:
-          typeof parsed.qualityBlend === "number" &&
-          Number.isFinite(parsed.qualityBlend)
-            ? clampNumber(
-                Math.round(parsed.qualityBlend),
-                MIN_QUALITY_BLEND,
-                MAX_QUALITY_BLEND,
-              )
+          typeof parsed.qualityBlend === "number" && Number.isFinite(parsed.qualityBlend)
+            ? clampNumber(Math.round(parsed.qualityBlend), MIN_QUALITY_BLEND, MAX_QUALITY_BLEND)
             : fallback.qualityBlend,
         categoryWeights: sanitizeCategoryWeights(parsed.categoryWeights),
       };
@@ -134,14 +118,12 @@ function loadStoredState(): StoredState {
 
 function hasBudgetQueryState(search: string): boolean {
   const params = new URLSearchParams(search);
-  return ["budget", "housing", "bedrooms", "people", "quality", "cw"].some(
-    (key) => params.has(key),
+  return ["budget", "housing", "bedrooms", "people", "quality", "cw"].some((key) =>
+    params.has(key),
   );
 }
 
-function parseCategoryWeightsParam(
-  value: string | null,
-): Partial<BudgetCategoryWeights> {
+function parseCategoryWeightsParam(value: string | null): Partial<BudgetCategoryWeights> {
   if (!value) return {};
 
   const weights: Partial<BudgetCategoryWeights> = {};
@@ -164,11 +146,7 @@ function buildStateFromSearch(search: string): StoredState {
   const params = new URLSearchParams(search);
   const next = createDefaultState();
 
-  const budget = parseClampedInteger(
-    params.get("budget"),
-    MIN_BUDGET,
-    MAX_BUDGET,
-  );
+  const budget = parseClampedInteger(params.get("budget"), MIN_BUDGET, MAX_BUDGET);
   if (budget !== null) next.budget = budget;
 
   const housing = params.get("housing");
@@ -181,23 +159,13 @@ function buildStateFromSearch(search: string): StoredState {
     next.bedrooms = bedrooms;
   }
 
-  const people = parseClampedInteger(
-    params.get("people"),
-    MIN_PEOPLE_COUNT,
-    MAX_PEOPLE_COUNT,
-  );
+  const people = parseClampedInteger(params.get("people"), MIN_PEOPLE_COUNT, MAX_PEOPLE_COUNT);
   if (people !== null) next.peopleCount = people;
 
-  const quality = parseClampedInteger(
-    params.get("quality"),
-    MIN_QUALITY_BLEND,
-    MAX_QUALITY_BLEND,
-  );
+  const quality = parseClampedInteger(params.get("quality"), MIN_QUALITY_BLEND, MAX_QUALITY_BLEND);
   if (quality !== null) next.qualityBlend = quality;
 
-  next.categoryWeights = sanitizeCategoryWeights(
-    parseCategoryWeightsParam(params.get("cw")),
-  );
+  next.categoryWeights = sanitizeCategoryWeights(parseCategoryWeightsParam(params.get("cw")));
 
   return next;
 }
@@ -210,9 +178,7 @@ export function useBudgetState() {
   );
 
   const [budget, setBudget] = useState(initialState.budget);
-  const [housing, setHousing] = useState<HousingPreference>(
-    initialState.housing,
-  );
+  const [housing, setHousing] = useState<HousingPreference>(initialState.housing);
   const [peopleCount, setPeopleCount] = useState(initialState.peopleCount);
   const [bedrooms, setBedrooms] = useState<Bedrooms>(initialState.bedrooms);
   const [qualityBlend, setQualityBlend] = useState(initialState.qualityBlend);
@@ -238,15 +204,12 @@ export function useBudgetState() {
     }
   }, [budget, housing, peopleCount, bedrooms, qualityBlend, categoryWeights]);
 
-  const handleCategoryWeight = useCallback(
-    (key: keyof BudgetCategoryWeights, value: number) => {
-      setCategoryWeights((prev) => ({
-        ...prev,
-        [key]: Math.max(0, Math.min(100, Math.round(value))),
-      }));
-    },
-    [],
-  );
+  const handleCategoryWeight = useCallback((key: keyof BudgetCategoryWeights, value: number) => {
+    setCategoryWeights((prev) => ({
+      ...prev,
+      [key]: Math.max(0, Math.min(100, Math.round(value))),
+    }));
+  }, []);
 
   const handleReset = useCallback(() => {
     setBudget(DEFAULT_BUDGET);
@@ -258,9 +221,7 @@ export function useBudgetState() {
   }, []);
 
   const isDefault = useMemo(() => {
-    const catKeys = Object.keys(
-      DEFAULT_CATEGORY_WEIGHTS,
-    ) as (keyof BudgetCategoryWeights)[];
+    const catKeys = Object.keys(DEFAULT_CATEGORY_WEIGHTS) as (keyof BudgetCategoryWeights)[];
     return (
       budget === DEFAULT_BUDGET &&
       housing === DEFAULT_HOUSING &&
@@ -276,27 +237,14 @@ export function useBudgetState() {
     params.set("budget", String(budget));
     if (housing !== DEFAULT_HOUSING) params.set("housing", housing);
     if (bedrooms !== DEFAULT_BEDROOMS) params.set("bedrooms", String(bedrooms));
-    if (peopleCount !== DEFAULT_PEOPLE_COUNT)
-      params.set("people", String(peopleCount));
-    if (qualityBlend !== DEFAULT_QUALITY_BLEND)
-      params.set("quality", String(qualityBlend));
-    const catKeys = Object.keys(
-      DEFAULT_CATEGORY_WEIGHTS,
-    ) as (keyof BudgetCategoryWeights)[];
-    const nonDefault = catKeys.filter(
-      (k) => categoryWeights[k] !== DEFAULT_CATEGORY_WEIGHTS[k],
-    );
+    if (peopleCount !== DEFAULT_PEOPLE_COUNT) params.set("people", String(peopleCount));
+    if (qualityBlend !== DEFAULT_QUALITY_BLEND) params.set("quality", String(qualityBlend));
+    const catKeys = Object.keys(DEFAULT_CATEGORY_WEIGHTS) as (keyof BudgetCategoryWeights)[];
+    const nonDefault = catKeys.filter((k) => categoryWeights[k] !== DEFAULT_CATEGORY_WEIGHTS[k]);
     if (nonDefault.length > 0) {
-      params.set(
-        "cw",
-        nonDefault.map((k) => `${k}:${categoryWeights[k]}`).join(","),
-      );
+      params.set("cw", nonDefault.map((k) => `${k}:${categoryWeights[k]}`).join(","));
     }
-    const url =
-      window.location.origin +
-      window.location.pathname +
-      "?" +
-      params.toString();
+    const url = window.location.origin + window.location.pathname + "?" + params.toString();
     navigator.clipboard.writeText(url).catch(() => {
       const el = document.createElement("textarea");
       el.value = url;

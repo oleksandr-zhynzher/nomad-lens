@@ -19,11 +19,7 @@ interface Props {
   monthlyCost: number;
 }
 
-export function BudgetBreakdownChart({
-  breakdown,
-  budget,
-  monthlyCost,
-}: Props) {
+export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) {
   const { t } = useTranslation();
   const segments = CATEGORY_KEYS.filter((k) => breakdown[k] > 0);
   const maxVal = Math.max(monthlyCost, budget) * 1.1;

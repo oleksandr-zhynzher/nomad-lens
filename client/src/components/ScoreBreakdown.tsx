@@ -28,10 +28,7 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
             .filter(([, ind]) => ind !== undefined)
             .slice(0, 2); // First 2 indicators
           detailText = indEntries
-            .map(
-              ([, ind]) =>
-                `${ind!.raw.toLocaleString()}${ind!.unit} (${ind!.year})`,
-            )
+            .map(([, ind]) => `${ind!.raw.toLocaleString()}${ind!.unit} (${ind!.year})`)
             .join(" · ");
         }
 
@@ -50,10 +47,7 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
                   color: "#CCCCCC",
                 }}
               >
-                {t(
-                  `indicatorsPage.indicators.${key}.name`,
-                  CATEGORY_LABELS[key],
-                )}
+                {t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
               </span>
               <span
                 style={{
@@ -68,10 +62,7 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
             </div>
 
             {/* Score bar - 4px height */}
-            <div
-              className="rounded-full"
-              style={{ height: "4px", backgroundColor: "#333333" }}
-            >
+            <div className="rounded-full" style={{ height: "4px", backgroundColor: "#333333" }}>
               <div
                 className="rounded-full transition-all"
                 style={{

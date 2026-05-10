@@ -14,8 +14,7 @@ import { localizeCountry } from "../utils/localize";
 import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
 import { CountryDetailPanel } from "./CountryDetailPanel";
 
-const GEO_URL =
-  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 interface WorldMapProps {
   ranked: RankedCountry[];
@@ -37,19 +36,13 @@ interface MapGeographiesProps {
   selectedCode: string | null;
   zoom: number;
   fillColour: (alpha2: string) => string;
-  geoToAlpha2: (geo: {
-    id?: unknown;
-    properties: Record<string, unknown>;
-  }) => string;
+  geoToAlpha2: (geo: { id?: unknown; properties: Record<string, unknown> }) => string;
   handleMouseEnter: (
     geo: { id?: unknown; properties: Record<string, unknown> },
     e: React.MouseEvent,
   ) => void;
   handleMouseLeave: () => void;
-  handleClick: (geo: {
-    id?: unknown;
-    properties: Record<string, unknown>;
-  }) => void;
+  handleClick: (geo: { id?: unknown; properties: Record<string, unknown> }) => void;
   setGeoLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -72,9 +65,7 @@ function MapGeographies({
   }, [geoLoading, geographies.length, setGeoLoading]);
 
   return geographies.map((geo) => {
-    const alpha2 = geoToAlpha2(
-      geo as { id?: unknown; properties: Record<string, unknown> },
-    );
+    const alpha2 = geoToAlpha2(geo as { id?: unknown; properties: Record<string, unknown> });
     const isSelected = alpha2 === selectedCode;
 
     return (
@@ -94,28 +85,16 @@ function MapGeographies({
           pressed: { outline: "none" },
         }}
         onMouseEnter={(e: React.MouseEvent) =>
-          handleMouseEnter(
-            geo as { id?: unknown; properties: Record<string, unknown> },
-            e,
-          )
+          handleMouseEnter(geo as { id?: unknown; properties: Record<string, unknown> }, e)
         }
         onMouseLeave={() => handleMouseLeave()}
-        onClick={() =>
-          handleClick(
-            geo as { id?: unknown; properties: Record<string, unknown> },
-          )
-        }
+        onClick={() => handleClick(geo as { id?: unknown; properties: Record<string, unknown> })}
       />
     );
   });
 }
 
-export function WorldMap({
-  ranked,
-  onCountryClick,
-  onToggleWeights,
-  showWeights,
-}: WorldMapProps) {
+export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights }: WorldMapProps) {
   const { t, i18n } = useTranslation();
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const [zoom, setZoom] = useState(1);
@@ -124,14 +103,9 @@ export function WorldMap({
   const [geoLoading, setGeoLoading] = useState(true);
 
   // Build alpha2 → ranked country map for fast lookup
-  const scoreByAlpha2: Map<string, RankedCountry> = new Map(
-    ranked.map((r) => [r.country.code, r]),
-  );
+  const scoreByAlpha2: Map<string, RankedCountry> = new Map(ranked.map((r) => [r.country.code, r]));
 
-  function geoToAlpha2(geo: {
-    id?: unknown;
-    properties: Record<string, unknown>;
-  }): string {
+  function geoToAlpha2(geo: { id?: unknown; properties: Record<string, unknown> }): string {
     const numeric = String(geo.id ?? "").padStart(3, "0");
     return isoNumericToAlpha2[numeric] ?? "";
   }
@@ -170,19 +144,14 @@ export function WorldMap({
     setHover(null);
   }
 
-  function handleClick(geo: {
-    id?: unknown;
-    properties: Record<string, unknown>;
-  }) {
+  function handleClick(geo: { id?: unknown; properties: Record<string, unknown> }) {
     const alpha2 = geoToAlpha2(geo);
     if (!alpha2) return;
     setHover(null);
     setSelectedCode(alpha2);
   }
 
-  const selectedCountry = selectedCode
-    ? (scoreByAlpha2.get(selectedCode) ?? null)
-    : null;
+  const selectedCountry = selectedCode ? (scoreByAlpha2.get(selectedCode) ?? null) : null;
 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
@@ -283,10 +252,7 @@ export function WorldMap({
           { color: "#3A3A3A", label: t("map.noData"), range: "" },
         ].map(({ color, label, range }) => (
           <div key={label} className="flex items-center gap-2">
-            <span
-              className="w-3 h-3 shrink-0"
-              style={{ background: color, borderRadius: "2px" }}
-            />
+            <span className="w-3 h-3 shrink-0" style={{ background: color, borderRadius: "2px" }} />
             <span
               style={{
                 fontFamily: "IBM Plex Mono, monospace",

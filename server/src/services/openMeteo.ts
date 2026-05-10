@@ -1,7 +1,7 @@
-import { cache } from "../middleware/cache";
-import type { OpenMeteoClimate, SeasonType } from "../utils/types";
+import { cache } from '../middleware/cache';
+import type { OpenMeteoClimate, SeasonType } from '../utils/types';
 
-const CACHE_NS = "openmeteo:climate:";
+const CACHE_NS = 'openmeteo:climate:';
 
 interface ArchiveResponse {
   daily?: {
@@ -24,9 +24,7 @@ function monthlyMeansOf(values: (number | null)[]): number[] {
   for (const daysInMonth of DAYS_PER_MONTH) {
     const slice = values.slice(dayIdx, dayIdx + daysInMonth);
     const valid = slice.filter((v): v is number => v !== null && !isNaN(v));
-    means.push(
-      valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : NaN,
-    );
+    means.push(valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : NaN);
     dayIdx += daysInMonth;
   }
   return means;
@@ -37,21 +35,18 @@ function classifySeasonType(
   annualPrecip: number,
   tempRange: number,
 ): SeasonType {
-  if (annualPrecip < 250) return "arid";
-  if (annualMean < 3) return "polar";
-  if (tempRange >= 20) return "four_seasons";
-  if (annualMean >= 18) return "tropical";
-  return "mild_seasons";
+  if (annualPrecip < 250) return 'arid';
+  if (annualMean < 3) return 'polar';
+  if (tempRange >= 20) return 'four_seasons';
+  if (annualMean >= 18) return 'tropical';
+  return 'mild_seasons';
 }
 
 /**
  * Fetch 1-year climate data for a coordinate from Open-Meteo archive.
  * Uses 2023 as the reference year. Results are cached for 24 h.
  */
-export async function fetchClimate(
-  lat: number,
-  lng: number,
-): Promise<OpenMeteoClimate | null> {
+export async function fetchClimate(lat: number, lng: number): Promise<OpenMeteoClimate | null> {
   const key = `${CACHE_NS}${lat.toFixed(2)},${lng.toFixed(2)}`;
   const cached = cache.get<OpenMeteoClimate>(key);
   if (cached) return cached;
@@ -59,10 +54,10 @@ export async function fetchClimate(
   const params = new URLSearchParams({
     latitude: lat.toFixed(4),
     longitude: lng.toFixed(4),
-    start_date: "2023-01-01",
-    end_date: "2023-12-31",
-    daily: "temperature_2m_mean,precipitation_sum",
-    timezone: "GMT",
+    start_date: '2023-01-01',
+    end_date: '2023-12-31',
+    daily: 'temperature_2m_mean,precipitation_sum',
+    timezone: 'GMT',
   });
   const url = `https://archive-api.open-meteo.com/v1/archive?${params}`;
 
@@ -95,11 +90,7 @@ export async function fetchClimate(
   const annualPrecipitation =
     precipValues.length > 0 ? precipValues.reduce((a, b) => a + b, 0) : null;
 
-  if (
-    annualMeanTemp === null ||
-    annualPrecipitation === null ||
-    validMonthly.length < 12
-  )
+  if (annualMeanTemp === null || annualPrecipitation === null || validMonthly.length < 12)
     return null;
 
   const maxMonthTemp = Math.max(...monthlyMeans);
@@ -107,11 +98,7 @@ export async function fetchClimate(
   const tempRange = maxMonthTemp - minMonthTemp;
   const hottestMonth = maxMonthTemp;
   const coldestMonth = minMonthTemp;
-  const seasonType = classifySeasonType(
-    annualMeanTemp,
-    annualPrecipitation,
-    tempRange,
-  );
+  const seasonType = classifySeasonType(annualMeanTemp, annualPrecipitation, tempRange);
 
   const result: OpenMeteoClimate = {
     annualMeanTemp,

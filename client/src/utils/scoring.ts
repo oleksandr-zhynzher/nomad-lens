@@ -46,10 +46,7 @@ export function computeScore(country: CountryData, weights: WeightMap): number {
  * Rank all countries by their weighted composite score.
  * Returns a sorted array with 1-based rank attached.
  */
-export function rankCountries(
-  countries: CountryData[],
-  weights: WeightMap,
-): RankedCountry[] {
+export function rankCountries(countries: CountryData[], weights: WeightMap): RankedCountry[] {
   const scored = countries.map((country) => ({
     country,
     finalScore: computeScore(country, weights),
@@ -73,9 +70,7 @@ export function defaultWeights(): WeightMap {
   const visible = VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k));
   const base = Math.floor(100 / visible.length);
   const leftover = 100 - base * visible.length;
-  const result = Object.fromEntries(
-    CATEGORY_KEYS.map((k) => [k, 0]),
-  ) as WeightMap;
+  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
   visible.forEach((k, i) => {
     result[k] = base + (i < leftover ? 1 : 0);
   });
@@ -87,9 +82,7 @@ export function defaultWeights(): WeightMap {
  * AI metrics default to 0 (opt-in only).
  */
 export function defaultIndependentWeights(): WeightMap {
-  const result = Object.fromEntries(
-    CATEGORY_KEYS.map((k) => [k, 0]),
-  ) as WeightMap;
+  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
   VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k)).forEach((k) => {
     result[k] = 50;
   });
@@ -203,10 +196,7 @@ const ADJACENT: Record<SeasonType, SeasonType[]> = {
  * Compute a preference-based climate score (0–100).
  * 70% temperature match + 30% season type match.
  */
-export function computeClimateScore(
-  climateData: ClimateData,
-  prefs: ClimatePreferences,
-): number {
+export function computeClimateScore(climateData: ClimateData, prefs: ClimatePreferences): number {
   const { annualMeanTemp, seasonType } = climateData;
 
   let tempScore: number;

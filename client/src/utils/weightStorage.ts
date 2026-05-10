@@ -7,8 +7,14 @@ export const LS_WEIGHT_MODE_KEY = "nomad-lens:weight-mode";
 export const LS_FILTERS_KEY = "nomad-lens:filters";
 
 export const WEIGHT_SHARE_KEYS = [
-  "nomadVisa", "schengen", "minDays", "regions",
-  "climateSeason", "climateMin", "climateMax", "weightMode",
+  "nomadVisa",
+  "schengen",
+  "minDays",
+  "regions",
+  "climateSeason",
+  "climateMin",
+  "climateMax",
+  "weightMode",
   ...CATEGORY_KEYS,
 ];
 
@@ -29,7 +35,10 @@ export function weightsFromSearch(search: string): WeightMap {
     const v = params.get(key);
     if (v !== null) {
       const n = Number(v);
-      if (!isNaN(n)) { base[key] = Math.max(0, Math.min(100, n)); hasParams = true; }
+      if (!isNaN(n)) {
+        base[key] = Math.max(0, Math.min(100, n));
+        hasParams = true;
+      }
     }
   }
   if (!hasParams) return base;
@@ -43,8 +52,15 @@ export function weightsFromSearch(search: string): WeightMap {
       let leftover = 100 - floorSum;
       const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
       remainders.sort((a, b) => b.r - a.r);
-      remainders.forEach(({ i }) => { if (leftover > 0) { floors[i]++; leftover--; } });
-      VISIBLE_CATEGORY_KEYS.forEach((k, i) => { base[k] = floors[i]; });
+      remainders.forEach(({ i }) => {
+        if (leftover > 0) {
+          floors[i]++;
+          leftover--;
+        }
+      });
+      VISIBLE_CATEGORY_KEYS.forEach((k, i) => {
+        base[k] = floors[i];
+      });
     }
   }
   return base;
@@ -79,22 +95,39 @@ export function consumeSharedParams(): URLSearchParams | null {
   const urlParams = new URLSearchParams(window.location.search);
   const hasShared =
     CATEGORY_KEYS.some((k) => urlParams.has(k)) ||
-    ["nomadVisa", "schengen", "minDays", "regions", "climateSeason", "climateMin", "climateMax", "weightMode"].some(
-      (k) => urlParams.has(k),
-    );
+    [
+      "nomadVisa",
+      "schengen",
+      "minDays",
+      "regions",
+      "climateSeason",
+      "climateMin",
+      "climateMax",
+      "weightMode",
+    ].some((k) => urlParams.has(k));
   if (!hasShared) return null;
 
   // Strip only weight/filter params, preserve others (c, m, etc.)
   const cleaned = new URLSearchParams(window.location.search);
   for (const k of [
     ...CATEGORY_KEYS,
-    "nomadVisa", "schengen", "minDays", "regions",
-    "climateSeason", "climateMin", "climateMax", "weightMode",
+    "nomadVisa",
+    "schengen",
+    "minDays",
+    "regions",
+    "climateSeason",
+    "climateMin",
+    "climateMax",
+    "weightMode",
   ]) {
     cleaned.delete(k);
   }
   const newSearch = cleaned.toString();
-  window.history.replaceState(null, "", window.location.pathname + (newSearch ? `?${newSearch}` : ""));
+  window.history.replaceState(
+    null,
+    "",
+    window.location.pathname + (newSearch ? `?${newSearch}` : ""),
+  );
   return urlParams;
 }
 
@@ -103,24 +136,38 @@ const _sharedParams = consumeSharedParams();
 
 export function loadWeightModeFromStorage(): WeightMode {
   if (_sharedParams?.get("weightMode") === "balanced") {
-    try { localStorage.setItem(LS_WEIGHT_MODE_KEY, "balanced"); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(LS_WEIGHT_MODE_KEY, "balanced");
+    } catch {
+      /* ignore */
+    }
     return "balanced";
   }
   if (_sharedParams?.get("weightMode") === "independent") {
-    try { localStorage.setItem(LS_WEIGHT_MODE_KEY, "independent"); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(LS_WEIGHT_MODE_KEY, "independent");
+    } catch {
+      /* ignore */
+    }
     return "independent";
   }
   try {
     const raw = localStorage.getItem(LS_WEIGHT_MODE_KEY);
     if (raw === "balanced" || raw === "independent") return raw;
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   return "independent";
 }
 
 export function loadWeightsFromStorage(): WeightMap {
   if (_sharedParams && CATEGORY_KEYS.some((k) => _sharedParams.has(k))) {
     const imported = weightsFromSearch(_sharedParams.toString());
-    try { localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(imported)); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(imported));
+    } catch {
+      /* ignore */
+    }
     return imported;
   }
   try {
@@ -137,7 +184,9 @@ export function loadWeightsFromStorage(): WeightMap {
       }
       return base;
     }
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   const mode = loadWeightModeFromStorage();
   return mode === "independent" ? defaultIndependentWeights() : defaultWeights();
 }
@@ -150,13 +199,13 @@ export function loadFiltersFromStorage(): LoadedFilters {
     const loaded: LoadedFilters = {
       nomadVisaOnly: _sharedParams.get("nomadVisa") === "1",
       schengenOnly: _sharedParams.get("schengen") === "1",
-      minTouristDays:
-        minDaysStr !== null && !isNaN(Number(minDaysStr)) ? Number(minDaysStr) : null,
+      minTouristDays: minDaysStr !== null && !isNaN(Number(minDaysStr)) ? Number(minDaysStr) : null,
       selectedRegions: regionsStr
         ? new Set(regionsStr.split(",").filter(Boolean))
         : new Set<string>(),
       climatePrefs: {
-        seasonType: ((_sharedParams.get("climateSeason") ?? def.seasonType) as ClimatePreferences["seasonType"]),
+        seasonType: (_sharedParams.get("climateSeason") ??
+          def.seasonType) as ClimatePreferences["seasonType"],
         minTemp:
           _sharedParams.has("climateMin") && !isNaN(Number(_sharedParams.get("climateMin")))
             ? Number(_sharedParams.get("climateMin"))
@@ -167,7 +216,11 @@ export function loadFiltersFromStorage(): LoadedFilters {
             : def.maxTemp,
       },
     };
-    try { localStorage.setItem(LS_FILTERS_KEY, JSON.stringify(filtersToStorable(loaded))); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(LS_FILTERS_KEY, JSON.stringify(filtersToStorable(loaded)));
+    } catch {
+      /* ignore */
+    }
     return loaded;
   }
   try {
@@ -191,7 +244,9 @@ export function loadFiltersFromStorage(): LoadedFilters {
         },
       };
     }
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   return {
     nomadVisaOnly: false,
     schengenOnly: false,

@@ -1,12 +1,4 @@
-import {
-  Users,
-  Globe,
-  Wallet,
-  Smile,
-  Wifi,
-  Heart,
-  AlertTriangle,
-} from "lucide-react";
+import { Users, Globe, Wallet, Smile, Wifi, Heart, AlertTriangle } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
@@ -23,13 +15,7 @@ interface AiIndicatorCardProps {
   subIndicators: string[];
 }
 
-function AiIndicatorCard({
-  Icon,
-  name,
-  description,
-  source,
-  subIndicators,
-}: AiIndicatorCardProps) {
+function AiIndicatorCard({ Icon, name, description, source, subIndicators }: AiIndicatorCardProps) {
   return (
     <div className="flex flex-1 flex-col gap-3.5 rounded-md border border-[#1E1E20] bg-[#141416] p-6">
       {/* Header row: icon + title + AI badge */}
@@ -42,9 +28,7 @@ function AiIndicatorCard({
       </div>
 
       {/* Description */}
-      <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">
-        {description}
-      </div>
+      <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">{description}</div>
 
       {/* Sub-indicators */}
       {subIndicators.length > 0 && (
@@ -70,9 +54,7 @@ function AiIndicatorCard({
         <span className="rounded-[4px] border border-[#252525] bg-[#1A1A1A] px-2 py-[3px] text-[10px] text-[#C084FC]">
           {source}
         </span>
-        <span className="text-[11px] text-[#3A3A3A]">
-          AI metric — off by default
-        </span>
+        <span className="text-[11px] text-[#3A3A3A]">AI metric — off by default</span>
       </div>
     </div>
   );
@@ -110,11 +92,7 @@ export function AiIndicatorsPage() {
       <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
         {/* Disclaimer banner */}
         <div className="flex items-start gap-3 rounded-lg border border-[rgba(192,132,252,0.2)] bg-[rgba(192,132,252,0.06)] px-5 py-4">
-          <AlertTriangle
-            size={18}
-            color="#C084FC"
-            className="mt-0.5 shrink-0"
-          />
+          <AlertTriangle size={18} color="#C084FC" className="mt-0.5 shrink-0" />
           <div className="text-[13px] leading-[1.6] text-[#9E9E9E]">
             {t("aiIndicatorsPage.disclaimer", { count: aiIndicatorCount })}
           </div>
@@ -122,10 +100,7 @@ export function AiIndicatorsPage() {
 
         {/* Indicator cards */}
         {AI_INDICATOR_ROWS.map((row, rowIdx) => (
-          <div
-            key={rowIdx}
-            className="flex flex-col md:flex-row gap-4 md:gap-5 w-full"
-          >
+          <div key={rowIdx} className="flex flex-col md:flex-row gap-4 md:gap-5 w-full">
             {row.map(([Icon, key]) => {
               const subIndicators: string[] =
                 (t(`aiIndicatorsPage.indicators.${key}.subIndicators`, {
@@ -136,13 +111,9 @@ export function AiIndicatorsPage() {
                   key={key}
                   Icon={Icon}
                   name={t(`aiIndicatorsPage.indicators.${key}.name`)}
-                  description={t(
-                    `aiIndicatorsPage.indicators.${key}.description`,
-                  )}
+                  description={t(`aiIndicatorsPage.indicators.${key}.description`)}
                   source={t(`aiIndicatorsPage.indicators.${key}.source`)}
-                  subIndicators={
-                    Array.isArray(subIndicators) ? subIndicators : []
-                  }
+                  subIndicators={Array.isArray(subIndicators) ? subIndicators : []}
                 />
               );
             })}

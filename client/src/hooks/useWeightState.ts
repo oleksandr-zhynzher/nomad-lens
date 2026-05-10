@@ -1,5 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { defaultClimatePreferences, defaultIndependentWeights, defaultWeights, redistributeWeights } from "../utils/scoring";
+import {
+  defaultClimatePreferences,
+  defaultIndependentWeights,
+  defaultWeights,
+  redistributeWeights,
+} from "../utils/scoring";
 import type { CategoryKey, ClimatePreferences, WeightMap, WeightMode } from "../utils/types";
 import { CATEGORY_KEYS } from "../utils/types";
 import {
@@ -19,9 +24,15 @@ export function useWeightState() {
   const [weightMode, setWeightMode] = useState<WeightMode>(loadWeightModeFromStorage);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(() => loadFiltersFromStorage().nomadVisaOnly);
   const [schengenOnly, setSchengenOnly] = useState(() => loadFiltersFromStorage().schengenOnly);
-  const [minTouristDays, setMinTouristDays] = useState<number | null>(() => loadFiltersFromStorage().minTouristDays);
-  const [selectedRegions, setSelectedRegions] = useState<Set<string>>(() => loadFiltersFromStorage().selectedRegions);
-  const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(() => loadFiltersFromStorage().climatePrefs);
+  const [minTouristDays, setMinTouristDays] = useState<number | null>(
+    () => loadFiltersFromStorage().minTouristDays,
+  );
+  const [selectedRegions, setSelectedRegions] = useState<Set<string>>(
+    () => loadFiltersFromStorage().selectedRegions,
+  );
+  const [climatePrefs, setClimatePrefs] = useState<ClimatePreferences>(
+    () => loadFiltersFromStorage().climatePrefs,
+  );
 
   // Persist weights to localStorage
   useEffect(() => {
@@ -37,10 +48,18 @@ export function useWeightState() {
       localStorage.setItem(
         LS_FILTERS_KEY,
         JSON.stringify(
-          filtersToStorable({ nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs }),
+          filtersToStorable({
+            nomadVisaOnly,
+            schengenOnly,
+            minTouristDays,
+            selectedRegions,
+            climatePrefs,
+          }),
         ),
       );
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }, [nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
 
   const handleWeightChange = useCallback(
@@ -74,13 +93,23 @@ export function useWeightState() {
     const defClimate = defaultClimatePreferences();
     return (
       CATEGORY_KEYS.every((k) => weights[k] === def[k]) &&
-      !nomadVisaOnly && !schengenOnly && minTouristDays === null &&
+      !nomadVisaOnly &&
+      !schengenOnly &&
+      minTouristDays === null &&
       selectedRegions.size === 0 &&
       climatePrefs.seasonType === defClimate.seasonType &&
       climatePrefs.minTemp === defClimate.minTemp &&
       climatePrefs.maxTemp === defClimate.maxTemp
     );
-  }, [weights, weightMode, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
+  }, [
+    weights,
+    weightMode,
+    nomadVisaOnly,
+    schengenOnly,
+    minTouristDays,
+    selectedRegions,
+    climatePrefs,
+  ]);
 
   const buildShareUrl = useCallback(
     (extraParams?: URLSearchParams) => {
@@ -91,14 +120,25 @@ export function useWeightState() {
       if (minTouristDays !== null) params.set("minDays", String(minTouristDays));
       if (selectedRegions.size > 0) params.set("regions", [...selectedRegions].join(","));
       const defClimate = defaultClimatePreferences();
-      if (climatePrefs.seasonType !== defClimate.seasonType) params.set("climateSeason", climatePrefs.seasonType);
-      if (climatePrefs.minTemp !== defClimate.minTemp) params.set("climateMin", String(climatePrefs.minTemp));
-      if (climatePrefs.maxTemp !== defClimate.maxTemp) params.set("climateMax", String(climatePrefs.maxTemp));
+      if (climatePrefs.seasonType !== defClimate.seasonType)
+        params.set("climateSeason", climatePrefs.seasonType);
+      if (climatePrefs.minTemp !== defClimate.minTemp)
+        params.set("climateMin", String(climatePrefs.minTemp));
+      if (climatePrefs.maxTemp !== defClimate.maxTemp)
+        params.set("climateMax", String(climatePrefs.maxTemp));
       // Merge extra params (e.g. c=, m= from compare page)
       extraParams?.forEach((v, k) => params.set(k, v));
       return window.location.origin + window.location.pathname + "?" + params.toString();
     },
-    [weights, weightMode, nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs],
+    [
+      weights,
+      weightMode,
+      nomadVisaOnly,
+      schengenOnly,
+      minTouristDays,
+      selectedRegions,
+      climatePrefs,
+    ],
   );
 
   const handleShare = useCallback(
@@ -117,13 +157,20 @@ export function useWeightState() {
   );
 
   return {
-    weights, setWeights,
-    weightMode, setWeightMode,
-    nomadVisaOnly, setNomadVisaOnly,
-    schengenOnly, setSchengenOnly,
-    minTouristDays, setMinTouristDays,
-    selectedRegions, setSelectedRegions,
-    climatePrefs, setClimatePrefs,
+    weights,
+    setWeights,
+    weightMode,
+    setWeightMode,
+    nomadVisaOnly,
+    setNomadVisaOnly,
+    schengenOnly,
+    setSchengenOnly,
+    minTouristDays,
+    setMinTouristDays,
+    selectedRegions,
+    setSelectedRegions,
+    climatePrefs,
+    setClimatePrefs,
     weightsAreDefault,
     handleWeightChange,
     handleReset,

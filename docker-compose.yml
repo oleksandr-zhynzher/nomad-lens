@@ -7,7 +7,7 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - ./server/src:/app/src:ro          # hot-reload source
+      - ./server/src:/app/src:ro # hot-reload source
       - ./server/package.json:/app/package.json:ro
     environment:
       - NODE_ENV=development

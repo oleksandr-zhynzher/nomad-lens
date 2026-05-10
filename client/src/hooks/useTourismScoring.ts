@@ -5,11 +5,7 @@ import {
   getWeightedTourismRanking,
   getWeightedTourismBudgetRanking,
 } from "../utils/tourismScoring";
-import type {
-  TourismToggles,
-  TourismBudgetState,
-  TravelDates,
-} from "./useTourismWeightState";
+import type { TourismToggles, TourismBudgetState, TravelDates } from "./useTourismWeightState";
 
 export type { TourismBudgetMatch } from "../utils/tourismScoring";
 
@@ -22,15 +18,11 @@ export function useTourismScoring(
   travelDates?: TravelDates,
 ): TourismRanked[] {
   return useMemo(() => {
-    let filtered = countries.filter(
-      (c) => regionFilter.size === 0 || regionFilter.has(c.region),
-    );
+    let filtered = countries.filter((c) => regionFilter.size === 0 || regionFilter.has(c.region));
 
     if (toggles) {
       if (toggles.visaFreeOnly) {
-        filtered = filtered.filter(
-          (c) => c.touristVisaDays != null && c.touristVisaDays > 0,
-        );
+        filtered = filtered.filter((c) => c.touristVisaDays != null && c.touristVisaDays > 0);
       }
       if (toggles.requiredTags.length > 0) {
         filtered = filtered.filter((c) => {
@@ -42,8 +34,7 @@ export function useTourismScoring(
 
     const selectedTags = toggles?.requiredTags ?? [];
     const activeTags = selectedTags.length > 0 ? selectedTags : undefined;
-    const activeDates =
-      travelDates?.startDate && travelDates?.endDate ? travelDates : undefined;
+    const activeDates = travelDates?.startDate && travelDates?.endDate ? travelDates : undefined;
     const activityBlend = toggles?.activityBlend;
 
     // When budget is enabled, use budget-blended ranking
@@ -64,12 +55,6 @@ export function useTourismScoring(
       }));
     }
 
-    return getWeightedTourismRanking(
-      filtered,
-      weights,
-      activeTags,
-      activeDates,
-      activityBlend,
-    );
+    return getWeightedTourismRanking(filtered, weights, activeTags, activeDates, activityBlend);
   }, [countries, weights, regionFilter, toggles, budgetState, travelDates]);
 }

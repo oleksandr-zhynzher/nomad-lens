@@ -40,9 +40,7 @@ export function TourismPage() {
   );
 
   const [search, setSearch] = useState("");
-  const [searchMode, setSearchMode] = useState<"filter" | "highlight">(
-    "filter",
-  );
+  const [searchMode, setSearchMode] = useState<"filter" | "highlight">("filter");
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [matchCursor, setMatchCursor] = useState(0);
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
@@ -60,9 +58,7 @@ export function TourismPage() {
     if (!mobileParamsOpen) return;
     const previousOverflow = document.body.style.overflow;
     const previousFocusedElement =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
     document.body.style.overflow = "hidden";
     mobileSheetCloseButtonRef.current?.focus();
@@ -107,11 +103,7 @@ export function TourismPage() {
     const q = search.trim().toLowerCase();
     if (!q || searchMode !== "highlight") return [];
     return ranked
-      .filter((r) =>
-        localizeCountry(r.country, i18n.language)
-          .name.toLowerCase()
-          .includes(q),
-      )
+      .filter((r) => localizeCountry(r.country, i18n.language).name.toLowerCase().includes(q))
       .map((r) => r.country.code);
   }, [search, searchMode, ranked, i18n.language]);
 
@@ -130,25 +122,18 @@ export function TourismPage() {
   // Scroll to highlighted country
   useEffect(() => {
     if (!highlightedCode) return;
-    const el = document.querySelector(
-      `[data-country-code="${highlightedCode}"]`,
-    );
+    const el = document.querySelector(`[data-country-code="${highlightedCode}"]`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [highlightedCode]);
 
   const goNext = useCallback(
-    () =>
-      setMatchCursor((c) =>
-        matchingCodes.length ? (c + 1) % matchingCodes.length : 0,
-      ),
+    () => setMatchCursor((c) => (matchingCodes.length ? (c + 1) % matchingCodes.length : 0)),
     [matchingCodes.length],
   );
   const goPrev = useCallback(
     () =>
       setMatchCursor((c) =>
-        matchingCodes.length
-          ? (c - 1 + matchingCodes.length) % matchingCodes.length
-          : 0,
+        matchingCodes.length ? (c - 1 + matchingCodes.length) % matchingCodes.length : 0,
       ),
     [matchingCodes.length],
   );
@@ -162,8 +147,7 @@ export function TourismPage() {
     );
   }, [ranked, search, searchMode, i18n.language]);
 
-  const activeHighlight =
-    searchMode === "highlight" ? highlightedCode : undefined;
+  const activeHighlight = searchMode === "highlight" ? highlightedCode : undefined;
 
   const toggleSelect = useCallback((code: string) => {
     setSelectedCodes((prev) => {
@@ -181,9 +165,7 @@ export function TourismPage() {
 
   const handleCompare = useCallback(() => {
     if (selectedCodes.size < 2) return;
-    navigate(
-      `${langPrefix}/compare?m=tourism&c=${Array.from(selectedCodes).join(",")}`,
-    );
+    navigate(`${langPrefix}/compare?m=tourism&c=${Array.from(selectedCodes).join(",")}`);
   }, [selectedCodes, navigate, langPrefix]);
 
   return (
@@ -276,10 +258,7 @@ export function TourismPage() {
                     backgroundColor: "#333333",
                     color: "#9E9E9E",
                   }}
-                  aria-label={t(
-                    "tourism.a11y.closeParameters",
-                    "Close parameters",
-                  )}
+                  aria-label={t("tourism.a11y.closeParameters", "Close parameters")}
                 >
                   <X size={18} />
                 </button>
@@ -325,10 +304,7 @@ export function TourismPage() {
         </button>
 
         {/* Right content area */}
-        <main
-          className="flex-1 min-w-0 pb-28 md:pb-0"
-          style={{ backgroundColor: "#000000" }}
-        >
+        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#000000" }}>
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
@@ -554,10 +530,7 @@ export function TourismPage() {
                         setSearch(e.target.value);
                         setMatchCursor(0);
                       }}
-                      placeholder={t(
-                        "tourism.searchPlaceholder",
-                        "Search countries…",
-                      )}
+                      placeholder={t("tourism.searchPlaceholder", "Search countries…")}
                       style={{
                         flex: 1,
                         backgroundColor: "transparent",
@@ -591,73 +564,55 @@ export function TourismPage() {
 
                   {/* Search mode controls */}
                   {search.trim() && (
-                    <div
-                      className="flex items-center"
-                      style={{ gap: "4px", flexShrink: 0 }}
-                    >
-                      {searchMode === "highlight" &&
-                        matchingCodes.length > 0 && (
-                          <>
-                            <span
-                              style={{
-                                fontFamily: "IBM Plex Mono, monospace",
-                                fontSize: "11px",
-                                color: "#8A8A8A",
-                                whiteSpace: "nowrap",
-                              }}
-                            >
-                              {matchCursor + 1}/{matchingCodes.length}
-                            </span>
-                            <button
-                              onClick={goPrev}
-                              disabled={matchingCodes.length === 0}
-                              className="flex items-center justify-center"
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                borderRadius: "3px",
-                                border: "none",
-                                cursor: matchingCodes.length
-                                  ? "pointer"
-                                  : "default",
-                                backgroundColor: "#2A2A2A",
-                                color: matchingCodes.length
-                                  ? "#CCCCCC"
-                                  : "#757575",
-                              }}
-                              aria-label={t(
-                                "tourism.a11y.previousMatch",
-                                "Previous match",
-                              )}
-                            >
-                              <ChevronUp size={14} />
-                            </button>
-                            <button
-                              onClick={goNext}
-                              disabled={matchingCodes.length === 0}
-                              className="flex items-center justify-center"
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                borderRadius: "3px",
-                                border: "none",
-                                cursor: matchingCodes.length
-                                  ? "pointer"
-                                  : "default",
-                                backgroundColor: "#2A2A2A",
-                                color: matchingCodes.length
-                                  ? "#CCCCCC"
-                                  : "#757575",
-                              }}
-                              aria-label={t(
-                                "tourism.a11y.nextMatch",
-                                "Next match",
-                              )}
-                            >
-                              <ChevronDown size={14} />
-                            </button>
-                          </>
-                        )}
+                    <div className="flex items-center" style={{ gap: "4px", flexShrink: 0 }}>
+                      {searchMode === "highlight" && matchingCodes.length > 0 && (
+                        <>
+                          <span
+                            style={{
+                              fontFamily: "IBM Plex Mono, monospace",
+                              fontSize: "11px",
+                              color: "#8A8A8A",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {matchCursor + 1}/{matchingCodes.length}
+                          </span>
+                          <button
+                            onClick={goPrev}
+                            disabled={matchingCodes.length === 0}
+                            className="flex items-center justify-center"
+                            style={{
+                              width: "24px",
+                              height: "24px",
+                              borderRadius: "3px",
+                              border: "none",
+                              cursor: matchingCodes.length ? "pointer" : "default",
+                              backgroundColor: "#2A2A2A",
+                              color: matchingCodes.length ? "#CCCCCC" : "#757575",
+                            }}
+                            aria-label={t("tourism.a11y.previousMatch", "Previous match")}
+                          >
+                            <ChevronUp size={14} />
+                          </button>
+                          <button
+                            onClick={goNext}
+                            disabled={matchingCodes.length === 0}
+                            className="flex items-center justify-center"
+                            style={{
+                              width: "24px",
+                              height: "24px",
+                              borderRadius: "3px",
+                              border: "none",
+                              cursor: matchingCodes.length ? "pointer" : "default",
+                              backgroundColor: "#2A2A2A",
+                              color: matchingCodes.length ? "#CCCCCC" : "#757575",
+                            }}
+                            aria-label={t("tourism.a11y.nextMatch", "Next match")}
+                          >
+                            <ChevronDown size={14} />
+                          </button>
+                        </>
+                      )}
                       <Tooltip
                         side="bottom"
                         content={
@@ -680,9 +635,7 @@ export function TourismPage() {
                       >
                         <button
                           onClick={() => {
-                            setSearchMode((m) =>
-                              m === "filter" ? "highlight" : "filter",
-                            );
+                            setSearchMode((m) => (m === "filter" ? "highlight" : "filter"));
                             setMatchCursor(0);
                           }}
                           className="flex items-center justify-center"
@@ -697,21 +650,11 @@ export function TourismPage() {
                           }}
                           aria-label={
                             searchMode === "filter"
-                              ? t(
-                                  "tourism.a11y.switchToScrollMode",
-                                  "Switch to scroll mode",
-                                )
-                              : t(
-                                  "tourism.a11y.switchToFilterMode",
-                                  "Switch to filter mode",
-                                )
+                              ? t("tourism.a11y.switchToScrollMode", "Switch to scroll mode")
+                              : t("tourism.a11y.switchToFilterMode", "Switch to filter mode")
                           }
                         >
-                          {searchMode === "filter" ? (
-                            <List size={13} />
-                          ) : (
-                            <Filter size={13} />
-                          )}
+                          {searchMode === "filter" ? <List size={13} /> : <Filter size={13} />}
                         </button>
                       </Tooltip>
                     </div>
@@ -734,19 +677,11 @@ export function TourismPage() {
                           paddingRight: "14px",
                           borderRadius: "6px",
                           border:
-                            selectedCodes.size < 2
-                              ? "1px solid var(--color-accent-dim)"
-                              : "none",
-                          cursor:
-                            selectedCodes.size < 2 ? "default" : "pointer",
+                            selectedCodes.size < 2 ? "1px solid var(--color-accent-dim)" : "none",
+                          cursor: selectedCodes.size < 2 ? "default" : "pointer",
                           backgroundColor:
-                            selectedCodes.size < 2
-                              ? "#161616"
-                              : "var(--color-accent)",
-                          color:
-                            selectedCodes.size < 2
-                              ? "var(--color-accent-dim)"
-                              : "#FFFFFF",
+                            selectedCodes.size < 2 ? "#161616" : "var(--color-accent)",
+                          color: selectedCodes.size < 2 ? "var(--color-accent-dim)" : "#FFFFFF",
                           fontFamily: "Inter, sans-serif",
                           fontSize: "13px",
                           fontWeight: 600,
@@ -788,10 +723,7 @@ export function TourismPage() {
                           color: "#8A8A8A",
                           flexShrink: 0,
                         }}
-                        aria-label={t(
-                          "tourism.a11y.exitCompareMode",
-                          "Exit compare mode",
-                        )}
+                        aria-label={t("tourism.a11y.exitCompareMode", "Exit compare mode")}
                       >
                         <X size={16} />
                       </button>
@@ -901,10 +833,7 @@ export function TourismPage() {
                       "compare.tourismSelectionSubtitle",
                       "Select countries to compare tourism appeal side by side",
                     )
-                  : t(
-                      "countryList.clickHint",
-                      "Click on a country to view details",
-                    )}
+                  : t("countryList.clickHint", "Click on a country to view details")}
               </span>
               <span style={{ color: "#8A8A8A" }}>
                 {t("countryList.count", { count: displayedRanked.length })}
@@ -943,16 +872,12 @@ export function TourismPage() {
                     ranked={r}
                     index={i}
                     highlighted={r.country.code === activeHighlight}
-                    expanded={
-                      compareMode ? false : expandedCode === r.country.code
-                    }
+                    expanded={compareMode ? false : expandedCode === r.country.code}
                     onToggle={
                       compareMode
                         ? undefined
                         : () =>
-                            setExpandedCode((c) =>
-                              c === r.country.code ? null : r.country.code,
-                            )
+                            setExpandedCode((c) => (c === r.country.code ? null : r.country.code))
                     }
                     compareMode={compareMode}
                     isSelected={selectedCodes.has(r.country.code)}

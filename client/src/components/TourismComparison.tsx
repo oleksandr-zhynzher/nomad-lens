@@ -18,10 +18,7 @@ import {
 import type { CountryData } from "../utils/types";
 import { TOURISM_CATEGORY_KEYS } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
-import {
-  computeTourismScore,
-  tourismScoreColour,
-} from "../utils/tourismScoring";
+import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 
 const SLOT_COLORS = [
@@ -171,37 +168,23 @@ export function TourismComparison({
     .filter(
       (c) =>
         !selectedCodes.includes(c.code) &&
-        localizeCountry(c, lang)
-          .name.toLowerCase()
-          .includes(query.toLowerCase()),
+        localizeCountry(c, lang).name.toLowerCase().includes(query.toLowerCase()),
     )
-    .sort((a, b) =>
-      localizeCountry(a, lang).name.localeCompare(
-        localizeCountry(b, lang).name,
-      ),
-    );
+    .sort((a, b) => localizeCountry(a, lang).name.localeCompare(localizeCountry(b, lang).name));
 
   return (
     <div>
       {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
-        <div
-          className="flex gap-3 pb-2"
-          style={{ overflowX: "auto", scrollbarWidth: "thin" }}
-        >
+        <div className="flex gap-3 pb-2" style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
           {selectedCountries.map((slot) => {
             const score = computeTourismScore(slot.country);
-            const sColor =
-              score != null ? tourismScoreColour(score) : "#333333";
+            const sColor = score != null ? tourismScoreColour(score) : "#333333";
             return (
               <div
                 key={slot.country.code}
                 className="shrink-0 w-[148px] md:w-[180px]"
-                onClick={() =>
-                  navigate(
-                    `${langPrefix}/country/${slot.country.code.toLowerCase()}`,
-                  )
-                }
+                onClick={() => navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)}
                 style={{ cursor: "pointer" }}
               >
                 <div
@@ -289,11 +272,8 @@ export function TourismComparison({
                     8,
                     Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
                   );
-                  const fitsBelow =
-                    rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
-                  const top = fitsBelow
-                    ? rect.bottom + 8
-                    : rect.top - dropdownMaxHeight - 8;
+                  const fitsBelow = rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
+                  const top = fitsBelow ? rect.bottom + 8 : rect.top - dropdownMaxHeight - 8;
                   setDropdownPos({ top, left });
                 }
                 setDropdownOpen((p) => !p);
@@ -396,8 +376,7 @@ export function TourismComparison({
                       fontFamily: "IBM Plex Mono, monospace",
                       fontSize: "13px",
                       fontWeight: 600,
-                      color:
-                        score != null ? tourismScoreColour(score) : "#333333",
+                      color: score != null ? tourismScoreColour(score) : "#333333",
                     }}
                   >
                     {score != null ? score.toFixed(1) : "—"}
@@ -522,8 +501,7 @@ export function TourismComparison({
                             fontFamily: "IBM Plex Mono, monospace",
                             fontSize: "22px",
                             fontWeight: 600,
-                            color:
-                              val != null ? tourismScoreColour(val) : "#333333",
+                            color: val != null ? tourismScoreColour(val) : "#333333",
                           }}
                         >
                           {val != null ? val.toFixed(1) : "—"}

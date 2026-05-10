@@ -12,123 +12,123 @@
 
 // Countries universally known as beach destinations, regardless of what data says
 const BEACH_OVERRIDE: Set<string> = new Set([
-  "MV", // Maldives
-  "SC", // Seychelles
-  "MU", // Mauritius
-  "FJ", // Fiji
-  "BS", // Bahamas
-  "BB", // Barbados
-  "JM", // Jamaica
-  "CU", // Cuba
-  "DO", // Dominican Republic
-  "CR", // Costa Rica
-  "TH", // Thailand
-  "ID", // Indonesia (Bali)
-  "PH", // Philippines
-  "VN", // Vietnam
-  "MY", // Malaysia
-  "LK", // Sri Lanka
-  "GR", // Greece
-  "HR", // Croatia
-  "ES", // Spain
-  "PT", // Portugal
-  "IT", // Italy
-  "TR", // Turkey
-  "EG", // Egypt (Red Sea)
-  "TN", // Tunisia
-  "MA", // Morocco
-  "BR", // Brazil
-  "MX", // Mexico
-  "PA", // Panama
-  "CO", // Colombia
-  "AU", // Australia
-  "NZ", // New Zealand
-  "ZA", // South Africa
-  "KE", // Kenya (coast)
-  "TZ", // Tanzania (Zanzibar)
-  "MZ", // Mozambique
-  "CV", // Cape Verde
-  "CY", // Cyprus
-  "MT", // Malta
-  "ME", // Montenegro
-  "AL", // Albania
-  "BG", // Bulgaria
-  "RO", // Romania (Black Sea)
-  "UA", // Ukraine (Black Sea - seasonal)
-  "GE", // Georgia (Black Sea)
-  "AE", // UAE (Dubai beaches)
-  "OM", // Oman
-  "SA", // Saudi Arabia (Red Sea)
-  "BH", // Bahrain
-  "QA", // Qatar
-  "KH", // Cambodia
-  "MM", // Myanmar
-  "BN", // Brunei
-  "TL", // Timor-Leste
-  "PG", // Papua New Guinea
-  "NC", // New Caledonia
-  "PF", // French Polynesia
-  "VU", // Vanuatu
-  "WS", // Samoa
-  "TO", // Tonga
-  "SB", // Solomon Islands
-  "KI", // Kiribati
-  "TV", // Tuvalu
-  "PW", // Palau
-  "FM", // Micronesia
-  "MH", // Marshall Islands
-  "NR", // Nauru
-  "AG", // Antigua
-  "DM", // Dominica
-  "GD", // Grenada
-  "KN", // St Kitts
-  "LC", // St Lucia
-  "VC", // St Vincent
-  "TT", // Trinidad
-  "CW", // Curacao
-  "AW", // Aruba
-  "BZ", // Belize
-  "HN", // Honduras (Bay Islands)
-  "NI", // Nicaragua
-  "SV", // El Salvador
-  "GT", // Guatemala
-  "SN", // Senegal
-  "GM", // Gambia
-  "GH", // Ghana
-  "NG", // Nigeria
-  "CM", // Cameroon
-  "GA", // Gabon
-  "AO", // Angola
-  "NA", // Namibia
-  "EC", // Ecuador
-  "PE", // Peru
-  "CL", // Chile
-  "AR", // Argentina
-  "UY", // Uruguay
-  "VE", // Venezuela
-  "GY", // Guyana
-  "SR", // Suriname
-  "PR", // Puerto Rico
-  "VI", // US Virgin Islands
-  "VG", // British Virgin Islands
-  "BM", // Bermuda
-  "KY", // Cayman Islands
-  "TC", // Turks & Caicos
-  "SX", // Sint Maarten
-  "MF", // St Martin
-  "IL", // Israel (Tel Aviv + Eilat)
-  "LB", // Lebanon
-  "JP", // Japan
-  "KR", // South Korea
-  "TW", // Taiwan
-  "CN", // China
-  "IN", // India (Goa, Kerala)
-  "BD", // Bangladesh (Cox's Bazar)
-  "PK", // Pakistan (coast)
-  "IR", // Iran (Kish, Persian Gulf)
-  "IQ", // Iraq (limited)
-  "SG", // Singapore (Sentosa)
-  "HK", // Hong Kong
+  'MV', // Maldives
+  'SC', // Seychelles
+  'MU', // Mauritius
+  'FJ', // Fiji
+  'BS', // Bahamas
+  'BB', // Barbados
+  'JM', // Jamaica
+  'CU', // Cuba
+  'DO', // Dominican Republic
+  'CR', // Costa Rica
+  'TH', // Thailand
+  'ID', // Indonesia (Bali)
+  'PH', // Philippines
+  'VN', // Vietnam
+  'MY', // Malaysia
+  'LK', // Sri Lanka
+  'GR', // Greece
+  'HR', // Croatia
+  'ES', // Spain
+  'PT', // Portugal
+  'IT', // Italy
+  'TR', // Turkey
+  'EG', // Egypt (Red Sea)
+  'TN', // Tunisia
+  'MA', // Morocco
+  'BR', // Brazil
+  'MX', // Mexico
+  'PA', // Panama
+  'CO', // Colombia
+  'AU', // Australia
+  'NZ', // New Zealand
+  'ZA', // South Africa
+  'KE', // Kenya (coast)
+  'TZ', // Tanzania (Zanzibar)
+  'MZ', // Mozambique
+  'CV', // Cape Verde
+  'CY', // Cyprus
+  'MT', // Malta
+  'ME', // Montenegro
+  'AL', // Albania
+  'BG', // Bulgaria
+  'RO', // Romania (Black Sea)
+  'UA', // Ukraine (Black Sea - seasonal)
+  'GE', // Georgia (Black Sea)
+  'AE', // UAE (Dubai beaches)
+  'OM', // Oman
+  'SA', // Saudi Arabia (Red Sea)
+  'BH', // Bahrain
+  'QA', // Qatar
+  'KH', // Cambodia
+  'MM', // Myanmar
+  'BN', // Brunei
+  'TL', // Timor-Leste
+  'PG', // Papua New Guinea
+  'NC', // New Caledonia
+  'PF', // French Polynesia
+  'VU', // Vanuatu
+  'WS', // Samoa
+  'TO', // Tonga
+  'SB', // Solomon Islands
+  'KI', // Kiribati
+  'TV', // Tuvalu
+  'PW', // Palau
+  'FM', // Micronesia
+  'MH', // Marshall Islands
+  'NR', // Nauru
+  'AG', // Antigua
+  'DM', // Dominica
+  'GD', // Grenada
+  'KN', // St Kitts
+  'LC', // St Lucia
+  'VC', // St Vincent
+  'TT', // Trinidad
+  'CW', // Curacao
+  'AW', // Aruba
+  'BZ', // Belize
+  'HN', // Honduras (Bay Islands)
+  'NI', // Nicaragua
+  'SV', // El Salvador
+  'GT', // Guatemala
+  'SN', // Senegal
+  'GM', // Gambia
+  'GH', // Ghana
+  'NG', // Nigeria
+  'CM', // Cameroon
+  'GA', // Gabon
+  'AO', // Angola
+  'NA', // Namibia
+  'EC', // Ecuador
+  'PE', // Peru
+  'CL', // Chile
+  'AR', // Argentina
+  'UY', // Uruguay
+  'VE', // Venezuela
+  'GY', // Guyana
+  'SR', // Suriname
+  'PR', // Puerto Rico
+  'VI', // US Virgin Islands
+  'VG', // British Virgin Islands
+  'BM', // Bermuda
+  'KY', // Cayman Islands
+  'TC', // Turks & Caicos
+  'SX', // Sint Maarten
+  'MF', // St Martin
+  'IL', // Israel (Tel Aviv + Eilat)
+  'LB', // Lebanon
+  'JP', // Japan
+  'KR', // South Korea
+  'TW', // Taiwan
+  'CN', // China
+  'IN', // India (Goa, Kerala)
+  'BD', // Bangladesh (Cox's Bazar)
+  'PK', // Pakistan (coast)
+  'IR', // Iran (Kish, Persian Gulf)
+  'IQ', // Iraq (limited)
+  'SG', // Singapore (Sentosa)
+  'HK', // Hong Kong
 ]);
 
 export function isBeachDestination(
@@ -146,74 +146,74 @@ export function isBeachDestination(
 // ──────────────────────────────────────────────────────────────────────────────
 
 const ISLAND_NATIONS: Set<string> = new Set([
-  "MV",
-  "SC",
-  "MU",
-  "FJ",
-  "BS",
-  "BB",
-  "JM",
-  "CU",
-  "DO",
-  "HT",
-  "TT",
-  "AG",
-  "DM",
-  "GD",
-  "KN",
-  "LC",
-  "VC",
-  "CW",
-  "AW",
-  "BM",
-  "KY",
-  "TC",
-  "SX",
-  "MF",
-  "VG",
-  "VI",
-  "PR",
-  "PH",
-  "ID",
-  "SG",
-  "BN",
-  "TL",
-  "MY", // Borneo-based
-  "JP",
-  "KR", // technically not but key islands
-  "TW",
-  "HK",
-  "MO",
-  "PG",
-  "NC",
-  "PF",
-  "VU",
-  "WS",
-  "TO",
-  "SB",
-  "KI",
-  "FM",
-  "MH",
-  "NR",
-  "PW",
-  "TV",
-  "IS",
-  "GB",
-  "IE",
-  "MT",
-  "CY",
-  "CV",
-  "ST",
-  "KM",
-  "MG",
-  "NZ",
-  "AU",
-  "BH",
-  "GU",
-  "AS",
-  "MP",
-  "FO",
-  "GL",
+  'MV',
+  'SC',
+  'MU',
+  'FJ',
+  'BS',
+  'BB',
+  'JM',
+  'CU',
+  'DO',
+  'HT',
+  'TT',
+  'AG',
+  'DM',
+  'GD',
+  'KN',
+  'LC',
+  'VC',
+  'CW',
+  'AW',
+  'BM',
+  'KY',
+  'TC',
+  'SX',
+  'MF',
+  'VG',
+  'VI',
+  'PR',
+  'PH',
+  'ID',
+  'SG',
+  'BN',
+  'TL',
+  'MY', // Borneo-based
+  'JP',
+  'KR', // technically not but key islands
+  'TW',
+  'HK',
+  'MO',
+  'PG',
+  'NC',
+  'PF',
+  'VU',
+  'WS',
+  'TO',
+  'SB',
+  'KI',
+  'FM',
+  'MH',
+  'NR',
+  'PW',
+  'TV',
+  'IS',
+  'GB',
+  'IE',
+  'MT',
+  'CY',
+  'CV',
+  'ST',
+  'KM',
+  'MG',
+  'NZ',
+  'AU',
+  'BH',
+  'GU',
+  'AS',
+  'MP',
+  'FO',
+  'GL',
 ]);
 
 export function isIslandNation(iso2: string): boolean {
@@ -225,51 +225,51 @@ export function isIslandNation(iso2: string): boolean {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const SKI_COUNTRIES: Set<string> = new Set([
-  "AT",
-  "CH",
-  "FR",
-  "IT",
-  "DE",
-  "AD", // Alps core
-  "NO",
-  "SE",
-  "FI", // Scandinavia
-  "US",
-  "CA", // North America
-  "JP", // Niseko, Hakuba
-  "NZ",
-  "AU", // Southern hemisphere
-  "ES", // Sierra Nevada, Pyrenees
-  "BG", // Bansko
-  "RO", // Sinaia, Poiana Brasov
-  "SK", // Jasná, Tatras
-  "CZ", // Krkonoše
-  "PL", // Zakopane
-  "SI", // Julian Alps
-  "BA", // Jahorina
-  "RS", // Kopaonik
-  "ME", // Kolašin
-  "GE", // Gudauri, Bakuriani
-  "AM", // Tsaghkadzor
-  "IR", // Dizin, Tochal
-  "CL", // Portillo, Valle Nevado
-  "AR", // Bariloche, Las Leñas
-  "KR", // Pyeongchang
-  "CN", // Multiple resorts
-  "IN", // Gulmarg, Auli
-  "TR", // Palandöken, Uludağ
-  "IS", // Akureyri
-  "RU", // Sochi region
-  "KZ", // Shymbulak
-  "KG", // Karakol
-  "UA", // Bukovel
-  "LI", // Malbun
-  "MK", // Popova Shapka
-  "GR", // Parnassos
-  "LB", // Faraya, Cedars
-  "MN", // Sky Resort
-  "PT", // Serra da Estrela
-  "HR", // Sljeme
+  'AT',
+  'CH',
+  'FR',
+  'IT',
+  'DE',
+  'AD', // Alps core
+  'NO',
+  'SE',
+  'FI', // Scandinavia
+  'US',
+  'CA', // North America
+  'JP', // Niseko, Hakuba
+  'NZ',
+  'AU', // Southern hemisphere
+  'ES', // Sierra Nevada, Pyrenees
+  'BG', // Bansko
+  'RO', // Sinaia, Poiana Brasov
+  'SK', // Jasná, Tatras
+  'CZ', // Krkonoše
+  'PL', // Zakopane
+  'SI', // Julian Alps
+  'BA', // Jahorina
+  'RS', // Kopaonik
+  'ME', // Kolašin
+  'GE', // Gudauri, Bakuriani
+  'AM', // Tsaghkadzor
+  'IR', // Dizin, Tochal
+  'CL', // Portillo, Valle Nevado
+  'AR', // Bariloche, Las Leñas
+  'KR', // Pyeongchang
+  'CN', // Multiple resorts
+  'IN', // Gulmarg, Auli
+  'TR', // Palandöken, Uludağ
+  'IS', // Akureyri
+  'RU', // Sochi region
+  'KZ', // Shymbulak
+  'KG', // Karakol
+  'UA', // Bukovel
+  'LI', // Malbun
+  'MK', // Popova Shapka
+  'GR', // Parnassos
+  'LB', // Faraya, Cedars
+  'MN', // Sky Resort
+  'PT', // Serra da Estrela
+  'HR', // Sljeme
 ]);
 
 export function hasSkiResorts(iso2: string): boolean {
@@ -281,73 +281,73 @@ export function hasSkiResorts(iso2: string): boolean {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const MOUNTAIN_COUNTRIES: Set<string> = new Set([
-  "NP", // Himalayas, Everest, Annapurna
-  "PE", // Andes, Machu Picchu trails
-  "BO", // Andes, Huayna Potosí
-  "TZ", // Kilimanjaro
-  "KE", // Mount Kenya
-  "UG", // Rwenzori
-  "EC", // Cotopaxi, Chimborazo
-  "CL", // Torres del Paine, Andes
-  "AR", // Aconcagua, Patagonia
-  "CO", // Sierra Nevada
-  "US", // Rockies, Appalachians, Cascades
-  "CA", // Canadian Rockies
-  "CH", // Swiss Alps
-  "AT", // Austrian Alps
-  "FR", // Mont Blanc, Pyrenees
-  "IT", // Dolomites
-  "DE", // Bavarian Alps
-  "ES", // Pyrenees, Sierra Nevada
-  "NO", // Jotunheimen, Lofoten
-  "SE", // Kungsleden
-  "IS", // Highland treks
-  "NZ", // Southern Alps, Milford Track
-  "AU", // Blue Mountains
-  "JP", // Mount Fuji, Japan Alps
-  "CN", // Himalayas (Tibet), Huangshan
-  "IN", // Himalayas, Western Ghats
-  "PK", // Karakoram, K2
-  "KG", // Tien Shan
-  "KZ", // Tien Shan
-  "TJ", // Pamirs
-  "GE", // Caucasus
-  "AM", // Lesser Caucasus
-  "AZ", // Greater Caucasus
-  "RU", // Elbrus, Caucasus, Altai
-  "TR", // Ararat, Lycian Way
-  "IR", // Alborz, Zagros
-  "MA", // Atlas Mountains
-  "ET", // Simien Mountains
-  "RW", // Volcanoes NP (gorilla trekking)
-  "MN", // Altai
-  "ID", // Rinjani, Bromo, Papua peaks
-  "MY", // Kinabalu
-  "PH", // Pulag, Apo
-  "TW", // Jade Mountain
-  "VN", // Fansipan
-  "LA", // Northern highlands
-  "MM", // Hkakabo Razi
-  "BT", // Snowman Trek
-  "LK", // Adam's Peak, Knuckles
-  "SI", // Julian Alps
-  "HR", // Velebit
-  "ME", // Durmitor
-  "AL", // Albanian Alps
-  "BA", // Dinaric Alps
-  "GR", // Mount Olympus
-  "BG", // Rila, Pirin
-  "RO", // Carpathians
-  "SK", // High Tatras
-  "PL", // Tatras
-  "PT", // Madeira, Azores
-  "UA", // Carpathians
-  "MG", // Andringitra
-  "SC", // Morne Seychellois
-  "CR", // Chirripó
-  "GT", // Volcanos
-  "HN", // Celaque
-  "PA", // Barú
+  'NP', // Himalayas, Everest, Annapurna
+  'PE', // Andes, Machu Picchu trails
+  'BO', // Andes, Huayna Potosí
+  'TZ', // Kilimanjaro
+  'KE', // Mount Kenya
+  'UG', // Rwenzori
+  'EC', // Cotopaxi, Chimborazo
+  'CL', // Torres del Paine, Andes
+  'AR', // Aconcagua, Patagonia
+  'CO', // Sierra Nevada
+  'US', // Rockies, Appalachians, Cascades
+  'CA', // Canadian Rockies
+  'CH', // Swiss Alps
+  'AT', // Austrian Alps
+  'FR', // Mont Blanc, Pyrenees
+  'IT', // Dolomites
+  'DE', // Bavarian Alps
+  'ES', // Pyrenees, Sierra Nevada
+  'NO', // Jotunheimen, Lofoten
+  'SE', // Kungsleden
+  'IS', // Highland treks
+  'NZ', // Southern Alps, Milford Track
+  'AU', // Blue Mountains
+  'JP', // Mount Fuji, Japan Alps
+  'CN', // Himalayas (Tibet), Huangshan
+  'IN', // Himalayas, Western Ghats
+  'PK', // Karakoram, K2
+  'KG', // Tien Shan
+  'KZ', // Tien Shan
+  'TJ', // Pamirs
+  'GE', // Caucasus
+  'AM', // Lesser Caucasus
+  'AZ', // Greater Caucasus
+  'RU', // Elbrus, Caucasus, Altai
+  'TR', // Ararat, Lycian Way
+  'IR', // Alborz, Zagros
+  'MA', // Atlas Mountains
+  'ET', // Simien Mountains
+  'RW', // Volcanoes NP (gorilla trekking)
+  'MN', // Altai
+  'ID', // Rinjani, Bromo, Papua peaks
+  'MY', // Kinabalu
+  'PH', // Pulag, Apo
+  'TW', // Jade Mountain
+  'VN', // Fansipan
+  'LA', // Northern highlands
+  'MM', // Hkakabo Razi
+  'BT', // Snowman Trek
+  'LK', // Adam's Peak, Knuckles
+  'SI', // Julian Alps
+  'HR', // Velebit
+  'ME', // Durmitor
+  'AL', // Albanian Alps
+  'BA', // Dinaric Alps
+  'GR', // Mount Olympus
+  'BG', // Rila, Pirin
+  'RO', // Carpathians
+  'SK', // High Tatras
+  'PL', // Tatras
+  'PT', // Madeira, Azores
+  'UA', // Carpathians
+  'MG', // Andringitra
+  'SC', // Morne Seychellois
+  'CR', // Chirripó
+  'GT', // Volcanos
+  'HN', // Celaque
+  'PA', // Barú
 ]);
 
 export function hasMountaineering(iso2: string): boolean {
@@ -359,106 +359,106 @@ export function hasMountaineering(iso2: string): boolean {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const HISTORIC_CITIES_COUNTRIES: Set<string> = new Set([
-  "IT",
-  "FR",
-  "ES",
-  "GR",
-  "TR",
-  "EG",
-  "DE",
-  "AT",
-  "CZ",
-  "PL",
-  "HU",
-  "HR",
-  "PT",
-  "GB",
-  "IE",
-  "NL",
-  "BE",
-  "LU",
-  "RO",
-  "BG",
-  "RS",
-  "BA",
-  "ME",
-  "AL",
-  "MK",
-  "RU",
-  "UA",
-  "BY",
-  "GE",
-  "AM",
-  "MA",
-  "TN",
-  "DZ",
-  "LY",
-  "IR",
-  "IQ",
-  "JO",
-  "LB",
-  "SY",
-  "PS",
-  "IL",
-  "IN",
-  "LK",
-  "NP",
-  "PK",
-  "CN",
-  "JP",
-  "KR",
-  "TW",
-  "VN",
-  "KH",
-  "MM",
-  "LA",
-  "TH",
-  "MX",
-  "PE",
-  "CO",
-  "EC",
-  "GT",
-  "BO",
-  "CU",
-  "ET",
-  "KE",
-  "TZ",
-  "GH",
-  "SN",
-  "ML",
-  "UZ",
-  "KG",
-  "KZ",
-  "TJ",
-  "US",
-  "CA",
-  "BR",
-  "AR",
-  "SE",
-  "NO",
-  "DK",
-  "FI",
-  "CH",
-  "LI",
-  "SM",
-  "MT",
-  "CY",
-  "AD",
-  "SI",
-  "SK",
-  "EE",
-  "LT",
-  "LV",
-  "MD",
-  "SA",
-  "OM",
-  "AE",
-  "YE",
-  "AU",
-  "NZ",
-  "ID",
-  "MY",
-  "PH",
+  'IT',
+  'FR',
+  'ES',
+  'GR',
+  'TR',
+  'EG',
+  'DE',
+  'AT',
+  'CZ',
+  'PL',
+  'HU',
+  'HR',
+  'PT',
+  'GB',
+  'IE',
+  'NL',
+  'BE',
+  'LU',
+  'RO',
+  'BG',
+  'RS',
+  'BA',
+  'ME',
+  'AL',
+  'MK',
+  'RU',
+  'UA',
+  'BY',
+  'GE',
+  'AM',
+  'MA',
+  'TN',
+  'DZ',
+  'LY',
+  'IR',
+  'IQ',
+  'JO',
+  'LB',
+  'SY',
+  'PS',
+  'IL',
+  'IN',
+  'LK',
+  'NP',
+  'PK',
+  'CN',
+  'JP',
+  'KR',
+  'TW',
+  'VN',
+  'KH',
+  'MM',
+  'LA',
+  'TH',
+  'MX',
+  'PE',
+  'CO',
+  'EC',
+  'GT',
+  'BO',
+  'CU',
+  'ET',
+  'KE',
+  'TZ',
+  'GH',
+  'SN',
+  'ML',
+  'UZ',
+  'KG',
+  'KZ',
+  'TJ',
+  'US',
+  'CA',
+  'BR',
+  'AR',
+  'SE',
+  'NO',
+  'DK',
+  'FI',
+  'CH',
+  'LI',
+  'SM',
+  'MT',
+  'CY',
+  'AD',
+  'SI',
+  'SK',
+  'EE',
+  'LT',
+  'LV',
+  'MD',
+  'SA',
+  'OM',
+  'AE',
+  'YE',
+  'AU',
+  'NZ',
+  'ID',
+  'MY',
+  'PH',
 ]);
 
 export function hasHistoricCities(iso2: string): boolean {
@@ -470,55 +470,55 @@ export function hasHistoricCities(iso2: string): boolean {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const WILDLIFE_COUNTRIES: Set<string> = new Set([
-  "KE",
-  "TZ",
-  "ZA",
-  "BW",
-  "NA",
-  "UG",
-  "RW",
-  "ZM",
-  "ZW",
-  "MZ",
-  "ET",
-  "MG",
-  "MW",
-  "SZ",
-  "IN",
-  "LK",
-  "NP",
-  "BT",
-  "BR",
-  "CR",
-  "EC",
-  "PE",
-  "CO",
-  "AU",
-  "NZ",
-  "PG",
-  "ID", // Komodo, orangutans
-  "MY", // Borneo orangutans
-  "TH", // Elephants
-  "CN", // Pandas
-  "US",
-  "CA", // Bears, wolves, bison
-  "NO",
-  "IS",
-  "GL", // Arctic wildlife, whale watching
-  "AR", // Patagonia penguins, whales
-  "CL", // Patagonia
-  "GA", // Gorillas, forest elephants
-  "CG", // Gorillas
-  "CD", // Mountain gorillas
-  "CM", // Wildlife reserves
-  "GH", // Mole NP
-  "SN", // Djoudj NP
-  "AO", // Kissama NP
-  "MV", // Marine life
-  "SC", // Tortoises, marine life
-  "FJ", // Marine life
-  "PH", // Whale sharks, tarsiers
-  "JP", // Snow monkeys, Okinawa marine
+  'KE',
+  'TZ',
+  'ZA',
+  'BW',
+  'NA',
+  'UG',
+  'RW',
+  'ZM',
+  'ZW',
+  'MZ',
+  'ET',
+  'MG',
+  'MW',
+  'SZ',
+  'IN',
+  'LK',
+  'NP',
+  'BT',
+  'BR',
+  'CR',
+  'EC',
+  'PE',
+  'CO',
+  'AU',
+  'NZ',
+  'PG',
+  'ID', // Komodo, orangutans
+  'MY', // Borneo orangutans
+  'TH', // Elephants
+  'CN', // Pandas
+  'US',
+  'CA', // Bears, wolves, bison
+  'NO',
+  'IS',
+  'GL', // Arctic wildlife, whale watching
+  'AR', // Patagonia penguins, whales
+  'CL', // Patagonia
+  'GA', // Gorillas, forest elephants
+  'CG', // Gorillas
+  'CD', // Mountain gorillas
+  'CM', // Wildlife reserves
+  'GH', // Mole NP
+  'SN', // Djoudj NP
+  'AO', // Kissama NP
+  'MV', // Marine life
+  'SC', // Tortoises, marine life
+  'FJ', // Marine life
+  'PH', // Whale sharks, tarsiers
+  'JP', // Snow monkeys, Okinawa marine
 ]);
 
 export function hasWildlifeSafari(iso2: string): boolean {
@@ -530,78 +530,78 @@ export function hasWildlifeSafari(iso2: string): boolean {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const DIVING_COUNTRIES: Set<string> = new Set([
-  "EG", // Red Sea
-  "MV", // Maldives
-  "TH", // Similan, Koh Tao
-  "ID", // Raja Ampat, Komodo
-  "PH", // Tubbataha, Apo Reef
-  "MY", // Sipadan
-  "AU", // Great Barrier Reef
-  "BZ", // Blue Hole
-  "HN", // Roatán, Utila
-  "MX", // Cenotes, Cozumel
-  "CR", // Cocos Island
-  "PA", // Coiba
-  "EC", // Galápagos
-  "CU", // Jardines de la Reina
-  "BS", // Andros, Exumas
-  "KY", // Stingray City
-  "BB", // Shipwrecks
-  "CW", // Reefs
-  "AW", // Reefs
-  "BM", // Shipwrecks
-  "MU", // Reefs
-  "SC", // Inner/outer islands
-  "TZ", // Mafia, Pemba
-  "MZ", // Tofo
-  "KE", // Diani
-  "MG", // Nosy Be
-  "ZA", // Sardine Run, Aliwal Shoal
-  "JP", // Okinawa
-  "PW", // Palau
-  "FM", // Chuuk/Truk lagoon
-  "MH", // Bikini Atoll
-  "FJ", // Soft coral capital
-  "VU", // SS President Coolidge
-  "NC", // Barrier reef
-  "PG", // Kimbe Bay
-  "TO", // Humpback whales
-  "SB", // WWII wrecks
-  "WS", // Reefs
-  "OM", // Daymaniyat
-  "JO", // Aqaba, Red Sea
-  "SA", // Red Sea
-  "IL", // Eilat
-  "PT", // Azores
-  "ES", // Canaries, Med
-  "HR", // Adriatic
-  "MT", // Blue Hole, wrecks
-  "GR", // Med islands
-  "TR", // Kaş, Fethiye
-  "IT", // Sardinia, Ustica
-  "FR", // Mediterranean, Réunion
-  "IN", // Andaman, Lakshadweep
-  "LK", // Trincomalee, Hikkaduwa
-  "VN", // Nha Trang, Phú Quốc
-  "KH", // Koh Rong
-  "MM", // Mergui Archipelago
-  "BN", // Brunei reefs
-  "TL", // Atauro Island
-  "CO", // San Andrés, Malpelo
-  "BR", // Fernando de Noronha
-  "CV", // Cape Verde
-  "KR", // Jeju
-  "TW", // Green Island, Kenting
-  "NZ", // Poor Knights Islands
-  "CY", // Zenobia wreck
-  "AL", // Albanian Riviera
-  "ME", // Adriatic
-  "SG", // Sisters Islands
-  "CN", // Hainan
-  "US", // Florida Keys, Hawaii
-  "PR", // Isla Mona
-  "VI", // Buck Island
-  "SN", // Gorée reefs
+  'EG', // Red Sea
+  'MV', // Maldives
+  'TH', // Similan, Koh Tao
+  'ID', // Raja Ampat, Komodo
+  'PH', // Tubbataha, Apo Reef
+  'MY', // Sipadan
+  'AU', // Great Barrier Reef
+  'BZ', // Blue Hole
+  'HN', // Roatán, Utila
+  'MX', // Cenotes, Cozumel
+  'CR', // Cocos Island
+  'PA', // Coiba
+  'EC', // Galápagos
+  'CU', // Jardines de la Reina
+  'BS', // Andros, Exumas
+  'KY', // Stingray City
+  'BB', // Shipwrecks
+  'CW', // Reefs
+  'AW', // Reefs
+  'BM', // Shipwrecks
+  'MU', // Reefs
+  'SC', // Inner/outer islands
+  'TZ', // Mafia, Pemba
+  'MZ', // Tofo
+  'KE', // Diani
+  'MG', // Nosy Be
+  'ZA', // Sardine Run, Aliwal Shoal
+  'JP', // Okinawa
+  'PW', // Palau
+  'FM', // Chuuk/Truk lagoon
+  'MH', // Bikini Atoll
+  'FJ', // Soft coral capital
+  'VU', // SS President Coolidge
+  'NC', // Barrier reef
+  'PG', // Kimbe Bay
+  'TO', // Humpback whales
+  'SB', // WWII wrecks
+  'WS', // Reefs
+  'OM', // Daymaniyat
+  'JO', // Aqaba, Red Sea
+  'SA', // Red Sea
+  'IL', // Eilat
+  'PT', // Azores
+  'ES', // Canaries, Med
+  'HR', // Adriatic
+  'MT', // Blue Hole, wrecks
+  'GR', // Med islands
+  'TR', // Kaş, Fethiye
+  'IT', // Sardinia, Ustica
+  'FR', // Mediterranean, Réunion
+  'IN', // Andaman, Lakshadweep
+  'LK', // Trincomalee, Hikkaduwa
+  'VN', // Nha Trang, Phú Quốc
+  'KH', // Koh Rong
+  'MM', // Mergui Archipelago
+  'BN', // Brunei reefs
+  'TL', // Atauro Island
+  'CO', // San Andrés, Malpelo
+  'BR', // Fernando de Noronha
+  'CV', // Cape Verde
+  'KR', // Jeju
+  'TW', // Green Island, Kenting
+  'NZ', // Poor Knights Islands
+  'CY', // Zenobia wreck
+  'AL', // Albanian Riviera
+  'ME', // Adriatic
+  'SG', // Sisters Islands
+  'CN', // Hainan
+  'US', // Florida Keys, Hawaii
+  'PR', // Isla Mona
+  'VI', // Buck Island
+  'SN', // Gorée reefs
 ]);
 
 export function hasDivingSnorkeling(iso2: string): boolean {
@@ -613,49 +613,49 @@ export function hasDivingSnorkeling(iso2: string): boolean {
 // ──────────────────────────────────────────────────────────────────────────────
 
 const DESERT_COUNTRIES: Set<string> = new Set([
-  "EG", // Sahara, White Desert
-  "MA", // Sahara, Merzouga
-  "TN", // Grand Erg Oriental
-  "DZ", // Sahara
-  "LY", // Sahara
-  "MR", // Sahara
-  "ML", // Sahara edge
-  "NE", // Ténéré
-  "TD", // Ennedi Plateau
-  "SD", // Nubian Desert
-  "JO", // Wadi Rum
-  "SA", // Rub al Khali
-  "AE", // Dubai desert
-  "OM", // Wahiba Sands
-  "IR", // Dasht-e Lut, Dasht-e Kavir
-  "IL", // Negev
-  "PS", // Judean
-  "IQ", // Western Desert
-  "NA", // Namib, Sossusvlei
-  "BW", // Kalahari
-  "ZA", // Kalahari edge
-  "US", // Mojave, Sonoran, Monument Valley
-  "MX", // Baja, Sonoran
-  "CL", // Atacama
-  "PE", // Nazca, Ica
-  "AR", // Patagonian steppe
-  "AU", // Outback, Uluru
-  "CN", // Gobi, Taklamakan
-  "MN", // Gobi
-  "IN", // Thar, Rajasthan
-  "PK", // Cholistan, Thar
-  "UZ", // Kyzylkum
-  "TM", // Karakum
-  "KZ", // Betpak-Dala
-  "KG", // Semi-arid areas
-  "ET", // Danakil Depression
-  "DJ", // Lac Assal
-  "ER", // Danakil
-  "SO", // Arid terrain
-  "YE", // Rub al Khali edge
-  "KW", // Desert
-  "BH", // Desert
-  "QA", // Desert
+  'EG', // Sahara, White Desert
+  'MA', // Sahara, Merzouga
+  'TN', // Grand Erg Oriental
+  'DZ', // Sahara
+  'LY', // Sahara
+  'MR', // Sahara
+  'ML', // Sahara edge
+  'NE', // Ténéré
+  'TD', // Ennedi Plateau
+  'SD', // Nubian Desert
+  'JO', // Wadi Rum
+  'SA', // Rub al Khali
+  'AE', // Dubai desert
+  'OM', // Wahiba Sands
+  'IR', // Dasht-e Lut, Dasht-e Kavir
+  'IL', // Negev
+  'PS', // Judean
+  'IQ', // Western Desert
+  'NA', // Namib, Sossusvlei
+  'BW', // Kalahari
+  'ZA', // Kalahari edge
+  'US', // Mojave, Sonoran, Monument Valley
+  'MX', // Baja, Sonoran
+  'CL', // Atacama
+  'PE', // Nazca, Ica
+  'AR', // Patagonian steppe
+  'AU', // Outback, Uluru
+  'CN', // Gobi, Taklamakan
+  'MN', // Gobi
+  'IN', // Thar, Rajasthan
+  'PK', // Cholistan, Thar
+  'UZ', // Kyzylkum
+  'TM', // Karakum
+  'KZ', // Betpak-Dala
+  'KG', // Semi-arid areas
+  'ET', // Danakil Depression
+  'DJ', // Lac Assal
+  'ER', // Danakil
+  'SO', // Arid terrain
+  'YE', // Rub al Khali edge
+  'KW', // Desert
+  'BH', // Desert
+  'QA', // Desert
 ]);
 
 export function hasDesertAdventure(iso2: string): boolean {
@@ -667,24 +667,24 @@ export function hasDesertAdventure(iso2: string): boolean {
 // ──────────────────────────────────────────────────────────────────────────────
 
 export type TourismTag =
-  | "beach"
-  | "island"
-  | "ski"
-  | "mountains"
-  | "historic"
-  | "wildlife"
-  | "diving"
-  | "desert";
+  | 'beach'
+  | 'island'
+  | 'ski'
+  | 'mountains'
+  | 'historic'
+  | 'wildlife'
+  | 'diving'
+  | 'desert';
 
 export const ALL_TOURISM_TAGS: TourismTag[] = [
-  "beach",
-  "island",
-  "ski",
-  "mountains",
-  "historic",
-  "wildlife",
-  "diving",
-  "desert",
+  'beach',
+  'island',
+  'ski',
+  'mountains',
+  'historic',
+  'wildlife',
+  'diving',
+  'desert',
 ];
 
 export function computeTourismTags(
@@ -693,14 +693,14 @@ export function computeTourismTags(
   hottestMonth: number | undefined,
 ): TourismTag[] {
   const tags: TourismTag[] = [];
-  if (isBeachDestination(iso2, landlocked, hottestMonth)) tags.push("beach");
-  if (isIslandNation(iso2)) tags.push("island");
-  if (hasSkiResorts(iso2)) tags.push("ski");
-  if (hasMountaineering(iso2)) tags.push("mountains");
-  if (hasHistoricCities(iso2)) tags.push("historic");
-  if (hasWildlifeSafari(iso2)) tags.push("wildlife");
-  if (hasDivingSnorkeling(iso2)) tags.push("diving");
-  if (hasDesertAdventure(iso2)) tags.push("desert");
+  if (isBeachDestination(iso2, landlocked, hottestMonth)) tags.push('beach');
+  if (isIslandNation(iso2)) tags.push('island');
+  if (hasSkiResorts(iso2)) tags.push('ski');
+  if (hasMountaineering(iso2)) tags.push('mountains');
+  if (hasHistoricCities(iso2)) tags.push('historic');
+  if (hasWildlifeSafari(iso2)) tags.push('wildlife');
+  if (hasDivingSnorkeling(iso2)) tags.push('diving');
+  if (hasDesertAdventure(iso2)) tags.push('desert');
   return tags;
 }
 
@@ -1021,10 +1021,7 @@ const TAG_SCORE_MAPS: Record<TourismTag, Record<string, number>> = {
  * Only tags the country qualifies for will appear in the result.
  * Countries in a tag set but without an explicit score get a default of 50.
  */
-export function computeTourismTagScores(
-  iso2: string,
-  tags: TourismTag[],
-): Record<string, number> {
+export function computeTourismTagScores(iso2: string, tags: TourismTag[]): Record<string, number> {
   const scores: Record<string, number> = {};
   for (const tag of tags) {
     const map = TAG_SCORE_MAPS[tag];
@@ -1045,10 +1042,7 @@ export function computeTourismTagScores(
  * These values represent typical coastal/resort area temperatures.
  * { annualMean: °C, tempRange: °C (difference between hottest and coldest month) }
  */
-const COASTAL_CLIMATE_OVERRIDE: Record<
-  string,
-  { annualMean: number; tempRange: number }
-> = {
+const COASTAL_CLIMATE_OVERRIDE: Record<string, { annualMean: number; tempRange: number }> = {
   // ═══════════════════════════════════════════════════════════════════════════
   // COASTAL TEMPERATURE OVERRIDES — based on verified beach resort temperatures
   // Values derived from: annualMean = (Jan+Jul)/2, tempRange = |Jul-Jan|
@@ -1165,11 +1159,7 @@ const COASTAL_CLIMATE_OVERRIDE: Record<
  * Peak warmth is July (index 6) for Northern Hemisphere,
  * January (index 0) for Southern Hemisphere.
  */
-function estimateMonthlyTemps(
-  annualMean: number,
-  tempRange: number,
-  latitude: number,
-): number[] {
+function estimateMonthlyTemps(annualMean: number, tempRange: number, latitude: number): number[] {
   const peakMonth = latitude >= 0 ? 6 : 0;
   const months: number[] = [];
   for (let m = 0; m < 12; m++) {
@@ -1274,18 +1264,14 @@ export function computeTourismTagSeasonality(
   annualMean: number,
   tempRange: number,
 ): Record<string, number[]> {
-  const coastalTags = new Set<TourismTag>(["beach", "island", "diving"]);
+  const coastalTags = new Set<TourismTag>(['beach', 'island', 'diving']);
   const coastalOverride = COASTAL_CLIMATE_OVERRIDE[iso2];
 
   // Standard temps based on country-wide climate
   const standardTemps = estimateMonthlyTemps(annualMean, tempRange, latitude);
   // Coastal temps if override available
   const coastalTemps = coastalOverride
-    ? estimateMonthlyTemps(
-        coastalOverride.annualMean,
-        coastalOverride.tempRange,
-        latitude,
-      )
+    ? estimateMonthlyTemps(coastalOverride.annualMean, coastalOverride.tempRange, latitude)
     : standardTemps;
 
   const result: Record<string, number[]> = {};

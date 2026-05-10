@@ -15,45 +15,50 @@ export interface CategoryScore {
 }
 
 export type CategoryKey =
-  | "economy"
-  | "affordability"
-  | "foodSecurity"
-  | "healthcare"
-  | "education"
-  | "environment"
-  | "climate"
-  | "safety"
-  | "infrastructure"
-  | "happiness"
-  | "humanDevelopment"
-  | "governance"
-  | "englishProficiency"
-  | "digitalFreedom"
-  | "personalFreedom"
-  | "logistics"
-  | "biodiversity"
-  | "socialTolerance"
-  | "taxFriendliness"
-  | "startupEnvironment"
-  | "airConnectivity"
-  | "culturalHeritage"
-  | "healthcareCost"
-  | "tourismSafety"
-  | "culturalAttractions"
-  | "naturalAttractions"
-  | "accommodationCost"
-  | "foodAndDining"
-  | "seasonalAppeal"
-  | "transportCost"
-  | "travelAccessibility"
-  | "tourismInfrastructure"
-  | "localFriendliness"
-  | "nomadCommunity"
-  | "visaFriendliness"
-  | "costEfficiency"
-  | "workLifeBalance"
-  | "digitalReadiness"
-  | "culturalFit";
+  | 'economy'
+  | 'affordability'
+  | 'foodSecurity'
+  | 'healthcare'
+  | 'education'
+  | 'environment'
+  | 'climate'
+  | 'safety'
+  | 'infrastructure'
+  | 'happiness'
+  | 'humanDevelopment'
+  | 'governance'
+  | 'englishProficiency'
+  | 'digitalFreedom'
+  | 'personalFreedom'
+  | 'logistics'
+  | 'biodiversity'
+  | 'socialTolerance'
+  | 'taxFriendliness'
+  | 'startupEnvironment'
+  | 'airConnectivity'
+  | 'culturalHeritage'
+  | 'healthcareCost'
+  | 'tourismSafety'
+  | 'accommodationCost'
+  | 'transportCost'
+  | 'tourismInfrastructure'
+  | 'localFriendliness'
+  | 'nightlifeEntertainment'
+  | 'touristScamSafety'
+  | 'streetFoodCuisine'
+  | 'beachWaterQuality'
+  | 'walkabilityScenicBeauty'
+  | 'shoppingMarkets'
+  | 'photographySpots'
+  | 'familyFriendliness'
+  | 'adventureSports'
+  | 'historicalSites'
+  | 'nomadCommunity'
+  | 'visaFriendliness'
+  | 'costEfficiency'
+  | 'workLifeBalance'
+  | 'digitalReadiness'
+  | 'culturalFit';
 
 // ─── Cost of Living ───────────────────────────────────────────────────────────
 
@@ -125,7 +130,7 @@ export interface NomadVisaIncomeRequirement {
 }
 
 export interface NomadVisaTax {
-  status: "exempt" | "standard" | "special";
+  status: 'exempt' | 'standard' | 'special';
   rate: number | null;
   notes: string;
 }
@@ -167,12 +172,7 @@ export interface NomadVisaDetails {
 
 // ─── Climate ─────────────────────────────────────────────────────────────────
 
-export type SeasonType =
-  | "four_seasons"
-  | "mild_seasons"
-  | "tropical"
-  | "arid"
-  | "polar";
+export type SeasonType = 'four_seasons' | 'mild_seasons' | 'tropical' | 'arid' | 'polar';
 
 export interface ClimateData {
   annualMeanTemp: number;

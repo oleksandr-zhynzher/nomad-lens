@@ -37,11 +37,11 @@ export function useCountries(): UseCountriesResult {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initial async load intentionally flips loading state before the fetch resolves
     load();
     return () => {
       cancelRef.current = true;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return { countries, loading, error, refresh: load };

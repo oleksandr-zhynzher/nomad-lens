@@ -126,9 +126,7 @@ export function BudgetMatcherPage() {
 
   const handleCompare = () => {
     if (selectedCodes.size < 2) return;
-    navigate(
-      `${langPrefix}/compare?m=budget&c=${Array.from(selectedCodes).join(",")}`,
-    );
+    navigate(`${langPrefix}/compare?m=budget&c=${Array.from(selectedCodes).join(",")}`);
   };
 
   const matches = useBudgetMatcher(
@@ -144,9 +142,7 @@ export function BudgetMatcherPage() {
   const query = search.trim().toLowerCase();
   const filteredMatches = query
     ? matches.filter((m) =>
-        localizeCountry(m.country, i18n.language)
-          .name.toLowerCase()
-          .includes(query),
+        localizeCountry(m.country, i18n.language).name.toLowerCase().includes(query),
       )
     : matches;
 
@@ -157,16 +153,13 @@ export function BudgetMatcherPage() {
     categories: false,
   });
   const [copied, setCopied] = useState(false);
-  const toggle = (key: string) =>
-    setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggle = (key: string) => setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
 
   useEffect(() => {
     if (!mobileParamsOpen) return;
     const previousOverflow = document.body.style.overflow;
     const previousFocusedElement =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     document.body.style.overflow = "hidden";
 
     const trapFocus = (event: KeyboardEvent) => {
@@ -401,9 +394,7 @@ export function BudgetMatcherPage() {
             size={14}
             style={{
               color: "#808080",
-              transform: !collapsed.lifestyle
-                ? "rotate(0deg)"
-                : "rotate(-90deg)",
+              transform: !collapsed.lifestyle ? "rotate(0deg)" : "rotate(-90deg)",
               transition: "transform 0.15s ease",
               flexShrink: 0,
             }}
@@ -482,9 +473,7 @@ export function BudgetMatcherPage() {
                 }}
               >
                 <button
-                  onClick={() =>
-                    bs.setPeopleCount(Math.max(1, bs.peopleCount - 1))
-                  }
+                  onClick={() => bs.setPeopleCount(Math.max(1, bs.peopleCount - 1))}
                   disabled={bs.peopleCount <= 1}
                   style={{
                     width: 32,
@@ -518,9 +507,7 @@ export function BudgetMatcherPage() {
                   {bs.peopleCount}
                 </span>
                 <button
-                  onClick={() =>
-                    bs.setPeopleCount(Math.min(20, bs.peopleCount + 1))
-                  }
+                  onClick={() => bs.setPeopleCount(Math.min(20, bs.peopleCount + 1))}
                   disabled={bs.peopleCount >= 20}
                   style={{
                     width: 32,
@@ -577,9 +564,7 @@ export function BudgetMatcherPage() {
             size={14}
             style={{
               color: "#808080",
-              transform: !collapsed.categories
-                ? "rotate(0deg)"
-                : "rotate(-90deg)",
+              transform: !collapsed.categories ? "rotate(0deg)" : "rotate(-90deg)",
               transition: "transform 0.15s ease",
               flexShrink: 0,
             }}
@@ -630,9 +615,7 @@ export function BudgetMatcherPage() {
                     max={100}
                     step={1}
                     value={bs.categoryWeights[key]}
-                    onChange={(e) =>
-                      bs.handleCategoryWeight(key, Number(e.target.value))
-                    }
+                    onChange={(e) => bs.handleCategoryWeight(key, Number(e.target.value))}
                     className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
                     style={{
                       background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${bs.categoryWeights[key]}%, #333333 ${bs.categoryWeights[key]}%, #333333 100%)`,
@@ -867,10 +850,7 @@ export function BudgetMatcherPage() {
         </button>
 
         {/* ── Right content area ──────────────────────────── */}
-        <main
-          className="flex-1 min-w-0 pb-28 md:pb-0"
-          style={{ backgroundColor: "#000000" }}
-        >
+        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#000000" }}>
           <div className="px-4 md:px-6">
             {/* ── Hero section (matching list page) ─────────── */}
             <div
@@ -1105,18 +1085,10 @@ export function BudgetMatcherPage() {
                         paddingRight: "14px",
                         borderRadius: "6px",
                         border:
-                          selectedCodes.size < 2
-                            ? "1px solid var(--color-accent-dim)"
-                            : "none",
+                          selectedCodes.size < 2 ? "1px solid var(--color-accent-dim)" : "none",
                         cursor: selectedCodes.size < 2 ? "default" : "pointer",
-                        backgroundColor:
-                          selectedCodes.size < 2
-                            ? "#161616"
-                            : "var(--color-accent)",
-                        color:
-                          selectedCodes.size < 2
-                            ? "var(--color-accent-dim)"
-                            : "#FFFFFF",
+                        backgroundColor: selectedCodes.size < 2 ? "#161616" : "var(--color-accent)",
+                        color: selectedCodes.size < 2 ? "var(--color-accent-dim)" : "#FFFFFF",
                         fontFamily: "Inter, sans-serif",
                         fontSize: "13px",
                         fontWeight: 600,
@@ -1156,10 +1128,7 @@ export function BudgetMatcherPage() {
                         backgroundColor: "#161616",
                         color: "#8A8A8A",
                       }}
-                      aria-label={t(
-                        "a11y.exitCompareMode",
-                        "Exit compare mode",
-                      )}
+                      aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
                     >
                       <X size={16} />
                     </button>
@@ -1276,10 +1245,7 @@ export function BudgetMatcherPage() {
                   }}
                 >
                   <span style={{ color: "#9E9E9E" }}>
-                    {t(
-                      "countryList.clickHint",
-                      "Click on a country to view details",
-                    )}
+                    {t("countryList.clickHint", "Click on a country to view details")}
                   </span>
                   <span style={{ color: "#8A8A8A" }}>
                     {t("countryList.count", { count: filteredMatches.length })}
@@ -1302,28 +1268,20 @@ export function BudgetMatcherPage() {
                     return (
                       <div
                         key={m.country.code}
-                        onClick={
-                          compareMode
-                            ? () => toggleSelect(m.country.code)
-                            : undefined
-                        }
+                        onClick={compareMode ? () => toggleSelect(m.country.code) : undefined}
                         style={{ cursor: compareMode ? "pointer" : undefined }}
                       >
                         <BudgetCountryCard
                           match={m}
                           budget={bs.budget}
                           rank={i + 1}
-                          expanded={
-                            !compareMode && expandedCode === m.country.code
-                          }
+                          expanded={!compareMode && expandedCode === m.country.code}
                           onToggle={
                             compareMode
                               ? undefined
                               : () =>
                                   setExpandedCode((prev) =>
-                                    prev === m.country.code
-                                      ? null
-                                      : m.country.code,
+                                    prev === m.country.code ? null : m.country.code,
                                   )
                           }
                           compareMode={compareMode}

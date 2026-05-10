@@ -145,10 +145,7 @@ export function useTourismWeightState() {
 
   useEffect(() => {
     try {
-      localStorage.setItem(
-        LS_REGIONS_KEY,
-        JSON.stringify([...selectedRegions]),
-      );
+      localStorage.setItem(LS_REGIONS_KEY, JSON.stringify([...selectedRegions]));
     } catch {
       /* ignore */
     }
@@ -192,18 +189,13 @@ export function useTourismWeightState() {
   const handleToggleTag = useCallback((tag: TourismTag) => {
     setToggles((prev) => {
       const tags = prev.requiredTags;
-      const next = tags.includes(tag)
-        ? tags.filter((t) => t !== tag)
-        : [...tags, tag];
+      const next = tags.includes(tag) ? tags.filter((t) => t !== tag) : [...tags, tag];
       return { ...prev, requiredTags: next };
     });
   }, []);
 
   const setBudgetField = useCallback(
-    <K extends keyof TourismBudgetState>(
-      key: K,
-      value: TourismBudgetState[K],
-    ) => {
+    <K extends keyof TourismBudgetState>(key: K, value: TourismBudgetState[K]) => {
       setBudgetState((prev) => ({ ...prev, [key]: value }));
     },
     [],

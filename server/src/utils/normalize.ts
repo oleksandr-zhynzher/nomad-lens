@@ -2,11 +2,7 @@
  * Normalize a value to the 0–100 scale using min-max normalization.
  * Returns null if value is null/NaN or if max === min.
  */
-export function minMax(
-  value: number | null,
-  min: number,
-  max: number,
-): number | null {
+export function minMax(value: number | null, min: number, max: number): number | null {
   if (value === null || isNaN(value)) return null;
   if (max === min) return null;
   const clamped = Math.max(min, Math.min(max, value));
@@ -16,24 +12,15 @@ export function minMax(
 /**
  * Log-scale min-max normalization — good for GDP where distribution is skewed.
  */
-export function logMinMax(
-  value: number | null,
-  min: number,
-  max: number,
-): number | null {
-  if (value === null || isNaN(value) || value <= 0 || min <= 0 || max <= 0)
-    return null;
+export function logMinMax(value: number | null, min: number, max: number): number | null {
+  if (value === null || isNaN(value) || value <= 0 || min <= 0 || max <= 0) return null;
   return minMax(Math.log(value), Math.log(min), Math.log(max));
 }
 
 /**
  * Inverted min-max — use when lower value means better (e.g. pollution, crime).
  */
-export function invertMinMax(
-  value: number | null,
-  min: number,
-  max: number,
-): number | null {
+export function invertMinMax(value: number | null, min: number, max: number): number | null {
   const raw = minMax(value, min, max);
   if (raw === null) return null;
   return Math.round((100 - raw) * 10) / 10;
@@ -43,11 +30,7 @@ export function invertMinMax(
  * Inverted log-scale min-max — use when lower value means better on a skewed
  * distribution (e.g. nominal GDP as a cost-of-living proxy).
  */
-export function invertLogMinMax(
-  value: number | null,
-  min: number,
-  max: number,
-): number | null {
+export function invertLogMinMax(value: number | null, min: number, max: number): number | null {
   const raw = logMinMax(value, min, max);
   if (raw === null) return null;
   return Math.round((100 - raw) * 10) / 10;
@@ -69,10 +52,7 @@ export function average(scores: (number | null)[]): number | null {
  * Scores temperature deviation from 18°C and precipitation suitability.
  * Returns 0–100 (higher = more comfortable).
  */
-export function climateScore(
-  annualMeanTemp: number,
-  annualPrecipitation: number,
-): number {
+export function climateScore(annualMeanTemp: number, annualPrecipitation: number): number {
   // Ideal temperature range: 14–22°C → max score
   const tempDev = Math.abs(annualMeanTemp - 18);
   const tempScore = Math.max(0, 100 - tempDev * 5);

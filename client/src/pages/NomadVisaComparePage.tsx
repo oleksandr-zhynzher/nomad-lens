@@ -5,10 +5,7 @@ import { ExternalLink, ArrowLeft } from "lucide-react";
 import { Layout } from "../components/Layout";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
-import {
-  normalizeCountryCodes,
-  tokenizeCountryCodesParam,
-} from "../utils/countryCodeSelection";
+import { normalizeCountryCodes, tokenizeCountryCodesParam } from "../utils/countryCodeSelection";
 import { localizeCountry } from "../utils/localize";
 import type { CountryData, NomadVisaDetails } from "../utils/types";
 
@@ -42,13 +39,7 @@ const VALUE_TEXT = {
   color: "#CCCCCC",
 };
 
-function Row({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
+function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div
       style={{
@@ -76,13 +67,7 @@ function Row({
   );
 }
 
-function Cell({
-  children,
-  count,
-}: {
-  children: React.ReactNode;
-  count: number;
-}) {
+function Cell({ children, count }: { children: React.ReactNode; count: number }) {
   return (
     <div
       style={{
@@ -115,10 +100,7 @@ export function NomadVisaComparePage() {
       ),
     [countries],
   );
-  const rawCodes = useMemo(
-    () => tokenizeCountryCodesParam(searchParams.get("c")),
-    [searchParams],
-  );
+  const rawCodes = useMemo(() => tokenizeCountryCodesParam(searchParams.get("c")), [searchParams]);
   const codes = useMemo(
     () => normalizeCountryCodes(rawCodes, validVisaCodes),
     [rawCodes, validVisaCodes],
@@ -309,8 +291,7 @@ export function NomadVisaComparePage() {
                         marginLeft: "6px",
                       }}
                     >
-                      +{c.nomadVisa.duration.maxExtension}{" "}
-                      {t("countryPage.visa.mo")}{" "}
+                      +{c.nomadVisa.duration.maxExtension} {t("countryPage.visa.mo")}{" "}
                       {t("countryPage.visa.extension")}
                     </span>
                   )}
@@ -325,8 +306,7 @@ export function NomadVisaComparePage() {
                   <span
                     style={{
                       ...VALUE_MONO,
-                      color:
-                        c.nomadVisa.cost.amount === 0 ? "#44CC66" : "#FFFFFF",
+                      color: c.nomadVisa.cost.amount === 0 ? "#44CC66" : "#FFFFFF",
                     }}
                   >
                     {c.nomadVisa.cost.amount === 0
@@ -387,8 +367,7 @@ export function NomadVisaComparePage() {
             <Row label={t("nomadVisasPage.table.tax", "Tax Status")}>
               {selected.map((c) => {
                 const taxColors =
-                  TAX_STATUS_COLORS[c.nomadVisa.tax.status] ??
-                  TAX_STATUS_COLORS.standard;
+                  TAX_STATUS_COLORS[c.nomadVisa.tax.status] ?? TAX_STATUS_COLORS.standard;
                 return (
                   <Cell key={c.code} count={count}>
                     <span
@@ -419,9 +398,7 @@ export function NomadVisaComparePage() {
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span style={VALUE_MONO}>
-                    {c.nomadVisa.tax.rate != null
-                      ? `${c.nomadVisa.tax.rate}%`
-                      : "—"}
+                    {c.nomadVisa.tax.rate != null ? `${c.nomadVisa.tax.rate}%` : "—"}
                   </span>
                 </Cell>
               ))}
@@ -434,31 +411,23 @@ export function NomadVisaComparePage() {
                   <span
                     style={{
                       ...VALUE_TEXT,
-                      color: c.nomadVisa.duration.renewable
-                        ? "#44CC66"
-                        : "#CC4444",
+                      color: c.nomadVisa.duration.renewable ? "#44CC66" : "#CC4444",
                     }}
                   >
-                    {c.nomadVisa.duration.renewable
-                      ? t("common.yes", "Yes")
-                      : t("common.no", "No")}
+                    {c.nomadVisa.duration.renewable ? t("common.yes", "Yes") : t("common.no", "No")}
                   </span>
                 </Cell>
               ))}
             </Row>
 
             {/* Online application */}
-            <Row
-              label={t("nomadVisaComparePage.onlineApp", "Online Application")}
-            >
+            <Row label={t("nomadVisaComparePage.onlineApp", "Online Application")}>
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span
                     style={{
                       ...VALUE_TEXT,
-                      color: c.nomadVisa.applicationProcess.online
-                        ? "#44CC66"
-                        : "#CC4444",
+                      color: c.nomadVisa.applicationProcess.online ? "#44CC66" : "#CC4444",
                     }}
                   >
                     {c.nomadVisa.applicationProcess.online
@@ -470,12 +439,7 @@ export function NomadVisaComparePage() {
             </Row>
 
             {/* Processing time */}
-            <Row
-              label={t(
-                "nomadVisaComparePage.processingTime",
-                "Processing Time",
-              )}
-            >
+            <Row label={t("nomadVisaComparePage.processingTime", "Processing Time")}>
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span style={VALUE_TEXT}>
@@ -486,9 +450,7 @@ export function NomadVisaComparePage() {
             </Row>
 
             {/* Official link */}
-            <Row
-              label={t("nomadVisaComparePage.officialLink", "Official Link")}
-            >
+            <Row label={t("nomadVisaComparePage.officialLink", "Official Link")}>
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <a

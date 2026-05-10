@@ -1,0 +1,12 @@
+{
+  "printWidth": 100,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": ["server/**/*.ts", "infra/**/*.ts"],
+      "options": {
+        "singleQuote": true
+      }
+    }
+  ]
+}

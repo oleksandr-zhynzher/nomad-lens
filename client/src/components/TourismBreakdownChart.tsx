@@ -21,10 +21,7 @@ export function TourismBreakdownChart({ country }: Props) {
             .filter(([, ind]) => ind !== undefined)
             .slice(0, 2);
           detailText = indEntries
-            .map(
-              ([, ind]) =>
-                `${ind!.raw.toLocaleString()}${ind!.unit} (${ind!.year})`,
-            )
+            .map(([, ind]) => `${ind!.raw.toLocaleString()}${ind!.unit} (${ind!.year})`)
             .join(" · ");
         }
 
@@ -58,10 +55,7 @@ export function TourismBreakdownChart({ country }: Props) {
             </div>
 
             {/* Score bar - 4px height */}
-            <div
-              className="rounded-full"
-              style={{ height: "4px", backgroundColor: "#333333" }}
-            >
+            <div className="rounded-full" style={{ height: "4px", backgroundColor: "#333333" }}>
               <div
                 className="rounded-full transition-all"
                 style={{

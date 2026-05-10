@@ -51,14 +51,8 @@ function WeightSlider({
   langPrefix,
 }: WeightSliderProps) {
   const { t } = useTranslation();
-  const label = t(
-    `indicatorsPage.indicators.${categoryKey}.name`,
-    CATEGORY_LABELS[categoryKey],
-  );
-  const wLabel =
-    weightMode === "independent"
-      ? `${value}`
-      : weightLabel(categoryKey, weights);
+  const label = t(`indicatorsPage.indicators.${categoryKey}.name`, CATEGORY_LABELS[categoryKey]);
+  const wLabel = weightMode === "independent" ? `${value}` : weightLabel(categoryKey, weights);
   const description = CATEGORY_DESCRIPTIONS[categoryKey];
   const dataSource = CATEGORY_DATA_SOURCES[categoryKey];
   const isAi = AI_CATEGORIES.has(categoryKey);
@@ -93,10 +87,7 @@ function WeightSlider({
             </span>
           )}
           {isAi && (
-            <Link
-              to={`${langPrefix}/ai-indicators`}
-              style={{ textDecoration: "none" }}
-            >
+            <Link to={`${langPrefix}/ai-indicators`} style={{ textDecoration: "none" }}>
               <span
                 style={{
                   fontFamily: "Inter, sans-serif",
@@ -127,9 +118,7 @@ function WeightSlider({
                   {label}
                 </div>
                 <div style={{ marginBottom: "8px" }}>{description}</div>
-                <div style={{ fontSize: "10px", color: "#9E9E9E" }}>
-                  Source: {dataSource}
-                </div>
+                <div style={{ fontSize: "10px", color: "#9E9E9E" }}>Source: {dataSource}</div>
               </div>
             }
             side="top"
@@ -239,12 +228,7 @@ const WEIGHT_GROUPS: Array<{
     label: "CONNECTIVITY",
     labelKey: "weights.groups.connectivity",
     icon: <Globe size={16} color="#8B7BAD" />,
-    keys: [
-      "infrastructure",
-      "logistics",
-      "airConnectivity",
-      "englishProficiency",
-    ],
+    keys: ["infrastructure", "logistics", "airConnectivity", "englishProficiency"],
   },
   {
     label: "AI INSIGHTS",
@@ -290,12 +274,7 @@ export function WeightPanel({
   };
 
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries(
-      [...WEIGHT_GROUPS.map((g) => g.label), "VISA & STAY"].map((l) => [
-        l,
-        true,
-      ]),
-    ),
+    Object.fromEntries([...WEIGHT_GROUPS.map((g) => g.label), "VISA & STAY"].map((l) => [l, true])),
   );
 
   const toggleGroup = (label: string) =>
@@ -383,9 +362,7 @@ export function WeightPanel({
                     fontSize: "13px",
                     fontWeight: weightMode === "independent" ? 500 : 400,
                     backgroundColor:
-                      weightMode === "independent"
-                        ? "var(--color-accent)"
-                        : "transparent",
+                      weightMode === "independent" ? "var(--color-accent)" : "transparent",
                     color: weightMode === "independent" ? "#FFFFFF" : "#9E9E9E",
                     transition: "all 0.15s ease",
                   }}
@@ -428,9 +405,7 @@ export function WeightPanel({
                     fontSize: "13px",
                     fontWeight: weightMode === "balanced" ? 500 : 400,
                     backgroundColor:
-                      weightMode === "balanced"
-                        ? "var(--color-accent)"
-                        : "transparent",
+                      weightMode === "balanced" ? "var(--color-accent)" : "transparent",
                     color: weightMode === "balanced" ? "#FFFFFF" : "#9E9E9E",
                     transition: "all 0.15s ease",
                   }}
@@ -448,20 +423,14 @@ export function WeightPanel({
       <div className="flex-1 overflow-y-auto">
         {WEIGHT_GROUPS.map((group) => {
           const isOpen = !collapsed[group.label];
-          const groupTotal = group.keys.reduce(
-            (s, k) => s + (weights[k] ?? 0),
-            0,
-          );
+          const groupTotal = group.keys.reduce((s, k) => s + (weights[k] ?? 0), 0);
           const groupBadge =
             weightMode === "independent"
               ? `${t("weights.averageBadge")} ${Math.round(groupTotal / group.keys.length)}`
               : `${groupTotal}%`;
 
           return (
-            <div
-              key={group.label}
-              style={{ borderBottom: "1px solid #242424" }}
-            >
+            <div key={group.label} style={{ borderBottom: "1px solid #242424" }}>
               {/* Group header */}
               <button
                 className="button-hover-exempt weight-panel-group-button w-full flex items-center"
@@ -560,14 +529,9 @@ export function WeightPanel({
                         >
                           {/* Season rows — 3 equal-width buttons per row */}
                           {[SEASON_ROW1, SEASON_ROW2].map((row, ri) => (
-                            <div
-                              key={ri}
-                              className="flex"
-                              style={{ gap: "4px" }}
-                            >
+                            <div key={ri} className="flex" style={{ gap: "4px" }}>
                               {row.map((opt) => {
-                                const active =
-                                  climatePrefs.seasonType === opt.value;
+                                const active = climatePrefs.seasonType === opt.value;
                                 return (
                                   <button
                                     key={opt.value}
@@ -586,9 +550,7 @@ export function WeightPanel({
                                       fontFamily: "Inter, sans-serif",
                                       fontSize: "10px",
                                       fontWeight: "normal",
-                                      backgroundColor: active
-                                        ? "#8F5A3C"
-                                        : "#2A2A2A",
+                                      backgroundColor: active ? "#8F5A3C" : "#2A2A2A",
                                       color: active ? "#FFFFFF" : "#8A8A8A",
                                       textAlign: "center",
                                     }}
@@ -644,10 +606,7 @@ export function WeightPanel({
                                   const v = Number(e.target.value);
                                   onClimatePrefsChange({
                                     ...climatePrefs,
-                                    minTemp: Math.min(
-                                      v,
-                                      climatePrefs.maxTemp - 1,
-                                    ),
+                                    minTemp: Math.min(v, climatePrefs.maxTemp - 1),
                                   });
                                 }}
                                 className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
@@ -692,10 +651,7 @@ export function WeightPanel({
                                   const v = Number(e.target.value);
                                   onClimatePrefsChange({
                                     ...climatePrefs,
-                                    maxTemp: Math.max(
-                                      v,
-                                      climatePrefs.minTemp + 1,
-                                    ),
+                                    maxTemp: Math.max(v, climatePrefs.minTemp + 1),
                                   });
                                 }}
                                 className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
@@ -733,8 +689,7 @@ export function WeightPanel({
         {/* ── VISA & STAY section (collapsible, at bottom) ─── */}
         {(() => {
           const isOpen = !collapsed["VISA & STAY"];
-          const hasActiveFilter =
-            nomadVisaOnly || schengenOnly || minTouristDays !== null;
+          const hasActiveFilter = nomadVisaOnly || schengenOnly || minTouristDays !== null;
           return (
             <div style={{ borderBottom: "1px solid #242424" }}>
               <button
@@ -854,18 +809,14 @@ export function WeightPanel({
                       onClick={() => onNomadVisaOnlyChange(!nomadVisaOnly)}
                       className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
                       style={{
-                        backgroundColor: nomadVisaOnly
-                          ? "var(--color-accent)"
-                          : "#333333",
+                        backgroundColor: nomadVisaOnly ? "var(--color-accent)" : "#333333",
                         flexShrink: 0,
                       }}
                     >
                       <span
                         className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
                         style={{
-                          transform: nomadVisaOnly
-                            ? "translateX(26px)"
-                            : "translateX(4px)",
+                          transform: nomadVisaOnly ? "translateX(26px)" : "translateX(4px)",
                         }}
                       />
                     </button>
@@ -921,18 +872,14 @@ export function WeightPanel({
                       onClick={() => onSchengenOnlyChange(!schengenOnly)}
                       className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
                       style={{
-                        backgroundColor: schengenOnly
-                          ? "var(--color-accent)"
-                          : "#333333",
+                        backgroundColor: schengenOnly ? "var(--color-accent)" : "#333333",
                         flexShrink: 0,
                       }}
                     >
                       <span
                         className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
                         style={{
-                          transform: schengenOnly
-                            ? "translateX(26px)"
-                            : "translateX(4px)",
+                          transform: schengenOnly ? "translateX(26px)" : "translateX(4px)",
                         }}
                       />
                     </button>
@@ -987,8 +934,7 @@ export function WeightPanel({
                     <div className="flex" style={{ gap: "4px" }}>
                       {([null, 30, 60, 90, 180] as const).map((days) => {
                         const active = minTouristDays === days;
-                        const label =
-                          days === null ? t("visa.any") : `${days}+`;
+                        const label = days === null ? t("visa.any") : `${days}+`;
                         return (
                           <button
                             key={label}

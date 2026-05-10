@@ -27,10 +27,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="compare" element={<ComparePage />} />
           <Route path="country/:code" element={<CountryPage />} />
           <Route path="nomad-visas" element={<NomadVisasPage />} />
-          <Route
-            path="nomad-visas/compare"
-            element={<NomadVisaComparePage />}
-          />
+          <Route path="nomad-visas/compare" element={<NomadVisaComparePage />} />
           <Route path="budget-matcher" element={<BudgetMatcherPage />} />
           <Route path="data-sources" element={<DataSourcesPage />} />
           <Route path="indicators" element={<IndicatorsPage />} />

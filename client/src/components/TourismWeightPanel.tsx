@@ -120,10 +120,7 @@ interface TourismWeightPanelProps {
     value: TourismBudgetState[K],
   ) => void;
   toggles?: TourismToggles;
-  onToggleFieldChange?: <K extends keyof TourismToggles>(
-    key: K,
-    value: TourismToggles[K],
-  ) => void;
+  onToggleFieldChange?: <K extends keyof TourismToggles>(key: K, value: TourismToggles[K]) => void;
   travelDates?: TravelDates;
   onTravelDatesChange?: React.Dispatch<React.SetStateAction<TravelDates>>;
   mobile?: boolean;
@@ -219,11 +216,7 @@ export function TourismWeightPanel({
       )}
 
       {/* Scrollable sliders */}
-      <div
-        ref={scrollRef}
-        onScroll={onScroll}
-        className="flex-1 overflow-y-auto auto-scrollbar"
-      >
+      <div ref={scrollRef} onScroll={onScroll} className="flex-1 overflow-y-auto auto-scrollbar">
         {/* ── Budget group (top) ────────────────────────────────────── */}
         {budgetState && onBudgetChange && (
           <div style={{ borderBottom: "1px solid #242424" }}>
@@ -275,9 +268,7 @@ export function TourismWeightPanel({
                 size={14}
                 style={{
                   color: "#808080",
-                  transform: !collapsed["BUDGET"]
-                    ? "rotate(0deg)"
-                    : "rotate(-90deg)",
+                  transform: !collapsed["BUDGET"] ? "rotate(0deg)" : "rotate(-90deg)",
                   transition: "transform 0.15s ease",
                   flexShrink: 0,
                 }}
@@ -285,10 +276,7 @@ export function TourismWeightPanel({
             </button>
 
             {!collapsed["BUDGET"] && (
-              <div
-                className="flex flex-col"
-                style={{ padding: "12px 16px", gap: "16px" }}
-              >
+              <div className="flex flex-col" style={{ padding: "12px 16px", gap: "16px" }}>
                 {/* Daily budget slider */}
                 <div>
                   <div className="flex items-end gap-2 mb-2">
@@ -321,17 +309,12 @@ export function TourismWeightPanel({
                     max={500}
                     step={5}
                     value={budgetState.dailyBudget}
-                    onChange={(e) =>
-                      onBudgetChange("dailyBudget", Number(e.target.value))
-                    }
+                    onChange={(e) => onBudgetChange("dailyBudget", Number(e.target.value))}
                     className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
                     style={{
                       background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((budgetState.dailyBudget - 10) / 490) * 100}%, #333333 ${((budgetState.dailyBudget - 10) / 490) * 100}%, #333333 100%)`,
                     }}
-                    aria-label={t(
-                      "tourismBudget.dailyBudgetLabel",
-                      "Daily budget",
-                    )}
+                    aria-label={t("tourismBudget.dailyBudgetLabel", "Daily budget")}
                   />
                   <div className="flex justify-between mt-1.5">
                     <span
@@ -417,9 +400,7 @@ export function TourismWeightPanel({
                     min={0}
                     max={100}
                     value={budgetState.budgetBlend}
-                    onChange={(e) =>
-                      onBudgetChange("budgetBlend", Number(e.target.value))
-                    }
+                    onChange={(e) => onBudgetChange("budgetBlend", Number(e.target.value))}
                     className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
                     style={{
                       background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${budgetState.budgetBlend}%, #333333 ${budgetState.budgetBlend}%, #333333 100%)`,
@@ -479,19 +460,11 @@ export function TourismWeightPanel({
                           onClick={() => {
                             if (isHotel) {
                               // If already on a hotel tier, just keep it; otherwise default to hotel3
-                              if (
-                                !budgetState.accommodation.startsWith("hotel")
-                              ) {
-                                onBudgetChange(
-                                  "accommodation",
-                                  "hotel3" as AccommodationType,
-                                );
+                              if (!budgetState.accommodation.startsWith("hotel")) {
+                                onBudgetChange("accommodation", "hotel3" as AccommodationType);
                               }
                             } else {
-                              onBudgetChange(
-                                "accommodation",
-                                opt as AccommodationType,
-                              );
+                              onBudgetChange("accommodation", opt as AccommodationType);
                             }
                           }}
                           style={{
@@ -503,9 +476,7 @@ export function TourismWeightPanel({
                             fontFamily: "Inter, sans-serif",
                             fontSize: 11,
                             fontWeight: active ? 500 : 400,
-                            backgroundColor: active
-                              ? "var(--color-accent)"
-                              : "transparent",
+                            backgroundColor: active ? "var(--color-accent)" : "transparent",
                             color: active ? "#FFFFFF" : "#8A8A8A",
                             textAlign: "center",
                             transition: "all 0.15s ease",
@@ -547,9 +518,7 @@ export function TourismWeightPanel({
                               fontSize: 7,
                               letterSpacing: "0.5px",
                               fontWeight: active ? 600 : 400,
-                              backgroundColor: active
-                                ? "#3A3A3A"
-                                : "transparent",
+                              backgroundColor: active ? "#3A3A3A" : "transparent",
                               color: active ? "#FFD700" : "#666",
                               textAlign: "center",
                               transition: "all 0.15s ease",
@@ -580,10 +549,7 @@ export function TourismWeightPanel({
                   >
                     <button
                       onClick={() =>
-                        onBudgetChange(
-                          "peopleCount",
-                          Math.max(1, budgetState.peopleCount - 1),
-                        )
+                        onBudgetChange("peopleCount", Math.max(1, budgetState.peopleCount - 1))
                       }
                       disabled={budgetState.peopleCount <= 1}
                       style={{
@@ -592,16 +558,13 @@ export function TourismWeightPanel({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor:
-                          budgetState.peopleCount <= 1 ? "#222" : "#333",
+                        backgroundColor: budgetState.peopleCount <= 1 ? "#222" : "#333",
                         border: "none",
                         borderRadius: 6,
-                        color:
-                          budgetState.peopleCount <= 1 ? "#555" : "#E8E9EB",
+                        color: budgetState.peopleCount <= 1 ? "#555" : "#E8E9EB",
                         fontSize: 16,
                         fontWeight: 700,
-                        cursor:
-                          budgetState.peopleCount <= 1 ? "default" : "pointer",
+                        cursor: budgetState.peopleCount <= 1 ? "default" : "pointer",
                         transition: "all 0.15s ease",
                       }}
                     >
@@ -622,10 +585,7 @@ export function TourismWeightPanel({
                     </span>
                     <button
                       onClick={() =>
-                        onBudgetChange(
-                          "peopleCount",
-                          Math.min(10, budgetState.peopleCount + 1),
-                        )
+                        onBudgetChange("peopleCount", Math.min(10, budgetState.peopleCount + 1))
                       }
                       disabled={budgetState.peopleCount >= 10}
                       style={{
@@ -634,16 +594,13 @@ export function TourismWeightPanel({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        backgroundColor:
-                          budgetState.peopleCount >= 10 ? "#222" : "#333",
+                        backgroundColor: budgetState.peopleCount >= 10 ? "#222" : "#333",
                         border: "none",
                         borderRadius: 6,
-                        color:
-                          budgetState.peopleCount >= 10 ? "#555" : "#E8E9EB",
+                        color: budgetState.peopleCount >= 10 ? "#555" : "#E8E9EB",
                         fontSize: 16,
                         fontWeight: 700,
-                        cursor:
-                          budgetState.peopleCount >= 10 ? "default" : "pointer",
+                        cursor: budgetState.peopleCount >= 10 ? "default" : "pointer",
                         transition: "all 0.15s ease",
                       }}
                     >
@@ -672,38 +629,34 @@ export function TourismWeightPanel({
                       gap: 4,
                     }}
                   >
-                    {(["market", "casual", "restaurants"] as const).map(
-                      (opt) => {
-                        const active = opt === budgetState.dining;
-                        return (
-                          <button
-                            key={opt}
-                            onClick={() => onBudgetChange("dining", opt)}
-                            style={{
-                              flex: 1,
-                              padding: "5px 0",
-                              borderRadius: 3,
-                              border: "none",
-                              cursor: "pointer",
-                              fontFamily: "Inter, sans-serif",
-                              fontSize: 11,
-                              fontWeight: active ? 500 : 400,
-                              backgroundColor: active
-                                ? "var(--color-accent)"
-                                : "transparent",
-                              color: active ? "#FFFFFF" : "#8A8A8A",
-                              textAlign: "center",
-                              transition: "all 0.15s ease",
-                            }}
-                          >
-                            {t(
-                              `tourismBudget.diningTypes.${opt}`,
-                              opt.charAt(0).toUpperCase() + opt.slice(1),
-                            )}
-                          </button>
-                        );
-                      },
-                    )}
+                    {(["market", "casual", "restaurants"] as const).map((opt) => {
+                      const active = opt === budgetState.dining;
+                      return (
+                        <button
+                          key={opt}
+                          onClick={() => onBudgetChange("dining", opt)}
+                          style={{
+                            flex: 1,
+                            padding: "5px 0",
+                            borderRadius: 3,
+                            border: "none",
+                            cursor: "pointer",
+                            fontFamily: "Inter, sans-serif",
+                            fontSize: 11,
+                            fontWeight: active ? 500 : 400,
+                            backgroundColor: active ? "var(--color-accent)" : "transparent",
+                            color: active ? "#FFFFFF" : "#8A8A8A",
+                            textAlign: "center",
+                            transition: "all 0.15s ease",
+                          }}
+                        >
+                          {t(
+                            `tourismBudget.diningTypes.${opt}`,
+                            opt.charAt(0).toUpperCase() + opt.slice(1),
+                          )}
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -756,16 +709,12 @@ export function TourismWeightPanel({
                       color: "#64B5F6",
                     }}
                   >
-                    {new Date(
-                      travelDates.startDate + "T00:00",
-                    ).toLocaleDateString(undefined, {
+                    {new Date(travelDates.startDate + "T00:00").toLocaleDateString(undefined, {
                       month: "short",
                       day: "numeric",
                     })}
                     {" → "}
-                    {new Date(
-                      travelDates.endDate + "T00:00",
-                    ).toLocaleDateString(undefined, {
+                    {new Date(travelDates.endDate + "T00:00").toLocaleDateString(undefined, {
                       month: "short",
                       day: "numeric",
                     })}
@@ -776,9 +725,7 @@ export function TourismWeightPanel({
                 size={14}
                 style={{
                   color: "#808080",
-                  transform: !collapsed["DATES"]
-                    ? "rotate(0deg)"
-                    : "rotate(-90deg)",
+                  transform: !collapsed["DATES"] ? "rotate(0deg)" : "rotate(-90deg)",
                   transition: "transform 0.15s ease",
                   flexShrink: 0,
                 }}
@@ -786,10 +733,7 @@ export function TourismWeightPanel({
             </button>
 
             {!collapsed["DATES"] && (
-              <div
-                className="flex flex-col"
-                style={{ padding: "12px 16px", gap: "8px" }}
-              >
+              <div className="flex flex-col" style={{ padding: "12px 16px", gap: "8px" }}>
                 {/* Row 1: Labels */}
                 <div className="flex" style={{ gap: 8 }}>
                   <span
@@ -827,9 +771,7 @@ export function TourismWeightPanel({
                             ...prev,
                             startDate: newStart,
                             endDate:
-                              newStart &&
-                              prev.endDate &&
-                              newStart.slice(5) > prev.endDate.slice(5)
+                              newStart && prev.endDate && newStart.slice(5) > prev.endDate.slice(5)
                                 ? null
                                 : prev.endDate,
                           }));
@@ -865,9 +807,7 @@ export function TourismWeightPanel({
                       WebkitAppearance: "none" as const,
                       textAlign: "center" as const,
                     };
-                    const daysInMonth = curMM
-                      ? new Date(2000, parseInt(curMM), 0).getDate()
-                      : 31;
+                    const daysInMonth = curMM ? new Date(2000, parseInt(curMM), 0).getDate() : 31;
                     return (
                       <div
                         key={id}
@@ -882,13 +822,9 @@ export function TourismWeightPanel({
                           value={curMM}
                           onChange={(e) => {
                             const mm = e.target.value;
-                            const maxDay = mm
-                              ? new Date(2000, parseInt(mm), 0).getDate()
-                              : 31;
+                            const maxDay = mm ? new Date(2000, parseInt(mm), 0).getDate() : 31;
                             const safeDD = mm
-                              ? String(
-                                  Math.min(parseInt(curDD), maxDay),
-                                ).padStart(2, "0")
+                              ? String(Math.min(parseInt(curDD), maxDay)).padStart(2, "0")
                               : "01";
                             onChange(mm, mm ? safeDD : "01");
                           }}
@@ -899,9 +835,7 @@ export function TourismWeightPanel({
                               : t("tourismFilters.endMonth", "End month")
                           }
                         >
-                          <option value="">
-                            {t("tourismFilters.monthPlaceholder", "Month")}
-                          </option>
+                          <option value="">{t("tourismFilters.monthPlaceholder", "Month")}</option>
                           {monthOptions.map((month) => (
                             <option key={month.value} value={month.value}>
                               {month.label}
@@ -912,9 +846,7 @@ export function TourismWeightPanel({
                           value={curMM ? parseInt(curDD).toString() : ""}
                           disabled={!curMM}
                           onChange={(e) => {
-                            const dd = String(
-                              parseInt(e.target.value),
-                            ).padStart(2, "0");
+                            const dd = String(parseInt(e.target.value)).padStart(2, "0");
                             onChange(curMM, dd);
                           }}
                           style={{
@@ -928,10 +860,7 @@ export function TourismWeightPanel({
                               : t("tourismFilters.endDay", "End day")
                           }
                         >
-                          {Array.from(
-                            { length: daysInMonth },
-                            (_, i) => i + 1,
-                          ).map((d) => (
+                          {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((d) => (
                             <option key={d} value={d}>
                               {d}
                             </option>
@@ -1009,8 +938,7 @@ export function TourismWeightPanel({
               {TOURISM_GROUPS.map((group) => {
                 const subOpen = !collapsed[group.labelKey];
                 const subAvg = Math.round(
-                  group.keys.reduce((s, k) => s + (weights[k] ?? 50), 0) /
-                    group.keys.length,
+                  group.keys.reduce((s, k) => s + (weights[k] ?? 50), 0) / group.keys.length,
                 );
                 return (
                   <div key={group.labelKey}>
@@ -1037,10 +965,7 @@ export function TourismWeightPanel({
                           textAlign: "left",
                         }}
                       >
-                        {t(
-                          `tourismWeights.groups.${group.labelKey}`,
-                          group.labelKey,
-                        )}
+                        {t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
                       </span>
                       <div
                         style={{
@@ -1065,9 +990,7 @@ export function TourismWeightPanel({
                         size={14}
                         style={{
                           color: "#808080",
-                          transform: subOpen
-                            ? "rotate(0deg)"
-                            : "rotate(-90deg)",
+                          transform: subOpen ? "rotate(0deg)" : "rotate(-90deg)",
                           transition: "transform 0.15s ease",
                           flexShrink: 0,
                         }}

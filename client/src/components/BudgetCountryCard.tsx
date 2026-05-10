@@ -189,10 +189,7 @@ export function BudgetCountryCard({
           </div>
 
           {/* Cost + surplus */}
-          <div
-            className="hidden sm:flex flex-col items-end"
-            style={{ flexShrink: 0 }}
-          >
+          <div className="hidden sm:flex flex-col items-end" style={{ flexShrink: 0 }}>
             <span
               style={{
                 fontFamily: "IBM Plex Mono, monospace",
@@ -241,11 +238,7 @@ export function BudgetCountryCard({
 
         {/* Breakdown bar */}
         <div style={{ marginTop: "8px", marginLeft: "60px" }}>
-          <BudgetBreakdownChart
-            breakdown={breakdown}
-            budget={budget}
-            monthlyCost={monthlyCost}
-          />
+          <BudgetBreakdownChart breakdown={breakdown} budget={budget} monthlyCost={monthlyCost} />
         </div>
       </button>
 
@@ -259,10 +252,7 @@ export function BudgetCountryCard({
           }}
         >
           {/* Summary row */}
-          <div
-            className="flex items-center justify-between"
-            style={{ marginBottom: "12px" }}
-          >
+          <div className="flex items-center justify-between" style={{ marginBottom: "12px" }}>
             <span
               style={{
                 fontFamily: "Inter, sans-serif",
@@ -315,16 +305,12 @@ export function BudgetCountryCard({
                 },
                 {
                   key: "groceries" as const,
-                  icon: (
-                    <ShoppingCart size={14} color={COST_COLORS.groceries} />
-                  ),
+                  icon: <ShoppingCart size={14} color={COST_COLORS.groceries} />,
                   label: t("budget.categories.groceries"),
                 },
                 {
                   key: "dining" as const,
-                  icon: (
-                    <UtensilsCrossed size={14} color={COST_COLORS.dining} />
-                  ),
+                  icon: <UtensilsCrossed size={14} color={COST_COLORS.dining} />,
                   label: t("budget.categories.dining"),
                 },
                 {
