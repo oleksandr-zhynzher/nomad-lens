@@ -391,17 +391,21 @@ export function Layout({ children }: LayoutProps) {
         <div
           className="fixed inset-x-0 top-14 bottom-0 z-40 px-3 pb-3 md:hidden"
           style={{ backgroundColor: "#0D0E10" }}
-          onClick={() => setMobileMenuOpen(false)}
         >
+          <button
+            type="button"
+            aria-label={t("a11y.closeMenu", "Close menu")}
+            className="absolute inset-0"
+            onClick={() => setMobileMenuOpen(false)}
+          />
           <div
-            className="flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4"
+            className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4"
             style={{
               background:
                 "linear-gradient(180deg, rgba(20,20,22,0.98) 0%, rgba(13,14,16,0.98) 100%)",
               borderColor: "#252525",
               boxShadow: "0 20px 48px rgba(0,0,0,0.45)",
             }}
-            onClick={(event) => event.stopPropagation()}
           >
             <p
               style={{

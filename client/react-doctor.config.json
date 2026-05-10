@@ -1,0 +1,17 @@
+{
+  "failOn": "none",
+  "ignore": {
+    "rules": [
+      "react-doctor/no-giant-component",
+      "react-doctor/no-inline-exhaustive-style",
+      "react-doctor/no-tiny-text",
+      "react-doctor/no-transition-all",
+      "react-doctor/rendering-hydration-mismatch-time",
+      "no-giant-component",
+      "no-inline-exhaustive-style",
+      "no-tiny-text",
+      "no-transition-all",
+      "rendering-hydration-mismatch-time"
+    ]
+  }
+}

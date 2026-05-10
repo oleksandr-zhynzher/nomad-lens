@@ -50,14 +50,14 @@ export function CountryDetailPanel({
   const locC = useLocalizedCountry(c);
 
   return createPortal(
-    <div
-      className="fixed inset-0 z-40 flex flex-col md:flex-row"
-      onClick={onClose}
-    >
+    <div className="fixed inset-0 z-40 flex flex-col md:flex-row">
       {/* Backdrop — on desktop fills left side, on mobile fills top */}
-      <div
+      <button
+        type="button"
+        aria-label={t("countryDetails.close", "Close country details")}
         className="flex-1"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
+        onClick={onClose}
       />
 
       {/* Drawer — right panel on desktop, bottom sheet on mobile */}
@@ -68,7 +68,6 @@ export function CountryDetailPanel({
           height: "100vh",
           backgroundColor: "#1A1A1A",
         }}
-        onClick={(e) => e.stopPropagation()}
       >
         {/* Mobile drag handle */}
         <div className="flex md:hidden justify-center pt-2 pb-1 shrink-0">
