@@ -11,6 +11,12 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## React Doctor
+
+Run `npm run doctor` from `client/` for a local React Doctor report. CI runs `npm run doctor:ci`, which fails if React Doctor reports errors or the configured health score drops below 80.
+
+The current configuration keeps the score focused on actionable issues. Large component extraction, broad inline-style migration, compact-label typography, legacy transition shorthands, and hydration-time warnings are tracked as non-blocking for this Vite SPA because they require wider UI refactors or SSR-specific changes.
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:

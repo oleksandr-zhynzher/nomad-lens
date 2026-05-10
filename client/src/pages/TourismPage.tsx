@@ -197,14 +197,16 @@ export function TourismPage() {
             role="dialog"
             aria-modal="true"
             aria-label={t("mobileSheet.weightsAndPreferences")}
-            onClick={() => setMobileParamsOpen(false)}
           >
-            <div
+            <button
+              type="button"
+              aria-label={t("mobileSheet.close", "Close preferences")}
               className="absolute inset-0"
               style={{
                 backgroundColor: "rgba(0,0,0,0.72)",
                 backdropFilter: "blur(6px)",
               }}
+              onClick={() => setMobileParamsOpen(false)}
             />
             <div
               ref={mobileSheetRef}

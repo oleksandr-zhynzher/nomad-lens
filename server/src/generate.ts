@@ -794,6 +794,12 @@ async function generate(): Promise<void> {
       },
     };
 
+    const culturalAttractions = culturalHeritage;
+    const naturalAttractions = biodiversity;
+    const foodAndDining = streetFoodCuisine;
+    const seasonalAppeal = climate;
+    const travelAccessibility = airConnectivity;
+
     // ── Assemble & filter ────────────────────────────────────────────────
     const scores = {
       economy,
@@ -820,8 +826,13 @@ async function generate(): Promise<void> {
       culturalHeritage,
       healthcareCost,
       tourismSafety,
+      culturalAttractions,
+      naturalAttractions,
       accommodationCost,
+      foodAndDining,
+      seasonalAppeal,
       transportCost,
+      travelAccessibility,
       tourismInfrastructure,
       localFriendliness,
       nightlifeEntertainment,

@@ -106,8 +106,8 @@ export function BudgetComparison({
     const onHeader = () => {
       body.scrollLeft = header.scrollLeft;
     };
-    body.addEventListener("scroll", onBody);
-    header.addEventListener("scroll", onHeader);
+    body.addEventListener("scroll", onBody, { passive: true });
+    header.addEventListener("scroll", onHeader, { passive: true });
     return () => {
       body.removeEventListener("scroll", onBody);
       header.removeEventListener("scroll", onHeader);
@@ -155,9 +155,15 @@ export function BudgetComparison({
       return sortDirection === "desc" ? surplusDelta : -surplusDelta;
     });
 
+    if (
+      sortedCodes.length === selectedCodes.length &&
+      sortedCodes.every((code, index) => code === selectedCodes[index])
+    ) {
+      return;
+    }
+
     onSelectedCodesChange(sortedCodes);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortDirection, sortTrigger]);
+  }, [matchMap, onSelectedCodesChange, selectedCodes, sortDirection, sortTrigger]);
 
   const filtered = countries
     .filter(

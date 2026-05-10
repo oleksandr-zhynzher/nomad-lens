@@ -110,8 +110,8 @@ export function TourismComparison({
     const onHeader = () => {
       body.scrollLeft = header.scrollLeft;
     };
-    body.addEventListener("scroll", onBody);
-    header.addEventListener("scroll", onHeader);
+    body.addEventListener("scroll", onBody, { passive: true });
+    header.addEventListener("scroll", onHeader, { passive: true });
     return () => {
       body.removeEventListener("scroll", onBody);
       header.removeEventListener("scroll", onHeader);
@@ -155,9 +155,15 @@ export function TourismComparison({
       return sortDirection === "desc" ? scoreDelta : -scoreDelta;
     });
 
+    if (
+      sorted.length === selectedCodes.length &&
+      sorted.every((code, index) => code === selectedCodes[index])
+    ) {
+      return;
+    }
+
     onSelectedCodesChange(sorted);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sortDirection, sortTrigger]);
+  }, [countries, onSelectedCodesChange, selectedCodes, sortDirection, sortTrigger]);
 
   // Report selection count to parent
   useEffect(() => {

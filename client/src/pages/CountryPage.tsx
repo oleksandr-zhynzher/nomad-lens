@@ -176,6 +176,15 @@ export function CountryPage() {
     (left, right) => (c.tourismTagScores?.[right] ?? 0) - (c.tourismTagScores?.[left] ?? 0),
   );
 
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.state?.idx > 0) {
+      navigate(-1);
+      return;
+    }
+
+    navigate(`${langPrefix}/`, { replace: true });
+  };
+
   return (
     <Layout>
       <div style={{ backgroundColor: "var(--color-bg)", minHeight: "100vh" }}>
@@ -203,7 +212,7 @@ export function CountryPage() {
 
           {/* Back button */}
           <button
-            onClick={() => navigate(-1)}
+            onClick={handleBack}
             className="left-4 md:left-8"
             style={{
               position: "absolute",
