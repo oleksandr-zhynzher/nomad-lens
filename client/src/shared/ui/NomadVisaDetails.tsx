@@ -1,3 +1,4 @@
+import React from "react";
 import { ChevronDown, ChevronUp, Clock, DollarSign, TrendingUp, Shield } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails as NomadVisaDetailsType } from "../../utils/types";
@@ -107,13 +108,15 @@ export function NomadVisaDetails({ visa, expanded, onToggle }: NomadVisaDetailsP
                 {t("countryPage.visa.tax", "Tax")}
               </span>
               <span
-                className="inline-flex items-center px-2 py-0.5 rounded-full font-mono text-[10px] font-semibold"
-                style={{
-                  backgroundColor: (
-                    TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard
-                  ).bg,
-                  color: (TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard).text,
-                }}
+                className="inline-flex items-center px-2 py-0.5 rounded-full font-mono text-[10px] font-semibold bg-[var(--tax-bg)] text-[var(--tax-c)]"
+                style={
+                  {
+                    "--tax-bg": (TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard)
+                      .bg,
+                    "--tax-c": (TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard)
+                      .text,
+                  } as React.CSSProperties
+                }
               >
                 {visa.tax.status === "exempt"
                   ? t("countryPage.taxExemptLabel")

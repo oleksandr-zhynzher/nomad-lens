@@ -1,3 +1,5 @@
+import React from "react";
+
 interface ComparisonHeaderColumn {
   key: string | number;
   flagUrl?: string;
@@ -21,7 +23,7 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
     >
       <div
         className="flex items-center border-b border-[#1C1C1C] py-[14px]"
-        style={{ gap: gap ?? "0" }}
+        style={gap ? ({ "--th-gap": gap, gap: "var(--th-gap)" } as React.CSSProperties) : undefined}
       >
         <div className="w-[160px] md:w-[240px] shrink-0">
           <span className="text-[10px] font-semibold tracking-[1.5px] text-dimmest uppercase">
@@ -31,8 +33,8 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
         {columns.map((col) => (
           <div
             key={col.key}
-            className="flex shrink-0 items-center justify-center gap-1.5"
-            style={{ width: columnWidth }}
+            className="flex shrink-0 items-center justify-center gap-1.5 w-[var(--cw)]"
+            style={{ "--cw": columnWidth } as React.CSSProperties}
           >
             {col.flagUrl && (
               <img
@@ -42,8 +44,8 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
               />
             )}
             <span
-              className="truncate text-xs font-semibold text-white"
-              style={{ maxWidth: col.maxNameWidth ?? "76px" }}
+              className="truncate text-xs font-semibold text-white max-w-[var(--mnw)]"
+              style={{ "--mnw": col.maxNameWidth ?? "76px" } as React.CSSProperties}
             >
               {col.name}
             </span>

@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
   value: number | null;
   colour: string;
@@ -16,13 +18,18 @@ export function ComparisonScoreCell({
   columnWidth,
 }: Props) {
   return (
-    <div className="shrink-0 text-center" style={{ width: columnWidth }}>
+    <div
+      className="shrink-0 text-center w-[var(--cw)]"
+      style={{ "--cw": columnWidth } as React.CSSProperties}
+    >
       <span
-        className="font-mono font-semibold"
-        style={{
-          fontSize: fontSize ?? "22px",
-          color: value != null ? colour : (nullColour ?? "#333333"),
-        }}
+        className={`font-mono font-semibold [font-size:var(--fs)] text-[var(--sc)]`}
+        style={
+          {
+            "--fs": fontSize ?? "22px",
+            "--sc": value != null ? colour : (nullColour ?? "#333333"),
+          } as React.CSSProperties
+        }
       >
         {value != null ? (format ? format(value) : value.toFixed(1)) : "—"}
       </span>

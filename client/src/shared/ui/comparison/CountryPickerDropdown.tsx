@@ -43,7 +43,6 @@ export function CountryPickerDropdown({
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
         className="w-full px-3 py-2.5 focus:outline-none bg-surface-3 border-b border-[#252525] text-white text-[13px]"
-        style={{ border: "none", borderBottom: "1px solid #252525" }}
       />
       <div className="max-h-[320px] overflow-y-auto">
         {countries.map((c) => (
@@ -68,13 +67,8 @@ export function CountryPickerDropdown({
   if (position) {
     return (
       <div
-        className="z-50 rounded-lg overflow-hidden w-[320px] bg-surface border border-surface-4"
-        style={{
-          position: "fixed",
-          top: position.top,
-          left: position.left,
-          boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-        }}
+        className="fixed z-50 rounded-lg overflow-hidden w-[320px] bg-surface border border-surface-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] top-[var(--tt)] left-[var(--tl)]"
+        style={{ "--tt": `${position.top}px`, "--tl": `${position.left}px` } as React.CSSProperties}
       >
         {inner}
       </div>
@@ -82,10 +76,7 @@ export function CountryPickerDropdown({
   }
 
   return (
-    <div
-      className="z-20 mt-1 rounded-lg overflow-hidden w-full md:w-[320px] bg-surface border border-surface-4"
-      style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.5)" }}
-    >
+    <div className="z-20 mt-1 rounded-lg overflow-hidden w-full md:w-[320px] bg-surface border border-surface-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
       {inner}
     </div>
   );

@@ -1,3 +1,4 @@
+import React from "react";
 import { ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { TourismRanked } from "../utils/tourismScoring";
@@ -47,16 +48,14 @@ export function TourismCountryCard({
     <div
       data-country-code={country.code}
       data-selected={isSelected ? "true" : undefined}
-      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"}`}
-      style={{
-        backgroundColor: rowBg,
-        borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
-        ["--row-hover-bg" as string]: hoverBg,
-        ...(highlighted && {
-          outline: `2px solid var(--color-accent)`,
-          outlineOffset: "-1px",
-        }),
-      }}
+      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"} bg-[var(--row-bg)] border-t border-[var(--row-bt)] ${highlighted ? "outline outline-2 outline-[var(--color-accent)] -outline-offset-1" : ""}`}
+      style={
+        {
+          "--row-bg": rowBg,
+          "--row-bt": highlighted ? "var(--color-accent)" : borderColor,
+          "--row-hover-bg": hoverBg,
+        } as React.CSSProperties
+      }
     >
       {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
 
@@ -130,11 +129,7 @@ export function TourismCountryCard({
           {/* Chevron */}
           <ChevronRight
             size={20}
-            className="shrink-0 text-dimmest transition-transform duration-200"
-            style={{
-              transform: compareMode ? "rotate(0deg)" : expanded ? "rotate(90deg)" : "rotate(0deg)",
-              opacity: compareMode ? 0.35 : 1,
-            }}
+            className={`shrink-0 text-dimmest transition-transform duration-200 ${compareMode ? "rotate-0 opacity-[0.35]" : expanded ? "rotate-90" : "rotate-0"}`}
           />
         </div>
 
