@@ -1,4 +1,3 @@
-import localCountriesData from "../../../data/countries.json";
 import { getJson } from "../../../shared/api/http";
 import type { CountryData } from "../model/country.types";
 
@@ -16,7 +15,7 @@ export function getCountries(): Promise<CountryData[]> {
   }
 
   if (BASE_URL === "") {
-    return Promise.resolve(localCountriesData as CountryData[]);
+    return getJson<CountryData[]>("/countries.json");
   }
 
   return getJson<CountryData[]>(`${BASE_URL}/api/countries`);

@@ -11217,15 +11217,7 @@
     "isSchengen": false,
     "touristVisaDays": 90,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "island",
-      "ski",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving"
-    ],
+    "tourismTags": ["beach", "island", "ski", "mountains", "historic", "wildlife", "diving"],
     "tourismTagScores": {
       "beach": 50,
       "island": 89,
@@ -30855,14 +30847,7 @@
     "isSchengen": false,
     "touristVisaDays": 30,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "island",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving"
-    ],
+    "tourismTags": ["beach", "island", "mountains", "historic", "wildlife", "diving"],
     "tourismTagScores": {
       "beach": 92,
       "island": 88,
@@ -51811,14 +51796,7 @@
     "isSchengen": false,
     "touristVisaDays": 90,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "ski",
-      "mountains",
-      "historic",
-      "wildlife",
-      "desert"
-    ],
+    "tourismTags": ["beach", "ski", "mountains", "historic", "wildlife", "desert"],
     "tourismTagScores": {
       "beach": 50,
       "ski": 80,
@@ -54887,15 +54865,7 @@
     "isSchengen": false,
     "touristVisaDays": null,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "ski",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving",
-      "desert"
-    ],
+    "tourismTags": ["beach", "ski", "mountains", "historic", "wildlife", "diving", "desert"],
     "tourismTagScores": {
       "beach": 50,
       "ski": 50,
@@ -60311,14 +60281,7 @@
     "isSchengen": false,
     "touristVisaDays": 90,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "island",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving"
-    ],
+    "tourismTags": ["beach", "island", "mountains", "historic", "wildlife", "diving"],
     "tourismTagScores": {
       "beach": 83,
       "island": 50,
@@ -76470,15 +76433,7 @@
     "isSchengen": false,
     "touristVisaDays": 90,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "ski",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving",
-      "desert"
-    ],
+    "tourismTags": ["beach", "ski", "mountains", "historic", "wildlife", "diving", "desert"],
     "tourismTagScores": {
       "beach": 50,
       "ski": 88,
@@ -85366,14 +85321,7 @@
     "isSchengen": false,
     "touristVisaDays": 30,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "island",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving"
-    ],
+    "tourismTags": ["beach", "island", "mountains", "historic", "wildlife", "diving"],
     "tourismTagScores": {
       "beach": 88,
       "island": 88,
@@ -92854,11 +92802,7 @@
       "applicationProcess": {
         "online": false,
         "processingTime": "10–30 days",
-        "documents": [
-          "Passport",
-          "Proof of remote employment",
-          "Payment of CI fee ($11)"
-        ]
+        "documents": ["Passport", "Proof of remote employment", "Payment of CI fee ($11)"]
       },
       "lastUpdated": "2026-04-04",
       "i18n": {
@@ -92889,11 +92833,7 @@
           ],
           "applicationProcess": {
             "processingTime": "10–30 дней",
-            "documents": [
-              "Паспорт",
-              "Подтверждение удалённой работы",
-              "Оплата сбора CI ($11)"
-            ]
+            "documents": ["Паспорт", "Подтверждение удалённой работы", "Оплата сбора CI ($11)"]
           }
         },
         "ua": {
@@ -92923,11 +92863,7 @@
           ],
           "applicationProcess": {
             "processingTime": "10–30 днів",
-            "documents": [
-              "Паспорт",
-              "Підтвердження віддаленої роботи",
-              "Оплата збору CI ($11)"
-            ]
+            "documents": ["Паспорт", "Підтвердження віддаленої роботи", "Оплата збору CI ($11)"]
           }
         }
       }
@@ -107660,15 +107596,7 @@
     "isSchengen": false,
     "touristVisaDays": 90,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "island",
-      "ski",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving"
-    ],
+    "tourismTags": ["beach", "island", "ski", "mountains", "historic", "wildlife", "diving"],
     "tourismTagScores": {
       "beach": 80,
       "island": 87,
@@ -116065,15 +115993,7 @@
     "isSchengen": false,
     "touristVisaDays": 15,
     "landlocked": false,
-    "tourismTags": [
-      "beach",
-      "ski",
-      "mountains",
-      "historic",
-      "wildlife",
-      "diving",
-      "desert"
-    ],
+    "tourismTags": ["beach", "ski", "mountains", "historic", "wildlife", "diving", "desert"],
     "tourismTagScores": {
       "beach": 50,
       "ski": 70,
