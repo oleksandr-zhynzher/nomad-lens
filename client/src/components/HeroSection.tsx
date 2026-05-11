@@ -9,83 +9,37 @@ interface HeroSectionProps {
 export function HeroSection({ backgroundImage, title, subtitle, children }: HeroSectionProps) {
   return (
     <div
-      style={{
-        position: "relative",
-        width: "100%",
-        backgroundColor: "#0F1114",
-        overflow: "hidden",
-      }}
-      className={children ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"}
+      className={`relative w-full bg-[#0F1114] overflow-hidden ${children ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"}`}
     >
       {/* Background image */}
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
       />
 
       {/* Gradient overlay: transparent top → opaque dark bottom */}
       <div
+        className="absolute inset-0"
         style={{
-          position: "absolute",
-          inset: 0,
           background: "linear-gradient(180deg, #0D0D0F00 0%, #0D0D0FBB 60%, #0D0D0FFF 100%)",
         }}
       />
 
       {/* Text content */}
       <div
-        className="px-4 md:px-12"
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: children ? "flex-end" : "center",
-          gap: "10px",
-          paddingBottom: children ? "24px" : undefined,
-        }}
+        className={`px-4 md:px-12 absolute inset-0 flex flex-col gap-[10px] ${children ? "justify-end pb-6" : "justify-center"}`}
       >
         <h1
-          className="text-3xl md:text-[56px]"
-          style={{
-            fontFamily: "Oswald, sans-serif",
-            fontWeight: 700,
-            color: "#E8E9EB",
-            margin: 0,
-            lineHeight: 1,
-          }}
+          className="text-3xl md:text-[56px] font-bold text-on-surface m-0 leading-none"
+          style={{ fontFamily: "Oswald, sans-serif" }}
         >
           {title}
         </h1>
-        <p
-          className="hidden md:block"
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "15px",
-            color: "#9E9E9E",
-            margin: 0,
-          }}
-        >
-          {subtitle}
-        </p>
+        <p className="hidden md:block text-[15px] text-muted m-0">{subtitle}</p>
         {children && (
           <>
             {/* Copper rule */}
-            <div
-              className="hidden md:block"
-              style={{
-                width: "128px",
-                height: "2px",
-                backgroundColor: "var(--color-accent)",
-                marginTop: "8px",
-                marginBottom: "12px",
-              }}
-            />
+            <div className="hidden md:block w-32 h-0.5 bg-accent mt-2 mb-3" />
             {/* Stats row */}
             {children}
           </>

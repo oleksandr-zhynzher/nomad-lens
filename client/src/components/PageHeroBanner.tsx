@@ -13,9 +13,9 @@ export function PageHeroBanner({
   children,
 }: PageHeroBannerProps) {
   return (
-    <div className="md:px-4" style={{ maxWidth: "1200px", margin: "0 auto" }}>
+    <div className="md:px-4 max-w-[1200px] mx-auto">
       <div
-        className="relative mb-6 overflow-hidden md:mb-8 md:rounded-lg"
+        className="relative mb-6 overflow-hidden md:mb-8 md:rounded-lg bg-cover bg-center bg-no-repeat"
         style={{
           background: "#0A0D12",
           backgroundImage: `url('${backgroundImage}')`,
@@ -32,46 +32,24 @@ export function PageHeroBanner({
         />
 
         <div
-          className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
-          style={{ minHeight: children ? "160px" : "120px" }}
+          className={`relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 ${children ? "min-h-[160px]" : "min-h-[120px]"}`}
         >
           <h1
-            className="text-3xl md:text-6xl"
-            style={{
-              fontFamily: "Oswald, sans-serif",
-              fontWeight: 600,
-              lineHeight: "0.95",
-              color: "#FFFFFF",
-              marginBottom: "8px",
-            }}
+            className="text-3xl md:text-6xl font-semibold leading-[0.95] text-white mb-2"
+            style={{ fontFamily: "Oswald, sans-serif" }}
           >
             {title}
           </h1>
 
           <p
-            className="hidden md:block"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "15px",
-              color: "#8A8A8A",
-              maxWidth: "580px",
-              marginBottom: children ? "20px" : 0,
-            }}
+            className={`hidden md:block text-[15px] text-dim max-w-[580px] ${children ? "mb-5" : "mb-0"}`}
           >
             {subtitle}
           </p>
 
           {children && (
             <>
-              <div
-                className="hidden md:block"
-                style={{
-                  width: "128px",
-                  height: "2px",
-                  backgroundColor: "var(--color-accent)",
-                  marginBottom: "16px",
-                }}
-              />
+              <div className="hidden md:block w-32 h-0.5 bg-accent mb-4" />
               {children}
             </>
           )}

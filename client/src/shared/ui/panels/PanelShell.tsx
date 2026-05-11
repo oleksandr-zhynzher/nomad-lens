@@ -39,43 +39,12 @@ export function PanelShell({
 
   return (
     <aside
-      className={`flex flex-col overflow-hidden${mobile ? " flex-1 min-h-0" : ""}`}
-      style={{
-        backgroundColor: "#1A1A1A",
-        width: mobile ? "100%" : "340px",
-        height: mobile ? undefined : "100%",
-      }}
+      className={`flex flex-col overflow-hidden bg-surface${mobile ? " flex-1 min-h-0 w-full" : " w-[340px] h-full"}`}
     >
       {!mobile && (
-        <div
-          className="flex-shrink-0"
-          style={{ padding: "14px 16px", borderBottom: "1px solid #2A2A2A" }}
-        >
-          <h2
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: 600,
-              letterSpacing: "2px",
-              textTransform: "uppercase",
-              color: "#FFFFFF",
-            }}
-          >
-            {title}
-          </h2>
-          {subtitle && (
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "10px",
-                color: "#8A8A8A",
-                marginTop: "6px",
-                lineHeight: "1.5",
-              }}
-            >
-              {subtitle}
-            </p>
-          )}
+        <div className="flex-shrink-0 p-[14px_16px] border-b border-[#2A2A2A]">
+          <h2 className="text-[13px] font-semibold tracking-[2px] uppercase text-white">{title}</h2>
+          {subtitle && <p className="text-[10px] text-dim mt-1.5 leading-[1.5]">{subtitle}</p>}
           {headerExtra}
         </div>
       )}
@@ -84,27 +53,13 @@ export function PanelShell({
         {children}
       </div>
 
-      <div
-        className="flex-shrink-0 sticky bottom-0"
-        style={{ borderTop: "1px solid #333333", backgroundColor: "#1A1A1A" }}
-      >
-        <div className="flex flex-col gap-2" style={{ padding: "12px 16px" }}>
+      <div className="flex-shrink-0 sticky bottom-0 border-t border-border bg-surface">
+        <div className="flex flex-col gap-2 px-4 py-3">
           {footerExtra}
           <button
             type="button"
             onClick={onReset}
-            className="button-hover-exempt weight-panel-reset-button w-full flex items-center justify-center gap-2 rounded transition-colors"
-            style={{
-              backgroundColor: "transparent",
-              color: "var(--color-accent-dim)",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: 500,
-              height: "40px",
-              border: "1px solid #333333",
-              borderRadius: "6px",
-              cursor: "pointer",
-            }}
+            className="button-hover-exempt weight-panel-reset-button w-full flex items-center justify-center gap-2 rounded transition-colors bg-transparent text-accent-dim text-[13px] font-medium h-10 border border-border rounded-[6px] cursor-pointer"
           >
             <svg
               width="14"

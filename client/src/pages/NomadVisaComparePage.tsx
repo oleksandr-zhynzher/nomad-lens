@@ -21,52 +21,17 @@ const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
 
 type VisaCountry = CountryData & { nomadVisa: NomadVisaDetails };
 
-const LABEL_STYLE = {
-  fontFamily: "Inter, sans-serif",
-  fontSize: "11px",
-  fontWeight: 600 as const,
-  letterSpacing: "0.8px",
-  textTransform: "uppercase" as const,
-  color: "#757575",
-};
-
-const VALUE_MONO = {
-  fontFamily: "IBM Plex Mono, monospace",
-  fontSize: "14px",
-  fontWeight: 600 as const,
-  color: "#FFFFFF",
-};
-
-const VALUE_TEXT = {
-  fontFamily: "Inter, sans-serif",
-  fontSize: "13px",
-  color: "#CCCCCC",
-};
+const LABEL_STYLE = "text-[11px] font-semibold tracking-[0.8px] uppercase text-dimmest";
+const VALUE_MONO = "font-mono text-sm font-semibold text-white";
+const VALUE_TEXT = "text-[13px] text-tertiary";
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "160px 1fr",
-        gap: "0",
-        borderBottom: "1px solid #1A1A1A",
-        alignItems: "stretch",
-      }}
-    >
-      <div
-        style={{
-          ...LABEL_STYLE,
-          padding: "14px 16px",
-          backgroundColor: "#111113",
-          display: "flex",
-          alignItems: "center",
-          flexShrink: 0,
-        }}
-      >
+    <div className="grid grid-cols-[160px_1fr] border-b border-[#1A1A1A] items-stretch">
+      <div className={`${LABEL_STYLE} px-4 py-3.5 bg-[#111113] flex items-center shrink-0`}>
         {label}
       </div>
-      <div style={{ display: "flex", overflow: "hidden" }}>{children}</div>
+      <div className="flex overflow-hidden">{children}</div>
     </div>
   );
 }
@@ -74,14 +39,8 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 function Cell({ children, count }: { children: React.ReactNode; count: number }) {
   return (
     <div
-      style={{
-        flex: `0 0 ${100 / count}%`,
-        padding: "14px 16px",
-        borderLeft: "1px solid #1A1A1A",
-        display: "flex",
-        alignItems: "center",
-        minWidth: 0,
-      }}
+      className="shrink-0 grow-0 flex items-center min-w-0 px-4 py-3.5 border-l border-[#1A1A1A]"
+      style={{ "--cell-w": `${100 / count}%`, flex: `0 0 ${100 / count}%` } as React.CSSProperties}
     >
       {children}
     </div>
@@ -133,126 +92,52 @@ export function NomadVisaComparePage() {
 
   return (
     <Layout>
-      <div
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "32px 16px 64px",
-        }}
-      >
+      <div className="max-w-[1100px] mx-auto px-4 py-8 pb-16">
         {/* Back link */}
         <Link
           to={`${langPrefix}/nomad-visas`}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "6px",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "13px",
-            color: "#8A8A8A",
-            textDecoration: "none",
-            marginBottom: "24px",
-          }}
+          className="inline-flex items-center gap-1.5 text-[13px] text-dim no-underline mb-6"
         >
           <ArrowLeft size={14} />
           {t("nomadVisasPage.backToVisas", "Back to Nomad")}
         </Link>
 
         <h1
-          style={{
-            fontFamily: "Oswald, sans-serif",
-            fontSize: "28px",
-            fontWeight: 700,
-            letterSpacing: "1px",
-            textTransform: "uppercase",
-            color: "#FFFFFF",
-            marginBottom: "32px",
-          }}
+          className="text-[28px] font-bold tracking-[1px] uppercase text-white mb-8"
+          style={{ fontFamily: "Oswald, sans-serif" }}
         >
           {t("nomadVisasPage.compareTitle", "Nomad Visa Comparison")}
         </h1>
 
         {loading ? (
-          <div
-            style={{
-              textAlign: "center",
-              padding: "64px 0",
-              color: "#8A8A8A",
-              fontFamily: "Inter, sans-serif",
-            }}
-          >
-            {t("loading", "Loading…")}
-          </div>
+          <div className="text-center py-16 text-dim">{t("loading", "Loading…")}</div>
         ) : count < 2 ? (
-          <div
-            style={{
-              textAlign: "center",
-              padding: "64px 16px",
-              color: "#8A8A8A",
-              fontFamily: "Inter, sans-serif",
-            }}
-          >
+          <div className="text-center px-4 py-16 text-dim">
             {t(
               "nomadVisasPage.noCountriesSelected",
               "No countries selected. Go back and pick at least 2.",
             )}
           </div>
         ) : (
-          <div
-            style={{
-              border: "1px solid #1E1E1E",
-              borderRadius: "8px",
-              overflow: "hidden",
-            }}
-          >
+          <div className="border border-[#1E1E1E] rounded-lg overflow-hidden">
             {/* Country header row */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "160px 1fr",
-                backgroundColor: "#111113",
-                borderBottom: "2px solid #2A2A2A",
-              }}
-            >
-              <div style={{ padding: "16px" }} />
-              <div style={{ display: "flex" }}>
+            <div className="grid grid-cols-[160px_1fr] bg-[#111113] border-b-2 border-[#2A2A2A]">
+              <div className="p-4" />
+              <div className="flex">
                 {selected.map((c) => {
                   const loc = localizeCountry(c, lang);
                   return (
                     <div
                       key={c.code}
-                      style={{
-                        flex: `0 0 ${100 / count}%`,
-                        padding: "16px",
-                        borderLeft: "1px solid #1E1E1E",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        minWidth: 0,
-                      }}
+                      className="flex items-center gap-2.5 min-w-0 p-4 border-l border-[#1E1E1E] shrink-0 grow-0"
+                      style={{ flex: `0 0 ${100 / count}%` }}
                     >
                       <img
                         src={c.flagUrl}
                         alt={loc.name}
-                        style={{
-                          width: "28px",
-                          height: "19px",
-                          borderRadius: "3px",
-                          objectFit: "cover",
-                          flexShrink: 0,
-                        }}
+                        className="w-7 h-[19px] rounded-[3px] object-cover shrink-0"
                       />
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "15px",
-                          fontWeight: 600,
-                          color: "#FFFFFF",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
+                      <span className="text-[15px] font-semibold text-white overflow-hidden text-ellipsis whitespace-nowrap">
                         {loc.name}
                       </span>
                     </div>
@@ -265,7 +150,7 @@ export function NomadVisaComparePage() {
             <Row label={t("nomadVisasPage.table.visaName", "Visa Name")}>
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
-                  <span style={VALUE_TEXT}>{c.nomadVisa.visaName}</span>
+                  <span className={VALUE_TEXT}>{c.nomadVisa.visaName}</span>
                 </Cell>
               ))}
             </Row>
@@ -274,26 +159,10 @@ export function NomadVisaComparePage() {
             <Row label={t("nomadVisasPage.table.duration", "Duration")}>
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
-                  <span style={VALUE_MONO}>{c.nomadVisa.duration.initial}</span>
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#8A8A8A",
-                      marginLeft: "3px",
-                    }}
-                  >
-                    {t("countryPage.visa.mo")}
-                  </span>
+                  <span className={VALUE_MONO}>{c.nomadVisa.duration.initial}</span>
+                  <span className="text-xs text-dim ml-[3px]">{t("countryPage.visa.mo")}</span>
                   {c.nomadVisa.duration.maxExtension > 0 && (
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "11px",
-                        color: "#808080",
-                        marginLeft: "6px",
-                      }}
-                    >
+                    <span className="text-[11px] text-dimmer ml-1.5">
                       +{c.nomadVisa.duration.maxExtension} {t("countryPage.visa.mo")}{" "}
                       {t("countryPage.visa.extension")}
                     </span>
@@ -307,10 +176,7 @@ export function NomadVisaComparePage() {
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span
-                    style={{
-                      ...VALUE_MONO,
-                      color: c.nomadVisa.cost.amount === 0 ? "#44CC66" : "#FFFFFF",
-                    }}
+                    className={`${VALUE_MONO} ${c.nomadVisa.cost.amount === 0 ? "text-[#44CC66]" : "text-white"}`}
                   >
                     {c.nomadVisa.cost.amount === 0
                       ? t("countryPage.visa.free", "Free")
@@ -328,36 +194,24 @@ export function NomadVisaComparePage() {
                   <Cell key={c.code} count={count}>
                     {inc.monthly ? (
                       <>
-                        <span style={VALUE_MONO}>
+                        <span className={VALUE_MONO}>
                           {inc.currency} {inc.monthly.toLocaleString()}
                         </span>
-                        <span
-                          style={{
-                            ...VALUE_TEXT,
-                            color: "#8A8A8A",
-                            marginLeft: "3px",
-                          }}
-                        >
+                        <span className="text-[13px] text-dim ml-[3px]">
                           /{t("countryPage.visa.mo")}
                         </span>
                       </>
                     ) : inc.annual ? (
                       <>
-                        <span style={VALUE_MONO}>
+                        <span className={VALUE_MONO}>
                           {inc.currency} {inc.annual.toLocaleString()}
                         </span>
-                        <span
-                          style={{
-                            ...VALUE_TEXT,
-                            color: "#8A8A8A",
-                            marginLeft: "3px",
-                          }}
-                        >
+                        <span className="text-[13px] text-dim ml-[3px]">
                           /{t("countryPage.visa.yr")}
                         </span>
                       </>
                     ) : (
-                      <span style={{ ...VALUE_MONO, color: "#44CC66" }}>
+                      <span className={`${VALUE_MONO} text-[#44CC66]`}>
                         {t("countryPage.visa.noMinimum", "None")}
                       </span>
                     )}
@@ -374,16 +228,8 @@ export function NomadVisaComparePage() {
                 return (
                   <Cell key={c.code} count={count}>
                     <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "11px",
-                        fontWeight: 600,
-                        backgroundColor: taxColors.bg,
-                        color: taxColors.text,
-                        borderRadius: "12px",
-                        padding: "3px 10px",
-                        whiteSpace: "nowrap",
-                      }}
+                      className="font-mono text-[11px] font-semibold rounded-full px-2.5 py-[3px] whitespace-nowrap"
+                      style={{ backgroundColor: taxColors.bg, color: taxColors.text }}
                     >
                       {c.nomadVisa.tax.status === "exempt"
                         ? t("countryPage.taxExemptLabel")
@@ -400,7 +246,7 @@ export function NomadVisaComparePage() {
             <Row label={t("nomadVisaComparePage.taxRate", "Tax Rate")}>
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
-                  <span style={VALUE_MONO}>
+                  <span className={VALUE_MONO}>
                     {c.nomadVisa.tax.rate != null ? `${c.nomadVisa.tax.rate}%` : "—"}
                   </span>
                 </Cell>
@@ -412,10 +258,7 @@ export function NomadVisaComparePage() {
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span
-                    style={{
-                      ...VALUE_TEXT,
-                      color: c.nomadVisa.duration.renewable ? "#44CC66" : "#CC4444",
-                    }}
+                    className={`text-[13px] ${c.nomadVisa.duration.renewable ? "text-[#44CC66]" : "text-[#CC4444]"}`}
                   >
                     {c.nomadVisa.duration.renewable ? t("common.yes", "Yes") : t("common.no", "No")}
                   </span>
@@ -428,10 +271,7 @@ export function NomadVisaComparePage() {
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span
-                    style={{
-                      ...VALUE_TEXT,
-                      color: c.nomadVisa.applicationProcess.online ? "#44CC66" : "#CC4444",
-                    }}
+                    className={`text-[13px] ${c.nomadVisa.applicationProcess.online ? "text-[#44CC66]" : "text-[#CC4444]"}`}
                   >
                     {c.nomadVisa.applicationProcess.online
                       ? t("common.yes", "Yes")
@@ -445,7 +285,7 @@ export function NomadVisaComparePage() {
             <Row label={t("nomadVisaComparePage.processingTime", "Processing Time")}>
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
-                  <span style={VALUE_TEXT}>
+                  <span className={VALUE_TEXT}>
                     {c.nomadVisa.applicationProcess.processingTime || "—"}
                   </span>
                 </Cell>
@@ -460,15 +300,7 @@ export function NomadVisaComparePage() {
                     href={c.nomadVisa.officialUrl}
                     target="_blank"
                     rel="noreferrer"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "5px",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "var(--color-accent-dim)",
-                      textDecoration: "none",
-                    }}
+                    className="inline-flex items-center gap-[5px] text-xs text-accent-dim no-underline"
                   >
                     <ExternalLink size={13} />
                     {t("nomadVisaComparePage.viewPage", "Official page")}

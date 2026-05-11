@@ -71,18 +71,7 @@ export function WeightPanel({
     <button
       onClick={handleShare}
       aria-live="polite"
-      className="button-hover-exempt weight-panel-share-button w-full flex items-center justify-center gap-2 rounded transition-colors"
-      style={{
-        backgroundColor: copied ? "#2A4A2A" : "#1A2A1A",
-        color: copied ? "#88CC88" : "#6B9E6B",
-        fontFamily: "Inter, sans-serif",
-        fontSize: "13px",
-        fontWeight: 500,
-        height: "40px",
-        border: `1px solid ${copied ? "#4A8A4A" : "#2A4A2A"}`,
-        borderRadius: "6px",
-        transition: "all 0.15s ease",
-      }}
+      className={`button-hover-exempt weight-panel-share-button w-full flex items-center justify-center gap-2 rounded transition-all duration-[150ms] ease-[ease] h-10 text-[13px] font-medium border rounded-[6px] ${copied ? "bg-[#2A4A2A] text-[#88CC88] border-[#4A8A4A]" : "bg-[#1A2A1A] text-[#6B9E6B] border-[#2A4A2A]"}`}
     >
       {copied ? (
         <>
@@ -147,36 +136,14 @@ export function WeightPanel({
               <Link
                 to={`${langPrefix}/ai-indicators`}
                 onClick={(e) => e.stopPropagation()}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "2px",
-                  borderRadius: "3px",
-                  flexShrink: 0,
-                }}
+                className="flex items-center p-0.5 rounded-[3px] shrink-0"
                 title="AI Indicators methodology"
               >
                 <ExternalLink size={12} color="#C084FC" />
               </Link>
             )}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                backgroundColor: "#291608",
-                borderRadius: "3px",
-                padding: "3px 8px",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "11px",
-                  color: "#C2956A",
-                }}
-              >
-                {badgeText}
-              </span>
+            <div className="flex items-center bg-[#291608] rounded-[3px] px-2 py-[3px]">
+              <span className="font-mono text-[11px] text-accent-dim">{badgeText}</span>
             </div>
           </>
         );
@@ -191,10 +158,10 @@ export function WeightPanel({
             isOpen={!collapsed[group.label]}
             onToggle={() => toggleGroup(group.label)}
           >
-            <div style={{ paddingTop: "4px", paddingBottom: "4px" }}>
+            <div className="py-1">
               {group.keys.map((key) => (
                 <React.Fragment key={key}>
-                  <div style={{ padding: "10px 16px" }}>
+                  <div className="px-4 py-2.5">
                     <WeightSlider
                       categoryKey={key}
                       value={weights[key]}

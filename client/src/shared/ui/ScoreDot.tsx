@@ -1,4 +1,4 @@
-import { scoreColour } from "../../utils/scoring";
+import { scoreColourClass } from "../../utils/colorClasses";
 import { Tooltip } from "../../components/Tooltip";
 
 interface ScoreDotProps {
@@ -8,15 +8,10 @@ interface ScoreDotProps {
 }
 
 export function ScoreDot({ value, label, shape = "circle" }: ScoreDotProps) {
-  const color = scoreColour(value);
   const tooltipContent = (
-    <div style={{ display: "flex", alignItems: "center", gap: "6px", whiteSpace: "nowrap" }}>
-      <span style={{ fontSize: "11px", color: "#CCCCCC", fontFamily: "Inter, sans-serif" }}>
-        {label}
-      </span>
-      <span
-        style={{ fontSize: "11px", fontWeight: 700, fontFamily: "IBM Plex Mono, monospace", color }}
-      >
+    <div className="flex items-center gap-1.5 whitespace-nowrap">
+      <span className="text-[11px] text-tertiary">{label}</span>
+      <span className={`text-[11px] font-bold font-mono ${scoreColourClass(value, "text")}`}>
         {value !== null ? value.toFixed(1) : "—"}
       </span>
     </div>
@@ -26,13 +21,7 @@ export function ScoreDot({ value, label, shape = "circle" }: ScoreDotProps) {
       <div
         role="img"
         aria-label={`${label}: ${value !== null ? value.toFixed(1) : "N/A"}`}
-        style={{
-          width: "12px",
-          height: "12px",
-          borderRadius: shape === "circle" ? "50%" : "2px",
-          backgroundColor: color,
-          cursor: "default",
-        }}
+        className={`w-3 h-3 cursor-default ${shape === "circle" ? "rounded-full" : "rounded-sm"} ${scoreColourClass(value, "bg")}`}
       />
     </Tooltip>
   );

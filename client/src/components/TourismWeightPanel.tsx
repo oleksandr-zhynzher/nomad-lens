@@ -84,22 +84,8 @@ export function TourismWeightPanel({
           icon={<DollarSign size={16} color="#4CAF50" />}
           label={t("tourismBudget.groupLabel", "Travel Budget")}
           badge={
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                backgroundColor: "#0a2910",
-                borderRadius: "3px",
-                padding: "3px 8px",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "11px",
-                  color: "#4CAF50",
-                }}
-              >
+            <div className="flex items-center bg-[#0a2910] rounded-[3px] px-2 py-[3px]">
+              <span className="font-mono text-[11px] text-[#4CAF50]">
                 ${budgetState.dailyBudget}
               </span>
             </div>
@@ -107,29 +93,14 @@ export function TourismWeightPanel({
           isOpen={!collapsed["BUDGET"]}
           onToggle={() => toggleGroup("BUDGET")}
         >
-          <div className="flex flex-col" style={{ padding: "12px 16px", gap: "16px" }}>
+          <div className="flex flex-col px-4 py-3 gap-4">
             {/* Daily budget slider */}
             <div>
               <div className="flex items-end gap-2 mb-2">
-                <span
-                  style={{
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: 24,
-                    fontWeight: 700,
-                    color: "#E8E9EB",
-                    lineHeight: 1,
-                  }}
-                >
+                <span className="font-mono text-2xl font-bold text-on-surface leading-none">
                   ${budgetState.dailyBudget}
                 </span>
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: 12,
-                    color: "#808080",
-                    paddingBottom: 1,
-                  }}
-                >
+                <span className="text-xs text-dimmer pb-px">
                   {t("tourismBudget.perDay", "/day")}
                 </span>
               </div>
@@ -148,26 +119,22 @@ export function TourismWeightPanel({
                 aria-label={t("tourismBudget.dailyBudgetLabel", "Daily budget")}
               />
               <div className="flex justify-between mt-1.5">
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
-                  $10
-                </span>
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
-                  $500
-                </span>
+                <span className="text-[10px] text-dimmer">$10</span>
+                <span className="text-[10px] text-dimmer">$500</span>
               </div>
             </div>
 
             {/* Budget blend slider */}
-            <div className="flex flex-col" style={{ gap: 9 }}>
+            <div className="flex flex-col gap-[9px]">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
-                  <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
+                  <span className="text-xs text-white">
                     {t("tourismBudget.budgetBlend", "Budget blend")}
                   </span>
                   <Tooltip
                     content={
-                      <div style={{ maxWidth: 240 }}>
-                        <div style={{ marginBottom: 6, color: "#FFFFFF", fontWeight: 600 }}>
+                      <div className="max-w-[240px]">
+                        <div className="mb-1.5 text-white font-semibold">
                           {t("tourismBudget.budgetBlend", "Budget blend")}
                         </div>
                         <div>
@@ -183,17 +150,11 @@ export function TourismWeightPanel({
                     <Info
                       size={13}
                       color="#FFFFFF"
-                      style={{ cursor: "pointer", flexShrink: 0, opacity: 0.45 }}
+                      className="cursor-pointer shrink-0 opacity-45"
                     />
                   </Tooltip>
                 </div>
-                <span
-                  style={{
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: 11,
-                    color: "var(--color-accent-dim)",
-                  }}
-                >
+                <span className="font-mono text-[11px] text-accent-dim">
                   {budgetState.budgetBlend}
                 </span>
               </div>
@@ -211,24 +172,21 @@ export function TourismWeightPanel({
                 aria-label={t("tourismBudget.budgetBlend", "Budget blend")}
               />
               <div className="flex justify-between">
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
+                <span className="text-[10px] text-dimmer">
                   {t("tourismBudget.affordability", "Affordability")}
                 </span>
-                <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
+                <span className="text-[10px] text-dimmer">
                   {t("tourismBudget.tourismQuality", "Tourism Quality")}
                 </span>
               </div>
             </div>
 
             {/* Accommodation type */}
-            <div className="flex flex-col" style={{ gap: 6 }}>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
+            <div className="flex flex-col gap-[6px]">
+              <span className="text-xs text-white">
                 {t("tourismBudget.accommodation", "Accommodation")}
               </span>
-              <div
-                className="flex"
-                style={{ backgroundColor: "#2A2A2A", borderRadius: 4, padding: 4, gap: 4 }}
-              >
+              <div className="flex bg-surface-4 rounded-[4px] p-1 gap-1">
                 {(["hotel", "airbnb", "hostel"] as const).map((opt) => {
                   const isHotel = opt === "hotel";
                   const active = isHotel
@@ -246,20 +204,7 @@ export function TourismWeightPanel({
                           onBudgetChange("accommodation", opt as AccommodationType);
                         }
                       }}
-                      style={{
-                        flex: 1,
-                        padding: "5px 0",
-                        borderRadius: 3,
-                        border: "none",
-                        cursor: "pointer",
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: 11,
-                        fontWeight: active ? 500 : 400,
-                        backgroundColor: active ? "var(--color-accent)" : "transparent",
-                        color: active ? "#FFFFFF" : "#8A8A8A",
-                        textAlign: "center",
-                        transition: "all 0.15s ease",
-                      }}
+                      className={`flex-1 py-[5px] rounded-[3px] border-none cursor-pointer text-[11px] transition-all duration-[150ms] text-center ${active ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
                     >
                       {t(
                         `tourismBudget.accomTypes.${opt}`,
@@ -271,10 +216,7 @@ export function TourismWeightPanel({
               </div>
               {/* Hotel star sub-selector */}
               {budgetState.accommodation.startsWith("hotel") && (
-                <div
-                  className="flex"
-                  style={{ backgroundColor: "#222", borderRadius: 4, padding: 4, gap: 4 }}
-                >
+                <div className="flex bg-surface-2 rounded-[4px] p-1 gap-1">
                   {([5, 4, 3, 2, 1] as const).map((stars) => {
                     const key = `hotel${stars}` as AccommodationType;
                     const active = budgetState.accommodation === key;
@@ -282,21 +224,7 @@ export function TourismWeightPanel({
                       <button
                         key={stars}
                         onClick={() => onBudgetChange("accommodation", key)}
-                        style={{
-                          flex: 1,
-                          padding: "5px 0",
-                          borderRadius: 3,
-                          border: "none",
-                          cursor: "pointer",
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: 7,
-                          letterSpacing: "0.5px",
-                          fontWeight: active ? 600 : 400,
-                          backgroundColor: active ? "#3A3A3A" : "transparent",
-                          color: active ? "#FFD700" : "#666",
-                          textAlign: "center",
-                          transition: "all 0.15s ease",
-                        }}
+                        className={`flex-1 py-[5px] rounded-[3px] border-none cursor-pointer text-[7px] tracking-[0.5px] transition-all duration-[150ms] text-center ${active ? "bg-border font-semibold text-[#FFD700]" : "bg-transparent font-normal text-[#666]"}`}
                       >
                         {"★".repeat(stars)}
                       </button>
@@ -307,8 +235,8 @@ export function TourismWeightPanel({
             </div>
 
             {/* People count */}
-            <div className="flex flex-col" style={{ gap: 6 }}>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
+            <div className="flex flex-col gap-[6px]">
+              <span className="text-xs text-white">
                 {t("tourismBudget.travellers", "Travellers")}
               </span>
               <PeopleCountStepper
@@ -320,8 +248,8 @@ export function TourismWeightPanel({
             </div>
 
             {/* Dining preference */}
-            <div className="flex flex-col" style={{ gap: 6 }}>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
+            <div className="flex flex-col gap-[6px]">
+              <span className="text-xs text-white">
                 {t("tourismBudget.diningLabel", "Food & Dining")}
               </span>
               <ToggleGroup
@@ -345,22 +273,8 @@ export function TourismWeightPanel({
           label={t("tourismFilters.travelDates", "Travel Dates")}
           badge={
             travelDates.startDate && travelDates.endDate ? (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#0a1929",
-                  borderRadius: "3px",
-                  padding: "3px 8px",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: "10px",
-                    color: "#64B5F6",
-                  }}
-                >
+              <div className="flex items-center bg-[#0a1929] rounded-[3px] px-2 py-[3px]">
+                <span className="font-mono text-[10px] text-[#64B5F6]">
                   {new Date(travelDates.startDate + "T00:00").toLocaleDateString(undefined, {
                     month: "short",
                     day: "numeric",
@@ -377,24 +291,14 @@ export function TourismWeightPanel({
           isOpen={!collapsed["DATES"]}
           onToggle={() => toggleGroup("DATES")}
         >
-          <div className="flex flex-col" style={{ padding: "12px 16px", gap: "8px" }}>
+          <div className="flex flex-col px-4 py-3 gap-2">
             {/* Row 1: Labels */}
-            <div className="flex" style={{ gap: 8 }}>
-              <span
-                className="flex-1"
-                style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#808080" }}
-              >
-                {t("tourismFilters.from", "From")}
-              </span>
-              <span
-                className="flex-1"
-                style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#808080" }}
-              >
-                {t("tourismFilters.to", "To")}
-              </span>
+            <div className="flex gap-2">
+              <span className="flex-1 text-xs text-dimmer">{t("tourismFilters.from", "From")}</span>
+              <span className="flex-1 text-xs text-dimmer">{t("tourismFilters.to", "To")}</span>
             </div>
             {/* Row 2: Month+Day pickers */}
-            <div className="flex" style={{ gap: 8 }}>
+            <div className="flex gap-2">
               {(
                 [
                   {
@@ -444,7 +348,7 @@ export function TourismWeightPanel({
                 };
                 const daysInMonth = curMM ? new Date(2000, parseInt(curMM), 0).getDate() : 31;
                 return (
-                  <div key={id} style={{ flex: 1, minWidth: 0, display: "flex", gap: 4 }}>
+                  <div key={id} className="flex-1 min-w-0 flex gap-1">
                     <select
                       value={curMM}
                       onChange={(e) => {
@@ -497,14 +401,7 @@ export function TourismWeightPanel({
               travelDates.endDate &&
               toggles &&
               toggles.requiredTags.length > 0 && (
-                <p
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "11px",
-                    color: "#666",
-                    margin: 0,
-                  }}
-                >
+                <p className="text-[11px] text-[#666] m-0">
                   {t(
                     "tourismFilters.seasonalHint",
                     "Rankings are adjusted for seasonal quality during your travel dates.",
@@ -523,7 +420,7 @@ export function TourismWeightPanel({
         isOpen={!collapsed["TOURISM"]}
         onToggle={() => toggleGroup("TOURISM")}
       >
-        <div style={{ paddingTop: "4px", paddingBottom: "4px" }}>
+        <div className="py-1">
           {TOURISM_GROUPS.map((group) => {
             const subAvg = Math.round(
               group.keys.reduce((s, k) => s + (weights[k] ?? 50), 0) / group.keys.length,
@@ -535,22 +432,8 @@ export function TourismWeightPanel({
                 icon={TOURISM_GROUP_ICONS[group.labelKey]}
                 label={t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
                 badge={
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      backgroundColor: "#291608",
-                      borderRadius: "3px",
-                      padding: "3px 8px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "11px",
-                        color: "#C2956A",
-                      }}
-                    >
+                  <div className="flex items-center bg-[#291608] rounded-[3px] px-2 py-[3px]">
+                    <span className="font-mono text-[11px] text-accent-dim">
                       {`${t("weights.averageBadge", "avg")} ${subAvg}`}
                     </span>
                   </div>
@@ -559,7 +442,7 @@ export function TourismWeightPanel({
                 onToggle={() => toggleGroup(group.labelKey)}
               >
                 {group.keys.map((key) => (
-                  <div key={key} style={{ padding: "10px 16px" }}>
+                  <div key={key} className="px-4 py-2.5">
                     <TourismWeightSlider
                       metricKey={key}
                       value={weights[key] ?? 50}

@@ -36,65 +36,26 @@ export function MobileSheet({ open, title, closeLabel, children, onClose }: Mobi
       <button
         type="button"
         aria-label={closeLabel}
-        className="absolute inset-0"
-        style={{
-          backgroundColor: "rgba(0,0,0,0.72)",
-          backdropFilter: "blur(6px)",
-        }}
+        className="absolute inset-0 bg-black/[0.72] backdrop-blur-[6px]"
         onClick={onClose}
       />
       <div
         ref={sheetRef}
         tabIndex={-1}
-        className="relative mt-auto flex w-full flex-col overflow-hidden"
-        style={{
-          minHeight: "70vh",
-          maxHeight: "calc(100dvh - 16px)",
-          backgroundColor: "#1A1A1A",
-          borderTopLeftRadius: "24px",
-          borderTopRightRadius: "24px",
-          borderTop: "1px solid #2A2A2A",
-          boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
-          overscrollBehavior: "contain",
-          paddingBottom: "env(safe-area-inset-bottom, 0px)",
-        }}
+        className="relative mt-auto flex w-full flex-col overflow-hidden min-h-[70vh] max-h-[calc(100dvh-16px)] bg-surface rounded-tl-[24px] rounded-tr-[24px] border-t border-[#2A2A2A] shadow-[0_-18px_42px_rgba(0,0,0,0.45)] overscroll-contain pb-[env(safe-area-inset-bottom,0px)]"
       >
         <div className="flex justify-center pt-3 pb-1 shrink-0" aria-hidden="true">
-          <div
-            style={{
-              width: "36px",
-              height: "4px",
-              borderRadius: "2px",
-              backgroundColor: "#444444",
-            }}
-          />
+          <div className="w-9 h-1 rounded-[2px] bg-[#444444]" />
         </div>
         <div className="flex items-center justify-between px-4 pb-2 shrink-0">
-          <h2
-            id={titleId}
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "12px",
-              fontWeight: 600,
-              letterSpacing: "1.5px",
-              textTransform: "uppercase",
-              color: "#9E9E9E",
-            }}
-          >
+          <h2 id={titleId} className="text-xs font-semibold tracking-[1.5px] uppercase text-muted">
             {title}
           </h2>
           <button
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="flex items-center justify-center"
-            style={{
-              width: "32px",
-              height: "32px",
-              borderRadius: "4px",
-              backgroundColor: "#333333",
-              color: "#9E9E9E",
-            }}
+            className="flex items-center justify-center w-8 h-8 rounded-[4px] bg-border text-muted"
             aria-label={closeLabel}
           >
             <X size={18} aria-hidden="true" />

@@ -97,7 +97,7 @@ export function TourismComparison({
     <div>
       {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
-        <div className="flex gap-3 pb-2" style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
+        <div className="flex gap-3 pb-2 overflow-x-auto [scrollbar-width:thin]">
           {selectedCountries.map((slot) => {
             const score = computeTourismScore(slot.country);
             const sColor = score != null ? tourismScoreColour(score) : "#333333";
@@ -113,12 +113,10 @@ export function TourismComparison({
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
                 >
                   <span
-                    className="text-[32px]"
+                    className="text-[32px] font-bold leading-none"
                     style={{
                       fontFamily: "Oswald, sans-serif",
-                      fontWeight: 700,
                       color: sColor,
-                      lineHeight: 1,
                     }}
                   >
                     {score != null ? score.toFixed(1) : "—"}
@@ -171,12 +169,8 @@ export function TourismComparison({
             regionLabel: t(`regions.${regionKey(c.region)}`),
             trailing: (
               <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  color: score != null ? tourismScoreColour(score) : "#333333",
-                }}
+                className="font-mono text-[13px] font-semibold"
+                style={{ color: score != null ? tourismScoreColour(score) : "#333333" }}
               >
                 {score != null ? score.toFixed(1) : "—"}
               </span>
@@ -196,7 +190,7 @@ export function TourismComparison({
       {selectedCountries.length > 0 && (
         <div className="mt-8">
           {/* Separator */}
-          <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
+          <div className="h-px bg-[#1C1C1C]" />
 
           {/* Sticky column header */}
           <ComparisonTableHeader
@@ -211,7 +205,7 @@ export function TourismComparison({
           />
 
           {/* Scrollable data rows */}
-          <div ref={bodyRef} style={{ overflowX: "auto" }}>
+          <div ref={bodyRef} className="overflow-x-auto">
             {TOURISM_CATEGORY_KEYS.map((key) => {
               const Icon = TOURISM_ICONS[key];
               return (

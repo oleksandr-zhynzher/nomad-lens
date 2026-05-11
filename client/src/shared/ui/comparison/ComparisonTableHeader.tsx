@@ -17,24 +17,14 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
   return (
     <div
       ref={ref}
-      className="sticky z-10 top-14 sm:top-[112px]"
-      style={{ overflowX: "auto", scrollbarWidth: "none", backgroundColor: "#0F1114" }}
+      className="sticky z-10 top-14 sm:top-[112px] overflow-x-auto [scrollbar-width:none] bg-[#0F1114]"
     >
       <div
-        className="flex items-center"
-        style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0", gap: gap ?? "0" }}
+        className="flex items-center border-b border-[#1C1C1C] py-[14px]"
+        style={{ gap: gap ?? "0" }}
       >
         <div className="w-[160px] md:w-[240px] shrink-0">
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "10px",
-              fontWeight: 600,
-              letterSpacing: "1.5px",
-              color: "#757575",
-              textTransform: "uppercase",
-            }}
-          >
+          <span className="text-[10px] font-semibold tracking-[1.5px] text-dimmest uppercase">
             {label}
           </span>
         </div>
@@ -48,19 +38,12 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
               <img
                 src={col.flagUrl}
                 alt={col.name}
-                className="rounded-full object-cover"
-                style={{ width: "18px", height: "18px" }}
+                className="rounded-full object-cover w-[18px] h-[18px]"
               />
             )}
             <span
-              className="truncate"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                fontWeight: 600,
-                color: "#FFFFFF",
-                maxWidth: col.maxNameWidth ?? "76px",
-              }}
+              className="truncate text-xs font-semibold text-white"
+              style={{ maxWidth: col.maxNameWidth ?? "76px" }}
             >
               {col.name}
             </span>

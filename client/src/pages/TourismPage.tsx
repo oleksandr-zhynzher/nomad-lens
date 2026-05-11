@@ -130,10 +130,7 @@ export function TourismPage() {
     <Layout>
       <div className="flex">
         {/* Left sidebar - Tourism Weight Panel (hidden on mobile) */}
-        <aside
-          className="hidden md:block sticky top-14 self-start"
-          style={{ width: "340px", height: "calc(100vh - 56px)" }}
-        >
+        <aside className="hidden md:block sticky top-14 self-start w-[340px] h-[calc(100vh-56px)]">
           <TourismWeightPanel
             weights={ws.weights}
             onChange={ws.handleWeightChange}
@@ -171,19 +168,10 @@ export function TourismPage() {
 
         {/* Mobile FAB - Parameters button */}
         <button
-          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg"
+          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-[24px] bg-accent text-white text-sm font-semibold"
           style={{
             bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
             right: "16px",
-            height: "48px",
-            paddingLeft: "16px",
-            paddingRight: "18px",
-            borderRadius: "24px",
-            backgroundColor: "var(--color-accent)",
-            color: "#FFFFFF",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "14px",
-            fontWeight: 600,
           }}
           onClick={() => setMobileParamsOpen(true)}
           aria-label={t("tourism.a11y.openParameters", "Open parameters")}
@@ -193,7 +181,7 @@ export function TourismPage() {
         </button>
 
         {/* Right content area */}
-        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#0A0A0F" }}>
+        <main className="flex-1 min-w-0 pb-28 md:pb-0 bg-[#0A0A0F]">
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
@@ -215,71 +203,17 @@ export function TourismPage() {
                 }}
               />
 
-              <div
-                className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
-                style={{ minHeight: "160px" }}
-              >
-                {/* Eyebrow */}
+              <div className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 min-h-[160px]">
                 <div className="flex items-center gap-2 mb-2 md:mb-3">
-                  <span
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: "4px",
-                        height: "4px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--color-accent-dim)",
-                        flexShrink: 0,
-                        display: "inline-block",
-                      }}
-                    />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "11px",
-                        fontWeight: 500,
-                        letterSpacing: "2.5px",
-                        textTransform: "uppercase",
-                        color: "var(--color-accent-dim)",
-                        lineHeight: 1,
-                      }}
-                    >
+                  <span className="flex items-center gap-2">
+                    <span className="inline-block w-1 h-1 rounded-full bg-accent-dim shrink-0" />
+                    <span className="text-[11px] font-medium tracking-[2.5px] uppercase text-accent-dim leading-none">
                       {t("tourism.eyebrow", "EXPLORE")}
                     </span>
                   </span>
-                  <span
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: "4px",
-                        height: "4px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--color-accent-dim)",
-                        flexShrink: 0,
-                        display: "inline-block",
-                      }}
-                    />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "11px",
-                        fontWeight: 500,
-                        letterSpacing: "2.5px",
-                        textTransform: "uppercase",
-                        color: "var(--color-accent-dim)",
-                        lineHeight: 1,
-                      }}
-                    >
+                  <span className="flex items-center gap-2">
+                    <span className="inline-block w-1 h-1 rounded-full bg-accent-dim shrink-0" />
+                    <span className="text-[11px] font-medium tracking-[2.5px] uppercase text-accent-dim leading-none">
                       {t("nav.tourism", "TOURISM")}
                     </span>
                   </span>
@@ -287,67 +221,27 @@ export function TourismPage() {
 
                 {/* H1 */}
                 <h1
-                  className="text-3xl md:text-6xl"
-                  style={{
-                    fontFamily: "Oswald, sans-serif",
-                    fontWeight: 600,
-                    lineHeight: "0.95",
-                    color: "#FFFFFF",
-                    marginBottom: "8px",
-                  }}
+                  className="text-3xl md:text-6xl font-semibold leading-[0.95] text-white mb-2"
+                  style={{ fontFamily: "Oswald, sans-serif" }}
                 >
                   {t("tourism.title", "TOURISM EXPLORER")}
                 </h1>
 
                 {/* Tagline */}
-                <p
-                  className="hidden md:block"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "15px",
-                    color: "#8A8A8A",
-                    maxWidth: "580px",
-                    marginBottom: "20px",
-                  }}
-                >
+                <p className="hidden md:block text-[15px] text-dim max-w-[580px] mb-5">
                   {t("tourism.subtitle")}
                 </p>
 
                 {/* Copper rule */}
-                <div
-                  className="hidden md:block"
-                  style={{
-                    width: "128px",
-                    height: "2px",
-                    backgroundColor: "var(--color-accent)",
-                    marginBottom: "16px",
-                  }}
-                />
+                <div className="hidden md:block w-32 h-0.5 bg-accent mb-4" />
 
                 {/* Stats row */}
                 <div className="hero-stats-row hero-banner-stats">
                   <div className="min-w-0">
-                    <div
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-dim)",
-                        lineHeight: "1",
-                      }}
-                    >
+                    <div className="font-mono text-[18px] font-semibold text-accent-dim leading-none">
                       {ranked.length}
                     </div>
-                    <div
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#757575",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginTop: "4px",
-                      }}
-                    >
+                    <div className="text-[10px] text-dimmer uppercase tracking-[1px] mt-1">
                       {t("hero.stats.countries", {
                         count: ranked.length,
                       })}
@@ -355,27 +249,10 @@ export function TourismPage() {
                   </div>
                   <div className="hero-stat-divider" />
                   <div className="min-w-0">
-                    <div
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-dim)",
-                        lineHeight: "1",
-                      }}
-                    >
+                    <div className="font-mono text-[18px] font-semibold text-accent-dim leading-none">
                       {TOURISM_CATEGORY_KEYS.length}
                     </div>
-                    <div
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#757575",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginTop: "4px",
-                      }}
-                    >
+                    <div className="text-[10px] text-dimmer uppercase tracking-[1px] mt-1">
                       {t("tourismWeights.metricsLabel", "Tourism Metrics")}
                     </div>
                   </div>
@@ -384,31 +261,13 @@ export function TourismPage() {
             </div>
 
             {/* Sentinel for sticky detection */}
-            <div ref={sentinelRef} style={{ height: "1px" }} />
+            <div ref={sentinelRef} className="h-px" />
 
             {/* Sticky search bar */}
-            <div
-              className="sticky z-20"
-              style={{
-                top: "56px",
-                backgroundColor: "#0A0A0F",
-                paddingTop: "8px",
-                paddingBottom: "12px",
-              }}
-            >
+            <div className="sticky z-20 bg-[#0A0A0F] pt-2 pb-3" style={{ top: "56px" }}>
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
                 <div className="flex flex-1 items-center gap-2 min-w-0">
-                  <div
-                    className="flex flex-1 items-center"
-                    style={{
-                      backgroundColor: "#1A1A1C",
-                      border: "1px solid #333333",
-                      borderRadius: "6px",
-                      height: "40px",
-                      padding: "0 12px",
-                      gap: "8px",
-                    }}
-                  >
+                  <div className="flex flex-1 items-center bg-[#1A1A1C] border border-[#333333] rounded-[6px] h-10 px-3 gap-2">
                     <Search size={16} color="#757575" />
                     <input
                       ref={searchInputRef}
@@ -420,15 +279,7 @@ export function TourismPage() {
                         setMatchCursor(0);
                       }}
                       placeholder={t("tourism.searchPlaceholder", "Search countries…")}
-                      style={{
-                        flex: 1,
-                        backgroundColor: "transparent",
-                        border: "none",
-                        outline: "none",
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "14px",
-                        color: "#E8E9EB",
-                      }}
+                      className="flex-1 bg-transparent border-none outline-none text-sm text-[#E8E9EB]"
                     />
                     {search && (
                       <button
@@ -437,14 +288,7 @@ export function TourismPage() {
                           setHighlightedCode(null);
                           setMatchCursor(0);
                         }}
-                        style={{
-                          background: "none",
-                          border: "none",
-                          cursor: "pointer",
-                          color: "#757575",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
+                        className="bg-transparent border-0 cursor-pointer text-dimmer flex items-center"
                       >
                         <X size={14} />
                       </button>
@@ -453,32 +297,16 @@ export function TourismPage() {
 
                   {/* Search mode controls */}
                   {search.trim() && (
-                    <div className="flex items-center" style={{ gap: "4px", flexShrink: 0 }}>
+                    <div className="flex items-center gap-1 shrink-0">
                       {searchMode === "highlight" && matchingCodes.length > 0 && (
                         <>
-                          <span
-                            style={{
-                              fontFamily: "IBM Plex Mono, monospace",
-                              fontSize: "11px",
-                              color: "#8A8A8A",
-                              whiteSpace: "nowrap",
-                            }}
-                          >
+                          <span className="font-mono text-[11px] text-dim whitespace-nowrap">
                             {matchCursor + 1}/{matchingCodes.length}
                           </span>
                           <button
                             onClick={goPrev}
                             disabled={matchingCodes.length === 0}
-                            className="flex items-center justify-center"
-                            style={{
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "3px",
-                              border: "none",
-                              cursor: matchingCodes.length ? "pointer" : "default",
-                              backgroundColor: "#2A2A2A",
-                              color: matchingCodes.length ? "#CCCCCC" : "#757575",
-                            }}
+                            className={`flex items-center justify-center w-6 h-6 rounded-[3px] border-0 bg-[#2A2A2A] ${matchingCodes.length ? "cursor-pointer text-muted" : "cursor-default text-dimmer"}`}
                             aria-label={t("tourism.a11y.previousMatch", "Previous match")}
                           >
                             <ChevronUp size={14} />
@@ -486,16 +314,7 @@ export function TourismPage() {
                           <button
                             onClick={goNext}
                             disabled={matchingCodes.length === 0}
-                            className="flex items-center justify-center"
-                            style={{
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "3px",
-                              border: "none",
-                              cursor: matchingCodes.length ? "pointer" : "default",
-                              backgroundColor: "#2A2A2A",
-                              color: matchingCodes.length ? "#CCCCCC" : "#757575",
-                            }}
+                            className={`flex items-center justify-center w-6 h-6 rounded-[3px] border-0 bg-[#2A2A2A] ${matchingCodes.length ? "cursor-pointer text-muted" : "cursor-default text-dimmer"}`}
                             aria-label={t("tourism.a11y.nextMatch", "Next match")}
                           >
                             <ChevronDown size={14} />
@@ -527,16 +346,7 @@ export function TourismPage() {
                             setSearchMode((m) => (m === "filter" ? "highlight" : "filter"));
                             setMatchCursor(0);
                           }}
-                          className="flex items-center justify-center"
-                          style={{
-                            width: "24px",
-                            height: "24px",
-                            borderRadius: "3px",
-                            border: "none",
-                            cursor: "pointer",
-                            backgroundColor: "#2A2A2A",
-                            color: "#9E9E9E",
-                          }}
+                          className="flex items-center justify-center w-6 h-6 rounded-[3px] border-0 bg-[#2A2A2A] cursor-pointer text-on-surface"
                           aria-label={
                             searchMode === "filter"
                               ? t("tourism.a11y.switchToScrollMode", "Switch to scroll mode")
@@ -555,43 +365,14 @@ export function TourismPage() {
                     <>
                       <button
                         onClick={handleCompare}
-                        className="flex-1 justify-center sm:flex-none"
+                        className={`flex flex-1 items-center justify-center gap-1.5 sm:flex-none h-10 px-[14px] rounded-[6px] text-[13px] font-semibold whitespace-nowrap shrink-0 transition-all duration-150 ease-in-out ${selectedCodes.size < 2 ? "border border-accent-dim cursor-default bg-[#161616] text-accent-dim" : "border-0 cursor-pointer bg-accent text-white"}`}
                         disabled={selectedCodes.size < 2}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "6px",
-                          height: "40px",
-                          paddingLeft: "14px",
-                          paddingRight: "14px",
-                          borderRadius: "6px",
-                          border:
-                            selectedCodes.size < 2 ? "1px solid var(--color-accent-dim)" : "none",
-                          cursor: selectedCodes.size < 2 ? "default" : "pointer",
-                          backgroundColor:
-                            selectedCodes.size < 2 ? "#161616" : "var(--color-accent)",
-                          color: selectedCodes.size < 2 ? "var(--color-accent-dim)" : "#FFFFFF",
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "13px",
-                          fontWeight: 600,
-                          whiteSpace: "nowrap",
-                          transition: "all 0.15s ease",
-                          flexShrink: 0,
-                        }}
                       >
                         <GitCompare size={15} />
                         {t("compare.compareSelected", "Compare")}
                         {selectedCodes.size > 0 && (
                           <span
-                            style={{
-                              backgroundColor:
-                                selectedCodes.size < 2
-                                  ? "rgba(143,90,60,0.2)"
-                                  : "rgba(255,255,255,0.25)",
-                              borderRadius: "10px",
-                              padding: "1px 7px",
-                              fontSize: "12px",
-                            }}
+                            className={`rounded-[10px] px-[7px] py-px text-xs ${selectedCodes.size < 2 ? "bg-[rgba(143,90,60,0.2)]" : "bg-[rgba(255,255,255,0.25)]"}`}
                           >
                             {selectedCodes.size}
                           </span>
@@ -599,19 +380,7 @@ export function TourismPage() {
                       </button>
                       <button
                         onClick={exitCompareMode}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          width: "40px",
-                          height: "40px",
-                          borderRadius: "6px",
-                          border: "1px solid #2A2A2A",
-                          cursor: "pointer",
-                          backgroundColor: "#161616",
-                          color: "#8A8A8A",
-                          flexShrink: 0,
-                        }}
+                        className="flex items-center justify-center w-10 h-10 rounded-[6px] border border-[#2A2A2A] cursor-pointer bg-[#161616] text-dim shrink-0"
                         aria-label={t("tourism.a11y.exitCompareMode", "Exit compare mode")}
                       >
                         <X size={16} />
@@ -620,25 +389,7 @@ export function TourismPage() {
                   ) : (
                     <button
                       onClick={() => setCompareMode(true)}
-                      className="w-full justify-center sm:w-auto"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                        height: "40px",
-                        paddingLeft: "14px",
-                        paddingRight: "14px",
-                        borderRadius: "6px",
-                        border: "1px solid #2A2A2A",
-                        cursor: "pointer",
-                        backgroundColor: "#161616",
-                        color: "#9E9E9E",
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        fontWeight: 500,
-                        whiteSpace: "nowrap",
-                        flexShrink: 0,
-                      }}
+                      className="w-full justify-center sm:w-auto flex items-center gap-1.5 h-10 px-[14px] rounded-[6px] border border-[#2A2A2A] cursor-pointer bg-[#161616] text-on-surface text-[13px] font-medium whitespace-nowrap shrink-0"
                     >
                       <GitCompare size={15} />
                       {t("compare.compareMode", "Compare")}
@@ -648,15 +399,7 @@ export function TourismPage() {
               </div>
 
               {compareMode && (
-                <p
-                  style={{
-                    marginTop: "8px",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "12px",
-                    color: "#8A8A8A",
-                    paddingLeft: "2px",
-                  }}
-                >
+                <p className="mt-2 text-xs text-dim pl-0.5">
                   {t(
                     "compare.helperText",
                     "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
@@ -667,17 +410,7 @@ export function TourismPage() {
 
             {/* Activity tag chips */}
             <div className="mb-0">
-              <div
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: 700,
-                  letterSpacing: "2px",
-                  textTransform: "uppercase",
-                  color: "#9E9E9E",
-                  marginBottom: "12px",
-                }}
-              >
+              <div className="text-[13px] font-bold tracking-[2px] uppercase text-on-surface mb-3">
                 {t("tourismFilters.activityTags", "Activities")}
               </div>
               <div className="flex flex-wrap gap-2">
@@ -687,17 +420,7 @@ export function TourismPage() {
                     <button
                       key={tag}
                       onClick={() => ws.handleToggleTag(tag)}
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        fontWeight: 600,
-                        padding: "8px 18px",
-                        borderRadius: "3px",
-                        border: "none",
-                        cursor: "pointer",
-                        backgroundColor: active ? "#8F5A3C" : "#2A2A2A",
-                        color: active ? "#FFFFFF" : "#9E9E9E",
-                      }}
+                      className={`text-[13px] font-semibold py-2 px-[18px] rounded-[3px] border-0 cursor-pointer ${active ? "bg-[#8F5A3C] text-white" : "bg-[#2A2A2A] text-on-surface"}`}
                     >
                       {t(`tourismTags.${tag}`, tag)}
                     </button>
@@ -709,14 +432,8 @@ export function TourismPage() {
 
           {/* Country list */}
           <div className="px-4 md:px-6">
-            <div
-              className="flex items-center justify-between px-1 my-4"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-              }}
-            >
-              <span style={{ color: "#9E9E9E" }}>
+            <div className="flex items-center justify-between px-1 my-4 text-xs">
+              <span className="text-on-surface">
                 {compareMode
                   ? t(
                       "compare.tourismSelectionSubtitle",
@@ -724,7 +441,7 @@ export function TourismPage() {
                     )
                   : t("countryList.clickHint", "Click on a country to view details")}
               </span>
-              <span style={{ color: "#8A8A8A" }}>
+              <span className="text-dim">
                 {t("countryList.count", { count: displayedRanked.length })}
               </span>
             </div>
@@ -735,23 +452,12 @@ export function TourismPage() {
                   {Array.from({ length: 8 }).map((_, i) => (
                     <div
                       key={i}
-                      className="h-14 animate-pulse"
-                      style={{
-                        backgroundColor: "#1A1A1A",
-                        borderTop: "1px solid #333333",
-                      }}
+                      className="h-14 animate-pulse bg-[#1A1A1A] border-t border-[#333333]"
                     />
                   ))}
                 </div>
               ) : displayedRanked.length === 0 ? (
-                <p
-                  className="text-center py-20"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "14px",
-                    color: "#8A8A8A",
-                  }}
-                >
+                <p className="text-center py-20 text-sm text-dim">
                   {t("tourism.noResults", "No countries match your filters.")}
                 </p>
               ) : (

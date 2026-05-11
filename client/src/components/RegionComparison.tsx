@@ -108,20 +108,14 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
   return (
     <div>
       {/* Region cards — horizontally scrollable on small screens */}
-      <div className="flex gap-3 pb-2" style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
+      <div className="flex gap-3 pb-2 overflow-x-auto [scrollbar-width:thin]">
         {regionStats.map((r) => {
           const active = enabled.has(r.name);
           return (
             <div key={r.name} className="shrink-0 w-[148px] md:w-[180px]">
               <button
                 onClick={() => toggleRegion(r.name)}
-                className="w-full rounded-lg p-4 flex flex-col items-center gap-3 transition-all"
-                style={{
-                  backgroundColor: "transparent",
-                  border: active ? "1px solid #2E2E30" : "1px solid #1C1C1C",
-                  opacity: active ? 1 : 0.45,
-                  cursor: "pointer",
-                }}
+                className={`w-full rounded-lg p-4 flex flex-col items-center gap-3 transition-all cursor-pointer bg-transparent ${active ? "border border-[#2E2E30] opacity-100" : "border border-[#1C1C1C] opacity-45"}`}
               >
                 {(() => {
                   const Icon = REGION_ICONS[r.name];
@@ -130,24 +124,16 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                   ) : null;
                 })()}
                 <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "15px",
-                    fontWeight: 600,
-                    color: active ? "#E8E9EB" : "#808080",
-                    textAlign: "center",
-                  }}
+                  className={`text-[15px] font-semibold text-center ${active ? "text-on-surface" : "text-dimmer"}`}
                 >
                   {t(`regions.${regionKey(r.name)}`)}
                 </span>
 
                 <span
+                  className="text-[32px] font-bold leading-none"
                   style={{
                     fontFamily: "Oswald, sans-serif",
-                    fontSize: "32px",
-                    fontWeight: 700,
                     color: active ? scoreColour(r.overall) : "#757575",
-                    lineHeight: 1,
                   }}
                 >
                   {r.overall.toFixed(1)}
@@ -164,7 +150,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
       {activeRegions.length > 0 && (
         <div>
           {/* Separator */}
-          <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
+          <div className="h-px bg-[#1C1C1C]" />
 
           {/* Sticky column header — own overflow wrapper, synced with body */}
           <ComparisonTableHeader
@@ -179,7 +165,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
           />
 
           {/* Scrollable data rows */}
-          <div ref={bodyRef} style={{ overflowX: "auto" }}>
+          <div ref={bodyRef} className="overflow-x-auto">
             {/* Overall row */}
             <ComparisonRowShell
               icon={TrendingUp}

@@ -29,39 +29,22 @@ export function CollapsibleSection({
   const contentId = `section-content-${id}`;
 
   return (
-    <div style={{ borderBottom: "1px solid #242424" }}>
+    <div className="border-b border-[#242424]">
       <button
         type="button"
-        className="button-hover-exempt weight-panel-group-button w-full flex items-center"
-        style={{ height: "40px", padding: "0 14px", gap: "8px", backgroundColor: "#1A1A1A" }}
+        className="button-hover-exempt weight-panel-group-button w-full flex items-center h-10 px-[14px] gap-2 bg-surface"
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={contentId}
       >
         {icon}
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "10px",
-            fontWeight: 600,
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            color: "#9E9E9E",
-            flex: 1,
-            textAlign: "left",
-          }}
-        >
+        <span className="text-[10px] font-semibold tracking-[1.5px] uppercase text-muted flex-1 text-left">
           {label}
         </span>
         {badge}
         <ChevronDown
           size={14}
-          style={{
-            color: "#808080",
-            transform: isOpen ? "rotate(0deg)" : "rotate(-90deg)",
-            transition: "transform 0.15s ease",
-            flexShrink: 0,
-          }}
+          className={`text-dimmer shrink-0 transition-transform duration-150 ${isOpen ? "rotate-0" : "-rotate-90"}`}
         />
       </button>
 

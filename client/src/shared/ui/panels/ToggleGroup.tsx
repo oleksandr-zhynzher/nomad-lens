@@ -14,10 +14,7 @@ export function ToggleGroup<T extends string | number>({
   labelFn,
 }: ToggleGroupProps<T>) {
   return (
-    <div
-      className="flex"
-      style={{ backgroundColor: "#2A2A2A", borderRadius: 4, padding: 4, gap: 4 }}
-    >
+    <div className="flex bg-surface-4 rounded-[4px] p-1 gap-1">
       {options.map((opt) => {
         const active = opt === value;
         return (
@@ -25,20 +22,7 @@ export function ToggleGroup<T extends string | number>({
             key={String(opt)}
             type="button"
             onClick={() => onChange(opt)}
-            style={{
-              flex: 1,
-              padding: "5px 0",
-              borderRadius: 3,
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "Inter, sans-serif",
-              fontSize: 12,
-              fontWeight: active ? 500 : 400,
-              backgroundColor: active ? "var(--color-accent)" : "transparent",
-              color: active ? "#FFFFFF" : "#8A8A8A",
-              textAlign: "center",
-              transition: "all 0.15s ease",
-            }}
+            className={`flex-1 py-[5px] rounded-[3px] border-0 cursor-pointer text-xs text-center transition-all ${active ? "font-medium bg-accent text-white" : "font-normal bg-transparent text-dim"}`}
           >
             {labelFn(opt)}
           </button>

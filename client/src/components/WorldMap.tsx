@@ -14,6 +14,7 @@ import { localizeCountry } from "../utils/localize";
 import { CountryDetailPanel } from "./CountryDetailPanel";
 import worldTopology from "../data/countries-110m.json";
 import { geoNumericToAlpha2, mapScoreToColour } from "../utils/mapUtils";
+import { scoreColourClass } from "../utils/colorClasses";
 
 const WORLD_TOPOLOGY: object = worldTopology;
 
@@ -141,42 +142,28 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
       {geoLoading && (
-        <div
-          className="absolute inset-0 z-20 flex items-center justify-center"
-          style={{ backgroundColor: "#0A0A0F" }}
-        >
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-bg">
           <div
-            className="animate-spin"
+            className="animate-spin w-8 h-8 rounded-full"
             style={{
-              width: "32px",
-              height: "32px",
               border: "3px solid #2A2A2A",
               borderTopColor: "var(--color-accent-dim)",
-              borderRadius: "50%",
             }}
           />
         </div>
       )}
       {/* Zoom controls */}
-      <div
-        className="absolute top-2 left-2 md:top-3 md:left-3 z-10 flex flex-col overflow-hidden"
-        style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}
-      >
+      <div className="absolute top-2 left-2 md:top-3 md:left-3 z-10 flex flex-col overflow-hidden bg-surface rounded-[4px]">
         <button
           onClick={() => setZoom((z) => Math.min(z * 1.5, 12))}
-          className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
-          style={{ color: "#9E9E9E", borderBottom: "1px solid #333333" }}
+          className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors text-muted border-b border-border"
           aria-label={t("a11y.zoomIn", "Zoom in")}
         >
           +
         </button>
         <button
           onClick={() => setZoom((z) => Math.max(z / 1.5, 1))}
-          className="w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors"
-          style={{
-            color: "#9E9E9E",
-            borderBottom: onToggleWeights ? "1px solid #333333" : undefined,
-          }}
+          className={`w-9 h-9 md:w-10 md:h-10 text-lg font-bold leading-none flex items-center justify-center transition-colors text-muted ${onToggleWeights ? "border-b border-border" : ""}`}
           aria-label={t("a11y.zoomOut", "Zoom out")}
         >
           −
@@ -184,10 +171,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         {onToggleWeights && (
           <button
             onClick={onToggleWeights}
-            className="hidden md:flex w-10 h-10 items-center justify-center transition-colors"
-            style={{
-              color: showWeights ? "var(--color-accent-dim)" : "#999999",
-            }}
+            className={`hidden md:flex w-10 h-10 items-center justify-center transition-colors ${showWeights ? "text-accent-dim" : "text-[#999999]"}`}
             aria-label={t("a11y.toggleParameters", "Toggle parameters")}
           >
             <svg
@@ -209,21 +193,8 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
       </div>
 
       {/* Legend */}
-      <div
-        className="hidden absolute bottom-2 left-2 z-10 md:bottom-3 md:left-3 md:flex md:flex-col md:gap-1.5 md:px-3 md:py-2"
-        style={{ backgroundColor: "#1A1A1A", borderRadius: "4px" }}
-      >
-        <p
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "9px",
-            fontWeight: 600,
-            letterSpacing: "1.5px",
-            textTransform: "uppercase",
-            color: "#8A8A8A",
-            marginBottom: "2px",
-          }}
-        >
+      <div className="hidden absolute bottom-2 left-2 z-10 md:bottom-3 md:left-3 md:flex md:flex-col md:gap-1.5 md:px-3 md:py-2 bg-surface rounded-[4px]">
+        <p className="text-[9px] font-semibold tracking-[1.5px] uppercase text-dim mb-0.5">
           {t("map.score")}
         </p>
         {[
@@ -237,15 +208,9 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
           { color: "#3A3A3A", label: t("map.noData"), range: "" },
         ].map(({ color, label, range }) => (
           <div key={label} className="flex items-center gap-2">
-            <span className="w-3 h-3 shrink-0" style={{ background: color, borderRadius: "2px" }} />
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "10px",
-                color: "#CCCCCC",
-              }}
-            >
-              {label} <span style={{ color: "#8A8A8A" }}>{range}</span>
+            <span className="w-3 h-3 shrink-0 rounded-[2px]" style={{ background: color }} />
+            <span className="font-mono text-[10px] text-tertiary">
+              {label} <span className="text-dim">{range}</span>
             </span>
           </div>
         ))}
@@ -290,63 +255,27 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
       {/* Hover tooltip */}
       {hover && (
         <div
-          className="pointer-events-none fixed z-50 px-3 py-2 shadow-xl rounded"
+          className="pointer-events-none fixed z-50 px-3 py-2 shadow-xl rounded-[4px] bg-surface"
           style={{
             left: hover.x + 12,
             top: hover.y - 10,
-            backgroundColor: "#1A1A1A",
-            borderRadius: "4px",
           }}
         >
-          <p
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: 600,
-              color: "#FFFFFF",
-            }}
-          >
-            {hover.name}
-          </p>
+          <p className="text-[13px] font-semibold text-white">{hover.name}</p>
           {hover.score !== null ? (
             <p
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "13px",
-                fontWeight: 600,
-                marginTop: "2px",
-                color: scoreTextColour(hover.score),
-              }}
+              className={`font-mono text-[13px] font-semibold mt-0.5 ${scoreColourClass(hover.score, "text")}`}
             >
-              {hover.score.toFixed(1)}{" "}
-              <span style={{ fontWeight: 400, color: "#8A8A8A" }}>/ 100</span>
+              {hover.score.toFixed(1)} <span className="font-normal text-dim">/ 100</span>
             </p>
           ) : (
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                color: "#8A8A8A",
-                marginTop: "2px",
-              }}
-            >
-              {t("map.noData")}
-            </p>
+            <p className="text-xs text-dim mt-0.5">{t("map.noData")}</p>
           )}
         </div>
       )}
 
       {/* Ranked count */}
-      <p
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "11px",
-          color: "#808080",
-          textAlign: "right",
-          marginTop: "8px",
-          paddingRight: "4px",
-        }}
-      >
+      <p className="text-[11px] text-dimmer text-right mt-2 pr-1">
         {t("map.countriesScored", { count: ranked.length })}
       </p>
 
@@ -360,11 +289,4 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
       )}
     </div>
   );
-}
-
-function scoreTextColour(s: number): string {
-  if (s >= 75) return "#4CAF50";
-  if (s >= 60) return "#8BC34A";
-  if (s >= 50) return "#FFC107";
-  return "#FF5722";
 }

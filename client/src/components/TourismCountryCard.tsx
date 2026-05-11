@@ -2,7 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { TourismRanked } from "../utils/tourismScoring";
 import { applyTagSeasonality } from "../utils/tourismScoring";
-import { scoreColour } from "../utils/scoring";
+import { tourismScoreColourClass } from "../utils/colorClasses";
 import { TOURISM_CATEGORY_KEYS } from "../utils/types";
 import type { TravelDates } from "../hooks/useTourismWeightState";
 import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
@@ -47,13 +47,11 @@ export function TourismCountryCard({
     <div
       data-country-code={country.code}
       data-selected={isSelected ? "true" : undefined}
-      className="country-row overflow-hidden transition-colors duration-150"
+      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"}`}
       style={{
-        position: "relative",
         backgroundColor: rowBg,
         borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
         ["--row-hover-bg" as string]: hoverBg,
-        paddingLeft: compareMode ? "38px" : 0,
         ...(highlighted && {
           outline: `2px solid var(--color-accent)`,
           outlineOffset: "-1px",
@@ -63,32 +61,13 @@ export function TourismCountryCard({
       {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
 
       <button
-        className="w-full text-left transition-colors cursor-pointer"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "12px 16px",
-          paddingLeft: compareMode ? "38px" : "16px",
-          minHeight: "56px",
-          backgroundColor: "transparent",
-          border: "none",
-        }}
+        className={`w-full text-left flex flex-col transition-colors cursor-pointer bg-transparent border-none min-h-14 ${compareMode ? "pl-[38px] pr-4" : "px-4"} py-3`}
         onClick={compareMode ? onSelect : onToggle}
         aria-expanded={expanded}
       >
         <div className="flex items-center gap-2 md:gap-4 w-full">
           {/* Rank */}
-          <span
-            className="text-base md:text-lg"
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontWeight: 700,
-              color: "var(--color-accent)",
-              width: "28px",
-              textAlign: "center",
-              flexShrink: 0,
-            }}
-          >
+          <span className="text-base md:text-lg font-mono font-bold text-accent w-7 text-center shrink-0">
             {rank}
           </span>
 
@@ -107,14 +86,7 @@ export function TourismCountryCard({
             {/* Tag quality dots — only shown when tags are selected */}
             {selectedTags.length > 0 && (
               <>
-                <div
-                  style={{
-                    width: "1px",
-                    height: "12px",
-                    backgroundColor: "#333",
-                    margin: "0 2px",
-                  }}
-                />
+                <div className="w-px h-3 bg-border mx-0.5" />
                 {selectedTags.map((tag) => {
                   const baseVal = country.tourismTagScores?.[tag] ?? null;
                   const val =
@@ -134,22 +106,12 @@ export function TourismCountryCard({
 
           {/* Cost + surplus (daily) */}
           {ranked.budgetMatch && (
-            <div className="hidden sm:flex flex-col items-end" style={{ flexShrink: 0 }}>
-              <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "13px",
-                  color: "#CCCCCC",
-                }}
-              >
+            <div className="hidden sm:flex flex-col items-end shrink-0">
+              <span className="font-mono text-[13px] text-tertiary">
                 ${ranked.budgetMatch.dailyCost}/d
               </span>
               <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "11px",
-                  color: ranked.budgetMatch.surplus >= 0 ? "#4CAF50" : "#FF5722",
-                }}
+                className={`font-mono text-[11px] ${ranked.budgetMatch.surplus >= 0 ? "text-success" : "text-danger"}`}
               >
                 {ranked.budgetMatch.surplus >= 0 ? "+" : ""}${ranked.budgetMatch.surplus}/d
               </span>
@@ -157,14 +119,9 @@ export function TourismCountryCard({
           )}
 
           {/* Final score */}
-          <div style={{ flexShrink: 0, width: "48px", textAlign: "right" }}>
+          <div className="shrink-0 w-12 text-right">
             <span
-              className="text-lg md:text-xl"
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontWeight: 700,
-                color: scoreColour(tourismScore),
-              }}
+              className={`text-lg md:text-xl font-mono font-bold ${tourismScoreColourClass(tourismScore, "text")}`}
             >
               {tourismScore.toFixed(0)}
             </span>
@@ -173,19 +130,17 @@ export function TourismCountryCard({
           {/* Chevron */}
           <ChevronRight
             size={20}
+            className="shrink-0 text-dimmest transition-transform duration-200"
             style={{
-              color: "#757575",
-              transition: "transform 0.2s",
               transform: compareMode ? "rotate(0deg)" : expanded ? "rotate(90deg)" : "rotate(0deg)",
               opacity: compareMode ? 0.35 : 1,
             }}
-            className="shrink-0"
           />
         </div>
 
         {/* Breakdown bar — matches BudgetCountryCard */}
         {ranked.budgetMatch && (
-          <div style={{ marginTop: "8px", marginLeft: "60px" }}>
+          <div className="mt-2 ml-[60px]">
             <TourismBudgetBar
               breakdown={ranked.budgetMatch.breakdown}
               dailyCost={ranked.budgetMatch.dailyCost}

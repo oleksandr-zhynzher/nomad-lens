@@ -8,31 +8,16 @@ interface CompareCheckboxProps {
 export function CompareCheckbox({ isSelected, uncheckedBg = "transparent" }: CompareCheckboxProps) {
   return (
     <div
-      style={{
-        position: "absolute",
-        left: "10px",
-        top: "50%",
-        transform: "translateY(-50%)",
-        zIndex: 2,
-        width: "20px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        pointerEvents: uncheckedBg !== "transparent" ? "none" : undefined,
-      }}
+      className="absolute left-[10px] top-1/2 -translate-y-1/2 z-[2] w-5 flex items-center justify-center"
+      style={{ pointerEvents: uncheckedBg !== "transparent" ? "none" : undefined }}
     >
       <div
-        style={{
-          width: "16px",
-          height: "16px",
-          borderRadius: "3px",
-          border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
-          backgroundColor: isSelected ? "var(--color-accent)" : uncheckedBg,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          transition: "all 0.1s ease",
-        }}
+        className={`w-4 h-4 rounded-sm flex items-center justify-center transition-all ${isSelected ? "bg-accent border-2 border-accent" : "bg-transparent border-2 border-[#404040]"}`}
+        style={
+          isSelected
+            ? undefined
+            : { backgroundColor: uncheckedBg !== "transparent" ? uncheckedBg : undefined }
+        }
       >
         {isSelected && (
           <svg width="9" height="7" viewBox="0 0 9 7" fill="none">

@@ -109,7 +109,7 @@ export function CountryComparison({
     <div>
       {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
-        <div className="flex gap-3 pb-2" style={{ overflowX: "auto", scrollbarWidth: "thin" }}>
+        <div className="flex gap-3 pb-2 overflow-x-auto [scrollbar-width:thin]">
           {selectedCountries.map((slot) => {
             const score = computeScore(applyClimate(slot.country, climatePrefs), weights);
             const sColor = scoreColour(score);
@@ -131,12 +131,7 @@ export function CountryComparison({
                       >
                         <Link
                           to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
-                          style={{
-                            color: "var(--color-accent)",
-                            flexShrink: 0,
-                            lineHeight: 1,
-                            display: "inline-flex",
-                          }}
+                          className="text-accent shrink-0 leading-none inline-flex"
                         >
                           <Plane size={13} />
                         </Link>
@@ -145,12 +140,10 @@ export function CountryComparison({
                   }
                 >
                   <span
-                    className="text-[32px]"
+                    className="text-[32px] font-bold leading-none"
                     style={{
                       fontFamily: "Oswald, sans-serif",
-                      fontWeight: 700,
                       color: sColor,
-                      lineHeight: 1,
                     }}
                   >
                     {score.toFixed(1)}
@@ -203,12 +196,8 @@ export function CountryComparison({
             regionLabel: t(`regions.${regionKey(c.region)}`),
             trailing: (
               <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  color: scoreColour(score),
-                }}
+                className="font-mono text-[13px] font-semibold"
+                style={{ color: scoreColour(score) }}
               >
                 {score.toFixed(1)}
               </span>
@@ -228,7 +217,7 @@ export function CountryComparison({
       {selectedCountries.length > 0 && (
         <div className="mt-8">
           {/* Separator */}
-          <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
+          <div className="h-px bg-[#1C1C1C]" />
 
           {/* Sticky column header — own overflow wrapper, synced with body */}
           <ComparisonTableHeader
@@ -243,7 +232,7 @@ export function CountryComparison({
           />
 
           {/* Scrollable data rows */}
-          <div ref={bodyRef} style={{ overflowX: "auto" }}>
+          <div ref={bodyRef} className="overflow-x-auto">
             {/* Indicator rows */}
             {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];

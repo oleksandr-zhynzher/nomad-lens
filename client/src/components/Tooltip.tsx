@@ -97,17 +97,8 @@ export function Tooltip({
         createPortal(
           <div
             role="tooltip"
-            className="pointer-events-none rounded shadow-xl text-xs leading-relaxed"
-            style={{
-              ...style,
-              backgroundColor: "#1E1E1E",
-              border: "1px solid #2E2E2E",
-              borderRadius: "6px",
-              padding: "5px 9px",
-              color: "#FFFFFF",
-              fontFamily: "Inter, sans-serif",
-              maxWidth: "220px",
-            }}
+            className="pointer-events-none rounded-[6px] shadow-xl text-xs text-white leading-relaxed bg-surface border border-[#2E2E2E] px-[9px] py-[5px] max-w-[220px]"
+            style={style}
           >
             {content}
           </div>,

@@ -11,23 +11,12 @@ interface WeightModeToggleProps {
 export function WeightModeToggle({ weightMode, onWeightModeChange }: WeightModeToggleProps) {
   const { t } = useTranslation();
   return (
-    <div
-      className="flex"
-      style={{
-        marginTop: "10px",
-        backgroundColor: "#2A2A2A",
-        borderRadius: "4px",
-        padding: "4px",
-        gap: "4px",
-      }}
-    >
-      <div style={{ flex: "1 1 0", display: "flex" }}>
+    <div className="flex mt-[10px] bg-surface-4 rounded-[4px] p-1 gap-1">
+      <div className="flex-1 flex">
         <Tooltip
           content={
             <div>
-              <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>
-                {t("weights.independentTitle")}
-              </div>
+              <div className="mb-2 text-white font-semibold">{t("weights.independentTitle")}</div>
               <div>{t("weights.independentDesc")}</div>
             </div>
           }
@@ -37,33 +26,18 @@ export function WeightModeToggle({ weightMode, onWeightModeChange }: WeightModeT
         >
           <button
             onClick={() => onWeightModeChange("independent")}
-            className="flex items-center justify-center gap-1.5"
-            style={{
-              width: "100%",
-              padding: "6px 12px",
-              borderRadius: "3px",
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: weightMode === "independent" ? 500 : 400,
-              backgroundColor: weightMode === "independent" ? "var(--color-accent)" : "transparent",
-              color: weightMode === "independent" ? "#FFFFFF" : "#9E9E9E",
-              transition: "all 0.15s ease",
-            }}
+            className={`w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-[3px] border-0 cursor-pointer text-[13px] transition-all ${weightMode === "independent" ? "font-medium bg-accent text-white" : "font-normal bg-transparent text-muted"}`}
           >
             <Sliders size={16} />
             {t("weights.independentMode")}
           </button>
         </Tooltip>
       </div>
-      <div style={{ flex: "1 1 0", display: "flex" }}>
+      <div className="flex-1 flex">
         <Tooltip
           content={
             <div>
-              <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>
-                {t("weights.balancedTitle")}
-              </div>
+              <div className="mb-2 text-white font-semibold">{t("weights.balancedTitle")}</div>
               <div>{t("weights.balancedDesc")}</div>
             </div>
           }
@@ -73,20 +47,7 @@ export function WeightModeToggle({ weightMode, onWeightModeChange }: WeightModeT
         >
           <button
             onClick={() => onWeightModeChange("balanced")}
-            className="flex items-center justify-center gap-1.5"
-            style={{
-              width: "100%",
-              padding: "6px 12px",
-              borderRadius: "3px",
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: weightMode === "balanced" ? 500 : 400,
-              backgroundColor: weightMode === "balanced" ? "var(--color-accent)" : "transparent",
-              color: weightMode === "balanced" ? "#FFFFFF" : "#9E9E9E",
-              transition: "all 0.15s ease",
-            }}
+            className={`w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-[3px] border-0 cursor-pointer text-[13px] transition-all ${weightMode === "balanced" ? "font-medium bg-accent text-white" : "font-normal bg-transparent text-muted"}`}
           >
             <Scale size={16} />
             {t("weights.balancedMode")}

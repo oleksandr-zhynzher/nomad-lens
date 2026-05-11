@@ -86,23 +86,8 @@ export function CountryPage() {
   if (loading) {
     return (
       <Layout>
-        <div
-          style={{
-            minHeight: "60vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "14px",
-              color: "#8A8A8A",
-            }}
-          >
-            {t("loading")}
-          </span>
+        <div className="min-h-[60vh] flex items-center justify-center">
+          <span className="text-sm text-dim">{t("loading")}</span>
         </div>
       </Layout>
     );
@@ -111,34 +96,9 @@ export function CountryPage() {
   if (error || !c) {
     return (
       <Layout>
-        <div
-          style={{
-            minHeight: "60vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: "16px",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "14px",
-              color: "#9E9E9E",
-            }}
-          >
-            {error ?? t("countryPage.notFound")}
-          </span>
-          <Link
-            to={`${langPrefix}/`}
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              color: "#C2956A",
-              textDecoration: "none",
-            }}
-          >
+        <div className="min-h-[60vh] flex items-center justify-center flex-col gap-4">
+          <span className="text-sm text-on-surface">{error ?? t("countryPage.notFound")}</span>
+          <Link to={`${langPrefix}/`} className="text-[13px] text-[#C2956A] no-underline">
             {t("countryPage.backToCountries")}
           </Link>
         </div>
@@ -187,13 +147,11 @@ export function CountryPage() {
 
   return (
     <Layout>
-      <div style={{ backgroundColor: "var(--color-bg)", minHeight: "100vh" }}>
+      <div className="bg-bg min-h-screen">
         {/* ── heroBanner ── */}
         <div
+          className="min-h-[280px] relative overflow-hidden"
           style={{
-            minHeight: "280px",
-            position: "relative",
-            overflow: "hidden",
             backgroundColor: "#0A0D12",
             backgroundImage: "url('/hero-map.png')",
             backgroundSize: "cover",
@@ -202,9 +160,8 @@ export function CountryPage() {
         >
           {/* Gradient overlay */}
           <div
+            className="absolute inset-0"
             style={{
-              position: "absolute",
-              inset: 0,
               background:
                 "linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(13,13,15,0.92) 70%, #0D0D0F 100%)",
             }}
@@ -213,181 +170,60 @@ export function CountryPage() {
           {/* Back button */}
           <button
             onClick={handleBack}
-            className="left-4 md:left-8"
-            style={{
-              position: "absolute",
-              top: "20px",
-              zIndex: 10,
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              background: "rgba(17,17,17,0.75)",
-              border: "1px solid #2A2A2A",
-              borderRadius: "8px",
-              padding: "7px 14px",
-              cursor: "pointer",
-              color: "#AAAAAA",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              backdropFilter: "blur(8px)",
-            }}
+            className="absolute top-5 z-10 left-4 md:left-8 flex items-center gap-1.5 bg-[rgba(17,17,17,0.75)] border border-[#2A2A2A] rounded-lg py-[7px] px-[14px] cursor-pointer text-[#AAAAAA] text-[13px] backdrop-blur-[8px]"
           >
             <ArrowLeft size={15} color="#AAAAAA" />
             {t("countryPage.back")}
           </button>
 
           {/* Bottom content: flag + name + badges */}
-          <div
-            className="px-4 pb-6 md:px-16 md:pb-8"
-            style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end",
-              gap: "16px",
-            }}
-          >
+          <div className="absolute inset-0 flex flex-col justify-end gap-4 px-4 pb-6 md:px-16 md:pb-8">
             {/* Flag + name row */}
             <div className="flex items-center gap-3 md:gap-6 flex-wrap">
-              <div
-                className="w-16 h-11 md:w-[100px] md:h-[67px]"
-                style={{
-                  borderRadius: "6px",
-                  overflow: "hidden",
-                  flexShrink: 0,
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.5)",
-                }}
-              >
+              <div className="w-16 h-11 md:w-[100px] md:h-[67px] rounded-[6px] overflow-hidden shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
                 <img
                   src={c.flagUrl}
                   alt={t("a11y.flagAlt", "{{country}} flag", {
                     country: locC.name,
                   })}
-                  style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                  className="object-cover w-full h-full"
                 />
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "11px",
-                    fontWeight: 600,
-                    letterSpacing: "2px",
-                    color: "#8F5A3C",
-                    textTransform: "uppercase",
-                  }}
-                >
+              <div className="flex flex-col gap-1">
+                <span className="text-[11px] font-semibold tracking-[2px] text-[#8F5A3C] uppercase">
                   {t("countryPage.countryDetailLabel")}
                 </span>
                 <h1
-                  className="text-2xl md:text-4xl"
-                  style={{
-                    fontFamily: "Oswald, sans-serif",
-                    fontWeight: 700,
-                    color: "#E8E9EB",
-                    margin: 0,
-                    lineHeight: 1,
-                  }}
+                  className="text-2xl md:text-4xl font-bold text-[#E8E9EB] m-0 leading-none"
+                  style={{ fontFamily: "Oswald, sans-serif" }}
                 >
                   {locC.name}
                 </h1>
               </div>
-              <div className="hidden md:block" style={{ flex: 1 }} />
-              <div
-                className="hidden md:block"
-                style={{
-                  backgroundColor: "rgba(26,26,26,0.8)",
-                  borderRadius: "6px",
-                  padding: "6px 12px",
-                  alignSelf: "flex-end",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: "14px",
-                    color: "#808080",
-                  }}
-                >
-                  {c.code}
-                </span>
+              <div className="hidden md:block flex-1" />
+              <div className="hidden md:block bg-[rgba(26,26,26,0.8)] rounded-[6px] px-3 py-1.5 self-end">
+                <span className="font-mono text-sm text-[#808080]">{c.code}</span>
               </div>
             </div>
 
             {/* Badges row */}
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+            <div className="flex gap-2.5 flex-wrap">
               {c.hasNomadVisa && (
-                <div
-                  style={{
-                    backgroundColor: "rgba(26,26,10,0.85)",
-                    border: "1px solid #2A2810",
-                    borderRadius: "20px",
-                    padding: "6px 14px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    backdropFilter: "blur(4px)",
-                  }}
-                >
+                <div className="bg-[rgba(26,26,10,0.85)] border border-[#2A2810] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
                   <Plane size={13} color="#8F5A3C" />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#C2956A",
-                    }}
-                  >
-                    {t("countryPage.nomadVisaBadge")}
-                  </span>
+                  <span className="text-xs text-[#C2956A]">{t("countryPage.nomadVisaBadge")}</span>
                 </div>
               )}
               {c.isSchengen && (
-                <div
-                  style={{
-                    backgroundColor: "rgba(10,18,24,0.85)",
-                    border: "1px solid #0A2030",
-                    borderRadius: "20px",
-                    padding: "6px 14px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    backdropFilter: "blur(4px)",
-                  }}
-                >
+                <div className="bg-[rgba(10,18,24,0.85)] border border-[#0A2030] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
                   <Globe size={13} color="#5B8FA8" />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#7BACC8",
-                    }}
-                  >
-                    {t("countryPage.schengen")}
-                  </span>
+                  <span className="text-xs text-[#7BACC8]">{t("countryPage.schengen")}</span>
                 </div>
               )}
               {c.touristVisaDays != null && (
-                <div
-                  style={{
-                    backgroundColor: "rgba(26,20,16,0.85)",
-                    border: "1px solid #2A2010",
-                    borderRadius: "20px",
-                    padding: "6px 14px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    backdropFilter: "blur(4px)",
-                  }}
-                >
+                <div className="bg-[rgba(26,20,16,0.85)] border border-[#2A2010] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
                   <Calendar size={13} color="#C2956A" />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#C2956A",
-                    }}
-                  >
+                  <span className="text-xs text-[#C2956A]">
                     {t("countryPage.touristVisaBadge", {
                       count: c.touristVisaDays,
                     })}
@@ -395,28 +231,9 @@ export function CountryPage() {
                 </div>
               )}
               {c.climateData && (
-                <div
-                  style={{
-                    backgroundColor: "rgba(16,22,16,0.85)",
-                    border: "1px solid #142014",
-                    borderRadius: "20px",
-                    padding: "6px 14px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                    backdropFilter: "blur(4px)",
-                  }}
-                >
+                <div className="bg-[rgba(16,22,16,0.85)] border border-[#142014] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
                   <CloudSun size={13} color="#7A9B6B" />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#7A9B6B",
-                    }}
-                  >
-                    {seasonLabel}
-                  </span>
+                  <span className="text-xs text-[#7A9B6B]">{seasonLabel}</span>
                 </div>
               )}
             </div>
@@ -424,125 +241,31 @@ export function CountryPage() {
         </div>
 
         {/* ── statsRow ── */}
-        <div
-          className="grid grid-cols-2 gap-3 md:flex md:items-center"
-          style={{
-            backgroundColor: "var(--color-bg)",
-            paddingTop: "24px",
-            paddingBottom: "24px",
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "#111111",
-              borderRadius: "8px",
-              border: "1px solid #1E1E1E",
-              padding: "14px 18px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              flex: 1,
-            }}
-          >
+        <div className="bg-bg py-6 grid grid-cols-2 gap-3 md:flex md:items-center">
+          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
             <TrendingUp size={14} color="#8F5A3C" />
-            <div style={{ display: "flex", alignItems: "baseline", gap: "8px" }}>
+            <div className="flex items-baseline gap-2">
               {finalScore != null && (
-                <span
-                  style={{
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: "22px",
-                    fontWeight: 700,
-                    color: "#C2956A",
-                  }}
-                >
+                <span className="font-mono text-[22px] font-bold text-[#C2956A]">
                   {finalScore.toFixed(1)}
                 </span>
               )}
-              <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "#808080",
-                }}
-              >
-                #{rank}
-              </span>
+              <span className="font-mono text-xs text-[#808080]">#{rank}</span>
             </div>
           </div>
-          <div
-            style={{
-              backgroundColor: "#111111",
-              borderRadius: "8px",
-              border: "1px solid #1E1E1E",
-              padding: "14px 18px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              flex: 1,
-            }}
-          >
+          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
             <Users size={14} color="#5B8FA8" />
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "22px",
-                fontWeight: 700,
-                color: "#E8E9EB",
-              }}
-            >
+            <span className="font-mono text-[22px] font-bold text-[#E8E9EB]">
               {(c.population / 1_000_000).toFixed(1)}M
             </span>
           </div>
-          <div
-            style={{
-              backgroundColor: "#111111",
-              borderRadius: "8px",
-              border: "1px solid #1E1E1E",
-              padding: "14px 18px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              flex: 1,
-            }}
-          >
+          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
             <Building size={14} color="#7A9B6B" />
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "18px",
-                fontWeight: 700,
-                color: "#E8E9EB",
-              }}
-            >
-              {locC.capital}
-            </span>
+            <span className="font-mono text-[18px] font-bold text-[#E8E9EB]">{locC.capital}</span>
           </div>
-          <div
-            style={{
-              backgroundColor: "#111111",
-              borderRadius: "8px",
-              border: "1px solid #1E1E1E",
-              padding: "14px 18px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              flex: 1,
-            }}
-          >
+          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
             <MapPin size={14} color="#C2956A" />
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "18px",
-                fontWeight: 700,
-                color: "#E8E9EB",
-              }}
-            >
+            <span className="font-mono text-[18px] font-bold text-[#E8E9EB]">
               {t(`regions.${regionKey(c.region)}`)}
             </span>
           </div>
@@ -550,117 +273,41 @@ export function CountryPage() {
 
         {/* ── visa-section ── */}
         {visa && (
-          <div
-            style={{
-              backgroundColor: "var(--color-bg)",
-              paddingTop: "32px",
-              paddingBottom: "32px",
-              gap: "32px",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
+          <div className="bg-bg py-8 gap-8 flex flex-col">
             <div className="flex flex-col md:flex-row gap-3 md:items-center">
               <h2
-                style={{
-                  fontFamily: "Oswald, sans-serif",
-                  fontWeight: 700,
-                  color: "#E8E9EB",
-                  margin: 0,
-                }}
+                className="font-bold text-[#E8E9EB] m-0"
+                style={{ fontFamily: "Oswald, sans-serif" }}
               >
                 {t("countryPage.nomadVisaSection")}
               </h2>
-              <div style={{ flex: 1 }} />
-              <div
-                style={{
-                  backgroundColor: "#1A1A0A",
-                  borderRadius: "20px",
-                  padding: "6px 16px",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "12px",
-                    color: "#C2956A",
-                  }}
-                >
-                  {visa.visaName}
-                </span>
+              <div className="flex-1" />
+              <div className="bg-[#1A1A0A] rounded-[20px] px-4 py-1.5">
+                <span className="text-xs text-[#C2956A]">{visa.visaName}</span>
               </div>
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "10px",
-                  color: "#757575",
-                }}
-              >
+              <span className="text-[10px] text-dimmer">
                 {t("countryPage.updated", { date: visa.lastUpdated })}
               </span>
             </div>
 
             <div className="flex flex-col md:flex-row gap-5 md:gap-6">
               {/* Left column – 440px */}
-              <div
-                className="w-full md:w-[440px] md:flex-shrink-0"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                }}
-              >
+              <div className="w-full md:w-[440px] md:flex-shrink-0 flex flex-col gap-5">
                 {/* Duration & Cost */}
-                <div
-                  style={{
-                    backgroundColor: "#111111",
-                    borderRadius: "12px",
-                    border: "1px solid #1E1E1E",
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "16px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#808080",
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                    }}
-                  >
+                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
+                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                     {t("countryPage.durationCost")}
                   </span>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div className="flex gap-2 items-center">
                     <Calendar size={16} color="#8F5A3C" />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "14px",
-                        color: "#E8E9EB",
-                      }}
-                    >
+                    <span className="text-sm text-[#E8E9EB]">
                       {t("countryPage.monthsInitial", {
                         count: visa.duration.initial,
                       })}
                     </span>
-                    <div style={{ flex: 1 }} />
+                    <div className="flex-1" />
                     {visa.duration.maxExtension > 0 && (
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "11px",
-                          color: "#C2956A",
-                        }}
-                      >
+                      <span className="text-[11px] text-[#C2956A]">
                         {t("countryPage.moExtension", {
                           count: visa.duration.maxExtension,
                         })}
@@ -668,124 +315,47 @@ export function CountryPage() {
                     )}
                   </div>
                   {visa.duration.renewable && (
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "8px",
-                        alignItems: "center",
-                      }}
-                    >
+                    <div className="flex gap-2 items-center">
                       <RefreshCw size={16} color="#6B9E6B" />
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "14px",
-                          color: "#6B9E6B",
-                        }}
-                      >
-                        {t("countryPage.renewable")}
-                      </span>
+                      <span className="text-sm text-[#6B9E6B]">{t("countryPage.renewable")}</span>
                     </div>
                   )}
-                  <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div className="h-px bg-[#1E1E1E]" />
+                  <div className="flex gap-2 items-center">
                     <CreditCard size={16} color="#8F5A3C" />
                     <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "22px",
-                        fontWeight: 700,
-                        color: visa.cost.amount === 0 ? "#44CC66" : "#E8E9EB",
-                      }}
+                      className={`font-mono text-[22px] font-bold ${visa.cost.amount === 0 ? "text-[#44CC66]" : "text-[#E8E9EB]"}`}
                     >
                       {visa.cost.amount === 0
                         ? t("countryPage.free")
                         : `${visa.cost.currency} ${visa.cost.amount.toLocaleString()}`}
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "11px",
-                        color: "#8A8A8A",
-                      }}
-                    >
-                      {t("countryPage.applicationFee")}
-                    </span>
+                    <span className="text-[11px] text-dim">{t("countryPage.applicationFee")}</span>
                   </div>
-                  <div
-                    style={{
-                      backgroundColor: "var(--color-bg)",
-                      borderRadius: "8px",
-                      padding: "12px 16px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "4px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "9px",
-                        color: "#757575",
-                        letterSpacing: "1px",
-                        textTransform: "uppercase",
-                      }}
-                    >
+                  <div className="bg-bg rounded-lg px-4 py-3 flex flex-col gap-1">
+                    <span className="text-[9px] text-dimmer tracking-[1px] uppercase">
                       {t("countryPage.incomeRequirement")}
                     </span>
                     {visa.incomeRequirement.monthly != null ? (
                       <>
-                        <span
-                          style={{
-                            fontFamily: "IBM Plex Mono, monospace",
-                            fontSize: "18px",
-                            fontWeight: 700,
-                            color: "#C2956A",
-                          }}
-                        >
+                        <span className="font-mono text-[18px] font-bold text-[#C2956A]">
                           {visa.incomeRequirement.currency}{" "}
                           {visa.incomeRequirement.monthly.toLocaleString()}{" "}
                           {t("countryPage.perMonth")}
                         </span>
-                        <span
-                          style={{
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "11px",
-                            color: "#8A8A8A",
-                          }}
-                        >
+                        <span className="text-[11px] text-dim">
                           {visa.incomeRequirement.currency}{" "}
                           {(visa.incomeRequirement.monthly * 12).toLocaleString()}{" "}
                           {t("countryPage.perYear")}
                         </span>
                       </>
                     ) : visa.incomeRequirement.annual != null ? (
-                      <span
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "18px",
-                          fontWeight: 700,
-                          color: "#C2956A",
-                        }}
-                      >
+                      <span className="font-mono text-[18px] font-bold text-[#C2956A]">
                         {visa.incomeRequirement.currency}{" "}
                         {visa.incomeRequirement.annual.toLocaleString()} {t("countryPage.perYear")}
                       </span>
                     ) : (
-                      <span
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "18px",
-                          fontWeight: 700,
-                          color: "#44CC66",
-                        }}
-                      >
+                      <span className="font-mono text-[18px] font-bold text-[#44CC66]">
                         {t("countryPage.visa.noMinimum")}
                       </span>
                     )}
@@ -793,55 +363,27 @@ export function CountryPage() {
                 </div>
 
                 {/* Taxation */}
-                <div
-                  style={{
-                    backgroundColor: "#111111",
-                    borderRadius: "12px",
-                    border: "1px solid #1E1E1E",
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "16px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#808080",
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                    }}
-                  >
+                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
+                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                     {t("countryPage.taxation")}
                   </span>
                   <div
-                    style={{
-                      display: "flex",
-                      gap: "4px",
-                      alignItems: "center",
-                      backgroundColor:
-                        visa.tax.status === "exempt"
-                          ? "#0A2010"
-                          : visa.tax.status === "special"
-                            ? "#1A0A1A"
-                            : "#1A1A0A",
-                      borderRadius: "8px",
-                      padding: "10px 16px",
-                    }}
+                    className={`flex gap-1 items-center rounded-lg px-4 py-2.5 ${
+                      visa.tax.status === "exempt"
+                        ? "bg-[#0A2010]"
+                        : visa.tax.status === "special"
+                          ? "bg-[#1A0A1A]"
+                          : "bg-[#1A1A0A]"
+                    }`}
                   >
                     <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        fontWeight: 600,
-                        color:
-                          visa.tax.status === "exempt"
-                            ? "#44CC66"
-                            : visa.tax.status === "special"
-                              ? "#9B8FB4"
-                              : "#C2956A",
-                      }}
+                      className={`text-[13px] font-semibold ${
+                        visa.tax.status === "exempt"
+                          ? "text-[#44CC66]"
+                          : visa.tax.status === "special"
+                            ? "text-[#9B8FB4]"
+                            : "text-[#C2956A]"
+                      }`}
                     >
                       {visa.tax.status === "exempt"
                         ? t("countryPage.taxExemptLabel")
@@ -850,70 +392,27 @@ export function CountryPage() {
                           : t("countryPage.standardTaxLabel")}
                     </span>
                     {visa.tax.rate != null && visa.tax.status !== "exempt" && (
-                      <span
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "13px",
-                          color: "#8A8A8A",
-                        }}
-                      >
+                      <span className="font-mono text-[13px] text-dim">
                         {" · "}
                         {visa.tax.rate}%
                       </span>
                     )}
                   </div>
                   {visa.tax.notes && (
-                    <p
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "12px",
-                        color: "#808080",
-                        margin: 0,
-                      }}
-                    >
+                    <p className="text-xs text-[#808080] m-0">
                       {localize(visa.tax.notes, visa, (l) => l.tax?.notes)}
                     </p>
                   )}
                 </div>
 
                 {/* Eligibility */}
-                <div
-                  style={{
-                    backgroundColor: "#111111",
-                    borderRadius: "12px",
-                    border: "1px solid #1E1E1E",
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#808080",
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                    }}
-                  >
+                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-3">
+                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                     {t("countryPage.eligibilitySection")}
                   </span>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div className="flex gap-2 items-center">
                     <User size={14} color="#808080" />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        color: "#8A8A8A",
-                      }}
-                    >
+                    <span className="text-[13px] text-dim">
                       {t("countryPage.minimumAge", {
                         age: visa.eligibility.minAge,
                       })}
@@ -924,7 +423,7 @@ export function CountryPage() {
                     visa,
                     (l) => l.eligibility?.requirements,
                   ).map((req, i) => (
-                    <div key={i} style={{ display: "flex", gap: "8px", paddingTop: "4px" }}>
+                    <div key={i} className="flex gap-2 pt-1">
                       <Check
                         size={13}
                         color="#6B9E6B"
@@ -935,76 +434,23 @@ export function CountryPage() {
                           } as React.CSSProperties
                         }
                       />
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "12px",
-                          color: "#9E9E9E",
-                          flex: 1,
-                        }}
-                      >
-                        {req}
-                      </span>
+                      <span className="text-xs text-on-surface flex-1">{req}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Right column – flex fill */}
-              <div
-                style={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "20px",
-                  minWidth: 0,
-                }}
-              >
+              <div className="flex-1 flex flex-col gap-5 min-w-0">
                 {/* Visa Benefits */}
-                <div
-                  style={{
-                    backgroundColor: "#111111",
-                    borderRadius: "12px",
-                    border: "1px solid #1E1E1E",
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#808080",
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                    }}
-                  >
+                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-3">
+                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                     {t("countryPage.visaBenefits")}
                   </span>
                   {localize(visa.benefits, visa, (l) => l.benefits).map((benefit, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: "flex",
-                        gap: "10px",
-                        alignItems: "center",
-                        backgroundColor: "var(--color-bg)",
-                        borderRadius: "8px",
-                        padding: "10px 12px",
-                      }}
-                    >
+                    <div key={i} className="flex gap-2.5 items-center bg-bg rounded-lg px-3 py-2.5">
                       <Briefcase size={16} color="#8F5A3C" />
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "13px",
-                          color: "#CCCCCC",
-                        }}
-                      >
-                        {benefit}
-                      </span>
+                      <span className="text-[13px] text-muted">{benefit}</span>
                     </div>
                   ))}
                 </div>

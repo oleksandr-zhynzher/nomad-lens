@@ -23,10 +23,7 @@ export function TourismCountryCardDetail({
   const langPrefix = useLangPrefix();
 
   return (
-    <div
-      className="px-4 py-4"
-      style={{ borderTop: `1px solid ${borderColor}`, backgroundColor: "#111113" }}
-    >
+    <div className="px-4 py-4 bg-[#111113]" style={{ borderTop: `1px solid ${borderColor}` }}>
       <TourismBreakdownChart country={country} />
 
       {/* Budget breakdown */}
@@ -54,122 +51,50 @@ export function TourismCountryCardDetail({
 
           return (
             <div
+              className="mt-4 p-[14px] rounded-[10px] border border-[#2A2D33] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
               style={{
-                marginTop: "16px",
-                padding: "14px",
                 background:
                   "linear-gradient(180deg, rgba(18,19,22,0.96) 0%, rgba(11,12,14,0.98) 100%)",
-                borderRadius: "10px",
-                border: "1px solid #2A2D33",
-                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.03)",
               }}
             >
-              <div className="flex items-center justify-between" style={{ marginBottom: "12px" }}>
-                <div
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    fontWeight: 700,
-                    letterSpacing: "1.7px",
-                    textTransform: "uppercase",
-                    color: "#A6ADB8",
-                  }}
-                >
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-[10px] font-bold tracking-[1.7px] uppercase text-[#A6ADB8]">
                   {t("tourismBudget.costBreakdown", "Daily Cost Breakdown")}
                 </div>
-                <span
-                  className="inline-flex items-center"
-                  style={{
-                    height: "20px",
-                    padding: "0 8px",
-                    borderRadius: "999px",
-                    border: "1px solid #343A44",
-                    backgroundColor: "#171A1F",
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: "11px",
-                    fontWeight: 600,
-                    color: "#D8DEE9",
-                  }}
-                >
+                <span className="inline-flex items-center h-5 px-2 rounded-full border border-[#343A44] bg-[#171A1F] font-mono text-[11px] font-semibold text-[#D8DEE9]">
                   ${totalDaily}/d
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-5" style={{ gap: "10px" }}>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-[10px]">
                 {rows.map(({ cat, amount, color, width }) => {
                   const meta = cardMeta[cat];
                   return (
                     <div
                       key={cat}
-                      style={{
-                        backgroundColor: "#0C0F13",
-                        border: "1px solid #2B313A",
-                        borderRadius: "10px",
-                        padding: "12px",
-                        minHeight: "102px",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.02)",
-                      }}
+                      className="bg-[#0C0F13] border border-[#2B313A] rounded-[10px] p-3 min-h-[102px] flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]"
                     >
                       <div className="flex items-center justify-between gap-2">
                         <span
-                          className="inline-flex items-center justify-center"
-                          style={{
-                            width: "28px",
-                            height: "28px",
-                            borderRadius: "8px",
-                            backgroundColor: "#161A20",
-                            border: `1px solid ${meta.accent}44`,
-                          }}
+                          className="inline-flex items-center justify-center w-7 h-7 rounded-[8px] bg-[#161A20]"
+                          style={{ border: `1px solid ${meta.accent}44` }}
                         >
                           {meta.icon}
                         </span>
-                        <span
-                          style={{
-                            fontFamily: "IBM Plex Mono, monospace",
-                            fontSize: "17px",
-                            lineHeight: 1,
-                            fontWeight: 700,
-                            color: "#ECEFF4",
-                          }}
-                        >
+                        <span className="font-mono text-[17px] leading-none font-bold text-[#ECEFF4]">
                           ${amount}
                         </span>
                       </div>
-                      <div
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          fontWeight: 600,
-                          letterSpacing: "0.8px",
-                          textTransform: "uppercase",
-                          color: "#8E96A3",
-                          marginTop: "8px",
-                        }}
-                      >
+                      <div className="text-[10px] font-semibold tracking-[0.8px] uppercase text-[#8E96A3] mt-2">
                         {t(
                           `tourismBudget.categories.${cat}`,
                           cat.charAt(0).toUpperCase() + cat.slice(1),
                         )}
                       </div>
-                      <div
-                        style={{
-                          marginTop: "8px",
-                          height: "5px",
-                          borderRadius: "999px",
-                          backgroundColor: "#232A33",
-                          overflow: "hidden",
-                        }}
-                      >
+                      <div className="mt-2 h-[5px] rounded-full bg-[#232A33] overflow-hidden">
                         <div
-                          style={{
-                            width: `${width}%`,
-                            height: "100%",
-                            borderRadius: "999px",
-                            backgroundColor: color,
-                          }}
+                          className="h-full rounded-full"
+                          style={{ width: `${width}%`, backgroundColor: color }}
                         />
                       </div>
                     </div>
@@ -177,153 +102,45 @@ export function TourismCountryCardDetail({
                 })}
 
                 {/* Total card */}
-                <div
-                  style={{
-                    backgroundColor: "#0C0F13",
-                    border: "1px solid #2B313A",
-                    borderRadius: "10px",
-                    padding: "12px",
-                    minHeight: "102px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.02)",
-                  }}
-                >
+                <div className="bg-[#0C0F13] border border-[#2B313A] rounded-[10px] p-3 min-h-[102px] flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
                   <div className="flex items-center justify-between gap-2">
-                    <span
-                      className="inline-flex items-center justify-center"
-                      style={{
-                        width: "28px",
-                        height: "28px",
-                        borderRadius: "8px",
-                        backgroundColor: "#161A20",
-                        border: "1px solid #3C4F3F",
-                        color: "#58C26D",
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "12px",
-                        fontWeight: 700,
-                      }}
-                    >
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-[8px] bg-[#161A20] border border-[#3C4F3F] text-[#58C26D] font-mono text-xs font-bold">
                       Σ
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "17px",
-                        lineHeight: 1,
-                        fontWeight: 700,
-                        color: "#58C26D",
-                      }}
-                    >
+                    <span className="font-mono text-[17px] leading-none font-bold text-[#58C26D]">
                       ${totalDaily}
                     </span>
                   </div>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      fontWeight: 600,
-                      letterSpacing: "0.8px",
-                      textTransform: "uppercase",
-                      color: "#8E96A3",
-                      marginTop: "8px",
-                    }}
-                  >
+                  <div className="text-[10px] font-semibold tracking-[0.8px] uppercase text-[#8E96A3] mt-2">
                     {t("tourismBudget.total", "Total")}
                   </div>
-                  <div
-                    style={{
-                      marginTop: "8px",
-                      height: "5px",
-                      borderRadius: "999px",
-                      backgroundColor: "#232A33",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "999px",
-                        backgroundColor: "#58C26D",
-                      }}
-                    />
+                  <div className="mt-2 h-[5px] rounded-full bg-[#232A33] overflow-hidden">
+                    <div className="w-full h-full rounded-full bg-[#58C26D]" />
                   </div>
                 </div>
 
                 {/* Surplus card */}
                 <div
-                  style={{
-                    backgroundColor: "#0C0F13",
-                    border: `1px solid ${budgetMatch.surplus >= 0 ? "#2D6E3A" : "#6C3A2D"}`,
-                    borderRadius: "10px",
-                    padding: "12px",
-                    minHeight: "102px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.02)",
-                  }}
+                  className={`bg-[#0C0F13] rounded-[10px] p-3 min-h-[102px] flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] ${budgetMatch.surplus >= 0 ? "border border-[#2D6E3A]" : "border border-[#6C3A2D]"}`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span
-                      className="inline-flex items-center justify-center"
-                      style={{
-                        width: "28px",
-                        height: "28px",
-                        borderRadius: "8px",
-                        backgroundColor: budgetMatch.surplus >= 0 ? "#17301D" : "#321A16",
-                        border: `1px solid ${budgetMatch.surplus >= 0 ? "#2D6E3A" : "#6C3A2D"}`,
-                        color: budgetMatch.surplus >= 0 ? "#58C26D" : "#FF7A59",
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "12px",
-                        fontWeight: 700,
-                      }}
+                      className={`inline-flex items-center justify-center w-7 h-7 rounded-[8px] font-mono text-xs font-bold ${budgetMatch.surplus >= 0 ? "bg-[#17301D] border border-[#2D6E3A] text-[#58C26D]" : "bg-[#321A16] border border-[#6C3A2D] text-[#FF7A59]"}`}
                     >
                       {budgetMatch.surplus >= 0 ? "+" : "-"}
                     </span>
                     <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "17px",
-                        lineHeight: 1,
-                        fontWeight: 700,
-                        color: budgetMatch.surplus >= 0 ? "#58C26D" : "#FF7A59",
-                      }}
+                      className={`font-mono text-[17px] leading-none font-bold ${budgetMatch.surplus >= 0 ? "text-[#58C26D]" : "text-[#FF7A59]"}`}
                     >
                       {budgetMatch.surplus >= 0 ? "+" : "-"}${Math.abs(budgetMatch.surplus)}
                     </span>
                   </div>
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      fontWeight: 600,
-                      letterSpacing: "0.8px",
-                      textTransform: "uppercase",
-                      color: "#8E96A3",
-                      marginTop: "8px",
-                    }}
-                  >
+                  <div className="text-[10px] font-semibold tracking-[0.8px] uppercase text-[#8E96A3] mt-2">
                     {t("tourismBudget.surplus", "surplus")}
                   </div>
-                  <div
-                    style={{
-                      marginTop: "8px",
-                      height: "5px",
-                      borderRadius: "999px",
-                      backgroundColor: "#232A33",
-                      overflow: "hidden",
-                    }}
-                  >
+                  <div className="mt-2 h-[5px] rounded-full bg-[#232A33] overflow-hidden">
                     <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "999px",
-                        backgroundColor: budgetMatch.surplus >= 0 ? "#58C26D" : "#FF7A59",
-                      }}
+                      className={`w-full h-full rounded-full ${budgetMatch.surplus >= 0 ? "bg-[#58C26D]" : "bg-[#FF7A59]"}`}
                     />
                   </div>
                 </div>
@@ -334,20 +151,9 @@ export function TourismCountryCardDetail({
 
       <Link
         to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-        className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
+        className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors h-11 border border-[#3A404B] rounded-[8px] text-sm font-semibold tracking-[0.2px] text-[#D7AE82] no-underline mt-4"
         style={{
-          display: "flex",
-          height: "44px",
           background: "linear-gradient(180deg, rgba(28,31,36,0.95) 0%, rgba(20,22,26,0.98) 100%)",
-          border: "1px solid #3A404B",
-          borderRadius: "8px",
-          fontFamily: "Inter, sans-serif",
-          fontSize: "14px",
-          fontWeight: 600,
-          letterSpacing: "0.2px",
-          color: "#D7AE82",
-          textDecoration: "none",
-          marginTop: "16px",
         }}
         onClick={(e) => e.stopPropagation()}
       >

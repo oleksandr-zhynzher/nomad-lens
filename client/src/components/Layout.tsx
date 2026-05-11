@@ -76,198 +76,80 @@ export function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <div
-      className="min-h-screen flex flex-col text-slate-100"
-      style={{ backgroundColor: "var(--color-bg)" }}
-    >
-      <header
-        className="sticky top-0 z-30 border-b"
-        style={{
-          backgroundColor: "#0D0E10",
-          borderColor: "#252525",
-          height: "56px",
-        }}
-      >
+    <div className="min-h-screen flex flex-col text-slate-100 bg-bg">
+      <header className="sticky top-0 z-30 border-b bg-[#0D0E10] border-[#252525] h-14">
         <div className="mx-auto flex h-full w-full max-w-[1200px] items-center justify-between px-4">
           <button
             onClick={() => handleViewClick("list")}
-            className="flex items-center gap-2.5 leading-none"
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              height: "32px",
-              marginTop: "-4px",
-            }}
+            className="flex items-center gap-2.5 leading-none bg-transparent border-none cursor-pointer p-0 h-8 -mt-1"
           >
             <LogoMark size={32} />
             <span
-              style={{
-                fontFamily: "Oswald, sans-serif",
-                fontSize: "20px",
-                fontWeight: 700,
-                letterSpacing: "2px",
-                lineHeight: 1,
-                textTransform: "uppercase",
-                display: "flex",
-                alignItems: "center",
-                height: "32px",
-                marginTop: "-4px",
-              }}
+              className="text-[20px] font-bold tracking-[2px] leading-none uppercase flex items-center h-8 -mt-1"
+              style={{ fontFamily: "Oswald, sans-serif" }}
             >
               NOMAD LENS
             </span>
           </button>
 
           <div className="hidden items-center gap-4 md:flex">
-            <div className="flex rounded-md p-1" style={{ backgroundColor: "#2A2A2A", gap: "4px" }}>
+            <div className="flex rounded-md p-1 bg-surface-4 gap-1">
               <button
                 onClick={() => handleViewClick("list")}
-                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={activeView === "list" ? "true" : undefined}
-                style={{
-                  backgroundColor: activeView === "list" ? "var(--color-accent)" : "transparent",
-                  color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activeView === "list" ? 500 : 400,
-                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] ${activeView === "list" ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
               >
                 <List size={16} />
                 {t("views.list")}
               </button>
               <button
                 onClick={() => handleViewClick("map")}
-                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={activeView === "map" ? "true" : undefined}
-                style={{
-                  backgroundColor: activeView === "map" ? "var(--color-accent)" : "transparent",
-                  color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activeView === "map" ? 500 : 400,
-                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] ${activeView === "map" ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
               >
                 <Map size={16} />
                 {t("views.map")}
               </button>
               <button
                 onClick={() => handleViewClick("compare")}
-                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={activeView === "compare" ? "true" : undefined}
-                style={{
-                  backgroundColor: activeView === "compare" ? "var(--color-accent)" : "transparent",
-                  color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activeView === "compare" ? 500 : 400,
-                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] ${activeView === "compare" ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
               >
                 <BarChart3 size={16} />
                 {t("views.compare")}
               </button>
               <Link
                 to={`${langPrefix}/nomad-visas`}
-                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={pathname.endsWith("/nomad-visas") ? "true" : undefined}
-                style={{
-                  backgroundColor: pathname.endsWith("/nomad-visas")
-                    ? "var(--color-accent)"
-                    : "transparent",
-                  color: pathname.endsWith("/nomad-visas") ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
-                  textDecoration: "none",
-                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] no-underline ${pathname.endsWith("/nomad-visas") ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
               >
                 <Plane size={16} />
                 {t("nav.nomadVisas")}
               </Link>
               <Link
                 to={`${langPrefix}/budget-matcher`}
-                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={pathname.endsWith("/budget-matcher") ? "true" : undefined}
-                style={{
-                  backgroundColor: pathname.endsWith("/budget-matcher")
-                    ? "var(--color-accent)"
-                    : "transparent",
-                  color: pathname.endsWith("/budget-matcher") ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
-                  textDecoration: "none",
-                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] no-underline ${pathname.endsWith("/budget-matcher") ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
               </Link>
               <Link
                 to={`${langPrefix}/tourism`}
-                className="header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors"
-                data-active={pathname.endsWith("/tourism") ? "true" : undefined}
-                style={{
-                  backgroundColor: pathname.endsWith("/tourism")
-                    ? "var(--color-accent)"
-                    : "transparent",
-                  color: pathname.endsWith("/tourism") ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: pathname.endsWith("/tourism") ? 500 : 400,
-                  textDecoration: "none",
-                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] no-underline ${pathname.endsWith("/tourism") ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
               >
                 <Palmtree size={16} />
                 {t("nav.tourism", "Tourism")}
               </Link>
             </div>
 
-            <div
-              ref={langRef}
-              style={{
-                position: "relative",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
+            <div ref={langRef} className="relative flex items-center">
               <button
                 onClick={() => setLangDropdownOpen((previous) => !previous)}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  letterSpacing: "1px",
-                  lineHeight: 1,
-                  color: langDropdownOpen ? "#C2956A" : "#808080",
-                  minWidth: "32px",
-                  height: "32px",
-                  padding: "0 6px",
-                }}
+                className={`inline-flex items-center justify-center bg-transparent border-none cursor-pointer text-xs font-bold tracking-[1px] leading-none min-w-8 h-8 px-1.5 ${langDropdownOpen ? "text-accent-dim" : "text-dimmer"}`}
               >
                 {currentLang.code.toUpperCase()}
               </button>
 
               {langDropdownOpen && (
                 <div
-                  style={{
-                    position: "absolute",
-                    top: "calc(100% + 6px)",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    backgroundColor: "#111111",
-                    border: "1px solid #252525",
-                    borderRadius: "8px",
-                    overflow: "hidden",
-                    boxShadow: "0 8px 24px rgba(0,0,0,0.6)",
-                    zIndex: 50,
-                  }}
+                  className="absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 bg-[#111111] border border-[#252525] rounded-lg overflow-hidden z-50"
+                  style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.6)" }}
                 >
                   {LANG_OPTIONS.filter((option) => option.code !== i18n.language).map(
                     (option, index) => (
@@ -275,22 +157,7 @@ export function Layout({ children }: LayoutProps) {
                         key={option.code}
                         to={langSwitchPath(option.code)}
                         onClick={() => setLangDropdownOpen(false)}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          minWidth: "56px",
-                          height: "32px",
-                          padding: "0 16px",
-                          textDecoration: "none",
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "12px",
-                          fontWeight: 600,
-                          letterSpacing: "1px",
-                          lineHeight: 1,
-                          color: "#9E9E9E",
-                          borderTop: index === 0 ? "none" : "1px solid #1E1E1E",
-                        }}
+                        className={`flex items-center justify-center min-w-14 h-8 px-4 no-underline text-xs font-semibold tracking-[1px] leading-none text-muted ${index === 0 ? "" : "border-t border-[#1E1E1E]"}`}
                       >
                         {option.code.toUpperCase()}
                       </Link>
@@ -304,12 +171,7 @@ export function Layout({ children }: LayoutProps) {
               href="https://github.com/oleksandr-zhynzher/nomad-lens"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 transition-colors hover:text-slate-200"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "13px",
-                color: "#9E9E9E",
-              }}
+              className="flex items-center gap-1.5 transition-colors hover:text-slate-200 text-[13px] text-muted"
             >
               <svg
                 width="16"
@@ -328,8 +190,7 @@ export function Layout({ children }: LayoutProps) {
           </div>
 
           <button
-            className="flex items-center justify-center md:hidden"
-            style={{ width: "40px", height: "40px", color: "#9E9E9E" }}
+            className="flex items-center justify-center md:hidden w-10 h-10 text-muted"
             onClick={() => setMobileMenuOpen((previous) => !previous)}
             aria-label={t("a11y.toggleMenu", "Toggle menu")}
           >
@@ -339,10 +200,7 @@ export function Layout({ children }: LayoutProps) {
       </header>
 
       {mobileMenuOpen && (
-        <div
-          className="fixed inset-x-0 top-14 bottom-0 z-40 px-3 pb-3 md:hidden"
-          style={{ backgroundColor: "#0D0E10" }}
-        >
+        <div className="fixed inset-x-0 top-14 bottom-0 z-40 px-3 pb-3 md:hidden bg-[#0D0E10]">
           <button
             type="button"
             aria-label={t("a11y.closeMenu", "Close menu")}
@@ -350,66 +208,34 @@ export function Layout({ children }: LayoutProps) {
             onClick={() => setMobileMenuOpen(false)}
           />
           <div
-            className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4"
+            className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4 border-[#252525]"
             style={{
               background:
                 "linear-gradient(180deg, rgba(20,20,22,0.98) 0%, rgba(13,14,16,0.98) 100%)",
-              borderColor: "#252525",
               boxShadow: "0 20px 48px rgba(0,0,0,0.45)",
             }}
           >
-            <p
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "10px",
-                fontWeight: 600,
-                letterSpacing: "1.5px",
-                textTransform: "uppercase",
-                color: "#757575",
-                marginBottom: "4px",
-              }}
-            >
+            <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-dimmest mb-1">
               {t("views.viewLabel")}
             </p>
             <div className="mb-3 grid grid-cols-2 gap-2">
               <button
                 onClick={() => handleViewClick("list")}
-                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
-                style={{
-                  backgroundColor: activeView === "list" ? "var(--color-accent)" : "#2A2A2A",
-                  color: activeView === "list" ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activeView === "list" ? 500 : 400,
-                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] ${activeView === "list" ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
               >
                 <List size={16} />
                 {t("views.list")}
               </button>
               <button
                 onClick={() => handleViewClick("map")}
-                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
-                style={{
-                  backgroundColor: activeView === "map" ? "var(--color-accent)" : "#2A2A2A",
-                  color: activeView === "map" ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activeView === "map" ? 500 : 400,
-                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] ${activeView === "map" ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
               >
                 <Map size={16} />
                 {t("views.map")}
               </button>
               <button
                 onClick={() => handleViewClick("compare")}
-                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
-                style={{
-                  backgroundColor: activeView === "compare" ? "var(--color-accent)" : "#2A2A2A",
-                  color: activeView === "compare" ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: activeView === "compare" ? 500 : 400,
-                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] ${activeView === "compare" ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
               >
                 <BarChart3 size={16} />
                 {t("views.compare")}
@@ -417,17 +243,7 @@ export function Layout({ children }: LayoutProps) {
               <Link
                 to={`${langPrefix}/nomad-visas`}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
-                style={{
-                  backgroundColor: pathname.endsWith("/nomad-visas")
-                    ? "var(--color-accent)"
-                    : "#2A2A2A",
-                  color: pathname.endsWith("/nomad-visas") ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: pathname.endsWith("/nomad-visas") ? 500 : 400,
-                  textDecoration: "none",
-                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] no-underline ${pathname.endsWith("/nomad-visas") ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
               >
                 <Plane size={16} />
                 {t("nav.nomadVisas")}
@@ -435,17 +251,7 @@ export function Layout({ children }: LayoutProps) {
               <Link
                 to={`${langPrefix}/budget-matcher`}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
-                style={{
-                  backgroundColor: pathname.endsWith("/budget-matcher")
-                    ? "var(--color-accent)"
-                    : "#2A2A2A",
-                  color: pathname.endsWith("/budget-matcher") ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: pathname.endsWith("/budget-matcher") ? 500 : 400,
-                  textDecoration: "none",
-                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] no-underline ${pathname.endsWith("/budget-matcher") ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
@@ -453,39 +259,20 @@ export function Layout({ children }: LayoutProps) {
               <Link
                 to={`${langPrefix}/tourism`}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors"
-                style={{
-                  backgroundColor: pathname.endsWith("/tourism")
-                    ? "var(--color-accent)"
-                    : "#2A2A2A",
-                  color: pathname.endsWith("/tourism") ? "#FFFFFF" : "#9E9E9E",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  fontWeight: pathname.endsWith("/tourism") ? 500 : 400,
-                  textDecoration: "none",
-                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] no-underline ${pathname.endsWith("/tourism") ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
               >
                 <Palmtree size={16} />
                 {t("nav.tourism", "Tourism")}
               </Link>
             </div>
 
-            <div
-              className="flex items-center gap-3 py-3"
-              style={{ borderBottom: "1px solid #1E1E1E" }}
-            >
+            <div className="flex items-center gap-3 py-3 border-b border-[#1E1E1E]">
               {(["en", "ua", "ru"] as const).map((language) => (
                 <Link
                   key={language}
                   to={langSwitchPath(language)}
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: i18n.language === language ? 700 : 400,
-                    color: i18n.language === language ? "#C2956A" : "#808080",
-                    textDecoration: "none",
-                  }}
+                  className={`text-[13px] no-underline ${i18n.language === language ? "font-bold text-accent-dim" : "font-normal text-dimmer"}`}
                 >
                   {t(`langSwitcher.${language}`)}
                 </Link>
@@ -496,13 +283,7 @@ export function Layout({ children }: LayoutProps) {
               href="https://github.com/oleksandr-zhynzher/nomad-lens"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 py-3"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-                color: "#9E9E9E",
-                textDecoration: "none",
-              }}
+              className="flex items-center gap-2 py-3 text-sm text-muted no-underline"
             >
               <svg
                 width="16"
@@ -528,10 +309,7 @@ export function Layout({ children }: LayoutProps) {
         {children}
       </main>
 
-      <footer
-        className="mt-16 border-t px-4 py-6 text-center text-xs"
-        style={{ borderColor: "#333333", color: "#8A8A8A" }}
-      >
+      <footer className="mt-16 border-t px-4 py-6 text-center text-xs border-border text-dim">
         {t("footer.data")}
       </footer>
     </div>

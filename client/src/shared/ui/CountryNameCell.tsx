@@ -18,25 +18,11 @@ export function CountryNameCell({ country, badge }: CountryNameCellProps) {
       <img
         src={country.flagUrl}
         alt={t("a11y.flagAlt", "{{country}} flag", { country: locC.name })}
-        className="object-cover shrink-0"
-        style={{ width: "24px", height: "16px", borderRadius: "2px" }}
+        className="object-cover shrink-0 w-6 h-4 rounded-sm"
         loading="lazy"
       />
-      <p
-        className="truncate"
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "14px",
-          fontWeight: 600,
-          color: "#FFFFFF",
-        }}
-      >
-        {locC.name}
-      </p>
-      <span
-        className="hidden sm:inline shrink-0"
-        style={{ fontFamily: "Inter, sans-serif", fontSize: "11px", color: "#808080" }}
-      >
+      <p className="truncate text-sm font-semibold text-white">{locC.name}</p>
+      <span className="hidden sm:inline shrink-0 text-[11px] text-dimmer">
         {t(`regions.${regionKey(country.region)}`)}
       </span>
       {badge}

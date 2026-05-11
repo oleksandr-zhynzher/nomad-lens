@@ -12,20 +12,7 @@ export function ViewCountryButton({ to }: ViewCountryButtonProps) {
   return (
     <Link
       to={to}
-      className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
-      style={{
-        display: "flex",
-        height: "40px",
-        backgroundColor: "transparent",
-        border: "1px solid #333333",
-        borderRadius: "6px",
-        fontFamily: "Inter, sans-serif",
-        fontSize: "13px",
-        fontWeight: 500,
-        color: "var(--color-accent-dim)",
-        textDecoration: "none",
-        marginTop: "16px",
-      }}
+      className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors h-10 bg-transparent border border-border rounded-md text-[13px] font-medium text-accent-dim no-underline mt-4"
       onClick={(e) => e.stopPropagation()}
     >
       <User size={14} />

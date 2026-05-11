@@ -56,35 +56,14 @@ function ToggleGroup<T extends string | number>({
   labelFn: (v: T) => string;
 }) {
   return (
-    <div
-      className="flex"
-      style={{
-        backgroundColor: "#2A2A2A",
-        borderRadius: 4,
-        padding: 4,
-        gap: 4,
-      }}
-    >
+    <div className="flex bg-surface-4 rounded p-1 gap-1">
       {options.map((opt) => {
         const active = opt === value;
         return (
           <button
             key={String(opt)}
             onClick={() => onChange(opt)}
-            style={{
-              flex: 1,
-              padding: "5px 0",
-              borderRadius: 3,
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "Inter, sans-serif",
-              fontSize: 12,
-              fontWeight: active ? 500 : 400,
-              backgroundColor: active ? "var(--color-accent)" : "transparent",
-              color: active ? "#FFFFFF" : "#8A8A8A",
-              textAlign: "center",
-              transition: "all 0.15s ease",
-            }}
+            className={`flex-1 px-0 py-[5px] rounded-[3px] border-0 cursor-pointer text-center text-xs transition-all duration-150 ${active ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
           >
             {labelFn(opt)}
           </button>
@@ -158,34 +137,12 @@ export function BudgetMatcherPage() {
   const sidebarContent = (
     <>
       {/* ── Budget slider (always visible) ────────────────── */}
-      <div
-        style={{
-          padding: "16px",
-          borderBottom: "1px solid #242424",
-        }}
-      >
+      <div className="p-4 border-b border-[#242424]">
         <div className="flex items-end gap-2 mb-3">
-          <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: 28,
-              fontWeight: 700,
-              color: "#E8E9EB",
-              lineHeight: 1,
-            }}
-          >
+          <span className="font-mono text-[28px] font-bold text-on-surface leading-none">
             ${bs.budget.toLocaleString()}
           </span>
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 12,
-              color: "#808080",
-              paddingBottom: 2,
-            }}
-          >
-            {t("budget.perMonth", "/month")}
-          </span>
+          <span className="text-xs text-dimmer pb-0.5">{t("budget.perMonth", "/month")}</span>
         </div>
 
         <input
@@ -204,51 +161,23 @@ export function BudgetMatcherPage() {
         />
 
         <div className="flex justify-between mt-1.5">
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 10,
-              color: "#808080",
-            }}
-          >
-            $300
-          </span>
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 10,
-              color: "#808080",
-            }}
-          >
-            $10,000
-          </span>
+          <span className="text-[10px] text-dimmer">$300</span>
+          <span className="text-[10px] text-dimmer">$10,000</span>
         </div>
       </div>
 
       {/* ── QUALITY BLEND (top level) ─────────────────────── */}
-      <div style={{ padding: "12px 16px", borderBottom: "1px solid #242424" }}>
-        <div className="flex flex-col" style={{ gap: 9 }}>
+      <div className="px-4 py-3 border-b border-[#242424]">
+        <div className="flex flex-col gap-[9px]">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1.5">
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 12,
-                  color: "#FFFFFF",
-                }}
-              >
+              <span className="text-xs text-white">
                 {t("budget.qualityBlend", "Quality blend")}
               </span>
               <Tooltip
                 content={
-                  <div style={{ maxWidth: 240 }}>
-                    <div
-                      style={{
-                        marginBottom: 6,
-                        color: "#FFFFFF",
-                        fontWeight: 600,
-                      }}
-                    >
+                  <div className="max-w-[240px]">
+                    <div className="mb-1.5 text-white font-semibold">
                       {t("budget.qualityBlend", "Quality blend")}
                     </div>
                     <div>
@@ -264,19 +193,11 @@ export function BudgetMatcherPage() {
                 <Info
                   size={13}
                   color="#FFFFFF"
-                  style={{ cursor: "pointer", flexShrink: 0, opacity: 0.45 }}
+                  className="cursor-pointer shrink-0 opacity-[0.45]"
                 />
               </Tooltip>
             </div>
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: 11,
-                color: "var(--color-accent-dim)",
-              }}
-            >
-              {bs.qualityBlend}
-            </span>
+            <span className="font-mono text-[11px] text-accent-dim">{bs.qualityBlend}</span>
           </div>
           <input
             name="budget-quality-blend"
@@ -292,22 +213,10 @@ export function BudgetMatcherPage() {
             aria-label={t("a11y.qualityBlend", "Quality blend")}
           />
           <div className="flex justify-between">
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 10,
-                color: "#808080",
-              }}
-            >
+            <span className="text-[10px] text-dimmer">
               {t("budget.pureAffordability", "Pure Affordability")}
             </span>
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 10,
-                color: "#808080",
-              }}
-            >
+            <span className="text-[10px] text-dimmer">
               {t("budget.qualityFocus", "Country Quality")}
             </span>
           </div>
@@ -315,63 +224,28 @@ export function BudgetMatcherPage() {
       </div>
 
       {/* ── LIFESTYLE PROFILE (collapsible) ───────────────── */}
-      <div style={{ borderBottom: "1px solid #242424" }}>
+      <div className="border-b border-[#242424]">
         <button
-          className="w-full flex items-center"
-          style={{
-            height: 40,
-            padding: "0 14px",
-            gap: 8,
-            backgroundColor: "transparent",
-          }}
+          className="w-full flex items-center h-10 px-3.5 gap-2 bg-transparent"
           onClick={() => toggle("lifestyle")}
         >
           <UserRound size={16} color="#C2956A" />
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 10,
-              fontWeight: 600,
-              letterSpacing: 1.5,
-              textTransform: "uppercase",
-              color: "#9E9E9E",
-              flex: 1,
-              textAlign: "left",
-            }}
-          >
-            {t("budget.lifestyleProfile", "LIFESTYLE PROFILE")}
-          </span>
+          <span className="text-[10px] font-semibold tracking-[1.5px] uppercase text-muted flex-1 text-left"></span>
           <ChevronDown
             size={14}
+            className="text-dimmer shrink-0"
             style={{
-              color: "#808080",
               transform: !collapsed.lifestyle ? "rotate(0deg)" : "rotate(-90deg)",
               transition: "transform 0.15s ease",
-              flexShrink: 0,
             }}
           />
         </button>
 
         {!collapsed.lifestyle && (
-          <div
-            style={{
-              padding: "12px 16px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 14,
-            }}
-          >
+          <div className="px-4 py-3 flex flex-col gap-3.5">
             {/* Apartment size */}
-            <div className="flex flex-col" style={{ gap: 6 }}>
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 12,
-                  color: "#FFFFFF",
-                }}
-              >
-                {t("budget.bedrooms.label")}
-              </span>
+            <div className="flex flex-col gap-1.5">
+              <span className="text-xs text-white">{t("budget.bedrooms.label")}</span>
               <ToggleGroup
                 options={[1, 2, 3] as const}
                 value={bs.bedrooms}
@@ -381,16 +255,8 @@ export function BudgetMatcherPage() {
             </div>
 
             {/* Housing preference — city vs region, applies to all bedroom counts */}
-            <div className="flex flex-col" style={{ gap: 6 }}>
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 12,
-                  color: "#FFFFFF",
-                }}
-              >
-                {t("budget.housing.label", "Location")}
-              </span>
+            <div className="flex flex-col gap-1.5">
+              <span className="text-xs text-white">{t("budget.housing.label", "Location")}</span>
               <ToggleGroup
                 options={["majorCity", "smallerCity"] as const}
                 value={bs.housing}
@@ -405,76 +271,23 @@ export function BudgetMatcherPage() {
             </div>
 
             {/* People count */}
-            <div className="flex flex-col" style={{ gap: 6 }}>
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 12,
-                  color: "#FFFFFF",
-                }}
-              >
-                {t("budget.people.label", "People")}
-              </span>
-              <div
-                className="inline-flex items-center"
-                style={{
-                  borderRadius: 6,
-                  height: 36,
-                  gap: 4,
-                }}
-              >
+            <div className="flex flex-col gap-1.5">
+              <span className="text-xs text-white">{t("budget.people.label", "People")}</span>
+              <div className="inline-flex items-center rounded-md h-9 gap-1">
                 <button
                   onClick={() => bs.setPeopleCount(Math.max(1, bs.peopleCount - 1))}
                   disabled={bs.peopleCount <= 1}
-                  style={{
-                    width: 32,
-                    height: 32,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: bs.peopleCount <= 1 ? "#222" : "#333",
-                    border: "none",
-                    borderRadius: 6,
-                    color: bs.peopleCount <= 1 ? "#555" : "#E8E9EB",
-                    fontSize: 16,
-                    fontWeight: 700,
-                    cursor: bs.peopleCount <= 1 ? "default" : "pointer",
-                    transition: "all 0.15s ease",
-                  }}
+                  className={`w-8 h-8 flex items-center justify-center border-0 rounded-md text-base font-bold cursor-${bs.peopleCount <= 1 ? "default" : "pointer"} transition-all duration-150 ${bs.peopleCount <= 1 ? "bg-surface-2 text-[#555]" : "bg-border text-on-surface"}`}
                 >
                   −
                 </button>
-                <span
-                  style={{
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: 15,
-                    fontWeight: 700,
-                    color: "#E8E9EB",
-                    minWidth: 24,
-                    textAlign: "center",
-                    userSelect: "none",
-                  }}
-                >
+                <span className="font-mono text-[15px] font-bold text-on-surface min-w-6 text-center select-none">
                   {bs.peopleCount}
                 </span>
                 <button
                   onClick={() => bs.setPeopleCount(Math.min(20, bs.peopleCount + 1))}
                   disabled={bs.peopleCount >= 20}
-                  style={{
-                    width: 32,
-                    height: 32,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: bs.peopleCount >= 20 ? "#222" : "#333",
-                    border: "none",
-                    borderRadius: 6,
-                    color: bs.peopleCount >= 20 ? "#555" : "#E8E9EB",
-                    fontSize: 16,
-                    fontWeight: 700,
-                    cursor: bs.peopleCount >= 20 ? "default" : "pointer",
-                    transition: "all 0.15s ease",
-                  }}
+                  className={`w-8 h-8 flex items-center justify-center border-0 rounded-md text-base font-bold cursor-${bs.peopleCount >= 20 ? "default" : "pointer"} transition-all duration-150 ${bs.peopleCount >= 20 ? "bg-surface-2 text-[#555]" : "bg-border text-on-surface"}`}
                 >
                   +
                 </button>
@@ -485,77 +298,41 @@ export function BudgetMatcherPage() {
       </div>
 
       {/* ── CATEGORY WEIGHTS (collapsible) ────────────────── */}
-      <div style={{ borderBottom: "1px solid #242424" }}>
+      <div className="border-b border-[#242424]">
         <button
-          className="w-full flex items-center"
-          style={{
-            height: 40,
-            padding: "0 14px",
-            gap: 8,
-            backgroundColor: "transparent",
-          }}
+          className="w-full flex items-center h-10 px-3.5 gap-2 bg-transparent"
           onClick={() => toggle("categories")}
         >
           <Sliders size={16} color="#C2956A" />
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 10,
-              fontWeight: 600,
-              letterSpacing: 1.5,
-              textTransform: "uppercase",
-              color: "#9E9E9E",
-              flex: 1,
-              textAlign: "left",
-            }}
-          >
+          <span className="text-[10px] font-semibold tracking-[1.5px] uppercase text-muted flex-1 text-left">
             {t("budget.categoryWeights", "CATEGORY WEIGHTS")}
           </span>
           <ChevronDown
             size={14}
+            className="text-dimmer shrink-0"
             style={{
-              color: "#808080",
               transform: !collapsed.categories ? "rotate(0deg)" : "rotate(-90deg)",
               transition: "transform 0.15s ease",
-              flexShrink: 0,
             }}
           />
         </button>
 
         {!collapsed.categories && (
-          <div style={{ paddingTop: 4, paddingBottom: 4 }}>
+          <div className="pt-0.5 pb-0.5">
             {BUDGET_CATEGORIES.map(({ key, icon: Icon }) => (
-              <div key={key} style={{ padding: "10px 16px" }}>
-                <div className="flex flex-col" style={{ gap: 9 }}>
+              <div key={key} className="px-4 py-2.5">
+                <div className="flex flex-col gap-[9px]">
                   <div className="flex items-center justify-between">
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 6,
-                      }}
-                    >
+                    <div className="flex items-center gap-1.5">
                       <Icon size={14} color="#9E9E9E" />
                       <Link
                         to={`${langPrefix}/budget-categories`}
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: 12,
-                          fontWeight: 400,
-                          color: "#FFFFFF",
-                          textDecoration: "none",
-                        }}
+                        className="text-xs font-normal text-white no-underline"
                       >
                         {t(`budget.categories.${key}`)}
                       </Link>
                     </div>
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: 11,
-                        color: "var(--color-accent-dim)",
-                      }}
-                    >
+                    <span className="font-mono text-[11px] text-accent-dim">
                       {bs.categoryWeights[key]}
                     </span>
                   </div>
@@ -581,11 +358,8 @@ export function BudgetMatcherPage() {
       </div>
 
       {/* ── Share & Reset buttons ─────────────────────────── */}
-      <div
-        className="flex-shrink-0 sticky bottom-0"
-        style={{ borderTop: "1px solid #333333", backgroundColor: "#131416" }}
-      >
-        <div className="flex flex-col gap-2" style={{ padding: "12px 16px" }}>
+      <div className="flex-shrink-0 sticky bottom-0 border-t border-border bg-[#131416]">
+        <div className="flex flex-col gap-2 px-4 py-3">
           {!bs.isDefault && (
             <button
               onClick={() => {
@@ -594,19 +368,7 @@ export function BudgetMatcherPage() {
                 setTimeout(() => setCopied(false), 3000);
               }}
               aria-live="polite"
-              className="w-full flex items-center justify-center gap-2 rounded transition-colors"
-              style={{
-                backgroundColor: copied ? "#2A4A2A" : "#1A2A1A",
-                color: copied ? "#88CC88" : "#6B9E6B",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "13px",
-                fontWeight: 500,
-                height: "40px",
-                border: `1px solid ${copied ? "#4A8A4A" : "#2A4A2A"}`,
-                borderRadius: "6px",
-                transition: "all 0.15s ease",
-                cursor: "pointer",
-              }}
+              className={`w-full flex items-center justify-center gap-2 rounded transition-colors h-10 rounded-md text-[13px] font-medium border cursor-pointer ${copied ? "bg-[#2A4A2A] text-[#88CC88] border-[#4A8A4A]" : "bg-[#1A2A1A] text-[#6B9E6B] border-[#2A4A2A]"}`}
             >
               {copied ? (
                 <>
@@ -647,18 +409,7 @@ export function BudgetMatcherPage() {
           )}
           <button
             onClick={bs.handleReset}
-            className="w-full flex items-center justify-center gap-2 rounded transition-colors"
-            style={{
-              backgroundColor: "transparent",
-              color: "var(--color-accent-dim)",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: 500,
-              height: "40px",
-              border: "1px solid #333333",
-              borderRadius: "6px",
-              cursor: "pointer",
-            }}
+            className="w-full flex items-center justify-center gap-2 rounded transition-colors h-10 rounded-md text-[13px] font-medium bg-transparent text-accent-dim border border-border cursor-pointer"
           >
             <svg
               width="14"
@@ -684,16 +435,7 @@ export function BudgetMatcherPage() {
     <Layout>
       <div className="flex">
         {/* ── Left sidebar (hidden on mobile) ─────────────── */}
-        <aside
-          className="hidden md:block sticky top-14 self-start overflow-y-auto"
-          style={{
-            width: "340px",
-            height: "calc(100vh - 56px)",
-            backgroundColor: "#131416",
-            borderRight: "1px solid #1E1E22",
-            flexShrink: 0,
-          }}
-        >
+        <aside className="hidden md:block sticky top-14 self-start overflow-y-auto w-[340px] h-[calc(100vh-56px)] bg-[#131416] border-r border-[#1E1E22] shrink-0">
           {sidebarContent}
         </aside>
 
@@ -708,21 +450,10 @@ export function BudgetMatcherPage() {
 
         {/* ── Mobile FAB ──────────────────────────────────── */}
         <button
-          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg"
+          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-full bg-accent text-white text-sm font-semibold border-0 cursor-pointer"
           style={{
             bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
             right: "16px",
-            height: "48px",
-            paddingLeft: "16px",
-            paddingRight: "18px",
-            borderRadius: "24px",
-            backgroundColor: "var(--color-accent)",
-            color: "#FFFFFF",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "14px",
-            fontWeight: 600,
-            border: "none",
-            cursor: "pointer",
           }}
           onClick={() => setMobileParamsOpen(true)}
           aria-label={t("a11y.openParameters", "Open parameters")}
@@ -732,7 +463,7 @@ export function BudgetMatcherPage() {
         </button>
 
         {/* ── Right content area ──────────────────────────── */}
-        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#0A0A0F" }}>
+        <main className="flex-1 min-w-0 pb-28 md:pb-0 bg-bg">
           <div className="px-4 md:px-6">
             {/* ── Hero section (matching list page) ─────────── */}
             <div
@@ -754,73 +485,30 @@ export function BudgetMatcherPage() {
                 }}
               />
 
-              <div
-                className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
-                style={{ minHeight: "160px" }}
-              >
+              <div className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 min-h-[160px]">
                 {/* H1 — responsive font (list page style) */}
                 <h1
-                  className="text-3xl md:text-6xl"
-                  style={{
-                    fontFamily: "Oswald, sans-serif",
-                    fontWeight: 600,
-                    lineHeight: "0.95",
-                    color: "#FFFFFF",
-                    marginBottom: "8px",
-                  }}
+                  className="text-3xl md:text-6xl font-semibold leading-[0.95] text-white mb-2"
+                  style={{ fontFamily: "Oswald, sans-serif" }}
                 >
                   {t("budget.eyebrow", "BUDGET MATCHER")}
                 </h1>
                 {/* Tagline */}
-                <p
-                  className="hidden md:block"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "15px",
-                    color: "#8A8A8A",
-                    maxWidth: "580px",
-                    marginBottom: "20px",
-                  }}
-                >
+                <p className="hidden md:block text-[15px] text-dim max-w-[580px] mb-5">
                   {t(
                     "budget.subtitle",
                     "Enter your monthly budget and discover which countries offer the best lifestyle for your money",
                   )}
                 </p>
                 {/* Copper rule */}
-                <div
-                  className="hidden md:block"
-                  style={{
-                    width: "128px",
-                    height: "2px",
-                    backgroundColor: "var(--color-accent)",
-                    marginBottom: "16px",
-                  }}
-                />
+                <div className="hidden md:block w-32 h-0.5 bg-accent mb-4" />
                 {/* Stats row */}
                 <div className="hero-stats-row hero-banner-stats">
                   <div className="min-w-0">
-                    <div
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-dim)",
-                        lineHeight: "1",
-                      }}
-                    >
+                    <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
                       {matches.length || "—"}
                     </div>
-                    <div
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#757575",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginTop: "4px",
-                      }}
-                    >
+                    <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
                       {t("budget.stats.matchedCountries", {
                         count: matches.length,
                       })}
@@ -828,58 +516,20 @@ export function BudgetMatcherPage() {
                   </div>
                   <div className="hero-stat-divider" />
                   <div className="min-w-0">
-                    <div
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-dim)",
-                        lineHeight: "1",
-                      }}
-                    >
+                    <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
                       ${bs.budget.toLocaleString()}
                     </div>
-                    <div
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#757575",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginTop: "4px",
-                      }}
-                    >
+                    <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
                       {t("budget.perMonth", "/ MONTH")}
                     </div>
                   </div>
                   <div className="hero-stat-divider" />
-                  <Link
-                    to={`${langPrefix}/budget-categories`}
-                    className="min-w-0"
-                    style={{ textDecoration: "none" }}
-                  >
+                  <Link to={`${langPrefix}/budget-categories`} className="min-w-0 no-underline">
                     <div>
-                      <div
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "18px",
-                          fontWeight: 600,
-                          color: "var(--color-accent-dim)",
-                          lineHeight: "1",
-                        }}
-                      >
+                      <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
                         {BUDGET_CATEGORIES.length}
                       </div>
-                      <div
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#757575",
-                          textTransform: "uppercase",
-                          letterSpacing: "1px",
-                          marginTop: "4px",
-                        }}
-                      >
+                      <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
                         {t("budget.stats.categories", {
                           count: BUDGET_CATEGORIES.length,
                         })}
@@ -891,23 +541,15 @@ export function BudgetMatcherPage() {
             </div>
 
             {/* ── Sentinel + sticky search bar ──────────────── */}
-            <div ref={sentinelRef} style={{ height: 0 }} />
-            <div
-              className="sticky z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-3"
-              style={{
-                top: "56px",
-                backgroundColor: "#0A0A0F",
-                borderBottom: "1px solid #1a1a1a",
-              }}
-            >
+            <div ref={sentinelRef} className="h-0" />
+            <div className="sticky top-14 z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-3 bg-bg border-b border-surface">
               {/* Search + compare row */}
               <div className="mb-1 flex flex-col gap-2 sm:flex-row sm:items-center">
                 {/* Search input */}
                 <div className="relative flex-1 min-w-0">
                   <Search
-                    className="absolute left-3 top-1/2 -translate-y-1/2"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-dim pointer-events-none"
                     size={16}
-                    style={{ color: "#808080", pointerEvents: "none" }}
                   />
                   <input
                     ref={searchInputRef}
@@ -916,28 +558,12 @@ export function BudgetMatcherPage() {
                     placeholder={t("search.placeholder", "Search countries…")}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full pl-9 pr-9 py-2.5 rounded-md focus:outline-none"
-                    style={{
-                      backgroundColor: "#161616",
-                      border: "1px solid #1E1E22",
-                      color: "#FFFFFF",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "14px",
-                    }}
+                    className="w-full pl-9 pr-9 py-2.5 rounded-md focus:outline-none bg-[#161616] border border-surface text-white text-sm"
                   />
                   {search.length > 0 && (
                     <button
                       onClick={() => setSearch("")}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center"
-                      style={{
-                        width: "22px",
-                        height: "22px",
-                        borderRadius: "3px",
-                        border: "none",
-                        cursor: "pointer",
-                        backgroundColor: "#2A2A2A",
-                        color: "#CCCCCC",
-                      }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-[22px] h-[22px] rounded-[3px] border-0 cursor-pointer bg-surface-4 text-tertiary"
                       aria-label={t("a11y.clearSearch", "Clear search")}
                     >
                       <X size={13} />
@@ -947,50 +573,17 @@ export function BudgetMatcherPage() {
 
                 {/* Compare buttons */}
                 {compareMode ? (
-                  <div
-                    className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto">
                     <button
                       onClick={handleCompare}
                       disabled={selectedCodes.size < 2}
-                      className="flex-1 justify-center sm:flex-none"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                        height: "40px",
-                        paddingLeft: "14px",
-                        paddingRight: "14px",
-                        borderRadius: "6px",
-                        border:
-                          selectedCodes.size < 2 ? "1px solid var(--color-accent-dim)" : "none",
-                        cursor: selectedCodes.size < 2 ? "default" : "pointer",
-                        backgroundColor: selectedCodes.size < 2 ? "#161616" : "var(--color-accent)",
-                        color: selectedCodes.size < 2 ? "var(--color-accent-dim)" : "#FFFFFF",
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        fontWeight: 600,
-                        whiteSpace: "nowrap",
-                        transition: "all 0.15s ease",
-                      }}
+                      className={`flex flex-1 items-center justify-center sm:flex-none gap-1.5 h-10 px-3.5 rounded-md text-[13px] font-semibold whitespace-nowrap transition-all cursor-${selectedCodes.size < 2 ? "default" : "pointer"} ${selectedCodes.size < 2 ? "bg-[#161616] text-accent-dim border border-accent-dim" : "bg-accent text-white border-0"}`}
                     >
                       <GitCompare size={15} />
                       {t("nomadVisasPage.compareSelected", "Compare")}
                       {selectedCodes.size > 0 && (
                         <span
-                          style={{
-                            backgroundColor:
-                              selectedCodes.size < 2
-                                ? "rgba(194,149,106,0.2)"
-                                : "rgba(255,255,255,0.25)",
-                            borderRadius: "10px",
-                            padding: "1px 7px",
-                            fontSize: "12px",
-                          }}
+                          className={`rounded-[10px] px-[7px] py-px text-xs ${selectedCodes.size < 2 ? "bg-[rgba(194,149,106,0.2)]" : "bg-[rgba(255,255,255,0.25)]"}`}
                         >
                           {selectedCodes.size}
                         </span>
@@ -998,18 +591,7 @@ export function BudgetMatcherPage() {
                     </button>
                     <button
                       onClick={exitCompareMode}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "6px",
-                        border: "1px solid #2A2A2A",
-                        cursor: "pointer",
-                        backgroundColor: "#161616",
-                        color: "#8A8A8A",
-                      }}
+                      className="flex items-center justify-center w-10 h-10 rounded-md border border-surface-4 cursor-pointer bg-[#161616] text-[#8A8A8A]"
                       aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
                     >
                       <X size={16} />
@@ -1018,25 +600,7 @@ export function BudgetMatcherPage() {
                 ) : (
                   <button
                     onClick={() => setCompareMode(true)}
-                    className="w-full justify-center sm:w-auto"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      height: "40px",
-                      paddingLeft: "14px",
-                      paddingRight: "14px",
-                      borderRadius: "6px",
-                      border: "1px solid #2A2A2A",
-                      cursor: "pointer",
-                      backgroundColor: "#161616",
-                      color: "#9E9E9E",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      fontWeight: 500,
-                      whiteSpace: "nowrap",
-                      flexShrink: 0,
-                    }}
+                    className="w-full flex items-center justify-center sm:w-auto gap-1.5 h-10 px-3.5 rounded-md border border-surface-4 cursor-pointer bg-[#161616] text-muted text-[13px] font-medium whitespace-nowrap shrink-0"
                   >
                     <GitCompare size={15} />
                     {t("nomadVisasPage.compareMode", "Compare")}
@@ -1046,14 +610,7 @@ export function BudgetMatcherPage() {
 
               {/* Helper text — full width, below search+buttons row */}
               {compareMode && (
-                <p
-                  style={{
-                    margin: "0 0 8px",
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "12px",
-                    color: "#8A8A8A",
-                  }}
-                >
+                <p className="mb-2 text-xs text-dim">
                   {t(
                     "compare.helperText",
                     "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
@@ -1064,29 +621,15 @@ export function BudgetMatcherPage() {
               {/* Color legend — always visible below search */}
               <Link
                 to={`${langPrefix}/budget-categories`}
-                className="flex flex-wrap gap-x-4 gap-y-1 px-0.5"
-                style={{ textDecoration: "none" }}
+                className="flex flex-wrap gap-x-4 gap-y-1 px-0.5 no-underline"
               >
                 {BUDGET_CATEGORIES.map(({ key }) => (
                   <div key={key} className="flex items-center gap-1.5">
                     <div
-                      style={{
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        backgroundColor: COST_COLORS[key] ?? "#555",
-                        flexShrink: 0,
-                      }}
+                      className="w-2 h-2 rounded-full shrink-0 bg-[var(--c)]"
+                      style={{ "--c": COST_COLORS[key] ?? "#555" } as React.CSSProperties}
                     />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "11px",
-                        color: "#8A8A8A",
-                      }}
-                    >
-                      {t(`budget.categories.${key}`)}
-                    </span>
+                    <span className="text-[11px] text-dim">{t(`budget.categories.${key}`)}</span>
                   </div>
                 ))}
               </Link>
@@ -1096,54 +639,25 @@ export function BudgetMatcherPage() {
             {loading ? (
               <div className="flex flex-col gap-2 mt-4">
                 {Array.from({ length: 8 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="h-14 animate-pulse"
-                    style={{
-                      backgroundColor: "#1A1A1A",
-                      borderTop: "1px solid #333333",
-                    }}
-                  />
+                  <div key={i} className="h-14 animate-pulse bg-surface border-t border-border" />
                 ))}
               </div>
             ) : matches.length === 0 ? (
-              <p
-                className="text-center py-20"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: 14,
-                  color: "#8A8A8A",
-                }}
-              >
+              <p className="text-center py-20 text-sm text-dim">
                 {t("budget.noResults", "No countries with cost data available")}
               </p>
             ) : (
               <div className="flex flex-col">
-                <div
-                  className="flex items-center justify-between px-1 my-4"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "12px",
-                  }}
-                >
-                  <span style={{ color: "#9E9E9E" }}>
+                <div className="flex items-center justify-between px-1 my-4 text-xs">
+                  <span className="text-muted">
                     {t("countryList.clickHint", "Click on a country to view details")}
                   </span>
-                  <span style={{ color: "#8A8A8A" }}>
+                  <span className="text-dim">
                     {t("countryList.count", { count: filteredMatches.length })}
                   </span>
                 </div>
                 {filteredMatches.length === 0 ? (
-                  <p
-                    className="text-center py-20"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: 14,
-                      color: "#8A8A8A",
-                    }}
-                  >
-                    {t("countryList.noResults")}
-                  </p>
+                  <p className="text-center py-20 text-sm text-dim">{t("countryList.noResults")}</p>
                 ) : (
                   filteredMatches.map((m, i) => {
                     const isSelected = selectedCodes.has(m.country.code);
@@ -1163,7 +677,7 @@ export function BudgetMatcherPage() {
                         }
                         role={compareMode ? "button" : undefined}
                         tabIndex={compareMode ? 0 : undefined}
-                        style={{ cursor: compareMode ? "pointer" : undefined }}
+                        className={compareMode ? "cursor-pointer" : ""}
                       >
                         <BudgetCountryCard
                           match={m}

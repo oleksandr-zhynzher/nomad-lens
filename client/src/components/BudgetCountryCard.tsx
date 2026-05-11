@@ -12,7 +12,8 @@ import {
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
 import { BudgetBreakdownChart } from "./BudgetBreakdownChart";
-import { COST_COLORS, comfortScoreColour, surplusColour } from "../utils/budgetColors";
+import { COST_COLORS } from "../utils/budgetColors";
+import { surplusColourClass, comfortScoreColourClass } from "../utils/colorClasses";
 import { ViewCountryButton } from "../shared/ui/ViewCountryButton";
 import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
 import { getRowStyles } from "../utils/rowStyles";
@@ -46,11 +47,9 @@ export function BudgetCountryCard({
   return (
     <div
       data-selected={isSelected ? "true" : undefined}
-      className="country-row overflow-hidden transition-colors duration-150"
+      className="country-row overflow-hidden transition-colors duration-150 relative border-b border-surface-2"
       style={{
-        position: "relative",
         backgroundColor: rowBg,
-        borderBottom: "1px solid #222",
         ["--row-hover-bg" as string]: hoverBg,
       }}
     >
@@ -59,33 +58,13 @@ export function BudgetCountryCard({
 
       {/* Main row — clickable button */}
       <button
-        className="w-full text-left transition-colors"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "12px 16px",
-          paddingLeft: compareMode ? "38px" : "16px",
-          background: "transparent",
-          border: "none",
-          cursor: compareMode ? "pointer" : "pointer",
-          width: "100%",
-        }}
+        className={`w-full text-left flex flex-col transition-colors bg-transparent border-none cursor-pointer ${compareMode ? "pl-[38px] pr-4" : "px-4"} py-3`}
         onClick={onToggle}
         aria-expanded={expanded}
       >
         <div className="flex items-center gap-3 w-full">
           {/* Rank */}
-          <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontWeight: 700,
-              color: "var(--color-accent)",
-              width: "28px",
-              textAlign: "center",
-              flexShrink: 0,
-              fontSize: "16px",
-            }}
-          >
+          <span className="font-mono font-bold text-accent w-7 text-center shrink-0 text-base">
             {rank}
           </span>
 
@@ -93,36 +72,19 @@ export function BudgetCountryCard({
           <CountryNameCell country={country} />
 
           {/* Cost + surplus */}
-          <div className="hidden sm:flex flex-col items-end" style={{ flexShrink: 0 }}>
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "13px",
-                color: "#CCCCCC",
-              }}
-            >
+          <div className="hidden sm:flex flex-col items-end shrink-0">
+            <span className="font-mono text-[13px] text-tertiary">
               ${monthlyCost.toLocaleString()}
             </span>
-            <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "11px",
-                color: surplusColour(surplus),
-              }}
-            >
+            <span className={`font-mono text-[11px] ${surplusColourClass(surplus, "text")}`}>
               {surplus >= 0 ? "+" : ""}${surplus.toLocaleString()}
             </span>
           </div>
 
           {/* Comfort score */}
-          <div style={{ flexShrink: 0, width: "48px", textAlign: "right" }}>
+          <div className="shrink-0 w-12 text-right">
             <span
-              style={{
-                fontFamily: "IBM Plex Mono, monospace",
-                fontSize: "18px",
-                fontWeight: 700,
-                color: comfortScoreColour(comfortScore),
-              }}
+              className={`font-mono text-lg font-bold ${comfortScoreColourClass(comfortScore, "text")}`}
             >
               {comfortScore.toFixed(0)}
             </span>
@@ -131,60 +93,31 @@ export function BudgetCountryCard({
           {/* Chevron */}
           <ChevronRight
             size={18}
-            style={{
-              color: "#757575",
-              transition: "transform 0.2s",
-              transform: expanded ? "rotate(90deg)" : "rotate(0deg)",
-            }}
-            className="shrink-0"
+            className="shrink-0 text-dimmest transition-transform duration-200"
+            style={{ transform: expanded ? "rotate(90deg)" : "rotate(0deg)" }}
           />
         </div>
 
         {/* Breakdown bar */}
-        <div style={{ marginTop: "8px", marginLeft: "60px" }}>
+        <div className="mt-2 ml-[60px]">
           <BudgetBreakdownChart breakdown={breakdown} budget={budget} monthlyCost={monthlyCost} />
         </div>
       </button>
 
       {/* Expanded detail panel */}
       {expanded && (
-        <div
-          className="px-4 py-4"
-          style={{
-            borderTop: `1px solid ${borderColor}`,
-            backgroundColor: "#0A0A0A",
-          }}
-        >
+        <div className="px-4 py-4 bg-[#0A0A0A]" style={{ borderTop: `1px solid ${borderColor}` }}>
           {/* Summary row */}
-          <div className="flex items-center justify-between" style={{ marginBottom: "12px" }}>
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                fontWeight: 600,
-                color: "#FFFFFF",
-              }}
-            >
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-semibold text-white">
               {t("budget.monthlyBreakdown", "Monthly breakdown")}
             </span>
             <div className="flex items-center gap-3">
-              <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "13px",
-                  fontWeight: 700,
-                  color: "#CCCCCC",
-                }}
-              >
+              <span className="font-mono text-[13px] font-bold text-tertiary">
                 ${monthlyCost.toLocaleString()}
               </span>
               <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: surplusColour(surplus),
-                }}
+                className={`font-mono text-xs font-semibold ${surplusColourClass(surplus, "text")}`}
               >
                 {surplus >= 0 ? "+" : ""}${surplus.toLocaleString()}{" "}
                 {t("budget.surplus", "surplus")}
@@ -194,11 +127,8 @@ export function BudgetCountryCard({
 
           {/* Category cards grid — matching CountryPage style */}
           <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))",
-              gap: "12px",
-            }}
+            className="grid gap-3"
+            style={{ gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))" }}
           >
             {(
               [
@@ -243,44 +173,15 @@ export function BudgetCountryCard({
               .map(({ key, icon, label }) => (
                 <div
                   key={key}
-                  style={{
-                    backgroundColor: "#111111",
-                    borderRadius: "8px",
-                    border: "1px solid #1E1E1E",
-                    padding: "16px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "6px",
-                  }}
+                  className="bg-[#111111] rounded-lg border border-[#1E1E1E] p-4 flex flex-col gap-1.5"
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
+                  <div className="flex items-center gap-2.5">
                     {icon}
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        color: "#E8E9EB",
-                      }}
-                    >
+                    <span className="font-mono text-xl font-bold text-on-surface">
                       ${breakdown[key].toLocaleString()}
                     </span>
                   </div>
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#808080",
-                    }}
-                  >
-                    {label}
-                  </span>
+                  <span className="text-[10px] text-dimmer">{label}</span>
                 </div>
               ))}
           </div>

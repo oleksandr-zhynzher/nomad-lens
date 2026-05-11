@@ -39,14 +39,7 @@ export function CountryList({
     return (
       <div className="flex flex-col gap-2">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div
-            key={i}
-            className="h-14 animate-pulse"
-            style={{
-              backgroundColor: "#1A1A1A",
-              borderTop: "1px solid #333333",
-            }}
-          />
+          <div key={i} className="h-14 animate-pulse bg-surface border-t border-border" />
         ))}
       </div>
     );
@@ -55,23 +48,10 @@ export function CountryList({
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
-        <p
-          style={{
-            color: "var(--color-danger)",
-            fontFamily: "Inter, sans-serif",
-          }}
-        >
-          {error}
-        </p>
+        <p className="text-danger">{error}</p>
         <button
           onClick={onRetry}
-          className="px-4 py-2 rounded text-sm transition-colors"
-          style={{
-            backgroundColor: "var(--color-accent)",
-            color: "#FFFFFF",
-            fontFamily: "Inter, sans-serif",
-            fontWeight: 500,
-          }}
+          className="px-4 py-2 rounded text-sm font-medium transition-colors bg-accent text-white"
         >
           {t("countryList.retry")}
         </button>
@@ -80,32 +60,18 @@ export function CountryList({
   }
 
   if (ranked.length === 0) {
-    return (
-      <p
-        className="text-center py-20"
-        style={{
-          fontFamily: "Inter, sans-serif",
-          fontSize: "14px",
-          color: "#8A8A8A",
-        }}
-      >
-        {t("countryList.noResults")}
-      </p>
-    );
+    return <p className="text-center py-20 text-sm text-dim">{t("countryList.noResults")}</p>;
   }
 
   return (
     <div className="flex flex-col">
-      <div
-        className="flex items-center justify-between px-1 my-4"
-        style={{ fontFamily: "Inter, sans-serif", fontSize: "12px" }}
-      >
-        <span style={{ color: "#9E9E9E" }}>
+      <div className="flex items-center justify-between px-1 my-4 text-xs">
+        <span className="text-muted">
           {compareMode
             ? t("compare.countrySubtitle", "Select countries to compare across all indicators")
             : t("countryList.clickHint", "Click on a country to view details")}
         </span>
-        <span style={{ color: "#8A8A8A" }}>{t("countryList.count", { count: ranked.length })}</span>
+        <span className="text-dim">{t("countryList.count", { count: ranked.length })}</span>
       </div>
       {visible.map((r, index) => (
         <CountryCard
@@ -121,7 +87,7 @@ export function CountryList({
         />
       ))}
       {/* Invisible sentinel — entering the viewport triggers the next page load */}
-      {hasMore && <div ref={sentinelRef} style={{ height: "1px" }} />}
+      {hasMore && <div ref={sentinelRef} className="h-px" />}
     </div>
   );
 }

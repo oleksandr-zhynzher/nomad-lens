@@ -33,21 +33,13 @@ export function WeightSliderRow({
   const shown = displayValue ?? value;
 
   return (
-    <div className="flex flex-col" style={{ gap: "9px" }}>
+    <div className="flex flex-col gap-[9px]">
       <div className="flex items-center justify-between">
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <div className="flex items-center gap-1.5">
           {label}
           {tooltipIcon}
         </div>
-        <span
-          style={{
-            fontFamily: "IBM Plex Mono, monospace",
-            fontSize: "11px",
-            color: "var(--color-accent-dim)",
-          }}
-        >
-          {shown}
-        </span>
+        <span className="font-mono text-[11px] text-accent-dim">{shown}</span>
       </div>
       <input
         name={inputName}

@@ -116,10 +116,7 @@ export function BudgetComparison({
     <div>
       {/* ── Country selector ─────────────────────────────────── */}
       <div className="relative">
-        <div
-          className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
-          style={{ scrollbarWidth: "thin" }}
-        >
+        <div className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto [scrollbar-width:thin]">
           {selectedSlots.map((slot) => {
             const match = matchMap.get(slot.country.code);
             const cost = match?.monthlyCost;
@@ -133,12 +130,10 @@ export function BudgetComparison({
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
                 >
                   <span
-                    className="text-[28px]"
+                    className="text-[28px] font-bold leading-none"
                     style={{
                       fontFamily: "Oswald, sans-serif",
-                      fontWeight: 700,
                       color: cost != null ? "#C2956A" : "#555",
-                      lineHeight: 1,
                     }}
                   >
                     {cost != null ? `$${cost.toLocaleString()}` : "—"}
@@ -146,12 +141,8 @@ export function BudgetComparison({
 
                   {surplus != null && (
                     <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "11px",
-                        fontWeight: 600,
-                        color: surplusColour(surplus),
-                      }}
+                      className="text-[11px] font-semibold"
+                      style={{ color: surplusColour(surplus) }}
                     >
                       {surplus >= 0
                         ? `+$${surplus.toLocaleString()} left`
@@ -207,14 +198,7 @@ export function BudgetComparison({
             name: localizeCountry(c, lang).name,
             regionLabel: t(`regions.${regionKey(c.region)}`),
             trailing: (
-              <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  color: "#C2956A",
-                }}
-              >
+              <span className="font-mono text-[13px] font-semibold text-accent-dim">
                 {cost != null ? `$${cost.toLocaleString()}` : "—"}
               </span>
             ),
@@ -232,7 +216,7 @@ export function BudgetComparison({
       {/* Data grid */}
       {selectedSlots.length > 0 && (
         <div className="mt-8">
-          <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
+          <div className="h-px bg-[#1C1C1C]" />
 
           {/* Sticky column header */}
           <ComparisonTableHeader
@@ -247,7 +231,7 @@ export function BudgetComparison({
           />
 
           {/* Scrollable rows */}
-          <div ref={bodyRef} style={{ overflowX: "auto" }}>
+          <div ref={bodyRef} className="overflow-x-auto">
             {/* Monthly total row */}
             <ComparisonRowShell
               icon={Wallet}

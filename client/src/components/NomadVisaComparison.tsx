@@ -86,27 +86,13 @@ export function NomadVisaComparison({
 
     switch (field) {
       case "visaName":
-        return (
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              color: "#E8E9EB",
-            }}
-          >
-            {visa.visaName}
-          </span>
-        );
+        return <span className="text-[13px] text-on-surface">{visa.visaName}</span>;
       case "overallScore": {
         const overallScore = computeScore(applyClimate(slot.country, climatePrefs), weights);
         return (
           <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "20px",
-              fontWeight: 600,
-              color: scoreColour(overallScore),
-            }}
+            className="font-mono text-[20px] font-semibold"
+            style={{ color: scoreColour(overallScore) }}
           >
             {overallScore.toFixed(1)}
           </span>
@@ -116,12 +102,7 @@ export function NomadVisaComparison({
         const monthlyBudget = budgetMatchByCode.get(slot.country.code)?.monthlyCost;
         return (
           <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "20px",
-              fontWeight: 600,
-              color: monthlyBudget != null ? "#E8E9EB" : "#757575",
-            }}
+            className={`font-mono text-[20px] font-semibold ${monthlyBudget != null ? "text-on-surface" : "text-dimmest"}`}
           >
             {monthlyBudget != null ? `$${monthlyBudget.toLocaleString()}` : "—"}
           </span>
@@ -130,35 +111,21 @@ export function NomadVisaComparison({
       case "duration":
         return (
           <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "20px",
-              fontWeight: 600,
-              color: visa.duration.initial >= 12 ? "#44CC66" : "#DDAA44",
-            }}
+            className={`font-mono text-[20px] font-semibold ${visa.duration.initial >= 12 ? "text-success" : "text-warn"}`}
           >
             {visa.duration.initial}
-            <span style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}>
-              {t("countryPage.visa.months")}
-            </span>
+            <span className="text-xs text-dim ml-[2px]">{t("countryPage.visa.months")}</span>
           </span>
         );
       case "maxExtension":
         return (
           <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "20px",
-              fontWeight: 600,
-              color: visa.duration.maxExtension > 0 ? "#5B8FA8" : "#757575",
-            }}
+            className={`font-mono text-[20px] font-semibold ${visa.duration.maxExtension > 0 ? "text-[#5B8FA8]" : "text-dimmest"}`}
           >
             {visa.duration.maxExtension > 0 ? (
               <>
                 +{visa.duration.maxExtension}
-                <span style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}>
-                  {t("countryPage.visa.months")}
-                </span>
+                <span className="text-xs text-dim ml-[2px]">{t("countryPage.visa.months")}</span>
               </>
             ) : (
               "—"
@@ -167,19 +134,14 @@ export function NomadVisaComparison({
         );
       case "renewable":
         return visa.duration.renewable ? (
-          <CheckCircle2 size={20} style={{ color: "#44CC66" }} />
+          <CheckCircle2 size={20} className="text-success" />
         ) : (
-          <XCircle size={20} style={{ color: "#808080" }} />
+          <XCircle size={20} className="text-dimmer" />
         );
       case "cost":
         return (
           <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "20px",
-              fontWeight: 600,
-              color: visa.cost.amount === 0 ? "#44CC66" : "#E8E9EB",
-            }}
+            className={`font-mono text-[20px] font-semibold ${visa.cost.amount === 0 ? "text-success" : "text-on-surface"}`}
           >
             {visa.cost.amount === 0 ? (
               t("countryPage.free")
@@ -202,15 +164,7 @@ export function NomadVisaComparison({
         const annual = visa.incomeRequirement.annual;
         if (!monthly && !annual) {
           return (
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "13px",
-                color: "#44CC66",
-              }}
-            >
-              {t("countryPage.visa.noMinimum")}
-            </span>
+            <span className="text-[13px] text-success">{t("countryPage.visa.noMinimum")}</span>
           );
         }
         const cur =
@@ -222,17 +176,10 @@ export function NomadVisaComparison({
                 ? "£"
                 : visa.incomeRequirement.currency;
         return (
-          <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: "20px",
-              fontWeight: 600,
-              color: "#E8E9EB",
-            }}
-          >
+          <span className="font-mono text-[20px] font-semibold text-on-surface">
             {cur}
             {monthly ? monthly.toLocaleString() : annual?.toLocaleString()}
-            <span style={{ fontSize: "12px", color: "#8A8A8A", marginLeft: 2 }}>
+            <span className="text-xs text-dim ml-[2px]">
               /{monthly ? t("countryPage.visa.mo") : t("countryPage.visa.yr")}
             </span>
           </span>
@@ -255,11 +202,8 @@ export function NomadVisaComparison({
           <div className="flex flex-col items-center gap-1.5">
             <div className="flex items-center gap-2">
               <span
-                className="px-2.5 py-1 rounded-full"
+                className="px-2.5 py-1 rounded-full text-[11px] font-semibold"
                 style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11px",
-                  fontWeight: 600,
                   backgroundColor: colors.bg,
                   color: colors.text,
                 }}
@@ -268,28 +212,15 @@ export function NomadVisaComparison({
               </span>
               {visa.tax.rate != null && (
                 <span
-                  style={{
-                    fontFamily: "IBM Plex Mono, monospace",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    color: colors.text,
-                  }}
+                  className="font-mono text-[16px] font-semibold"
+                  style={{ color: colors.text }}
                 >
                   {visa.tax.rate}%
                 </span>
               )}
             </div>
             {taxNotes && (
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11px",
-                  color: "#8A8A8A",
-                  lineHeight: 1.4,
-                  textAlign: "center",
-                  maxWidth: "260px",
-                }}
-              >
+              <span className="text-[11px] text-dim leading-[1.4] text-center max-w-[260px]">
                 {taxNotes}
               </span>
             )}
@@ -299,40 +230,18 @@ export function NomadVisaComparison({
       case "online":
         return visa.applicationProcess.online ? (
           <div className="flex items-center gap-1.5">
-            <CheckCircle2 size={16} style={{ color: "#44CC66" }} />
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                color: "#44CC66",
-              }}
-            >
-              {t("compare.online")}
-            </span>
+            <CheckCircle2 size={16} className="text-success" />
+            <span className="text-xs text-success">{t("compare.online")}</span>
           </div>
         ) : (
           <div className="flex items-center gap-1.5">
-            <XCircle size={16} style={{ color: "#9E9E9E" }} />
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                color: "#9E9E9E",
-              }}
-            >
-              {t("compare.inPerson")}
-            </span>
+            <XCircle size={16} className="text-muted" />
+            <span className="text-xs text-muted">{t("compare.inPerson")}</span>
           </div>
         );
       case "processingTime":
         return (
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              color: "#E8E9EB",
-            }}
-          >
+          <span className="text-[13px] text-on-surface">
             {loc?.applicationProcess?.processingTime ?? visa.applicationProcess.processingTime}
           </span>
         );
@@ -341,15 +250,7 @@ export function NomadVisaComparison({
         return (
           <div className="flex flex-col gap-1">
             {items.map((b, i) => (
-              <span
-                key={i}
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11px",
-                  color: "#9E9E9E",
-                  lineHeight: 1.3,
-                }}
-              >
+              <span key={i} className="text-[11px] text-muted leading-[1.3]">
                 • {b}
               </span>
             ))}
@@ -362,10 +263,7 @@ export function NomadVisaComparison({
   return (
     <div>
       {/* Country selector — horizontal scroll */}
-      <div
-        className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto"
-        style={{ scrollbarWidth: "thin" }}
-      >
+      <div className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto [scrollbar-width:thin]">
         {selectedCountries.map((slot) => (
           <div key={slot.country.code} className="min-w-0 w-full md:shrink-0 md:w-[180px]">
             <ComparisonSlotCard
@@ -376,25 +274,9 @@ export function NomadVisaComparison({
                 navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
               }
               regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
-              nameSuffix={
-                <Plane
-                  size={13}
-                  style={{
-                    color: "var(--color-accent)",
-                    flexShrink: 0,
-                  }}
-                />
-              }
+              nameSuffix={<Plane size={13} className="text-accent shrink-0" />}
             >
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11px",
-                  color: "#9E9E9E",
-                  textAlign: "center",
-                  lineHeight: 1.3,
-                }}
-              >
+              <span className="text-[11px] text-muted text-center leading-[1.3]">
                 {slot.country.nomadVisa.visaName}
               </span>
             </ComparisonSlotCard>
@@ -418,7 +300,7 @@ export function NomadVisaComparison({
           flagUrl: c.flagUrl,
           name: localizeCountry(c, lang).name,
           regionLabel: t(`regions.${regionKey(c.region)}`),
-          trailing: <Plane size={14} style={{ color: "var(--color-accent)" }} />,
+          trailing: <Plane size={14} className="text-accent" />,
         }))}
         query={query}
         onQueryChange={setQuery}
@@ -431,7 +313,7 @@ export function NomadVisaComparison({
       {/* Visa comparison grid */}
       {selectedCountries.length > 0 && (
         <div className="mt-8">
-          <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
+          <div className="h-px bg-[#1C1C1C]" />
 
           {/* Sticky header */}
           <ComparisonTableHeader
@@ -448,7 +330,7 @@ export function NomadVisaComparison({
           />
 
           {/* Data rows */}
-          <div ref={bodyRef} style={{ overflowX: "auto" }}>
+          <div ref={bodyRef} className="overflow-x-auto">
             {VISA_FIELDS.map(({ key, icon: Icon }) => (
               <ComparisonRowShell
                 key={key}

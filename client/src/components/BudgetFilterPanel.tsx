@@ -30,38 +30,14 @@ export function BudgetFilterPanel({ bs }: Props) {
   );
 
   return (
-    <div
-      style={{
-        backgroundColor: "#131416",
-        border: "1px solid #1E1E22",
-        borderRadius: "8px",
-        overflow: "hidden",
-      }}
-    >
+    <div className="bg-[#131416] border border-[#1E1E22] rounded-[8px] overflow-hidden">
       {/* Budget slider */}
-      <div style={{ padding: "16px", borderBottom: "1px solid #242424" }}>
+      <div className="p-4 border-b border-[#242424]">
         <div className="flex items-end gap-2 mb-3">
-          <span
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontSize: 28,
-              fontWeight: 600,
-              color: "#E8E9EB",
-              lineHeight: 1,
-            }}
-          >
+          <span className="font-mono text-[28px] font-semibold text-on-surface leading-none">
             ${bs.budget.toLocaleString()}
           </span>
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: 12,
-              color: "#808080",
-              paddingBottom: 2,
-            }}
-          >
-            {t("budget.perMonth", "/month")}
-          </span>
+          <span className="text-xs text-dimmer pb-0.5">{t("budget.perMonth", "/month")}</span>
         </div>
         <input
           name="compare-budget-amount"
@@ -78,32 +54,26 @@ export function BudgetFilterPanel({ bs }: Props) {
           aria-label={t("a11y.budgetSlider", "Budget slider")}
         />
         <div className="flex justify-between mt-1.5">
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
-            $300
-          </span>
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
-            $10,000
-          </span>
+          <span className="text-[10px] text-dimmer">$300</span>
+          <span className="text-[10px] text-dimmer">$10,000</span>
         </div>
       </div>
 
       {/* Quality blend */}
-      <div style={{ padding: "12px 16px", borderBottom: "1px solid #242424" }}>
+      <div className="px-4 py-3 border-b border-[#242424]">
         <WeightSliderRow
           inputName="compare-budget-quality-blend"
           value={bs.qualityBlend}
           onChange={bs.setQualityBlend}
           ariaLabel={t("a11y.qualityBlend", "Quality blend")}
           label={
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
-              {t("budget.qualityBlend", "Quality blend")}
-            </span>
+            <span className="text-xs text-white">{t("budget.qualityBlend", "Quality blend")}</span>
           }
           tooltipIcon={
             <Tooltip
               content={
-                <div style={{ maxWidth: 240 }}>
-                  <div style={{ marginBottom: 6, color: "#FFFFFF", fontWeight: 600 }}>
+                <div className="max-w-[240px]">
+                  <div className="mb-1.5 text-white font-semibold">
                     {t("budget.qualityBlend", "Quality blend")}
                   </div>
                   <div>
@@ -116,19 +86,15 @@ export function BudgetFilterPanel({ bs }: Props) {
               }
               side="bottom"
             >
-              <Info
-                size={13}
-                color="#FFFFFF"
-                style={{ cursor: "pointer", flexShrink: 0, opacity: 0.45 }}
-              />
+              <Info size={13} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-45" />
             </Tooltip>
           }
         />
         <div className="flex justify-between mt-1.5">
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
+          <span className="text-[10px] text-dimmer">
             {t("budget.pureAffordability", "Pure Affordability")}
           </span>
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, color: "#808080" }}>
+          <span className="text-[10px] text-dimmer">
             {t("budget.qualityFocus", "Country Quality")}
           </span>
         </div>
@@ -142,11 +108,9 @@ export function BudgetFilterPanel({ bs }: Props) {
         isOpen={open.lifestyle}
         onToggle={() => toggle("lifestyle")}
       >
-        <div style={{ padding: "12px 16px", display: "flex", flexDirection: "column", gap: 14 }}>
-          <div className="flex flex-col" style={{ gap: 6 }}>
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
-              {t("budget.bedrooms.label")}
-            </span>
+        <div className="flex flex-col px-4 py-3 gap-[14px]">
+          <div className="flex flex-col gap-[6px]">
+            <span className="text-xs text-white">{t("budget.bedrooms.label")}</span>
             <ToggleGroup
               options={[1, 2, 3] as const}
               value={bs.bedrooms}
@@ -155,10 +119,8 @@ export function BudgetFilterPanel({ bs }: Props) {
             />
           </div>
 
-          <div className="flex flex-col" style={{ gap: 6 }}>
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
-              {t("budget.housing.label", "Location")}
-            </span>
+          <div className="flex flex-col gap-[6px]">
+            <span className="text-xs text-white">{t("budget.housing.label", "Location")}</span>
             <ToggleGroup
               options={["majorCity", "smallerCity"] as const}
               value={bs.housing}
@@ -169,10 +131,8 @@ export function BudgetFilterPanel({ bs }: Props) {
             />
           </div>
 
-          <div className="flex flex-col" style={{ gap: 6 }}>
-            <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#FFFFFF" }}>
-              {t("budget.people.label", "People")}
-            </span>
+          <div className="flex flex-col gap-[6px]">
+            <span className="text-xs text-white">{t("budget.people.label", "People")}</span>
             <PeopleCountStepper
               value={bs.peopleCount}
               min={1}
@@ -189,18 +149,8 @@ export function BudgetFilterPanel({ bs }: Props) {
         icon={<Sliders size={16} color="#C2956A" />}
         label={t("budget.categoryWeights", "CATEGORY WEIGHTS")}
         badge={
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "#291608",
-              borderRadius: 3,
-              padding: "3px 8px",
-            }}
-          >
-            <span
-              style={{ fontFamily: "IBM Plex Mono, monospace", fontSize: 11, color: "#C2956A" }}
-            >
+          <div className="flex items-center bg-[#291608] rounded-[3px] px-2 py-[3px]">
+            <span className="font-mono text-[11px] text-accent-dim">
               {t("weights.averageBadge")} {avgCategoryWeight}
             </span>
           </div>
@@ -208,9 +158,9 @@ export function BudgetFilterPanel({ bs }: Props) {
         isOpen={open.categories}
         onToggle={() => toggle("categories")}
       >
-        <div style={{ paddingTop: 4, paddingBottom: 4 }}>
+        <div className="py-1">
           {BUDGET_CATEGORY_KEYS.map((key) => (
-            <div key={key} style={{ padding: "10px 16px" }}>
+            <div key={key} className="px-4 py-2.5">
               <WeightSliderRow
                 inputName={`${key}-compare-budget-weight`}
                 value={bs.categoryWeights[key]}
@@ -219,12 +169,7 @@ export function BudgetFilterPanel({ bs }: Props) {
                 label={
                   <Link
                     to={`${langPrefix}/budget-categories`}
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: 12,
-                      color: "#FFFFFF",
-                      textDecoration: "none",
-                    }}
+                    className="text-xs text-white no-underline"
                   >
                     {t(`budget.categories.${key}`, key)}
                   </Link>
@@ -236,22 +181,11 @@ export function BudgetFilterPanel({ bs }: Props) {
       </CollapsibleSection>
 
       {/* Reset */}
-      <div style={{ padding: "12px 16px" }}>
+      <div className="px-4 py-3">
         <button
           type="button"
           onClick={bs.handleReset}
-          className="w-full flex items-center justify-center gap-2 rounded"
-          style={{
-            backgroundColor: "transparent",
-            color: "var(--color-accent-dim)",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "13px",
-            fontWeight: 500,
-            height: "40px",
-            border: "1px solid #333333",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
+          className="w-full flex items-center justify-center gap-2 rounded bg-transparent text-accent-dim text-[13px] font-medium h-10 border border-border rounded-[6px] cursor-pointer"
         >
           <svg
             width="14"

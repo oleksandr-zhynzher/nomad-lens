@@ -41,43 +41,16 @@ export function WeightSlider({
       {isAi ? (
         <Link
           to={`${langPrefix}/ai-indicators`}
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "12px",
-            fontWeight: 400,
-            color: "#FFFFFF",
-            textDecoration: "none",
-          }}
+          className="text-xs font-normal text-white no-underline"
         >
           {label}
         </Link>
       ) : (
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "12px",
-            fontWeight: 400,
-            color: "#FFFFFF",
-          }}
-        >
-          {label}
-        </span>
+        <span className="text-xs font-normal text-white">{label}</span>
       )}
       {isAi && (
-        <Link to={`${langPrefix}/ai-indicators`} style={{ textDecoration: "none" }}>
-          <span
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "9px",
-              fontWeight: 600,
-              color: "#C084FC",
-              backgroundColor: "rgba(192, 132, 252, 0.12)",
-              padding: "1px 5px",
-              borderRadius: "4px",
-              letterSpacing: "0.5px",
-              lineHeight: "16px",
-            }}
-          >
+        <Link to={`${langPrefix}/ai-indicators`} className="no-underline">
+          <span className="text-[9px] font-semibold text-[#C084FC] bg-[rgba(192,132,252,0.12)] px-[5px] py-px rounded-[4px] tracking-[0.5px] leading-4">
             AI
           </span>
         </Link>
@@ -89,14 +62,14 @@ export function WeightSlider({
     <Tooltip
       content={
         <div>
-          <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>{label}</div>
-          <div style={{ marginBottom: "8px" }}>{description}</div>
-          <div style={{ fontSize: "10px", color: "#9E9E9E" }}>Source: {dataSource}</div>
+          <div className="mb-2 text-white font-semibold">{label}</div>
+          <div className="mb-2">{description}</div>
+          <div className="text-[10px] text-muted">Source: {dataSource}</div>
         </div>
       }
       side="top"
     >
-      <Info size={14} color="#FFFFFF" style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }} />
+      <Info size={14} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-60" />
     </Tooltip>
   );
 

@@ -18,10 +18,9 @@ export function ComparisonScoreCell({
   return (
     <div className="shrink-0 text-center" style={{ width: columnWidth }}>
       <span
+        className="font-mono font-semibold"
         style={{
-          fontFamily: "IBM Plex Mono, monospace",
           fontSize: fontSize ?? "22px",
-          fontWeight: 600,
           color: value != null ? colour : (nullColour ?? "#333333"),
         }}
       >

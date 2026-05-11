@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import type { CountryData } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { scoreColour } from "../utils/scoring";
+import { scoreColourClass } from "../utils/colorClasses";
 
 interface ScoreBreakdownProps {
   country: CountryData;
@@ -33,59 +33,28 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
         }
 
         return (
-          <div
-            key={key}
-            className="flex flex-col gap-1 p-2 md:p-3 rounded"
-            style={{ backgroundColor: "#222222" }}
-          >
+          <div key={key} className="flex flex-col gap-1 p-2 md:p-3 rounded bg-surface-2">
             <div className="flex items-center justify-between gap-2">
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: "#CCCCCC",
-                }}
-              >
+              <span className="text-xs font-semibold text-tertiary">
                 {t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
               </span>
               <span
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "12px",
-                  fontWeight: 600,
-                  color: scoreColour(value),
-                }}
+                className={`font-mono text-xs font-semibold ${scoreColourClass(value, "text")}`}
               >
                 {value !== null ? value.toFixed(0) : "N/A"}
               </span>
             </div>
 
             {/* Score bar - 4px height */}
-            <div className="rounded-full" style={{ height: "4px", backgroundColor: "#333333" }}>
+            <div className="rounded-full h-1 bg-border">
               <div
-                className="rounded-full transition-all"
-                style={{
-                  height: "4px",
-                  width: `${value ?? 0}%`,
-                  backgroundColor: scoreColour(value),
-                }}
+                className={`rounded-full transition-all h-1 ${scoreColourClass(value, "bg")}`}
+                style={{ width: `${value ?? 0}%` }}
               />
             </div>
 
             {/* Detail text */}
-            {detailText && (
-              <p
-                style={{
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "10px",
-                  color: "#8A8A8A",
-                  marginTop: "2px",
-                }}
-              >
-                {detailText}
-              </p>
-            )}
+            {detailText && <p className="font-mono text-[10px] text-dim mt-0.5">{detailText}</p>}
           </div>
         );
       })}

@@ -23,10 +23,8 @@ export function ComparisonRowShell({
 }: Props) {
   return (
     <div
-      className="flex items-center"
+      className="flex items-center border-b border-[#1C1C1C] py-4"
       style={{
-        borderBottom: "1px solid #1C1C1C",
-        padding: "16px 0",
         ...(highlight ? { backgroundColor: "#0D0D0F" } : {}),
         ...(gap ? { gap } : {}),
       }}
@@ -34,11 +32,10 @@ export function ComparisonRowShell({
       <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
         {Icon && <Icon size={16} style={{ color: iconColor ?? "#808080", flexShrink: 0 }} />}
         <span
+          className="text-[13px] text-dim"
           style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "13px",
             fontWeight: labelWeight,
-            color: labelColor ?? "#8A8A8A",
+            color: labelColor ?? undefined,
           }}
         >
           {label}

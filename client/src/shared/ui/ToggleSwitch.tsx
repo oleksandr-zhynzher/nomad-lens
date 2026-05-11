@@ -12,12 +12,10 @@ export function ToggleSwitch({ checked, onChange, ariaLabel }: ToggleSwitchProps
       aria-checked={checked}
       aria-label={ariaLabel}
       onClick={() => onChange(!checked)}
-      className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
-      style={{ backgroundColor: checked ? "var(--color-accent)" : "#333333", flexShrink: 0 }}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors shrink-0 ${checked ? "bg-accent" : "bg-border"}`}
     >
       <span
-        className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"
-        style={{ transform: checked ? "translateX(26px)" : "translateX(4px)" }}
+        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${checked ? "translate-x-[26px]" : "translate-x-1"}`}
       />
     </button>
   );

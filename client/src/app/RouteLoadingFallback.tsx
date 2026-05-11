@@ -5,14 +5,11 @@ export function RouteLoadingFallback() {
 
   return (
     <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "var(--color-bg)", color: "#8A8A8A" }}
+      className="flex min-h-screen items-center justify-center bg-bg text-dim"
       role="status"
       aria-live="polite"
     >
-      <span style={{ fontFamily: "Inter, sans-serif", fontSize: "14px" }}>
-        {t("loading", "Loading…")}
-      </span>
+      <span className="text-sm">{t("loading", "Loading…")}</span>
     </div>
   );
 }

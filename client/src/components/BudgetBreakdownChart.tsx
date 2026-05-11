@@ -16,61 +16,20 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
   const maxVal = Math.max(monthlyCost, budget) * 1.1;
 
   return (
-    <div
-      style={{
-        position: "relative",
-        height: "20px",
-        borderRadius: "4px",
-        overflow: "hidden",
-        backgroundColor: "#222",
-      }}
-    >
+    <div className="relative h-5 rounded-[4px] overflow-hidden bg-surface-2">
       {/* Stacked segments */}
-      <div
-        style={{
-          display: "flex",
-          height: "100%",
-          width: `${(monthlyCost / maxVal) * 100}%`,
-        }}
-      >
+      <div className="flex h-full" style={{ width: `${(monthlyCost / maxVal) * 100}%` }}>
         {segments.map((key) => (
           <Tooltip
             key={key}
             content={
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  whiteSpace: "nowrap",
-                }}
-              >
+              <div className="flex items-center gap-2 whitespace-nowrap">
                 <div
-                  style={{
-                    width: "8px",
-                    height: "8px",
-                    borderRadius: "50%",
-                    backgroundColor: COST_COLORS[key] ?? "#555",
-                    flexShrink: 0,
-                  }}
+                  className="w-2 h-2 rounded-full shrink-0"
+                  style={{ backgroundColor: COST_COLORS[key] ?? "#555" }}
                 />
-                <span
-                  style={{
-                    fontSize: "11px",
-                    color: "#CCCCCC",
-                    fontFamily: "Inter, sans-serif",
-                  }}
-                >
-                  {t(`budget.categories.${key}`)}
-                </span>
-                <span
-                  style={{
-                    fontSize: "11px",
-                    fontWeight: 700,
-                    fontFamily: "IBM Plex Mono, monospace",
-                    color: "#FFFFFF",
-                  }}
-                >
+                <span className="text-[11px] text-tertiary">{t(`budget.categories.${key}`)}</span>
+                <span className="text-[11px] font-bold font-mono text-white">
                   ${breakdown[key]}
                 </span>
               </div>
@@ -83,26 +42,16 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
             }}
           >
             <div
-              style={{
-                width: "100%",
-                backgroundColor: COST_COLORS[key] ?? "#555",
-                height: "100%",
-              }}
+              className="w-full h-full"
+              style={{ backgroundColor: COST_COLORS[key] ?? "#555" }}
             />
           </Tooltip>
         ))}
       </div>
       {/* Budget line */}
       <div
-        style={{
-          position: "absolute",
-          left: `${(budget / maxVal) * 100}%`,
-          top: 0,
-          bottom: 0,
-          width: "2px",
-          backgroundColor: "#FFFFFF",
-          opacity: 0.7,
-        }}
+        className="absolute top-0 bottom-0 w-0.5 bg-white opacity-70"
+        style={{ left: `${(budget / maxVal) * 100}%` }}
       />
     </div>
   );

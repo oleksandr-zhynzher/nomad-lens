@@ -23,36 +23,19 @@ export function TourismWeightSlider({ metricKey, value, onChange }: TourismWeigh
         label,
         defaultValue: "{{label}} weight",
       })}
-      label={
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "12px",
-            fontWeight: 400,
-            color: "#FFFFFF",
-          }}
-        >
-          {label}
-        </span>
-      }
+      label={<span className="text-xs font-normal text-white">{label}</span>}
       tooltipIcon={
         desc ? (
           <Tooltip
             content={
               <div>
-                <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>
-                  {label}
-                </div>
+                <div className="mb-2 text-white font-semibold">{label}</div>
                 <div>{desc}</div>
               </div>
             }
             side="top"
           >
-            <Info
-              size={14}
-              color="#FFFFFF"
-              style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }}
-            />
+            <Info size={14} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-60" />
           </Tooltip>
         ) : undefined
       }

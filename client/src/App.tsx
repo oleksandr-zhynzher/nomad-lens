@@ -247,10 +247,7 @@ export default function App() {
     <Layout>
       <div className="flex">
         {/* Left sidebar - Weight Panel (hidden on mobile) */}
-        <aside
-          className="hidden md:block sticky top-14 self-start"
-          style={{ width: "340px", height: "calc(100vh - 56px)" }}
-        >
+        <aside className="hidden md:block sticky top-14 self-start w-[340px] h-[calc(100vh-56px)]">
           <WeightPanel
             weights={ws.weights}
             onChange={ws.handleWeightChange}
@@ -298,20 +295,8 @@ export default function App() {
 
         {/* Mobile FAB - Parameters button */}
         <button
-          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg"
-          style={{
-            bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
-            right: "16px",
-            height: "48px",
-            paddingLeft: "16px",
-            paddingRight: "18px",
-            borderRadius: "24px",
-            backgroundColor: "var(--color-accent)",
-            color: "#FFFFFF",
-            fontFamily: "Inter, sans-serif",
-            fontSize: "14px",
-            fontWeight: 600,
-          }}
+          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-[24px] bg-accent text-white text-sm font-semibold"
+          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)", right: "16px" }}
           onClick={() => setMobileParamsOpen(true)}
           aria-label={t("a11y.openParameters", "Open parameters")}
         >
@@ -320,7 +305,7 @@ export default function App() {
         </button>
 
         {/* Right content area */}
-        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#0A0A0F" }}>
+        <main className="flex-1 min-w-0 pb-28 md:pb-0 bg-bg">
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
@@ -342,46 +327,15 @@ export default function App() {
                 }}
               />
 
-              <div
-                className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12"
-                style={{ minHeight: "160px" }}
-              >
+              <div className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 min-h-[160px]">
                 {/* Eyebrow */}
                 <div className="flex items-center gap-2 mb-2 md:mb-3">
                   {t("hero.eyebrow")
                     .split("·")
                     .map((word, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: "4px",
-                            height: "4px",
-                            borderRadius: "50%",
-                            backgroundColor: "var(--color-accent-dim)",
-                            flexShrink: 0,
-                            display: "inline-block",
-                            position: "relative",
-                            top: "0px",
-                          }}
-                        />
-                        <span
-                          style={{
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "11px",
-                            fontWeight: 500,
-                            letterSpacing: "2.5px",
-                            textTransform: "uppercase",
-                            color: "var(--color-accent-dim)",
-                            lineHeight: 1,
-                          }}
-                        >
+                      <span key={i} className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-accent-dim shrink-0 inline-block relative" />
+                        <span className="text-[11px] font-medium tracking-[2.5px] uppercase text-accent-dim leading-none">
                           {word.trim()}
                         </span>
                       </span>
@@ -389,95 +343,34 @@ export default function App() {
                 </div>
                 {/* H1 — responsive font */}
                 <h1
-                  className="text-3xl md:text-6xl"
-                  style={{
-                    fontFamily: "Oswald, sans-serif",
-                    fontWeight: 700,
-                    lineHeight: "0.95",
-                    color: "#FFFFFF",
-                    marginBottom: "8px",
-                  }}
+                  className="text-3xl md:text-6xl font-bold leading-[0.95] text-white mb-2"
+                  style={{ fontFamily: "Oswald, sans-serif" }}
                 >
                   {t("hero.title")}
                 </h1>
                 {/* Tagline */}
-                <p
-                  className="hidden md:block"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "15px",
-                    color: "#8A8A8A",
-                    maxWidth: "580px",
-                    marginBottom: "20px",
-                  }}
-                >
+                <p className="hidden md:block text-[15px] text-dim max-w-[580px] mb-5">
                   {t("hero.tagline")}
                 </p>
                 {/* Copper rule */}
-                <div
-                  className="hidden md:block"
-                  style={{
-                    width: "128px",
-                    height: "2px",
-                    backgroundColor: "var(--color-accent)",
-                    marginBottom: "16px",
-                  }}
-                />
+                <div className="hidden md:block w-32 h-0.5 bg-accent mb-4" />
                 {/* Stats row */}
                 <div className="hero-stats-row hero-banner-stats">
                   <div className="min-w-0">
-                    <div
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "18px",
-                        fontWeight: 600,
-                        color: "var(--color-accent-dim)",
-                        lineHeight: "1",
-                      }}
-                    >
+                    <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
                       {countries.length}
                     </div>
-                    <div
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#757575",
-                        textTransform: "uppercase",
-                        letterSpacing: "1px",
-                        marginTop: "4px",
-                      }}
-                    >
+                    <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
                       {t("hero.stats.countries", { count: countries.length })}
                     </div>
                   </div>
                   <div className="hero-stat-divider" />
-                  <Link
-                    to={`${langPrefix}/indicators`}
-                    className="min-w-0"
-                    style={{ textDecoration: "none" }}
-                  >
+                  <Link to={`${langPrefix}/indicators`} className="min-w-0 no-underline">
                     <div>
-                      <div
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "18px",
-                          fontWeight: 600,
-                          color: "var(--color-accent-dim)",
-                          lineHeight: "1",
-                        }}
-                      >
+                      <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
                         {DISPLAYED_CORE_CATEGORY_KEYS.length}
                       </div>
-                      <div
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#757575",
-                          textTransform: "uppercase",
-                          letterSpacing: "1px",
-                          marginTop: "4px",
-                        }}
-                      >
+                      <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
                         {t("hero.stats.indicators", {
                           count: DISPLAYED_CORE_CATEGORY_KEYS.length,
                         })}
@@ -485,33 +378,12 @@ export default function App() {
                     </div>
                   </Link>
                   <div className="hero-stat-divider" />
-                  <Link
-                    to={`${langPrefix}/data-sources`}
-                    className="min-w-0"
-                    style={{ textDecoration: "none" }}
-                  >
+                  <Link to={`${langPrefix}/data-sources`} className="min-w-0 no-underline">
                     <div>
-                      <div
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "18px",
-                          fontWeight: 600,
-                          color: "var(--color-accent-dim)",
-                          lineHeight: "1",
-                        }}
-                      >
+                      <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
                         {DATA_SOURCE_KEYS.flat().length}
                       </div>
-                      <div
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#757575",
-                          textTransform: "uppercase",
-                          letterSpacing: "1px",
-                          marginTop: "4px",
-                        }}
-                      >
+                      <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
                         {t("hero.stats.dataSources", {
                           count: DATA_SOURCE_KEYS.flat().length,
                         })}
@@ -519,33 +391,12 @@ export default function App() {
                     </div>
                   </Link>
                   <div className="hero-stat-divider" />
-                  <Link
-                    to={`${langPrefix}/ai-indicators`}
-                    className="min-w-0"
-                    style={{ textDecoration: "none" }}
-                  >
+                  <Link to={`${langPrefix}/ai-indicators`} className="min-w-0 no-underline">
                     <div>
-                      <div
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "18px",
-                          fontWeight: 600,
-                          color: "var(--color-accent-dim)",
-                          lineHeight: "1",
-                        }}
-                      >
+                      <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
                         {AI_CATEGORY_KEYS.length}
                       </div>
-                      <div
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#757575",
-                          textTransform: "uppercase",
-                          letterSpacing: "1px",
-                          marginTop: "4px",
-                        }}
-                      >
+                      <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
                         {t("hero.stats.aiIndicators", {
                           count: AI_CATEGORY_KEYS.length,
                         })}
@@ -557,26 +408,19 @@ export default function App() {
             </div>
 
             {/* Sentinel — used by IntersectionObserver to detect sticky state */}
-            <div ref={sentinelRef} style={{ height: 0 }} />
+            <div ref={sentinelRef} className="h-0" />
 
             {/* Search bar + Region chips — sticky below header */}
             <div
-              className="sticky z-20 -mx-4 px-4 pb-4 md:-mx-6 md:px-6"
-              style={{
-                top: "56px",
-                paddingTop: isSticky ? "12px" : "0",
-                backgroundColor: "#0A0A0F",
-                borderBottom: "1px solid #1a1a1a",
-              }}
+              className={`sticky z-20 -mx-4 px-4 pb-4 md:-mx-6 md:px-6 top-14 bg-bg border-b border-surface ${isSticky ? "pt-3" : "pt-0"}`}
             >
               {/* Search + compare row */}
               <div className={`${isSticky ? "" : " mb-4"}`}>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
                   <div className="relative flex-1 min-w-0">
                     <Search
-                      className="absolute left-4 top-1/2 -translate-y-1/2"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-dim"
                       size={18}
-                      style={{ color: "#8A8A8A" }}
                     />
                     <input
                       ref={searchInputRef}
@@ -585,51 +429,28 @@ export default function App() {
                       placeholder={t("search.placeholder")}
                       value={search}
                       onChange={(e) => updateSearch(e.target.value)}
-                      className="w-full pl-12 rounded-md focus:outline-none"
+                      className="w-full pl-12 rounded-md focus:outline-none h-10 text-white text-sm bg-[#161616] border border-surface"
                       style={{
-                        height: "40px",
                         paddingRight:
                           search.length === 0
                             ? "16px"
                             : searchMode === "highlight" && search.trim().length >= 1
                               ? "164px"
                               : "72px",
-                        backgroundColor: "#161616",
-                        border: "1px solid #1E1E22",
-                        color: "#FFFFFF",
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "14px",
                       }}
                     />
                     {search.length > 0 && (
                       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
                         <button
                           onClick={() => updateSearch("")}
-                          className="flex items-center justify-center"
-                          style={{
-                            width: "24px",
-                            height: "24px",
-                            borderRadius: "3px",
-                            border: "none",
-                            cursor: "pointer",
-                            backgroundColor: "#2A2A2A",
-                            color: "#CCCCCC",
-                          }}
+                          className="flex items-center justify-center w-6 h-6 rounded-[3px] border-0 cursor-pointer bg-surface-4 text-tertiary"
                           aria-label={t("a11y.clearSearch", "Clear search")}
                         >
                           <X size={14} />
                         </button>
                         {searchMode === "highlight" && search.trim().length >= 1 && (
                           <>
-                            <span
-                              style={{
-                                fontFamily: "IBM Plex Mono, monospace",
-                                fontSize: "11px",
-                                color: "#8A8A8A",
-                                minWidth: "36px",
-                                textAlign: "right",
-                              }}
-                            >
+                            <span className="font-mono text-[11px] text-dim min-w-9 text-right">
                               {matchingCodes.length > 0
                                 ? `${matchCursor + 1}/${matchingCodes.length}`
                                 : "0/0"}
@@ -637,16 +458,7 @@ export default function App() {
                             <button
                               onClick={goPrev}
                               disabled={matchingCodes.length === 0}
-                              className="flex items-center justify-center"
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                borderRadius: "3px",
-                                border: "none",
-                                cursor: matchingCodes.length ? "pointer" : "default",
-                                backgroundColor: "#2A2A2A",
-                                color: matchingCodes.length ? "#CCCCCC" : "#757575",
-                              }}
+                              className={`flex items-center justify-center w-6 h-6 rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
                               aria-label={t("a11y.previousMatch", "Previous match")}
                             >
                               <ChevronUp size={14} />
@@ -654,16 +466,7 @@ export default function App() {
                             <button
                               onClick={goNext}
                               disabled={matchingCodes.length === 0}
-                              className="flex items-center justify-center"
-                              style={{
-                                width: "24px",
-                                height: "24px",
-                                borderRadius: "3px",
-                                border: "none",
-                                cursor: matchingCodes.length ? "pointer" : "default",
-                                backgroundColor: "#2A2A2A",
-                                color: matchingCodes.length ? "#CCCCCC" : "#757575",
-                              }}
+                              className={`flex items-center justify-center w-6 h-6 rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
                               aria-label={t("a11y.nextMatch", "Next match")}
                             >
                               <ChevronDown size={14} />
@@ -695,16 +498,7 @@ export default function App() {
                               setSearchMode((m) => (m === "filter" ? "highlight" : "filter"));
                               setMatchCursor(0);
                             }}
-                            className="flex items-center justify-center"
-                            style={{
-                              width: "24px",
-                              height: "24px",
-                              borderRadius: "3px",
-                              border: "none",
-                              cursor: "pointer",
-                              backgroundColor: "#2A2A2A",
-                              color: "#9E9E9E",
-                            }}
+                            className="flex items-center justify-center w-6 h-6 rounded-[3px] border-0 cursor-pointer bg-surface-4 text-muted"
                             aria-label={
                               searchMode === "filter"
                                 ? t("a11y.switchToScrollMode", "Switch to scroll mode")
@@ -723,43 +517,14 @@ export default function App() {
                       <>
                         <button
                           onClick={handleCompare}
-                          className="flex-1 justify-center sm:flex-none"
+                          className={`flex-1 justify-center sm:flex-none flex items-center gap-1.5 h-10 px-3.5 rounded-md text-[13px] font-semibold whitespace-nowrap shrink-0 transition-all duration-150 ${selectedCodes.size < 2 ? "border border-accent-dim cursor-default bg-[#161616] text-accent-dim" : "border-0 cursor-pointer bg-accent text-white"}`}
                           disabled={selectedCodes.size < 2}
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "6px",
-                            height: "40px",
-                            paddingLeft: "14px",
-                            paddingRight: "14px",
-                            borderRadius: "6px",
-                            border:
-                              selectedCodes.size < 2 ? "1px solid var(--color-accent-dim)" : "none",
-                            cursor: selectedCodes.size < 2 ? "default" : "pointer",
-                            backgroundColor:
-                              selectedCodes.size < 2 ? "#161616" : "var(--color-accent)",
-                            color: selectedCodes.size < 2 ? "var(--color-accent-dim)" : "#FFFFFF",
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "13px",
-                            fontWeight: 600,
-                            whiteSpace: "nowrap",
-                            transition: "all 0.15s ease",
-                            flexShrink: 0,
-                          }}
                         >
                           <GitCompare size={15} />
                           {t("compare.compareSelected", "Compare")}
                           {selectedCodes.size > 0 && (
                             <span
-                              style={{
-                                backgroundColor:
-                                  selectedCodes.size < 2
-                                    ? "rgba(143,90,60,0.2)"
-                                    : "rgba(255,255,255,0.25)",
-                                borderRadius: "10px",
-                                padding: "1px 7px",
-                                fontSize: "12px",
-                              }}
+                              className={`rounded-[10px] px-[7px] py-px text-xs ${selectedCodes.size < 2 ? "bg-[rgba(143,90,60,0.2)]" : "bg-[rgba(255,255,255,0.25)]"}`}
                             >
                               {selectedCodes.size}
                             </span>
@@ -767,19 +532,7 @@ export default function App() {
                         </button>
                         <button
                           onClick={exitCompareMode}
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "6px",
-                            border: "1px solid #2A2A2A",
-                            cursor: "pointer",
-                            backgroundColor: "#161616",
-                            color: "#8A8A8A",
-                            flexShrink: 0,
-                          }}
+                          className="flex items-center justify-center w-10 h-10 rounded-md border border-surface-4 cursor-pointer bg-[#161616] text-dim shrink-0"
                           aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
                         >
                           <X size={16} />
@@ -788,25 +541,7 @@ export default function App() {
                     ) : (
                       <button
                         onClick={() => setCompareMode(true)}
-                        className="w-full justify-center sm:w-auto"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "6px",
-                          height: "40px",
-                          paddingLeft: "14px",
-                          paddingRight: "14px",
-                          borderRadius: "6px",
-                          border: "1px solid #2A2A2A",
-                          cursor: "pointer",
-                          backgroundColor: "#161616",
-                          color: "#9E9E9E",
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "13px",
-                          fontWeight: 500,
-                          whiteSpace: "nowrap",
-                          flexShrink: 0,
-                        }}
+                        className="w-full justify-center sm:w-auto flex items-center gap-1.5 h-10 px-3.5 rounded-md border border-surface-4 cursor-pointer bg-[#161616] text-muted text-[13px] font-medium whitespace-nowrap shrink-0"
                       >
                         <GitCompare size={15} />
                         {t("compare.compareMode", "Compare")}
@@ -816,15 +551,7 @@ export default function App() {
                 </div>
 
                 {compareMode && (
-                  <p
-                    style={{
-                      marginTop: "8px",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#8A8A8A",
-                      paddingLeft: "2px",
-                    }}
-                  >
+                  <p className="mt-2 text-xs text-dim pl-0.5">
                     {t(
                       "compare.helperText",
                       "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
@@ -836,33 +563,13 @@ export default function App() {
               {/* Region chips — hidden when sticky */}
               {!isSticky && (
                 <div className="mb-0">
-                  <div
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      fontWeight: 700,
-                      letterSpacing: "2px",
-                      textTransform: "uppercase",
-                      color: "#9E9E9E",
-                      marginBottom: "12px",
-                    }}
-                  >
+                  <div className="text-[13px] font-bold tracking-[2px] uppercase text-muted mb-3">
                     {t("regions.label")}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <button
                       onClick={() => ws.setSelectedRegions(new Set())}
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        fontWeight: 600,
-                        padding: "8px 18px",
-                        borderRadius: "3px",
-                        border: "none",
-                        cursor: "pointer",
-                        backgroundColor: ws.selectedRegions.size === 0 ? "#8F5A3C" : "#2A2A2A",
-                        color: ws.selectedRegions.size === 0 ? "#FFFFFF" : "#9E9E9E",
-                      }}
+                      className={`text-[13px] font-semibold px-[18px] py-2 rounded-[3px] border-0 cursor-pointer ${ws.selectedRegions.size === 0 ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
                     >
                       {t("regions.all")}
                     </button>
@@ -877,17 +584,7 @@ export default function App() {
                             return next;
                           })
                         }
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "13px",
-                          fontWeight: 600,
-                          padding: "8px 18px",
-                          borderRadius: "3px",
-                          border: "none",
-                          cursor: "pointer",
-                          backgroundColor: ws.selectedRegions.has(r) ? "#8F5A3C" : "#2A2A2A",
-                          color: ws.selectedRegions.has(r) ? "#FFFFFF" : "#9E9E9E",
-                        }}
+                        className={`text-[13px] font-semibold px-[18px] py-2 rounded-[3px] border-0 cursor-pointer ${ws.selectedRegions.has(r) ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
                       >
                         {t(`regions.${r.replace(/\s/g, "")}`, r)}
                       </button>
