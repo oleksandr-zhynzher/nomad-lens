@@ -41,7 +41,8 @@ import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails, NomadVisaLocalization } from "../utils/types";
 import { CATEGORY_LABELS, TOURISM_GROUPS, VISIBLE_CATEGORY_KEYS } from "../utils/types";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
-import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring";
+import { computeTourismScore } from "../utils/tourismScoring";
+import { tourismScoreColourClass } from "../utils/colorClasses";
 import { TOURISM_COLORS } from "../utils/tourismColors";
 
 type SeasonLabelKey = "four_seasons" | "mild_seasons" | "tropical" | "arid" | "polar";
@@ -456,63 +457,21 @@ export function CountryPage() {
                 </div>
 
                 {/* Application Process */}
-                <div
-                  style={{
-                    backgroundColor: "#111111",
-                    borderRadius: "12px",
-                    border: "1px solid #1E1E1E",
-                    padding: "24px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "16px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#808080",
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                    }}
-                  >
+                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
+                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                     {t("countryPage.applicationProcessSection")}
                   </span>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div className="flex gap-2 items-center">
                     <Building2 size={16} color="#C2956A" />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "14px",
-                        color: "#E8E9EB",
-                      }}
-                    >
+                    <span className="text-sm text-[#E8E9EB]">
                       {visa.applicationProcess.online
                         ? t("countryPage.onlineApplication")
                         : t("countryPage.inPersonApplication")}
                     </span>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "8px",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div className="flex gap-2 items-center">
                     <Timer size={16} color="#8F5A3C" />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        color: "#9E9E9E",
-                      }}
-                    >
+                    <span className="text-[13px] text-on-surface">
                       {t("countryPage.processing", {
                         time: localize(
                           visa.applicationProcess.processingTime,
@@ -522,16 +481,8 @@ export function CountryPage() {
                       })}
                     </span>
                   </div>
-                  <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "9px",
-                      color: "#757575",
-                      letterSpacing: "1px",
-                      textTransform: "uppercase",
-                    }}
-                  >
+                  <div className="h-px bg-[#1E1E1E]" />
+                  <span className="text-[9px] text-dimmer tracking-[1px] uppercase">
                     {t("countryPage.requiredDocsSection")}
                   </span>
                   {localize(
@@ -539,24 +490,9 @@ export function CountryPage() {
                     visa,
                     (l) => l.applicationProcess?.documents,
                   ).map((doc, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        display: "flex",
-                        gap: "8px",
-                        alignItems: "center",
-                      }}
-                    >
+                    <div key={i} className="flex gap-2 items-center">
                       <FileText size={13} color="#808080" />
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "12px",
-                          color: "#8A8A8A",
-                        }}
-                      >
-                        {doc}
-                      </span>
+                      <span className="text-xs text-dim">{doc}</span>
                     </div>
                   ))}
                 </div>
@@ -566,35 +502,14 @@ export function CountryPage() {
                   href={visa.officialUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    backgroundColor: "#1A1410",
-                    borderRadius: "12px",
-                    border: "1px solid #2A2018",
-                    display: "flex",
-                    gap: "12px",
-                    padding: "20px",
-                    alignItems: "center",
-                    textDecoration: "none",
-                  }}
+                  className="bg-[#1A1410] rounded-xl border border-[#2A2018] flex gap-3 p-5 items-center no-underline"
                 >
                   <ExternalLink size={18} color="#8F5A3C" />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "14px",
-                      color: "#C2956A",
-                    }}
-                  >
+                  <span className="text-sm text-[#C2956A]">
                     {t("countryPage.officialVisaWebsite")}
                   </span>
-                  <div style={{ flex: 1 }} />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "11px",
-                      color: "#808080",
-                    }}
-                  >
+                  <div className="flex-1" />
+                  <span className="text-[11px] text-[#808080]">
                     {getHostname(visa.officialUrl)}
                   </span>
                 </a>
@@ -604,36 +519,15 @@ export function CountryPage() {
         )}
 
         {/* ── scores-section + climate ── */}
-        <div
-          style={{
-            backgroundColor: "var(--color-bg)",
-            paddingTop: "32px",
-            paddingBottom: "32px",
-            gap: "32px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <div className="bg-bg py-8 gap-8 flex flex-col">
           <div className="flex flex-col md:flex-row gap-3 md:items-center">
             <h2
-              style={{
-                fontFamily: "Oswald, sans-serif",
-                fontWeight: 700,
-                color: "#E8E9EB",
-                margin: 0,
-              }}
+              className="font-bold text-[#E8E9EB] m-0"
+              style={{ fontFamily: "Oswald, sans-serif" }}
             >
               {t("countryPage.performanceBreakdown")}
             </h2>
-            <span
-              style={{
-                flex: 1,
-                textAlign: "right",
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                color: "#757575",
-              }}
-            >
+            <span className="flex-1 text-right text-xs text-dimmer">
               {t("countryPage.categoriesSubtitle", {
                 count: VISIBLE_CATEGORY_KEYS.length,
                 name: locC.name,
@@ -645,37 +539,16 @@ export function CountryPage() {
 
           {tourismMetricCount > 0 && (
             <>
-              <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
-              <div
-                style={{
-                  backgroundColor: "var(--color-bg)",
-                  paddingTop: "32px",
-                  paddingBottom: "32px",
-                  gap: "24px",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
+              <div className="h-px bg-[#1E1E1E]" />
+              <div className="bg-bg py-8 gap-6 flex flex-col">
                 <div className="flex flex-col md:flex-row gap-3 md:items-center">
                   <h2
-                    style={{
-                      fontFamily: "Oswald, sans-serif",
-                      fontWeight: 700,
-                      color: "#E8E9EB",
-                      margin: 0,
-                    }}
+                    className="font-bold text-[#E8E9EB] m-0"
+                    style={{ fontFamily: "Oswald, sans-serif" }}
                   >
                     {t("nav.tourism", "Tourism")}
                   </h2>
-                  <span
-                    style={{
-                      flex: 1,
-                      textAlign: "right",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#757575",
-                    }}
-                  >
+                  <span className="flex-1 text-right text-xs text-dimmer">
                     {t("indicatorsPage.tourismIndicatorsLabel", {
                       count: tourismMetricCount,
                     })}
@@ -683,86 +556,27 @@ export function CountryPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                  <div
-                    style={{
-                      backgroundColor: "#111111",
-                      borderRadius: "12px",
-                      border: "1px solid #1E1E1E",
-                      padding: "24px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "16px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        gap: "12px",
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#808080",
-                          letterSpacing: "1.5px",
-                          textTransform: "uppercase",
-                        }}
-                      >
+                  <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                         {t("countryDetail.tourismScores", "Tourism Score")}
                       </span>
-                      <span
-                        style={{
-                          fontFamily: "IBM Plex Mono, monospace",
-                          fontSize: "12px",
-                          color: "#666666",
-                        }}
-                      >
-                        {tourismMetricCount}
-                      </span>
+                      <span className="font-mono text-xs text-[#666666]">{tourismMetricCount}</span>
                     </div>
 
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "baseline",
-                        gap: "10px",
-                      }}
-                    >
+                    <div className="flex items-baseline gap-2.5">
                       <span
-                        style={{
-                          fontFamily: "Oswald, sans-serif",
-                          fontSize: "42px",
-                          fontWeight: 700,
-                          lineHeight: 1,
-                          color:
-                            tourismScore != null ? tourismScoreColour(tourismScore) : "#757575",
-                        }}
+                        className={`text-[42px] font-bold leading-none ${tourismScore != null ? tourismScoreColourClass(tourismScore, "text") : "text-dimmer"}`}
+                        style={{ fontFamily: "Oswald, sans-serif" }}
                       >
                         {tourismScore != null ? tourismScore.toFixed(1) : "—"}
                       </span>
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "12px",
-                          color: "#8A8A8A",
-                        }}
-                      >
+                      <span className="text-xs text-dim">
                         {t("tourismWeights.metricsLabel", "Tourism Metrics")}
                       </span>
                     </div>
 
-                    <p
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "12px",
-                        color: "#8A8A8A",
-                        margin: 0,
-                        lineHeight: 1.5,
-                      }}
-                    >
+                    <p className="text-xs text-dim m-0 leading-relaxed">
                       {tourismScore != null
                         ? t(
                             "countryPage.tourismProfileSubtitle",
@@ -776,38 +590,15 @@ export function CountryPage() {
                     </p>
 
                     {tourismTags.length > 0 && (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "10px",
-                        }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "10px",
-                            color: "#808080",
-                            letterSpacing: "1.5px",
-                            textTransform: "uppercase",
-                          }}
-                        >
+                      <div className="flex flex-col gap-2.5">
+                        <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                           {t("tourismFilters.activityTags", "Activities")}
                         </span>
                         <div className="flex flex-wrap gap-2">
                           {tourismTags.map((tag) => (
                             <span
                               key={tag}
-                              style={{
-                                fontFamily: "Inter, sans-serif",
-                                fontSize: "11px",
-                                fontWeight: 600,
-                                padding: "6px 10px",
-                                borderRadius: "999px",
-                                backgroundColor: "#1A1A1C",
-                                border: "1px solid #252525",
-                                color: "#CFCFCF",
-                              }}
+                              className="text-[11px] font-semibold px-2.5 py-1.5 rounded-full bg-[#1A1A1C] border border-[#252525] text-[#CFCFCF]"
                             >
                               {t(`tourismTags.${tag}`, tag)}
                             </span>
@@ -820,69 +611,25 @@ export function CountryPage() {
                   {tourismGroups.map((group) => (
                     <div
                       key={group.labelKey}
-                      style={{
-                        backgroundColor: "#111111",
-                        borderRadius: "12px",
-                        border: "1px solid #1E1E1E",
-                        padding: "24px",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "14px",
-                      }}
+                      className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-[14px]"
                     >
-                      <div
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#808080",
-                          letterSpacing: "1.5px",
-                          textTransform: "uppercase",
-                        }}
-                      >
+                      <div className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
                         {t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
                       </div>
 
                       <div className="flex flex-col gap-3">
                         {group.metrics.map((metric) => (
                           <div key={metric.key} className="flex flex-col gap-2">
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                gap: "8px",
-                              }}
-                            >
-                              <span
-                                style={{
-                                  fontFamily: "Inter, sans-serif",
-                                  fontSize: "12px",
-                                  color: "#CFCFCF",
-                                }}
-                              >
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="text-xs text-[#CFCFCF]">
                                 {t(`tourism.metrics.${metric.key}`, CATEGORY_LABELS[metric.key])}
                               </span>
-                              <span
-                                style={{
-                                  fontFamily: "IBM Plex Mono, monospace",
-                                  fontSize: "12px",
-                                  fontWeight: 700,
-                                  color: "#E8E9EB",
-                                  flexShrink: 0,
-                                }}
-                              >
+                              <span className="font-mono text-xs font-bold text-[#E8E9EB] shrink-0">
                                 {metric.value.toFixed(0)}
                               </span>
                             </div>
 
-                            <div
-                              style={{
-                                height: "8px",
-                                borderRadius: "999px",
-                                backgroundColor: "#232323",
-                                overflow: "hidden",
-                              }}
-                            >
+                            <div className="h-2 rounded-full bg-[#232323] overflow-hidden">
                               <div
                                 style={{
                                   width: `${metric.value}%`,
@@ -905,37 +652,16 @@ export function CountryPage() {
           {/* ── Cost of Living ── */}
           {c.costOfLiving && (
             <>
-              <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
-              <div
-                style={{
-                  backgroundColor: "var(--color-bg)",
-                  paddingTop: "32px",
-                  paddingBottom: "32px",
-                  gap: "24px",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
+              <div className="h-px bg-[#1E1E1E]" />
+              <div className="bg-bg py-8 gap-6 flex flex-col">
                 <div className="flex flex-col md:flex-row gap-3 md:items-center">
                   <h2
-                    style={{
-                      fontFamily: "Oswald, sans-serif",
-                      fontWeight: 700,
-                      color: "#E8E9EB",
-                      margin: 0,
-                    }}
+                    className="font-bold text-[#E8E9EB] m-0"
+                    style={{ fontFamily: "Oswald, sans-serif" }}
                   >
                     {t("countryPage.costOfLivingSection", "Cost of Living")}
                   </h2>
-                  <span
-                    style={{
-                      flex: 1,
-                      textAlign: "right",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#757575",
-                    }}
-                  >
+                  <span className="flex-1 text-right text-xs text-dimmer">
                     {t("countryPage.costOfLivingSubtitle", "USD / month · single nomad")}
                   </span>
                 </div>
@@ -943,87 +669,27 @@ export function CountryPage() {
                 {/* Summary row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {c.costOfLiving.totalBasic !== null && (
-                    <div
-                      style={{
-                        backgroundColor: "#111111",
-                        borderRadius: "10px",
-                        border: "1px solid #1E1E1E",
-                        padding: "20px",
-                        flex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "8px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "12px",
-                        }}
-                      >
+                    <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex-1 flex flex-col gap-2">
+                      <div className="flex items-center gap-3">
                         <TrendingUp size={16} color="#44CC66" />
-                        <span
-                          style={{
-                            fontFamily: "IBM Plex Mono, monospace",
-                            fontSize: "28px",
-                            fontWeight: 700,
-                            color: "#44CC66",
-                          }}
-                        >
+                        <span className="font-mono text-[28px] font-bold text-[#44CC66]">
                           ${c.costOfLiving.totalBasic.toLocaleString()}
                         </span>
                       </div>
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#808080",
-                        }}
-                      >
+                      <span className="text-[10px] text-[#808080]">
                         {t("countryPage.colTotalBasic", "Basic Budget")}
                       </span>
                     </div>
                   )}
                   {c.costOfLiving.totalComfortable !== null && (
-                    <div
-                      style={{
-                        backgroundColor: "#111111",
-                        borderRadius: "10px",
-                        border: "1px solid #1E1E1E",
-                        padding: "20px",
-                        flex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "8px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "12px",
-                        }}
-                      >
+                    <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex-1 flex flex-col gap-2">
+                      <div className="flex items-center gap-3">
                         <TrendingUp size={16} color="#5B8FA8" />
-                        <span
-                          style={{
-                            fontFamily: "IBM Plex Mono, monospace",
-                            fontSize: "28px",
-                            fontWeight: 700,
-                            color: "#5B8FA8",
-                          }}
-                        >
+                        <span className="font-mono text-[28px] font-bold text-[#5B8FA8]">
                           ${c.costOfLiving.totalComfortable.toLocaleString()}
                         </span>
                       </div>
-                      <span
-                        style={{
-                          fontFamily: "Inter, sans-serif",
-                          fontSize: "10px",
-                          color: "#808080",
-                        }}
-                      >
+                      <span className="text-[10px] text-[#808080]">
                         {t("countryPage.colTotalComfortable", "Comfortable Budget")}
                       </span>
                     </div>
@@ -1091,44 +757,15 @@ export function CountryPage() {
                     return (
                       <div
                         key={key}
-                        style={{
-                          backgroundColor: "#111111",
-                          borderRadius: "8px",
-                          border: "1px solid #1E1E1E",
-                          padding: "16px",
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "6px",
-                        }}
+                        className="bg-[#111111] rounded-lg border border-[#1E1E1E] p-4 flex flex-col gap-1.5"
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                          }}
-                        >
+                        <div className="flex items-center gap-2.5">
                           {icon}
-                          <span
-                            style={{
-                              fontFamily: "IBM Plex Mono, monospace",
-                              fontSize: "20px",
-                              fontWeight: 700,
-                              color: "#E8E9EB",
-                            }}
-                          >
+                          <span className="font-mono text-[20px] font-bold text-[#E8E9EB]">
                             ${val.toLocaleString()}
                           </span>
                         </div>
-                        <span
-                          style={{
-                            fontFamily: "Inter, sans-serif",
-                            fontSize: "10px",
-                            color: "#808080",
-                          }}
-                        >
-                          {label}
-                        </span>
+                        <span className="text-[10px] text-[#808080]">{label}</span>
                       </div>
                     );
                   })}
@@ -1140,167 +777,54 @@ export function CountryPage() {
           {/* ── Climate Data ── */}
           {c.climateData && (
             <>
-              <div style={{ height: "1px", backgroundColor: "#1E1E1E" }} />
-              <div
-                style={{
-                  backgroundColor: "var(--color-bg)",
-                  paddingTop: "32px",
-                  paddingBottom: "32px",
-                  gap: "24px",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
+              <div className="h-px bg-[#1E1E1E]" />
+              <div className="bg-bg py-8 gap-6 flex flex-col">
                 <div className="flex flex-col md:flex-row gap-3 md:items-center">
                   <h2
-                    style={{
-                      fontFamily: "Oswald, sans-serif",
-                      fontWeight: 700,
-                      color: "#E8E9EB",
-                      margin: 0,
-                    }}
+                    className="font-bold text-[#E8E9EB] m-0"
+                    style={{ fontFamily: "Oswald, sans-serif" }}
                   >
                     {t("countryPage.climateDataSection")}
                   </h2>
-                  <span
-                    style={{
-                      flex: 1,
-                      textAlign: "right",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      color: "#757575",
-                    }}
-                  >
+                  <span className="flex-1 text-right text-xs text-dimmer">
                     {seasonLabel} · {t("countryPage.annualAverages")}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div
-                    style={{
-                      backgroundColor: "#111111",
-                      borderRadius: "10px",
-                      border: "1px solid #1E1E1E",
-                      padding: "20px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
-                    }}
-                  >
+                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
                     <Thermometer size={16} color="#5B8FA8" />
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "28px",
-                        fontWeight: 700,
-                        color: "#E8E9EB",
-                      }}
-                    >
+                    <span className="font-mono text-[28px] font-bold text-[#E8E9EB]">
                       {c.climateData.annualMeanTemp.toFixed(1)}°C
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#808080",
-                      }}
-                    >
+                    <span className="text-[10px] text-[#808080]">
                       {t("countryPage.annualMeanTemp")}
                     </span>
                   </div>
-                  <div
-                    style={{
-                      backgroundColor: "#111111",
-                      borderRadius: "10px",
-                      border: "1px solid #1E1E1E",
-                      padding: "20px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
-                    }}
-                  >
+                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
                     <Droplets size={16} color="#5B8FA8" />
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "28px",
-                        fontWeight: 700,
-                        color: "#E8E9EB",
-                      }}
-                    >
+                    <span className="font-mono text-[28px] font-bold text-[#E8E9EB]">
                       {Math.round(c.climateData.annualPrecipitation)}mm
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#808080",
-                      }}
-                    >
+                    <span className="text-[10px] text-[#808080]">
                       {t("countryPage.annualPrecipitation")}
                     </span>
                   </div>
-                  <div
-                    style={{
-                      backgroundColor: "#111111",
-                      borderRadius: "10px",
-                      border: "1px solid #1E1E1E",
-                      padding: "20px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
-                    }}
-                  >
+                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
                     <Sun size={16} color="#C2956A" />
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "28px",
-                        fontWeight: 700,
-                        color: "#C2956A",
-                      }}
-                    >
+                    <span className="font-mono text-[28px] font-bold text-[#C2956A]">
                       {c.climateData.hottestMonth.toFixed(1)}°C
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#808080",
-                      }}
-                    >
+                    <span className="text-[10px] text-[#808080]">
                       {t("countryPage.hottestMonth")}
                     </span>
                   </div>
-                  <div
-                    style={{
-                      backgroundColor: "#111111",
-                      borderRadius: "10px",
-                      border: "1px solid #1E1E1E",
-                      padding: "20px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "8px",
-                    }}
-                  >
+                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
                     <Snowflake size={16} color="#7BACC8" />
-                    <span
-                      style={{
-                        fontFamily: "IBM Plex Mono, monospace",
-                        fontSize: "28px",
-                        fontWeight: 700,
-                        color: "#7BACC8",
-                      }}
-                    >
+                    <span className="font-mono text-[28px] font-bold text-[#7BACC8]">
                       {c.climateData.coldestMonth.toFixed(1)}°C
                     </span>
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "10px",
-                        color: "#808080",
-                      }}
-                    >
+                    <span className="text-[10px] text-[#808080]">
                       {t("countryPage.coldestMonth")}
                     </span>
                   </div>
