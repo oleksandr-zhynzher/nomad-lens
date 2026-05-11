@@ -9,6 +9,10 @@ import { CATEGORY_ICONS } from "../utils/categoryIcons";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 import { REGION_COLORS, REGION_ICONS, REGION_COLUMN_WIDTH } from "../utils/regionConstants";
 import type { RegionStats } from "../utils/regionConstants";
+import { ComparisonTableHeader } from "../shared/ui/comparison/ComparisonTableHeader";
+import { ComparisonRowShell } from "../shared/ui/comparison/ComparisonRowShell";
+import { ComparisonScoreCell } from "../shared/ui/comparison/ComparisonScoreCell";
+import { RegionPill } from "../shared/ui/comparison/RegionPill";
 
 interface RegionComparisonProps {
   countries: CountryData[];
@@ -149,18 +153,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                   {r.overall.toFixed(1)}
                 </span>
 
-                <span
-                  className="px-2 py-0.5 rounded-full"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    color: active ? "#9E9E9E" : "#757575",
-                    backgroundColor: "#1C1C1C",
-                    border: "1px solid #2C2C2C",
-                  }}
-                >
-                  {r.count} countries
-                </span>
+                <RegionPill label={`${r.count} countries`} dimmed={!active} />
               </button>
             </div>
           );
@@ -174,146 +167,59 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
           <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
           {/* Sticky column header — own overflow wrapper, synced with body */}
-          <div
+          <ComparisonTableHeader
             ref={headerRef}
-            className="sticky z-10 top-14 sm:top-[112px]"
-            style={{
-              overflowX: "auto",
-              scrollbarWidth: "none",
-              backgroundColor: "#0F1114",
-            }}
-          >
-            <div
-              className="flex items-center"
-              style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}
-            >
-              <div className="w-[160px] md:w-[240px] shrink-0">
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    fontWeight: 600,
-                    letterSpacing: "1.5px",
-                    color: "#757575",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {t("compare.indicatorHeader")}
-                </span>
-              </div>
-              {activeRegions.map((r) => (
-                <div
-                  key={r.name}
-                  className="flex shrink-0 items-center justify-center"
-                  style={{ width: REGION_COLUMN_WIDTH }}
-                >
-                  <span
-                    className="truncate text-center"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      color: "#FFFFFF",
-                      maxWidth: "84px",
-                    }}
-                  >
-                    {t(`regions.${regionKey(r.name)}`)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+            label={t("compare.indicatorHeader")}
+            columns={activeRegions.map((r) => ({
+              key: r.name,
+              name: t(`regions.${regionKey(r.name)}`),
+              maxNameWidth: "84px",
+            }))}
+            columnWidth={REGION_COLUMN_WIDTH}
+          />
 
           {/* Scrollable data rows */}
           <div ref={bodyRef} style={{ overflowX: "auto" }}>
             {/* Overall row */}
-            <div
-              className="flex items-center"
-              style={{
-                borderBottom: "1px solid #1C1C1C",
-                padding: "16px 0",
-                backgroundColor: "#0D0D0F",
-              }}
+            <ComparisonRowShell
+              icon={TrendingUp}
+              iconColor="#9E9E9E"
+              label={t("compare.overallScore")}
+              labelWeight={600}
+              labelColor="#AAAAAA"
+              highlight={true}
             >
-              <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                <TrendingUp size={16} style={{ color: "#9E9E9E" }} />
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    fontWeight: 600,
-                    color: "#AAAAAA",
-                  }}
-                >
-                  {t("compare.overallScore")}
-                </span>
-              </div>
               {activeRegions.map((r) => (
-                <div
+                <ComparisonScoreCell
                   key={r.name}
-                  className="shrink-0 text-center"
-                  style={{ width: REGION_COLUMN_WIDTH }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "IBM Plex Mono, monospace",
-                      fontSize: "22px",
-                      fontWeight: 600,
-                      color: scoreColour(r.overall),
-                    }}
-                  >
-                    {r.overall.toFixed(1)}
-                  </span>
-                </div>
+                  value={r.overall}
+                  colour={scoreColour(r.overall)}
+                  columnWidth={REGION_COLUMN_WIDTH}
+                />
               ))}
-            </div>
+            </ComparisonRowShell>
 
             {/* Indicator rows */}
             {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];
               return (
-                <div
+                <ComparisonRowShell
                   key={key}
-                  className="flex items-center"
-                  style={{
-                    borderBottom: "1px solid #1C1C1C",
-                    padding: "16px 0",
-                  }}
+                  icon={Icon}
+                  label={t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
                 >
-                  <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                    <Icon size={16} style={{ color: "#808080" }} />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        color: "#8A8A8A",
-                      }}
-                    >
-                      {t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
-                    </span>
-                  </div>
                   {activeRegions.map((r) => {
                     const val = r.categories[key].avg;
                     return (
-                      <div
+                      <ComparisonScoreCell
                         key={r.name}
-                        className="shrink-0 text-center"
-                        style={{ width: REGION_COLUMN_WIDTH }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: "IBM Plex Mono, monospace",
-                            fontSize: "22px",
-                            fontWeight: 600,
-                            color: val != null ? scoreColour(val) : "#333333",
-                          }}
-                        >
-                          {val != null ? val.toFixed(1) : "—"}
-                        </span>
-                      </div>
+                        value={val}
+                        colour={val != null ? scoreColour(val) : "#333333"}
+                        columnWidth={REGION_COLUMN_WIDTH}
+                      />
                     );
                   })}
-                </div>
+                </ComparisonRowShell>
               );
             })}
           </div>

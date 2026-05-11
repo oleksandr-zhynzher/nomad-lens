@@ -1,16 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
-import { CirclePlus, X, Plane } from "lucide-react";
+import { Plane } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { computeScore, scoreColour, applyClimate } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { Tooltip } from "./Tooltip";
-import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
 import { CATEGORY_ICONS } from "../utils/categoryIcons";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
+import { useComparisonSelection } from "../shared/hooks/useComparisonSelection";
+import { ComparisonSlotCard } from "../shared/ui/comparison/ComparisonSlotCard";
+import { ComparisonAddButton } from "../shared/ui/comparison/ComparisonAddButton";
+import { CountryPickerDropdown } from "../shared/ui/comparison/CountryPickerDropdown";
+import { ComparisonTableHeader } from "../shared/ui/comparison/ComparisonTableHeader";
+import { ComparisonRowShell } from "../shared/ui/comparison/ComparisonRowShell";
+import { ComparisonScoreCell } from "../shared/ui/comparison/ComparisonScoreCell";
 
 const COMPARISON_COLUMN_WIDTH = "112px";
 
@@ -35,43 +41,35 @@ export function CountryComparison({
   sortDirection = null,
   onSelectionCount,
 }: Props) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [dropdownPos, setDropdownPos] = useState<{
-    top: number;
-    left: number;
-  } | null>(null);
-  const [query, setQuery] = useState("");
-  const addBtnRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const bodyRef = useRef<HTMLDivElement>(null);
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const navigate = useNavigate();
   const lang = i18n.language;
 
+  const {
+    selectedSlots: selectedCountries,
+    handleAdd,
+    handleRemove,
+    filteredCandidates: filtered,
+    dropdownOpen,
+    setDropdownOpen,
+    dropdownPos,
+    setDropdownPos,
+    query,
+    setQuery,
+    addBtnRef,
+    headerRef,
+    bodyRef,
+  } = useComparisonSelection({
+    allCandidates: countries,
+    selectedCodes,
+    onSelectedCodesChange,
+    lang,
+    onSelectionCount,
+  });
+
   // Sync horizontal scroll between sticky header and body
   useSyncScroll(headerRef, bodyRef);
-
-  const selectedCountries = selectedCodes
-    .map((code, i) => {
-      const country = countries.find((c) => c.code === code);
-      return country ? { country, color: getComparisonSlotColor(i), index: i } : null;
-    })
-    .filter(Boolean) as {
-    country: CountryData;
-    color: string;
-    index: number;
-  }[];
-
-  const handleRemove = (index: number) => {
-    onSelectedCodesChange(selectedCodes.filter((_, i) => i !== index));
-  };
-
-  const handleAdd = (code: string) => {
-    onSelectedCodesChange([...selectedCodes, code]);
-    setDropdownOpen(false);
-    setQuery("");
-  };
 
   // Sort when parent triggers it
   useEffect(() => {
@@ -107,19 +105,6 @@ export function CountryComparison({
     weights,
   ]);
 
-  // Report selection count to parent
-  useEffect(() => {
-    onSelectionCount?.(selectedCodes.length);
-  }, [selectedCodes.length, onSelectionCount]);
-
-  const filtered = countries
-    .filter(
-      (c) =>
-        !selectedCodes.includes(c.code) &&
-        localizeCountry(c, lang).name.toLowerCase().includes(query.toLowerCase()),
-    )
-    .sort((a, b) => localizeCountry(a, lang).name.localeCompare(localizeCountry(b, lang).name));
-
   return (
     <div>
       {/* Country selector — horizontal scroll with fade hint */}
@@ -129,63 +114,17 @@ export function CountryComparison({
             const score = computeScore(applyClimate(slot.country, climatePrefs), weights);
             const sColor = scoreColour(score);
             return (
-              <div
-                key={slot.country.code}
-                className="shrink-0 w-[148px] md:w-[180px]"
-                onClick={() => navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`);
+              <div key={slot.country.code} className="shrink-0 w-[148px] md:w-[180px]">
+                <ComparisonSlotCard
+                  flagUrl={slot.country.flagUrl}
+                  countryName={localizeCountry(slot.country, lang).name}
+                  onRemove={() => handleRemove(slot.index)}
+                  onNavigate={() =>
+                    navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
                   }
-                }}
-                role="link"
-                tabIndex={0}
-                style={{ cursor: "pointer" }}
-              >
-                <div
-                  className="relative rounded-lg p-4 flex flex-col items-center gap-3"
-                  style={{
-                    backgroundColor: "#1A1A1C",
-                    border: "1px solid #2E2E30",
-                    height: "100%",
-                  }}
-                >
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleRemove(slot.index);
-                    }}
-                    className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
-                    style={{
-                      opacity: 0.6,
-                      color: "#FFFFFF",
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "11px",
-                    }}
-                  >
-                    <X size={14} />
-                  </button>
-
-                  <img
-                    src={slot.country.flagUrl}
-                    alt={localizeCountry(slot.country, lang).name}
-                    className="rounded-full object-cover w-9 h-9"
-                  />
-
-                  <div className="flex items-center justify-center gap-1.5">
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "15px",
-                        fontWeight: 600,
-                        color: "#E8E9EB",
-                        textAlign: "center",
-                      }}
-                    >
-                      {localizeCountry(slot.country, lang).name}
-                    </span>
-                    {slot.country.hasNomadVisa && (
+                  regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
+                  nameSuffix={
+                    slot.country.hasNomadVisa ? (
                       <Tooltip
                         content={t("countryDetail.nomadVisa", "Nomad Visa Available")}
                         side="top"
@@ -202,9 +141,9 @@ export function CountryComparison({
                           <Plane size={13} />
                         </Link>
                       </Tooltip>
-                    )}
-                  </div>
-
+                    ) : undefined
+                  }
+                >
                   <span
                     className="text-[32px]"
                     style={{
@@ -216,27 +155,15 @@ export function CountryComparison({
                   >
                     {score.toFixed(1)}
                   </span>
-
-                  <span
-                    className="px-2 py-0.5 rounded-full"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "10px",
-                      color: "#9E9E9E",
-                      backgroundColor: "#1C1C1C",
-                      border: "1px solid #2C2C2C",
-                    }}
-                  >
-                    {t(`regions.${regionKey(slot.country.region)}`)}
-                  </span>
-                </div>
+                </ComparisonSlotCard>
               </div>
             );
           })}
 
           {/* Add button */}
           <div ref={addBtnRef} className="shrink-0 w-[148px] md:w-[180px]">
-            <button
+            <ComparisonAddButton
+              label={t("compare.addCountry")}
               onClick={() => {
                 if (!dropdownOpen && addBtnRef.current) {
                   const rect = addBtnRef.current.getBoundingClientRect();
@@ -252,24 +179,7 @@ export function CountryComparison({
                 }
                 setDropdownOpen((p) => !p);
               }}
-              className="flex min-h-[160px] w-full flex-col items-center justify-center gap-2 rounded-lg p-4 transition-colors hover:border-[#3A3A3A] md:min-h-[180px]"
-              style={{
-                backgroundColor: "#141416",
-                border: "1px dashed #252525",
-                cursor: "pointer",
-              }}
-            >
-              <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
-              <span
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "12px",
-                  color: "#E8E9EB",
-                }}
-              >
-                {t("compare.addCountry")}
-              </span>
-            </button>
+            />
           </div>
         </div>
         {/* Right-edge fade — hints at horizontal scrollability on mobile */}
@@ -282,97 +192,37 @@ export function CountryComparison({
       </div>
 
       {/* Dropdown — fixed-positioned under the Add Country card */}
-      {dropdownOpen && dropdownPos && (
-        <div
-          className="z-50 rounded-lg overflow-hidden w-[320px]"
-          style={{
-            position: "fixed",
-            top: dropdownPos.top,
-            left: dropdownPos.left,
-            backgroundColor: "#1A1A1C",
-            border: "1px solid #2A2A2A",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-          }}
-        >
-          <input
-            name="country-comparison-search"
-            type="text"
-            autoFocus
-            placeholder={t("compare.searchCountry")}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full px-3 py-2.5 focus:outline-none"
-            style={{
-              backgroundColor: "#141416",
-              border: "none",
-              borderBottom: "1px solid #252525",
-              color: "#FFFFFF",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-            }}
-          />
-          <div style={{ maxHeight: "320px", overflowY: "auto" }}>
-            {filtered.map((c) => {
-              const score = computeScore(applyClimate(c, climatePrefs), weights);
-              return (
-                <button
-                  key={c.code}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors text-left"
-                  onClick={() => handleAdd(c.code)}
-                >
-                  <img
-                    src={c.flagUrl}
-                    alt={localizeCountry(c, lang).name}
-                    className="rounded-full object-cover"
-                    style={{ width: "24px", height: "24px" }}
-                  />
-                  <span
-                    className="flex-1 truncate"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      color: "#E8E9EB",
-                    }}
-                  >
-                    {localizeCountry(c, lang).name}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "11px",
-                      color: "#808080",
-                    }}
-                  >
-                    {t(`regions.${regionKey(c.region)}`)}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "IBM Plex Mono, monospace",
-                      fontSize: "13px",
-                      fontWeight: 600,
-                      color: scoreColour(score),
-                    }}
-                  >
-                    {score.toFixed(1)}
-                  </span>
-                </button>
-              );
-            })}
-            {filtered.length === 0 && (
-              <div
-                className="px-3 py-4 text-center"
+      <CountryPickerDropdown
+        open={dropdownOpen && dropdownPos != null}
+        countries={filtered.map((c) => {
+          const score = computeScore(applyClimate(c, climatePrefs), weights);
+          return {
+            code: c.code,
+            flagUrl: c.flagUrl,
+            name: localizeCountry(c, lang).name,
+            regionLabel: t(`regions.${regionKey(c.region)}`),
+            trailing: (
+              <span
                 style={{
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "IBM Plex Mono, monospace",
                   fontSize: "13px",
-                  color: "#808080",
+                  fontWeight: 600,
+                  color: scoreColour(score),
                 }}
               >
-                {t("compare.noCountriesFound")}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+                {score.toFixed(1)}
+              </span>
+            ),
+          };
+        })}
+        query={query}
+        onQueryChange={setQuery}
+        onSelect={handleAdd}
+        position={dropdownPos ?? undefined}
+        inputName="country-comparison-search"
+        searchPlaceholder={t("compare.searchCountry")}
+        emptyLabel={t("compare.noCountriesFound")}
+      />
 
       {/* Indicator grid */}
       {selectedCountries.length > 0 && (
@@ -381,61 +231,16 @@ export function CountryComparison({
           <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
           {/* Sticky column header — own overflow wrapper, synced with body */}
-          <div
+          <ComparisonTableHeader
             ref={headerRef}
-            className="sticky z-10 top-14 sm:top-[112px]"
-            style={{
-              overflowX: "auto",
-              scrollbarWidth: "none",
-              backgroundColor: "#0F1114",
-            }}
-          >
-            <div
-              className="flex items-center"
-              style={{ borderBottom: "1px solid #1C1C1C", padding: "14px 0" }}
-            >
-              <div className="w-[160px] md:w-[240px] shrink-0">
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    fontWeight: 600,
-                    letterSpacing: "1.5px",
-                    color: "#757575",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {t("compare.indicatorHeader")}
-                </span>
-              </div>
-              {selectedCountries.map((slot) => (
-                <div
-                  key={slot.index}
-                  className="flex shrink-0 items-center justify-center gap-1.5"
-                  style={{ width: COMPARISON_COLUMN_WIDTH }}
-                >
-                  <img
-                    src={slot.country.flagUrl}
-                    alt={localizeCountry(slot.country, lang).name}
-                    className="rounded-full object-cover"
-                    style={{ width: "18px", height: "18px" }}
-                  />
-                  <span
-                    className="truncate"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      color: "#FFFFFF",
-                      maxWidth: "76px",
-                    }}
-                  >
-                    {localizeCountry(slot.country, lang).name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+            label={t("compare.indicatorHeader")}
+            columns={selectedCountries.map((slot) => ({
+              key: slot.index,
+              flagUrl: slot.country.flagUrl,
+              name: localizeCountry(slot.country, lang).name,
+            }))}
+            columnWidth={COMPARISON_COLUMN_WIDTH}
+          />
 
           {/* Scrollable data rows */}
           <div ref={bodyRef} style={{ overflowX: "auto" }}>
@@ -443,48 +248,23 @@ export function CountryComparison({
             {VISIBLE_CATEGORY_KEYS.map((key) => {
               const Icon = CATEGORY_ICONS[key];
               return (
-                <div
+                <ComparisonRowShell
                   key={key}
-                  className="flex items-center"
-                  style={{
-                    borderBottom: "1px solid #1C1C1C",
-                    padding: "16px 0",
-                  }}
+                  icon={Icon}
+                  label={t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
                 >
-                  <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                    <Icon size={16} style={{ color: "#808080" }} />
-                    <span
-                      style={{
-                        fontFamily: "Inter, sans-serif",
-                        fontSize: "13px",
-                        color: "#8A8A8A",
-                      }}
-                    >
-                      {t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
-                    </span>
-                  </div>
                   {selectedCountries.map((slot) => {
-                    const val = slot.country.scores[key]?.value;
+                    const val = slot.country.scores[key]?.value ?? null;
                     return (
-                      <div
+                      <ComparisonScoreCell
                         key={slot.index}
-                        className="shrink-0 text-center"
-                        style={{ width: COMPARISON_COLUMN_WIDTH }}
-                      >
-                        <span
-                          style={{
-                            fontFamily: "IBM Plex Mono, monospace",
-                            fontSize: "22px",
-                            fontWeight: 600,
-                            color: val != null ? scoreColour(val) : "#333333",
-                          }}
-                        >
-                          {val != null ? val.toFixed(1) : "—"}
-                        </span>
-                      </div>
+                        value={val}
+                        colour={val != null ? scoreColour(val) : "#333333"}
+                        columnWidth={COMPARISON_COLUMN_WIDTH}
+                      />
                     );
                   })}
-                </div>
+                </ComparisonRowShell>
               );
             })}
           </div>

@@ -1,15 +1,19 @@
-import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
-import { CirclePlus, X, Plane, CheckCircle2, XCircle } from "lucide-react";
+import { Plane, CheckCircle2, XCircle } from "lucide-react";
 import { computeScore, scoreColour } from "../utils/scoring";
 import { applyClimate } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import type { ClimatePreferences, CountryData, WeightMap } from "../utils/types";
-import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
+import { useComparisonSelection } from "../shared/hooks/useComparisonSelection";
+import { ComparisonSlotCard } from "../shared/ui/comparison/ComparisonSlotCard";
+import { ComparisonAddButton } from "../shared/ui/comparison/ComparisonAddButton";
+import { CountryPickerDropdown } from "../shared/ui/comparison/CountryPickerDropdown";
+import { ComparisonTableHeader } from "../shared/ui/comparison/ComparisonTableHeader";
+import { ComparisonRowShell } from "../shared/ui/comparison/ComparisonRowShell";
 import {
   TAX_STATUS_COLORS,
   VISA_FIELDS,
@@ -35,49 +39,40 @@ export function NomadVisaComparison({
   selectedCodes,
   onSelectedCodesChange,
 }: Props) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const headerRef = useRef<HTMLDivElement>(null);
-  const bodyRef = useRef<HTMLDivElement>(null);
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const navigate = useNavigate();
   const lang = i18n.language;
   const budgetMatchByCode = new Map(budgetMatches.map((match) => [match.country.code, match]));
 
+  const visaCountries = countries.filter((c) => !!c.nomadVisa);
+
+  const {
+    selectedSlots,
+    handleAdd,
+    handleRemove,
+    filteredCandidates: filtered,
+    dropdownOpen,
+    setDropdownOpen,
+    query,
+    setQuery,
+    headerRef,
+    bodyRef,
+  } = useComparisonSelection({
+    allCandidates: visaCountries,
+    selectedCodes,
+    onSelectedCodesChange,
+    lang,
+  });
+
   // Sync horizontal scroll between sticky header and body
   useSyncScroll(headerRef, bodyRef);
 
-  const visaCountries = countries.filter((c) => !!c.nomadVisa);
-
-  const selectedCountries = selectedCodes
-    .map((code, i) => {
-      const country = visaCountries.find((c) => c.code === code);
-      return country ? { country, color: getComparisonSlotColor(i), index: i } : null;
-    })
-    .filter(Boolean) as {
+  const selectedCountries = selectedSlots.filter((s) => !!s.country.nomadVisa) as Array<{
     country: CountryData & { nomadVisa: NonNullable<CountryData["nomadVisa"]> };
     color: string;
     index: number;
-  }[];
-
-  const handleRemove = (index: number) => {
-    onSelectedCodesChange(selectedCodes.filter((_, i) => i !== index));
-  };
-
-  const handleAdd = (code: string) => {
-    onSelectedCodesChange([...selectedCodes, code]);
-    setDropdownOpen(false);
-    setQuery("");
-  };
-
-  const filtered = visaCountries
-    .filter(
-      (c) =>
-        !selectedCodes.includes(c.code) &&
-        localizeCountry(c, lang).name.toLowerCase().includes(query.toLowerCase()),
-    )
-    .sort((a, b) => localizeCountry(a, lang).name.localeCompare(localizeCountry(b, lang).name));
+  }>;
 
   /** Localize nomad visa fields that have i18n */
   function getLocalizedVisa(country: CountryData) {
@@ -372,62 +367,16 @@ export function NomadVisaComparison({
         style={{ scrollbarWidth: "thin" }}
       >
         {selectedCountries.map((slot) => (
-          <div
-            key={slot.country.code}
-            className="min-w-0 w-full md:shrink-0 md:w-[180px]"
-            onClick={() => navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`);
+          <div key={slot.country.code} className="min-w-0 w-full md:shrink-0 md:w-[180px]">
+            <ComparisonSlotCard
+              flagUrl={slot.country.flagUrl}
+              countryName={localizeCountry(slot.country, lang).name}
+              onRemove={() => handleRemove(slot.index)}
+              onNavigate={() =>
+                navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
               }
-            }}
-            role="link"
-            tabIndex={0}
-            style={{ cursor: "pointer" }}
-          >
-            <div
-              className="relative rounded-lg p-4 flex flex-col items-center gap-3"
-              style={{
-                backgroundColor: "#1A1A1C",
-                border: "1px solid #2E2E30",
-                height: "100%",
-              }}
-            >
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleRemove(slot.index);
-                }}
-                className="absolute top-3 right-3 flex items-center gap-1 transition-opacity hover:opacity-100"
-                style={{
-                  opacity: 0.6,
-                  color: "#FFFFFF",
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "11px",
-                }}
-              >
-                <X size={14} />
-              </button>
-
-              <img
-                src={slot.country.flagUrl}
-                alt={localizeCountry(slot.country, lang).name}
-                className="rounded-full object-cover w-9 h-9"
-              />
-
-              <div className="flex items-center justify-center gap-1.5">
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "15px",
-                    fontWeight: 600,
-                    color: "#E8E9EB",
-                    textAlign: "center",
-                  }}
-                >
-                  {localizeCountry(slot.country, lang).name}
-                </span>
+              regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
+              nameSuffix={
                 <Plane
                   size={13}
                   style={{
@@ -435,8 +384,8 @@ export function NomadVisaComparison({
                     flexShrink: 0,
                   }}
                 />
-              </div>
-
+              }
+            >
               <span
                 style={{
                   fontFamily: "Inter, sans-serif",
@@ -448,125 +397,36 @@ export function NomadVisaComparison({
               >
                 {slot.country.nomadVisa.visaName}
               </span>
-
-              <span
-                className="px-2 py-0.5 rounded-full"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "10px",
-                  color: "#9E9E9E",
-                  backgroundColor: "#1C1C1C",
-                  border: "1px solid #2C2C2C",
-                }}
-              >
-                {t(`regions.${regionKey(slot.country.region)}`)}
-              </span>
-            </div>
+            </ComparisonSlotCard>
           </div>
         ))}
 
         {/* Add button */}
         <div className="min-w-0 w-full md:shrink-0 md:w-[180px]">
-          <button
+          <ComparisonAddButton
+            label={t("compare.addCountry")}
             onClick={() => setDropdownOpen((p) => !p)}
-            className="flex min-h-[160px] w-full flex-col items-center justify-center gap-2 rounded-lg p-4 transition-colors hover:border-[#3A3A3A] md:min-h-[180px]"
-            style={{
-              backgroundColor: "#141416",
-              border: "1px dashed #252525",
-              cursor: "pointer",
-            }}
-          >
-            <CirclePlus size={28} style={{ color: "#E8E9EB" }} />
-            <span
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "12px",
-                color: "#E8E9EB",
-              }}
-            >
-              {t("compare.addCountry")}
-            </span>
-          </button>
+          />
         </div>
       </div>
 
       {/* Dropdown */}
-      {dropdownOpen && (
-        <div
-          className="z-20 mt-1 rounded-lg overflow-hidden w-full md:w-[320px]"
-          style={{
-            backgroundColor: "#1A1A1C",
-            border: "1px solid #2A2A2A",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
-          }}
-        >
-          <input
-            name="visa-comparison-search"
-            type="text"
-            autoFocus
-            placeholder={t("compare.searchCountry")}
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full px-3 py-2.5 focus:outline-none"
-            style={{
-              backgroundColor: "#141416",
-              border: "none",
-              borderBottom: "1px solid #252525",
-              color: "#FFFFFF",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-            }}
-          />
-          <div style={{ maxHeight: "320px", overflowY: "auto" }}>
-            {filtered.map((c) => (
-              <button
-                key={c.code}
-                className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 transition-colors text-left"
-                onClick={() => handleAdd(c.code)}
-              >
-                <img
-                  src={c.flagUrl}
-                  alt={localizeCountry(c, lang).name}
-                  className="rounded-full object-cover"
-                  style={{ width: "24px", height: "24px" }}
-                />
-                <span
-                  className="flex-1 truncate"
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "13px",
-                    color: "#E8E9EB",
-                  }}
-                >
-                  {localizeCountry(c, lang).name}
-                </span>
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "11px",
-                    color: "#808080",
-                  }}
-                >
-                  {t(`regions.${regionKey(c.region)}`)}
-                </span>
-                <Plane size={14} style={{ color: "var(--color-accent)" }} />
-              </button>
-            ))}
-            {filtered.length === 0 && (
-              <div
-                className="px-3 py-4 text-center"
-                style={{
-                  fontFamily: "Inter, sans-serif",
-                  fontSize: "13px",
-                  color: "#808080",
-                }}
-              >
-                {t("compare.noCountriesFound")}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <CountryPickerDropdown
+        open={dropdownOpen}
+        countries={filtered.map((c) => ({
+          code: c.code,
+          flagUrl: c.flagUrl,
+          name: localizeCountry(c, lang).name,
+          regionLabel: t(`regions.${regionKey(c.region)}`),
+          trailing: <Plane size={14} style={{ color: "var(--color-accent)" }} />,
+        }))}
+        query={query}
+        onQueryChange={setQuery}
+        onSelect={handleAdd}
+        inputName="visa-comparison-search"
+        searchPlaceholder={t("compare.searchCountry")}
+        emptyLabel={t("compare.noCountriesFound")}
+      />
 
       {/* Visa comparison grid */}
       {selectedCountries.length > 0 && (
@@ -574,90 +434,28 @@ export function NomadVisaComparison({
           <div style={{ height: "1px", backgroundColor: "#1C1C1C" }} />
 
           {/* Sticky header */}
-          <div
+          <ComparisonTableHeader
             ref={headerRef}
-            className="sticky z-10 top-14 sm:top-[112px]"
-            style={{
-              overflowX: "auto",
-              scrollbarWidth: "none",
-              backgroundColor: "#0F1114",
-            }}
-          >
-            <div
-              className="flex items-center"
-              style={{
-                borderBottom: "1px solid #1C1C1C",
-                padding: "14px 0",
-                gap: VISA_COMPARISON_COLUMN_GAP,
-              }}
-            >
-              <div className="w-[160px] md:w-[240px] shrink-0">
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "10px",
-                    fontWeight: 600,
-                    letterSpacing: "1.5px",
-                    color: "#757575",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {t("compare.visaDetail", "Visa Detail")}
-                </span>
-              </div>
-              {selectedCountries.map((slot) => (
-                <div
-                  key={slot.index}
-                  className="flex shrink-0 items-center justify-center gap-1.5"
-                  style={{ width: VISA_COMPARISON_COLUMN_WIDTH }}
-                >
-                  <img
-                    src={slot.country.flagUrl}
-                    alt={localizeCountry(slot.country, lang).name}
-                    className="rounded-full object-cover"
-                    style={{ width: "18px", height: "18px" }}
-                  />
-                  <span
-                    className="truncate"
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      fontWeight: 600,
-                      color: "#FFFFFF",
-                      maxWidth: "150px",
-                    }}
-                  >
-                    {localizeCountry(slot.country, lang).name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+            label={t("compare.visaDetail", "Visa Detail")}
+            columns={selectedCountries.map((slot) => ({
+              key: slot.index,
+              flagUrl: slot.country.flagUrl,
+              name: localizeCountry(slot.country, lang).name,
+              maxNameWidth: "150px",
+            }))}
+            columnWidth={VISA_COMPARISON_COLUMN_WIDTH}
+            gap={VISA_COMPARISON_COLUMN_GAP}
+          />
 
           {/* Data rows */}
           <div ref={bodyRef} style={{ overflowX: "auto" }}>
             {VISA_FIELDS.map(({ key, icon: Icon }) => (
-              <div
+              <ComparisonRowShell
                 key={key}
-                className="flex items-center"
-                style={{
-                  borderBottom: "1px solid #1C1C1C",
-                  padding: "16px 0",
-                  gap: VISA_COMPARISON_COLUMN_GAP,
-                }}
+                icon={Icon}
+                label={t(`compare.visaFields.${key}`)}
+                gap={VISA_COMPARISON_COLUMN_GAP}
               >
-                <div className="flex items-center gap-2.5 w-[160px] md:w-[240px] shrink-0">
-                  <Icon size={16} style={{ color: "#808080" }} />
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "13px",
-                      color: "#8A8A8A",
-                    }}
-                  >
-                    {t(`compare.visaFields.${key}`)}
-                  </span>
-                </div>
                 {selectedCountries.map((slot) => (
                   <div
                     key={slot.index}
@@ -667,7 +465,7 @@ export function NomadVisaComparison({
                     {renderCell(slot, key)}
                   </div>
                 ))}
-              </div>
+              </ComparisonRowShell>
             ))}
           </div>
         </div>
