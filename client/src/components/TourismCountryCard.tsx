@@ -10,6 +10,7 @@ import { TourismBreakdownChart } from "./TourismBreakdownChart";
 import { Tooltip } from "./Tooltip";
 import { TOURISM_COST_COLORS } from "../utils/budgetColors";
 import type { TravelDates } from "../hooks/useTourismWeightState";
+import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
 
 interface Props {
   ranked: TourismRanked;
@@ -63,46 +64,7 @@ export function TourismCountryCard({
         }),
       }}
     >
-      {compareMode && (
-        <div
-          style={{
-            position: "absolute",
-            left: "10px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 3,
-            pointerEvents: "none",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "16px",
-              height: "16px",
-              borderRadius: "3px",
-              border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
-              backgroundColor: isSelected ? "var(--color-accent)" : rowBg,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {isSelected && (
-              <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                <path
-                  d="M1 3.5L3.5 6L8 1"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            )}
-          </div>
-        </div>
-      )}
+      {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
 
       <button
         className="w-full text-left transition-colors cursor-pointer"
@@ -199,7 +161,7 @@ export function TourismCountryCard({
                       fontSize: "11px",
                       fontWeight: 700,
                       fontFamily: "IBM Plex Mono, monospace",
-                      color: dotColour(val),
+                      color: scoreColour(val),
                     }}
                   >
                     {val !== null ? val.toFixed(1) : "—"}
@@ -215,7 +177,7 @@ export function TourismCountryCard({
                     style={{
                       width: "12px",
                       height: "12px",
-                      backgroundColor: dotColour(val),
+                      backgroundColor: scoreColour(val),
                     }}
                   />
                 </Tooltip>
@@ -278,7 +240,7 @@ export function TourismCountryCard({
                           fontSize: "11px",
                           fontWeight: 700,
                           fontFamily: "IBM Plex Mono, monospace",
-                          color: dotColour(val),
+                          color: scoreColour(val),
                         }}
                       >
                         {val !== null ? val.toFixed(1) : "—"}
@@ -294,7 +256,7 @@ export function TourismCountryCard({
                         style={{
                           width: "12px",
                           height: "12px",
-                          backgroundColor: dotColour(val),
+                          backgroundColor: scoreColour(val),
                           borderRadius: "2px",
                         }}
                       />
@@ -726,14 +688,6 @@ export function TourismCountryCard({
       )}
     </div>
   );
-}
-
-function dotColour(value: number | null): string {
-  if (value === null) return "#3A3A3A";
-  if (value >= 75) return "#4CAF50";
-  if (value >= 60) return "#8BC34A";
-  if (value >= 50) return "#FFC107";
-  return "#FF5722";
 }
 
 const TOURISM_BUDGET_KEYS: (keyof import("../utils/tourismScoring").TourismBudgetBreakdown)[] = [

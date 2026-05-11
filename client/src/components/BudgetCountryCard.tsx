@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   ChevronRight,
-  User,
   House,
   ShoppingCart,
   UtensilsCrossed,
@@ -15,21 +13,9 @@ import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
 import { BudgetBreakdownChart } from "./BudgetBreakdownChart";
-import { COST_COLORS } from "../utils/budgetColors";
-
-function scoreColor(score: number): string {
-  if (score >= 70) return "#4CAF50";
-  if (score >= 50) return "#8BC34A";
-  if (score >= 30) return "#FFC107";
-  return "#FF5722";
-}
-
-function surplusColor(surplus: number): string {
-  if (surplus > 200) return "#4CAF50";
-  if (surplus >= 0) return "#8BC34A";
-  if (surplus >= -200) return "#FFC107";
-  return "#FF5722";
-}
+import { COST_COLORS, comfortScoreColour, surplusColour } from "../utils/budgetColors";
+import { ViewCountryButton } from "../shared/ui/ViewCountryButton";
+import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
 
 interface Props {
   match: BudgetMatch;
@@ -73,49 +59,7 @@ export function BudgetCountryCard({
       }}
     >
       {/* Compare mode: checkbox */}
-      {compareMode && (
-        <>
-          <div
-            style={{
-              position: "absolute",
-              left: "10px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 3,
-              pointerEvents: "none",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div
-              style={{
-                width: "16px",
-                height: "16px",
-                borderRadius: "3px",
-                border: `2px solid ${isSelected ? "var(--color-accent)" : "#404040"}`,
-                backgroundColor: isSelected ? "var(--color-accent)" : rowBg,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transition: "all 0.1s ease",
-              }}
-            >
-              {isSelected && (
-                <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                  <path
-                    d="M1 3.5L3.5 6L8 1"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              )}
-            </div>
-          </div>
-        </>
-      )}
+      {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
 
       {/* Main row — clickable button */}
       <button
@@ -203,7 +147,7 @@ export function BudgetCountryCard({
               style={{
                 fontFamily: "IBM Plex Mono, monospace",
                 fontSize: "11px",
-                color: surplusColor(surplus),
+                color: surplusColour(surplus),
               }}
             >
               {surplus >= 0 ? "+" : ""}${surplus.toLocaleString()}
@@ -217,7 +161,7 @@ export function BudgetCountryCard({
                 fontFamily: "IBM Plex Mono, monospace",
                 fontSize: "18px",
                 fontWeight: 700,
-                color: scoreColor(comfortScore),
+                color: comfortScoreColour(comfortScore),
               }}
             >
               {comfortScore.toFixed(0)}
@@ -279,7 +223,7 @@ export function BudgetCountryCard({
                   fontFamily: "IBM Plex Mono, monospace",
                   fontSize: "12px",
                   fontWeight: 600,
-                  color: surplusColor(surplus),
+                  color: surplusColour(surplus),
                 }}
               >
                 {surplus >= 0 ? "+" : ""}${surplus.toLocaleString()}{" "}
@@ -382,27 +326,7 @@ export function BudgetCountryCard({
           </div>
 
           {/* View country details button — at the bottom */}
-          <Link
-            to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-            className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
-            style={{
-              display: "flex",
-              height: "40px",
-              backgroundColor: "transparent",
-              border: "1px solid #333333",
-              borderRadius: "6px",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: 500,
-              color: "var(--color-accent-dim)",
-              textDecoration: "none",
-              marginTop: "16px",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <User size={14} />
-            {t("countryPage.viewProfile", "View Country Details")}
-          </Link>
+          <ViewCountryButton to={`${langPrefix}/country/${country.code.toLowerCase()}`} />
         </div>
       )}
     </div>

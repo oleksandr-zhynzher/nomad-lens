@@ -1,4 +1,4 @@
-import { ChevronRight, Plane, User } from "lucide-react";
+import { ChevronRight, Plane } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
@@ -9,6 +9,8 @@ import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "./Tooltip";
 import { CATEGORY_LABELS } from "../utils/types";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
+import { ViewCountryButton } from "../shared/ui/ViewCountryButton";
+import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
 
 interface CountryCardProps {
   ranked: RankedCountry;
@@ -59,47 +61,7 @@ export function CountryCard({
         }),
       }}
     >
-      {compareMode && (
-        <div
-          style={{
-            position: "absolute",
-            left: "10px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            zIndex: 2,
-            width: "20px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              width: "16px",
-              height: "16px",
-              borderRadius: "3px",
-              border: `2px solid ${selected ? "var(--color-accent)" : "#404040"}`,
-              backgroundColor: selected ? "var(--color-accent)" : "transparent",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "all 0.1s ease",
-            }}
-          >
-            {selected && (
-              <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                <path
-                  d="M1 3.5L3.5 6L8 1"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            )}
-          </div>
-        </div>
-      )}
+      {compareMode && <CompareCheckbox isSelected={!!selected} />}
 
       {/* Main row */}
       <button
@@ -211,7 +173,7 @@ export function CountryCard({
                     fontSize: "11px",
                     fontWeight: 700,
                     fontFamily: "IBM Plex Mono, monospace",
-                    color: dotColour(val),
+                    color: scoreColour(val),
                   }}
                 >
                   {val !== null ? val.toFixed(1) : "—"}
@@ -227,7 +189,7 @@ export function CountryCard({
                   style={{
                     width: "12px",
                     height: "12px",
-                    backgroundColor: dotColour(val),
+                    backgroundColor: scoreColour(val),
                   }}
                 />
               </Tooltip>
@@ -272,37 +234,9 @@ export function CountryCard({
           }}
         >
           <ScoreBreakdown country={country} />
-          <Link
-            to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-            className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors"
-            style={{
-              display: "flex",
-              height: "40px",
-              backgroundColor: "transparent",
-              border: "1px solid #333333",
-              borderRadius: "6px",
-              fontFamily: "Inter, sans-serif",
-              fontSize: "13px",
-              fontWeight: 500,
-              color: "var(--color-accent-dim)",
-              textDecoration: "none",
-              marginTop: "16px",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <User size={14} />
-            {t("countryPage.viewProfile", "View Country Details")}
-          </Link>
+          <ViewCountryButton to={`${langPrefix}/country/${country.code.toLowerCase()}`} />
         </div>
       )}
     </div>
   );
-}
-
-function dotColour(value: number | null): string {
-  if (value === null) return "#3A3A3A";
-  if (value >= 75) return "#4CAF50";
-  if (value >= 60) return "#8BC34A";
-  if (value >= 50) return "#FFC107";
-  return "#FF5722";
 }

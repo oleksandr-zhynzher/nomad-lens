@@ -2,124 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
-import {
-  CirclePlus,
-  X,
-  TrendingUp,
-  Coins,
-  Wheat,
-  HeartPulse,
-  GraduationCap,
-  Leaf,
-  CloudSun,
-  Shield,
-  Wifi,
-  Smile,
-  Users,
-  Landmark,
-  Languages,
-  ShieldCheck,
-  UserCheck,
-  Truck,
-  Trees,
-  Heart,
-  Receipt,
-  Rocket,
-  Plane,
-  Theater,
-  Stethoscope,
-  UsersRound,
-  Stamp,
-  BadgeDollarSign,
-  Coffee,
-  Smartphone,
-  Handshake,
-  Bed,
-  UtensilsCrossed,
-  Bus,
-  Music,
-  ShieldAlert,
-  Waves,
-  Footprints,
-  ShoppingBag,
-  Camera,
-  Baby,
-  Mountain,
-  Castle,
-} from "lucide-react";
-import type { CountryData, WeightMap, ClimatePreferences, CategoryKey } from "../utils/types";
+import { CirclePlus, X, Plane } from "lucide-react";
+import type { CountryData, WeightMap, ClimatePreferences } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { computeClimateScore, computeScore, scoreColour } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { Tooltip } from "./Tooltip";
-
-const SLOT_COLORS = [
-  "#8F5A3C",
-  "#5B8FA8",
-  "#6B9E6B",
-  "#B07CC6",
-  "#E07C4F",
-  "#4EA8B0",
-  "#C75D8E",
-  "#7B9E3C",
-  "#D4A04A",
-  "#6889C7",
-  "#A66BBF",
-  "#4CAF8B",
-] as const;
+import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
+import { CATEGORY_ICONS } from "../utils/categoryIcons";
+import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 
 const COMPARISON_COLUMN_WIDTH = "112px";
-
-function getSlotColor(index: number) {
-  return SLOT_COLORS[index % SLOT_COLORS.length];
-}
-
-const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
-  economy: TrendingUp,
-  affordability: Coins,
-  foodSecurity: Wheat,
-  healthcare: HeartPulse,
-  education: GraduationCap,
-  environment: Leaf,
-  climate: CloudSun,
-  safety: Shield,
-  infrastructure: Wifi,
-  happiness: Smile,
-  humanDevelopment: Users,
-  governance: Landmark,
-  englishProficiency: Languages,
-  digitalFreedom: ShieldCheck,
-  personalFreedom: UserCheck,
-  logistics: Truck,
-  biodiversity: Trees,
-  socialTolerance: Heart,
-  taxFriendliness: Receipt,
-  startupEnvironment: Rocket,
-  airConnectivity: Plane,
-  culturalHeritage: Theater,
-  healthcareCost: Stethoscope,
-  nomadCommunity: UsersRound,
-  visaFriendliness: Stamp,
-  costEfficiency: BadgeDollarSign,
-  workLifeBalance: Coffee,
-  digitalReadiness: Smartphone,
-  culturalFit: Handshake,
-  tourismSafety: Shield,
-  accommodationCost: Bed,
-  transportCost: Bus,
-  tourismInfrastructure: Wifi,
-  localFriendliness: Smile,
-  nightlifeEntertainment: Music,
-  touristScamSafety: ShieldAlert,
-  streetFoodCuisine: UtensilsCrossed,
-  beachWaterQuality: Waves,
-  walkabilityScenicBeauty: Footprints,
-  shoppingMarkets: ShoppingBag,
-  photographySpots: Camera,
-  familyFriendliness: Baby,
-  adventureSports: Mountain,
-  historicalSites: Castle,
-};
 
 interface Props {
   countries: CountryData[];
@@ -171,28 +64,12 @@ export function CountryComparison({
   const lang = i18n.language;
 
   // Sync horizontal scroll between sticky header and body
-  useEffect(() => {
-    const header = headerRef.current;
-    const body = bodyRef.current;
-    if (!header || !body) return;
-    const onBody = () => {
-      header.scrollLeft = body.scrollLeft;
-    };
-    const onHeader = () => {
-      body.scrollLeft = header.scrollLeft;
-    };
-    body.addEventListener("scroll", onBody, { passive: true });
-    header.addEventListener("scroll", onHeader, { passive: true });
-    return () => {
-      body.removeEventListener("scroll", onBody);
-      header.removeEventListener("scroll", onHeader);
-    };
-  }, []);
+  useSyncScroll(headerRef, bodyRef);
 
   const selectedCountries = selectedCodes
     .map((code, i) => {
       const country = countries.find((c) => c.code === code);
-      return country ? { country, color: getSlotColor(i), index: i } : null;
+      return country ? { country, color: getComparisonSlotColor(i), index: i } : null;
     })
     .filter(Boolean) as {
     country: CountryData;

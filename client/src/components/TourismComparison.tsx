@@ -20,27 +20,10 @@ import { TOURISM_CATEGORY_KEYS } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring";
 import { useLangPrefix } from "../hooks/useLangPrefix";
-
-const SLOT_COLORS = [
-  "#8F5A3C",
-  "#5B8FA8",
-  "#6B9E6B",
-  "#B07CC6",
-  "#E07C4F",
-  "#4EA8B0",
-  "#C75D8E",
-  "#7B9E3C",
-  "#D4A04A",
-  "#6889C7",
-  "#A66BBF",
-  "#4CAF8B",
-] as const;
+import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
+import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 
 const COMPARISON_COLUMN_WIDTH = "112px";
-
-function getSlotColor(index: number) {
-  return SLOT_COLORS[index % SLOT_COLORS.length];
-}
 
 const TOURISM_ICONS: Record<string, typeof Shield> = {
   tourismSafety: Shield,
@@ -100,28 +83,12 @@ export function TourismComparison({
   const lang = i18n.language;
 
   // Sync horizontal scroll between sticky header and body
-  useEffect(() => {
-    const header = headerRef.current;
-    const body = bodyRef.current;
-    if (!header || !body) return;
-    const onBody = () => {
-      header.scrollLeft = body.scrollLeft;
-    };
-    const onHeader = () => {
-      body.scrollLeft = header.scrollLeft;
-    };
-    body.addEventListener("scroll", onBody, { passive: true });
-    header.addEventListener("scroll", onHeader, { passive: true });
-    return () => {
-      body.removeEventListener("scroll", onBody);
-      header.removeEventListener("scroll", onHeader);
-    };
-  }, []);
+  useSyncScroll(headerRef, bodyRef);
 
   const selectedCountries = selectedCodes
     .map((code, i) => {
       const country = countries.find((c) => c.code === code);
-      return country ? { country, color: getSlotColor(i), index: i } : null;
+      return country ? { country, color: getComparisonSlotColor(i), index: i } : null;
     })
     .filter(Boolean) as {
     country: CountryData;

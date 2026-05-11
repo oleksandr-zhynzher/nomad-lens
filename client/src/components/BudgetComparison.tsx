@@ -15,34 +15,10 @@ import {
 } from "lucide-react";
 import type { CountryData } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
-import { COST_COLORS } from "../utils/budgetColors";
+import { COST_COLORS, surplusColour } from "../utils/budgetColors";
+import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
+import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
-
-const SLOT_COLORS = [
-  "#8F5A3C",
-  "#5B8FA8",
-  "#6B9E6B",
-  "#B07CC6",
-  "#E07C4F",
-  "#4EA8B0",
-  "#C75D8E",
-  "#7B9E3C",
-  "#D4A04A",
-  "#6889C7",
-  "#A66BBF",
-  "#4CAF8B",
-] as const;
-
-function getSlotColor(i: number) {
-  return SLOT_COLORS[i % SLOT_COLORS.length];
-}
-
-function surplusColor(surplus: number): string {
-  if (surplus > 200) return "#4CAF50";
-  if (surplus >= 0) return "#8BC34A";
-  if (surplus >= -200) return "#FFC107";
-  return "#FF5722";
-}
 
 function costColor(value: number, min: number): string {
   if (value <= min) return "#4CAF50";
@@ -96,28 +72,12 @@ export function BudgetComparison({
   const matchMap = useMemo(() => new Map(matches.map((m) => [m.country.code, m])), [matches]);
 
   // Sync horizontal scroll
-  useEffect(() => {
-    const header = headerRef.current;
-    const body = bodyRef.current;
-    if (!header || !body) return;
-    const onBody = () => {
-      header.scrollLeft = body.scrollLeft;
-    };
-    const onHeader = () => {
-      body.scrollLeft = header.scrollLeft;
-    };
-    body.addEventListener("scroll", onBody, { passive: true });
-    header.addEventListener("scroll", onHeader, { passive: true });
-    return () => {
-      body.removeEventListener("scroll", onBody);
-      header.removeEventListener("scroll", onHeader);
-    };
-  }, []);
+  useSyncScroll(headerRef, bodyRef);
 
   const selectedSlots = selectedCodes
     .map((code, i) => {
       const country = countries.find((c) => c.code === code);
-      return country ? { country, color: getSlotColor(i), index: i } : null;
+      return country ? { country, color: getComparisonSlotColor(i), index: i } : null;
     })
     .filter(Boolean) as {
     country: CountryData;
@@ -260,7 +220,7 @@ export function BudgetComparison({
                         fontFamily: "Inter, sans-serif",
                         fontSize: "11px",
                         fontWeight: 600,
-                        color: surplusColor(surplus),
+                        color: surplusColour(surplus),
                       }}
                     >
                       {surplus >= 0
@@ -563,7 +523,7 @@ export function BudgetComparison({
                         fontFamily: "IBM Plex Mono, monospace",
                         fontSize: "22px",
                         fontWeight: 600,
-                        color: val != null ? surplusColor(val) : "#333333",
+                        color: val != null ? surplusColour(val) : "#333333",
                       }}
                     >
                       {val != null

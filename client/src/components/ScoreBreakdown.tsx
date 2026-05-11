@@ -68,7 +68,7 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
                 style={{
                   height: "4px",
                   width: `${value ?? 0}%`,
-                  backgroundColor: barColour(value),
+                  backgroundColor: scoreColour(value),
                 }}
               />
             </div>
@@ -91,12 +91,4 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
       })}
     </div>
   );
-}
-
-function barColour(value: number | null): string {
-  if (value === null) return "#3A3A3A";
-  if (value >= 75) return "#4CAF50";
-  if (value >= 60) return "#8BC34A";
-  if (value >= 50) return "#FFC107";
-  return "#FF5722";
 }

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
@@ -19,25 +19,8 @@ import {
 import { computeClimateScore, computeScore, scoreColour } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import type { ClimatePreferences, CountryData, WeightMap } from "../utils/types";
-
-const SLOT_COLORS = [
-  "#8F5A3C",
-  "#5B8FA8",
-  "#6B9E6B",
-  "#B07CC6",
-  "#E07C4F",
-  "#4EA8B0",
-  "#C75D8E",
-  "#7B9E3C",
-  "#D4A04A",
-  "#6889C7",
-  "#A66BBF",
-  "#4CAF8B",
-] as const;
-
-function getSlotColor(index: number) {
-  return SLOT_COLORS[index % SLOT_COLORS.length];
-}
+import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
+import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 
 const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
   exempt: { bg: "#1A4A2A", text: "#44CC66" },
@@ -105,30 +88,14 @@ export function NomadVisaComparison({
   const budgetMatchByCode = new Map(budgetMatches.map((match) => [match.country.code, match]));
 
   // Sync horizontal scroll between sticky header and body
-  useEffect(() => {
-    const header = headerRef.current;
-    const body = bodyRef.current;
-    if (!header || !body) return;
-    const onBody = () => {
-      header.scrollLeft = body.scrollLeft;
-    };
-    const onHeader = () => {
-      body.scrollLeft = header.scrollLeft;
-    };
-    body.addEventListener("scroll", onBody, { passive: true });
-    header.addEventListener("scroll", onHeader, { passive: true });
-    return () => {
-      body.removeEventListener("scroll", onBody);
-      header.removeEventListener("scroll", onHeader);
-    };
-  }, []);
+  useSyncScroll(headerRef, bodyRef);
 
   const visaCountries = countries.filter((c) => !!c.nomadVisa);
 
   const selectedCountries = selectedCodes
     .map((code, i) => {
       const country = visaCountries.find((c) => c.code === code);
-      return country ? { country, color: getSlotColor(i), index: i } : null;
+      return country ? { country, color: getComparisonSlotColor(i), index: i } : null;
     })
     .filter(Boolean) as {
     country: CountryData & { nomadVisa: NonNullable<CountryData["nomadVisa"]> };

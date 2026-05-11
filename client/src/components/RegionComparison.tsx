@@ -1,55 +1,12 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  TrendingUp,
-  Coins,
-  Wheat,
-  HeartPulse,
-  GraduationCap,
-  Leaf,
-  CloudSun,
-  Sun,
-  Mountain,
-  Tent,
-  Castle,
-  Lamp,
-  Waves,
-  Shield,
-  Wifi,
-  Smile,
-  Users,
-  Landmark,
-  Languages,
-  ShieldCheck,
-  UserCheck,
-  Truck,
-  Trees,
-  Heart,
-  Receipt,
-  Rocket,
-  Plane,
-  Theater,
-  Stethoscope,
-  UsersRound,
-  Stamp,
-  BadgeDollarSign,
-  Coffee,
-  Smartphone,
-  Handshake,
-  Bed,
-  UtensilsCrossed,
-  Bus,
-  Music,
-  ShieldAlert,
-  Footprints,
-  ShoppingBag,
-  Camera,
-  Baby,
-} from "lucide-react";
+import { TrendingUp, Sun, Mountain, Tent, Castle, Lamp, Waves } from "lucide-react";
 import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { regionKey } from "../utils/localize";
+import { CATEGORY_ICONS } from "../utils/categoryIcons";
+import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 
 interface RegionComparisonProps {
   countries: CountryData[];
@@ -76,53 +33,6 @@ const REGION_ICONS: Record<string, typeof Sun> = {
 };
 
 const REGION_COLUMN_WIDTH = "108px";
-
-const CATEGORY_ICONS: Record<CategoryKey, typeof TrendingUp> = {
-  economy: TrendingUp,
-  affordability: Coins,
-  foodSecurity: Wheat,
-  healthcare: HeartPulse,
-  education: GraduationCap,
-  environment: Leaf,
-  climate: CloudSun,
-  safety: Shield,
-  infrastructure: Wifi,
-  happiness: Smile,
-  humanDevelopment: Users,
-  governance: Landmark,
-  englishProficiency: Languages,
-  digitalFreedom: ShieldCheck,
-  personalFreedom: UserCheck,
-  logistics: Truck,
-  biodiversity: Trees,
-  socialTolerance: Heart,
-  taxFriendliness: Receipt,
-  startupEnvironment: Rocket,
-  airConnectivity: Plane,
-  culturalHeritage: Theater,
-  healthcareCost: Stethoscope,
-  nomadCommunity: UsersRound,
-  visaFriendliness: Stamp,
-  costEfficiency: BadgeDollarSign,
-  workLifeBalance: Coffee,
-  digitalReadiness: Smartphone,
-  culturalFit: Handshake,
-  tourismSafety: Shield,
-  accommodationCost: Bed,
-  transportCost: Bus,
-  tourismInfrastructure: Wifi,
-  localFriendliness: Smile,
-  nightlifeEntertainment: Music,
-  touristScamSafety: ShieldAlert,
-  streetFoodCuisine: UtensilsCrossed,
-  beachWaterQuality: Waves,
-  walkabilityScenicBeauty: Footprints,
-  shoppingMarkets: ShoppingBag,
-  photographySpots: Camera,
-  familyFriendliness: Baby,
-  adventureSports: Mountain,
-  historicalSites: Castle,
-};
 
 interface RegionStats {
   name: string;
@@ -152,23 +62,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
   }, [allRegions]);
 
   // Sync horizontal scroll between sticky header and body
-  useEffect(() => {
-    const header = headerRef.current;
-    const body = bodyRef.current;
-    if (!header || !body) return;
-    const onBody = () => {
-      header.scrollLeft = body.scrollLeft;
-    };
-    const onHeader = () => {
-      body.scrollLeft = header.scrollLeft;
-    };
-    body.addEventListener("scroll", onBody, { passive: true });
-    header.addEventListener("scroll", onHeader, { passive: true });
-    return () => {
-      body.removeEventListener("scroll", onBody);
-      header.removeEventListener("scroll", onHeader);
-    };
-  }, []);
+  useSyncScroll(headerRef, bodyRef);
 
   const regionStats = useMemo(() => {
     const grouped: Record<string, CountryData[]> = {};
