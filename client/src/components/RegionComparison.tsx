@@ -1,45 +1,19 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { TrendingUp, Sun, Mountain, Tent, Castle, Lamp, Waves } from "lucide-react";
-import type { CategoryKey, ClimatePreferences, CountryData, WeightMap } from "../utils/types";
+import { TrendingUp } from "lucide-react";
+import type { ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
 import { regionKey } from "../utils/localize";
 import { CATEGORY_ICONS } from "../utils/categoryIcons";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
+import { REGION_COLORS, REGION_ICONS, REGION_COLUMN_WIDTH } from "../utils/regionConstants";
+import type { RegionStats } from "../utils/regionConstants";
 
 interface RegionComparisonProps {
   countries: CountryData[];
   weights: WeightMap;
   climatePrefs: ClimatePreferences;
-}
-
-const REGION_COLORS: Record<string, string> = {
-  Africa: "#FF6B6B",
-  Americas: "#4ECDC4",
-  Asia: "#FFE66D",
-  Europe: "#6C5CE7",
-  "Middle East": "#FD79A8",
-  Oceania: "#00CEC9",
-};
-
-const REGION_ICONS: Record<string, typeof Sun> = {
-  Africa: Sun,
-  Americas: Mountain,
-  Asia: Tent,
-  Europe: Castle,
-  "Middle East": Lamp,
-  Oceania: Waves,
-};
-
-const REGION_COLUMN_WIDTH = "108px";
-
-interface RegionStats {
-  name: string;
-  count: number;
-  color: string;
-  overall: number;
-  categories: Record<CategoryKey, { avg: number | null; count: number }>;
 }
 
 export function RegionComparison({ countries, weights }: RegionComparisonProps) {

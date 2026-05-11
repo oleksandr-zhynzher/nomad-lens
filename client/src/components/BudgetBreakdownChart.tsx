@@ -2,16 +2,7 @@ import { useTranslation } from "react-i18next";
 import type { BudgetBreakdown } from "../hooks/useBudgetMatcher";
 import { Tooltip } from "./Tooltip";
 import { COST_COLORS } from "../utils/budgetColors";
-
-const CATEGORY_KEYS: (keyof BudgetBreakdown)[] = [
-  "housing",
-  "groceries",
-  "dining",
-  "transport",
-  "utilities",
-  "coworking",
-  "healthInsurance",
-];
+import { BUDGET_CATEGORY_KEYS } from "../utils/budgetConstants";
 
 interface Props {
   breakdown: BudgetBreakdown;
@@ -21,7 +12,7 @@ interface Props {
 
 export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) {
   const { t } = useTranslation();
-  const segments = CATEGORY_KEYS.filter((k) => breakdown[k] > 0);
+  const segments = BUDGET_CATEGORY_KEYS.filter((k) => breakdown[k] > 0);
   const maxVal = Math.max(monthlyCost, budget) * 1.1;
 
   return (

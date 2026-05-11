@@ -1,20 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import {
-  CirclePlus,
-  X,
-  Shield,
-  Theater,
-  TreePine,
-  Bed,
-  UtensilsCrossed,
-  Sun,
-  Bus,
-  Plane,
-  Wifi,
-  Smile,
-} from "lucide-react";
+import { CirclePlus, X } from "lucide-react";
 import type { CountryData } from "../utils/types";
 import { TOURISM_CATEGORY_KEYS } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
@@ -22,34 +9,11 @@ import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
-
-const COMPARISON_COLUMN_WIDTH = "112px";
-
-const TOURISM_ICONS: Record<string, typeof Shield> = {
-  tourismSafety: Shield,
-  culturalAttractions: Theater,
-  naturalAttractions: TreePine,
-  accommodationCost: Bed,
-  foodAndDining: UtensilsCrossed,
-  seasonalAppeal: Sun,
-  transportCost: Bus,
-  travelAccessibility: Plane,
-  tourismInfrastructure: Wifi,
-  localFriendliness: Smile,
-};
-
-const TOURISM_LABELS: Record<string, string> = {
-  tourismSafety: "Tourism Safety",
-  culturalAttractions: "Cultural Attractions",
-  naturalAttractions: "Natural Attractions",
-  accommodationCost: "Accommodation Cost",
-  foodAndDining: "Food & Dining",
-  seasonalAppeal: "Seasonal Appeal",
-  transportCost: "Transport Cost",
-  travelAccessibility: "Travel Accessibility",
-  tourismInfrastructure: "Tourism Infrastructure",
-  localFriendliness: "Local Friendliness",
-};
+import {
+  TOURISM_ICONS,
+  TOURISM_LABELS,
+  TOURISM_COMPARISON_COLUMN_WIDTH,
+} from "../utils/tourismConstants";
 
 interface Props {
   countries: CountryData[];
@@ -419,7 +383,7 @@ export function TourismComparison({
                 <div
                   key={slot.index}
                   className="flex shrink-0 items-center justify-center gap-1.5"
-                  style={{ width: COMPARISON_COLUMN_WIDTH }}
+                  style={{ width: TOURISM_COMPARISON_COLUMN_WIDTH }}
                 >
                   <img
                     src={slot.country.flagUrl}
@@ -475,7 +439,7 @@ export function TourismComparison({
                       <div
                         key={slot.index}
                         className="shrink-0 text-center"
-                        style={{ width: COMPARISON_COLUMN_WIDTH }}
+                        style={{ width: TOURISM_COMPARISON_COLUMN_WIDTH }}
                       >
                         <span
                           style={{

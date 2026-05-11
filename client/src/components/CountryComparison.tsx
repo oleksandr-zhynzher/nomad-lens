@@ -5,7 +5,7 @@ import { useLangPrefix } from "../hooks/useLangPrefix";
 import { CirclePlus, X, Plane } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
-import { computeClimateScore, computeScore, scoreColour } from "../utils/scoring";
+import { computeScore, scoreColour, applyClimate } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { Tooltip } from "./Tooltip";
 import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
@@ -23,20 +23,6 @@ interface Props {
   sortTrigger?: number;
   sortDirection?: "desc" | "asc" | null;
   onSelectionCount?: (count: number) => void;
-}
-
-function applyClimate(country: CountryData, climatePrefs: ClimatePreferences): CountryData {
-  if (!country.climateData) return country;
-  return {
-    ...country,
-    scores: {
-      ...country.scores,
-      climate: {
-        ...country.scores.climate,
-        value: computeClimateScore(country.climateData, climatePrefs),
-      },
-    },
-  };
 }
 
 export function CountryComparison({

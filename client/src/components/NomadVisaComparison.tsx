@@ -3,33 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
-import {
-  CirclePlus,
-  X,
-  Plane,
-  Clock,
-  Banknote,
-  Wallet,
-  Receipt,
-  FileCheck,
-  Globe,
-  CheckCircle2,
-  XCircle,
-} from "lucide-react";
-import { computeClimateScore, computeScore, scoreColour } from "../utils/scoring";
+import { CirclePlus, X, Plane, CheckCircle2, XCircle } from "lucide-react";
+import { computeScore, scoreColour } from "../utils/scoring";
+import { applyClimate } from "../utils/scoring";
 import { localizeCountry, regionKey } from "../utils/localize";
 import type { ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
-
-const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  exempt: { bg: "#1A4A2A", text: "#44CC66" },
-  standard: { bg: "#2A2A3A", text: "#8888CC" },
-  special: { bg: "#4A3A1A", text: "#DDAA44" },
-};
-
-const VISA_COMPARISON_COLUMN_WIDTH = "200px";
-const VISA_COMPARISON_COLUMN_GAP = "16px";
+import {
+  TAX_STATUS_COLORS,
+  VISA_FIELDS,
+  VISA_COMPARISON_COLUMN_WIDTH,
+  VISA_COMPARISON_COLUMN_GAP,
+} from "../utils/visaConstants";
+import type { VisaField } from "../utils/visaConstants";
 
 interface Props {
   countries: CountryData[];
@@ -39,35 +26,6 @@ interface Props {
   selectedCodes: string[];
   onSelectedCodesChange: (codes: string[]) => void;
 }
-
-type VisaField =
-  | "visaName"
-  | "overallScore"
-  | "monthlyBudget"
-  | "duration"
-  | "maxExtension"
-  | "renewable"
-  | "cost"
-  | "income"
-  | "taxStatus"
-  | "online"
-  | "processingTime"
-  | "benefits";
-
-const VISA_FIELDS: { key: VisaField; icon: typeof Clock }[] = [
-  { key: "visaName", icon: FileCheck },
-  { key: "duration", icon: Clock },
-  { key: "maxExtension", icon: Clock },
-  { key: "renewable", icon: CheckCircle2 },
-  { key: "cost", icon: Banknote },
-  { key: "income", icon: Wallet },
-  { key: "taxStatus", icon: Receipt },
-  { key: "online", icon: Globe },
-  { key: "processingTime", icon: FileCheck },
-  { key: "overallScore", icon: FileCheck },
-  { key: "monthlyBudget", icon: Wallet },
-  { key: "benefits", icon: Plane },
-];
 
 export function NomadVisaComparison({
   countries,
@@ -128,21 +86,6 @@ export function NomadVisaComparison({
     return { visa, loc };
   }
 
-  function applyClimate(country: CountryData): CountryData {
-    if (!country.climateData) return country;
-
-    return {
-      ...country,
-      scores: {
-        ...country.scores,
-        climate: {
-          ...country.scores.climate,
-          value: computeClimateScore(country.climateData, climatePrefs),
-        },
-      },
-    };
-  }
-
   function renderCell(slot: (typeof selectedCountries)[number], field: VisaField) {
     const { visa, loc } = getLocalizedVisa(slot.country);
 
@@ -160,7 +103,7 @@ export function NomadVisaComparison({
           </span>
         );
       case "overallScore": {
-        const overallScore = computeScore(applyClimate(slot.country), weights);
+        const overallScore = computeScore(applyClimate(slot.country, climatePrefs), weights);
         return (
           <span
             style={{

@@ -217,3 +217,18 @@ export function computeClimateScore(climateData: ClimateData, prefs: ClimatePref
 export function defaultClimatePreferences(): ClimatePreferences {
   return { seasonType: "any", minTemp: 15, maxTemp: 25 };
 }
+
+/** Apply climate preferences to a country's climate score (immutably). */
+export function applyClimate(country: CountryData, climatePrefs: ClimatePreferences): CountryData {
+  if (!country.climateData) return country;
+  return {
+    ...country,
+    scores: {
+      ...country.scores,
+      climate: {
+        ...country.scores.climate,
+        value: computeClimateScore(country.climateData, climatePrefs),
+      },
+    },
+  };
+}

@@ -22,12 +22,7 @@ import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring
 import { TOURISM_COLORS } from "../utils/tourismColors";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
-
-const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  exempt: { bg: "#1A4A2A", text: "#44CC66" },
-  standard: { bg: "#2A2A3A", text: "#8888CC" },
-  special: { bg: "#4A3A1A", text: "#DDAA44" },
-};
+import { TAX_STATUS_COLORS } from "../utils/visaConstants";
 
 interface CountryDetailPanelProps {
   country: RankedCountry;

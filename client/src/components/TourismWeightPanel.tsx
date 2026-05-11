@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Info, Sun, DollarSign, Calendar, Shield, Mountain, Music } from "lucide-react";
+import { Info, Sun, DollarSign, Calendar } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { TourismWeightMap } from "../utils/tourismScoring";
 import { TOURISM_GROUPS } from "../utils/types";
@@ -15,12 +15,7 @@ import { CollapsibleSection } from "../shared/ui/panels/CollapsibleSection";
 import { WeightSliderRow } from "../shared/ui/panels/WeightSliderRow";
 import { ToggleGroup } from "../shared/ui/panels/ToggleGroup";
 import { PeopleCountStepper } from "../shared/ui/panels/PeopleCountStepper";
-
-const TOURISM_GROUP_ICONS: Record<string, React.ReactElement> = {
-  safetyPeople: <Shield size={16} color="#6B9E6B" />,
-  sightseeingNature: <Mountain size={16} color="#5B8FA8" />,
-  activitiesLifestyle: <Music size={16} color="#8B5CF6" />,
-};
+import { TOURISM_GROUP_ICONS } from "../utils/tourismConstants";
 
 function TourismWeightSlider({
   metricKey,

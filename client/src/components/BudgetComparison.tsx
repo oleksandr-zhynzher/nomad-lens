@@ -1,44 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  CirclePlus,
-  X,
-  House,
-  ShoppingCart,
-  UtensilsCrossed,
-  Bus,
-  Wifi,
-  Laptop,
-  HeartPulse,
-  Wallet,
-  TrendingUp,
-} from "lucide-react";
+import { CirclePlus, X, Wallet, TrendingUp } from "lucide-react";
 import type { CountryData } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { COST_COLORS, surplusColour } from "../utils/budgetColors";
 import { getComparisonSlotColor } from "../shared/lib/comparisonColors";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
-
-function costColor(value: number, min: number): string {
-  if (value <= min) return "#4CAF50";
-  return "#FFFFFF";
-}
-
-const BREAKDOWN_ROWS: {
-  key: keyof import("../hooks/useBudgetMatcher").BudgetBreakdown;
-  icon: typeof House;
-}[] = [
-  { key: "housing", icon: House },
-  { key: "groceries", icon: ShoppingCart },
-  { key: "dining", icon: UtensilsCrossed },
-  { key: "transport", icon: Bus },
-  { key: "utilities", icon: Wifi },
-  { key: "coworking", icon: Laptop },
-  { key: "healthInsurance", icon: HeartPulse },
-];
-
-const BUDGET_COMPARISON_COLUMN_WIDTH = "112px";
+import {
+  BREAKDOWN_ROWS,
+  BUDGET_COMPARISON_COLUMN_WIDTH,
+  costColor,
+} from "../utils/budgetConstants";
 
 interface Props {
   countries: CountryData[];

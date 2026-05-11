@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { LogoMark } from "./LogoMark";
+import { LANG_OPTIONS } from "../utils/i18n";
+import { INFO_PAGES } from "../utils/navigation";
 
 interface LayoutProps {
   children: ReactNode;
@@ -51,24 +53,9 @@ export function Layout({ children }: LayoutProps) {
     };
   }, [mobileMenuOpen]);
 
-  const LANG_OPTIONS = [
-    { code: "en" as const, label: "English" },
-    { code: "ua" as const, label: "Українська" },
-    { code: "ru" as const, label: "Русский" },
-  ];
-
   const currentLang =
     LANG_OPTIONS.find((language) => language.code === i18n.language) ?? LANG_OPTIONS[0];
 
-  const INFO_PAGES = [
-    "/indicators",
-    "/data-sources",
-    "/nomad-visas",
-    "/budget-matcher",
-    "/ai-indicators",
-    "/budget-categories",
-    "/tourism",
-  ];
   const isInfoPage = INFO_PAGES.some((pagePath) => pathname.endsWith(pagePath));
 
   const activeView: "list" | "map" | "compare" | null = pathname.endsWith("/map")

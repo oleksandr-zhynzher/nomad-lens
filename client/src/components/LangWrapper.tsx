@@ -1,13 +1,7 @@
 import { useEffect } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import i18n from "../i18n";
-
-const SUPPORTED_LANGS = ["ua", "ru"] as const;
-type SupportedLang = (typeof SUPPORTED_LANGS)[number];
-
-function isSupportedLang(lang: string): lang is SupportedLang {
-  return (SUPPORTED_LANGS as readonly string[]).includes(lang);
-}
+import { isSupportedLang } from "../utils/i18n";
 
 export function LangWrapper() {
   const { lang } = useParams<{ lang?: string }>();

@@ -9,18 +9,9 @@ import { CollapsibleSection } from "../shared/ui/panels/CollapsibleSection";
 import { WeightSliderRow } from "../shared/ui/panels/WeightSliderRow";
 import { ToggleGroup } from "../shared/ui/panels/ToggleGroup";
 import { PeopleCountStepper } from "../shared/ui/panels/PeopleCountStepper";
+import { BUDGET_CATEGORY_KEYS } from "../utils/budgetConstants";
 
 type BudgetStateReturn = ReturnType<typeof useBudgetState>;
-
-const BUDGET_CATEGORY_KEYS = [
-  "housing",
-  "groceries",
-  "dining",
-  "transport",
-  "utilities",
-  "coworking",
-  "healthInsurance",
-] as const;
 
 interface Props {
   bs: BudgetStateReturn;
