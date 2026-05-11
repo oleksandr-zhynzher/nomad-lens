@@ -1,3 +1,4 @@
+import React from "react";
 import type { ReactNode } from "react";
 
 interface WeightSliderRowProps {
@@ -49,10 +50,8 @@ export function WeightSliderRow({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-        style={{
-          background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${pct}%, #333333 ${pct}%, #333333 100%)`,
-        }}
+        className="w-full h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+        style={{ "--pct": `${pct}%` } as React.CSSProperties}
         aria-label={ariaLabel}
       />
     </div>

@@ -3,8 +3,9 @@ import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
 import { Plane, CheckCircle2, XCircle } from "lucide-react";
-import { computeScore, scoreColour } from "../utils/scoring";
+import { computeScore } from "../utils/scoring";
 import { applyClimate } from "../utils/scoring";
+import { scoreColourClass } from "../utils/colorClasses";
 import { localizeCountry, regionKey } from "../utils/localize";
 import type { ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
@@ -91,8 +92,7 @@ export function NomadVisaComparison({
         const overallScore = computeScore(applyClimate(slot.country, climatePrefs), weights);
         return (
           <span
-            className="font-mono text-[20px] font-semibold"
-            style={{ color: scoreColour(overallScore) }}
+            className={`font-mono text-[20px] font-semibold ${scoreColourClass(overallScore, "text")}`}
           >
             {overallScore.toFixed(1)}
           </span>
@@ -202,18 +202,15 @@ export function NomadVisaComparison({
           <div className="flex flex-col items-center gap-1.5">
             <div className="flex items-center gap-2">
               <span
-                className="px-2.5 py-1 rounded-full text-[11px] font-semibold"
-                style={{
-                  backgroundColor: colors.bg,
-                  color: colors.text,
-                }}
+                className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[var(--tax-bg)] text-[var(--tax-text)]"
+                style={{ "--tax-bg": colors.bg, "--tax-text": colors.text } as React.CSSProperties}
               >
                 {label}
               </span>
               {visa.tax.rate != null && (
                 <span
-                  className="font-mono text-[16px] font-semibold"
-                  style={{ color: colors.text }}
+                  className="font-mono text-[16px] font-semibold text-[var(--tax-text)]"
+                  style={{ "--tax-text": colors.text } as React.CSSProperties}
                 >
                   {visa.tax.rate}%
                 </span>
@@ -341,8 +338,8 @@ export function NomadVisaComparison({
                 {selectedCountries.map((slot) => (
                   <div
                     key={slot.index}
-                    className="flex shrink-0 items-center justify-center"
-                    style={{ width: VISA_COMPARISON_COLUMN_WIDTH }}
+                    className="flex shrink-0 items-center justify-center w-[var(--vcw)]"
+                    style={{ "--vcw": VISA_COMPARISON_COLUMN_WIDTH } as React.CSSProperties}
                   >
                     {renderCell(slot, key)}
                   </div>

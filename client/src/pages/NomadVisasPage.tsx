@@ -324,8 +324,7 @@ export function NomadVisasPage() {
                 placeholder={t("nomadVisasPage.search", "Search countries...")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full h-10 pl-9 rounded-md outline-none text-sm text-white bg-[#161616] border border-surface"
-                style={{ paddingRight: searchQuery ? "36px" : "12px" }}
+                className={`w-full h-10 pl-9 rounded-md outline-none text-sm text-white bg-[#161616] border border-surface ${searchQuery ? "pr-9" : "pr-3"}`}
               />
               {searchQuery && (
                 <button
@@ -420,12 +419,12 @@ export function NomadVisasPage() {
                 {/* Sticky header table — hidden scrollbar, synced via JS */}
                 <div
                   ref={headerScrollRef}
-                  className="no-scrollbar sticky z-10 bg-bg overflow-x-scroll"
-                  style={{ top: `${theadTop}px` }}
+                  className="no-scrollbar sticky z-10 bg-bg overflow-x-scroll top-[var(--thead-top)]"
+                  style={{ "--thead-top": `${theadTop}px` } as React.CSSProperties}
                 >
                   <table
-                    className="w-full table-fixed border-separate border-spacing-0"
-                    style={{ minWidth: tableMinWidth }}
+                    className="w-full table-fixed border-separate border-spacing-0 min-w-[var(--tmin-w)]"
+                    style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
                   >
                     {colgroup}
                     <thead>
@@ -520,8 +519,8 @@ export function NomadVisasPage() {
                 {/* Scrollable body table */}
                 <div ref={bodyScrollRef} className="overflow-x-auto" onScroll={syncHeaderScroll}>
                   <table
-                    className="w-full table-fixed border-separate border-spacing-0"
-                    style={{ minWidth: tableMinWidth }}
+                    className="w-full table-fixed border-separate border-spacing-0 min-w-[var(--tmin-w)]"
+                    style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
                   >
                     {colgroup}
                     <tbody>
@@ -691,11 +690,13 @@ export function NomadVisasPage() {
                             {/* Tax */}
                             <td className="px-3 py-4 text-center">
                               <span
-                                className="inline-flex items-center px-2 py-1 rounded-full font-mono text-[11px] font-semibold whitespace-nowrap"
-                                style={{
-                                  backgroundColor: taxColors.bg,
-                                  color: taxColors.text,
-                                }}
+                                className="inline-flex items-center px-2 py-1 rounded-full font-mono text-[11px] font-semibold whitespace-nowrap bg-[var(--tax-bg)] text-[var(--tax-text)]"
+                                style={
+                                  {
+                                    "--tax-bg": taxColors.bg,
+                                    "--tax-text": taxColors.text,
+                                  } as React.CSSProperties
+                                }
                               >
                                 {visa.tax.status === "exempt"
                                   ? t("countryPage.taxExemptLabel")

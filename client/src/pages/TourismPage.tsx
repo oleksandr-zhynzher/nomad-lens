@@ -168,11 +168,8 @@ export function TourismPage() {
 
         {/* Mobile FAB - Parameters button */}
         <button
-          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-[24px] bg-accent text-white text-sm font-semibold"
-          style={{
-            bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
-            right: "16px",
-          }}
+          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-[24px] bg-accent text-white text-sm font-semibold right-4"
+          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)" }}
           onClick={() => setMobileParamsOpen(true)}
           aria-label={t("tourism.a11y.openParameters", "Open parameters")}
         >
@@ -220,10 +217,7 @@ export function TourismPage() {
                 </div>
 
                 {/* H1 */}
-                <h1
-                  className="text-3xl md:text-6xl font-semibold leading-[0.95] text-white mb-2"
-                  style={{ fontFamily: "Oswald, sans-serif" }}
-                >
+                <h1 className="text-3xl md:text-6xl font-semibold leading-[0.95] text-white mb-2 font-display">
                   {t("tourism.title", "TOURISM EXPLORER")}
                 </h1>
 
@@ -264,7 +258,7 @@ export function TourismPage() {
             <div ref={sentinelRef} className="h-px" />
 
             {/* Sticky search bar */}
-            <div className="sticky z-20 bg-[#0A0A0F] pt-2 pb-3" style={{ top: "56px" }}>
+            <div className="sticky z-20 bg-[#0A0A0F] pt-2 pb-3 top-14">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
                 <div className="flex flex-1 items-center gap-2 min-w-0">
                   <div className="flex flex-1 items-center bg-[#1A1A1C] border border-[#333333] rounded-[6px] h-10 px-3 gap-2">

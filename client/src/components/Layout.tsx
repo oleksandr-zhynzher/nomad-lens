@@ -84,10 +84,7 @@ export function Layout({ children }: LayoutProps) {
             className="flex items-center gap-2.5 leading-none bg-transparent border-none cursor-pointer p-0 h-8 -mt-1"
           >
             <LogoMark size={32} />
-            <span
-              className="text-[20px] font-bold tracking-[2px] leading-none uppercase flex items-center h-8 -mt-1"
-              style={{ fontFamily: "Oswald, sans-serif" }}
-            >
+            <span className="text-[20px] font-bold tracking-[2px] leading-none uppercase flex items-center h-8 -mt-1 [font-family:Oswald,_sans-serif]">
               NOMAD LENS
             </span>
           </button>
@@ -147,10 +144,7 @@ export function Layout({ children }: LayoutProps) {
               </button>
 
               {langDropdownOpen && (
-                <div
-                  className="absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 bg-[#111111] border border-[#252525] rounded-lg overflow-hidden z-50"
-                  style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.6)" }}
-                >
+                <div className="absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 bg-[#111111] border border-[#252525] rounded-lg overflow-hidden z-50 shadow-[0_8px_24px_rgba(0,0,0,0.6)]">
                   {LANG_OPTIONS.filter((option) => option.code !== i18n.language).map(
                     (option, index) => (
                       <Link
@@ -207,14 +201,7 @@ export function Layout({ children }: LayoutProps) {
             className="absolute inset-0"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div
-            className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4 border-[#252525]"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(20,20,22,0.98) 0%, rgba(13,14,16,0.98) 100%)",
-              boxShadow: "0 20px 48px rgba(0,0,0,0.45)",
-            }}
-          >
+          <div className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4 border-[#252525] [background:linear-gradient(180deg,rgba(20,20,22,0.98)_0%,rgba(13,14,16,0.98)_100%)] shadow-[0_20px_48px_rgba(0,0,0,0.45)]">
             <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-dimmest mb-1">
               {t("views.viewLabel")}
             </p>

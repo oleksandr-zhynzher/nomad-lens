@@ -47,11 +47,8 @@ export function BudgetCountryCard({
   return (
     <div
       data-selected={isSelected ? "true" : undefined}
-      className="country-row overflow-hidden transition-colors duration-150 relative border-b border-surface-2"
-      style={{
-        backgroundColor: rowBg,
-        ["--row-hover-bg" as string]: hoverBg,
-      }}
+      className="country-row overflow-hidden transition-colors duration-150 relative border-b border-surface-2 bg-[var(--row-bg)]"
+      style={{ "--row-bg": rowBg, "--row-hover-bg": hoverBg } as React.CSSProperties}
     >
       {/* Compare mode: checkbox */}
       {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
@@ -93,8 +90,7 @@ export function BudgetCountryCard({
           {/* Chevron */}
           <ChevronRight
             size={18}
-            className="shrink-0 text-dimmest transition-transform duration-200"
-            style={{ transform: expanded ? "rotate(90deg)" : "rotate(0deg)" }}
+            className={`shrink-0 text-dimmest transition-transform duration-200 ${expanded ? "rotate-90" : "rotate-0"}`}
           />
         </div>
 
@@ -106,7 +102,10 @@ export function BudgetCountryCard({
 
       {/* Expanded detail panel */}
       {expanded && (
-        <div className="px-4 py-4 bg-[#0A0A0A]" style={{ borderTop: `1px solid ${borderColor}` }}>
+        <div
+          className="px-4 py-4 bg-[#0A0A0A] border-t border-[var(--bc)]"
+          style={{ "--bc": borderColor } as React.CSSProperties}
+        >
           {/* Summary row */}
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-semibold text-white">
@@ -126,10 +125,7 @@ export function BudgetCountryCard({
           </div>
 
           {/* Category cards grid — matching CountryPage style */}
-          <div
-            className="grid gap-3"
-            style={{ gridTemplateColumns: "repeat(auto-fill, minmax(130px, 1fr))" }}
-          >
+          <div className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(130px,1fr))]">
             {(
               [
                 {

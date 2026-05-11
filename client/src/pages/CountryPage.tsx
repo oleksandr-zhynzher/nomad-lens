@@ -194,10 +194,7 @@ export function CountryPage() {
                 <span className="text-[11px] font-semibold tracking-[2px] text-[#8F5A3C] uppercase">
                   {t("countryPage.countryDetailLabel")}
                 </span>
-                <h1
-                  className="text-2xl md:text-4xl font-bold text-[#E8E9EB] m-0 leading-none"
-                  style={{ fontFamily: "Oswald, sans-serif" }}
-                >
+                <h1 className="text-2xl md:text-4xl font-bold text-[#E8E9EB] m-0 leading-none font-display">
                   {locC.name}
                 </h1>
               </div>
@@ -276,10 +273,7 @@ export function CountryPage() {
         {visa && (
           <div className="bg-bg py-8 gap-8 flex flex-col">
             <div className="flex flex-col md:flex-row gap-3 md:items-center">
-              <h2
-                className="font-bold text-[#E8E9EB] m-0"
-                style={{ fontFamily: "Oswald, sans-serif" }}
-              >
+              <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
                 {t("countryPage.nomadVisaSection")}
               </h2>
               <div className="flex-1" />
@@ -521,10 +515,7 @@ export function CountryPage() {
         {/* ── scores-section + climate ── */}
         <div className="bg-bg py-8 gap-8 flex flex-col">
           <div className="flex flex-col md:flex-row gap-3 md:items-center">
-            <h2
-              className="font-bold text-[#E8E9EB] m-0"
-              style={{ fontFamily: "Oswald, sans-serif" }}
-            >
+            <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
               {t("countryPage.performanceBreakdown")}
             </h2>
             <span className="flex-1 text-right text-xs text-dimmer">
@@ -542,10 +533,7 @@ export function CountryPage() {
               <div className="h-px bg-[#1E1E1E]" />
               <div className="bg-bg py-8 gap-6 flex flex-col">
                 <div className="flex flex-col md:flex-row gap-3 md:items-center">
-                  <h2
-                    className="font-bold text-[#E8E9EB] m-0"
-                    style={{ fontFamily: "Oswald, sans-serif" }}
-                  >
+                  <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
                     {t("nav.tourism", "Tourism")}
                   </h2>
                   <span className="flex-1 text-right text-xs text-dimmer">
@@ -566,8 +554,7 @@ export function CountryPage() {
 
                     <div className="flex items-baseline gap-2.5">
                       <span
-                        className={`text-[42px] font-bold leading-none ${tourismScore != null ? tourismScoreColourClass(tourismScore, "text") : "text-dimmer"}`}
-                        style={{ fontFamily: "Oswald, sans-serif" }}
+                        className={`text-[42px] font-bold leading-none font-display ${tourismScore != null ? tourismScoreColourClass(tourismScore, "text") : "text-dimmer"}`}
                       >
                         {tourismScore != null ? tourismScore.toFixed(1) : "—"}
                       </span>
@@ -631,12 +618,13 @@ export function CountryPage() {
 
                             <div className="h-2 rounded-full bg-[#232323] overflow-hidden">
                               <div
-                                style={{
-                                  width: `${metric.value}%`,
-                                  height: "100%",
-                                  borderRadius: "999px",
-                                  backgroundColor: TOURISM_COLORS[metric.key] ?? "#8F5A3C",
-                                }}
+                                style={
+                                  {
+                                    "--w": `${metric.value}%`,
+                                    "--c": TOURISM_COLORS[metric.key] ?? "#8F5A3C",
+                                  } as React.CSSProperties
+                                }
+                                className="w-[var(--w)] h-full rounded-full bg-[var(--c)]"
                               />
                             </div>
                           </div>
@@ -655,10 +643,7 @@ export function CountryPage() {
               <div className="h-px bg-[#1E1E1E]" />
               <div className="bg-bg py-8 gap-6 flex flex-col">
                 <div className="flex flex-col md:flex-row gap-3 md:items-center">
-                  <h2
-                    className="font-bold text-[#E8E9EB] m-0"
-                    style={{ fontFamily: "Oswald, sans-serif" }}
-                  >
+                  <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
                     {t("countryPage.costOfLivingSection", "Cost of Living")}
                   </h2>
                   <span className="flex-1 text-right text-xs text-dimmer">
@@ -780,10 +765,7 @@ export function CountryPage() {
               <div className="h-px bg-[#1E1E1E]" />
               <div className="bg-bg py-8 gap-6 flex flex-col">
                 <div className="flex flex-col md:flex-row gap-3 md:items-center">
-                  <h2
-                    className="font-bold text-[#E8E9EB] m-0"
-                    style={{ fontFamily: "Oswald, sans-serif" }}
-                  >
+                  <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
                     {t("countryPage.climateDataSection")}
                   </h2>
                   <span className="flex-1 text-right text-xs text-dimmer">

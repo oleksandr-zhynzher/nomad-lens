@@ -48,8 +48,8 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
             {/* Score bar - 4px height */}
             <div className="rounded-full h-1 bg-border">
               <div
-                className={`rounded-full transition-all h-1 ${scoreColourClass(value, "bg")}`}
-                style={{ width: `${value ?? 0}%` }}
+                className={`rounded-full transition-all h-1 ${scoreColourClass(value, "bg")} w-[var(--w)]`}
+                style={{ "--w": `${value ?? 0}%` } as React.CSSProperties}
               />
             </div>
 

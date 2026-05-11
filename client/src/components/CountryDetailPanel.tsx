@@ -6,8 +6,8 @@ import { useState } from "react";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import type { RankedCountry } from "../utils/types";
 import { TOURISM_GROUPS, CATEGORY_LABELS } from "../utils/types";
-import { scoreColour } from "../utils/scoring";
-import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring";
+import { scoreColourClass, tourismScoreColourClass } from "../utils/colorClasses";
+import { computeTourismScore } from "../utils/tourismScoring";
 import { TOURISM_COLORS } from "../utils/tourismColors";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
@@ -63,10 +63,7 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
                 loading="eager"
               />
               <div className="flex items-baseline gap-2 min-w-0">
-                <h2
-                  className="text-white font-bold leading-[1.2] whitespace-nowrap"
-                  style={{ fontFamily: "Oswald, sans-serif" }}
-                >
+                <h2 className="text-white font-bold leading-[1.2] whitespace-nowrap [font-family:Oswald,_sans-serif]">
                   {locC.name}
                 </h2>
                 <span className="text-xs text-muted">{t(`regions.${regionKey(c.region)}`)}</span>
@@ -75,11 +72,7 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
 
             {/* Score */}
             <span
-              className="font-bold leading-none whitespace-nowrap"
-              style={{
-                fontFamily: "Oswald, sans-serif",
-                color: scoreColour(finalScore),
-              }}
+              className={`font-bold leading-none whitespace-nowrap [font-family:Oswald,_sans-serif] ${scoreColourClass(finalScore, "text")}`}
             >
               {finalScore.toFixed(1)}
             </span>
@@ -123,8 +116,7 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
                   <h3 className="text-[11px] font-semibold tracking-[1.5px] uppercase text-[#6B9E6B] mb-3">
                     {t("countryDetail.tourismScores", "Tourism Score")}
                     <span
-                      className="ml-2 font-mono text-[13px] font-bold"
-                      style={{ color: tourismScoreColour(tScore) }}
+                      className={`ml-2 font-mono text-[13px] font-bold ${tourismScoreColourClass(tScore, "text")}`}
                     >
                       {tScore.toFixed(1)}
                     </span>
@@ -149,12 +141,10 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
                                   </span>
                                   <div className="flex-1 h-[6px] rounded-[3px] bg-surface-4 overflow-hidden">
                                     <div
-                                      style={{
-                                        width: `${val}%`,
-                                        height: "100%",
-                                        backgroundColor: color,
-                                        borderRadius: "3px",
-                                      }}
+                                      className="h-full rounded-[3px] w-[var(--bw)] bg-[var(--bc)]"
+                                      style={
+                                        { "--bw": `${val}%`, "--bc": color } as React.CSSProperties
+                                      }
                                     />
                                   </div>
                                   <span className="font-mono text-[11px] font-semibold text-on-surface w-[28px] text-right shrink-0">

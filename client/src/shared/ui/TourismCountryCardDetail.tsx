@@ -23,7 +23,10 @@ export function TourismCountryCardDetail({
   const langPrefix = useLangPrefix();
 
   return (
-    <div className="px-4 py-4 bg-[#111113]" style={{ borderTop: `1px solid ${borderColor}` }}>
+    <div
+      className="px-4 py-4 bg-[#111113] border-t border-[var(--bt-c)]"
+      style={{ "--bt-c": borderColor } as React.CSSProperties}
+    >
       <TourismBreakdownChart country={country} />
 
       {/* Budget breakdown */}
@@ -50,13 +53,7 @@ export function TourismCountryCardDetail({
           };
 
           return (
-            <div
-              className="mt-4 p-[14px] rounded-[10px] border border-[#2A2D33] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(18,19,22,0.96) 0%, rgba(11,12,14,0.98) 100%)",
-              }}
-            >
+            <div className="mt-4 p-[14px] rounded-[10px] border border-[#2A2D33] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] [background:linear-gradient(180deg,rgba(18,19,22,0.96)_0%,rgba(11,12,14,0.98)_100%)]">
               <div className="flex items-center justify-between mb-3">
                 <div className="text-[10px] font-bold tracking-[1.7px] uppercase text-[#A6ADB8]">
                   {t("tourismBudget.costBreakdown", "Daily Cost Breakdown")}
@@ -76,8 +73,8 @@ export function TourismCountryCardDetail({
                     >
                       <div className="flex items-center justify-between gap-2">
                         <span
-                          className="inline-flex items-center justify-center w-7 h-7 rounded-[8px] bg-[#161A20]"
-                          style={{ border: `1px solid ${meta.accent}44` }}
+                          className="inline-flex items-center justify-center w-7 h-7 rounded-[8px] bg-[#161A20] border border-[var(--acc-b)]"
+                          style={{ "--acc-b": `${meta.accent}44` } as React.CSSProperties}
                         >
                           {meta.icon}
                         </span>
@@ -93,8 +90,8 @@ export function TourismCountryCardDetail({
                       </div>
                       <div className="mt-2 h-[5px] rounded-full bg-[#232A33] overflow-hidden">
                         <div
-                          className="h-full rounded-full"
-                          style={{ width: `${width}%`, backgroundColor: color }}
+                          className="h-full rounded-full w-[var(--bw)] bg-[var(--bc)]"
+                          style={{ "--bw": `${width}%`, "--bc": color } as React.CSSProperties}
                         />
                       </div>
                     </div>
@@ -151,10 +148,7 @@ export function TourismCountryCardDetail({
 
       <Link
         to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-        className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors h-11 border border-[#3A404B] rounded-[8px] text-sm font-semibold tracking-[0.2px] text-[#D7AE82] no-underline mt-4"
-        style={{
-          background: "linear-gradient(180deg, rgba(28,31,36,0.95) 0%, rgba(20,22,26,0.98) 100%)",
-        }}
+        className="interactive-cta-link w-full flex items-center justify-center gap-2 transition-colors h-11 border border-[#3A404B] rounded-[8px] text-sm font-semibold tracking-[0.2px] text-[#D7AE82] no-underline mt-4 [background:linear-gradient(180deg,rgba(28,31,36,0.95)_0%,rgba(20,22,26,0.98)_100%)]"
         onClick={(e) => e.stopPropagation()}
       >
         {t("tourism.viewCountry", "View Profile")} →

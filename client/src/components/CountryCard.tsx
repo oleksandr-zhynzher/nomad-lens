@@ -46,16 +46,14 @@ export function CountryCard({
     <div
       data-country-code={country.code}
       data-selected={selected ? "true" : undefined}
-      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"}`}
-      style={{
-        backgroundColor: bgColor,
-        borderTop: `1px solid ${highlighted ? "var(--color-accent)" : borderColor}`,
-        ["--row-hover-bg" as string]: hoverBg,
-        ...(highlighted && {
-          outline: `2px solid var(--color-accent)`,
-          outlineOffset: "-1px",
-        }),
-      }}
+      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"} bg-[var(--row-bg)] border-t border-[var(--row-bt)] ${highlighted ? "outline outline-2 outline-[var(--color-accent)] outline-offset-[-1px]" : ""}`}
+      style={
+        {
+          "--row-bg": bgColor,
+          "--row-hover-bg": hoverBg,
+          "--row-bt": highlighted ? "var(--color-accent)" : borderColor,
+        } as React.CSSProperties
+      }
     >
       {compareMode && <CompareCheckbox isSelected={!!selected} />}
 
@@ -117,17 +115,16 @@ export function CountryCard({
         {/* Chevron */}
         <ChevronRight
           size={20}
-          className="shrink-0 text-dimmest transition-transform duration-200"
-          style={{
-            transform: compareMode ? "rotate(0deg)" : expanded ? "rotate(90deg)" : "rotate(0deg)",
-            opacity: compareMode ? 0.35 : 1,
-          }}
+          className={`shrink-0 text-dimmest transition-transform duration-200 ${!compareMode && expanded ? "rotate-90" : "rotate-0"} ${compareMode ? "opacity-[0.35]" : "opacity-100"}`}
         />
       </button>
 
       {/* Expanded breakdown */}
       {expanded && !compareMode && (
-        <div className="px-4 py-4 bg-[#111113]" style={{ borderTop: `1px solid ${borderColor}` }}>
+        <div
+          className="px-4 py-4 bg-[#111113] border-t border-[var(--exp-bc)]"
+          style={{ "--exp-bc": borderColor } as React.CSSProperties}
+        >
           <ScoreBreakdown country={country} />
           <ViewCountryButton to={`${langPrefix}/country/${country.code.toLowerCase()}`} />
         </div>

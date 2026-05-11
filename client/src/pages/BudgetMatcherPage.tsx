@@ -233,11 +233,7 @@ export function BudgetMatcherPage() {
           <span className="text-[10px] font-semibold tracking-[1.5px] uppercase text-muted flex-1 text-left"></span>
           <ChevronDown
             size={14}
-            className="text-dimmer shrink-0"
-            style={{
-              transform: !collapsed.lifestyle ? "rotate(0deg)" : "rotate(-90deg)",
-              transition: "transform 0.15s ease",
-            }}
+            className={`text-dimmer shrink-0 transition-transform duration-150 ${!collapsed.lifestyle ? "rotate-0" : "-rotate-90"}`}
           />
         </button>
 
@@ -309,11 +305,7 @@ export function BudgetMatcherPage() {
           </span>
           <ChevronDown
             size={14}
-            className="text-dimmer shrink-0"
-            style={{
-              transform: !collapsed.categories ? "rotate(0deg)" : "rotate(-90deg)",
-              transition: "transform 0.15s ease",
-            }}
+            className={`text-dimmer shrink-0 transition-transform duration-150 ${!collapsed.categories ? "rotate-0" : "-rotate-90"}`}
           />
         </button>
 
@@ -450,11 +442,8 @@ export function BudgetMatcherPage() {
 
         {/* ── Mobile FAB ──────────────────────────────────── */}
         <button
-          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-full bg-accent text-white text-sm font-semibold border-0 cursor-pointer"
-          style={{
-            bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)",
-            right: "16px",
-          }}
+          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-full bg-accent text-white text-sm font-semibold border-0 cursor-pointer right-4"
+          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)" }}
           onClick={() => setMobileParamsOpen(true)}
           aria-label={t("a11y.openParameters", "Open parameters")}
         >
@@ -487,10 +476,7 @@ export function BudgetMatcherPage() {
 
               <div className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 min-h-[160px]">
                 {/* H1 — responsive font (list page style) */}
-                <h1
-                  className="text-3xl md:text-6xl font-semibold leading-[0.95] text-white mb-2"
-                  style={{ fontFamily: "Oswald, sans-serif" }}
-                >
+                <h1 className="text-3xl md:text-6xl font-semibold leading-[0.95] text-white mb-2 font-display">
                   {t("budget.eyebrow", "BUDGET MATCHER")}
                 </h1>
                 {/* Tagline */}

@@ -295,8 +295,8 @@ export default function App() {
 
         {/* Mobile FAB - Parameters button */}
         <button
-          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-[24px] bg-accent text-white text-sm font-semibold"
-          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)", right: "16px" }}
+          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-[24px] bg-accent text-white text-sm font-semibold right-4"
+          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)" }}
           onClick={() => setMobileParamsOpen(true)}
           aria-label={t("a11y.openParameters", "Open parameters")}
         >
@@ -342,10 +342,7 @@ export default function App() {
                     ))}
                 </div>
                 {/* H1 — responsive font */}
-                <h1
-                  className="text-3xl md:text-6xl font-bold leading-[0.95] text-white mb-2"
-                  style={{ fontFamily: "Oswald, sans-serif" }}
-                >
+                <h1 className="text-3xl md:text-6xl font-bold leading-[0.95] text-white mb-2 font-display">
                   {t("hero.title")}
                 </h1>
                 {/* Tagline */}
@@ -429,15 +426,17 @@ export default function App() {
                       placeholder={t("search.placeholder")}
                       value={search}
                       onChange={(e) => updateSearch(e.target.value)}
-                      className="w-full pl-12 rounded-md focus:outline-none h-10 text-white text-sm bg-[#161616] border border-surface"
-                      style={{
-                        paddingRight:
-                          search.length === 0
-                            ? "16px"
-                            : searchMode === "highlight" && search.trim().length >= 1
-                              ? "164px"
-                              : "72px",
-                      }}
+                      className="w-full pl-12 rounded-md focus:outline-none h-10 text-white text-sm bg-[#161616] border border-surface pr-[var(--pr)]"
+                      style={
+                        {
+                          "--pr":
+                            search.length === 0
+                              ? "16px"
+                              : searchMode === "highlight" && search.trim().length >= 1
+                                ? "164px"
+                                : "72px",
+                        } as React.CSSProperties
+                      }
                     />
                     {search.length > 0 && (
                       <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">

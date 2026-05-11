@@ -18,15 +18,18 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
   return (
     <div className="relative h-5 rounded-[4px] overflow-hidden bg-surface-2">
       {/* Stacked segments */}
-      <div className="flex h-full" style={{ width: `${(monthlyCost / maxVal) * 100}%` }}>
+      <div
+        className="flex h-full w-[var(--bw)]"
+        style={{ "--bw": `${(monthlyCost / maxVal) * 100}%` } as React.CSSProperties}
+      >
         {segments.map((key) => (
           <Tooltip
             key={key}
             content={
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <div
-                  className="w-2 h-2 rounded-full shrink-0"
-                  style={{ backgroundColor: COST_COLORS[key] ?? "#555" }}
+                  className="w-2 h-2 rounded-full shrink-0 bg-[var(--seg-c)]"
+                  style={{ "--seg-c": COST_COLORS[key] ?? "#555" } as React.CSSProperties}
                 />
                 <span className="text-[11px] text-tertiary">{t(`budget.categories.${key}`)}</span>
                 <span className="text-[11px] font-bold font-mono text-white">
@@ -42,16 +45,16 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
             }}
           >
             <div
-              className="w-full h-full"
-              style={{ backgroundColor: COST_COLORS[key] ?? "#555" }}
+              className="w-full h-full bg-[var(--seg-c)]"
+              style={{ "--seg-c": COST_COLORS[key] ?? "#555" } as React.CSSProperties}
             />
           </Tooltip>
         ))}
       </div>
       {/* Budget line */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-white opacity-70"
-        style={{ left: `${(budget / maxVal) * 100}%` }}
+        className="absolute top-0 bottom-0 w-0.5 bg-white opacity-70 left-[var(--bl)]"
+        style={{ "--bl": `${(budget / maxVal) * 100}%` } as React.CSSProperties}
       />
     </div>
   );

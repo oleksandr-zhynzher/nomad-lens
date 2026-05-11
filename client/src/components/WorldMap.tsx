@@ -143,13 +143,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
     <div className="relative w-full" onMouseMove={handleMouseMove}>
       {geoLoading && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-bg">
-          <div
-            className="animate-spin w-8 h-8 rounded-full"
-            style={{
-              border: "3px solid #2A2A2A",
-              borderTopColor: "var(--color-accent-dim)",
-            }}
-          />
+          <div className="animate-spin w-8 h-8 rounded-full border-[3px] border-[#2A2A2A] border-t-accent-dim" />
         </div>
       )}
       {/* Zoom controls */}
@@ -208,7 +202,10 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
           { color: "#3A3A3A", label: t("map.noData"), range: "" },
         ].map(({ color, label, range }) => (
           <div key={label} className="flex items-center gap-2">
-            <span className="w-3 h-3 shrink-0 rounded-[2px]" style={{ background: color }} />
+            <span
+              className="w-3 h-3 shrink-0 rounded-[2px] bg-[var(--legend-c)]"
+              style={{ "--legend-c": color } as React.CSSProperties}
+            />
             <span className="font-mono text-[10px] text-tertiary">
               {label} <span className="text-dim">{range}</span>
             </span>
@@ -221,7 +218,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         projectionConfig={{ scale: 160 }}
         width={900}
         height={460}
-        style={{ width: "100%", height: "auto", background: "#0A0A0F" }}
+        className="w-full h-auto bg-[#0A0A0F]"
       >
         <ZoomableGroup
           zoom={zoom}
@@ -255,11 +252,10 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
       {/* Hover tooltip */}
       {hover && (
         <div
-          className="pointer-events-none fixed z-50 px-3 py-2 shadow-xl rounded-[4px] bg-surface"
-          style={{
-            left: hover.x + 12,
-            top: hover.y - 10,
-          }}
+          className="pointer-events-none fixed z-50 px-3 py-2 shadow-xl rounded-[4px] bg-surface top-[var(--tt-y)] left-[var(--tt-x)]"
+          style={
+            { "--tt-x": `${hover.x + 12}px`, "--tt-y": `${hover.y - 10}px` } as React.CSSProperties
+          }
         >
           <p className="text-[13px] font-semibold text-white">{hover.name}</p>
           {hover.score !== null ? (

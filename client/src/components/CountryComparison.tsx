@@ -6,6 +6,7 @@ import { Plane } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { computeScore, scoreColour, applyClimate } from "../utils/scoring";
+import { scoreColourClass } from "../utils/colorClasses";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { Tooltip } from "./Tooltip";
 import { CATEGORY_ICONS } from "../utils/categoryIcons";
@@ -112,7 +113,6 @@ export function CountryComparison({
         <div className="flex gap-3 pb-2 overflow-x-auto [scrollbar-width:thin]">
           {selectedCountries.map((slot) => {
             const score = computeScore(applyClimate(slot.country, climatePrefs), weights);
-            const sColor = scoreColour(score);
             return (
               <div key={slot.country.code} className="shrink-0 w-[148px] md:w-[180px]">
                 <ComparisonSlotCard
@@ -140,11 +140,7 @@ export function CountryComparison({
                   }
                 >
                   <span
-                    className="text-[32px] font-bold leading-none"
-                    style={{
-                      fontFamily: "Oswald, sans-serif",
-                      color: sColor,
-                    }}
+                    className={`text-[32px] font-bold leading-none [font-family:Oswald,_sans-serif] ${scoreColourClass(score, "text")}`}
                   >
                     {score.toFixed(1)}
                   </span>
@@ -176,12 +172,7 @@ export function CountryComparison({
           </div>
         </div>
         {/* Right-edge fade — hints at horizontal scrollability on mobile */}
-        <div
-          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block"
-          style={{
-            background: "linear-gradient(to right, transparent, #0F1114)",
-          }}
-        />
+        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block [background:linear-gradient(to_right,transparent,#0F1114)]" />
       </div>
 
       {/* Dropdown — fixed-positioned under the Add Country card */}
@@ -196,8 +187,7 @@ export function CountryComparison({
             regionLabel: t(`regions.${regionKey(c.region)}`),
             trailing: (
               <span
-                className="font-mono text-[13px] font-semibold"
-                style={{ color: scoreColour(score) }}
+                className={`font-mono text-[13px] font-semibold ${scoreColourClass(score, "text")}`}
               >
                 {score.toFixed(1)}
               </span>

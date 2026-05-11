@@ -4,6 +4,7 @@ import { TrendingUp } from "lucide-react";
 import type { ClimatePreferences, CountryData, WeightMap } from "../utils/types";
 import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "../utils/types";
 import { scoreColour } from "../utils/scoring";
+import { scoreColourClass } from "../utils/colorClasses";
 import { regionKey } from "../utils/localize";
 import { CATEGORY_ICONS } from "../utils/categoryIcons";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
@@ -120,7 +121,11 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                 {(() => {
                   const Icon = REGION_ICONS[r.name];
                   return Icon ? (
-                    <Icon size={20} style={{ color: active ? r.color : "#808080" }} />
+                    <Icon
+                      size={20}
+                      style={{ "--ic": active ? r.color : "#808080" } as React.CSSProperties}
+                      className="text-[var(--ic)]"
+                    />
                   ) : null;
                 })()}
                 <span
@@ -130,11 +135,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                 </span>
 
                 <span
-                  className="text-[32px] font-bold leading-none"
-                  style={{
-                    fontFamily: "Oswald, sans-serif",
-                    color: active ? scoreColour(r.overall) : "#757575",
-                  }}
+                  className={`text-[32px] font-bold leading-none [font-family:Oswald,_sans-serif] ${active ? scoreColourClass(r.overall, "text") : "text-[#757575]"}`}
                 >
                   {r.overall.toFixed(1)}
                 </span>

@@ -5,6 +5,7 @@ import type { CountryData } from "../utils/types";
 import { TOURISM_CATEGORY_KEYS } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { computeTourismScore, tourismScoreColour } from "../utils/tourismScoring";
+import { tourismScoreColourClass } from "../utils/colorClasses";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 import { useComparisonSelection } from "../shared/hooks/useComparisonSelection";
@@ -100,7 +101,6 @@ export function TourismComparison({
         <div className="flex gap-3 pb-2 overflow-x-auto [scrollbar-width:thin]">
           {selectedCountries.map((slot) => {
             const score = computeTourismScore(slot.country);
-            const sColor = score != null ? tourismScoreColour(score) : "#333333";
             return (
               <div key={slot.country.code} className="shrink-0 w-[148px] md:w-[180px]">
                 <ComparisonSlotCard
@@ -113,11 +113,7 @@ export function TourismComparison({
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
                 >
                   <span
-                    className="text-[32px] font-bold leading-none"
-                    style={{
-                      fontFamily: "Oswald, sans-serif",
-                      color: sColor,
-                    }}
+                    className={`text-[32px] font-bold leading-none [font-family:Oswald,_sans-serif] ${score != null ? tourismScoreColourClass(score, "text") : "text-[#333333]"}`}
                   >
                     {score != null ? score.toFixed(1) : "—"}
                   </span>
@@ -149,12 +145,7 @@ export function TourismComparison({
           </div>
         </div>
         {/* Right-edge fade */}
-        <div
-          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block"
-          style={{
-            background: "linear-gradient(to right, transparent, #0F1114)",
-          }}
-        />
+        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block [background:linear-gradient(to_right,transparent,#0F1114)]" />
       </div>
 
       {/* Dropdown — fixed-positioned under the Add Country card */}
@@ -169,8 +160,7 @@ export function TourismComparison({
             regionLabel: t(`regions.${regionKey(c.region)}`),
             trailing: (
               <span
-                className="font-mono text-[13px] font-semibold"
-                style={{ color: score != null ? tourismScoreColour(score) : "#333333" }}
+                className={`font-mono text-[13px] font-semibold ${score != null ? tourismScoreColourClass(score, "text") : "text-border"}`}
               >
                 {score != null ? score.toFixed(1) : "—"}
               </span>

@@ -112,10 +112,12 @@ export function TourismWeightPanel({
                 step={5}
                 value={budgetState.dailyBudget}
                 onChange={(e) => onBudgetChange("dailyBudget", Number(e.target.value))}
-                className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-                style={{
-                  background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((budgetState.dailyBudget - 10) / 490) * 100}%, #333333 ${((budgetState.dailyBudget - 10) / 490) * 100}%, #333333 100%)`,
-                }}
+                className="w-full h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+                style={
+                  {
+                    "--pct": `${((budgetState.dailyBudget - 10) / 490) * 100}%`,
+                  } as React.CSSProperties
+                }
                 aria-label={t("tourismBudget.dailyBudgetLabel", "Daily budget")}
               />
               <div className="flex justify-between mt-1.5">
@@ -165,10 +167,8 @@ export function TourismWeightPanel({
                 max={100}
                 value={budgetState.budgetBlend}
                 onChange={(e) => onBudgetChange("budgetBlend", Number(e.target.value))}
-                className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-                style={{
-                  background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${budgetState.budgetBlend}%, #333333 ${budgetState.budgetBlend}%, #333333 100%)`,
-                }}
+                className="w-full h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+                style={{ "--pct": `${budgetState.budgetBlend}%` } as React.CSSProperties}
                 aria-label={t("tourismBudget.budgetBlend", "Budget blend")}
               />
               <div className="flex justify-between">
@@ -331,21 +331,8 @@ export function TourismWeightPanel({
               ).map(({ id, dateVal, onChange }) => {
                 const curMM = dateVal ? dateVal.slice(5, 7) : "";
                 const curDD = dateVal ? dateVal.slice(8, 10) : "01";
-                const selectStyle = {
-                  fontFamily: "IBM Plex Mono, monospace",
-                  fontSize: "12px",
-                  padding: "6px 6px",
-                  borderRadius: "3px",
-                  border: "1px solid #333",
-                  backgroundColor: "#1A1A1C",
-                  color: "#E0E0E0",
-                  colorScheme: "dark" as const,
-                  outline: "none",
-                  cursor: "pointer",
-                  appearance: "none" as const,
-                  WebkitAppearance: "none" as const,
-                  textAlign: "center" as const,
-                };
+                const selectBaseClass =
+                  "font-mono text-xs rounded-sm border border-border bg-surface text-[#e0e0e0] [color-scheme:dark] outline-none cursor-pointer appearance-none text-center px-1.5 py-1.5 min-w-0";
                 const daysInMonth = curMM ? new Date(2000, parseInt(curMM), 0).getDate() : 31;
                 return (
                   <div key={id} className="flex-1 min-w-0 flex gap-1">
@@ -359,7 +346,7 @@ export function TourismWeightPanel({
                           : "01";
                         onChange(mm, mm ? safeDD : "01");
                       }}
-                      style={{ ...selectStyle, flex: 2 }}
+                      className={`${selectBaseClass} [flex:2]`}
                       aria-label={
                         id === "start"
                           ? t("tourismFilters.startMonth", "Start month")
@@ -380,7 +367,7 @@ export function TourismWeightPanel({
                         const dd = String(parseInt(e.target.value)).padStart(2, "0");
                         onChange(curMM, dd);
                       }}
-                      style={{ ...selectStyle, flex: 1.2, opacity: curMM ? 1 : 0.4 }}
+                      className={`${selectBaseClass} [flex:1.2] ${curMM ? "opacity-100" : "opacity-40"}`}
                       aria-label={
                         id === "start"
                           ? t("tourismFilters.startDay", "Start day")

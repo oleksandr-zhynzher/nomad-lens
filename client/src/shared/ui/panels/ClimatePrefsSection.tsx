@@ -1,3 +1,4 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
 import type { ClimatePreferences } from "../../../utils/types";
 import { SEASON_ROW1, SEASON_ROW2 } from "../../../utils/weightConfig";
@@ -52,10 +53,10 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
                 minTemp: Math.min(v, climatePrefs.maxTemp - 1),
               });
             }}
-            className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
-            style={{
-              background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((climatePrefs.minTemp + 10) / 55) * 100}%, #333333 ${((climatePrefs.minTemp + 10) / 55) * 100}%, #333333 100%)`,
-            }}
+            className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+            style={
+              { "--pct": `${((climatePrefs.minTemp + 10) / 55) * 100}%` } as React.CSSProperties
+            }
             aria-label={t("a11y.minimumPreferredTemperature", "Minimum preferred temperature")}
           />
           <span className="font-mono text-xs text-muted w-9 text-right">
@@ -77,10 +78,10 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
                 maxTemp: Math.max(v, climatePrefs.minTemp + 1),
               });
             }}
-            className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer"
-            style={{
-              background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${((climatePrefs.maxTemp + 10) / 55) * 100}%, #333333 ${((climatePrefs.maxTemp + 10) / 55) * 100}%, #333333 100%)`,
-            }}
+            className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+            style={
+              { "--pct": `${((climatePrefs.maxTemp + 10) / 55) * 100}%` } as React.CSSProperties
+            }
             aria-label={t("a11y.maximumPreferredTemperature", "Maximum preferred temperature")}
           />
           <span className="font-mono text-xs text-muted w-9 text-right">

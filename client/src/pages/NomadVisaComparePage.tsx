@@ -40,7 +40,7 @@ function Cell({ children, count }: { children: React.ReactNode; count: number })
   return (
     <div
       className="shrink-0 grow-0 flex items-center min-w-0 px-4 py-3.5 border-l border-[#1A1A1A]"
-      style={{ "--cell-w": `${100 / count}%`, flex: `0 0 ${100 / count}%` } as React.CSSProperties}
+      style={{ flex: `0 0 ${100 / count}%` }}
     >
       {children}
     </div>
@@ -102,10 +102,7 @@ export function NomadVisaComparePage() {
           {t("nomadVisasPage.backToVisas", "Back to Nomad")}
         </Link>
 
-        <h1
-          className="text-[28px] font-bold tracking-[1px] uppercase text-white mb-8"
-          style={{ fontFamily: "Oswald, sans-serif" }}
-        >
+        <h1 className="text-[28px] font-bold tracking-[1px] uppercase text-white mb-8 font-display">
           {t("nomadVisasPage.compareTitle", "Nomad Visa Comparison")}
         </h1>
 
@@ -228,8 +225,13 @@ export function NomadVisaComparePage() {
                 return (
                   <Cell key={c.code} count={count}>
                     <span
-                      className="font-mono text-[11px] font-semibold rounded-full px-2.5 py-[3px] whitespace-nowrap"
-                      style={{ backgroundColor: taxColors.bg, color: taxColors.text }}
+                      className="font-mono text-[11px] font-semibold rounded-full px-2.5 py-[3px] whitespace-nowrap bg-[var(--tax-bg)] text-[var(--tax-text)]"
+                      style={
+                        {
+                          "--tax-bg": taxColors.bg,
+                          "--tax-text": taxColors.text,
+                        } as React.CSSProperties
+                      }
                     >
                       {c.nomadVisa.tax.status === "exempt"
                         ? t("countryPage.taxExemptLabel")

@@ -47,10 +47,8 @@ export function BudgetFilterPanel({ bs }: Props) {
           step={50}
           value={bs.budget}
           onChange={(e) => bs.setBudget(Number(e.target.value))}
-          className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-          style={{
-            background: `linear-gradient(to right, var(--color-accent) 0%, var(--color-accent) ${budgetPct}%, #333333 ${budgetPct}%, #333333 100%)`,
-          }}
+          className="w-full h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+          style={{ "--pct": `${budgetPct}%` } as React.CSSProperties}
           aria-label={t("a11y.budgetSlider", "Budget slider")}
         />
         <div className="flex justify-between mt-1.5">

@@ -41,8 +41,8 @@ export function TourismBreakdownChart({ country }: Props) {
             {/* Score bar - 4px height */}
             <div className="rounded-full h-1 bg-border">
               <div
-                className={`rounded-full transition-all h-1 ${value !== null ? scoreColourClass(value, "bg") : "bg-border"}`}
-                style={{ width: `${value ?? 0}%` }}
+                className={`rounded-full transition-all h-1 ${value !== null ? scoreColourClass(value, "bg") : "bg-border"} w-[var(--w)]`}
+                style={{ "--w": `${value ?? 0}%` } as React.CSSProperties}
               />
             </div>
 

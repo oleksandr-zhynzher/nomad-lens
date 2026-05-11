@@ -4,6 +4,7 @@ import { Wallet, TrendingUp } from "lucide-react";
 import type { CountryData } from "../utils/types";
 import { localizeCountry, regionKey } from "../utils/localize";
 import { COST_COLORS, surplusColour } from "../utils/budgetColors";
+import { surplusColourClass } from "../utils/colorClasses";
 import { useSyncScroll } from "../shared/hooks/useSyncScroll";
 import { useComparisonSelection } from "../shared/hooks/useComparisonSelection";
 import { ComparisonSlotCard } from "../shared/ui/comparison/ComparisonSlotCard";
@@ -130,19 +131,14 @@ export function BudgetComparison({
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
                 >
                   <span
-                    className="text-[28px] font-bold leading-none"
-                    style={{
-                      fontFamily: "Oswald, sans-serif",
-                      color: cost != null ? "#C2956A" : "#555",
-                    }}
+                    className={`text-[28px] font-bold leading-none [font-family:Oswald,_sans-serif] ${cost != null ? "text-accent-dim" : "text-[#555]"}`}
                   >
                     {cost != null ? `$${cost.toLocaleString()}` : "—"}
                   </span>
 
                   {surplus != null && (
                     <span
-                      className="text-[11px] font-semibold"
-                      style={{ color: surplusColour(surplus) }}
+                      className={`text-[11px] font-semibold ${surplusColourClass(surplus, "text")}`}
                     >
                       {surplus >= 0
                         ? `+$${surplus.toLocaleString()} left`
@@ -178,12 +174,7 @@ export function BudgetComparison({
         </div>
 
         {/* Right-edge fade */}
-        <div
-          className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block"
-          style={{
-            background: "linear-gradient(to right, transparent, #0F1114)",
-          }}
-        />
+        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block [background:linear-gradient(to_right,transparent,#0F1114)]" />
       </div>
 
       {/* Dropdown */}
