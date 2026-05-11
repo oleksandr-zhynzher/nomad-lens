@@ -17,6 +17,7 @@ import {
   loadWeightsFromStorage,
   weightsToSearch,
 } from "../utils/weightStorage";
+import { copyTextToClipboard } from "../shared/hooks/useClipboard";
 
 /** Encapsulates all weight/filter/mode state that is shared across list, map, and compare pages. */
 export function useWeightState() {
@@ -144,13 +145,8 @@ export function useWeightState() {
   const handleShare = useCallback(
     (extraParams?: URLSearchParams) => {
       const url = buildShareUrl(extraParams);
-      navigator.clipboard.writeText(url).catch(() => {
-        const el = document.createElement("textarea");
-        el.value = url;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand("copy");
-        document.body.removeChild(el);
+      void copyTextToClipboard(url).catch((error) => {
+        console.error("Failed to copy ranking share URL", error);
       });
     },
     [buildShareUrl],

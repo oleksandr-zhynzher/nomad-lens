@@ -1,7 +1,6 @@
 ---
 name: "Reviewer"
 description: "Reviews Nomad Lens changes for correctness, accessibility, React performance, maintainability, and deployment risk. Use for PR review, code review, UI review, or pre-merge quality checks."
-tools: ["codebase", "edit", "terminal", "github", "fetch"]
 ---
 
 # Reviewer

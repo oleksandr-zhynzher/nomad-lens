@@ -1,5 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { api } from "../services/api";
+import { useCallback, useEffect } from "react";
+import {
+  selectCountries,
+  selectCountryError,
+  selectCountryStatus,
+  selectLoadCountries,
+  selectRefreshCountries,
+} from "../entities/country/model/country.selectors";
+import { useCountryStore } from "../entities/country/model/country.store";
 import type { CountryData } from "../utils/types";
 
 interface UseCountriesResult {
@@ -10,42 +17,24 @@ interface UseCountriesResult {
 }
 
 export function useCountries(): UseCountriesResult {
-  const [countries, setCountries] = useState<CountryData[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const cancelRef = useRef(false);
-
-  const fetchCountries = useCallback(() => {
-    api
-      .getCountries()
-      .then((data) => {
-        if (!cancelRef.current) {
-          setCountries(data);
-          setLoading(false);
-        }
-      })
-      .catch((err: unknown) => {
-        if (!cancelRef.current) {
-          setError(err instanceof Error ? err.message : "Failed to load data");
-          setLoading(false);
-        }
-      });
-  }, []);
-
-  const load = useCallback(() => {
-    cancelRef.current = false;
-    setLoading(true);
-    setError(null);
-    fetchCountries();
-  }, [fetchCountries]);
+  const countries = useCountryStore(selectCountries);
+  const status = useCountryStore(selectCountryStatus);
+  const error = useCountryStore(selectCountryError);
+  const loadCountries = useCountryStore(selectLoadCountries);
+  const refreshCountries = useCountryStore(selectRefreshCountries);
 
   useEffect(() => {
-    cancelRef.current = false;
-    fetchCountries();
-    return () => {
-      cancelRef.current = true;
-    };
-  }, [fetchCountries]);
+    void loadCountries();
+  }, [loadCountries]);
 
-  return { countries, loading, error, refresh: load };
+  const refresh = useCallback(() => {
+    void refreshCountries();
+  }, [refreshCountries]);
+
+  return {
+    countries,
+    loading: status === "idle" || status === "loading",
+    error,
+    refresh,
+  };
 }

@@ -133,11 +133,18 @@ export function useBudgetMatcher(
 
       // Quality blend: mix with average country quality score
       if (qualityBlend > 0) {
-        const scoreValues = Object.values(country.scores)
-          .map((s) => s.value)
-          .filter((v): v is number => v !== null && v !== undefined);
-        if (scoreValues.length > 0) {
-          const avgQuality = scoreValues.reduce((a, b) => a + b, 0) / scoreValues.length;
+        let scoreSum = 0;
+        let scoreCount = 0;
+
+        for (const scoreEntry of Object.values(country.scores)) {
+          const value = scoreEntry.value;
+          if (value === null || value === undefined) continue;
+          scoreSum += value;
+          scoreCount += 1;
+        }
+
+        if (scoreCount > 0) {
+          const avgQuality = scoreSum / scoreCount;
           score = score * (1 - qualityBlend / 100) + avgQuality * (qualityBlend / 100);
         }
       }

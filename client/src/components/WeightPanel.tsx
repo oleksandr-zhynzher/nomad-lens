@@ -30,7 +30,7 @@ import {
   CATEGORY_LABELS,
   AI_CATEGORIES,
 } from "../utils/types";
-import { defaultWeights, weightLabel } from "../utils/scoring";
+import { weightLabel } from "../utils/scoring";
 import { Tooltip } from "./Tooltip";
 
 interface WeightSliderProps {
@@ -974,6 +974,7 @@ export function WeightPanel({
           {!weightsAreDefault && (
             <button
               onClick={handleShare}
+              aria-live="polite"
               className="button-hover-exempt weight-panel-share-button w-full flex items-center justify-center gap-2 rounded transition-colors"
               style={{
                 backgroundColor: copied ? "#2A4A2A" : "#1A2A1A",
@@ -1058,5 +1059,3 @@ export function WeightPanel({
     </aside>
   );
 }
-
-export { defaultWeights }; // eslint-disable-line react-refresh/only-export-components

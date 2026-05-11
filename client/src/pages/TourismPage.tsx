@@ -15,6 +15,7 @@ import { Layout } from "../components/Layout";
 import { TourismWeightPanel } from "../components/TourismWeightPanel";
 import { TourismCountryCard } from "../components/TourismCountryCard";
 import { Tooltip } from "../components/Tooltip";
+import { MobileSheet } from "../shared/ui/MobileSheet";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useTourismWeightState } from "../hooks/useTourismWeightState";
@@ -50,61 +51,18 @@ export function TourismPage() {
 
   const searchInputRef = useRef<HTMLInputElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
-  const mobileSheetRef = useRef<HTMLDivElement>(null);
-  const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
-
-  // Mobile focus trap
-  useEffect(() => {
-    if (!mobileParamsOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    const previousFocusedElement =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-    document.body.style.overflow = "hidden";
-    mobileSheetCloseButtonRef.current?.focus();
-
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        setMobileParamsOpen(false);
-        return;
-      }
-
-      if (e.key !== "Tab") return;
-
-      const sheet = mobileSheetRef.current;
-      if (!sheet) return;
-
-      const focusable = sheet.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      );
-      if (focusable.length === 0) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    };
-    document.addEventListener("keydown", handler);
-
-    return () => {
-      document.removeEventListener("keydown", handler);
-      document.body.style.overflow = previousOverflow;
-      previousFocusedElement?.focus();
-    };
-  }, [mobileParamsOpen]);
 
   // Search — matching codes for highlight mode
   const matchingCodes = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q || searchMode !== "highlight") return [];
-    return ranked
-      .filter((r) => localizeCountry(r.country, i18n.language).name.toLowerCase().includes(q))
-      .map((r) => r.country.code);
+    const codes: string[] = [];
+    for (const rankedCountry of ranked) {
+      if (localizeCountry(rankedCountry.country, i18n.language).name.toLowerCase().includes(q)) {
+        codes.push(rankedCountry.country.code);
+      }
+    }
+    return codes;
   }, [search, searchMode, ranked, i18n.language]);
 
   useEffect(() => {
@@ -190,97 +148,26 @@ export function TourismPage() {
           />
         </aside>
 
-        {/* Mobile parameters bottom sheet */}
-        {mobileParamsOpen && (
-          <div
-            className="md:hidden fixed inset-0 z-50 flex"
-            role="dialog"
-            aria-modal="true"
-            aria-label={t("mobileSheet.weightsAndPreferences")}
-          >
-            <button
-              type="button"
-              aria-label={t("mobileSheet.close", "Close preferences")}
-              className="absolute inset-0"
-              style={{
-                backgroundColor: "rgba(0,0,0,0.72)",
-                backdropFilter: "blur(6px)",
-              }}
-              onClick={() => setMobileParamsOpen(false)}
-            />
-            <div
-              ref={mobileSheetRef}
-              data-mobile-sheet
-              tabIndex={-1}
-              className="relative mt-auto flex w-full flex-col overflow-hidden"
-              style={{
-                minHeight: "70vh",
-                maxHeight: "calc(100dvh - 16px)",
-                backgroundColor: "#1A1A1A",
-                borderTopLeftRadius: "24px",
-                borderTopRightRadius: "24px",
-                borderTop: "1px solid #2A2A2A",
-                boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Drag handle */}
-              <div className="flex justify-center pt-3 pb-1 shrink-0">
-                <div
-                  style={{
-                    width: "36px",
-                    height: "4px",
-                    borderRadius: "2px",
-                    backgroundColor: "#444444",
-                  }}
-                />
-              </div>
-              {/* Close button */}
-              <div className="flex items-center justify-between px-4 pb-2 shrink-0">
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    letterSpacing: "1.5px",
-                    textTransform: "uppercase",
-                    color: "#9E9E9E",
-                  }}
-                >
-                  {t("tourismWeights.title", "Tourism Weights")}
-                </span>
-                <button
-                  ref={mobileSheetCloseButtonRef}
-                  onClick={() => setMobileParamsOpen(false)}
-                  className="flex items-center justify-center"
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "4px",
-                    backgroundColor: "#333333",
-                    color: "#9E9E9E",
-                  }}
-                  aria-label={t("tourism.a11y.closeParameters", "Close parameters")}
-                >
-                  <X size={18} />
-                </button>
-              </div>
-              <TourismWeightPanel
-                weights={ws.weights}
-                onChange={ws.handleWeightChange}
-                onReset={ws.handleReset}
-                weightsAreDefault={ws.weightsAreDefault}
-                budgetState={ws.budgetState}
-                onBudgetChange={ws.setBudgetField}
-                toggles={ws.toggles}
-                onToggleFieldChange={ws.setToggleField}
-                travelDates={ws.travelDates}
-                onTravelDatesChange={ws.setTravelDates}
-                mobile
-              />
-            </div>
-          </div>
-        )}
+        <MobileSheet
+          open={mobileParamsOpen}
+          title={t("tourismWeights.title", "Tourism Weights")}
+          closeLabel={t("tourism.a11y.closeParameters", "Close parameters")}
+          onClose={() => setMobileParamsOpen(false)}
+        >
+          <TourismWeightPanel
+            weights={ws.weights}
+            onChange={ws.handleWeightChange}
+            onReset={ws.handleReset}
+            weightsAreDefault={ws.weightsAreDefault}
+            budgetState={ws.budgetState}
+            onBudgetChange={ws.setBudgetField}
+            toggles={ws.toggles}
+            onToggleFieldChange={ws.setToggleField}
+            travelDates={ws.travelDates}
+            onTravelDatesChange={ws.setTravelDates}
+            mobile
+          />
+        </MobileSheet>
 
         {/* Mobile FAB - Parameters button */}
         <button
@@ -306,13 +193,13 @@ export function TourismPage() {
         </button>
 
         {/* Right content area */}
-        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#000000" }}>
+        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#0A0A0F" }}>
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
               className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
               style={{
-                background: "#000000",
+                background: "#0A0A0F",
                 backgroundImage: `url('/hero-map.png')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -403,7 +290,7 @@ export function TourismPage() {
                   className="text-3xl md:text-6xl"
                   style={{
                     fontFamily: "Oswald, sans-serif",
-                    fontWeight: 700,
+                    fontWeight: 600,
                     lineHeight: "0.95",
                     color: "#FFFFFF",
                     marginBottom: "8px",
@@ -504,7 +391,7 @@ export function TourismPage() {
               className="sticky z-20"
               style={{
                 top: "56px",
-                backgroundColor: "#000000",
+                backgroundColor: "#0A0A0F",
                 paddingTop: "8px",
                 paddingBottom: "12px",
               }}

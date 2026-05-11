@@ -5,7 +5,11 @@ import { ExternalLink, ArrowLeft } from "lucide-react";
 import { Layout } from "../components/Layout";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
-import { normalizeCountryCodes, tokenizeCountryCodesParam } from "../utils/countryCodeSelection";
+import {
+  getRawCompareCountryCodes,
+  parseCompareCountryCodes,
+  setCompareCountryCodesParam,
+} from "../features/compare/model/compareUrlState";
 import { localizeCountry } from "../utils/localize";
 import type { CountryData, NomadVisaDetails } from "../utils/types";
 
@@ -100,10 +104,10 @@ export function NomadVisaComparePage() {
       ),
     [countries],
   );
-  const rawCodes = useMemo(() => tokenizeCountryCodesParam(searchParams.get("c")), [searchParams]);
+  const rawCodes = useMemo(() => getRawCompareCountryCodes(searchParams), [searchParams]);
   const codes = useMemo(
-    () => normalizeCountryCodes(rawCodes, validVisaCodes),
-    [rawCodes, validVisaCodes],
+    () => parseCompareCountryCodes(searchParams, validVisaCodes),
+    [searchParams, validVisaCodes],
   );
 
   useEffect(() => {
@@ -112,8 +116,7 @@ export function NomadVisaComparePage() {
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
-        if (codes.length === 0) next.delete("c");
-        else next.set("c", codes.join(","));
+        setCompareCountryCodesParam(next, codes);
         return next;
       },
       { replace: true },

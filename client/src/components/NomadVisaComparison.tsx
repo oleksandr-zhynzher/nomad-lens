@@ -466,6 +466,14 @@ export function NomadVisaComparison({
             key={slot.country.code}
             className="min-w-0 w-full md:shrink-0 md:w-[180px]"
             onClick={() => navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`);
+              }
+            }}
+            role="link"
+            tabIndex={0}
             style={{ cursor: "pointer" }}
           >
             <div

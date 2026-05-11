@@ -15,6 +15,7 @@ import { Layout } from "./components/Layout";
 import { WeightPanel } from "./components/WeightPanel";
 import { CountryList } from "./components/CountryList";
 import { Tooltip } from "./components/Tooltip";
+import { MobileSheet } from "./shared/ui/MobileSheet";
 import { useCountries } from "./hooks/useCountries";
 import { useScoring } from "./hooks/useScoring";
 import { useLangPrefix } from "./hooks/useLangPrefix";
@@ -43,8 +44,6 @@ export default function App() {
   const initialHighlightRef = useRef(searchParams.get("highlight"));
   const searchInputRef = useRef<HTMLInputElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
-  const mobileSheetRef = useRef<HTMLDivElement>(null);
-  const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
   const [isSticky, setIsSticky] = useState(false);
 
   // Detect sticky state by reading the sentinel's actual position on every
@@ -218,54 +217,6 @@ export default function App() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [search, searchMode, goNext, goPrev, allCodes, matchingCodes, matchCursor, activeNavCursor]);
 
-  useEffect(() => {
-    if (!mobileParamsOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    const previousFocusedElement =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    document.body.style.overflow = "hidden";
-
-    const trapFocus = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setMobileParamsOpen(false);
-        return;
-      }
-
-      if (event.key !== "Tab") return;
-
-      const sheet = mobileSheetRef.current;
-      if (!sheet) return;
-
-      const focusable = Array.from(
-        sheet.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        ),
-      ).filter((el) => !el.hasAttribute("disabled"));
-
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    window.addEventListener("keydown", trapFocus);
-    requestAnimationFrame(() => mobileSheetCloseButtonRef.current?.focus());
-
-    return () => {
-      window.removeEventListener("keydown", trapFocus);
-      document.body.style.overflow = previousOverflow;
-      previousFocusedElement?.focus();
-    };
-  }, [mobileParamsOpen]);
-
   const activeHighlight =
     searchMode === "highlight" && search.trim().length >= 1
       ? (matchingCodes[matchCursor] ?? null)
@@ -319,102 +270,31 @@ export default function App() {
           />
         </aside>
 
-        {/* Mobile parameters bottom sheet */}
-        {mobileParamsOpen && (
-          <div
-            className="md:hidden fixed inset-0 z-50 flex"
-            role="dialog"
-            aria-modal="true"
-            aria-label={t("mobileSheet.weightsAndPreferences")}
-          >
-            <button
-              type="button"
-              aria-label={t("mobileSheet.close", "Close preferences")}
-              className="absolute inset-0"
-              style={{
-                backgroundColor: "rgba(0,0,0,0.72)",
-                backdropFilter: "blur(6px)",
-              }}
-              onClick={() => setMobileParamsOpen(false)}
-            />
-            <div
-              ref={mobileSheetRef}
-              data-mobile-sheet
-              tabIndex={-1}
-              className="relative mt-auto flex w-full flex-col overflow-hidden"
-              style={{
-                minHeight: "70vh",
-                maxHeight: "calc(100dvh - 16px)",
-                backgroundColor: "#1A1A1A",
-                borderTopLeftRadius: "24px",
-                borderTopRightRadius: "24px",
-                borderTop: "1px solid #2A2A2A",
-                boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Drag handle */}
-              <div className="flex justify-center pt-3 pb-1 shrink-0">
-                <div
-                  style={{
-                    width: "36px",
-                    height: "4px",
-                    borderRadius: "2px",
-                    backgroundColor: "#444444",
-                  }}
-                />
-              </div>
-              {/* Close button */}
-              <div className="flex items-center justify-between px-4 pb-2 shrink-0">
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    letterSpacing: "1.5px",
-                    textTransform: "uppercase",
-                    color: "#9E9E9E",
-                  }}
-                >
-                  {t("mobileSheet.weightsAndPreferences")}
-                </span>
-                <button
-                  ref={mobileSheetCloseButtonRef}
-                  onClick={() => setMobileParamsOpen(false)}
-                  className="flex items-center justify-center"
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "4px",
-                    backgroundColor: "#333333",
-                    color: "#9E9E9E",
-                  }}
-                  aria-label={t("a11y.closeParameters", "Close parameters")}
-                >
-                  <X size={18} />
-                </button>
-              </div>
-              <WeightPanel
-                weights={ws.weights}
-                onChange={ws.handleWeightChange}
-                onReset={ws.handleReset}
-                weightsAreDefault={ws.weightsAreDefault}
-                onShare={() => ws.handleShare()}
-                climatePrefs={ws.climatePrefs}
-                onClimatePrefsChange={ws.setClimatePrefs}
-                nomadVisaOnly={ws.nomadVisaOnly}
-                onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-                schengenOnly={ws.schengenOnly}
-                onSchengenOnlyChange={ws.setSchengenOnly}
-                minTouristDays={ws.minTouristDays}
-                onMinTouristDaysChange={ws.setMinTouristDays}
-                weightMode={ws.weightMode}
-                onWeightModeChange={ws.handleWeightModeChange}
-                mobile
-              />
-            </div>
-          </div>
-        )}
+        <MobileSheet
+          open={mobileParamsOpen}
+          title={t("mobileSheet.weightsAndPreferences")}
+          closeLabel={t("a11y.closeParameters", "Close parameters")}
+          onClose={() => setMobileParamsOpen(false)}
+        >
+          <WeightPanel
+            weights={ws.weights}
+            onChange={ws.handleWeightChange}
+            onReset={ws.handleReset}
+            weightsAreDefault={ws.weightsAreDefault}
+            onShare={() => ws.handleShare()}
+            climatePrefs={ws.climatePrefs}
+            onClimatePrefsChange={ws.setClimatePrefs}
+            nomadVisaOnly={ws.nomadVisaOnly}
+            onNomadVisaOnlyChange={ws.setNomadVisaOnly}
+            schengenOnly={ws.schengenOnly}
+            onSchengenOnlyChange={ws.setSchengenOnly}
+            minTouristDays={ws.minTouristDays}
+            onMinTouristDaysChange={ws.setMinTouristDays}
+            weightMode={ws.weightMode}
+            onWeightModeChange={ws.handleWeightModeChange}
+            mobile
+          />
+        </MobileSheet>
 
         {/* Mobile FAB - Parameters button */}
         <button
@@ -440,13 +320,13 @@ export default function App() {
         </button>
 
         {/* Right content area */}
-        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#000000" }}>
+        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#0A0A0F" }}>
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
               className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
               style={{
-                background: "#000000",
+                background: "#0A0A0F",
                 backgroundImage: `url('/hero-map.png')`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -685,7 +565,7 @@ export default function App() {
               style={{
                 top: "56px",
                 paddingTop: isSticky ? "12px" : "0",
-                backgroundColor: "#000000",
+                backgroundColor: "#0A0A0F",
                 borderBottom: "1px solid #1a1a1a",
               }}
             >

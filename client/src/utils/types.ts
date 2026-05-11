@@ -145,10 +145,6 @@ export const AI_CATEGORY_KEYS: CategoryKey[] = [
   "culturalFit",
 ];
 
-export const CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
-  (key) => !AI_CATEGORY_KEYS.includes(key) && !TOURISM_CATEGORY_KEYS.includes(key),
-);
-
 export const DISPLAYED_CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
   (key) =>
     key !== "culturalHeritage" &&
@@ -157,7 +153,7 @@ export const DISPLAYED_CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
 );
 
 /** Categories computed by the server but hidden from the UI. */
-export const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
+const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
   "culturalHeritage",
   "biodiversity",
   "digitalFreedom",
@@ -347,53 +343,6 @@ export const CATEGORY_DATA_SOURCES: Record<CategoryKey, string> = {
   digitalReadiness: "AI-analyzed (Claude) — Speedtest/Ookla, Opensignal, GSMA, NomadList, Airalo",
   culturalFit:
     "AI-analyzed (Claude) — InterNations Expat Insider, NomadList, World Bank, travel advisories",
-};
-
-export const CATEGORY_ABBREVS: Record<CategoryKey, string> = {
-  economy: "ECO",
-  affordability: "AFF",
-  foodSecurity: "FOOD",
-  healthcare: "HLT",
-  education: "EDU",
-  environment: "ENV",
-  climate: "CLM",
-  safety: "SAF",
-  infrastructure: "INF",
-  happiness: "HAP",
-  humanDevelopment: "HDI",
-  governance: "GOV",
-  englishProficiency: "EPI",
-  digitalFreedom: "DIG",
-  personalFreedom: "PER",
-  logistics: "LOG",
-  biodiversity: "BIO",
-  socialTolerance: "SOC",
-  taxFriendliness: "TAX",
-  startupEnvironment: "BIZ",
-  airConnectivity: "AIR",
-  culturalHeritage: "CUL",
-  healthcareCost: "OOP",
-  tourismSafety: "TSF",
-  accommodationCost: "ACC",
-  transportCost: "TRN",
-  tourismInfrastructure: "TIF",
-  localFriendliness: "FRN",
-  nightlifeEntertainment: "NIT",
-  touristScamSafety: "SCM",
-  streetFoodCuisine: "SFC",
-  beachWaterQuality: "BCH",
-  walkabilityScenicBeauty: "WLK",
-  shoppingMarkets: "SHP",
-  photographySpots: "PHO",
-  familyFriendliness: "FAM",
-  adventureSports: "ADV",
-  historicalSites: "HIS",
-  nomadCommunity: "NMD",
-  visaFriendliness: "VIS",
-  costEfficiency: "VAL",
-  workLifeBalance: "WLB",
-  digitalReadiness: "DIG+",
-  culturalFit: "FIT",
 };
 
 // ─── Nomad Visa Details ───────────────────────────────────────────────────────

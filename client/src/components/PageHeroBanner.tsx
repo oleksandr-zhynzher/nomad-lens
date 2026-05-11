@@ -39,7 +39,7 @@ export function PageHeroBanner({
             className="text-3xl md:text-6xl"
             style={{
               fontFamily: "Oswald, sans-serif",
-              fontWeight: 700,
+              fontWeight: 600,
               lineHeight: "0.95",
               color: "#FFFFFF",
               marginBottom: "8px",

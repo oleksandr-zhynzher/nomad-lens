@@ -13,8 +13,9 @@ import type { RankedCountry } from "../utils/types";
 import { localizeCountry } from "../utils/localize";
 import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
 import { CountryDetailPanel } from "./CountryDetailPanel";
+import worldTopology from "../data/countries-110m.json";
 
-const GEO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+const WORLD_TOPOLOGY: object = worldTopology;
 
 interface WorldMapProps {
   ranked: RankedCountry[];
@@ -158,7 +159,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
       {geoLoading && (
         <div
           className="absolute inset-0 z-20 flex items-center justify-center"
-          style={{ backgroundColor: "#000000" }}
+          style={{ backgroundColor: "#0A0A0F" }}
         >
           <div
             className="animate-spin"
@@ -271,7 +272,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         projectionConfig={{ scale: 160 }}
         width={900}
         height={460}
-        style={{ width: "100%", height: "auto", background: "#000000" }}
+        style={{ width: "100%", height: "auto", background: "#0A0A0F" }}
       >
         <ZoomableGroup
           zoom={zoom}
@@ -282,9 +283,9 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
             setZoom(p.zoom);
           }}
         >
-          <Sphere fill="#000000" stroke="#1A1A1A" strokeWidth={0.5} />
+          <Sphere fill="#0A0A0F" stroke="#1A1A1A" strokeWidth={0.5} />
           <Graticule stroke="#1A1A1A" strokeWidth={0.3} />
-          <Geographies geography={GEO_URL}>
+          <Geographies geography={WORLD_TOPOLOGY}>
             {({ geographies }) => (
               <MapGeographies
                 geographies={geographies}

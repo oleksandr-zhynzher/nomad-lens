@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   House,
   ShoppingCart,
@@ -19,6 +19,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { Layout } from "../components/Layout";
+import { MobileSheet } from "../shared/ui/MobileSheet";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { Tooltip } from "../components/Tooltip";
 import { BudgetCountryCard } from "../components/BudgetCountryCard";
@@ -104,8 +105,6 @@ export function BudgetMatcherPage() {
   const [search, setSearch] = useState("");
   const sentinelRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const mobileSheetRef = useRef<HTMLDivElement>(null);
-  const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
 
   // Compare mode
   const [compareMode, setCompareMode] = useState(false);
@@ -154,54 +153,6 @@ export function BudgetMatcherPage() {
   });
   const [copied, setCopied] = useState(false);
   const toggle = (key: string) => setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
-
-  useEffect(() => {
-    if (!mobileParamsOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    const previousFocusedElement =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    document.body.style.overflow = "hidden";
-
-    const trapFocus = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setMobileParamsOpen(false);
-        return;
-      }
-
-      if (event.key !== "Tab") return;
-
-      const sheet = mobileSheetRef.current;
-      if (!sheet) return;
-
-      const focusable = Array.from(
-        sheet.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        ),
-      ).filter((el) => !el.hasAttribute("disabled"));
-
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    window.addEventListener("keydown", trapFocus);
-    requestAnimationFrame(() => mobileSheetCloseButtonRef.current?.focus());
-
-    return () => {
-      window.removeEventListener("keydown", trapFocus);
-      document.body.style.overflow = previousOverflow;
-      previousFocusedElement?.focus();
-    };
-  }, [mobileParamsOpen]);
 
   /* ── Sidebar content (shared between desktop & mobile) ── */
   const sidebarContent = (
@@ -642,6 +593,7 @@ export function BudgetMatcherPage() {
                 setCopied(true);
                 setTimeout(() => setCopied(false), 3000);
               }}
+              aria-live="polite"
               className="w-full flex items-center justify-center gap-2 rounded transition-colors"
               style={{
                 backgroundColor: copied ? "#2A4A2A" : "#1A2A1A",
@@ -745,84 +697,14 @@ export function BudgetMatcherPage() {
           {sidebarContent}
         </aside>
 
-        {/* ── Mobile parameters bottom sheet ──────────────── */}
-        {mobileParamsOpen && (
-          <div
-            className="md:hidden fixed inset-0 z-50 flex"
-            role="dialog"
-            aria-modal="true"
-            aria-label={t("budget.eyebrow", "BUDGET MATCHER")}
-            onClick={() => setMobileParamsOpen(false)}
-          >
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundColor: "rgba(0,0,0,0.72)",
-                backdropFilter: "blur(6px)",
-              }}
-            />
-            <div
-              ref={mobileSheetRef}
-              tabIndex={-1}
-              className="relative mt-auto flex w-full flex-col overflow-hidden"
-              style={{
-                minHeight: "70vh",
-                maxHeight: "calc(100dvh - 16px)",
-                backgroundColor: "#1A1A1A",
-                borderTopLeftRadius: "24px",
-                borderTopRightRadius: "24px",
-                borderTop: "1px solid #2A2A2A",
-                boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Drag handle */}
-              <div className="flex justify-center pt-3 pb-1 shrink-0">
-                <div
-                  style={{
-                    width: "36px",
-                    height: "4px",
-                    borderRadius: "2px",
-                    backgroundColor: "#444444",
-                  }}
-                />
-              </div>
-              {/* Close button */}
-              <div className="flex items-center justify-between px-4 pb-2 shrink-0">
-                <span
-                  style={{
-                    fontFamily: "Inter, sans-serif",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    letterSpacing: "1.5px",
-                    textTransform: "uppercase",
-                    color: "#9E9E9E",
-                  }}
-                >
-                  {t("budget.eyebrow", "BUDGET MATCHER")}
-                </span>
-                <button
-                  ref={mobileSheetCloseButtonRef}
-                  onClick={() => setMobileParamsOpen(false)}
-                  className="flex items-center justify-center"
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "4px",
-                    backgroundColor: "#333333",
-                    color: "#9E9E9E",
-                    border: "none",
-                    cursor: "pointer",
-                  }}
-                  aria-label={t("a11y.closeParameters", "Close parameters")}
-                >
-                  <X size={18} />
-                </button>
-              </div>
-              <div className="flex-1 overflow-y-auto">{sidebarContent}</div>
-            </div>
-          </div>
-        )}
+        <MobileSheet
+          open={mobileParamsOpen}
+          title={t("budget.eyebrow", "BUDGET MATCHER")}
+          closeLabel={t("a11y.closeParameters", "Close parameters")}
+          onClose={() => setMobileParamsOpen(false)}
+        >
+          <div className="flex-1 overflow-y-auto">{sidebarContent}</div>
+        </MobileSheet>
 
         {/* ── Mobile FAB ──────────────────────────────────── */}
         <button
@@ -850,13 +732,13 @@ export function BudgetMatcherPage() {
         </button>
 
         {/* ── Right content area ──────────────────────────── */}
-        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#000000" }}>
+        <main className="flex-1 min-w-0 pb-28 md:pb-0" style={{ backgroundColor: "#0A0A0F" }}>
           <div className="px-4 md:px-6">
             {/* ── Hero section (matching list page) ─────────── */}
             <div
               className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
               style={{
-                background: "#000000",
+                background: "#0A0A0F",
                 backgroundImage: "url('/hero-map.png')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -881,7 +763,7 @@ export function BudgetMatcherPage() {
                   className="text-3xl md:text-6xl"
                   style={{
                     fontFamily: "Oswald, sans-serif",
-                    fontWeight: 700,
+                    fontWeight: 600,
                     lineHeight: "0.95",
                     color: "#FFFFFF",
                     marginBottom: "8px",
@@ -1014,7 +896,7 @@ export function BudgetMatcherPage() {
               className="sticky z-20 -mx-4 px-4 md:-mx-6 md:px-6 py-3"
               style={{
                 top: "56px",
-                backgroundColor: "#000000",
+                backgroundColor: "#0A0A0F",
                 borderBottom: "1px solid #1a1a1a",
               }}
             >
@@ -1269,6 +1151,18 @@ export function BudgetMatcherPage() {
                       <div
                         key={m.country.code}
                         onClick={compareMode ? () => toggleSelect(m.country.code) : undefined}
+                        onKeyDown={
+                          compareMode
+                            ? (event) => {
+                                if (event.key === "Enter" || event.key === " ") {
+                                  event.preventDefault();
+                                  toggleSelect(m.country.code);
+                                }
+                              }
+                            : undefined
+                        }
+                        role={compareMode ? "button" : undefined}
+                        tabIndex={compareMode ? 0 : undefined}
                         style={{ cursor: compareMode ? "pointer" : undefined }}
                       >
                         <BudgetCountryCard

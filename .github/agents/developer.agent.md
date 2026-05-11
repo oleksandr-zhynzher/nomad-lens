@@ -1,7 +1,6 @@
 ---
 name: "Developer"
 description: "Implements Nomad Lens features and fixes across the React client, Express server, and AWS CDK infrastructure. Use for coding tasks, refactors, tests, and Vercel preview deployment prep."
-tools: ["codebase", "edit", "terminal", "github", "fetch"]
 ---
 
 # Developer

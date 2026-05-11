@@ -1,40 +1,39 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet, Palmtree, X } from "lucide-react";
+import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet, Palmtree } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "../components/Layout";
-import { WeightPanel } from "../components/WeightPanel";
 import { CountryComparison } from "../components/CountryComparison";
 import { RegionComparison } from "../components/RegionComparison";
 import { NomadVisaComparison } from "../components/NomadVisaComparison";
 import { BudgetComparison } from "../components/BudgetComparison";
-import { BudgetFilterPanel } from "../components/BudgetFilterPanel";
 import { TourismComparison } from "../components/TourismComparison";
-import { TourismWeightPanel } from "../components/TourismWeightPanel";
 import { PageHeroBanner } from "../components/PageHeroBanner";
+import { MobileSheet } from "../shared/ui/MobileSheet";
 import { useCountries } from "../hooks/useCountries";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useWeightState } from "../hooks/useWeightState";
 import { useTourismWeightState } from "../hooks/useTourismWeightState";
 import { useBudgetState } from "../hooks/useBudgetState";
 import { useBudgetMatcher } from "../hooks/useBudgetMatcher";
-import { normalizeCountryCodes, tokenizeCountryCodesParam } from "../utils/countryCodeSelection";
+import { normalizeCountryCodes } from "../utils/countryCodeSelection";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "../utils/types";
+import {
+  buildCompareShareParams,
+  getRawCompareCountryCodes,
+  parseCompareCountryCodes,
+  parseCompareMode,
+  setCompareCountryCodesParam,
+  setCompareModeParam,
+} from "../features/compare/model/compareUrlState";
+import type { CompareMode } from "../features/compare/model/compareUrlState";
+import { CompareParametersPanel } from "../features/compare/ui/CompareParametersPanel";
 
 export function ComparePage() {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [sortDirection, setSortDirection] = useState<"desc" | "asc" | null>(null);
-  const compareMode: "countries" | "regions" | "nomadVisas" | "budget" | "tourism" =
-    searchParams.get("m") === "regions"
-      ? "regions"
-      : searchParams.get("m") === "nomadVisas"
-        ? "nomadVisas"
-        : searchParams.get("m") === "budget"
-          ? "budget"
-          : searchParams.get("m") === "tourism"
-            ? "tourism"
-            : "countries";
+  const compareMode = parseCompareMode(searchParams);
 
   const [showWeights, setShowWeights] = useState(compareMode === "budget");
   const [sortTrigger, setSortTrigger] = useState(0);
@@ -42,8 +41,6 @@ export function ComparePage() {
   const [copied, setCopied] = useState(false);
   const [sortFeedbackActive, setSortFeedbackActive] = useState(false);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
-  const mobileSheetRef = useRef<HTMLDivElement>(null);
-  const mobileSheetCloseButtonRef = useRef<HTMLButtonElement>(null);
 
   const ws = useWeightState();
   const tws = useTourismWeightState();
@@ -53,13 +50,10 @@ export function ComparePage() {
     () => new Set(countries.map((country) => country.code.toUpperCase())),
     [countries],
   );
-  const rawSelectedCodes = useMemo(
-    () => tokenizeCountryCodesParam(searchParams.get("c")),
-    [searchParams],
-  );
+  const rawSelectedCodes = useMemo(() => getRawCompareCountryCodes(searchParams), [searchParams]);
   const selectedCodes = useMemo(
-    () => normalizeCountryCodes(rawSelectedCodes, validCountryCodes),
-    [rawSelectedCodes, validCountryCodes],
+    () => parseCompareCountryCodes(searchParams, validCountryCodes),
+    [searchParams, validCountryCodes],
   );
   const bs = useBudgetState();
   const budgetMatches = useBudgetMatcher(
@@ -103,68 +97,19 @@ export function ComparePage() {
   }, [showWeights, syncPanelHeight]);
 
   useEffect(() => {
-    if (!mobileParamsOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    const previousFocusedElement =
-      document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    document.body.style.overflow = "hidden";
-
-    const trapFocus = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        event.preventDefault();
-        setMobileParamsOpen(false);
-        return;
-      }
-
-      if (event.key !== "Tab") return;
-
-      const sheet = mobileSheetRef.current;
-      if (!sheet) return;
-
-      const focusable = Array.from(
-        sheet.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        ),
-      ).filter((el) => !el.hasAttribute("disabled"));
-
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    window.addEventListener("keydown", trapFocus);
-    requestAnimationFrame(() => mobileSheetCloseButtonRef.current?.focus());
-
-    return () => {
-      window.removeEventListener("keydown", trapFocus);
-      document.body.style.overflow = previousOverflow;
-      previousFocusedElement?.focus();
-    };
-  }, [mobileParamsOpen]);
-
-  useEffect(() => {
     if (!countries.length) return;
     if (rawSelectedCodes.join(",") === selectedCodes.join(",")) return;
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
-        if (selectedCodes.length === 0) next.delete("c");
-        else next.set("c", selectedCodes.join(","));
+        setCompareCountryCodesParam(next, selectedCodes);
         return next;
       },
       { replace: true },
     );
   }, [countries.length, rawSelectedCodes, selectedCodes, setSearchParams]);
 
-  const setCompareMode = (mode: "countries" | "regions" | "nomadVisas" | "budget" | "tourism") => {
+  const setCompareMode = (mode: CompareMode) => {
     if (mode === "budget") {
       setShowWeights(true);
     }
@@ -174,8 +119,7 @@ export function ComparePage() {
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
-        if (mode === "countries") next.delete("m");
-        else next.set("m", mode);
+        setCompareModeParam(next, mode);
         return next;
       },
       { replace: true },
@@ -187,8 +131,7 @@ export function ComparePage() {
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
-        if (nextCodes.length === 0) next.delete("c");
-        else next.set("c", nextCodes.join(","));
+        setCompareCountryCodesParam(next, nextCodes);
         return next;
       },
       { replace: true },
@@ -196,10 +139,7 @@ export function ComparePage() {
   };
 
   const handleShare = () => {
-    const extra = new URLSearchParams();
-    if (selectedCodes.length > 0) extra.set("c", selectedCodes.join(","));
-    if (compareMode !== "countries") extra.set("m", compareMode);
-    ws.handleShare(extra);
+    ws.handleShare(buildCompareShareParams(compareMode, selectedCodes));
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
   };
@@ -229,73 +169,6 @@ export function ComparePage() {
       ? t("compare.sortByBudget")
       : t("compare.sortByScore");
   const sortButtonIconClassName = sortDirection === "asc" ? "rotate-180" : "rotate-0";
-
-  const renderParametersPanel = (mobile = false) => {
-    if (compareMode === "tourism") {
-      return (
-        <TourismWeightPanel
-          weights={tws.weights}
-          onChange={tws.handleWeightChange}
-          onReset={tws.handleReset}
-          weightsAreDefault={tws.weightsAreDefault}
-          budgetState={tws.budgetState}
-          onBudgetChange={tws.setBudgetField}
-          mobile={mobile}
-        />
-      );
-    }
-
-    if (compareMode === "budget") {
-      return <BudgetFilterPanel bs={bs} />;
-    }
-
-    if (compareMode === "nomadVisas") {
-      return (
-        <div className="flex flex-col gap-4">
-          <WeightPanel
-            weights={ws.weights}
-            onChange={ws.handleWeightChange}
-            onReset={ws.handleReset}
-            weightsAreDefault={ws.weightsAreDefault}
-            onShare={handleShare}
-            climatePrefs={ws.climatePrefs}
-            onClimatePrefsChange={ws.setClimatePrefs}
-            nomadVisaOnly={ws.nomadVisaOnly}
-            onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-            schengenOnly={ws.schengenOnly}
-            onSchengenOnlyChange={ws.setSchengenOnly}
-            minTouristDays={ws.minTouristDays}
-            onMinTouristDaysChange={ws.setMinTouristDays}
-            weightMode={ws.weightMode}
-            onWeightModeChange={ws.handleWeightModeChange}
-            mobile={mobile}
-          />
-          <BudgetFilterPanel bs={bs} />
-        </div>
-      );
-    }
-
-    return (
-      <WeightPanel
-        weights={ws.weights}
-        onChange={ws.handleWeightChange}
-        onReset={ws.handleReset}
-        weightsAreDefault={ws.weightsAreDefault}
-        onShare={handleShare}
-        climatePrefs={ws.climatePrefs}
-        onClimatePrefsChange={ws.setClimatePrefs}
-        nomadVisaOnly={ws.nomadVisaOnly}
-        onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-        schengenOnly={ws.schengenOnly}
-        onSchengenOnlyChange={ws.setSchengenOnly}
-        minTouristDays={ws.minTouristDays}
-        onMinTouristDaysChange={ws.setMinTouristDays}
-        weightMode={ws.weightMode}
-        onWeightModeChange={ws.handleWeightModeChange}
-        mobile={mobile}
-      />
-    );
-  };
 
   return (
     <Layout>
@@ -684,81 +557,23 @@ export function ComparePage() {
             </div>
           </div>
 
-          {mobileParamsOpen && (
-            <div
-              className="md:hidden fixed inset-0 z-50 flex"
-              role="dialog"
-              aria-modal="true"
-              aria-label={t("compare.parameters")}
-              onClick={() => setMobileParamsOpen(false)}
-            >
-              <div
-                className="absolute inset-0"
-                style={{
-                  backgroundColor: "rgba(0,0,0,0.72)",
-                  backdropFilter: "blur(6px)",
-                }}
+          <MobileSheet
+            open={mobileParamsOpen}
+            title={t("compare.parameters")}
+            closeLabel={t("a11y.closeParameters", "Close parameters")}
+            onClose={() => setMobileParamsOpen(false)}
+          >
+            <div className="flex-1 overflow-y-auto">
+              <CompareParametersPanel
+                compareMode={compareMode}
+                rankingState={ws}
+                tourismState={tws}
+                budgetState={bs}
+                onShare={handleShare}
+                mobile
               />
-              <div
-                ref={mobileSheetRef}
-                tabIndex={-1}
-                className="relative mt-auto flex w-full flex-col overflow-hidden"
-                style={{
-                  minHeight: "70vh",
-                  maxHeight: "calc(100dvh - 16px)",
-                  backgroundColor: "#1A1A1A",
-                  borderTopLeftRadius: "24px",
-                  borderTopRightRadius: "24px",
-                  borderTop: "1px solid #2A2A2A",
-                  boxShadow: "0 -18px 42px rgba(0,0,0,0.45)",
-                }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="flex justify-center pt-3 pb-1 shrink-0">
-                  <div
-                    style={{
-                      width: "36px",
-                      height: "4px",
-                      borderRadius: "2px",
-                      backgroundColor: "#444444",
-                    }}
-                  />
-                </div>
-                <div className="flex items-center justify-between px-4 pb-2 shrink-0">
-                  <span
-                    style={{
-                      fontFamily: "Inter, sans-serif",
-                      fontSize: "12px",
-                      fontWeight: 700,
-                      letterSpacing: "1.5px",
-                      textTransform: "uppercase",
-                      color: "#9E9E9E",
-                    }}
-                  >
-                    {t("compare.parameters")}
-                  </span>
-                  <button
-                    ref={mobileSheetCloseButtonRef}
-                    onClick={() => setMobileParamsOpen(false)}
-                    className="flex items-center justify-center"
-                    style={{
-                      width: "32px",
-                      height: "32px",
-                      borderRadius: "4px",
-                      backgroundColor: "#333333",
-                      color: "#9E9E9E",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                    aria-label={t("a11y.closeParameters", "Close parameters")}
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-                <div className="flex-1 overflow-y-auto">{renderParametersPanel(true)}</div>
-              </div>
             </div>
-          )}
+          </MobileSheet>
 
           <div
             className={`grid gap-4 md:gap-6 ${
@@ -777,7 +592,13 @@ export function ComparePage() {
                   borderRadius: "8px",
                 }}
               >
-                {renderParametersPanel()}
+                <CompareParametersPanel
+                  compareMode={compareMode}
+                  rankingState={ws}
+                  tourismState={tws}
+                  budgetState={bs}
+                  onShare={handleShare}
+                />
               </div>
             )}
             <div style={{ minWidth: 0 }}>

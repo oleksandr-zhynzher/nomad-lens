@@ -1,8 +1,12 @@
 export function tokenizeCountryCodesParam(param: string | null): string[] {
-  return (param ?? "")
-    .split(",")
-    .map((code) => code.trim().toUpperCase())
-    .filter(Boolean);
+  const tokens: string[] = [];
+
+  for (const code of (param ?? "").split(",")) {
+    const normalizedCode = code.trim().toUpperCase();
+    if (normalizedCode) tokens.push(normalizedCode);
+  }
+
+  return tokens;
 }
 
 export function normalizeCountryCodes(

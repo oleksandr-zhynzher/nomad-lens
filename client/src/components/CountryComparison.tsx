@@ -270,6 +270,14 @@ export function CountryComparison({
                 key={slot.country.code}
                 className="shrink-0 w-[148px] md:w-[180px]"
                 onClick={() => navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`);
+                  }
+                }}
+                role="link"
+                tabIndex={0}
                 style={{ cursor: "pointer" }}
               >
                 <div

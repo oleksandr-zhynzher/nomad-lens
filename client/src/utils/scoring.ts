@@ -163,16 +163,6 @@ export function scoreColour(value: number | null): string {
 }
 
 /**
- * Get the short label for a category weight percentage.
- * Accepts independent 0-100 weights (not forced to sum to 100).
- */
-export function weightPercent(key: CategoryKey, weights: WeightMap): string {
-  const total = (Object.values(weights) as number[]).reduce((s, v) => s + v, 0);
-  if (total === 0) return "0%";
-  return `${Math.round((weights[key] / total) * 100)}%`;
-}
-
-/**
  * Return a human-readable label for a slider value.
  * Shows "Off" when weight is 0, otherwise the percentage contribution.
  */

@@ -1,7 +1,6 @@
 ---
 name: "React Architect"
 description: "Senior React architecture agent for Nomad Lens. Use for React component architecture, clean code, feature design, refactoring strategy, state boundaries, performance, accessibility, and maintainable frontend plans."
-tools: ["codebase", "edit", "terminal", "github", "fetch"]
 ---
 
 # React Architect

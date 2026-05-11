@@ -1,7 +1,6 @@
 ---
 name: "Architect"
 description: "Plans Nomad Lens architecture, feature boundaries, data flows, component structure, and deployment approach. Use for design reviews, implementation plans, ADR-style guidance, and cross-package changes."
-tools: ["codebase", "terminal", "github", "fetch"]
 ---
 
 # Architect

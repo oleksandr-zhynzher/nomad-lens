@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   CirclePlus,
@@ -93,7 +93,7 @@ export function BudgetComparison({
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
-  const matchMap = new Map(matches.map((m) => [m.country.code, m]));
+  const matchMap = useMemo(() => new Map(matches.map((m) => [m.country.code, m])), [matches]);
 
   // Sync horizontal scroll
   useEffect(() => {
