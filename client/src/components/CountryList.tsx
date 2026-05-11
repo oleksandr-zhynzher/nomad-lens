@@ -1,9 +1,7 @@
-import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import type { RankedCountry } from "../utils/types";
 import { CountryCard } from "./CountryCard";
-
-const PAGE_SIZE = 50;
+import { useInfiniteScroll } from "../hooks/useInfiniteScroll";
 
 interface CountryListProps {
   ranked: RankedCountry[];
@@ -35,39 +33,7 @@ export function CountryList({
 }: CountryListProps) {
   const { t } = useTranslation();
 
-  // Track visible count and reset it whenever the ranked list identity changes.
-  // Storing prevRanked in state is the React-recommended pattern for deriving
-  // state from props without a useEffect.
-  const [{ prevRanked, visibleCount }, setPagination] = useState({
-    prevRanked: ranked,
-    visibleCount: PAGE_SIZE,
-  });
-  if (prevRanked !== ranked) {
-    setPagination({ prevRanked: ranked, visibleCount: PAGE_SIZE });
-  }
-
-  // Sentinel element observed to auto-load the next page on scroll
-  const sentinelRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (showAll) return;
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setPagination((s) =>
-            s.visibleCount < s.prevRanked.length
-              ? { ...s, visibleCount: s.visibleCount + PAGE_SIZE }
-              : s,
-          );
-        }
-      },
-      { rootMargin: "200px" },
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, [showAll, ranked]);
+  const { visible, hasMore, sentinelRef } = useInfiniteScroll(ranked, showAll);
 
   if (loading) {
     return (
@@ -127,9 +93,6 @@ export function CountryList({
       </p>
     );
   }
-
-  const visible = showAll ? ranked : ranked.slice(0, visibleCount);
-  const hasMore = !showAll && visibleCount < ranked.length;
 
   return (
     <div className="flex flex-col">

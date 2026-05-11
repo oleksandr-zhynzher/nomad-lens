@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "../hooks/useLangPrefix";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
 import type { TourismRanked } from "../utils/tourismScoring";
+import { applyTagSeasonality } from "../utils/tourismScoring";
 import { scoreColour } from "../utils/scoring";
 import { TOURISM_CATEGORY_KEYS } from "../utils/types";
 import { TourismBreakdownChart } from "./TourismBreakdownChart";
@@ -11,6 +12,7 @@ import { Tooltip } from "./Tooltip";
 import { TOURISM_COST_COLORS } from "../utils/budgetColors";
 import type { TravelDates } from "../hooks/useTourismWeightState";
 import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
+import { getRowStyles } from "../utils/rowStyles";
 
 interface Props {
   ranked: TourismRanked;
@@ -42,10 +44,7 @@ export function TourismCountryCard({
   const langPrefix = useLangPrefix();
   const locC = useLocalizedCountry(country);
 
-  const isEven = index % 2 === 0;
-  const rowBg = isSelected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618";
-  const hoverBg = isEven ? "#232326" : "#202023";
-  const borderColor = isEven ? "#252527" : "#1F1F21";
+  const { bgColor: rowBg, hoverBg, borderColor } = getRowStyles(index, isSelected);
 
   return (
     <div
@@ -196,26 +195,14 @@ export function TourismCountryCard({
                 />
                 {selectedTags.map((tag) => {
                   const baseVal = country.tourismTagScores?.[tag] ?? null;
-                  // Apply seasonal multiplier if travel dates are set
-                  let val = baseVal;
-                  if (val !== null && travelDates?.startDate && travelDates?.endDate) {
-                    const seasonality = country.tourismTagSeasonality?.[tag];
-                    if (seasonality && seasonality.length === 12) {
-                      const start = new Date(travelDates.startDate + "T00:00:00");
-                      const end = new Date(travelDates.endDate + "T00:00:00");
-                      if (!isNaN(start.getTime()) && !isNaN(end.getTime()) && end >= start) {
-                        let wSum = 0;
-                        let days = 0;
-                        const cursor = new Date(start);
-                        while (cursor <= end) {
-                          wSum += seasonality[cursor.getMonth()];
-                          days++;
-                          cursor.setDate(cursor.getDate() + 1);
-                        }
-                        if (days > 0) val = Math.round(val * (wSum / days / 100) * 10) / 10;
-                      }
-                    }
-                  }
+                  const val =
+                    baseVal !== null
+                      ? applyTagSeasonality(
+                          baseVal,
+                          country.tourismTagSeasonality?.[tag],
+                          travelDates,
+                        )
+                      : null;
                   const label = t(`tourismTags.${tag}`, tag);
                   const tooltipContent = (
                     <div

@@ -11,6 +11,7 @@ import { CATEGORY_LABELS } from "../utils/types";
 import { useLocalizedCountry, regionKey } from "../utils/localize";
 import { ViewCountryButton } from "../shared/ui/ViewCountryButton";
 import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
+import { getRowStyles } from "../utils/rowStyles";
 
 interface CountryCardProps {
   ranked: RankedCountry;
@@ -39,10 +40,7 @@ export function CountryCard({
   const locC = useLocalizedCountry(country);
 
   // Alternating backgrounds
-  const isEven = index % 2 === 0;
-  const bgColor = selected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618";
-  const hoverBg = isEven ? "#232326" : "#202023";
-  const borderColor = isEven ? "#252527" : "#1F1F21";
+  const { bgColor, hoverBg, borderColor } = getRowStyles(index, selected);
 
   return (
     <div

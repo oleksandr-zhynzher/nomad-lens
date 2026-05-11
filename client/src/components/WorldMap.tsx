@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ComposableMap,
@@ -11,9 +11,9 @@ import {
 import type { Geography as GeographyType } from "react-simple-maps";
 import type { RankedCountry } from "../utils/types";
 import { localizeCountry } from "../utils/localize";
-import { isoNumericToAlpha2 } from "../utils/isoNumericToAlpha2";
 import { CountryDetailPanel } from "./CountryDetailPanel";
 import worldTopology from "../data/countries-110m.json";
+import { geoNumericToAlpha2, mapScoreToColour } from "../utils/mapUtils";
 
 const WORLD_TOPOLOGY: object = worldTopology;
 
@@ -36,8 +36,7 @@ interface MapGeographiesProps {
   geoLoading: boolean;
   selectedCode: string | null;
   zoom: number;
-  fillColour: (alpha2: string) => string;
-  geoToAlpha2: (geo: { id?: unknown; properties: Record<string, unknown> }) => string;
+  scoreByAlpha2: Map<string, RankedCountry>;
   handleMouseEnter: (
     geo: { id?: unknown; properties: Record<string, unknown> },
     e: React.MouseEvent,
@@ -52,8 +51,7 @@ function MapGeographies({
   geoLoading,
   selectedCode,
   zoom,
-  fillColour,
-  geoToAlpha2,
+  scoreByAlpha2,
   handleMouseEnter,
   handleMouseLeave,
   handleClick,
@@ -66,14 +64,14 @@ function MapGeographies({
   }, [geoLoading, geographies.length, setGeoLoading]);
 
   return geographies.map((geo) => {
-    const alpha2 = geoToAlpha2(geo as { id?: unknown; properties: Record<string, unknown> });
+    const alpha2 = geoNumericToAlpha2(geo as { id?: unknown; properties: Record<string, unknown> });
     const isSelected = alpha2 === selectedCode;
 
     return (
       <Geography
         key={geo.rsmKey}
         geography={geo}
-        fill={fillColour(alpha2)}
+        fill={mapScoreToColour(scoreByAlpha2.get(alpha2)?.finalScore)}
         stroke={isSelected ? "var(--color-accent)" : "#0F1114"}
         strokeWidth={isSelected ? 1.5 / zoom : 0.4}
         style={{
@@ -104,27 +102,13 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   const [geoLoading, setGeoLoading] = useState(true);
 
   // Build alpha2 → ranked country map for fast lookup
-  const scoreByAlpha2: Map<string, RankedCountry> = new Map(ranked.map((r) => [r.country.code, r]));
-
-  function geoToAlpha2(geo: { id?: unknown; properties: Record<string, unknown> }): string {
-    const numeric = String(geo.id ?? "").padStart(3, "0");
-    return isoNumericToAlpha2[numeric] ?? "";
-  }
-
-  function fillColour(alpha2: string): string {
-    const r = scoreByAlpha2.get(alpha2);
-    if (!r) return "#3A3A3A"; // No data
-    const s = r.finalScore;
-    if (s >= 75) return "#4CAF50"; // Excellent - green
-    if (s >= 50) return "#FFC107"; // Moderate - amber
-    return "#FF5722"; // Low - red-orange
-  }
+  const scoreByAlpha2 = useMemo(() => new Map(ranked.map((r) => [r.country.code, r])), [ranked]);
 
   function handleMouseEnter(
     geo: { id?: unknown; properties: Record<string, unknown> },
     e: React.MouseEvent,
   ) {
-    const alpha2 = geoToAlpha2(geo);
+    const alpha2 = geoNumericToAlpha2(geo);
     const r = scoreByAlpha2.get(alpha2);
     const name = r
       ? localizeCountry(r.country, i18n.language).name
@@ -146,7 +130,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   }
 
   function handleClick(geo: { id?: unknown; properties: Record<string, unknown> }) {
-    const alpha2 = geoToAlpha2(geo);
+    const alpha2 = geoNumericToAlpha2(geo);
     if (!alpha2) return;
     setHover(null);
     setSelectedCode(alpha2);
@@ -292,8 +276,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
                 geoLoading={geoLoading}
                 selectedCode={selectedCode}
                 zoom={zoom}
-                fillColour={fillColour}
-                geoToAlpha2={geoToAlpha2}
+                scoreByAlpha2={scoreByAlpha2}
                 handleMouseEnter={handleMouseEnter}
                 handleMouseLeave={handleMouseLeave}
                 handleClick={handleClick}

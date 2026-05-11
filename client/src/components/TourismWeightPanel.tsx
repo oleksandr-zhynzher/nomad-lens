@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { Info, Sun, DollarSign, Calendar } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import type React from "react";
+import { Tooltip } from "./Tooltip";
 import type { TourismWeightMap } from "../utils/tourismScoring";
 import { TOURISM_GROUPS } from "../utils/types";
-import { Tooltip } from "./Tooltip";
 import type {
   TourismBudgetState,
   AccommodationType,
@@ -12,69 +13,12 @@ import type {
 } from "../hooks/useTourismWeightState";
 import { PanelShell } from "../shared/ui/panels/PanelShell";
 import { CollapsibleSection } from "../shared/ui/panels/CollapsibleSection";
-import { WeightSliderRow } from "../shared/ui/panels/WeightSliderRow";
+import { TourismWeightSlider } from "../shared/ui/panels/TourismWeightSlider";
 import { ToggleGroup } from "../shared/ui/panels/ToggleGroup";
 import { PeopleCountStepper } from "../shared/ui/panels/PeopleCountStepper";
 import { TOURISM_GROUP_ICONS } from "../utils/tourismConstants";
-
-function TourismWeightSlider({
-  metricKey,
-  value,
-  onChange,
-}: {
-  metricKey: string;
-  value: number;
-  onChange: (key: string, value: number) => void;
-}) {
-  const { t } = useTranslation();
-  const label = t(`tourism.metrics.${metricKey}`, metricKey);
-  const desc = t(`tourism.metricDesc.${metricKey}`, "");
-
-  return (
-    <WeightSliderRow
-      inputName={`${metricKey}-tourism-weight`}
-      value={value}
-      onChange={(v) => onChange(metricKey, v)}
-      ariaLabel={t("tourismWeights.weightAriaLabel", {
-        label,
-        defaultValue: "{{label}} weight",
-      })}
-      label={
-        <span
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "12px",
-            fontWeight: 400,
-            color: "#FFFFFF",
-          }}
-        >
-          {label}
-        </span>
-      }
-      tooltipIcon={
-        desc ? (
-          <Tooltip
-            content={
-              <div>
-                <div style={{ marginBottom: "8px", color: "#FFFFFF", fontWeight: 600 }}>
-                  {label}
-                </div>
-                <div>{desc}</div>
-              </div>
-            }
-            side="top"
-          >
-            <Info
-              size={14}
-              color="#FFFFFF"
-              style={{ cursor: "pointer", flexShrink: 0, opacity: 0.6 }}
-            />
-          </Tooltip>
-        ) : undefined
-      }
-    />
-  );
-}
+import { getMonthOptions } from "../utils/dateUtils";
+import { useScrollIndicator } from "../hooks/useScrollIndicator";
 
 interface TourismWeightPanelProps {
   weights: TourismWeightMap;
@@ -107,13 +51,7 @@ export function TourismWeightPanel({
   onTravelDatesChange,
 }: TourismWeightPanelProps) {
   const { t, i18n } = useTranslation();
-  const monthLabelLocale = i18n.language === "ua" ? "uk" : i18n.language;
-  const monthOptions = Array.from({ length: 12 }, (_, index) => ({
-    value: String(index + 1).padStart(2, "0"),
-    label: new Intl.DateTimeFormat(monthLabelLocale, {
-      month: "short",
-    }).format(new Date(2000, index, 1)),
-  }));
+  const monthOptions = getMonthOptions(i18n.language);
 
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>({
     TOURISM: false,
@@ -125,16 +63,7 @@ export function TourismWeightPanel({
   const toggleGroup = (label: string) =>
     setCollapsed((prev) => ({ ...prev, [label]: !prev[label] }));
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scrollTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const onScroll = useCallback(() => {
-    scrollRef.current?.classList.add("scrolling");
-    clearTimeout(scrollTimer.current);
-    scrollTimer.current = setTimeout(() => {
-      scrollRef.current?.classList.remove("scrolling");
-    }, 800);
-  }, []);
-  useEffect(() => () => clearTimeout(scrollTimer.current), []);
+  const { scrollRef, onScroll } = useScrollIndicator();
 
   return (
     <PanelShell

@@ -189,6 +189,37 @@ export function getWeightedTourismRanking(
   }));
 }
 
+/**
+ * Apply a per-tag seasonality multiplier to a base tag score.
+ *
+ * Walks day-by-day through the travel date range, accumulates the monthly
+ * seasonality percentages, then scales the base value by the average daily
+ * seasonality fraction.
+ *
+ * Returns `baseVal` unchanged when dates or seasonality data are unavailable.
+ */
+export function applyTagSeasonality(
+  baseVal: number,
+  seasonality: number[] | undefined,
+  travelDates: { startDate: string | null; endDate: string | null } | undefined,
+): number {
+  if (!travelDates?.startDate || !travelDates?.endDate) return baseVal;
+  if (!seasonality || seasonality.length !== 12) return baseVal;
+  const start = new Date(travelDates.startDate + "T00:00:00");
+  const end = new Date(travelDates.endDate + "T00:00:00");
+  if (isNaN(start.getTime()) || isNaN(end.getTime()) || end < start) return baseVal;
+  let wSum = 0;
+  let days = 0;
+  const cursor = new Date(start);
+  while (cursor <= end) {
+    wSum += seasonality[cursor.getMonth()];
+    days++;
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  if (days === 0) return baseVal;
+  return Math.round(baseVal * (wSum / days / 100) * 10) / 10;
+}
+
 export function tourismScoreColour(score: number): string {
   if (score >= 70) return "#4CAF50";
   if (score >= 55) return "#8BC34A";

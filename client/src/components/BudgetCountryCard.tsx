@@ -16,6 +16,7 @@ import { BudgetBreakdownChart } from "./BudgetBreakdownChart";
 import { COST_COLORS, comfortScoreColour, surplusColour } from "../utils/budgetColors";
 import { ViewCountryButton } from "../shared/ui/ViewCountryButton";
 import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
+import { getRowStyles } from "../utils/rowStyles";
 
 interface Props {
   match: BudgetMatch;
@@ -41,11 +42,7 @@ export function BudgetCountryCard({
   const langPrefix = useLangPrefix();
   const locC = useLocalizedCountry(country);
 
-  const isEven = rank % 2 === 0;
-  const borderColor = isEven ? "#252527" : "#1F1F21";
-
-  const rowBg = isSelected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618";
-  const hoverBg = isEven ? "#232326" : "#202023";
+  const { bgColor: rowBg, hoverBg, borderColor } = getRowStyles(rank, isSelected);
 
   return (
     <div
