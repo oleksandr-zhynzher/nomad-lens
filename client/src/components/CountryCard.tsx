@@ -8,10 +8,11 @@ import { scoreColour } from "../utils/scoring";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "./Tooltip";
 import { CATEGORY_LABELS } from "../utils/types";
-import { useLocalizedCountry, regionKey } from "../utils/localize";
 import { ViewCountryButton } from "../shared/ui/ViewCountryButton";
 import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
 import { getRowStyles } from "../utils/rowStyles";
+import { CountryNameCell } from "../shared/ui/CountryNameCell";
+import { ScoreSparkline } from "../shared/ui/ScoreSparkline";
 
 interface CountryCardProps {
   ranked: RankedCountry;
@@ -37,7 +38,6 @@ export function CountryCard({
   const { country, finalScore, rank } = ranked;
   const { t } = useTranslation();
   const langPrefix = useLangPrefix();
-  const locC = useLocalizedCountry(country);
 
   // Alternating backgrounds
   const { bgColor, hoverBg, borderColor } = getRowStyles(index, selected);
@@ -89,111 +89,41 @@ export function CountryCard({
           {rank}
         </span>
 
-        {/* Flag */}
-        <img
-          src={country.flagUrl}
-          alt={t("a11y.flagAlt", "{{country}} flag", { country: locC.name })}
-          className="object-cover shrink-0"
-          style={{ width: "24px", height: "16px", borderRadius: "2px" }}
-          loading="lazy"
+        {/* Flag + Name + region + visa icon */}
+        <CountryNameCell
+          country={country}
+          badge={
+            country.hasNomadVisa ? (
+              <Tooltip content={t("a11y.nomadVisaAvailable", "Nomad Visa Available")} side="top">
+                <Link
+                  to={`${langPrefix}/country/${country.code.toLowerCase()}`}
+                  className="shrink-0 inline-flex items-center justify-center"
+                  style={{ color: "var(--color-accent)", lineHeight: 1 }}
+                  onClick={(e) => {
+                    if (compareMode) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      onSelectToggle?.();
+                    } else {
+                      e.stopPropagation();
+                    }
+                  }}
+                >
+                  <Plane size={13} />
+                </Link>
+              </Tooltip>
+            ) : undefined
+          }
         />
 
-        {/* Name + region + visa icon */}
-        <div className="flex-1 min-w-0 flex items-center gap-2 min-w-0">
-          <p
-            className="truncate"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "14px",
-              fontWeight: 600,
-              color: "#FFFFFF",
-            }}
-          >
-            {locC.name}
-          </p>
-          <span
-            className="hidden sm:inline shrink-0"
-            style={{
-              fontFamily: "Inter, sans-serif",
-              fontSize: "11px",
-              color: "#808080",
-            }}
-          >
-            {t(`regions.${regionKey(country.region)}`)}
-          </span>
-          {country.hasNomadVisa && (
-            <Tooltip content={t("a11y.nomadVisaAvailable", "Nomad Visa Available")} side="top">
-              <Link
-                to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-                className="shrink-0 inline-flex items-center justify-center"
-                style={{ color: "var(--color-accent)", lineHeight: 1 }}
-                onClick={(e) => {
-                  if (compareMode) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    onSelectToggle?.();
-                  } else {
-                    e.stopPropagation();
-                  }
-                }}
-              >
-                <Plane size={13} />
-              </Link>
-            </Tooltip>
-          )}
-        </div>
-
         {/* Sparkline dots */}
-        <div className="hidden sm:flex gap-1 items-center">
-          {VISIBLE_CATEGORY_KEYS.map((key) => {
-            const val = country.scores[key]?.value ?? null;
-            const label = t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key]);
-            const tooltipContent = (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "11px",
-                    color: "#CCCCCC",
-                    fontFamily: "Inter, sans-serif",
-                  }}
-                >
-                  {label}
-                </span>
-                <span
-                  style={{
-                    fontSize: "11px",
-                    fontWeight: 700,
-                    fontFamily: "IBM Plex Mono, monospace",
-                    color: scoreColour(val),
-                  }}
-                >
-                  {val !== null ? val.toFixed(1) : "—"}
-                </span>
-              </div>
-            );
-            return (
-              <Tooltip key={key} content={tooltipContent} side="top">
-                <div
-                  className="rounded-full cursor-default"
-                  role="img"
-                  aria-label={`${label}: ${val !== null ? val.toFixed(1) : "N/A"}`}
-                  style={{
-                    width: "12px",
-                    height: "12px",
-                    backgroundColor: scoreColour(val),
-                  }}
-                />
-              </Tooltip>
-            );
-          })}
-        </div>
+        <ScoreSparkline
+          entries={VISIBLE_CATEGORY_KEYS.map((key) => ({
+            key,
+            value: country.scores[key]?.value ?? null,
+            label: t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key]),
+          }))}
+        />
 
         {/* Final score */}
         <div className="shrink-0">

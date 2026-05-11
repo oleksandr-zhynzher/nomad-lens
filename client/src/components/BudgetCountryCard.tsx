@@ -10,13 +10,13 @@ import {
   Heart,
 } from "lucide-react";
 import { useLangPrefix } from "../hooks/useLangPrefix";
-import { useLocalizedCountry, regionKey } from "../utils/localize";
 import type { BudgetMatch } from "../hooks/useBudgetMatcher";
 import { BudgetBreakdownChart } from "./BudgetBreakdownChart";
 import { COST_COLORS, comfortScoreColour, surplusColour } from "../utils/budgetColors";
 import { ViewCountryButton } from "../shared/ui/ViewCountryButton";
 import { CompareCheckbox } from "../shared/ui/CompareCheckbox";
 import { getRowStyles } from "../utils/rowStyles";
+import { CountryNameCell } from "../shared/ui/CountryNameCell";
 
 interface Props {
   match: BudgetMatch;
@@ -40,7 +40,6 @@ export function BudgetCountryCard({
   const { country, comfortScore, monthlyCost, surplus, breakdown } = match;
   const { t } = useTranslation();
   const langPrefix = useLangPrefix();
-  const locC = useLocalizedCountry(country);
 
   const { bgColor: rowBg, hoverBg, borderColor } = getRowStyles(rank, isSelected);
 
@@ -90,44 +89,8 @@ export function BudgetCountryCard({
             {rank}
           </span>
 
-          {/* Flag */}
-          <img
-            src={country.flagUrl}
-            alt={locC.name}
-            style={{
-              width: "24px",
-              height: "16px",
-              borderRadius: "2px",
-              objectFit: "cover",
-            }}
-            loading="lazy"
-          />
-
-          {/* Name + region */}
-          <div className="flex-1 min-w-0 flex items-center gap-2">
-            <p
-              className="truncate"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "14px",
-                fontWeight: 600,
-                color: "#FFFFFF",
-                margin: 0,
-              }}
-            >
-              {locC.name}
-            </p>
-            <span
-              className="hidden sm:inline shrink-0"
-              style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: "11px",
-                color: "#808080",
-              }}
-            >
-              {t(`regions.${regionKey(country.region)}`)}
-            </span>
-          </div>
+          {/* Flag + Name + region */}
+          <CountryNameCell country={country} />
 
           {/* Cost + surplus */}
           <div className="hidden sm:flex flex-col items-end" style={{ flexShrink: 0 }}>
