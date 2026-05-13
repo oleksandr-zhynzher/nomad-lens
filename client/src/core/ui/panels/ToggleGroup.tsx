@@ -14,15 +14,17 @@ export function ToggleGroup<T extends string | number>({
   labelFn,
 }: ToggleGroupProps<T>) {
   return (
-    <div className="flex bg-surface-4 rounded-[4px] p-1 gap-1">
+    <div className="flex gap-1 rounded-[4px] bg-surface-4 p-1">
       {options.map((opt) => {
         const active = opt === value;
         return (
           <button
             key={String(opt)}
             type="button"
-            onClick={() => onChange(opt)}
-            className={`flex-1 py-[5px] rounded-[3px] border-0 cursor-pointer text-xs text-center transition-all ${active ? "font-medium bg-accent text-white" : "font-normal bg-transparent text-dim"}`}
+            onClick={() => {
+              onChange(opt);
+            }}
+            className={`flex-1 cursor-pointer rounded-[3px] border-0 py-[5px] text-center text-xs transition-all ${active ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
           >
             {labelFn(opt)}
           </button>

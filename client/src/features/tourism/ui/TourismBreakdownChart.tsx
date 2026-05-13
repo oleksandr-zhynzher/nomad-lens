@@ -26,28 +26,30 @@ export function TourismBreakdownChart({ country }: Props) {
         }
 
         return (
-          <div key={key} className="flex flex-col gap-1 p-2 md:p-3 rounded bg-surface-2">
+          <div key={key} className="flex flex-col gap-1 rounded bg-surface-2 p-2 md:p-3">
             <div className="flex items-center justify-between gap-2">
               <span className="text-xs font-semibold text-tertiary">
                 {t(`tourism.metrics.${key}`, key)}
               </span>
               <span
-                className={`font-mono text-xs font-semibold ${value !== null ? scoreColourClass(value, "text") : "text-border"}`}
+                className={`font-mono text-xs font-semibold ${value === null ? "text-border" : scoreColourClass(value, "text")}`}
               >
-                {value !== null ? value.toFixed(0) : "N/A"}
+                {value === null ? "N/A" : value.toFixed(0)}
               </span>
             </div>
 
             {/* Score bar - 4px height */}
-            <div className="rounded-full h-1 bg-border">
+            <div className="h-1 rounded-full bg-border">
               <div
-                className={`rounded-full transition-all h-1 ${value !== null ? scoreColourClass(value, "bg") : "bg-border"} w-[var(--w)]`}
+                className={`h-1 rounded-full transition-all ${value === null ? "bg-border" : scoreColourClass(value, "bg")} w-[var(--w)]`}
                 style={{ "--w": `${value ?? 0}%` } as React.CSSProperties}
               />
             </div>
 
             {/* Detail text */}
-            {detailText && <p className="font-mono text-[10px] text-dim mt-0.5">{detailText}</p>}
+            {detailText ? (
+              <p className="mt-0.5 font-mono text-[10px] text-dim">{detailText}</p>
+            ) : null}
           </div>
         );
       })}

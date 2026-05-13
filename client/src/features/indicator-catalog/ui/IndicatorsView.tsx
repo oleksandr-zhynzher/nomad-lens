@@ -73,7 +73,7 @@ function IndicatorCard({ Icon, name, description, source, weight }: IndicatorCar
 type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
 /** Rows of [Icon, translationKey] pairs — strings come from i18n */
-const INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
+const INDICATOR_ICONS: [IconType, string][][] = [
   [
     [TrendingUp, "economy"],
     [Wallet, "affordability"],
@@ -120,7 +120,7 @@ const INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
   ],
 ];
 
-const AI_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
+const AI_INDICATOR_ICONS: [IconType, string][][] = [
   [
     [Users, "nomadCommunity"],
     [Globe, "visaFriendliness"],
@@ -135,7 +135,7 @@ const AI_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
   ],
 ];
 
-const TOURISM_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
+const TOURISM_INDICATOR_ICONS: [IconType, string][][] = [
   [
     [Shield, "tourismSafety"],
     [Theater, "culturalAttractions"],
@@ -181,7 +181,7 @@ export function IndicatorsPage() {
       {/* Content zone */}
       <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
         {INDICATOR_ICONS.map((row, rowIdx) => (
-          <div key={rowIdx} className="flex flex-col md:flex-row gap-4 md:gap-5 w-full">
+          <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
             {row.map(([Icon, key]) => (
               <IndicatorCard
                 key={key}
@@ -199,7 +199,7 @@ export function IndicatorsPage() {
         <div className="mt-4">
           <div className="mb-4 flex items-center gap-2 border-b border-[#1E1E20] pb-3">
             <Sparkles size={14} color="#C084FC" />
-            <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#C084FC]">
+            <span className="text-[11px] font-semibold tracking-[1.5px] text-[#C084FC] uppercase">
               {t("indicatorsPage.aiSection", "AI-Powered Indicators")}
             </span>
             <span className="text-[11px] text-[#606060]">
@@ -208,7 +208,7 @@ export function IndicatorsPage() {
           </div>
           <div className="flex flex-col gap-4">
             {AI_INDICATOR_ICONS.map((row, rowIdx) => (
-              <div key={rowIdx} className="flex flex-col md:flex-row gap-4 md:gap-5 w-full">
+              <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
                 {row.map(([Icon, key]) => (
                   <IndicatorCard
                     key={key}
@@ -228,7 +228,7 @@ export function IndicatorsPage() {
         <div className="mt-4">
           <div className="mb-4 flex items-center gap-2 border-b border-[#1E1E20] pb-3">
             <Palmtree size={14} color="#6B9E6B" />
-            <span className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#6B9E6B]">
+            <span className="text-[11px] font-semibold tracking-[1.5px] text-[#6B9E6B] uppercase">
               {t("indicatorsPage.tourismSection", "Tourism Indicators")}
             </span>
             <span className="text-[11px] text-[#606060]">
@@ -237,7 +237,7 @@ export function IndicatorsPage() {
           </div>
           <div className="flex flex-col gap-4">
             {TOURISM_INDICATOR_ICONS.map((row, rowIdx) => (
-              <div key={rowIdx} className="flex flex-col md:flex-row gap-4 md:gap-5 w-full">
+              <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
                 {row.map(([Icon, key]) => (
                   <IndicatorCard
                     key={key}

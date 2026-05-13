@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useTranslation } from "react-i18next";
 import type { ClimatePreferences } from "@core/models";
 import { SEASON_ROW1, SEASON_ROW2 } from "@features/country-ranking/constants";
@@ -11,7 +11,7 @@ interface ClimatePrefsProps {
 export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: ClimatePrefsProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col bg-surface-3 px-5 py-[10px] gap-2">
+    <div className="flex flex-col gap-2 bg-surface-3 px-5 py-[10px]">
       {/* Season rows — 3 equal-width buttons per row */}
       {[SEASON_ROW1, SEASON_ROW2].map((row, ri) => (
         <div key={ri} className="flex gap-1">
@@ -20,8 +20,10 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
             return (
               <button
                 key={opt.value}
-                onClick={() => onClimatePrefsChange({ ...climatePrefs, seasonType: opt.value })}
-                className={`flex-1 py-[5px] rounded-[3px] border-0 cursor-pointer text-[10px] font-normal text-center ${active ? "bg-accent text-white" : "bg-surface-4 text-dim"}`}
+                onClick={() => {
+                  onClimatePrefsChange({ ...climatePrefs, seasonType: opt.value });
+                }}
+                className={`flex-1 cursor-pointer rounded-[3px] border-0 py-[5px] text-center text-[10px] font-normal ${active ? "bg-accent text-white" : "bg-surface-4 text-dim"}`}
               >
                 {t(opt.labelKey)}
               </button>
@@ -39,7 +41,7 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
       {/* Min/Max sliders */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs text-dimmer w-8">{t("climate.min")}</span>
+          <span className="w-8 text-xs text-dimmer">{t("climate.min")}</span>
           <input
             name="climate-min-temperature"
             type="range"
@@ -53,18 +55,18 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
                 minTemp: Math.min(v, climatePrefs.maxTemp - 1),
               });
             }}
-            className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+            className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
             style={
               { "--pct": `${((climatePrefs.minTemp + 10) / 55) * 100}%` } as React.CSSProperties
             }
             aria-label={t("a11y.minimumPreferredTemperature", "Minimum preferred temperature")}
           />
-          <span className="font-mono text-xs text-muted w-9 text-right">
+          <span className="w-9 text-right font-mono text-xs text-muted">
             {climatePrefs.minTemp}°
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-dimmer w-8">{t("climate.max")}</span>
+          <span className="w-8 text-xs text-dimmer">{t("climate.max")}</span>
           <input
             name="climate-max-temperature"
             type="range"
@@ -78,13 +80,13 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
                 maxTemp: Math.max(v, climatePrefs.minTemp + 1),
               });
             }}
-            className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+            className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
             style={
               { "--pct": `${((climatePrefs.maxTemp + 10) / 55) * 100}%` } as React.CSSProperties
             }
             aria-label={t("a11y.maximumPreferredTemperature", "Maximum preferred temperature")}
           />
-          <span className="font-mono text-xs text-muted w-9 text-right">
+          <span className="w-9 text-right font-mono text-xs text-muted">
             {climatePrefs.maxTemp}°
           </span>
         </div>

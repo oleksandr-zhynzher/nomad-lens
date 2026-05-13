@@ -41,7 +41,9 @@ export function Layout({ children }: LayoutProps) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [langDropdownOpen]);
 
   useEffect(() => {
@@ -68,67 +70,75 @@ export function Layout({ children }: LayoutProps) {
 
   const handleViewClick = (view: "list" | "map" | "compare") => {
     if (view === "list") {
-      navigate(langPrefix || "/");
+      void navigate(langPrefix || "/");
     } else {
-      navigate(`${langPrefix}/${view}`);
+      void navigate(`${langPrefix}/${view}`);
     }
     setMobileMenuOpen(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col text-slate-100 bg-bg">
-      <header className="sticky top-0 z-30 border-b bg-[#0D0E10] border-[#252525] h-14">
+    <div className="flex min-h-screen flex-col bg-bg text-slate-100">
+      <header className="sticky top-0 z-30 h-14 border-b border-[#252525] bg-[#0D0E10]">
         <div className="mx-auto flex h-full w-full max-w-[1200px] items-center justify-between px-4">
           <button
-            onClick={() => handleViewClick("list")}
-            className="flex items-center gap-2.5 leading-none bg-transparent border-none cursor-pointer p-0 h-8 -mt-1"
+            onClick={() => {
+              handleViewClick("list");
+            }}
+            className="-mt-1 flex h-8 cursor-pointer items-center gap-2.5 border-none bg-transparent p-0 leading-none"
           >
             <LogoMark size={32} />
-            <span className="text-[20px] font-bold tracking-[2px] leading-none uppercase flex items-center h-8 -mt-1 [font-family:Oswald,_sans-serif]">
+            <span className="-mt-1 flex h-8 items-center [font-family:Oswald,_sans-serif] text-[20px] leading-none font-bold tracking-[2px] uppercase">
               NOMAD LENS
             </span>
           </button>
 
           <div className="hidden items-center gap-4 md:flex">
-            <div className="flex rounded-md p-1 bg-surface-4 gap-1">
+            <div className="flex gap-1 rounded-md bg-surface-4 p-1">
               <button
-                onClick={() => handleViewClick("list")}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] ${activeView === "list" ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
+                onClick={() => {
+                  handleViewClick("list");
+                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${activeView === "list" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
               >
                 <List size={16} />
                 {t("views.list")}
               </button>
               <button
-                onClick={() => handleViewClick("map")}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] ${activeView === "map" ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
+                onClick={() => {
+                  handleViewClick("map");
+                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${activeView === "map" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
               >
                 <Map size={16} />
                 {t("views.map")}
               </button>
               <button
-                onClick={() => handleViewClick("compare")}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] ${activeView === "compare" ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
+                onClick={() => {
+                  handleViewClick("compare");
+                }}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${activeView === "compare" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
               >
                 <BarChart3 size={16} />
                 {t("views.compare")}
               </button>
               <Link
                 to={`${langPrefix}/nomad-visas`}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] no-underline ${pathname.endsWith("/nomad-visas") ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${pathname.endsWith("/nomad-visas") ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
               >
                 <Plane size={16} />
                 {t("nav.nomadVisas")}
               </Link>
               <Link
                 to={`${langPrefix}/budget-matcher`}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] no-underline ${pathname.endsWith("/budget-matcher") ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${pathname.endsWith("/budget-matcher") ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
               </Link>
               <Link
                 to={`${langPrefix}/tourism`}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 transition-colors text-[13px] no-underline ${pathname.endsWith("/tourism") ? "bg-accent text-white font-medium" : "bg-transparent text-muted font-normal"}`}
+                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${pathname.endsWith("/tourism") ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
               >
                 <Palmtree size={16} />
                 {t("nav.tourism", "Tourism")}
@@ -137,35 +147,39 @@ export function Layout({ children }: LayoutProps) {
 
             <div ref={langRef} className="relative flex items-center">
               <button
-                onClick={() => setLangDropdownOpen((previous) => !previous)}
-                className={`inline-flex items-center justify-center bg-transparent border-none cursor-pointer text-xs font-bold tracking-[1px] leading-none min-w-8 h-8 px-1.5 ${langDropdownOpen ? "text-accent-dim" : "text-dimmer"}`}
+                onClick={() => {
+                  setLangDropdownOpen((previous) => !previous);
+                }}
+                className={`inline-flex h-8 min-w-8 cursor-pointer items-center justify-center border-none bg-transparent px-1.5 text-xs leading-none font-bold tracking-[1px] ${langDropdownOpen ? "text-accent-dim" : "text-dimmer"}`}
               >
                 {currentLang.code.toUpperCase()}
               </button>
 
-              {langDropdownOpen && (
-                <div className="absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 bg-[#111111] border border-[#252525] rounded-lg overflow-hidden z-50 shadow-[0_8px_24px_rgba(0,0,0,0.6)]">
+              {langDropdownOpen ? (
+                <div className="absolute top-[calc(100%+6px)] left-1/2 z-50 -translate-x-1/2 overflow-hidden rounded-lg border border-[#252525] bg-[#111111] shadow-[0_8px_24px_rgba(0,0,0,0.6)]">
                   {LANG_OPTIONS.filter((option) => option.code !== i18n.language).map(
                     (option, index) => (
                       <Link
                         key={option.code}
                         to={langSwitchPath(option.code)}
-                        onClick={() => setLangDropdownOpen(false)}
-                        className={`flex items-center justify-center min-w-14 h-8 px-4 no-underline text-xs font-semibold tracking-[1px] leading-none text-muted ${index === 0 ? "" : "border-t border-[#1E1E1E]"}`}
+                        onClick={() => {
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`flex h-8 min-w-14 items-center justify-center px-4 text-xs leading-none font-semibold tracking-[1px] text-muted no-underline ${index === 0 ? "" : "border-t border-[#1E1E1E]"}`}
                       >
                         {option.code.toUpperCase()}
                       </Link>
                     ),
                   )}
                 </div>
-              )}
+              ) : null}
             </div>
 
             <a
               href="https:/github.com/oleksandr-zhynzher/nomad-lens"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1.5 transition-colors hover:text-slate-200 text-[13px] text-muted"
+              className="flex items-center gap-1.5 text-[13px] text-muted transition-colors hover:text-slate-200"
             >
               <svg
                 width="16"
@@ -184,8 +198,10 @@ export function Layout({ children }: LayoutProps) {
           </div>
 
           <button
-            className="flex items-center justify-center md:hidden w-10 h-10 text-muted"
-            onClick={() => setMobileMenuOpen((previous) => !previous)}
+            className="flex h-10 w-10 items-center justify-center text-muted md:hidden"
+            onClick={() => {
+              setMobileMenuOpen((previous) => !previous);
+            }}
             aria-label={t("a11y.toggleMenu", "Toggle menu")}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -193,72 +209,88 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </header>
 
-      {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-14 bottom-0 z-40 px-3 pb-3 md:hidden bg-[#0D0E10]">
+      {mobileMenuOpen ? (
+        <div className="fixed inset-x-0 top-14 bottom-0 z-40 bg-[#0D0E10] px-3 pb-3 md:hidden">
           <button
             type="button"
             aria-label={t("a11y.closeMenu", "Close menu")}
             className="absolute inset-0"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              setMobileMenuOpen(false);
+            }}
           />
-          <div className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border px-4 py-4 border-[#252525] [background:linear-gradient(180deg,rgba(20,20,22,0.98)_0%,rgba(13,14,16,0.98)_100%)] shadow-[0_20px_48px_rgba(0,0,0,0.45)]">
-            <p className="text-[10px] font-semibold tracking-[1.5px] uppercase text-dimmest mb-1">
+          <div className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border border-[#252525] px-4 py-4 shadow-[0_20px_48px_rgba(0,0,0,0.45)] [background:linear-gradient(180deg,rgba(20,20,22,0.98)_0%,rgba(13,14,16,0.98)_100%)]">
+            <p className="mb-1 text-[10px] font-semibold tracking-[1.5px] text-dimmest uppercase">
               {t("views.viewLabel")}
             </p>
             <div className="mb-3 grid grid-cols-2 gap-2">
               <button
-                onClick={() => handleViewClick("list")}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] ${activeView === "list" ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
+                onClick={() => {
+                  handleViewClick("list");
+                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${activeView === "list" ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
               >
                 <List size={16} />
                 {t("views.list")}
               </button>
               <button
-                onClick={() => handleViewClick("map")}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] ${activeView === "map" ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
+                onClick={() => {
+                  handleViewClick("map");
+                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${activeView === "map" ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
               >
                 <Map size={16} />
                 {t("views.map")}
               </button>
               <button
-                onClick={() => handleViewClick("compare")}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] ${activeView === "compare" ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
+                onClick={() => {
+                  handleViewClick("compare");
+                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${activeView === "compare" ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
               >
                 <BarChart3 size={16} />
                 {t("views.compare")}
               </button>
               <Link
                 to={`${langPrefix}/nomad-visas`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] no-underline ${pathname.endsWith("/nomad-visas") ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${pathname.endsWith("/nomad-visas") ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
               >
                 <Plane size={16} />
                 {t("nav.nomadVisas")}
               </Link>
               <Link
                 to={`${langPrefix}/budget-matcher`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] no-underline ${pathname.endsWith("/budget-matcher") ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${pathname.endsWith("/budget-matcher") ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
               </Link>
               <Link
                 to={`${langPrefix}/tourism`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors text-[13px] no-underline ${pathname.endsWith("/tourism") ? "bg-accent text-white font-medium" : "bg-surface-4 text-muted font-normal"}`}
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                }}
+                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${pathname.endsWith("/tourism") ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
               >
                 <Palmtree size={16} />
                 {t("nav.tourism", "Tourism")}
               </Link>
             </div>
 
-            <div className="flex items-center gap-3 py-3 border-b border-[#1E1E1E]">
+            <div className="flex items-center gap-3 border-b border-[#1E1E1E] py-3">
               {(["en", "ua", "ru"] as const).map((language) => (
                 <Link
                   key={language}
                   to={langSwitchPath(language)}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                  }}
                   className={`text-[13px] no-underline ${i18n.language === language ? "font-bold text-accent-dim" : "font-normal text-dimmer"}`}
                 >
                   {t(`langSwitcher.${language}`)}
@@ -288,7 +320,7 @@ export function Layout({ children }: LayoutProps) {
             </a>
           </div>
         </div>
-      )}
+      ) : null}
 
       <main
         className={activeView === "compare" ? "" : "mx-auto w-full max-w-7xl px-4 pb-4 md:pb-6"}
@@ -296,7 +328,7 @@ export function Layout({ children }: LayoutProps) {
         {children}
       </main>
 
-      <footer className="mt-16 border-t px-4 py-6 text-center text-xs border-border text-dim">
+      <footer className="mt-16 border-t border-border px-4 py-6 text-center text-xs text-dim">
         {t("footer.data")}
       </footer>
     </div>

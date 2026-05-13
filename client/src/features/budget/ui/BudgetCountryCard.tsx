@@ -47,21 +47,21 @@ export function BudgetCountryCard({
   return (
     <div
       data-selected={isSelected ? "true" : undefined}
-      className="country-row overflow-hidden transition-colors duration-150 relative border-b border-surface-2 bg-[var(--row-bg)]"
+      className="country-row relative overflow-hidden border-b border-surface-2 bg-[var(--row-bg)] transition-colors duration-150"
       style={{ "--row-bg": rowBg, "--row-hover-bg": hoverBg } as React.CSSProperties}
     >
       {/* Compare mode: checkbox */}
-      {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
+      {compareMode ? <CompareCheckbox isSelected={isSelected} uncheckedBg={rowBg} /> : null}
 
       {/* Main row — clickable button */}
       <button
-        className={`w-full text-left flex flex-col transition-colors bg-transparent border-none cursor-pointer ${compareMode ? "pl-[38px] pr-4" : "px-4"} py-3`}
+        className={`flex w-full cursor-pointer flex-col border-none bg-transparent text-left transition-colors ${compareMode ? "pr-4 pl-[38px]" : "px-4"} py-3`}
         onClick={onToggle}
         aria-expanded={expanded}
       >
-        <div className="flex items-center gap-3 w-full">
+        <div className="flex w-full items-center gap-3">
           {/* Rank */}
-          <span className="font-mono font-bold text-accent w-7 text-center shrink-0 text-base">
+          <span className="w-7 shrink-0 text-center font-mono text-base font-bold text-accent">
             {rank}
           </span>
 
@@ -69,7 +69,7 @@ export function BudgetCountryCard({
           <CountryNameCell country={country} />
 
           {/* Cost + surplus */}
-          <div className="hidden sm:flex flex-col items-end shrink-0">
+          <div className="hidden shrink-0 flex-col items-end sm:flex">
             <span className="font-mono text-[13px] text-tertiary">
               ${monthlyCost.toLocaleString()}
             </span>
@@ -79,7 +79,7 @@ export function BudgetCountryCard({
           </div>
 
           {/* Comfort score */}
-          <div className="shrink-0 w-12 text-right">
+          <div className="w-12 shrink-0 text-right">
             <span
               className={`font-mono text-lg font-bold ${comfortScoreColourClass(comfortScore, "text")}`}
             >
@@ -101,13 +101,13 @@ export function BudgetCountryCard({
       </button>
 
       {/* Expanded detail panel */}
-      {expanded && (
+      {expanded ? (
         <div
-          className="px-4 py-4 bg-[#0A0A0A] border-t border-[var(--bc)]"
+          className="border-t border-[var(--bc)] bg-[#0A0A0A] px-4 py-4"
           style={{ "--bc": borderColor } as React.CSSProperties}
         >
           {/* Summary row */}
-          <div className="flex items-center justify-between mb-3">
+          <div className="mb-3 flex items-center justify-between">
             <span className="text-xs font-semibold text-white">
               {t("budget.monthlyBreakdown", "Monthly breakdown")}
             </span>
@@ -125,7 +125,7 @@ export function BudgetCountryCard({
           </div>
 
           {/* Category cards grid — matching CountryPage style */}
-          <div className="grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(130px,1fr))]">
+          <div className="grid [grid-template-columns:repeat(auto-fill,minmax(130px,1fr))] gap-3">
             {(
               [
                 {
@@ -169,7 +169,7 @@ export function BudgetCountryCard({
               .map(({ key, icon, label }) => (
                 <div
                   key={key}
-                  className="bg-[#111111] rounded-lg border border-[#1E1E1E] p-4 flex flex-col gap-1.5"
+                  className="flex flex-col gap-1.5 rounded-lg border border-[#1E1E1E] bg-[#111111] p-4"
                 >
                   <div className="flex items-center gap-2.5">
                     {icon}
@@ -185,7 +185,7 @@ export function BudgetCountryCard({
           {/* View country details button — at the bottom */}
           <ViewCountryButton to={`${langPrefix}/country/${country.code.toLowerCase()}`} />
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

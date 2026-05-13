@@ -45,7 +45,13 @@ import { computeTourismScore } from "@features/tourism/utils";
 import { tourismScoreColourClass } from "@core/utils";
 import { TOURISM_COLORS } from "@features/tourism/constants";
 
-type SeasonLabelKey = "four_seasons" | "mild_seasons" | "tropical" | "arid" | "polar";
+function getHostname(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
 
 export function CountryPage() {
   const { t, i18n: i18nInstance } = useTranslation();
@@ -62,9 +68,9 @@ export function CountryPage() {
     visa: NomadVisaDetails,
     pick: (loc: NomadVisaLocalization) => T | undefined,
   ): T {
-    const lang = i18nInstance.language as "ru" | "ua" | string;
+    const lang = i18nInstance.language;
     if (lang === "ru" || lang === "ua") {
-      const loc = visa.i18n?.[lang as "ru" | "ua"];
+      const loc = visa.i18n?.[lang];
       if (loc) {
         const translated = pick(loc);
         if (translated !== undefined) return translated;
@@ -87,7 +93,7 @@ export function CountryPage() {
   if (loading) {
     return (
       <Layout>
-        <div className="min-h-[60vh] flex items-center justify-center">
+        <div className="flex min-h-[60vh] items-center justify-center">
           <span className="text-sm text-dim">{t("loading")}</span>
         </div>
       </Layout>
@@ -97,7 +103,7 @@ export function CountryPage() {
   if (error || !c) {
     return (
       <Layout>
-        <div className="min-h-[60vh] flex items-center justify-center flex-col gap-4">
+        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
           <span className="text-sm text-on-surface">{error ?? t("countryPage.notFound")}</span>
           <Link to={`${langPrefix}/`} className="text-[13px] text-[#C2956A] no-underline">
             {t("countryPage.backToCountries")}
@@ -108,16 +114,8 @@ export function CountryPage() {
   }
 
   const seasonLabel = c.climateData
-    ? t(`countryPage.seasonLabels.${c.climateData.seasonType as SeasonLabelKey}`)
+    ? t(`countryPage.seasonLabels.${c.climateData.seasonType}`)
     : null;
-
-  const getHostname = (url: string) => {
-    try {
-      return new URL(url).hostname.replace(/^www\./, "");
-    } catch {
-      return url;
-    }
-  };
 
   const tourismScore = computeTourismScore(c);
   const tourismGroups = TOURISM_GROUPS.map((group) => ({
@@ -133,25 +131,25 @@ export function CountryPage() {
     (count, group) => count + group.metrics.length,
     0,
   );
-  const tourismTags = Array.from(new Set(c.tourismTags ?? [])).sort(
+  const tourismTags = [...new Set(c.tourismTags)].sort(
     (left, right) => (c.tourismTagScores?.[right] ?? 0) - (c.tourismTagScores?.[left] ?? 0),
   );
 
   const handleBack = () => {
-    if (typeof window !== "undefined" && window.history.state?.idx > 0) {
-      navigate(-1);
+    if (globalThis.window != null && globalThis.history.state?.idx > 0) {
+      void navigate(-1);
       return;
     }
 
-    navigate(`${langPrefix}/`, { replace: true });
+    void navigate(`${langPrefix}/`, { replace: true });
   };
 
   return (
     <Layout>
-      <div className="bg-bg min-h-screen">
+      <div className="min-h-screen bg-bg">
         {/* ── heroBanner ── */}
         <div
-          className="min-h-[280px] relative overflow-hidden"
+          className="relative min-h-[280px] overflow-hidden"
           style={{
             backgroundColor: "#0A0D12",
             backgroundImage: "url('/hero-map.png')",
@@ -171,7 +169,7 @@ export function CountryPage() {
           {/* Back button */}
           <button
             onClick={handleBack}
-            className="absolute top-5 z-10 left-4 md:left-8 flex items-center gap-1.5 bg-[rgba(17,17,17,0.75)] border border-[#2A2A2A] rounded-lg py-[7px] px-[14px] cursor-pointer text-[#AAAAAA] text-[13px] backdrop-blur-[8px]"
+            className="absolute top-5 left-4 z-10 flex cursor-pointer items-center gap-1.5 rounded-lg border border-[#2A2A2A] bg-[rgba(17,17,17,0.75)] px-[14px] py-[7px] text-[13px] text-[#AAAAAA] backdrop-blur-[8px] md:left-8"
           >
             <ArrowLeft size={15} color="#AAAAAA" />
             {t("countryPage.back")}
@@ -180,46 +178,46 @@ export function CountryPage() {
           {/* Bottom content: flag + name + badges */}
           <div className="absolute inset-0 flex flex-col justify-end gap-4 px-4 pb-6 md:px-16 md:pb-8">
             {/* Flag + name row */}
-            <div className="flex items-center gap-3 md:gap-6 flex-wrap">
-              <div className="w-16 h-11 md:w-[100px] md:h-[67px] rounded-[6px] overflow-hidden shrink-0 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+            <div className="flex flex-wrap items-center gap-3 md:gap-6">
+              <div className="h-11 w-16 shrink-0 overflow-hidden rounded-[6px] shadow-[0_4px_16px_rgba(0,0,0,0.5)] md:h-[67px] md:w-[100px]">
                 <img
                   src={c.flagUrl}
                   alt={t("a11y.flagAlt", "{{country}} flag", {
                     country: locC.name,
                   })}
-                  className="object-cover w-full h-full"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-[11px] font-semibold tracking-[2px] text-[#8F5A3C] uppercase">
                   {t("countryPage.countryDetailLabel")}
                 </span>
-                <h1 className="text-2xl md:text-4xl font-bold text-[#E8E9EB] m-0 leading-none font-display">
+                <h1 className="m-0 font-display text-2xl leading-none font-bold text-[#E8E9EB] md:text-4xl">
                   {locC.name}
                 </h1>
               </div>
-              <div className="hidden md:block flex-1" />
-              <div className="hidden md:block bg-[rgba(26,26,26,0.8)] rounded-[6px] px-3 py-1.5 self-end">
+              <div className="hidden flex-1 md:block" />
+              <div className="hidden self-end rounded-[6px] bg-[rgba(26,26,26,0.8)] px-3 py-1.5 md:block">
                 <span className="font-mono text-sm text-[#808080]">{c.code}</span>
               </div>
             </div>
 
             {/* Badges row */}
-            <div className="flex gap-2.5 flex-wrap">
-              {c.hasNomadVisa && (
-                <div className="bg-[rgba(26,26,10,0.85)] border border-[#2A2810] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
+            <div className="flex flex-wrap gap-2.5">
+              {c.hasNomadVisa ? (
+                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2810] bg-[rgba(26,26,10,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
                   <Plane size={13} color="#8F5A3C" />
                   <span className="text-xs text-[#C2956A]">{t("countryPage.nomadVisaBadge")}</span>
                 </div>
-              )}
-              {c.isSchengen && (
-                <div className="bg-[rgba(10,18,24,0.85)] border border-[#0A2030] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
+              ) : null}
+              {c.isSchengen ? (
+                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#0A2030] bg-[rgba(10,18,24,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
                   <Globe size={13} color="#5B8FA8" />
                   <span className="text-xs text-[#7BACC8]">{t("countryPage.schengen")}</span>
                 </div>
-              )}
-              {c.touristVisaDays != null && (
-                <div className="bg-[rgba(26,20,16,0.85)] border border-[#2A2010] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
+              ) : null}
+              {c.touristVisaDays == null ? null : (
+                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2010] bg-[rgba(26,20,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
                   <Calendar size={13} color="#C2956A" />
                   <span className="text-xs text-[#C2956A]">
                     {t("countryPage.touristVisaBadge", {
@@ -228,22 +226,22 @@ export function CountryPage() {
                   </span>
                 </div>
               )}
-              {c.climateData && (
-                <div className="bg-[rgba(16,22,16,0.85)] border border-[#142014] rounded-[20px] py-1.5 px-[14px] flex items-center gap-1.5 backdrop-blur-[4px]">
+              {c.climateData ? (
+                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#142014] bg-[rgba(16,22,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
                   <CloudSun size={13} color="#7A9B6B" />
                   <span className="text-xs text-[#7A9B6B]">{seasonLabel}</span>
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
         </div>
 
         {/* ── statsRow ── */}
-        <div className="bg-bg py-6 grid grid-cols-2 gap-3 md:flex md:items-center">
-          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
+        <div className="grid grid-cols-2 gap-3 bg-bg py-6 md:flex md:items-center">
+          <div className="flex flex-1 items-center justify-center gap-2.5 rounded-lg border border-[#1E1E1E] bg-[#111111] px-[18px] py-[14px]">
             <TrendingUp size={14} color="#8F5A3C" />
             <div className="flex items-baseline gap-2">
-              {finalScore != null && (
+              {finalScore == null ? null : (
                 <span className="font-mono text-[22px] font-bold text-[#C2956A]">
                   {finalScore.toFixed(1)}
                 </span>
@@ -251,17 +249,17 @@ export function CountryPage() {
               <span className="font-mono text-xs text-[#808080]">#{rank}</span>
             </div>
           </div>
-          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
+          <div className="flex flex-1 items-center justify-center gap-2.5 rounded-lg border border-[#1E1E1E] bg-[#111111] px-[18px] py-[14px]">
             <Users size={14} color="#5B8FA8" />
             <span className="font-mono text-[22px] font-bold text-[#E8E9EB]">
               {(c.population / 1_000_000).toFixed(1)}M
             </span>
           </div>
-          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
+          <div className="flex flex-1 items-center justify-center gap-2.5 rounded-lg border border-[#1E1E1E] bg-[#111111] px-[18px] py-[14px]">
             <Building size={14} color="#7A9B6B" />
             <span className="font-mono text-[18px] font-bold text-[#E8E9EB]">{locC.capital}</span>
           </div>
-          <div className="bg-[#111111] rounded-lg border border-[#1E1E1E] py-[14px] px-[18px] flex items-center justify-center gap-2.5 flex-1">
+          <div className="flex flex-1 items-center justify-center gap-2.5 rounded-lg border border-[#1E1E1E] bg-[#111111] px-[18px] py-[14px]">
             <MapPin size={14} color="#C2956A" />
             <span className="font-mono text-[18px] font-bold text-[#E8E9EB]">
               {t(`regions.${regionKey(c.region)}`)}
@@ -270,14 +268,14 @@ export function CountryPage() {
         </div>
 
         {/* ── visa-section ── */}
-        {visa && (
-          <div className="bg-bg py-8 gap-8 flex flex-col">
-            <div className="flex flex-col md:flex-row gap-3 md:items-center">
-              <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
+        {visa ? (
+          <div className="flex flex-col gap-8 bg-bg py-8">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center">
+              <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
                 {t("countryPage.nomadVisaSection")}
               </h2>
               <div className="flex-1" />
-              <div className="bg-[#1A1A0A] rounded-[20px] px-4 py-1.5">
+              <div className="rounded-[20px] bg-[#1A1A0A] px-4 py-1.5">
                 <span className="text-xs text-[#C2956A]">{visa.visaName}</span>
               </div>
               <span className="text-[10px] text-dimmer">
@@ -285,15 +283,15 @@ export function CountryPage() {
               </span>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-5 md:gap-6">
+            <div className="flex flex-col gap-5 md:flex-row md:gap-6">
               {/* Left column – 440px */}
-              <div className="w-full md:w-[440px] md:flex-shrink-0 flex flex-col gap-5">
+              <div className="flex w-full flex-col gap-5 md:w-[440px] md:flex-shrink-0">
                 {/* Duration & Cost */}
-                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
-                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                     {t("countryPage.durationCost")}
                   </span>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex items-center gap-2">
                     <Calendar size={16} color="#8F5A3C" />
                     <span className="text-sm text-[#E8E9EB]">
                       {t("countryPage.monthsInitial", {
@@ -301,22 +299,22 @@ export function CountryPage() {
                       })}
                     </span>
                     <div className="flex-1" />
-                    {visa.duration.maxExtension > 0 && (
+                    {visa.duration.maxExtension > 0 ? (
                       <span className="text-[11px] text-[#C2956A]">
                         {t("countryPage.moExtension", {
                           count: visa.duration.maxExtension,
                         })}
                       </span>
-                    )}
+                    ) : null}
                   </div>
-                  {visa.duration.renewable && (
-                    <div className="flex gap-2 items-center">
+                  {visa.duration.renewable ? (
+                    <div className="flex items-center gap-2">
                       <RefreshCw size={16} color="#6B9E6B" />
                       <span className="text-sm text-[#6B9E6B]">{t("countryPage.renewable")}</span>
                     </div>
-                  )}
+                  ) : null}
                   <div className="h-px bg-[#1E1E1E]" />
-                  <div className="flex gap-2 items-center">
+                  <div className="flex items-center gap-2">
                     <CreditCard size={16} color="#8F5A3C" />
                     <span
                       className={`font-mono text-[22px] font-bold ${visa.cost.amount === 0 ? "text-[#44CC66]" : "text-[#E8E9EB]"}`}
@@ -327,11 +325,23 @@ export function CountryPage() {
                     </span>
                     <span className="text-[11px] text-dim">{t("countryPage.applicationFee")}</span>
                   </div>
-                  <div className="bg-bg rounded-lg px-4 py-3 flex flex-col gap-1">
-                    <span className="text-[9px] text-dimmer tracking-[1px] uppercase">
+                  <div className="flex flex-col gap-1 rounded-lg bg-bg px-4 py-3">
+                    <span className="text-[9px] tracking-[1px] text-dimmer uppercase">
                       {t("countryPage.incomeRequirement")}
                     </span>
-                    {visa.incomeRequirement.monthly != null ? (
+                    {visa.incomeRequirement.monthly == null ? (
+                      visa.incomeRequirement.annual == null ? (
+                        <span className="font-mono text-[18px] font-bold text-[#44CC66]">
+                          {t("countryPage.visa.noMinimum")}
+                        </span>
+                      ) : (
+                        <span className="font-mono text-[18px] font-bold text-[#C2956A]">
+                          {visa.incomeRequirement.currency}{" "}
+                          {visa.incomeRequirement.annual.toLocaleString()}{" "}
+                          {t("countryPage.perYear")}
+                        </span>
+                      )
+                    ) : (
                       <>
                         <span className="font-mono text-[18px] font-bold text-[#C2956A]">
                           {visa.incomeRequirement.currency}{" "}
@@ -344,26 +354,17 @@ export function CountryPage() {
                           {t("countryPage.perYear")}
                         </span>
                       </>
-                    ) : visa.incomeRequirement.annual != null ? (
-                      <span className="font-mono text-[18px] font-bold text-[#C2956A]">
-                        {visa.incomeRequirement.currency}{" "}
-                        {visa.incomeRequirement.annual.toLocaleString()} {t("countryPage.perYear")}
-                      </span>
-                    ) : (
-                      <span className="font-mono text-[18px] font-bold text-[#44CC66]">
-                        {t("countryPage.visa.noMinimum")}
-                      </span>
                     )}
                   </div>
                 </div>
 
                 {/* Taxation */}
-                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
-                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                     {t("countryPage.taxation")}
                   </span>
                   <div
-                    className={`flex gap-1 items-center rounded-lg px-4 py-2.5 ${
+                    className={`flex items-center gap-1 rounded-lg px-4 py-2.5 ${
                       visa.tax.status === "exempt"
                         ? "bg-[#0A2010]"
                         : visa.tax.status === "special"
@@ -386,26 +387,26 @@ export function CountryPage() {
                           ? t("countryPage.specialTaxLabel")
                           : t("countryPage.standardTaxLabel")}
                     </span>
-                    {visa.tax.rate != null && visa.tax.status !== "exempt" && (
+                    {visa.tax.rate != null && visa.tax.status !== "exempt" ? (
                       <span className="font-mono text-[13px] text-dim">
                         {" · "}
                         {visa.tax.rate}%
                       </span>
-                    )}
+                    ) : null}
                   </div>
-                  {visa.tax.notes && (
-                    <p className="text-xs text-[#808080] m-0">
+                  {visa.tax.notes ? (
+                    <p className="m-0 text-xs text-[#808080]">
                       {localize(visa.tax.notes, visa, (l) => l.tax?.notes)}
                     </p>
-                  )}
+                  ) : null}
                 </div>
 
                 {/* Eligibility */}
-                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-3">
-                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                <div className="flex flex-col gap-3 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                     {t("countryPage.eligibilitySection")}
                   </span>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex items-center gap-2">
                     <User size={14} color="#808080" />
                     <span className="text-[13px] text-dim">
                       {t("countryPage.minimumAge", {
@@ -422,28 +423,26 @@ export function CountryPage() {
                       <Check
                         size={13}
                         color="#6B9E6B"
-                        style={
-                          {
-                            flexShrink: 0,
-                            marginTop: "2px",
-                          } as React.CSSProperties
-                        }
+                        style={{
+                          flexShrink: 0,
+                          marginTop: "2px",
+                        }}
                       />
-                      <span className="text-xs text-on-surface flex-1">{req}</span>
+                      <span className="flex-1 text-xs text-on-surface">{req}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Right column – flex fill */}
-              <div className="flex-1 flex flex-col gap-5 min-w-0">
+              <div className="flex min-w-0 flex-1 flex-col gap-5">
                 {/* Visa Benefits */}
-                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-3">
-                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                <div className="flex flex-col gap-3 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                     {t("countryPage.visaBenefits")}
                   </span>
                   {localize(visa.benefits, visa, (l) => l.benefits).map((benefit, i) => (
-                    <div key={i} className="flex gap-2.5 items-center bg-bg rounded-lg px-3 py-2.5">
+                    <div key={i} className="flex items-center gap-2.5 rounded-lg bg-bg px-3 py-2.5">
                       <Briefcase size={16} color="#8F5A3C" />
                       <span className="text-[13px] text-muted">{benefit}</span>
                     </div>
@@ -451,11 +450,11 @@ export function CountryPage() {
                 </div>
 
                 {/* Application Process */}
-                <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
-                  <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                     {t("countryPage.applicationProcessSection")}
                   </span>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex items-center gap-2">
                     <Building2 size={16} color="#C2956A" />
                     <span className="text-sm text-[#E8E9EB]">
                       {visa.applicationProcess.online
@@ -463,7 +462,7 @@ export function CountryPage() {
                         : t("countryPage.inPersonApplication")}
                     </span>
                   </div>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex items-center gap-2">
                     <Timer size={16} color="#8F5A3C" />
                     <span className="text-[13px] text-on-surface">
                       {t("countryPage.processing", {
@@ -476,7 +475,7 @@ export function CountryPage() {
                     </span>
                   </div>
                   <div className="h-px bg-[#1E1E1E]" />
-                  <span className="text-[9px] text-dimmer tracking-[1px] uppercase">
+                  <span className="text-[9px] tracking-[1px] text-dimmer uppercase">
                     {t("countryPage.requiredDocsSection")}
                   </span>
                   {localize(
@@ -484,7 +483,7 @@ export function CountryPage() {
                     visa,
                     (l) => l.applicationProcess?.documents,
                   ).map((doc, i) => (
-                    <div key={i} className="flex gap-2 items-center">
+                    <div key={i} className="flex items-center gap-2">
                       <FileText size={13} color="#808080" />
                       <span className="text-xs text-dim">{doc}</span>
                     </div>
@@ -496,7 +495,7 @@ export function CountryPage() {
                   href={visa.officialUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#1A1410] rounded-xl border border-[#2A2018] flex gap-3 p-5 items-center no-underline"
+                  className="flex items-center gap-3 rounded-xl border border-[#2A2018] bg-[#1A1410] p-5 no-underline"
                 >
                   <ExternalLink size={18} color="#8F5A3C" />
                   <span className="text-sm text-[#C2956A]">
@@ -510,12 +509,12 @@ export function CountryPage() {
               </div>
             </div>
           </div>
-        )}
+        ) : null}
 
         {/* ── scores-section + climate ── */}
-        <div className="bg-bg py-8 gap-8 flex flex-col">
-          <div className="flex flex-col md:flex-row gap-3 md:items-center">
-            <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
+        <div className="flex flex-col gap-8 bg-bg py-8">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+            <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
               {t("countryPage.performanceBreakdown")}
             </h2>
             <span className="flex-1 text-right text-xs text-dimmer">
@@ -528,12 +527,12 @@ export function CountryPage() {
 
           <ScoreBreakdown country={c} columns={4} />
 
-          {tourismMetricCount > 0 && (
+          {tourismMetricCount > 0 ? (
             <>
               <div className="h-px bg-[#1E1E1E]" />
-              <div className="bg-bg py-8 gap-6 flex flex-col">
-                <div className="flex flex-col md:flex-row gap-3 md:items-center">
-                  <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
+              <div className="flex flex-col gap-6 bg-bg py-8">
+                <div className="flex flex-col gap-3 md:flex-row md:items-center">
+                  <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
                     {t("nav.tourism", "Tourism")}
                   </h2>
                   <span className="flex-1 text-right text-xs text-dimmer">
@@ -543,10 +542,10 @@ export function CountryPage() {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                  <div className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+                  <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                      <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                         {t("countryDetail.tourismScores", "Tourism Score")}
                       </span>
                       <span className="font-mono text-xs text-[#666666]">{tourismMetricCount}</span>
@@ -554,53 +553,53 @@ export function CountryPage() {
 
                     <div className="flex items-baseline gap-2.5">
                       <span
-                        className={`text-[42px] font-bold leading-none font-display ${tourismScore != null ? tourismScoreColourClass(tourismScore, "text") : "text-dimmer"}`}
+                        className={`font-display text-[42px] leading-none font-bold ${tourismScore == null ? "text-dimmer" : tourismScoreColourClass(tourismScore, "text")}`}
                       >
-                        {tourismScore != null ? tourismScore.toFixed(1) : "—"}
+                        {tourismScore == null ? "—" : tourismScore.toFixed(1)}
                       </span>
                       <span className="text-xs text-dim">
                         {t("tourismWeights.metricsLabel", "Tourism Metrics")}
                       </span>
                     </div>
 
-                    <p className="text-xs text-dim m-0 leading-relaxed">
-                      {tourismScore != null
+                    <p className="m-0 text-xs leading-relaxed text-dim">
+                      {tourismScore == null
                         ? t(
+                            "countryPage.tourismProfileUnavailable",
+                            "Tourism indicators are not available for this country yet.",
+                          )
+                        : t(
                             "countryPage.tourismProfileSubtitle",
                             "{{name}}'s tourism profile across safety, sightseeing, and activities.",
                             { name: locC.name },
-                          )
-                        : t(
-                            "countryPage.tourismProfileUnavailable",
-                            "Tourism indicators are not available for this country yet.",
                           )}
                     </p>
 
-                    {tourismTags.length > 0 && (
+                    {tourismTags.length > 0 ? (
                       <div className="flex flex-col gap-2.5">
-                        <span className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                        <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                           {t("tourismFilters.activityTags", "Activities")}
                         </span>
                         <div className="flex flex-wrap gap-2">
                           {tourismTags.map((tag) => (
                             <span
                               key={tag}
-                              className="text-[11px] font-semibold px-2.5 py-1.5 rounded-full bg-[#1A1A1C] border border-[#252525] text-[#CFCFCF]"
+                              className="rounded-full border border-[#252525] bg-[#1A1A1C] px-2.5 py-1.5 text-[11px] font-semibold text-[#CFCFCF]"
                             >
                               {t(`tourismTags.${tag}`, tag)}
                             </span>
                           ))}
                         </div>
                       </div>
-                    )}
+                    ) : null}
                   </div>
 
                   {tourismGroups.map((group) => (
                     <div
                       key={group.labelKey}
-                      className="bg-[#111111] rounded-xl border border-[#1E1E1E] p-6 flex flex-col gap-[14px]"
+                      className="flex flex-col gap-[14px] rounded-xl border border-[#1E1E1E] bg-[#111111] p-6"
                     >
-                      <div className="text-[10px] text-[#808080] tracking-[1.5px] uppercase">
+                      <div className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
                         {t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
                       </div>
 
@@ -611,12 +610,12 @@ export function CountryPage() {
                               <span className="text-xs text-[#CFCFCF]">
                                 {t(`tourism.metrics.${metric.key}`, CATEGORY_LABELS[metric.key])}
                               </span>
-                              <span className="font-mono text-xs font-bold text-[#E8E9EB] shrink-0">
+                              <span className="shrink-0 font-mono text-xs font-bold text-[#E8E9EB]">
                                 {metric.value.toFixed(0)}
                               </span>
                             </div>
 
-                            <div className="h-2 rounded-full bg-[#232323] overflow-hidden">
+                            <div className="h-2 overflow-hidden rounded-full bg-[#232323]">
                               <div
                                 style={
                                   {
@@ -624,7 +623,7 @@ export function CountryPage() {
                                     "--c": TOURISM_COLORS[metric.key] ?? "#8F5A3C",
                                   } as React.CSSProperties
                                 }
-                                className="w-[var(--w)] h-full rounded-full bg-[var(--c)]"
+                                className="h-full w-[var(--w)] rounded-full bg-[var(--c)]"
                               />
                             </div>
                           </div>
@@ -635,15 +634,15 @@ export function CountryPage() {
                 </div>
               </div>
             </>
-          )}
+          ) : null}
 
           {/* ── Cost of Living ── */}
-          {c.costOfLiving && (
+          {c.costOfLiving ? (
             <>
               <div className="h-px bg-[#1E1E1E]" />
-              <div className="bg-bg py-8 gap-6 flex flex-col">
-                <div className="flex flex-col md:flex-row gap-3 md:items-center">
-                  <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
+              <div className="flex flex-col gap-6 bg-bg py-8">
+                <div className="flex flex-col gap-3 md:flex-row md:items-center">
+                  <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
                     {t("countryPage.costOfLivingSection", "Cost of Living")}
                   </h2>
                   <span className="flex-1 text-right text-xs text-dimmer">
@@ -652,9 +651,9 @@ export function CountryPage() {
                 </div>
 
                 {/* Summary row */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {c.costOfLiving.totalBasic !== null && (
-                    <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex-1 flex flex-col gap-2">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  {c.costOfLiving.totalBasic === null ? null : (
+                    <div className="flex flex-1 flex-col gap-2 rounded-[10px] border border-[#1E1E1E] bg-[#111111] p-5">
                       <div className="flex items-center gap-3">
                         <TrendingUp size={16} color="#44CC66" />
                         <span className="font-mono text-[28px] font-bold text-[#44CC66]">
@@ -666,8 +665,8 @@ export function CountryPage() {
                       </span>
                     </div>
                   )}
-                  {c.costOfLiving.totalComfortable !== null && (
-                    <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex-1 flex flex-col gap-2">
+                  {c.costOfLiving.totalComfortable === null ? null : (
+                    <div className="flex flex-1 flex-col gap-2 rounded-[10px] border border-[#1E1E1E] bg-[#111111] p-5">
                       <div className="flex items-center gap-3">
                         <TrendingUp size={16} color="#5B8FA8" />
                         <span className="font-mono text-[28px] font-bold text-[#5B8FA8]">
@@ -682,7 +681,7 @@ export function CountryPage() {
                 </div>
 
                 {/* Breakdown grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                   {(
                     [
                       {
@@ -738,11 +737,11 @@ export function CountryPage() {
                     ] as const
                   ).map(({ key, icon, label }) => {
                     const val = c.costOfLiving![key];
-                    if (val === null || val === undefined) return null;
+                    if (val == null) return null;
                     return (
                       <div
                         key={key}
-                        className="bg-[#111111] rounded-lg border border-[#1E1E1E] p-4 flex flex-col gap-1.5"
+                        className="flex flex-col gap-1.5 rounded-lg border border-[#1E1E1E] bg-[#111111] p-4"
                       >
                         <div className="flex items-center gap-2.5">
                           {icon}
@@ -757,15 +756,15 @@ export function CountryPage() {
                 </div>
               </div>
             </>
-          )}
+          ) : null}
 
           {/* ── Climate Data ── */}
-          {c.climateData && (
+          {c.climateData ? (
             <>
               <div className="h-px bg-[#1E1E1E]" />
-              <div className="bg-bg py-8 gap-6 flex flex-col">
-                <div className="flex flex-col md:flex-row gap-3 md:items-center">
-                  <h2 className="font-bold text-[#E8E9EB] m-0 font-display">
+              <div className="flex flex-col gap-6 bg-bg py-8">
+                <div className="flex flex-col gap-3 md:flex-row md:items-center">
+                  <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
                     {t("countryPage.climateDataSection")}
                   </h2>
                   <span className="flex-1 text-right text-xs text-dimmer">
@@ -773,8 +772,8 @@ export function CountryPage() {
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                  <div className="flex flex-col gap-2 rounded-[10px] border border-[#1E1E1E] bg-[#111111] p-5">
                     <Thermometer size={16} color="#5B8FA8" />
                     <span className="font-mono text-[28px] font-bold text-[#E8E9EB]">
                       {c.climateData.annualMeanTemp.toFixed(1)}°C
@@ -783,7 +782,7 @@ export function CountryPage() {
                       {t("countryPage.annualMeanTemp")}
                     </span>
                   </div>
-                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 rounded-[10px] border border-[#1E1E1E] bg-[#111111] p-5">
                     <Droplets size={16} color="#5B8FA8" />
                     <span className="font-mono text-[28px] font-bold text-[#E8E9EB]">
                       {Math.round(c.climateData.annualPrecipitation)}mm
@@ -792,7 +791,7 @@ export function CountryPage() {
                       {t("countryPage.annualPrecipitation")}
                     </span>
                   </div>
-                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 rounded-[10px] border border-[#1E1E1E] bg-[#111111] p-5">
                     <Sun size={16} color="#C2956A" />
                     <span className="font-mono text-[28px] font-bold text-[#C2956A]">
                       {c.climateData.hottestMonth.toFixed(1)}°C
@@ -801,7 +800,7 @@ export function CountryPage() {
                       {t("countryPage.hottestMonth")}
                     </span>
                   </div>
-                  <div className="bg-[#111111] rounded-[10px] border border-[#1E1E1E] p-5 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 rounded-[10px] border border-[#1E1E1E] bg-[#111111] p-5">
                     <Snowflake size={16} color="#7BACC8" />
                     <span className="font-mono text-[28px] font-bold text-[#7BACC8]">
                       {c.climateData.coldestMonth.toFixed(1)}°C
@@ -813,7 +812,7 @@ export function CountryPage() {
                 </div>
               </div>
             </>
-          )}
+          ) : null}
         </div>
       </div>
     </Layout>

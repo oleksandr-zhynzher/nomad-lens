@@ -18,7 +18,7 @@ const uaPluralAlias = {
   },
 };
 
-i18n
+void i18n
   .use(uaPluralAlias)
   .use(initReactI18next)
   .init({
@@ -34,4 +34,4 @@ i18n
     },
   });
 
-export default i18n;
+export { default } from "i18next";

@@ -19,8 +19,8 @@ interface VersionedStorageOptions<T> {
 }
 
 function getDefaultStorage(): JsonStorage | undefined {
-  if (typeof window === "undefined") return undefined;
-  return window.localStorage;
+  if (globalThis.window == null) return undefined;
+  return globalThis.localStorage;
 }
 
 function isVersionedEnvelope(value: unknown): value is VersionedEnvelope {

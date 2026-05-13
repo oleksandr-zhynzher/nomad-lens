@@ -8,7 +8,7 @@ export const LS_BUDGET_KEY = "nomad-lens:budget";
 export const BUDGET_STORAGE_VERSION = 1;
 
 export const MIN_BUDGET = 300;
-export const MAX_BUDGET = 10000;
+export const MAX_BUDGET = 10_000;
 export const MIN_PEOPLE_COUNT = 1;
 export const MAX_PEOPLE_COUNT = 20;
 export const MIN_QUALITY_BLEND = 0;

@@ -8,7 +8,9 @@ export function geoNumericToAlpha2(geo: {
   id?: unknown;
   properties: Record<string, unknown>;
 }): string {
-  const numeric = String(geo.id ?? "").padStart(3, "0");
+  const numeric = (
+    typeof geo.id === "string" || typeof geo.id === "number" ? String(geo.id) : ""
+  ).padStart(3, "0");
   return isoNumericToAlpha2[numeric] ?? "";
 }
 

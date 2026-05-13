@@ -32,23 +32,23 @@ export function CollapsibleSection({
     <div className="border-b border-[#242424]">
       <button
         type="button"
-        className="button-hover-exempt weight-panel-group-button w-full flex items-center h-10 px-[14px] gap-2 bg-surface"
+        className="button-hover-exempt weight-panel-group-button flex h-10 w-full items-center gap-2 bg-surface px-[14px]"
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={contentId}
       >
         {icon}
-        <span className="text-[10px] font-semibold tracking-[1.5px] uppercase text-muted flex-1 text-left">
+        <span className="flex-1 text-left text-[10px] font-semibold tracking-[1.5px] text-muted uppercase">
           {label}
         </span>
         {badge}
         <ChevronDown
           size={14}
-          className={`text-dimmer shrink-0 transition-transform duration-150 ${isOpen ? "rotate-0" : "-rotate-90"}`}
+          className={`shrink-0 text-dimmer transition-transform duration-150 ${isOpen ? "rotate-0" : "-rotate-90"}`}
         />
       </button>
 
-      {isOpen && <div id={contentId}>{children}</div>}
+      {isOpen ? <div id={contentId}>{children}</div> : null}
     </div>
   );
 }

@@ -98,24 +98,26 @@ export function TourismComparison({
     <div>
       {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
-        <div className="flex gap-3 pb-2 overflow-x-auto [scrollbar-width:thin]">
+        <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
           {selectedCountries.map((slot) => {
             const score = computeTourismScore(slot.country);
             return (
-              <div key={slot.country.code} className="shrink-0 w-[148px] md:w-[180px]">
+              <div key={slot.country.code} className="w-[148px] shrink-0 md:w-[180px]">
                 <ComparisonSlotCard
                   flagUrl={slot.country.flagUrl}
                   countryName={localizeCountry(slot.country, lang).name}
-                  onRemove={() => handleRemove(slot.index)}
+                  onRemove={() => {
+                    handleRemove(slot.index);
+                  }}
                   onNavigate={() =>
                     navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
                   }
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
                 >
                   <span
-                    className={`text-[32px] font-bold leading-none [font-family:Oswald,_sans-serif] ${score != null ? tourismScoreColourClass(score, "text") : "text-[#333333]"}`}
+                    className={`[font-family:Oswald,_sans-serif] text-[32px] leading-none font-bold ${score == null ? "text-[#333333]" : tourismScoreColourClass(score, "text")}`}
                   >
-                    {score != null ? score.toFixed(1) : "—"}
+                    {score == null ? "—" : score.toFixed(1)}
                   </span>
                 </ComparisonSlotCard>
               </div>
@@ -123,7 +125,7 @@ export function TourismComparison({
           })}
 
           {/* Add button */}
-          <div ref={addBtnRef} className="shrink-0 w-[148px] md:w-[180px]">
+          <div ref={addBtnRef} className="w-[148px] shrink-0 md:w-[180px]">
             <ComparisonAddButton
               label={t("compare.addCountry")}
               onClick={() => {
@@ -145,12 +147,12 @@ export function TourismComparison({
           </div>
         </div>
         {/* Right-edge fade */}
-        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block [background:linear-gradient(to_right,transparent,#0F1114)]" />
+        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 [background:linear-gradient(to_right,transparent,#0F1114)] md:block" />
       </div>
 
       {/* Dropdown — fixed-positioned under the Add Country card */}
       <CountryPickerDropdown
-        open={dropdownOpen && dropdownPos != null}
+        open={dropdownOpen ? dropdownPos != null : false}
         countries={filtered.map((c) => {
           const score = computeTourismScore(c);
           return {
@@ -160,9 +162,9 @@ export function TourismComparison({
             regionLabel: t(`regions.${regionKey(c.region)}`),
             trailing: (
               <span
-                className={`font-mono text-[13px] font-semibold ${score != null ? tourismScoreColourClass(score, "text") : "text-border"}`}
+                className={`font-mono text-[13px] font-semibold ${score == null ? "text-border" : tourismScoreColourClass(score, "text")}`}
               >
-                {score != null ? score.toFixed(1) : "—"}
+                {score == null ? "—" : score.toFixed(1)}
               </span>
             ),
           };
@@ -177,7 +179,7 @@ export function TourismComparison({
       />
 
       {/* Indicator grid */}
-      {selectedCountries.length > 0 && (
+      {selectedCountries.length > 0 ? (
         <div className="mt-8">
           {/* Separator */}
           <div className="h-px bg-[#1C1C1C]" />
@@ -210,7 +212,7 @@ export function TourismComparison({
                       <ComparisonScoreCell
                         key={slot.index}
                         value={val}
-                        colour={val != null ? tourismScoreColour(val) : "#333333"}
+                        colour={val == null ? "#333333" : tourismScoreColour(val)}
                         columnWidth={TOURISM_COMPARISON_COLUMN_WIDTH}
                       />
                     );
@@ -220,7 +222,7 @@ export function TourismComparison({
             })}
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

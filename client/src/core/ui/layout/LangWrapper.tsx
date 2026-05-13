@@ -12,7 +12,7 @@ export function LangWrapper() {
   // Always call hooks unconditionally before any early return
   useEffect(() => {
     if (!isInvalidLang && i18n.language !== activeLang) {
-      i18n.changeLanguage(activeLang);
+      void i18n.changeLanguage(activeLang);
     }
   }, [activeLang, isInvalidLang]);
 

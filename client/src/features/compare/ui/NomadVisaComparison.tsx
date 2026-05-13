@@ -68,16 +68,16 @@ export function NomadVisaComparison({
   // Sync horizontal scroll between sticky header and body
   useSyncScroll(headerRef, bodyRef);
 
-  const selectedCountries = selectedSlots.filter((s) => !!s.country.nomadVisa) as Array<{
+  const selectedCountries = selectedSlots.filter((s) => !!s.country.nomadVisa) as {
     country: CountryData & { nomadVisa: NonNullable<CountryData["nomadVisa"]> };
     color: string;
     index: number;
-  }>;
+  }[];
 
   /** Localize nomad visa fields that have i18n */
   function getLocalizedVisa(country: CountryData) {
     const visa = country.nomadVisa!;
-    const loc = lang === "ru" || lang === "ua" ? visa.i18n?.[lang as "ru" | "ua"] : undefined;
+    const loc = lang === "ru" || lang === "ua" ? visa.i18n?.[lang] : undefined;
     return { visa, loc };
   }
 
@@ -101,9 +101,9 @@ export function NomadVisaComparison({
         const monthlyBudget = budgetMatchByCode.get(slot.country.code)?.monthlyCost;
         return (
           <span
-            className={`font-mono text-[20px] font-semibold ${monthlyBudget != null ? "text-on-surface" : "text-dimmest"}`}
+            className={`font-mono text-[20px] font-semibold ${monthlyBudget == null ? "text-dimmest" : "text-on-surface"}`}
           >
-            {monthlyBudget != null ? `$${monthlyBudget.toLocaleString()}` : "—"}
+            {monthlyBudget == null ? "—" : `$${monthlyBudget.toLocaleString()}`}
           </span>
         );
       }
@@ -113,7 +113,7 @@ export function NomadVisaComparison({
             className={`font-mono text-[20px] font-semibold ${visa.duration.initial >= 12 ? "text-success" : "text-warn"}`}
           >
             {visa.duration.initial}
-            <span className="text-xs text-dim ml-[2px]">{t("countryPage.visa.months")}</span>
+            <span className="ml-[2px] text-xs text-dim">{t("countryPage.visa.months")}</span>
           </span>
         );
       case "maxExtension":
@@ -124,7 +124,7 @@ export function NomadVisaComparison({
             {visa.duration.maxExtension > 0 ? (
               <>
                 +{visa.duration.maxExtension}
-                <span className="text-xs text-dim ml-[2px]">{t("countryPage.visa.months")}</span>
+                <span className="ml-[2px] text-xs text-dim">{t("countryPage.visa.months")}</span>
               </>
             ) : (
               "—"
@@ -178,7 +178,7 @@ export function NomadVisaComparison({
           <span className="font-mono text-[20px] font-semibold text-on-surface">
             {cur}
             {monthly ? monthly.toLocaleString() : annual?.toLocaleString()}
-            <span className="text-xs text-dim ml-[2px]">
+            <span className="ml-[2px] text-xs text-dim">
               /{monthly ? t("countryPage.visa.mo") : t("countryPage.visa.yr")}
             </span>
           </span>
@@ -201,12 +201,12 @@ export function NomadVisaComparison({
           <div className="flex flex-col items-center gap-1.5">
             <div className="flex items-center gap-2">
               <span
-                className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[var(--tax-bg)] text-[var(--tax-text)]"
+                className="rounded-full bg-[var(--tax-bg)] px-2.5 py-1 text-[11px] font-semibold text-[var(--tax-text)]"
                 style={{ "--tax-bg": colors.bg, "--tax-text": colors.text } as React.CSSProperties}
               >
                 {label}
               </span>
-              {visa.tax.rate != null && (
+              {visa.tax.rate == null ? null : (
                 <span
                   className="font-mono text-[16px] font-semibold text-[var(--tax-text)]"
                   style={{ "--tax-text": colors.text } as React.CSSProperties}
@@ -215,11 +215,11 @@ export function NomadVisaComparison({
                 </span>
               )}
             </div>
-            {taxNotes && (
-              <span className="text-[11px] text-dim leading-[1.4] text-center max-w-[260px]">
+            {taxNotes ? (
+              <span className="max-w-[260px] text-center text-[11px] leading-[1.4] text-dim">
                 {taxNotes}
               </span>
-            )}
+            ) : null}
           </div>
         );
       }
@@ -246,7 +246,7 @@ export function NomadVisaComparison({
         return (
           <div className="flex flex-col gap-1">
             {items.map((b, i) => (
-              <span key={i} className="text-[11px] text-muted leading-[1.3]">
+              <span key={i} className="text-[11px] leading-[1.3] text-muted">
                 • {b}
               </span>
             ))}
@@ -259,20 +259,22 @@ export function NomadVisaComparison({
   return (
     <div>
       {/* Country selector — horizontal scroll */}
-      <div className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto [scrollbar-width:thin]">
+      <div className="grid grid-cols-3 gap-3 pb-2 [scrollbar-width:thin] md:flex md:items-stretch md:overflow-x-auto">
         {selectedCountries.map((slot) => (
-          <div key={slot.country.code} className="min-w-0 w-full md:shrink-0 md:w-[180px]">
+          <div key={slot.country.code} className="w-full min-w-0 md:w-[180px] md:shrink-0">
             <ComparisonSlotCard
               flagUrl={slot.country.flagUrl}
               countryName={localizeCountry(slot.country, lang).name}
-              onRemove={() => handleRemove(slot.index)}
+              onRemove={() => {
+                handleRemove(slot.index);
+              }}
               onNavigate={() =>
                 navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
               }
               regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
-              nameSuffix={<Plane size={13} className="text-accent shrink-0" />}
+              nameSuffix={<Plane size={13} className="shrink-0 text-accent" />}
             >
-              <span className="text-[11px] text-muted text-center leading-[1.3]">
+              <span className="text-center text-[11px] leading-[1.3] text-muted">
                 {slot.country.nomadVisa.visaName}
               </span>
             </ComparisonSlotCard>
@@ -280,10 +282,12 @@ export function NomadVisaComparison({
         ))}
 
         {/* Add button */}
-        <div className="min-w-0 w-full md:shrink-0 md:w-[180px]">
+        <div className="w-full min-w-0 md:w-[180px] md:shrink-0">
           <ComparisonAddButton
             label={t("compare.addCountry")}
-            onClick={() => setDropdownOpen((p) => !p)}
+            onClick={() => {
+              setDropdownOpen((p) => !p);
+            }}
           />
         </div>
       </div>
@@ -307,7 +311,7 @@ export function NomadVisaComparison({
       />
 
       {/* Visa comparison grid */}
-      {selectedCountries.length > 0 && (
+      {selectedCountries.length > 0 ? (
         <div className="mt-8">
           <div className="h-px bg-[#1C1C1C]" />
 
@@ -337,7 +341,7 @@ export function NomadVisaComparison({
                 {selectedCountries.map((slot) => (
                   <div
                     key={slot.index}
-                    className="flex shrink-0 items-center justify-center w-[var(--vcw)]"
+                    className="flex w-[var(--vcw)] shrink-0 items-center justify-center"
                     style={{ "--vcw": VISA_COMPARISON_COLUMN_WIDTH } as React.CSSProperties}
                   >
                     {renderCell(slot, key)}
@@ -347,7 +351,7 @@ export function NomadVisaComparison({
             ))}
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

@@ -41,7 +41,9 @@ export function useInfiniteScroll<T>(items: T[], disabled = false) {
       { rootMargin: "200px" },
     );
     observer.observe(sentinel);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, [disabled, items]);
 
   const visible = disabled ? items : items.slice(0, visibleCount);

@@ -54,7 +54,7 @@ export function CountryCard({
     <div
       data-country-code={country.code}
       data-selected={selected ? "true" : undefined}
-      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"} bg-[var(--row-bg)] border-t border-[var(--row-bt)] ${highlighted ? "outline outline-2 outline-[var(--color-accent)] outline-offset-[-1px]" : ""}`}
+      className={`country-row relative overflow-hidden transition-colors duration-150 ${compareMode ? "pl-[38px]" : "pl-0"} border-t border-[var(--row-bt)] bg-[var(--row-bg)] ${highlighted ? "outline outline-2 outline-offset-[-1px] outline-[var(--color-accent)]" : ""}`}
       style={
         {
           "--row-bg": bgColor,
@@ -63,16 +63,16 @@ export function CountryCard({
         } as React.CSSProperties
       }
     >
-      {compareMode && <CompareCheckbox isSelected={!!selected} />}
+      {compareMode ? <CompareCheckbox isSelected={selected} /> : null}
 
       {/* Main row */}
       <button
-        className={`w-full flex items-center gap-2 md:gap-4 px-3 md:px-4 py-2.5 md:py-3 transition-all text-left cursor-pointer min-h-14 bg-transparent border-none relative ${compareMode ? "z-0" : "z-[1]"}`}
+        className={`relative flex min-h-14 w-full cursor-pointer items-center gap-2 border-none bg-transparent px-3 py-2.5 text-left transition-all md:gap-4 md:px-4 md:py-3 ${compareMode ? "z-0" : "z-[1]"}`}
         onClick={compareMode ? onSelectToggle : onToggle}
         aria-expanded={expanded}
       >
         {/* Rank */}
-        <span className="text-base md:text-lg font-mono font-bold text-accent w-7 text-center shrink-0">
+        <span className="w-7 shrink-0 text-center font-mono text-base font-bold text-accent md:text-lg">
           {rank}
         </span>
 
@@ -84,7 +84,7 @@ export function CountryCard({
               <Tooltip content={t("a11y.nomadVisaAvailable", "Nomad Visa Available")} side="top">
                 <Link
                   to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-                  className="shrink-0 inline-flex items-center justify-center text-accent"
+                  className="inline-flex shrink-0 items-center justify-center text-accent"
                   onClick={(e) => {
                     if (compareMode) {
                       e.preventDefault();
@@ -114,7 +114,7 @@ export function CountryCard({
         {/* Final score */}
         <div className="shrink-0">
           <span
-            className={`text-lg md:text-xl font-mono font-bold ${scoreColourClass(finalScore, "text")}`}
+            className={`font-mono text-lg font-bold md:text-xl ${scoreColourClass(finalScore, "text")}`}
           >
             {finalScore.toFixed(1)}
           </span>
@@ -128,15 +128,15 @@ export function CountryCard({
       </button>
 
       {/* Expanded breakdown */}
-      {expanded && !compareMode && (
+      {expanded && !compareMode ? (
         <div
-          className="px-4 py-4 bg-[#111113] border-t border-[var(--exp-bc)]"
+          className="border-t border-[var(--exp-bc)] bg-[#111113] px-4 py-4"
           style={{ "--exp-bc": borderColor } as React.CSSProperties}
         >
           <ScoreBreakdown country={country} />
           <ViewCountryButton to={`${langPrefix}/country/${country.code.toLowerCase()}`} />
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

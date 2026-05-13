@@ -21,44 +21,49 @@ export function BudgetFilterPanel({ bs }: Props) {
   const { t } = useTranslation();
   const langPrefix = useLangPrefix();
   const [open, setOpen] = useState({ lifestyle: true, categories: true });
-  const toggle = (key: keyof typeof open) => setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
+  const toggle = (key: keyof typeof open) => {
+    setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   const budgetPct = ((bs.budget - 300) / 9700) * 100;
 
   const avgCategoryWeight = Math.round(
-    Object.values(bs.categoryWeights).reduce((a, b) => a + b, 0) / BUDGET_CATEGORY_KEYS.length,
+    (Object.values(bs.categoryWeights) as number[]).reduce((a, b) => a + b, 0) /
+      BUDGET_CATEGORY_KEYS.length,
   );
 
   return (
-    <div className="bg-[#131416] border border-[#1E1E22] rounded-[8px] overflow-hidden">
+    <div className="overflow-hidden rounded-[8px] border border-[#1E1E22] bg-[#131416]">
       {/* Budget slider */}
-      <div className="p-4 border-b border-[#242424]">
-        <div className="flex items-end gap-2 mb-3">
-          <span className="font-mono text-[28px] font-semibold text-on-surface leading-none">
+      <div className="border-b border-[#242424] p-4">
+        <div className="mb-3 flex items-end gap-2">
+          <span className="font-mono text-[28px] leading-none font-semibold text-on-surface">
             ${bs.budget.toLocaleString()}
           </span>
-          <span className="text-xs text-dimmer pb-0.5">{t("budget.perMonth", "/month")}</span>
+          <span className="pb-0.5 text-xs text-dimmer">{t("budget.perMonth", "/month")}</span>
         </div>
         <input
           name="compare-budget-amount"
           type="range"
           min={300}
-          max={10000}
+          max={10_000}
           step={50}
           value={bs.budget}
-          onChange={(e) => bs.setBudget(Number(e.target.value))}
-          className="w-full h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+          onChange={(e) => {
+            bs.setBudget(Number(e.target.value));
+          }}
+          className="h-1.5 w-full cursor-pointer appearance-none rounded-full [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
           style={{ "--pct": `${budgetPct}%` } as React.CSSProperties}
           aria-label={t("a11y.budgetSlider", "Budget slider")}
         />
-        <div className="flex justify-between mt-1.5">
+        <div className="mt-1.5 flex justify-between">
           <span className="text-[10px] text-dimmer">$300</span>
           <span className="text-[10px] text-dimmer">$10,000</span>
         </div>
       </div>
 
       {/* Quality blend */}
-      <div className="px-4 py-3 border-b border-[#242424]">
+      <div className="border-b border-[#242424] px-4 py-3">
         <WeightSliderRow
           inputName="compare-budget-quality-blend"
           value={bs.qualityBlend}
@@ -71,7 +76,7 @@ export function BudgetFilterPanel({ bs }: Props) {
             <Tooltip
               content={
                 <div className="max-w-[240px]">
-                  <div className="mb-1.5 text-white font-semibold">
+                  <div className="mb-1.5 font-semibold text-white">
                     {t("budget.qualityBlend", "Quality blend")}
                   </div>
                   <div>
@@ -84,11 +89,11 @@ export function BudgetFilterPanel({ bs }: Props) {
               }
               side="bottom"
             >
-              <Info size={13} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-45" />
+              <Info size={13} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-45" />
             </Tooltip>
           }
         />
-        <div className="flex justify-between mt-1.5">
+        <div className="mt-1.5 flex justify-between">
           <span className="text-[10px] text-dimmer">
             {t("budget.pureAffordability", "Pure Affordability")}
           </span>
@@ -104,9 +109,11 @@ export function BudgetFilterPanel({ bs }: Props) {
         icon={<UserRound size={16} color="#C2956A" />}
         label={t("budget.lifestyleProfile", "LIFESTYLE PROFILE")}
         isOpen={open.lifestyle}
-        onToggle={() => toggle("lifestyle")}
+        onToggle={() => {
+          toggle("lifestyle");
+        }}
       >
-        <div className="flex flex-col px-4 py-3 gap-[14px]">
+        <div className="flex flex-col gap-[14px] px-4 py-3">
           <div className="flex flex-col gap-[6px]">
             <span className="text-xs text-white">{t("budget.bedrooms.label")}</span>
             <ToggleGroup
@@ -147,14 +154,16 @@ export function BudgetFilterPanel({ bs }: Props) {
         icon={<Sliders size={16} color="#C2956A" />}
         label={t("budget.categoryWeights", "CATEGORY WEIGHTS")}
         badge={
-          <div className="flex items-center bg-[#291608] rounded-[3px] px-2 py-[3px]">
+          <div className="flex items-center rounded-[3px] bg-[#291608] px-2 py-[3px]">
             <span className="font-mono text-[11px] text-accent-dim">
               {t("weights.averageBadge")} {avgCategoryWeight}
             </span>
           </div>
         }
         isOpen={open.categories}
-        onToggle={() => toggle("categories")}
+        onToggle={() => {
+          toggle("categories");
+        }}
       >
         <div className="py-1">
           {BUDGET_CATEGORY_KEYS.map((key) => (
@@ -162,7 +171,9 @@ export function BudgetFilterPanel({ bs }: Props) {
               <WeightSliderRow
                 inputName={`${key}-compare-budget-weight`}
                 value={bs.categoryWeights[key]}
-                onChange={(v) => bs.handleCategoryWeight(key, v)}
+                onChange={(v) => {
+                  bs.handleCategoryWeight(key, v);
+                }}
                 ariaLabel={t(`budget.categories.${key}`, key)}
                 label={
                   <Link
@@ -183,7 +194,7 @@ export function BudgetFilterPanel({ bs }: Props) {
         <button
           type="button"
           onClick={bs.handleReset}
-          className="w-full flex items-center justify-center gap-2 rounded bg-transparent text-accent-dim text-[13px] font-medium h-10 border border-border rounded-[6px] cursor-pointer"
+          className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded rounded-[6px] border border-border bg-transparent text-[13px] font-medium text-accent-dim"
         >
           <svg
             width="14"

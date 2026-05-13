@@ -48,10 +48,10 @@ export const CATEGORY_KEYS: CategoryKey[] = [
 ];
 
 /** Tourism subcategory groups — logical groupings of tourism metrics. */
-export const TOURISM_GROUPS: Array<{
+export const TOURISM_GROUPS: {
   labelKey: string;
   keys: CategoryKey[];
-}> = [
+}[] = [
   {
     labelKey: "safetyPeople",
     keys: ["tourismSafety", "touristScamSafety", "localFriendliness", "englishProficiency"],
@@ -93,7 +93,7 @@ export const DISPLAYED_CORE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(
 );
 
 /** Categories computed by the server but hidden from the UI. */
-const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
+const HIDDEN_CATEGORIES = new Set<CategoryKey>([
   "culturalHeritage",
   "biodiversity",
   "digitalFreedom",
@@ -101,7 +101,7 @@ const HIDDEN_CATEGORIES: Set<CategoryKey> = new Set([
 ]);
 
 /** AI metrics are visible but opt-in (default weight = 0). */
-export const AI_CATEGORIES: Set<CategoryKey> = new Set(AI_CATEGORY_KEYS);
+export const AI_CATEGORIES = new Set<CategoryKey>(AI_CATEGORY_KEYS);
 
 /** Only the categories visible in the UI (weights, breakdowns, comparisons). */
 export const VISIBLE_CATEGORY_KEYS: CategoryKey[] = CATEGORY_KEYS.filter(

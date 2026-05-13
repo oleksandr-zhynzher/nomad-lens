@@ -7,6 +7,10 @@ interface PeopleCountStepperProps {
   onChange: (value: number) => void;
 }
 
+function btnClass(disabled: boolean) {
+  return `w-8 h-8 flex items-center justify-center rounded-[6px] text-base font-bold transition-all ${disabled ? "bg-surface-2 text-[#555555] cursor-default" : "bg-border text-on-surface cursor-pointer"}`;
+}
+
 export function PeopleCountStepper({
   value,
   min = 1,
@@ -16,11 +20,8 @@ export function PeopleCountStepper({
   const atMin = value <= min;
   const atMax = value >= max;
 
-  const btnClass = (disabled: boolean) =>
-    `w-8 h-8 flex items-center justify-center rounded-[6px] text-base font-bold transition-all ${disabled ? "bg-surface-2 text-[#555555] cursor-default" : "bg-border text-on-surface cursor-pointer"}`;
-
   return (
-    <div className="inline-flex items-center rounded-[6px] h-9 gap-1">
+    <div className="inline-flex h-9 items-center gap-1 rounded-[6px]">
       <button
         type="button"
         onClick={() => !atMin && onChange(value - 1)}
@@ -29,7 +30,7 @@ export function PeopleCountStepper({
       >
         −
       </button>
-      <span className="font-mono text-[15px] font-bold text-on-surface min-w-6 text-center select-none">
+      <span className="min-w-6 text-center font-mono text-[15px] font-bold text-on-surface select-none">
         {value}
       </span>
       <button

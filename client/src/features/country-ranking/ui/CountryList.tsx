@@ -42,7 +42,7 @@ export function CountryList({
     return (
       <div className="flex flex-col gap-2">
         {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="h-14 animate-pulse bg-surface border-t border-border" />
+          <div key={i} className="h-14 animate-pulse border-t border-border bg-surface" />
         ))}
       </div>
     );
@@ -54,7 +54,7 @@ export function CountryList({
         <p className="text-danger">{error}</p>
         <button
           onClick={onRetry}
-          className="px-4 py-2 rounded text-sm font-medium transition-colors bg-accent text-white"
+          className="rounded bg-accent px-4 py-2 text-sm font-medium text-white transition-colors"
         >
           {t("countryList.retry")}
         </button>
@@ -63,12 +63,12 @@ export function CountryList({
   }
 
   if (ranked.length === 0) {
-    return <p className="text-center py-20 text-sm text-dim">{t("countryList.noResults")}</p>;
+    return <p className="py-20 text-center text-sm text-dim">{t("countryList.noResults")}</p>;
   }
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center justify-between px-1 my-4 text-xs">
+      <div className="my-4 flex items-center justify-between px-1 text-xs">
         <span className="text-muted">
           {compareMode
             ? t("compare.countrySubtitle", "Select countries to compare across all indicators")
@@ -91,7 +91,7 @@ export function CountryList({
         />
       ))}
       {/* Invisible sentinel — entering the viewport triggers the next page load */}
-      {hasMore && <div ref={sentinelRef} className="h-px" />}
+      {hasMore ? <div ref={sentinelRef} className="h-px" /> : null}
     </div>
   );
 }

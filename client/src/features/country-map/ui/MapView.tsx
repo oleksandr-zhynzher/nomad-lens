@@ -27,7 +27,7 @@ export function MapPage() {
 
   const handleCountryClick = useCallback(
     (iso2: string) => {
-      navigate((langPrefix || "/") + `?highlight=${iso2}`);
+      void navigate((langPrefix || "/") + `?highlight=${iso2}`);
     },
     [navigate, langPrefix],
   );
@@ -40,14 +40,16 @@ export function MapPage() {
             showWeights ? "grid-cols-1 lg:grid-cols-[340px_1fr]" : "grid-cols-1"
           }`}
         >
-          {showWeights && (
+          {showWeights ? (
             <div className="hidden md:block">
               <WeightPanel
                 weights={ws.weights}
                 onChange={ws.handleWeightChange}
                 onReset={ws.handleReset}
                 weightsAreDefault={ws.weightsAreDefault}
-                onShare={() => ws.handleShare()}
+                onShare={() => {
+                  ws.handleShare();
+                }}
                 climatePrefs={ws.climatePrefs}
                 onClimatePrefsChange={ws.setClimatePrefs}
                 nomadVisaOnly={ws.nomadVisaOnly}
@@ -60,11 +62,13 @@ export function MapPage() {
                 onWeightModeChange={ws.handleWeightModeChange}
               />
             </div>
-          )}
+          ) : null}
           <WorldMap
             ranked={ranked}
             onCountryClick={handleCountryClick}
-            onToggleWeights={() => setShowWeights((p) => !p)}
+            onToggleWeights={() => {
+              setShowWeights((p) => !p);
+            }}
             showWeights={showWeights}
           />
         </div>

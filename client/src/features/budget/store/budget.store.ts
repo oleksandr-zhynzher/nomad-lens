@@ -93,9 +93,7 @@ export function sanitizeBudgetPreferences(value: unknown): BudgetPreferencesStat
       typeof parsed.peopleCount === "number" && Number.isFinite(parsed.peopleCount)
         ? clampNumber(Math.round(parsed.peopleCount), MIN_PEOPLE_COUNT, MAX_PEOPLE_COUNT)
         : fallback.peopleCount,
-    bedrooms: BEDROOM_OPTIONS.has(parsed.bedrooms as Bedrooms)
-      ? (parsed.bedrooms as Bedrooms)
-      : fallback.bedrooms,
+    bedrooms: BEDROOM_OPTIONS.has(parsed.bedrooms!) ? parsed.bedrooms! : fallback.bedrooms,
     qualityBlend:
       typeof parsed.qualityBlend === "number" && Number.isFinite(parsed.qualityBlend)
         ? clampNumber(Math.round(parsed.qualityBlend), MIN_QUALITY_BLEND, MAX_QUALITY_BLEND)
@@ -171,8 +169,8 @@ export function isDefaultBudgetPreferences(state: BudgetPreferencesState): boole
 }
 
 function getInitialBudgetPreferences(): BudgetPreferencesState {
-  if (typeof window !== "undefined" && hasBudgetQueryState(window.location.search)) {
-    return buildBudgetPreferencesFromSearch(window.location.search);
+  if (globalThis.window != null && hasBudgetQueryState(globalThis.location.search)) {
+    return buildBudgetPreferencesFromSearch(globalThis.location.search);
   }
 
   return readVersionedJson({
@@ -200,30 +198,37 @@ function commitBudgetPreferences(
 
 export const useBudgetPreferenceStore = createAppStore<BudgetPreferenceStore>((set, get) => ({
   ...getInitialBudgetPreferences(),
-  setBudget: (budget) =>
+  setBudget: (budget) => {
     commitBudgetPreferences(
       set,
       { budget: clampNumber(Math.round(budget), MIN_BUDGET, MAX_BUDGET) },
       get(),
-    ),
-  setHousing: (housing) => commitBudgetPreferences(set, { housing }, get()),
-  setPeopleCount: (peopleCount) =>
+    );
+  },
+  setHousing: (housing) => {
+    commitBudgetPreferences(set, { housing }, get());
+  },
+  setPeopleCount: (peopleCount) => {
     commitBudgetPreferences(
       set,
       {
         peopleCount: clampNumber(Math.round(peopleCount), MIN_PEOPLE_COUNT, MAX_PEOPLE_COUNT),
       },
       get(),
-    ),
-  setBedrooms: (bedrooms) => commitBudgetPreferences(set, { bedrooms }, get()),
-  setQualityBlend: (qualityBlend) =>
+    );
+  },
+  setBedrooms: (bedrooms) => {
+    commitBudgetPreferences(set, { bedrooms }, get());
+  },
+  setQualityBlend: (qualityBlend) => {
     commitBudgetPreferences(
       set,
       {
         qualityBlend: clampNumber(Math.round(qualityBlend), MIN_QUALITY_BLEND, MAX_QUALITY_BLEND),
       },
       get(),
-    ),
+    );
+  },
   handleCategoryWeight: (key, value) => {
     const categoryWeights = {
       ...get().categoryWeights,

@@ -67,12 +67,12 @@ function SortIcon({
   sortDirection: SortDirection;
 }) {
   if (sortField !== field) {
-    return <ChevronsUpDown size={14} className="inline ml-1 opacity-30" />;
+    return <ChevronsUpDown size={14} className="ml-1 inline opacity-30" />;
   }
   return sortDirection === "asc" ? (
-    <ChevronUp size={14} className="inline ml-1" />
+    <ChevronUp size={14} className="ml-1 inline" />
   ) : (
-    <ChevronDown size={14} className="inline ml-1" />
+    <ChevronDown size={14} className="ml-1 inline" />
   );
 }
 
@@ -108,13 +108,14 @@ export function NomadVisasPage() {
   const [compareMode, setCompareMode] = useState(false);
   const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
 
-  const toggleSelect = (code: string) =>
+  const toggleSelect = (code: string) => {
     setSelectedCodes((prev) => {
       const next = new Set(prev);
       if (next.has(code)) next.delete(code);
       else next.add(code);
       return next;
     });
+  };
 
   const exitCompareMode = () => {
     setCompareMode(false);
@@ -123,7 +124,7 @@ export function NomadVisasPage() {
 
   const handleCompare = () => {
     if (selectedCodes.size < 2) return;
-    navigate(`${langPrefix}/compare?m=nomadVisas&c=${Array.from(selectedCodes).join(",")}`);
+    void navigate(`${langPrefix}/compare?m=nomadVisas&c=${[...selectedCodes].join(",")}`);
   };
 
   // Sticky search bar — measure its height so thead sticks just below it
@@ -133,11 +134,15 @@ export function NomadVisasPage() {
   useEffect(() => {
     const el = searchBarRef.current;
     if (!el) return;
-    const update = () => setTheadTop(56 + el.offsetHeight);
+    const update = () => {
+      setTheadTop(56 + el.offsetHeight);
+    };
     update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
-    return () => ro.disconnect();
+    return () => {
+      ro.disconnect();
+    };
   }, []);
 
   // Two-table sticky header: sync horizontal scroll from body to header
@@ -265,13 +270,13 @@ export function NomadVisasPage() {
           { count: allVisaCountries.length },
         )}
       >
-        {!loading && allVisaCountries.length > 0 && (
+        {!loading && allVisaCountries.length > 0 ? (
           <div className="hero-stats-row hero-banner-stats">
             <div className="min-w-0">
-              <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
+              <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
                 {allVisaCountries.length}
               </div>
-              <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
+              <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                 {t("nomadVisasPage.stats.countries", {
                   count: allVisaCountries.length,
                 })}
@@ -279,10 +284,10 @@ export function NomadVisasPage() {
             </div>
             <div className="hero-stat-divider" />
             <div className="min-w-0">
-              <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
+              <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
                 {allVisaCountries.filter((c) => c.nomadVisa.tax.status === "exempt").length}
               </div>
-              <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
+              <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                 {t("nomadVisasPage.stats.taxExempt", {
                   count: allVisaCountries.filter((c) => c.nomadVisa.tax.status === "exempt").length,
                 })}
@@ -290,17 +295,17 @@ export function NomadVisasPage() {
             </div>
             <div className="hero-stat-divider" />
             <div className="min-w-0">
-              <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
+              <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
                 {allVisaCountries.filter((c) => c.nomadVisa.cost.amount === 0).length}
               </div>
-              <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
+              <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                 {t("nomadVisasPage.stats.freeVisas", {
                   count: allVisaCountries.filter((c) => c.nomadVisa.cost.amount === 0).length,
                 })}
               </div>
             </div>
           </div>
-        )}
+        ) : null}
       </PageHeroBanner>
 
       {/* Sentinel for sticky detection (not needed for logic here, reserved) */}
@@ -308,58 +313,62 @@ export function NomadVisasPage() {
 
       {/* Sticky search + compare bar */}
       <div ref={searchBarRef} className="sticky top-14 z-20 bg-bg py-3">
-        <div className="max-w-[1200px] mx-auto px-4">
+        <div className="mx-auto max-w-[1200px] px-4">
           {/* Row 1: search + compare buttons */}
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             {/* Search input */}
-            <div className="relative flex-1 min-w-0">
+            <div className="relative min-w-0 flex-1">
               <Search
                 size={16}
                 color="#808080"
-                className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2"
               />
               <input
                 name="visa-country-search"
                 type="text"
                 placeholder={t("nomadVisasPage.search", "Search countries...")}
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className={`w-full h-10 pl-9 rounded-md outline-none text-sm text-white bg-[#161616] border border-surface ${searchQuery ? "pr-9" : "pr-3"}`}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                }}
+                className={`h-10 w-full rounded-md border border-surface bg-[#161616] pl-9 text-sm text-white outline-none ${searchQuery ? "pr-9" : "pr-3"}`}
               />
-              {searchQuery && (
+              {searchQuery ? (
                 <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 w-[22px] h-[22px] flex items-center justify-center rounded-[3px] border-0 cursor-pointer bg-surface-4 text-tertiary"
+                  onClick={() => {
+                    setSearchQuery("");
+                  }}
+                  className="absolute top-1/2 right-2.5 flex h-[22px] w-[22px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
                   aria-label={t("a11y.clearSearch", "Clear search")}
                 >
                   <X size={12} />
                 </button>
-              )}
+              ) : null}
             </div>
 
             {/* Compare mode buttons */}
             {compareMode ? (
-              <div className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto">
+              <div className="flex w-full shrink-0 items-center justify-end gap-2 sm:w-auto">
                 {/* Compare CTA */}
                 <button
                   onClick={handleCompare}
                   disabled={selectedCodes.size < 2}
-                  className={`flex flex-1 items-center justify-center sm:flex-none gap-1.5 h-10 px-3.5 rounded-md text-[13px] font-semibold whitespace-nowrap transition-all cursor-${selectedCodes.size < 2 ? "default" : "pointer"} ${selectedCodes.size < 2 ? "bg-transparent text-accent-dim border border-accent-dim" : "bg-accent text-white border-0"}`}
+                  className={`flex h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-3.5 text-[13px] font-semibold whitespace-nowrap transition-all sm:flex-none cursor-${selectedCodes.size < 2 ? "default" : "pointer"} ${selectedCodes.size < 2 ? "border border-accent-dim bg-transparent text-accent-dim" : "border-0 bg-accent text-white"}`}
                 >
                   <GitCompare size={15} />
                   {t("nomadVisasPage.compareSelected", "Compare")}
-                  {selectedCodes.size > 0 && (
+                  {selectedCodes.size > 0 ? (
                     <span
                       className={`rounded-[10px] px-[7px] py-px text-xs ${selectedCodes.size < 2 ? "bg-[rgba(143,90,60,0.2)]" : "bg-[rgba(255,255,255,0.25)]"}`}
                     >
                       {selectedCodes.size}
                     </span>
-                  )}
+                  ) : null}
                 </button>
                 {/* Exit compare mode */}
                 <button
                   onClick={exitCompareMode}
-                  className="flex items-center justify-center w-10 h-10 rounded-md border border-surface-4 cursor-pointer bg-transparent text-dim"
+                  className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-transparent text-dim"
                   aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
                 >
                   <X size={16} />
@@ -367,8 +376,10 @@ export function NomadVisasPage() {
               </div>
             ) : (
               <button
-                onClick={() => setCompareMode(true)}
-                className="w-full flex items-center justify-center sm:w-auto gap-1.5 h-10 px-3.5 rounded-md border border-surface-4 cursor-pointer bg-transparent text-muted text-[13px] font-medium whitespace-nowrap shrink-0"
+                onClick={() => {
+                  setCompareMode(true);
+                }}
+                className="flex h-10 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-surface-4 bg-transparent px-3.5 text-[13px] font-medium whitespace-nowrap text-muted sm:w-auto"
               >
                 <GitCompare size={15} />
                 {t("nomadVisasPage.compareMode", "Compare")}
@@ -377,31 +388,31 @@ export function NomadVisasPage() {
           </div>
 
           {/* Row 2: helper text below the entire search+buttons row */}
-          {compareMode && (
+          {compareMode ? (
             <p className="mt-1.5 text-xs text-dim">
               {t(
                 "compare.helperText",
                 "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
               )}
             </p>
-          )}
+          ) : null}
         </div>
       </div>
 
       {/* Table */}
       {loading ? (
-        <div className="text-center py-16 text-dim">{t("loading", "Loading…")}</div>
+        <div className="py-16 text-center text-dim">{t("loading", "Loading…")}</div>
       ) : sortedCountries.length === 0 ? (
-        <div className="text-center py-16 px-4 text-dim">
+        <div className="px-4 py-16 text-center text-dim">
           {t("nomadVisasPage.noResults", "No countries found")}
         </div>
       ) : (
-        <div className="w-full px-4 pb-12 max-w-[1200px] mx-auto box-content">
+        <div className="mx-auto box-content w-full max-w-[1200px] px-4 pb-12">
           {/* Shared colgroup definition */}
           {(() => {
             const colgroup = (
               <colgroup>
-                {compareMode && <col className="w-12" />}
+                {compareMode ? <col className="w-12" /> : null}
                 <col className="w-[200px]" />
                 <col className="w-[160px]" />
                 <col className="w-[110px]" />
@@ -419,20 +430,22 @@ export function NomadVisasPage() {
                 {/* Sticky header table — hidden scrollbar, synced via JS */}
                 <div
                   ref={headerScrollRef}
-                  className="no-scrollbar sticky z-10 bg-bg overflow-x-scroll top-[var(--thead-top)]"
+                  className="no-scrollbar sticky top-[var(--thead-top)] z-10 overflow-x-scroll bg-bg"
                   style={{ "--thead-top": `${theadTop}px` } as React.CSSProperties}
                 >
                   <table
-                    className="w-full table-fixed border-separate border-spacing-0 min-w-[var(--tmin-w)]"
+                    className="w-full min-w-[var(--tmin-w)] table-fixed border-separate border-spacing-0"
                     style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
                   >
                     {colgroup}
                     <thead>
                       <tr className="border-b-2 border-border">
-                        {compareMode && <th className="px-3 py-4 bg-bg" />}
+                        {compareMode ? <th className="bg-bg px-3 py-4" /> : null}
                         <th
-                          onClick={() => handleSort("country")}
-                          className="px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] uppercase text-muted cursor-pointer select-none bg-bg whitespace-nowrap"
+                          onClick={() => {
+                            handleSort("country");
+                          }}
+                          className="cursor-pointer bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.country", "Country")}{" "}
                           <SortIcon
@@ -441,12 +454,14 @@ export function NomadVisasPage() {
                             sortDirection={sortDirection}
                           />
                         </th>
-                        <th className="px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] uppercase text-muted bg-bg whitespace-nowrap">
+                        <th className="bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase">
                           {t("nomadVisasPage.table.visaName", "Visa Name")}
                         </th>
                         <th
-                          onClick={() => handleSort("overallScore")}
-                          className="px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] uppercase text-muted cursor-pointer select-none bg-bg whitespace-nowrap"
+                          onClick={() => {
+                            handleSort("overallScore");
+                          }}
+                          className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.overallScore", "Overall Score")}{" "}
                           <SortIcon
@@ -456,8 +471,10 @@ export function NomadVisasPage() {
                           />
                         </th>
                         <th
-                          onClick={() => handleSort("monthlyBudget")}
-                          className="px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] uppercase text-muted cursor-pointer select-none bg-bg whitespace-nowrap"
+                          onClick={() => {
+                            handleSort("monthlyBudget");
+                          }}
+                          className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.monthlyBudget", "Monthly Budget")}{" "}
                           <SortIcon
@@ -467,8 +484,10 @@ export function NomadVisasPage() {
                           />
                         </th>
                         <th
-                          onClick={() => handleSort("duration")}
-                          className="px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] uppercase text-muted cursor-pointer select-none bg-bg whitespace-nowrap"
+                          onClick={() => {
+                            handleSort("duration");
+                          }}
+                          className="cursor-pointer bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.duration", "Duration")}{" "}
                           <SortIcon
@@ -478,8 +497,10 @@ export function NomadVisasPage() {
                           />
                         </th>
                         <th
-                          onClick={() => handleSort("cost")}
-                          className="px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] uppercase text-muted cursor-pointer select-none bg-bg whitespace-nowrap"
+                          onClick={() => {
+                            handleSort("cost");
+                          }}
+                          className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.cost", "Cost")}{" "}
                           <SortIcon
@@ -489,8 +510,10 @@ export function NomadVisasPage() {
                           />
                         </th>
                         <th
-                          onClick={() => handleSort("income")}
-                          className="px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] uppercase text-muted cursor-pointer select-none bg-bg whitespace-nowrap"
+                          onClick={() => {
+                            handleSort("income");
+                          }}
+                          className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.income", "Income Req.")}{" "}
                           <SortIcon
@@ -500,8 +523,10 @@ export function NomadVisasPage() {
                           />
                         </th>
                         <th
-                          onClick={() => handleSort("tax")}
-                          className="px-3 py-4 text-center text-[11px] font-semibold tracking-[1px] uppercase text-muted cursor-pointer select-none bg-bg whitespace-nowrap"
+                          onClick={() => {
+                            handleSort("tax");
+                          }}
+                          className="cursor-pointer bg-bg px-3 py-4 text-center text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.tax", "Tax Status")}{" "}
                           <SortIcon
@@ -510,7 +535,7 @@ export function NomadVisasPage() {
                             sortDirection={sortDirection}
                           />
                         </th>
-                        <th className="px-3 py-4 bg-bg" />
+                        <th className="bg-bg px-3 py-4" />
                       </tr>
                     </thead>
                   </table>
@@ -519,7 +544,7 @@ export function NomadVisasPage() {
                 {/* Scrollable body table */}
                 <div ref={bodyScrollRef} className="overflow-x-auto" onScroll={syncHeaderScroll}>
                   <table
-                    className="w-full table-fixed border-separate border-spacing-0 min-w-[var(--tmin-w)]"
+                    className="w-full min-w-[var(--tmin-w)] table-fixed border-separate border-spacing-0"
                     style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
                   >
                     {colgroup}
@@ -535,12 +560,14 @@ export function NomadVisasPage() {
                           <tr
                             key={country.code}
                             data-country-code={country.code.toLowerCase()}
-                            className={`border-b border-[#1E1E1E] transition-colors cursor-pointer ${isSelected ? "bg-[#1A2A1A]" : isHighlighted ? "bg-[#1A1208]" : "bg-transparent"}`}
+                            className={`cursor-pointer border-b border-[#1E1E1E] transition-colors ${isSelected ? "bg-[#1A2A1A]" : isHighlighted ? "bg-[#1A1208]" : "bg-transparent"}`}
                             onClick={() => {
                               if (compareMode) {
                                 toggleSelect(country.code);
                               } else {
-                                navigate(`${langPrefix}/country/${country.code.toLowerCase()}`);
+                                void navigate(
+                                  `${langPrefix}/country/${country.code.toLowerCase()}`,
+                                );
                               }
                             }}
                             onMouseEnter={(e) => {
@@ -555,9 +582,9 @@ export function NomadVisasPage() {
                             }}
                           >
                             {/* Checkbox — compare mode only */}
-                            {compareMode && (
+                            {compareMode ? (
                               <td
-                                className="py-4 pl-3 pr-1"
+                                className="py-4 pr-1 pl-3"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   toggleSelect(country.code);
@@ -565,9 +592,9 @@ export function NomadVisasPage() {
                               >
                                 <div
                                   aria-label={`Select ${localizeCountry(country, lang).name}`}
-                                  className={`w-4 h-4 rounded-[3px] flex items-center justify-center shrink-0 transition-all pointer-events-none ${isSelected ? "bg-accent border-2 border-accent" : "bg-transparent border-2 border-[#404040]"}`}
+                                  className={`pointer-events-none flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] transition-all ${isSelected ? "border-2 border-accent bg-accent" : "border-2 border-[#404040] bg-transparent"}`}
                                 >
-                                  {isSelected && (
+                                  {isSelected ? (
                                     <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
                                       <path
                                         d="M1 3.5L3.5 6L8 1"
@@ -577,10 +604,10 @@ export function NomadVisasPage() {
                                         strokeLinejoin="round"
                                       />
                                     </svg>
-                                  )}
+                                  ) : null}
                                 </div>
                               </td>
-                            )}
+                            ) : null}
 
                             {/* Country */}
                             <td className="px-3 py-4">
@@ -600,7 +627,7 @@ export function NomadVisasPage() {
                                   alt={t("a11y.flagAlt", "{{country}} flag", {
                                     country: localizeCountry(country, lang).name,
                                   })}
-                                  className="w-7 h-[19px] rounded-[3px] object-cover shrink-0"
+                                  className="h-[19px] w-7 shrink-0 rounded-[3px] object-cover"
                                   loading="lazy"
                                 />
                                 <span className="text-sm font-medium text-white">
@@ -626,9 +653,9 @@ export function NomadVisasPage() {
                             {/* Monthly budget */}
                             <td className="px-3 py-4 text-right">
                               <span
-                                className={`font-mono text-sm font-semibold ${monthlyBudget != null && monthlyBudget <= bs.budget ? "text-[#44CC66]" : monthlyBudget != null ? "text-white" : "text-dimmest"}`}
+                                className={`font-mono text-sm font-semibold ${monthlyBudget != null && monthlyBudget <= bs.budget ? "text-[#44CC66]" : monthlyBudget == null ? "text-dimmest" : "text-white"}`}
                               >
-                                {monthlyBudget != null ? `$${monthlyBudget.toLocaleString()}` : "—"}
+                                {monthlyBudget == null ? "—" : `$${monthlyBudget.toLocaleString()}`}
                               </span>
                             </td>
 
@@ -637,14 +664,14 @@ export function NomadVisasPage() {
                               <span className="font-mono text-sm font-semibold text-white">
                                 {visa.duration.initial}
                               </span>
-                              <span className="text-xs text-dim ml-[3px]">
+                              <span className="ml-[3px] text-xs text-dim">
                                 {t("countryPage.visa.mo")}
                               </span>
-                              {visa.duration.maxExtension > 0 && (
-                                <span className="text-[11px] text-dimmer ml-1">
+                              {visa.duration.maxExtension > 0 ? (
+                                <span className="ml-1 text-[11px] text-dimmer">
                                   +{visa.duration.maxExtension}
                                 </span>
-                              )}
+                              ) : null}
                             </td>
 
                             {/* Cost */}
@@ -666,7 +693,7 @@ export function NomadVisasPage() {
                                     {visa.incomeRequirement.currency}{" "}
                                     {visa.incomeRequirement.monthly.toLocaleString()}
                                   </span>
-                                  <span className="text-xs text-dim ml-0.5">
+                                  <span className="ml-0.5 text-xs text-dim">
                                     /{t("countryPage.visa.mo")}
                                   </span>
                                 </>
@@ -676,7 +703,7 @@ export function NomadVisasPage() {
                                     {visa.incomeRequirement.currency}{" "}
                                     {visa.incomeRequirement.annual.toLocaleString()}
                                   </span>
-                                  <span className="text-xs text-dim ml-0.5">
+                                  <span className="ml-0.5 text-xs text-dim">
                                     /{t("countryPage.visa.yr")}
                                   </span>
                                 </>
@@ -690,7 +717,7 @@ export function NomadVisasPage() {
                             {/* Tax */}
                             <td className="px-3 py-4 text-center">
                               <span
-                                className="inline-flex items-center px-2 py-1 rounded-full font-mono text-[11px] font-semibold whitespace-nowrap bg-[var(--tax-bg)] text-[var(--tax-text)]"
+                                className="inline-flex items-center rounded-full bg-[var(--tax-bg)] px-2 py-1 font-mono text-[11px] font-semibold whitespace-nowrap text-[var(--tax-text)]"
                                 style={
                                   {
                                     "--tax-bg": taxColors.bg,
@@ -712,8 +739,10 @@ export function NomadVisasPage() {
                                 href={visa.officialUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                className="text-accent inline-flex"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                }}
+                                className="inline-flex text-accent"
                               >
                                 <ExternalLink size={16} />
                               </a>

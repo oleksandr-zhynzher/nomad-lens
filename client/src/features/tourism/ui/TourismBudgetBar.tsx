@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "@core/ui";
 import { TOURISM_COST_COLORS } from "@features/budget/constants";
@@ -22,7 +22,7 @@ export function TourismBudgetBar({ breakdown, dailyCost, dailyBudget }: TourismB
   const maxVal = Math.max(dailyCost, dailyBudget) * 1.1;
 
   return (
-    <div className="relative h-5 rounded-[4px] overflow-hidden bg-surface-2">
+    <div className="relative h-5 overflow-hidden rounded-[4px] bg-surface-2">
       {/* Stacked segments scaled to maxVal */}
       <div
         className="flex h-full w-[var(--bw)]"
@@ -34,13 +34,13 @@ export function TourismBudgetBar({ breakdown, dailyCost, dailyBudget }: TourismB
             content={
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <div
-                  className="w-2 h-2 rounded-full shrink-0 bg-[var(--sc)]"
+                  className="h-2 w-2 shrink-0 rounded-full bg-[var(--sc)]"
                   style={{ "--sc": TOURISM_COST_COLORS[key] ?? "#555" } as React.CSSProperties}
                 />
                 <span className="text-[11px] text-tertiary">
                   {t(`tourismBudget.categories.${key}`, key)}
                 </span>
-                <span className="text-[11px] font-bold font-mono text-white">
+                <span className="font-mono text-[11px] font-bold text-white">
                   ${breakdown[key]}
                 </span>
               </div>
@@ -53,7 +53,7 @@ export function TourismBudgetBar({ breakdown, dailyCost, dailyBudget }: TourismB
             }}
           >
             <div
-              className="w-full h-full bg-[var(--sc)]"
+              className="h-full w-full bg-[var(--sc)]"
               style={{ "--sc": TOURISM_COST_COLORS[key] ?? "#555" } as React.CSSProperties}
             />
           </Tooltip>
@@ -61,7 +61,7 @@ export function TourismBudgetBar({ breakdown, dailyCost, dailyBudget }: TourismB
       </div>
       {/* Budget threshold line */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-white opacity-70 left-[var(--bl)]"
+        className="absolute top-0 bottom-0 left-[var(--bl)] w-0.5 bg-white opacity-70"
         style={{ "--bl": `${(dailyBudget / maxVal) * 100}%` } as React.CSSProperties}
       />
     </div>

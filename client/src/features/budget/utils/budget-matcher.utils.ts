@@ -81,7 +81,7 @@ function computeWeightedCost(
     healthInsurance: raw.healthInsurance * (weights.healthInsurance / 100),
   };
 
-  const total = Object.values(breakdown).reduce((sum, value) => sum + value, 0);
+  const total = (Object.values(breakdown) as number[]).reduce((sum, value) => sum + value, 0);
   return { total, breakdown };
 }
 
@@ -126,7 +126,7 @@ export function getBudgetMatches(
 
       for (const scoreEntry of Object.values(country.scores)) {
         const value = scoreEntry.value;
-        if (value === null || value === undefined) continue;
+        if (value == null) continue;
         scoreSum += value;
         scoreCount += 1;
       }

@@ -18,7 +18,12 @@ export function useScrollIndicator(delay = 800) {
     }, delay);
   }, [delay]);
 
-  useEffect(() => () => clearTimeout(scrollTimer.current), []);
+  useEffect(
+    () => () => {
+      clearTimeout(scrollTimer.current);
+    },
+    [],
+  );
 
   return { scrollRef, onScroll };
 }

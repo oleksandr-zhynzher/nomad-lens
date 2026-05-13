@@ -22,13 +22,13 @@ export const WEIGHT_SHARE_KEYS = [
   ...CATEGORY_KEYS,
 ];
 
-export type LoadedFilters = {
+export interface LoadedFilters {
   nomadVisaOnly: boolean;
   schengenOnly: boolean;
   minTouristDays: number | null;
   selectedRegions: Set<string>;
   climatePrefs: ClimatePreferences;
-};
+}
 
 export function weightsFromSearch(search: string): WeightMap {
   const params = new URLSearchParams(search);
@@ -39,7 +39,7 @@ export function weightsFromSearch(search: string): WeightMap {
     const v = params.get(key);
     if (v !== null) {
       const n = Number(v);
-      if (!isNaN(n)) {
+      if (!Number.isNaN(n)) {
         base[key] = Math.max(0, Math.min(100, n));
         hasParams = true;
       }
@@ -56,15 +56,15 @@ export function weightsFromSearch(search: string): WeightMap {
       let leftover = 100 - floorSum;
       const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
       remainders.sort((a, b) => b.r - a.r);
-      remainders.forEach(({ i }) => {
+      for (const { i } of remainders) {
         if (leftover > 0) {
           floors[i]++;
           leftover--;
         }
-      });
-      VISIBLE_CATEGORY_KEYS.forEach((k, i) => {
+      }
+      for (const [i, k] of VISIBLE_CATEGORY_KEYS.entries()) {
         base[k] = floors[i];
-      });
+      }
     }
   }
   return base;
@@ -96,7 +96,7 @@ export function filtersToStorable(f: LoadedFilters) {
  * Returns null if no weight share params were found.
  */
 export function consumeSharedParams(): URLSearchParams | null {
-  const urlParams = new URLSearchParams(window.location.search);
+  const urlParams = new URLSearchParams(globalThis.location.search);
   const hasShared =
     CATEGORY_KEYS.some((k) => urlParams.has(k)) ||
     [
@@ -112,7 +112,7 @@ export function consumeSharedParams(): URLSearchParams | null {
   if (!hasShared) return null;
 
   // Strip only weight/filter params, preserve others (c, m, etc.)
-  const cleaned = new URLSearchParams(window.location.search);
+  const cleaned = new URLSearchParams(globalThis.location.search);
   for (const k of [
     ...CATEGORY_KEYS,
     "nomadVisa",
@@ -127,17 +127,17 @@ export function consumeSharedParams(): URLSearchParams | null {
     cleaned.delete(k);
   }
   const newSearch = cleaned.toString();
-  window.history.replaceState(
+  globalThis.history.replaceState(
     null,
     "",
-    window.location.pathname + (newSearch ? `?${newSearch}` : ""),
+    globalThis.location.pathname + (newSearch ? `?${newSearch}` : ""),
   );
   return urlParams;
 }
 
 // Module-level: consumed once on first import, shared across all pages.
 // Guard for non-browser environments (tests / SSR).
-const _sharedParams = typeof window !== "undefined" ? consumeSharedParams() : null;
+const _sharedParams = globalThis.window == null ? null : consumeSharedParams();
 
 export function loadWeightModeFromStorage(): WeightMode {
   if (_sharedParams?.get("weightMode") === "balanced") {
@@ -183,7 +183,7 @@ export function loadWeightsFromStorage(): WeightMap {
       const base = mode === "independent" ? defaultIndependentWeights() : defaultWeights();
       for (const key of CATEGORY_KEYS) {
         const v = parsed[key];
-        if (typeof v === "number" && !isNaN(v)) {
+        if (typeof v === "number" && !Number.isNaN(v)) {
           base[key] = Math.max(0, Math.min(100, Math.round(v)));
         }
       }
@@ -204,7 +204,8 @@ export function loadFiltersFromStorage(): LoadedFilters {
     const loaded: LoadedFilters = {
       nomadVisaOnly: _sharedParams.get("nomadVisa") === "1",
       schengenOnly: _sharedParams.get("schengen") === "1",
-      minTouristDays: minDaysStr !== null && !isNaN(Number(minDaysStr)) ? Number(minDaysStr) : null,
+      minTouristDays:
+        minDaysStr !== null && !Number.isNaN(Number(minDaysStr)) ? Number(minDaysStr) : null,
       selectedRegions: regionsStr
         ? new Set(regionsStr.split(",").filter(Boolean))
         : new Set<string>(),
@@ -212,11 +213,11 @@ export function loadFiltersFromStorage(): LoadedFilters {
         seasonType: (_sharedParams.get("climateSeason") ??
           def.seasonType) as ClimatePreferences["seasonType"],
         minTemp:
-          _sharedParams.has("climateMin") && !isNaN(Number(_sharedParams.get("climateMin")))
+          _sharedParams.has("climateMin") && !Number.isNaN(Number(_sharedParams.get("climateMin")))
             ? Number(_sharedParams.get("climateMin"))
             : def.minTemp,
         maxTemp:
-          _sharedParams.has("climateMax") && !isNaN(Number(_sharedParams.get("climateMax")))
+          _sharedParams.has("climateMax") && !Number.isNaN(Number(_sharedParams.get("climateMax")))
             ? Number(_sharedParams.get("climateMax"))
             : def.maxTemp,
       },

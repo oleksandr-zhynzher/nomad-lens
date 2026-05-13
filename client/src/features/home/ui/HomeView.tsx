@@ -64,7 +64,9 @@ export default function App() {
       }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   const { countries, loading, error, refresh } = useCountries();
@@ -95,7 +97,9 @@ export default function App() {
       setHighlightedCode(h);
       const el = document.querySelector(`[data-country-code="${h}"]`);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-      highlightTimer.current = setTimeout(() => setHighlightedCode(null), 2500);
+      highlightTimer.current = setTimeout(() => {
+        setHighlightedCode(null);
+      }, 2500);
     }, 80);
 
     return () => {
@@ -108,7 +112,7 @@ export default function App() {
   }, [setSearchParams]);
 
   const displayedRanked = useMemo(() => {
-    if (searchMode === "filter" && search.trim().length >= 1) {
+    if (searchMode === "filter" && search.trim().length > 0) {
       const q = search.trim().toLowerCase();
       return ranked.filter(
         (r) =>
@@ -119,12 +123,15 @@ export default function App() {
     return ranked;
   }, [ranked, search, searchMode, lang]);
 
-  const regions = useMemo(() => [...new Set(countries.map((c) => c.region))].sort(), [countries]);
+  const regions = useMemo(
+    () => [...new Set(countries.map((c) => c.region))].sort((a, b) => a.localeCompare(b)),
+    [countries],
+  );
 
   // Search navigation
   const matchingCodes = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (q.length < 1) return [];
+    if (q.length === 0) return [];
     return ranked
       .filter(
         (r) =>
@@ -144,17 +151,14 @@ export default function App() {
     const el = document.querySelector(`[data-country-code="${code}"]`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [matchCursor, matchingCodes]);
-  const goNext = useCallback(
-    () => setMatchCursor((c) => (matchingCodes.length ? (c + 1) % matchingCodes.length : 0)),
-    [matchingCodes],
-  );
-  const goPrev = useCallback(
-    () =>
-      setMatchCursor((c) =>
-        matchingCodes.length ? (c - 1 + matchingCodes.length) % matchingCodes.length : 0,
-      ),
-    [matchingCodes],
-  );
+  const goNext = useCallback(() => {
+    setMatchCursor((c) => (matchingCodes.length > 0 ? (c + 1) % matchingCodes.length : 0));
+  }, [matchingCodes]);
+  const goPrev = useCallback(() => {
+    setMatchCursor((c) =>
+      matchingCodes.length > 0 ? (c - 1 + matchingCodes.length) % matchingCodes.length : 0,
+    );
+  }, [matchingCodes]);
 
   // Free keyboard navigation (no search active)
   const [navCursor, setNavCursor] = useState<number | null>(null);
@@ -176,11 +180,11 @@ export default function App() {
 
       if (e.key === "Enter") {
         const highlighted =
-          search.trim().length >= 1
+          search.trim().length > 0
             ? (matchingCodes[matchCursor] ?? null)
-            : activeNavCursor !== null
-              ? (allCodes[activeNavCursor] ?? null)
-              : null;
+            : activeNavCursor === null
+              ? null
+              : (allCodes[activeNavCursor] ?? null);
         if (highlighted) {
           e.preventDefault();
           setExpandedCode((c) => (c === highlighted ? null : highlighted));
@@ -195,7 +199,7 @@ export default function App() {
       )
         return;
       e.preventDefault();
-      if (search.trim().length >= 1) {
+      if (search.trim().length > 0) {
         if (searchMode === "highlight") {
           // Navigate within search matches (highlight mode only)
           if (e.key === "ArrowDown") goNext();
@@ -212,16 +216,18 @@ export default function App() {
         });
       }
     };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    globalThis.addEventListener("keydown", onKeyDown);
+    return () => {
+      globalThis.removeEventListener("keydown", onKeyDown);
+    };
   }, [search, searchMode, goNext, goPrev, allCodes, matchingCodes, matchCursor, activeNavCursor]);
 
   const activeHighlight =
-    searchMode === "highlight" && search.trim().length >= 1
+    searchMode === "highlight" && search.trim().length > 0
       ? (matchingCodes[matchCursor] ?? null)
-      : activeNavCursor !== null
-        ? (allCodes[activeNavCursor] ?? null)
-        : highlightedCode;
+      : activeNavCursor === null
+        ? highlightedCode
+        : (allCodes[activeNavCursor] ?? null);
 
   const toggleSelect = useCallback((code: string) => {
     setSelectedCodes((prev) => {
@@ -239,20 +245,22 @@ export default function App() {
 
   const handleCompare = useCallback(() => {
     if (selectedCodes.size < 2) return;
-    navigate(`${langPrefix}/compare?c=${Array.from(selectedCodes).join(",")}`);
+    void navigate(`${langPrefix}/compare?c=${[...selectedCodes].join(",")}`);
   }, [selectedCodes, navigate, langPrefix]);
 
   return (
     <Layout>
       <div className="flex">
         {/* Left sidebar - Weight Panel (hidden on mobile) */}
-        <aside className="hidden md:block sticky top-14 self-start w-[340px] h-[calc(100vh-56px)]">
+        <aside className="sticky top-14 hidden h-[calc(100vh-56px)] w-[340px] self-start md:block">
           <WeightPanel
             weights={ws.weights}
             onChange={ws.handleWeightChange}
             onReset={ws.handleReset}
             weightsAreDefault={ws.weightsAreDefault}
-            onShare={() => ws.handleShare()}
+            onShare={() => {
+              ws.handleShare();
+            }}
             climatePrefs={ws.climatePrefs}
             onClimatePrefsChange={ws.setClimatePrefs}
             nomadVisaOnly={ws.nomadVisaOnly}
@@ -270,14 +278,18 @@ export default function App() {
           open={mobileParamsOpen}
           title={t("mobileSheet.weightsAndPreferences")}
           closeLabel={t("a11y.closeParameters", "Close parameters")}
-          onClose={() => setMobileParamsOpen(false)}
+          onClose={() => {
+            setMobileParamsOpen(false);
+          }}
         >
           <WeightPanel
             weights={ws.weights}
             onChange={ws.handleWeightChange}
             onReset={ws.handleReset}
             weightsAreDefault={ws.weightsAreDefault}
-            onShare={() => ws.handleShare()}
+            onShare={() => {
+              ws.handleShare();
+            }}
             climatePrefs={ws.climatePrefs}
             onClimatePrefsChange={ws.setClimatePrefs}
             nomadVisaOnly={ws.nomadVisaOnly}
@@ -294,9 +306,11 @@ export default function App() {
 
         {/* Mobile FAB - Parameters button */}
         <button
-          className="md:hidden fixed z-40 flex items-center gap-2 shadow-lg h-12 pl-4 pr-[18px] rounded-[24px] bg-accent text-white text-sm font-semibold right-4"
+          className="fixed right-4 z-40 flex h-12 items-center gap-2 rounded-[24px] bg-accent pr-[18px] pl-4 text-sm font-semibold text-white shadow-lg md:hidden"
           style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)" }}
-          onClick={() => setMobileParamsOpen(true)}
+          onClick={() => {
+            setMobileParamsOpen(true);
+          }}
           aria-label={t("a11y.openParameters", "Open parameters")}
         >
           <SlidersHorizontal size={18} />
@@ -304,7 +318,7 @@ export default function App() {
         </button>
 
         {/* Right content area */}
-        <main className="flex-1 min-w-0 pb-28 md:pb-0 bg-bg">
+        <main className="min-w-0 flex-1 bg-bg pb-28 md:pb-0">
           <div className="px-4 md:px-6">
             {/* Hero section */}
             <div
@@ -326,47 +340,47 @@ export default function App() {
                 }}
               />
 
-              <div className="relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 min-h-[160px]">
+              <div className="relative flex min-h-[160px] flex-col justify-end px-4 py-4 md:px-12 md:py-12">
                 {/* Eyebrow */}
-                <div className="flex items-center gap-2 mb-2 md:mb-3">
+                <div className="mb-2 flex items-center gap-2 md:mb-3">
                   {t("hero.eyebrow")
                     .split("·")
                     .map((word, i) => (
                       <span key={i} className="flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-accent-dim shrink-0 inline-block relative" />
-                        <span className="text-[11px] font-medium tracking-[2.5px] uppercase text-accent-dim leading-none">
+                        <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                        <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
                           {word.trim()}
                         </span>
                       </span>
                     ))}
                 </div>
                 {/* H1 — responsive font */}
-                <h1 className="text-3xl md:text-6xl font-bold leading-[0.95] text-white mb-2 font-display">
+                <h1 className="mb-2 font-display text-3xl leading-[0.95] font-bold text-white md:text-6xl">
                   {t("hero.title")}
                 </h1>
                 {/* Tagline */}
-                <p className="hidden md:block text-[15px] text-dim max-w-[580px] mb-5">
+                <p className="mb-5 hidden max-w-[580px] text-[15px] text-dim md:block">
                   {t("hero.tagline")}
                 </p>
                 {/* Copper rule */}
-                <div className="hidden md:block w-32 h-0.5 bg-accent mb-4" />
+                <div className="mb-4 hidden h-0.5 w-32 bg-accent md:block" />
                 {/* Stats row */}
                 <div className="hero-stats-row hero-banner-stats">
                   <div className="min-w-0">
-                    <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
+                    <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
                       {countries.length}
                     </div>
-                    <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
+                    <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                       {t("hero.stats.countries", { count: countries.length })}
                     </div>
                   </div>
                   <div className="hero-stat-divider" />
                   <Link to={`${langPrefix}/indicators`} className="min-w-0 no-underline">
                     <div>
-                      <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
+                      <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
                         {DISPLAYED_CORE_CATEGORY_KEYS.length}
                       </div>
-                      <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
+                      <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                         {t("hero.stats.indicators", {
                           count: DISPLAYED_CORE_CATEGORY_KEYS.length,
                         })}
@@ -376,10 +390,10 @@ export default function App() {
                   <div className="hero-stat-divider" />
                   <Link to={`${langPrefix}/data-sources`} className="min-w-0 no-underline">
                     <div>
-                      <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
+                      <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
                         {DATA_SOURCE_KEYS.flat().length}
                       </div>
-                      <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
+                      <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                         {t("hero.stats.dataSources", {
                           count: DATA_SOURCE_KEYS.flat().length,
                         })}
@@ -389,10 +403,10 @@ export default function App() {
                   <div className="hero-stat-divider" />
                   <Link to={`${langPrefix}/ai-indicators`} className="min-w-0 no-underline">
                     <div>
-                      <div className="font-mono text-lg font-semibold text-accent-dim leading-none">
+                      <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
                         {AI_CATEGORY_KEYS.length}
                       </div>
-                      <div className="text-[10px] text-dimmest uppercase tracking-[1px] mt-1">
+                      <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                         {t("hero.stats.aiIndicators", {
                           count: AI_CATEGORY_KEYS.length,
                         })}
@@ -408,14 +422,14 @@ export default function App() {
 
             {/* Search bar + Region chips — sticky below header */}
             <div
-              className={`sticky z-20 -mx-4 px-4 pb-4 md:-mx-6 md:px-6 top-14 bg-bg border-b border-surface ${isSticky ? "pt-3" : "pt-0"}`}
+              className={`sticky top-14 z-20 -mx-4 border-b border-surface bg-bg px-4 pb-4 md:-mx-6 md:px-6 ${isSticky ? "pt-3" : "pt-0"}`}
             >
               {/* Search + compare row */}
-              <div className={`${isSticky ? "" : " mb-4"}`}>
+              <div className={isSticky ? "" : "mb-4"}>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-                  <div className="relative flex-1 min-w-0">
+                  <div className="relative min-w-0 flex-1">
                     <Search
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-dim"
+                      className="absolute top-1/2 left-4 -translate-y-1/2 text-dim"
                       size={18}
                     />
                     <input
@@ -424,31 +438,35 @@ export default function App() {
                       type="text"
                       placeholder={t("search.placeholder")}
                       value={search}
-                      onChange={(e) => updateSearch(e.target.value)}
-                      className="w-full pl-12 rounded-md focus:outline-none h-10 text-white text-sm bg-[#161616] border border-surface pr-[var(--pr)]"
+                      onChange={(e) => {
+                        updateSearch(e.target.value);
+                      }}
+                      className="h-10 w-full rounded-md border border-surface bg-[#161616] pr-[var(--pr)] pl-12 text-sm text-white focus:outline-none"
                       style={
                         {
                           "--pr":
                             search.length === 0
                               ? "16px"
-                              : searchMode === "highlight" && search.trim().length >= 1
+                              : searchMode === "highlight" && search.trim().length > 0
                                 ? "164px"
                                 : "72px",
                         } as React.CSSProperties
                       }
                     />
-                    {search.length > 0 && (
-                      <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                    {search.length > 0 ? (
+                      <div className="absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1">
                         <button
-                          onClick={() => updateSearch("")}
-                          className="flex items-center justify-center w-6 h-6 rounded-[3px] border-0 cursor-pointer bg-surface-4 text-tertiary"
+                          onClick={() => {
+                            updateSearch("");
+                          }}
+                          className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
                           aria-label={t("a11y.clearSearch", "Clear search")}
                         >
                           <X size={14} />
                         </button>
-                        {searchMode === "highlight" && search.trim().length >= 1 && (
+                        {searchMode === "highlight" && search.trim().length > 0 ? (
                           <>
-                            <span className="font-mono text-[11px] text-dim min-w-9 text-right">
+                            <span className="min-w-9 text-right font-mono text-[11px] text-dim">
                               {matchingCodes.length > 0
                                 ? `${matchCursor + 1}/${matchingCodes.length}`
                                 : "0/0"}
@@ -456,7 +474,7 @@ export default function App() {
                             <button
                               onClick={goPrev}
                               disabled={matchingCodes.length === 0}
-                              className={`flex items-center justify-center w-6 h-6 rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
+                              className={`flex h-6 w-6 items-center justify-center rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length > 0 ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
                               aria-label={t("a11y.previousMatch", "Previous match")}
                             >
                               <ChevronUp size={14} />
@@ -464,13 +482,13 @@ export default function App() {
                             <button
                               onClick={goNext}
                               disabled={matchingCodes.length === 0}
-                              className={`flex items-center justify-center w-6 h-6 rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
+                              className={`flex h-6 w-6 items-center justify-center rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length > 0 ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
                               aria-label={t("a11y.nextMatch", "Next match")}
                             >
                               <ChevronDown size={14} />
                             </button>
                           </>
-                        )}
+                        ) : null}
                         <Tooltip
                           side="bottom"
                           content={
@@ -496,7 +514,7 @@ export default function App() {
                               setSearchMode((m) => (m === "filter" ? "highlight" : "filter"));
                               setMatchCursor(0);
                             }}
-                            className="flex items-center justify-center w-6 h-6 rounded-[3px] border-0 cursor-pointer bg-surface-4 text-muted"
+                            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-muted"
                             aria-label={
                               searchMode === "filter"
                                 ? t("a11y.switchToScrollMode", "Switch to scroll mode")
@@ -507,30 +525,30 @@ export default function App() {
                           </button>
                         </Tooltip>
                       </div>
-                    )}
+                    ) : null}
                   </div>
 
-                  <div className="flex w-full items-center justify-end gap-2 shrink-0 sm:w-auto">
+                  <div className="flex w-full shrink-0 items-center justify-end gap-2 sm:w-auto">
                     {compareMode ? (
                       <>
                         <button
                           onClick={handleCompare}
-                          className={`flex-1 justify-center sm:flex-none flex items-center gap-1.5 h-10 px-3.5 rounded-md text-[13px] font-semibold whitespace-nowrap shrink-0 transition-all duration-150 ${selectedCodes.size < 2 ? "border border-accent-dim cursor-default bg-[#161616] text-accent-dim" : "border-0 cursor-pointer bg-accent text-white"}`}
+                          className={`flex h-10 flex-1 shrink-0 items-center justify-center gap-1.5 rounded-md px-3.5 text-[13px] font-semibold whitespace-nowrap transition-all duration-150 sm:flex-none ${selectedCodes.size < 2 ? "cursor-default border border-accent-dim bg-[#161616] text-accent-dim" : "cursor-pointer border-0 bg-accent text-white"}`}
                           disabled={selectedCodes.size < 2}
                         >
                           <GitCompare size={15} />
                           {t("compare.compareSelected", "Compare")}
-                          {selectedCodes.size > 0 && (
+                          {selectedCodes.size > 0 ? (
                             <span
                               className={`rounded-[10px] px-[7px] py-px text-xs ${selectedCodes.size < 2 ? "bg-[rgba(143,90,60,0.2)]" : "bg-[rgba(255,255,255,0.25)]"}`}
                             >
                               {selectedCodes.size}
                             </span>
-                          )}
+                          ) : null}
                         </button>
                         <button
                           onClick={exitCompareMode}
-                          className="flex items-center justify-center w-10 h-10 rounded-md border border-surface-4 cursor-pointer bg-[#161616] text-dim shrink-0"
+                          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-[#161616] text-dim"
                           aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
                         >
                           <X size={16} />
@@ -538,8 +556,10 @@ export default function App() {
                       </>
                     ) : (
                       <button
-                        onClick={() => setCompareMode(true)}
-                        className="w-full justify-center sm:w-auto flex items-center gap-1.5 h-10 px-3.5 rounded-md border border-surface-4 cursor-pointer bg-[#161616] text-muted text-[13px] font-medium whitespace-nowrap shrink-0"
+                        onClick={() => {
+                          setCompareMode(true);
+                        }}
+                        className="flex h-10 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-surface-4 bg-[#161616] px-3.5 text-[13px] font-medium whitespace-nowrap text-muted sm:w-auto"
                       >
                         <GitCompare size={15} />
                         {t("compare.compareMode", "Compare")}
@@ -548,43 +568,45 @@ export default function App() {
                   </div>
                 </div>
 
-                {compareMode && (
-                  <p className="mt-2 text-xs text-dim pl-0.5">
+                {compareMode ? (
+                  <p className="mt-2 pl-0.5 text-xs text-dim">
                     {t(
                       "compare.helperText",
                       "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
                     )}
                   </p>
-                )}
+                ) : null}
               </div>
 
               {/* Region chips — hidden when sticky */}
-              {!isSticky && (
+              {isSticky ? null : (
                 <div className="mb-0">
-                  <div className="text-[13px] font-bold tracking-[2px] uppercase text-muted mb-3">
+                  <div className="mb-3 text-[13px] font-bold tracking-[2px] text-muted uppercase">
                     {t("regions.label")}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <button
-                      onClick={() => ws.setSelectedRegions(new Set())}
-                      className={`text-[13px] font-semibold px-[18px] py-2 rounded-[3px] border-0 cursor-pointer ${ws.selectedRegions.size === 0 ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
+                      onClick={() => {
+                        ws.setSelectedRegions(new Set());
+                      }}
+                      className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${ws.selectedRegions.size === 0 ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
                     >
                       {t("regions.all")}
                     </button>
                     {regions.map((r) => (
                       <button
                         key={r}
-                        onClick={() =>
+                        onClick={() => {
                           ws.setSelectedRegions((prev) => {
                             const next = new Set(prev);
                             if (next.has(r)) next.delete(r);
                             else next.add(r);
                             return next;
-                          })
-                        }
-                        className={`text-[13px] font-semibold px-[18px] py-2 rounded-[3px] border-0 cursor-pointer ${ws.selectedRegions.has(r) ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
+                          });
+                        }}
+                        className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${ws.selectedRegions.has(r) ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
                       >
-                        {t(`regions.${r.replace(/\s/g, "")}`, r)}
+                        {t(`regions.${r.replaceAll(/\s/g, "")}`, r)}
                       </button>
                     ))}
                   </div>
@@ -603,7 +625,9 @@ export default function App() {
               onToggleExpanded={
                 compareMode
                   ? undefined
-                  : (code) => setExpandedCode((c) => (c === code ? null : code))
+                  : (code) => {
+                      setExpandedCode((c) => (c === code ? null : code));
+                    }
               }
               showAll={search.trim().length > 0 || highlightedCode !== null}
               compareMode={compareMode}

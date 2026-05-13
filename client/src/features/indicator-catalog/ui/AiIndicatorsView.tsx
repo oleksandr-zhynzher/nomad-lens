@@ -31,9 +31,9 @@ function AiIndicatorCard({ Icon, name, description, source, subIndicators }: AiI
       <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">{description}</div>
 
       {/* Sub-indicators */}
-      {subIndicators.length > 0 && (
+      {subIndicators.length > 0 ? (
         <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] uppercase tracking-[0.5px] text-[#808080]">
+          <span className="text-[10px] tracking-[0.5px] text-[#808080] uppercase">
             Sub-indicators
           </span>
           <div className="flex flex-wrap gap-1.5">
@@ -47,7 +47,7 @@ function AiIndicatorCard({ Icon, name, description, source, subIndicators }: AiI
             ))}
           </div>
         </div>
-      )}
+      ) : null}
 
       {/* Footer: source badge */}
       <div className="mt-auto flex items-center gap-2">
@@ -60,7 +60,7 @@ function AiIndicatorCard({ Icon, name, description, source, subIndicators }: AiI
   );
 }
 
-const AI_INDICATOR_ROWS: Array<Array<[IconType, string]>> = [
+const AI_INDICATOR_ROWS: [IconType, string][][] = [
   [
     [Users, "nomadCommunity"],
     [Globe, "visaFriendliness"],
@@ -100,7 +100,7 @@ export function AiIndicatorsPage() {
 
         {/* Indicator cards */}
         {AI_INDICATOR_ROWS.map((row, rowIdx) => (
-          <div key={rowIdx} className="flex flex-col md:flex-row gap-4 md:gap-5 w-full">
+          <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
             {row.map(([Icon, key]) => {
               const subIndicators: string[] =
                 (t(`aiIndicatorsPage.indicators.${key}.subIndicators`, {

@@ -28,7 +28,7 @@ export function computeScore(country: CountryData, weights: WeightMap): number {
     if (w <= 0) continue;
 
     const score = country.scores[key]?.value;
-    if (score === null || score === undefined) {
+    if (score == null) {
       missingCount++;
       continue;
     }
@@ -55,9 +55,9 @@ export function rankCountries(countries: CountryData[], weights: WeightMap): Ran
 
   scored.sort((a, b) => b.finalScore - a.finalScore);
 
-  scored.forEach((entry, i) => {
+  for (const [i, entry] of scored.entries()) {
     entry.rank = i + 1;
-  });
+  }
 
   return scored;
 }
@@ -71,9 +71,9 @@ export function defaultWeights(): WeightMap {
   const base = Math.floor(100 / visible.length);
   const leftover = 100 - base * visible.length;
   const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
-  visible.forEach((k, i) => {
+  for (const [i, k] of visible.entries()) {
     result[k] = base + (i < leftover ? 1 : 0);
-  });
+  }
   return result;
 }
 
@@ -83,9 +83,9 @@ export function defaultWeights(): WeightMap {
  */
 export function defaultIndependentWeights(): WeightMap {
   const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
-  VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k)).forEach((k) => {
+  for (const k of VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k))) {
     result[k] = 50;
-  });
+  }
   return result;
 }
 
@@ -108,9 +108,9 @@ export function redistributeWeights(
   if (others.length === 0) return result;
 
   if (remaining === 0) {
-    others.forEach((k) => {
+    for (const k of others) {
       result[k] = 0;
-    });
+    }
     return result;
   }
 
@@ -137,16 +137,16 @@ export function redistributeWeights(
   let leftover = remaining - floorSum;
   const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
   remainders.sort((a, b) => b.r - a.r);
-  remainders.forEach(({ i }) => {
+  for (const { i } of remainders) {
     if (leftover > 0) {
       floors[i]++;
       leftover--;
     }
-  });
+  }
 
-  others.forEach((k, i) => {
+  for (const [i, k] of others.entries()) {
     result[k] = floors[i];
-  });
+  }
   return result;
 }
 
@@ -205,7 +205,7 @@ export function computeClimateScore(climateData: ClimateData, prefs: ClimatePref
     seasonScore = 100;
   } else if (prefs.seasonType === seasonType) {
     seasonScore = 100;
-  } else if (ADJACENT[prefs.seasonType as SeasonType]?.includes(seasonType)) {
+  } else if (ADJACENT[prefs.seasonType]?.includes(seasonType)) {
     seasonScore = 60;
   } else {
     seasonScore = 20;

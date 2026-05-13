@@ -79,7 +79,7 @@ const CATEGORY_ACCENT_CLASSES: Record<string, { border: string; text: string }> 
   healthInsurance: { border: "border-[#C07A9B]", text: "text-[#C07A9B]" },
 };
 
-const CATEGORY_ROWS: Array<Array<[IconType, string]>> = [
+const CATEGORY_ROWS: [IconType, string][][] = [
   [
     [House, "housing"],
     [ShoppingCart, "groceries"],
@@ -119,7 +119,7 @@ export function BudgetCategoriesPage() {
 
         {/* Category cards */}
         {CATEGORY_ROWS.map((row, rowIdx) => (
-          <div key={rowIdx} className="flex flex-col md:flex-row gap-4 md:gap-5 w-full">
+          <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
             {row.map(([Icon, key]) => {
               const accentClasses = CATEGORY_ACCENT_CLASSES[key] ?? {
                 border: "border-[#555555]",

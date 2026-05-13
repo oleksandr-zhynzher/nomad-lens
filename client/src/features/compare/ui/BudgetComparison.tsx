@@ -98,13 +98,13 @@ export function BudgetComparison({
   // Cheapest value per row across selected countries
   const minBreakdown: Record<string, number> = {};
   const maxBreakdown: Record<string, number> = {};
-  BREAKDOWN_ROWS.forEach(({ key }) => {
+  for (const { key } of BREAKDOWN_ROWS) {
     const values = selectedSlots.map(
       (slot) => matchMap.get(slot.country.code)?.breakdown[key] ?? 0,
     );
     minBreakdown[key] = values.length > 0 ? Math.min(...values) : 0;
     maxBreakdown[key] = Math.max(1, ...values);
-  });
+  }
   const minTotal =
     selectedSlots.length > 0
       ? Math.min(...selectedSlots.map((slot) => matchMap.get(slot.country.code)?.monthlyCost ?? 0))
@@ -114,26 +114,28 @@ export function BudgetComparison({
     <div>
       {/* ── Country selector ─────────────────────────────────── */}
       <div className="relative">
-        <div className="grid grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto [scrollbar-width:thin]">
+        <div className="grid grid-cols-3 gap-3 pb-2 [scrollbar-width:thin] md:flex md:items-stretch md:overflow-x-auto">
           {selectedSlots.map((slot) => {
             const match = matchMap.get(slot.country.code);
             const cost = match?.monthlyCost;
-            const surplus = match != null ? match.surplus : null;
+            const surplus = match == null ? null : match.surplus;
             return (
-              <div key={slot.country.code} className="min-w-0 w-full md:shrink-0 md:w-[180px]">
+              <div key={slot.country.code} className="w-full min-w-0 md:w-[180px] md:shrink-0">
                 <ComparisonSlotCard
                   flagUrl={slot.country.flagUrl}
                   countryName={localizeCountry(slot.country, lang).name}
-                  onRemove={() => handleRemove(slot.index)}
+                  onRemove={() => {
+                    handleRemove(slot.index);
+                  }}
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
                 >
                   <span
-                    className={`text-[28px] font-bold leading-none [font-family:Oswald,_sans-serif] ${cost != null ? "text-accent-dim" : "text-[#555]"}`}
+                    className={`[font-family:Oswald,_sans-serif] text-[28px] leading-none font-bold ${cost == null ? "text-[#555]" : "text-accent-dim"}`}
                   >
-                    {cost != null ? `$${cost.toLocaleString()}` : "—"}
+                    {cost == null ? "—" : `$${cost.toLocaleString()}`}
                   </span>
 
-                  {surplus != null && (
+                  {surplus == null ? null : (
                     <span
                       className={`text-[11px] font-semibold ${surplusColourClass(surplus, "text")}`}
                     >
@@ -148,7 +150,7 @@ export function BudgetComparison({
           })}
 
           {/* Add button */}
-          <div ref={addBtnRef} className="min-w-0 w-full md:shrink-0 md:w-[180px]">
+          <div ref={addBtnRef} className="w-full min-w-0 md:w-[180px] md:shrink-0">
             <ComparisonAddButton
               label={t("compare.addCountry")}
               onClick={() => {
@@ -171,12 +173,12 @@ export function BudgetComparison({
         </div>
 
         {/* Right-edge fade */}
-        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 md:block [background:linear-gradient(to_right,transparent,#0F1114)]" />
+        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 [background:linear-gradient(to_right,transparent,#0F1114)] md:block" />
       </div>
 
       {/* Dropdown */}
       <CountryPickerDropdown
-        open={dropdownOpen && dropdownPos != null}
+        open={dropdownOpen ? dropdownPos != null : false}
         countries={filtered.map((c) => {
           const match = matchMap.get(c.code);
           const cost = match?.monthlyCost ?? c.costOfLiving?.totalBasic;
@@ -187,7 +189,7 @@ export function BudgetComparison({
             regionLabel: t(`regions.${regionKey(c.region)}`),
             trailing: (
               <span className="font-mono text-[13px] font-semibold text-accent-dim">
-                {cost != null ? `$${cost.toLocaleString()}` : "—"}
+                {cost == null ? "—" : `$${cost.toLocaleString()}`}
               </span>
             ),
           };
@@ -202,7 +204,7 @@ export function BudgetComparison({
       />
 
       {/* Data grid */}
-      {selectedSlots.length > 0 && (
+      {selectedSlots.length > 0 ? (
         <div className="mt-8">
           <div className="h-px bg-[#1C1C1C]" />
 
@@ -232,7 +234,7 @@ export function BudgetComparison({
                   <ComparisonScoreCell
                     key={slot.index}
                     value={val}
-                    colour={val != null ? costColor(val, minTotal) : "#333333"}
+                    colour={val == null ? "#333333" : costColor(val, minTotal)}
                     format={(v) => `$${v.toLocaleString()}`}
                     columnWidth={BUDGET_COMPARISON_COLUMN_WIDTH}
                   />
@@ -248,12 +250,12 @@ export function BudgetComparison({
             >
               {selectedSlots.map((slot) => {
                 const match = matchMap.get(slot.country.code);
-                const val = match !== undefined ? match.surplus : null;
+                const val = match === undefined ? null : match.surplus;
                 return (
                   <ComparisonScoreCell
                     key={slot.index}
                     value={val}
-                    colour={val != null ? surplusColour(val) : "#333333"}
+                    colour={val == null ? "#333333" : surplusColour(val)}
                     format={(v) =>
                       v >= 0 ? `+$${v.toLocaleString()}` : `-$${Math.abs(v).toLocaleString()}`
                     }
@@ -279,7 +281,7 @@ export function BudgetComparison({
                       <ComparisonScoreCell
                         key={slot.index}
                         value={val}
-                        colour={val != null ? costColor(val, minBreakdown[key]) : "#333333"}
+                        colour={val == null ? "#333333" : costColor(val, minBreakdown[key])}
                         format={(v) => `$${v.toLocaleString()}`}
                         columnWidth={BUDGET_COMPARISON_COLUMN_WIDTH}
                       />
@@ -290,7 +292,7 @@ export function BudgetComparison({
             })}
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

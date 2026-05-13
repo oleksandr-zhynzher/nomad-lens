@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 interface HeroSectionProps {
   backgroundImage: string;
@@ -11,11 +11,11 @@ interface HeroSectionProps {
 export function HeroSection({ backgroundImage, title, subtitle, children }: HeroSectionProps) {
   return (
     <div
-      className={`relative w-full bg-[#0F1114] overflow-hidden ${children ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"}`}
+      className={`relative w-full overflow-hidden bg-[#0F1114] ${children ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"}`}
     >
       {/* Background image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-[image:var(--hero-bg)]"
+        className="absolute inset-0 bg-[image:var(--hero-bg)] bg-cover bg-center"
         style={{ "--hero-bg": `url(${backgroundImage})` } as React.CSSProperties}
       />
 
@@ -24,20 +24,20 @@ export function HeroSection({ backgroundImage, title, subtitle, children }: Hero
 
       {/* Text content */}
       <div
-        className={`px-4 md:px-12 absolute inset-0 flex flex-col gap-[10px] ${children ? "justify-end pb-6" : "justify-center"}`}
+        className={`absolute inset-0 flex flex-col gap-[10px] px-4 md:px-12 ${children ? "justify-end pb-6" : "justify-center"}`}
       >
-        <h1 className="text-3xl md:text-[56px] font-bold text-on-surface m-0 leading-none [font-family:Oswald,_sans-serif]">
+        <h1 className="m-0 [font-family:Oswald,_sans-serif] text-3xl leading-none font-bold text-on-surface md:text-[56px]">
           {title}
         </h1>
-        <p className="hidden md:block text-[15px] text-muted m-0">{subtitle}</p>
-        {children && (
+        <p className="m-0 hidden text-[15px] text-muted md:block">{subtitle}</p>
+        {children ? (
           <>
             {/* Copper rule */}
-            <div className="hidden md:block w-32 h-0.5 bg-accent mt-2 mb-3" />
+            <div className="mt-2 mb-3 hidden h-0.5 w-32 bg-accent md:block" />
             {/* Stats row */}
             {children}
           </>
-        )}
+        ) : null}
       </div>
     </div>
   );

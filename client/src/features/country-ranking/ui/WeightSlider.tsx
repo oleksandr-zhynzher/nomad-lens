@@ -48,13 +48,13 @@ export function WeightSlider({
       ) : (
         <span className="text-xs font-normal text-white">{label}</span>
       )}
-      {isAi && (
+      {isAi ? (
         <Link to={`${langPrefix}/ai-indicators`} className="no-underline">
-          <span className="text-[9px] font-semibold text-[#C084FC] bg-[rgba(192,132,252,0.12)] px-[5px] py-px rounded-[4px] tracking-[0.5px] leading-4">
+          <span className="rounded-[4px] bg-[rgba(192,132,252,0.12)] px-[5px] py-px text-[9px] leading-4 font-semibold tracking-[0.5px] text-[#C084FC]">
             AI
           </span>
         </Link>
-      )}
+      ) : null}
     </>
   );
 
@@ -62,14 +62,14 @@ export function WeightSlider({
     <Tooltip
       content={
         <div>
-          <div className="mb-2 text-white font-semibold">{label}</div>
+          <div className="mb-2 font-semibold text-white">{label}</div>
           <div className="mb-2">{description}</div>
           <div className="text-[10px] text-muted">Source: {dataSource}</div>
         </div>
       }
       side="top"
     >
-      <Info size={14} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-60" />
+      <Info size={14} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-60" />
     </Tooltip>
   );
 
@@ -79,7 +79,9 @@ export function WeightSlider({
       value={value}
       min={0}
       max={100}
-      onChange={(v) => onChange(categoryKey, v)}
+      onChange={(v) => {
+        onChange(categoryKey, v);
+      }}
       ariaLabel={`${label} weight`}
       label={labelNode}
       tooltipIcon={tooltipIcon}

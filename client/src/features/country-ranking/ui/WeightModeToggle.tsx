@@ -11,12 +11,12 @@ interface WeightModeToggleProps {
 export function WeightModeToggle({ weightMode, onWeightModeChange }: WeightModeToggleProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex mt-[10px] bg-surface-4 rounded-[4px] p-1 gap-1">
-      <div className="flex-1 flex">
+    <div className="mt-[10px] flex gap-1 rounded-[4px] bg-surface-4 p-1">
+      <div className="flex flex-1">
         <Tooltip
           content={
             <div>
-              <div className="mb-2 text-white font-semibold">{t("weights.independentTitle")}</div>
+              <div className="mb-2 font-semibold text-white">{t("weights.independentTitle")}</div>
               <div>{t("weights.independentDesc")}</div>
             </div>
           }
@@ -25,19 +25,21 @@ export function WeightModeToggle({ weightMode, onWeightModeChange }: WeightModeT
           delay={300}
         >
           <button
-            onClick={() => onWeightModeChange("independent")}
-            className={`w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-[3px] border-0 cursor-pointer text-[13px] transition-all ${weightMode === "independent" ? "font-medium bg-accent text-white" : "font-normal bg-transparent text-muted"}`}
+            onClick={() => {
+              onWeightModeChange("independent");
+            }}
+            className={`flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-[3px] border-0 px-3 py-1.5 text-[13px] transition-all ${weightMode === "independent" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
           >
             <Sliders size={16} />
             {t("weights.independentMode")}
           </button>
         </Tooltip>
       </div>
-      <div className="flex-1 flex">
+      <div className="flex flex-1">
         <Tooltip
           content={
             <div>
-              <div className="mb-2 text-white font-semibold">{t("weights.balancedTitle")}</div>
+              <div className="mb-2 font-semibold text-white">{t("weights.balancedTitle")}</div>
               <div>{t("weights.balancedDesc")}</div>
             </div>
           }
@@ -46,8 +48,10 @@ export function WeightModeToggle({ weightMode, onWeightModeChange }: WeightModeT
           delay={300}
         >
           <button
-            onClick={() => onWeightModeChange("balanced")}
-            className={`w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-[3px] border-0 cursor-pointer text-[13px] transition-all ${weightMode === "balanced" ? "font-medium bg-accent text-white" : "font-normal bg-transparent text-muted"}`}
+            onClick={() => {
+              onWeightModeChange("balanced");
+            }}
+            className={`flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-[3px] border-0 px-3 py-1.5 text-[13px] transition-all ${weightMode === "balanced" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
           >
             <Scale size={16} />
             {t("weights.balancedMode")}

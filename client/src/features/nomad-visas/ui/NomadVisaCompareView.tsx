@@ -27,8 +27,8 @@ const VALUE_TEXT = "text-[13px] text-tertiary";
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-[160px_1fr] border-b border-[#1A1A1A] items-stretch">
-      <div className={`${LABEL_STYLE} px-4 py-3.5 bg-[#111113] flex items-center shrink-0`}>
+    <div className="grid grid-cols-[160px_1fr] items-stretch border-b border-[#1A1A1A]">
+      <div className={`${LABEL_STYLE} flex shrink-0 items-center bg-[#111113] px-4 py-3.5`}>
         {label}
       </div>
       <div className="flex overflow-hidden">{children}</div>
@@ -39,7 +39,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 function Cell({ children, count }: { children: React.ReactNode; count: number }) {
   return (
     <div
-      className="shrink-0 grow-0 flex items-center min-w-0 px-4 py-3.5 border-l border-[#1A1A1A]"
+      className="flex min-w-0 shrink-0 grow-0 items-center border-l border-[#1A1A1A] px-4 py-3.5"
       style={{ flex: `0 0 ${100 / count}%` }}
     >
       {children}
@@ -70,7 +70,7 @@ export function NomadVisaComparePage() {
   );
 
   useEffect(() => {
-    if (!countries.length) return;
+    if (countries.length === 0) return;
     if (rawCodes.join(",") === codes.join(",")) return;
     setSearchParams(
       (prev) => {
@@ -92,33 +92,33 @@ export function NomadVisaComparePage() {
 
   return (
     <Layout>
-      <div className="max-w-[1100px] mx-auto px-4 py-8 pb-16">
+      <div className="mx-auto max-w-[1100px] px-4 py-8 pb-16">
         {/* Back link */}
         <Link
           to={`${langPrefix}/nomad-visas`}
-          className="inline-flex items-center gap-1.5 text-[13px] text-dim no-underline mb-6"
+          className="mb-6 inline-flex items-center gap-1.5 text-[13px] text-dim no-underline"
         >
           <ArrowLeft size={14} />
           {t("nomadVisasPage.backToVisas", "Back to Nomad")}
         </Link>
 
-        <h1 className="text-[28px] font-bold tracking-[1px] uppercase text-white mb-8 font-display">
+        <h1 className="mb-8 font-display text-[28px] font-bold tracking-[1px] text-white uppercase">
           {t("nomadVisasPage.compareTitle", "Nomad Visa Comparison")}
         </h1>
 
         {loading ? (
-          <div className="text-center py-16 text-dim">{t("loading", "Loading…")}</div>
+          <div className="py-16 text-center text-dim">{t("loading", "Loading…")}</div>
         ) : count < 2 ? (
-          <div className="text-center px-4 py-16 text-dim">
+          <div className="px-4 py-16 text-center text-dim">
             {t(
               "nomadVisasPage.noCountriesSelected",
               "No countries selected. Go back and pick at least 2.",
             )}
           </div>
         ) : (
-          <div className="border border-[#1E1E1E] rounded-lg overflow-hidden">
+          <div className="overflow-hidden rounded-lg border border-[#1E1E1E]">
             {/* Country header row */}
-            <div className="grid grid-cols-[160px_1fr] bg-[#111113] border-b-2 border-[#2A2A2A]">
+            <div className="grid grid-cols-[160px_1fr] border-b-2 border-[#2A2A2A] bg-[#111113]">
               <div className="p-4" />
               <div className="flex">
                 {selected.map((c) => {
@@ -126,15 +126,15 @@ export function NomadVisaComparePage() {
                   return (
                     <div
                       key={c.code}
-                      className="flex items-center gap-2.5 min-w-0 p-4 border-l border-[#1E1E1E] shrink-0 grow-0"
+                      className="flex min-w-0 shrink-0 grow-0 items-center gap-2.5 border-l border-[#1E1E1E] p-4"
                       style={{ flex: `0 0 ${100 / count}%` }}
                     >
                       <img
                         src={c.flagUrl}
                         alt={loc.name}
-                        className="w-7 h-[19px] rounded-[3px] object-cover shrink-0"
+                        className="h-[19px] w-7 shrink-0 rounded-[3px] object-cover"
                       />
-                      <span className="text-[15px] font-semibold text-white overflow-hidden text-ellipsis whitespace-nowrap">
+                      <span className="overflow-hidden text-[15px] font-semibold text-ellipsis whitespace-nowrap text-white">
                         {loc.name}
                       </span>
                     </div>
@@ -157,13 +157,13 @@ export function NomadVisaComparePage() {
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span className={VALUE_MONO}>{c.nomadVisa.duration.initial}</span>
-                  <span className="text-xs text-dim ml-[3px]">{t("countryPage.visa.mo")}</span>
-                  {c.nomadVisa.duration.maxExtension > 0 && (
-                    <span className="text-[11px] text-dimmer ml-1.5">
+                  <span className="ml-[3px] text-xs text-dim">{t("countryPage.visa.mo")}</span>
+                  {c.nomadVisa.duration.maxExtension > 0 ? (
+                    <span className="ml-1.5 text-[11px] text-dimmer">
                       +{c.nomadVisa.duration.maxExtension} {t("countryPage.visa.mo")}{" "}
                       {t("countryPage.visa.extension")}
                     </span>
-                  )}
+                  ) : null}
                 </Cell>
               ))}
             </Row>
@@ -194,7 +194,7 @@ export function NomadVisaComparePage() {
                         <span className={VALUE_MONO}>
                           {inc.currency} {inc.monthly.toLocaleString()}
                         </span>
-                        <span className="text-[13px] text-dim ml-[3px]">
+                        <span className="ml-[3px] text-[13px] text-dim">
                           /{t("countryPage.visa.mo")}
                         </span>
                       </>
@@ -203,7 +203,7 @@ export function NomadVisaComparePage() {
                         <span className={VALUE_MONO}>
                           {inc.currency} {inc.annual.toLocaleString()}
                         </span>
-                        <span className="text-[13px] text-dim ml-[3px]">
+                        <span className="ml-[3px] text-[13px] text-dim">
                           /{t("countryPage.visa.yr")}
                         </span>
                       </>
@@ -225,7 +225,7 @@ export function NomadVisaComparePage() {
                 return (
                   <Cell key={c.code} count={count}>
                     <span
-                      className="font-mono text-[11px] font-semibold rounded-full px-2.5 py-[3px] whitespace-nowrap bg-[var(--tax-bg)] text-[var(--tax-text)]"
+                      className="rounded-full bg-[var(--tax-bg)] px-2.5 py-[3px] font-mono text-[11px] font-semibold whitespace-nowrap text-[var(--tax-text)]"
                       style={
                         {
                           "--tax-bg": taxColors.bg,
@@ -249,7 +249,7 @@ export function NomadVisaComparePage() {
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span className={VALUE_MONO}>
-                    {c.nomadVisa.tax.rate != null ? `${c.nomadVisa.tax.rate}%` : "—"}
+                    {c.nomadVisa.tax.rate == null ? "—" : `${c.nomadVisa.tax.rate}%`}
                   </span>
                 </Cell>
               ))}

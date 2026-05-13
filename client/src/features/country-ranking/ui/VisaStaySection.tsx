@@ -29,7 +29,7 @@ export function VisaStaySection({
   const hasActiveFilter = nomadVisaOnly || schengenOnly || minTouristDays !== null;
 
   const visaBadge = hasActiveFilter ? (
-    <div className="flex items-center bg-[#0E1E26] rounded-[3px] px-2 py-[3px]">
+    <div className="flex items-center rounded-[3px] bg-[#0E1E26] px-2 py-[3px]">
       <span className="font-mono text-[11px] text-[#7AADBD]">ON</span>
     </div>
   ) : undefined;
@@ -43,7 +43,7 @@ export function VisaStaySection({
       isOpen={isOpen}
       onToggle={onToggle}
     >
-      <div className="flex flex-col bg-surface-3 p-3 px-4 gap-[10px]">
+      <div className="flex flex-col gap-[10px] bg-surface-3 p-3 px-4">
         {/* Nomad Visa toggle */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
@@ -51,13 +51,13 @@ export function VisaStaySection({
             <Tooltip
               content={
                 <div>
-                  <div className="mb-2 text-white font-semibold">{t("visa.nomadVisaTitle")}</div>
+                  <div className="mb-2 font-semibold text-white">{t("visa.nomadVisaTitle")}</div>
                   <div>{t("visa.nomadVisaDesc")}</div>
                 </div>
               }
               side="top"
             >
-              <Info size={14} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-60" />
+              <Info size={14} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-60" />
             </Tooltip>
           </div>
           <ToggleSwitch
@@ -74,13 +74,13 @@ export function VisaStaySection({
             <Tooltip
               content={
                 <div>
-                  <div className="mb-2 text-white font-semibold">{t("visa.schengenTitle")}</div>
+                  <div className="mb-2 font-semibold text-white">{t("visa.schengenTitle")}</div>
                   <div>{t("visa.schengenDesc")}</div>
                 </div>
               }
               side="top"
             >
-              <Info size={14} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-60" />
+              <Info size={14} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-60" />
             </Tooltip>
           </div>
           <ToggleSwitch
@@ -97,13 +97,13 @@ export function VisaStaySection({
             <Tooltip
               content={
                 <div>
-                  <div className="mb-2 text-white font-semibold">{t("visa.touristVisaTitle")}</div>
+                  <div className="mb-2 font-semibold text-white">{t("visa.touristVisaTitle")}</div>
                   <div>{t("visa.touristVisaDesc")}</div>
                 </div>
               }
               side="top"
             >
-              <Info size={14} color="#FFFFFF" className="cursor-pointer shrink-0 opacity-60" />
+              <Info size={14} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-60" />
             </Tooltip>
           </div>
           <div className="flex gap-1">
@@ -113,8 +113,10 @@ export function VisaStaySection({
               return (
                 <button
                   key={label}
-                  onClick={() => onMinTouristDaysChange(days)}
-                  className={`flex-1 py-[5px] rounded-[3px] border-0 cursor-pointer text-[10px] text-center ${active ? "bg-accent text-white" : "bg-surface-4 text-dim"}`}
+                  onClick={() => {
+                    onMinTouristDaysChange(days);
+                  }}
+                  className={`flex-1 cursor-pointer rounded-[3px] border-0 py-[5px] text-center text-[10px] ${active ? "bg-accent text-white" : "bg-surface-4 text-dim"}`}
                 >
                   {label}
                 </button>

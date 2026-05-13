@@ -39,3 +39,4 @@ test-results/
 # Lambda build artifacts
 server/dist/
 server/.build/
+.eslintcache

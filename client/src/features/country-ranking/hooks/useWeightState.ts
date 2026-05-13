@@ -128,8 +128,8 @@ export function useWeightState() {
       if (climatePrefs.maxTemp !== defClimate.maxTemp)
         params.set("climateMax", String(climatePrefs.maxTemp));
       // Merge extra params (e.g. c=, m= from compare page)
-      extraParams?.forEach((v, k) => params.set(k, v));
-      return window.location.origin + window.location.pathname + "?" + params.toString();
+      if (extraParams) for (const [k, v] of extraParams.entries()) params.set(k, v);
+      return globalThis.location.origin + globalThis.location.pathname + "?" + params.toString();
     },
     [
       weights,
@@ -145,7 +145,7 @@ export function useWeightState() {
   const handleShare = useCallback(
     (extraParams?: URLSearchParams) => {
       const url = buildShareUrl(extraParams);
-      void copyTextToClipboard(url).catch((error) => {
+      void copyTextToClipboard(url).catch((error: unknown) => {
         console.error("Failed to copy ranking share URL", error);
       });
     },

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import {
   Briefcase,
   HeartPulse,
@@ -10,25 +10,25 @@ import {
 } from "lucide-react";
 import type { CategoryKey, SeasonType } from "@core/models";
 
-export const SEASON_ROW1: Array<{ value: SeasonType | "any"; labelKey: string }> = [
+export const SEASON_ROW1: { value: SeasonType | "any"; labelKey: string }[] = [
   { value: "any", labelKey: "climate.seasons.any" },
   { value: "four_seasons", labelKey: "climate.seasons.fourSeasons" },
   { value: "mild_seasons", labelKey: "climate.seasons.mild" },
 ];
 
-export const SEASON_ROW2: Array<{ value: SeasonType | "any"; labelKey: string }> = [
+export const SEASON_ROW2: { value: SeasonType | "any"; labelKey: string }[] = [
   { value: "tropical", labelKey: "climate.seasons.tropical" },
   { value: "arid", labelKey: "climate.seasons.arid" },
   { value: "polar", labelKey: "climate.seasons.polar" },
 ];
 
 /** Logical groups for the weight panel. Order here = render order. */
-export const WEIGHT_GROUPS: Array<{
+export const WEIGHT_GROUPS: {
   label: string;
   labelKey: string;
   icon: React.ReactElement;
   keys: CategoryKey[];
-}> = [
+}[] = [
   {
     label: "ECONOMIC",
     labelKey: "weights.groups.economic",

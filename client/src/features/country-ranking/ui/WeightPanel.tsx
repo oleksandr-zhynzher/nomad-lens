@@ -56,22 +56,25 @@ export function WeightPanel({
   const handleShare = () => {
     onShare();
     setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000);
   };
 
   const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() =>
     Object.fromEntries([...WEIGHT_GROUPS.map((g) => g.label), "VISA & STAY"].map((l) => [l, true])),
   );
 
-  const toggleGroup = (label: string) =>
+  const toggleGroup = (label: string) => {
     setCollapsed((prev) => ({ ...prev, [label]: !prev[label] }));
+  };
 
   // ── Footer extra: share button ────────────────────────────────────────────
-  const shareButton = !weightsAreDefault ? (
+  const shareButton = weightsAreDefault ? undefined : (
     <button
       onClick={handleShare}
       aria-live="polite"
-      className={`button-hover-exempt weight-panel-share-button w-full flex items-center justify-center gap-2 rounded transition-all duration-[150ms] ease-[ease] h-10 text-[13px] font-medium border rounded-[6px] ${copied ? "bg-[#2A4A2A] text-[#88CC88] border-[#4A8A4A]" : "bg-[#1A2A1A] text-[#6B9E6B] border-[#2A4A2A]"}`}
+      className={`button-hover-exempt weight-panel-share-button flex h-10 w-full items-center justify-center gap-2 rounded rounded-[6px] border text-[13px] font-medium transition-all duration-[150ms] ease-[ease] ${copied ? "border-[#4A8A4A] bg-[#2A4A2A] text-[#88CC88]" : "border-[#2A4A2A] bg-[#1A2A1A] text-[#6B9E6B]"}`}
     >
       {copied ? (
         <>
@@ -109,7 +112,7 @@ export function WeightPanel({
         </>
       )}
     </button>
-  ) : undefined;
+  );
 
   return (
     <PanelShell
@@ -132,17 +135,19 @@ export function WeightPanel({
 
         const groupBadge = (
           <>
-            {group.label === "AI INSIGHTS" && (
+            {group.label === "AI INSIGHTS" ? (
               <Link
                 to={`${langPrefix}/ai-indicators`}
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center p-0.5 rounded-[3px] shrink-0"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                className="flex shrink-0 items-center rounded-[3px] p-0.5"
                 title="AI Indicators methodology"
               >
                 <ExternalLink size={12} color="#C084FC" />
               </Link>
-            )}
-            <div className="flex items-center bg-[#291608] rounded-[3px] px-2 py-[3px]">
+            ) : null}
+            <div className="flex items-center rounded-[3px] bg-[#291608] px-2 py-[3px]">
               <span className="font-mono text-[11px] text-accent-dim">{badgeText}</span>
             </div>
           </>
@@ -156,7 +161,9 @@ export function WeightPanel({
             label={t(group.labelKey)}
             badge={groupBadge}
             isOpen={!collapsed[group.label]}
-            onToggle={() => toggleGroup(group.label)}
+            onToggle={() => {
+              toggleGroup(group.label);
+            }}
           >
             <div className="py-1">
               {group.keys.map((key) => (
@@ -171,12 +178,12 @@ export function WeightPanel({
                       langPrefix={langPrefix}
                     />
                   </div>
-                  {key === "climate" && (
+                  {key === "climate" ? (
                     <ClimatePrefsSection
                       climatePrefs={climatePrefs}
                       onClimatePrefsChange={onClimatePrefsChange}
                     />
-                  )}
+                  ) : null}
                 </React.Fragment>
               ))}
             </div>
@@ -193,7 +200,9 @@ export function WeightPanel({
         minTouristDays={minTouristDays}
         onMinTouristDaysChange={onMinTouristDaysChange}
         isOpen={!collapsed["VISA & STAY"]}
-        onToggle={() => toggleGroup("VISA & STAY")}
+        onToggle={() => {
+          toggleGroup("VISA & STAY");
+        }}
       />
     </PanelShell>
   );

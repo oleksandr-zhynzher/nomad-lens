@@ -24,7 +24,7 @@ interface RegionComparisonProps {
 export function RegionComparison({ countries, weights }: RegionComparisonProps) {
   const { t } = useTranslation();
   const allRegions = useMemo(
-    () => [...new Set(countries.map((c) => c.region))].sort(),
+    () => [...new Set(countries.map((c) => c.region))].sort((a, b) => a.localeCompare(b)),
     [countries],
   );
 
@@ -58,7 +58,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
       for (const key of VISIBLE_CATEGORY_KEYS) {
         const values = regionCountries
           .map((c) => c.scores[key]?.value)
-          .filter((v): v is number => v !== null && v !== undefined);
+          .filter((v): v is number => v != null);
 
         if (values.length === 0) {
           categories[key] = { avg: null, count: 0 };
@@ -109,14 +109,16 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
   return (
     <div>
       {/* Region cards — horizontally scrollable on small screens */}
-      <div className="flex gap-3 pb-2 overflow-x-auto [scrollbar-width:thin]">
+      <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
         {regionStats.map((r) => {
           const active = enabled.has(r.name);
           return (
-            <div key={r.name} className="shrink-0 w-[148px] md:w-[180px]">
+            <div key={r.name} className="w-[148px] shrink-0 md:w-[180px]">
               <button
-                onClick={() => toggleRegion(r.name)}
-                className={`w-full rounded-lg p-4 flex flex-col items-center gap-3 transition-all cursor-pointer bg-transparent ${active ? "border border-[#2E2E30] opacity-100" : "border border-[#1C1C1C] opacity-45"}`}
+                onClick={() => {
+                  toggleRegion(r.name);
+                }}
+                className={`flex w-full cursor-pointer flex-col items-center gap-3 rounded-lg bg-transparent p-4 transition-all ${active ? "border border-[#2E2E30] opacity-100" : "border border-[#1C1C1C] opacity-45"}`}
               >
                 {(() => {
                   const Icon = REGION_ICONS[r.name];
@@ -129,13 +131,13 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                   ) : null;
                 })()}
                 <span
-                  className={`text-[15px] font-semibold text-center ${active ? "text-on-surface" : "text-dimmer"}`}
+                  className={`text-center text-[15px] font-semibold ${active ? "text-on-surface" : "text-dimmer"}`}
                 >
                   {t(`regions.${regionKey(r.name)}`)}
                 </span>
 
                 <span
-                  className={`text-[32px] font-bold leading-none [font-family:Oswald,_sans-serif] ${active ? scoreColourClass(r.overall, "text") : "text-[#757575]"}`}
+                  className={`[font-family:Oswald,_sans-serif] text-[32px] leading-none font-bold ${active ? scoreColourClass(r.overall, "text") : "text-[#757575]"}`}
                 >
                   {r.overall.toFixed(1)}
                 </span>
@@ -148,7 +150,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
       </div>
 
       {/* Indicator grid */}
-      {activeRegions.length > 0 && (
+      {activeRegions.length > 0 ? (
         <div>
           {/* Separator */}
           <div className="h-px bg-[#1C1C1C]" />
@@ -201,7 +203,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                       <ComparisonScoreCell
                         key={r.name}
                         value={val}
-                        colour={val != null ? scoreColour(val) : "#333333"}
+                        colour={val == null ? "#333333" : scoreColour(val)}
                         columnWidth={REGION_COLUMN_WIDTH}
                       />
                     );
@@ -211,7 +213,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
             })}
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

@@ -39,27 +39,29 @@ export function PanelShell({
 
   return (
     <aside
-      className={`flex flex-col overflow-hidden bg-surface${mobile ? " flex-1 min-h-0 w-full" : " w-[340px] h-full"}`}
+      className={`flex flex-col overflow-hidden bg-surface${mobile ? "min-h-0 w-full flex-1" : "h-full w-[340px]"}`}
     >
-      {!mobile && (
-        <div className="flex-shrink-0 p-[14px_16px] border-b border-[#2A2A2A]">
-          <h2 className="text-[13px] font-semibold tracking-[2px] uppercase text-white">{title}</h2>
-          {subtitle && <p className="text-[10px] text-dim mt-1.5 leading-[1.5]">{subtitle}</p>}
+      {mobile ? null : (
+        <div className="flex-shrink-0 border-b border-[#2A2A2A] p-[14px_16px]">
+          <h2 className="text-[13px] font-semibold tracking-[2px] text-white uppercase">{title}</h2>
+          {subtitle ? (
+            <p className="mt-1.5 text-[10px] leading-[1.5] text-dim">{subtitle}</p>
+          ) : null}
           {headerExtra}
         </div>
       )}
 
-      <div ref={scrollRef} onScroll={onScroll} className="flex-1 overflow-y-auto auto-scrollbar">
+      <div ref={scrollRef} onScroll={onScroll} className="auto-scrollbar flex-1 overflow-y-auto">
         {children}
       </div>
 
-      <div className="flex-shrink-0 sticky bottom-0 border-t border-border bg-surface">
+      <div className="sticky bottom-0 flex-shrink-0 border-t border-border bg-surface">
         <div className="flex flex-col gap-2 px-4 py-3">
           {footerExtra}
           <button
             type="button"
             onClick={onReset}
-            className="button-hover-exempt weight-panel-reset-button w-full flex items-center justify-center gap-2 rounded transition-colors bg-transparent text-accent-dim text-[13px] font-medium h-10 border border-border rounded-[6px] cursor-pointer"
+            className="button-hover-exempt weight-panel-reset-button flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded rounded-[6px] border border-border bg-transparent text-[13px] font-medium text-accent-dim transition-colors"
           >
             <svg
               width="14"

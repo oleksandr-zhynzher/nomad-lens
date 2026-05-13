@@ -97,7 +97,7 @@ export function ComparePage() {
   }, [showWeights, syncPanelHeight]);
 
   useEffect(() => {
-    if (!countries.length) return;
+    if (countries.length === 0) return;
     if (rawSelectedCodes.join(",") === selectedCodes.join(",")) return;
     setSearchParams(
       (prev) => {
@@ -141,14 +141,18 @@ export function ComparePage() {
   const handleShare = () => {
     ws.handleShare(buildCompareShareParams(compareMode, selectedCodes));
     setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000);
   };
 
   const handleSortByScore = () => {
     setSortDirection((previous) => (previous === "desc" ? "asc" : "desc"));
     setSortTrigger((previous) => previous + 1);
     setSortFeedbackActive(true);
-    setTimeout(() => setSortFeedbackActive(false), 1000);
+    setTimeout(() => {
+      setSortFeedbackActive(false);
+    }, 1000);
   };
 
   const showParametersAction = true;
@@ -210,20 +214,20 @@ export function ComparePage() {
         >
           <div className="hero-stats-row hero-banner-stats">
             <div className="min-w-0">
-              <div className="font-mono text-[18px] font-semibold text-accent-dim leading-none">
+              <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
                 {countries.length}
               </div>
-              <div className="text-[10px] text-dimmer uppercase tracking-[1px] mt-1">
+              <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
                 {t("hero.stats.countries", { count: countries.length })}
               </div>
             </div>
             <div className="hero-stat-divider" />
             <Link to={`${langPrefix}/nomad-visas`} className="min-w-0 no-underline">
               <div>
-                <div className="font-mono text-[18px] font-semibold text-accent-dim leading-none">
+                <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
                   {nomadVisaCountryCount}
                 </div>
-                <div className="text-[10px] text-dimmer uppercase tracking-[1px] mt-1">
+                <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
                   {t("compare.nomadVisaCountries", {
                     count: nomadVisaCountryCount,
                   })}
@@ -233,10 +237,10 @@ export function ComparePage() {
             <div className="hero-stat-divider" />
             <Link to={`${langPrefix}/indicators`} className="min-w-0 no-underline">
               <div>
-                <div className="font-mono text-[18px] font-semibold text-accent-dim leading-none">
+                <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
                   {coreIndicatorCount}
                 </div>
-                <div className="text-[10px] text-dimmer uppercase tracking-[1px] mt-1">
+                <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
                   {t("hero.stats.indicators", { count: coreIndicatorCount })}
                 </div>
               </div>
@@ -244,10 +248,10 @@ export function ComparePage() {
             <div className="hero-stat-divider" />
             <Link to={`${langPrefix}/ai-indicators`} className="min-w-0 no-underline">
               <div>
-                <div className="font-mono text-[18px] font-semibold text-accent-dim leading-none">
+                <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
                   {aiIndicatorCount}
                 </div>
-                <div className="text-[10px] text-dimmer uppercase tracking-[1px] mt-1">
+                <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
                   {t("hero.stats.aiIndicators", { count: aiIndicatorCount })}
                 </div>
               </div>
@@ -255,43 +259,53 @@ export function ComparePage() {
           </div>
         </PageHeroBanner>
 
-        <div className="max-w-[1200px] mx-auto px-4 pb-6">
+        <div className="mx-auto max-w-[1200px] px-4 pb-6">
           {/* Mode toggle + actions row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 md:gap-4 mb-4 md:mb-6 sm:sticky sm:top-14 sm:z-20 sm:bg-[#0F1114] sm:-mx-4 sm:px-4 sm:py-2 sm:border-b sm:border-[#1C1C1C]">
+          <div className="mb-4 flex flex-col items-start gap-3 sm:sticky sm:top-14 sm:z-20 sm:-mx-4 md:mb-6 sm:flex-row sm:items-center md:gap-4 sm:border-b sm:border-[#1C1C1C] sm:bg-[#0F1114] sm:px-4 sm:py-2">
             {/* Compare mode toggle pills */}
-            <div className="w-full rounded-md p-1 sm:w-auto bg-[#1A1A1A] border border-[#252525]">
+            <div className="w-full rounded-md border border-[#252525] bg-[#1A1A1A] p-1 sm:w-auto">
               <div className="flex w-full gap-1">
                 <button
-                  onClick={() => setCompareMode("countries")}
-                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5 text-xs ${compareMode === "countries" ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
+                  onClick={() => {
+                    setCompareMode("countries");
+                  }}
+                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 text-xs transition-colors sm:px-4 sm:py-1.5 ${compareMode === "countries" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
                 >
                   <Flag size={14} className="shrink-0" />
                   {t("compare.countries")}
                 </button>
                 <button
-                  onClick={() => setCompareMode("regions")}
-                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5 text-xs ${compareMode === "regions" ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
+                  onClick={() => {
+                    setCompareMode("regions");
+                  }}
+                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 text-xs transition-colors sm:px-4 sm:py-1.5 ${compareMode === "regions" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
                 >
                   <Globe size={16} className="shrink-0" />
                   {t("compare.regions")}
                 </button>
                 <button
-                  onClick={() => setCompareMode("nomadVisas")}
-                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5 text-xs text-center leading-tight ${compareMode === "nomadVisas" ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
+                  onClick={() => {
+                    setCompareMode("nomadVisas");
+                  }}
+                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs leading-tight transition-colors sm:px-4 sm:py-1.5 ${compareMode === "nomadVisas" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
                 >
                   <Plane size={14} className="shrink-0" />
                   {t("compare.nomadVisas")}
                 </button>
                 <button
-                  onClick={() => setCompareMode("budget")}
-                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5 text-xs ${compareMode === "budget" ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
+                  onClick={() => {
+                    setCompareMode("budget");
+                  }}
+                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 text-xs transition-colors sm:px-4 sm:py-1.5 ${compareMode === "budget" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
                 >
                   <Wallet size={14} className="shrink-0" />
                   {t("compare.budget", "Budget")}
                 </button>
                 <button
-                  onClick={() => setCompareMode("tourism")}
-                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 transition-colors sm:px-4 sm:py-1.5 text-xs ${compareMode === "tourism" ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
+                  onClick={() => {
+                    setCompareMode("tourism");
+                  }}
+                  className={`flex min-w-0 flex-1 basis-1/5 items-center justify-center gap-1.5 rounded px-3 py-2 text-xs transition-colors sm:px-4 sm:py-1.5 ${compareMode === "tourism" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
                 >
                   <Palmtree size={14} className="shrink-0" />
                   {t("compare.tourism", "Tourism")}
@@ -301,9 +315,9 @@ export function ComparePage() {
 
             {/* Parameters + Sort + Share controls */}
             <div className="w-full sm:w-auto">
-              <div className="w-full rounded-md p-1 sm:w-auto bg-[#1A1A1A] border border-[#252525]">
+              <div className="w-full rounded-md border border-[#252525] bg-[#1A1A1A] p-1 sm:w-auto">
                 <div className={`grid gap-1 sm:flex sm:w-auto ${actionGridClassName}`}>
-                  {showParametersAction && (
+                  {showParametersAction ? (
                     <button
                       onClick={() => {
                         if (window.innerWidth <= mobileViewportMaxWidth) {
@@ -312,10 +326,10 @@ export function ComparePage() {
                           setShowWeights((p) => !p);
                         }
                       }}
-                      className={`flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-colors sm:flex-initial sm:px-4 sm:py-1.5 cursor-pointer text-xs shrink-0 ${showWeights && window.innerWidth > mobileViewportMaxWidth ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
+                      className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs transition-colors sm:flex-initial sm:px-4 sm:py-1.5 ${showWeights && window.innerWidth > mobileViewportMaxWidth ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
                     >
                       <svg
-                        className="w-4 h-4"
+                        className="h-4 w-4"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -329,12 +343,12 @@ export function ComparePage() {
                       </svg>
                       {t("compare.parameters")}
                     </button>
-                  )}
+                  ) : null}
 
-                  {showSortAction && (
+                  {showSortAction ? (
                     <button
                       onClick={handleSortByScore}
-                      className={`flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-all duration-150 ease-in-out sm:flex-initial sm:px-4 sm:py-1.5 cursor-pointer text-xs shrink-0 leading-tight ${sortFeedbackActive ? "bg-[#2A4A2A] text-[#88CC88] font-medium" : "bg-transparent text-dim font-normal"}`}
+                      className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs leading-tight transition-all duration-150 ease-in-out sm:flex-initial sm:px-4 sm:py-1.5 ${sortFeedbackActive ? "bg-[#2A4A2A] font-medium text-[#88CC88]" : "bg-transparent font-normal text-dim"}`}
                     >
                       <ArrowDownWideNarrow
                         size={16}
@@ -342,15 +356,15 @@ export function ComparePage() {
                       />
                       {sortButtonLabel}
                     </button>
-                  )}
+                  ) : null}
 
                   <button
                     onClick={handleShare}
-                    className={`flex min-w-0 items-center justify-center gap-1.5 rounded px-3 py-2 text-center transition-all duration-150 ease-in-out sm:flex-initial sm:px-4 sm:py-1.5 cursor-pointer text-xs shrink-0 ${copied ? "bg-[#2A4A2A] text-[#88CC88] font-medium" : "bg-transparent text-dim font-normal"}`}
+                    className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs transition-all duration-150 ease-in-out sm:flex-initial sm:px-4 sm:py-1.5 ${copied ? "bg-[#2A4A2A] font-medium text-[#88CC88]" : "bg-transparent font-normal text-dim"}`}
                   >
                     {copied ? (
                       <svg
-                        className="w-4 h-4"
+                        className="h-4 w-4"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -360,7 +374,7 @@ export function ComparePage() {
                       </svg>
                     ) : (
                       <svg
-                        className="w-4 h-4"
+                        className="h-4 w-4"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -384,7 +398,9 @@ export function ComparePage() {
             open={mobileParamsOpen}
             title={t("compare.parameters")}
             closeLabel={t("a11y.closeParameters", "Close parameters")}
-            onClose={() => setMobileParamsOpen(false)}
+            onClose={() => {
+              setMobileParamsOpen(false);
+            }}
           >
             <div className="flex-1 overflow-y-auto">
               <CompareParametersPanel
@@ -403,10 +419,10 @@ export function ComparePage() {
               showWeights ? "grid-cols-1 lg:grid-cols-[340px_1fr]" : "grid-cols-1"
             }`}
           >
-            {showWeights && (
+            {showWeights ? (
               <div
                 ref={panelRef}
-                className={`hidden md:block sticky top-4 rounded-lg ${compareMode === "budget" || compareMode === "nomadVisas" ? "overflow-auto" : "overflow-hidden"}`}
+                className={`sticky top-4 hidden rounded-lg md:block ${compareMode === "budget" || compareMode === "nomadVisas" ? "overflow-auto" : "overflow-hidden"}`}
               >
                 <CompareParametersPanel
                   compareMode={compareMode}
@@ -416,7 +432,7 @@ export function ComparePage() {
                   onShare={handleShare}
                 />
               </div>
-            )}
+            ) : null}
             <div className="min-w-0">
               {compareMode === "regions" ? (
                 <RegionComparison

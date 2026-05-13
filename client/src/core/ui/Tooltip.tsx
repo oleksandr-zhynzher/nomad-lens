@@ -35,28 +35,28 @@ export function Tooltip({
     [],
   );
 
+  function displayTooltip() {
+    if (triggerRef.current) {
+      const r = triggerRef.current.getBoundingClientRect();
+
+      // Auto-flip to bottom if not enough space on top
+      const tooltipHeight = 200; // approximate max height with padding
+      const spaceAbove = r.top;
+
+      let finalSide = side;
+      if (side === "top" && spaceAbove < tooltipHeight) {
+        // Not enough space above, flip to bottom
+        finalSide = "bottom";
+      }
+
+      setActualSide(finalSide);
+      setCoords({ x: r.left + r.width / 2, y: finalSide === "bottom" ? r.bottom : r.top });
+    }
+  }
+
   function show() {
     if (hideTimer.current) clearTimeout(hideTimer.current);
     if (showTimer.current) clearTimeout(showTimer.current);
-
-    const displayTooltip = () => {
-      if (triggerRef.current) {
-        const r = triggerRef.current.getBoundingClientRect();
-
-        // Auto-flip to bottom if not enough space on top
-        const tooltipHeight = 200; // approximate max height with padding
-        const spaceAbove = r.top;
-
-        let finalSide = side;
-        if (side === "top" && spaceAbove < tooltipHeight) {
-          // Not enough space above, flip to bottom
-          finalSide = "bottom";
-        }
-
-        setActualSide(finalSide);
-        setCoords({ x: r.left + r.width / 2, y: finalSide === "bottom" ? r.bottom : r.top });
-      }
-    };
 
     if (delay > 0) {
       showTimer.current = setTimeout(displayTooltip, delay);
@@ -67,7 +67,9 @@ export function Tooltip({
 
   function hide() {
     if (showTimer.current) clearTimeout(showTimer.current);
-    hideTimer.current = setTimeout(() => setCoords(null), 120);
+    hideTimer.current = setTimeout(() => {
+      setCoords(null);
+    }, 120);
   }
 
   const style: CSSProperties = coords
@@ -93,17 +95,18 @@ export function Tooltip({
       onBlur={hide}
     >
       {children}
-      {coords !== null &&
-        createPortal(
-          <div
-            role="tooltip"
-            className="pointer-events-none rounded-[6px] shadow-xl text-xs text-white leading-relaxed bg-surface border border-[#2E2E2E] px-[9px] py-[5px] max-w-[220px]"
-            style={style}
-          >
-            {content}
-          </div>,
-          document.body,
-        )}
+      {coords === null
+        ? null
+        : createPortal(
+            <div
+              role="tooltip"
+              className="pointer-events-none max-w-[220px] rounded-[6px] border border-[#2E2E2E] bg-surface px-[9px] py-[5px] text-xs leading-relaxed text-white shadow-xl"
+              style={style}
+            >
+              {content}
+            </div>,
+            document.body,
+          )}
     </span>
   );
 }

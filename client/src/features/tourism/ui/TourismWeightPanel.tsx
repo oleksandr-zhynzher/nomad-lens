@@ -60,8 +60,9 @@ export function TourismWeightPanel({
     ...Object.fromEntries(TOURISM_GROUPS.map((g) => [g.labelKey, false])),
   });
 
-  const toggleGroup = (label: string) =>
+  const toggleGroup = (label: string) => {
     setCollapsed((prev) => ({ ...prev, [label]: !prev[label] }));
+  };
 
   const { scrollRef, onScroll } = useScrollIndicator();
 
@@ -78,29 +79,31 @@ export function TourismWeightPanel({
       onScroll={onScroll}
     >
       {/* ── Budget group ──────────────────────────────────────────── */}
-      {budgetState && onBudgetChange && (
+      {budgetState && onBudgetChange ? (
         <CollapsibleSection
           id="tourism-budget"
           icon={<DollarSign size={16} color="#4CAF50" />}
           label={t("tourismBudget.groupLabel", "Travel Budget")}
           badge={
-            <div className="flex items-center bg-[#0a2910] rounded-[3px] px-2 py-[3px]">
+            <div className="flex items-center rounded-[3px] bg-[#0a2910] px-2 py-[3px]">
               <span className="font-mono text-[11px] text-[#4CAF50]">
                 ${budgetState.dailyBudget}
               </span>
             </div>
           }
-          isOpen={!collapsed["BUDGET"]}
-          onToggle={() => toggleGroup("BUDGET")}
+          isOpen={!collapsed.BUDGET}
+          onToggle={() => {
+            toggleGroup("BUDGET");
+          }}
         >
-          <div className="flex flex-col px-4 py-3 gap-4">
+          <div className="flex flex-col gap-4 px-4 py-3">
             {/* Daily budget slider */}
             <div>
-              <div className="flex items-end gap-2 mb-2">
-                <span className="font-mono text-2xl font-bold text-on-surface leading-none">
+              <div className="mb-2 flex items-end gap-2">
+                <span className="font-mono text-2xl leading-none font-bold text-on-surface">
                   ${budgetState.dailyBudget}
                 </span>
-                <span className="text-xs text-dimmer pb-px">
+                <span className="pb-px text-xs text-dimmer">
                   {t("tourismBudget.perDay", "/day")}
                 </span>
               </div>
@@ -111,8 +114,10 @@ export function TourismWeightPanel({
                 max={500}
                 step={5}
                 value={budgetState.dailyBudget}
-                onChange={(e) => onBudgetChange("dailyBudget", Number(e.target.value))}
-                className="w-full h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+                onChange={(e) => {
+                  onBudgetChange("dailyBudget", Number(e.target.value));
+                }}
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-full [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
                 style={
                   {
                     "--pct": `${((budgetState.dailyBudget - 10) / 490) * 100}%`,
@@ -120,7 +125,7 @@ export function TourismWeightPanel({
                 }
                 aria-label={t("tourismBudget.dailyBudgetLabel", "Daily budget")}
               />
-              <div className="flex justify-between mt-1.5">
+              <div className="mt-1.5 flex justify-between">
                 <span className="text-[10px] text-dimmer">$10</span>
                 <span className="text-[10px] text-dimmer">$500</span>
               </div>
@@ -136,7 +141,7 @@ export function TourismWeightPanel({
                   <Tooltip
                     content={
                       <div className="max-w-[240px]">
-                        <div className="mb-1.5 text-white font-semibold">
+                        <div className="mb-1.5 font-semibold text-white">
                           {t("tourismBudget.budgetBlend", "Budget blend")}
                         </div>
                         <div>
@@ -152,7 +157,7 @@ export function TourismWeightPanel({
                     <Info
                       size={13}
                       color="#FFFFFF"
-                      className="cursor-pointer shrink-0 opacity-45"
+                      className="shrink-0 cursor-pointer opacity-45"
                     />
                   </Tooltip>
                 </div>
@@ -166,8 +171,10 @@ export function TourismWeightPanel({
                 min={0}
                 max={100}
                 value={budgetState.budgetBlend}
-                onChange={(e) => onBudgetChange("budgetBlend", Number(e.target.value))}
-                className="w-full h-1.5 rounded-full appearance-none cursor-pointer [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
+                onChange={(e) => {
+                  onBudgetChange("budgetBlend", Number(e.target.value));
+                }}
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-full [background:linear-gradient(to_right,var(--color-accent)_0%,var(--color-accent)_var(--pct),#333333_var(--pct),#333333_100%)]"
                 style={{ "--pct": `${budgetState.budgetBlend}%` } as React.CSSProperties}
                 aria-label={t("tourismBudget.budgetBlend", "Budget blend")}
               />
@@ -186,7 +193,7 @@ export function TourismWeightPanel({
               <span className="text-xs text-white">
                 {t("tourismBudget.accommodation", "Accommodation")}
               </span>
-              <div className="flex bg-surface-4 rounded-[4px] p-1 gap-1">
+              <div className="flex gap-1 rounded-[4px] bg-surface-4 p-1">
                 {(["hotel", "airbnb", "hostel"] as const).map((opt) => {
                   const isHotel = opt === "hotel";
                   const active = isHotel
@@ -198,13 +205,13 @@ export function TourismWeightPanel({
                       onClick={() => {
                         if (isHotel) {
                           if (!budgetState.accommodation.startsWith("hotel")) {
-                            onBudgetChange("accommodation", "hotel3" as AccommodationType);
+                            onBudgetChange("accommodation", "hotel3");
                           }
                         } else {
                           onBudgetChange("accommodation", opt as AccommodationType);
                         }
                       }}
-                      className={`flex-1 py-[5px] rounded-[3px] border-none cursor-pointer text-[11px] transition-all duration-[150ms] text-center ${active ? "bg-accent text-white font-medium" : "bg-transparent text-dim font-normal"}`}
+                      className={`flex-1 cursor-pointer rounded-[3px] border-none py-[5px] text-center text-[11px] transition-all duration-[150ms] ${active ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
                     >
                       {t(
                         `tourismBudget.accomTypes.${opt}`,
@@ -215,23 +222,25 @@ export function TourismWeightPanel({
                 })}
               </div>
               {/* Hotel star sub-selector */}
-              {budgetState.accommodation.startsWith("hotel") && (
-                <div className="flex bg-surface-2 rounded-[4px] p-1 gap-1">
+              {budgetState.accommodation.startsWith("hotel") ? (
+                <div className="flex gap-1 rounded-[4px] bg-surface-2 p-1">
                   {([5, 4, 3, 2, 1] as const).map((stars) => {
                     const key = `hotel${stars}` as AccommodationType;
                     const active = budgetState.accommodation === key;
                     return (
                       <button
                         key={stars}
-                        onClick={() => onBudgetChange("accommodation", key)}
-                        className={`flex-1 py-[5px] rounded-[3px] border-none cursor-pointer text-[7px] tracking-[0.5px] transition-all duration-[150ms] text-center ${active ? "bg-border font-semibold text-[#FFD700]" : "bg-transparent font-normal text-[#666]"}`}
+                        onClick={() => {
+                          onBudgetChange("accommodation", key);
+                        }}
+                        className={`flex-1 cursor-pointer rounded-[3px] border-none py-[5px] text-center text-[7px] tracking-[0.5px] transition-all duration-[150ms] ${active ? "bg-border font-semibold text-[#FFD700]" : "bg-transparent font-normal text-[#666]"}`}
                       >
                         {"★".repeat(stars)}
                       </button>
                     );
                   })}
                 </div>
-              )}
+              ) : null}
             </div>
 
             {/* People count */}
@@ -243,7 +252,9 @@ export function TourismWeightPanel({
                 value={budgetState.peopleCount}
                 min={1}
                 max={10}
-                onChange={(v) => onBudgetChange("peopleCount", v)}
+                onChange={(v) => {
+                  onBudgetChange("peopleCount", v);
+                }}
               />
             </div>
 
@@ -255,7 +266,9 @@ export function TourismWeightPanel({
               <ToggleGroup
                 options={["market", "casual", "restaurants"] as const}
                 value={budgetState.dining}
-                onChange={(v) => onBudgetChange("dining", v)}
+                onChange={(v) => {
+                  onBudgetChange("dining", v);
+                }}
                 labelFn={(opt) =>
                   t(`tourismBudget.diningTypes.${opt}`, opt.charAt(0).toUpperCase() + opt.slice(1))
                 }
@@ -263,17 +276,17 @@ export function TourismWeightPanel({
             </div>
           </div>
         </CollapsibleSection>
-      )}
+      ) : null}
 
       {/* ── Travel Dates group ──────────────────────────────────────── */}
-      {travelDates && onTravelDatesChange && (
+      {travelDates && onTravelDatesChange ? (
         <CollapsibleSection
           id="tourism-dates"
           icon={<Calendar size={16} color="#64B5F6" />}
           label={t("tourismFilters.travelDates", "Travel Dates")}
           badge={
             travelDates.startDate && travelDates.endDate ? (
-              <div className="flex items-center bg-[#0a1929] rounded-[3px] px-2 py-[3px]">
+              <div className="flex items-center rounded-[3px] bg-[#0a1929] px-2 py-[3px]">
                 <span className="font-mono text-[10px] text-[#64B5F6]">
                   {new Date(travelDates.startDate + "T00:00").toLocaleDateString(undefined, {
                     month: "short",
@@ -288,10 +301,12 @@ export function TourismWeightPanel({
               </div>
             ) : undefined
           }
-          isOpen={!collapsed["DATES"]}
-          onToggle={() => toggleGroup("DATES")}
+          isOpen={!collapsed.DATES}
+          onToggle={() => {
+            toggleGroup("DATES");
+          }}
         >
-          <div className="flex flex-col px-4 py-3 gap-2">
+          <div className="flex flex-col gap-2 px-4 py-3">
             {/* Row 1: Labels */}
             <div className="flex gap-2">
               <span className="flex-1 text-xs text-dimmer">{t("tourismFilters.from", "From")}</span>
@@ -333,16 +348,18 @@ export function TourismWeightPanel({
                 const curDD = dateVal ? dateVal.slice(8, 10) : "01";
                 const selectBaseClass =
                   "font-mono text-xs rounded-sm border border-border bg-surface text-[#e0e0e0] [color-scheme:dark] outline-none cursor-pointer appearance-none text-center px-1.5 py-1.5 min-w-0";
-                const daysInMonth = curMM ? new Date(2000, parseInt(curMM), 0).getDate() : 31;
+                const daysInMonth = curMM
+                  ? new Date(2000, Number.parseInt(curMM), 0).getDate()
+                  : 31;
                 return (
-                  <div key={id} className="flex-1 min-w-0 flex gap-1">
+                  <div key={id} className="flex min-w-0 flex-1 gap-1">
                     <select
                       value={curMM}
                       onChange={(e) => {
                         const mm = e.target.value;
-                        const maxDay = mm ? new Date(2000, parseInt(mm), 0).getDate() : 31;
+                        const maxDay = mm ? new Date(2000, Number.parseInt(mm), 0).getDate() : 31;
                         const safeDD = mm
-                          ? String(Math.min(parseInt(curDD), maxDay)).padStart(2, "0")
+                          ? String(Math.min(Number.parseInt(curDD), maxDay)).padStart(2, "0")
                           : "01";
                         onChange(mm, mm ? safeDD : "01");
                       }}
@@ -361,10 +378,10 @@ export function TourismWeightPanel({
                       ))}
                     </select>
                     <select
-                      value={curMM ? parseInt(curDD).toString() : ""}
+                      value={curMM ? Number.parseInt(curDD).toString() : ""}
                       disabled={!curMM}
                       onChange={(e) => {
-                        const dd = String(parseInt(e.target.value)).padStart(2, "0");
+                        const dd = String(Number.parseInt(e.target.value)).padStart(2, "0");
                         onChange(curMM, dd);
                       }}
                       className={`${selectBaseClass} [flex:1.2] ${curMM ? "opacity-100" : "opacity-40"}`}
@@ -385,27 +402,29 @@ export function TourismWeightPanel({
               })}
             </div>
             {travelDates.startDate &&
-              travelDates.endDate &&
-              toggles &&
-              toggles.requiredTags.length > 0 && (
-                <p className="text-[11px] text-[#666] m-0">
-                  {t(
-                    "tourismFilters.seasonalHint",
-                    "Rankings are adjusted for seasonal quality during your travel dates.",
-                  )}
-                </p>
-              )}
+            travelDates.endDate &&
+            toggles &&
+            toggles.requiredTags.length > 0 ? (
+              <p className="m-0 text-[11px] text-[#666]">
+                {t(
+                  "tourismFilters.seasonalHint",
+                  "Rankings are adjusted for seasonal quality during your travel dates.",
+                )}
+              </p>
+            ) : null}
           </div>
         </CollapsibleSection>
-      )}
+      ) : null}
 
       {/* ── Tourism Metrics group ──────────────────────────────────── */}
       <CollapsibleSection
         id="tourism-metrics"
         icon={<Sun size={16} color="#D4A843" />}
         label={t("tourismWeights.groupLabel", "Tourism Metrics")}
-        isOpen={!collapsed["TOURISM"]}
-        onToggle={() => toggleGroup("TOURISM")}
+        isOpen={!collapsed.TOURISM}
+        onToggle={() => {
+          toggleGroup("TOURISM");
+        }}
       >
         <div className="py-1">
           {TOURISM_GROUPS.map((group) => {
@@ -419,14 +438,16 @@ export function TourismWeightPanel({
                 icon={TOURISM_GROUP_ICONS[group.labelKey]}
                 label={t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
                 badge={
-                  <div className="flex items-center bg-[#291608] rounded-[3px] px-2 py-[3px]">
+                  <div className="flex items-center rounded-[3px] bg-[#291608] px-2 py-[3px]">
                     <span className="font-mono text-[11px] text-accent-dim">
                       {`${t("weights.averageBadge", "avg")} ${subAvg}`}
                     </span>
                   </div>
                 }
                 isOpen={!collapsed[group.labelKey]}
-                onToggle={() => toggleGroup(group.labelKey)}
+                onToggle={() => {
+                  toggleGroup(group.labelKey);
+                }}
               >
                 {group.keys.map((key) => (
                   <div key={key} className="px-4 py-2.5">

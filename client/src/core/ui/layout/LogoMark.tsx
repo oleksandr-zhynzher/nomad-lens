@@ -11,7 +11,7 @@ export function LogoMark({ size = 32, className }: LogoMarkProps) {
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http:/www.w3.org/2000/svg"
-      className={`block shrink-0${className ? ` ${className}` : ""}`}
+      className={`block shrink-0${className ? " " + className : ""}`}
       aria-hidden="true"
     >
       <circle cx="27" cy="27" r="20" stroke="#C99662" strokeWidth="2.75" />

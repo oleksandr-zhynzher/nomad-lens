@@ -9,15 +9,8 @@ import {
   isDefaultBudgetPreferences,
   useBudgetPreferenceStore,
 } from "../store/budget.store";
-import type {
-  Bedrooms,
-  BudgetCategoryWeights,
-  BudgetPreferencesState,
-  HousingPreference,
-} from "../store/budget.store";
+import type { BudgetPreferencesState } from "../store/budget.store";
 import { copyTextToClipboard } from "@core/hooks";
-
-export type { Bedrooms, BudgetCategoryWeights, HousingPreference };
 
 function buildBudgetShareUrl(state: BudgetPreferencesState): string {
   const params = new URLSearchParams();
@@ -36,7 +29,7 @@ function buildBudgetShareUrl(state: BudgetPreferencesState): string {
     params.set("cw", nonDefault.map((key) => `${key}:${state.categoryWeights[key]}`).join(","));
   }
 
-  return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
+  return `${globalThis.location.origin}${globalThis.location.pathname}?${params.toString()}`;
 }
 
 export function useBudgetState() {
@@ -68,7 +61,7 @@ export function useBudgetState() {
 
   const handleShare = useCallback(() => {
     const url = buildBudgetShareUrl(state);
-    void copyTextToClipboard(url).catch((error) => {
+    void copyTextToClipboard(url).catch((error: unknown) => {
       console.error("Failed to copy budget share URL", error);
     });
   }, [state]);
@@ -86,3 +79,9 @@ export function useBudgetState() {
     handleShare,
   };
 }
+
+export {
+  type Bedrooms,
+  type BudgetCategoryWeights,
+  type HousingPreference,
+} from "../store/budget.store";

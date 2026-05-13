@@ -37,7 +37,7 @@ export function computeTourismScore(country: CountryData): number | null {
 function getMonthWeights(startDate: string, endDate: string): Map<number, number> {
   const start = new Date(startDate + "T00:00:00");
   const end = new Date(endDate + "T00:00:00");
-  if (isNaN(start.getTime()) || isNaN(end.getTime()) || end < start) return new Map();
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || end < start) return new Map();
 
   const weights = new Map<number, number>();
   let totalDays = 0;
@@ -65,7 +65,7 @@ function getSeasonalMultiplier(
   monthWeights: Map<number, number>,
 ): number {
   const seasonality = country.tourismTagSeasonality?.[tag];
-  if (!seasonality || seasonality.length !== 12) return 1;
+  if (seasonality?.length !== 12) return 1;
   let total = 0;
   for (const [month, weight] of monthWeights) {
     total += (seasonality[month] / 100) * weight;
@@ -96,7 +96,7 @@ export function computeWeightedTourismScore(
     const w = weights[key] ?? 0;
     if (w <= 0) continue;
     const val = country.scores[key]?.value;
-    if (val === null || val === undefined) {
+    if (val == null) {
       missingCount++;
       continue;
     }
@@ -116,15 +116,15 @@ export function computeWeightedTourismScore(
 
     for (const tag of selectedTags) {
       let tagScore = country.tourismTagScores?.[tag] ?? null;
-      if (tagScore != null) {
+      if (tagScore == null) {
+        missingCount++;
+      } else {
         // Apply seasonal multiplier when travel dates are set
         if (monthWeights && monthWeights.size > 0) {
           tagScore = tagScore * getSeasonalMultiplier(country, tag, monthWeights);
         }
         numerator += tagWeight * tagScore;
         denominator += tagWeight;
-      } else {
-        missingCount++;
       }
     }
   }
@@ -204,10 +204,10 @@ export function applyTagSeasonality(
   travelDates: { startDate: string | null; endDate: string | null } | undefined,
 ): number {
   if (!travelDates?.startDate || !travelDates?.endDate) return baseVal;
-  if (!seasonality || seasonality.length !== 12) return baseVal;
+  if (seasonality?.length !== 12) return baseVal;
   const start = new Date(travelDates.startDate + "T00:00:00");
   const end = new Date(travelDates.endDate + "T00:00:00");
-  if (isNaN(start.getTime()) || isNaN(end.getTime()) || end < start) return baseVal;
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || end < start) return baseVal;
   let wSum = 0;
   let days = 0;
   const cursor = new Date(start);
@@ -263,7 +263,7 @@ function getAccommodationDaily(col: CostOfLivingData, type: AccommodationType): 
 
   switch (type) {
     case "hotel5":
-      return dailyRent * 5.0;
+      return dailyRent * 5;
     case "hotel4":
       return dailyRent * 3.5;
     case "hotel3":
@@ -413,9 +413,9 @@ export function getWeightedTourismBudgetRanking(
   }
 
   results.sort((a, b) => b.blendedScore - a.blendedScore);
-  results.forEach((r, i) => {
+  for (const [i, r] of results.entries()) {
     r.rank = i + 1;
-  });
+  }
 
   return results;
 }

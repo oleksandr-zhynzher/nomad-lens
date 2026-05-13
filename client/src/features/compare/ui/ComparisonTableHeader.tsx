@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 interface ComparisonHeaderColumn {
   key: string | number;
@@ -19,13 +19,13 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
   return (
     <div
       ref={ref}
-      className="sticky z-10 top-14 sm:top-[112px] overflow-x-auto [scrollbar-width:none] bg-[#0F1114]"
+      className="sticky top-14 z-10 overflow-x-auto bg-[#0F1114] [scrollbar-width:none] sm:top-[112px]"
     >
       <div
         className="flex items-center border-b border-[#1C1C1C] py-[14px]"
         style={gap ? ({ "--th-gap": gap, gap: "var(--th-gap)" } as React.CSSProperties) : undefined}
       >
-        <div className="w-[160px] md:w-[240px] shrink-0">
+        <div className="w-[160px] shrink-0 md:w-[240px]">
           <span className="text-[10px] font-semibold tracking-[1.5px] text-dimmest uppercase">
             {label}
           </span>
@@ -33,18 +33,18 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
         {columns.map((col) => (
           <div
             key={col.key}
-            className="flex shrink-0 items-center justify-center gap-1.5 w-[var(--cw)]"
+            className="flex w-[var(--cw)] shrink-0 items-center justify-center gap-1.5"
             style={{ "--cw": columnWidth } as React.CSSProperties}
           >
-            {col.flagUrl && (
+            {col.flagUrl ? (
               <img
                 src={col.flagUrl}
                 alt={col.name}
-                className="rounded-full object-cover w-[18px] h-[18px]"
+                className="h-[18px] w-[18px] rounded-full object-cover"
               />
-            )}
+            ) : null}
             <span
-              className="truncate text-xs font-semibold text-white max-w-[var(--mnw)]"
+              className="max-w-[var(--mnw)] truncate text-xs font-semibold text-white"
               style={{ "--mnw": col.maxNameWidth ?? "76px" } as React.CSSProperties}
             >
               {col.name}

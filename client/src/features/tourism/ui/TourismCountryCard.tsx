@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { ChevronRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import type { TourismRanked } from "@features/tourism/utils";
@@ -48,7 +48,7 @@ export function TourismCountryCard({
     <div
       data-country-code={country.code}
       data-selected={isSelected ? "true" : undefined}
-      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"} bg-[var(--row-bg)] border-t border-[var(--row-bt)] ${highlighted ? "outline outline-2 outline-[var(--color-accent)] -outline-offset-1" : ""}`}
+      className={`country-row relative overflow-hidden transition-colors duration-150 ${compareMode ? "pl-[38px]" : "pl-0"} border-t border-[var(--row-bt)] bg-[var(--row-bg)] ${highlighted ? "outline outline-2 -outline-offset-1 outline-[var(--color-accent)]" : ""}`}
       style={
         {
           "--row-bg": rowBg,
@@ -57,16 +57,16 @@ export function TourismCountryCard({
         } as React.CSSProperties
       }
     >
-      {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
+      {compareMode ? <CompareCheckbox isSelected={isSelected} uncheckedBg={rowBg} /> : null}
 
       <button
-        className={`w-full text-left flex flex-col transition-colors cursor-pointer bg-transparent border-none min-h-14 ${compareMode ? "pl-[38px] pr-4" : "px-4"} py-3`}
+        className={`flex min-h-14 w-full cursor-pointer flex-col border-none bg-transparent text-left transition-colors ${compareMode ? "pr-4 pl-[38px]" : "px-4"} py-3`}
         onClick={compareMode ? onSelect : onToggle}
         aria-expanded={expanded}
       >
-        <div className="flex items-center gap-2 md:gap-4 w-full">
+        <div className="flex w-full items-center gap-2 md:gap-4">
           {/* Rank */}
-          <span className="text-base md:text-lg font-mono font-bold text-accent w-7 text-center shrink-0">
+          <span className="w-7 shrink-0 text-center font-mono text-base font-bold text-accent md:text-lg">
             {rank}
           </span>
 
@@ -74,7 +74,7 @@ export function TourismCountryCard({
           <CountryNameCell country={country} />
 
           {/* Sparkline dots — tourism score categories + tag dots */}
-          <div className="hidden sm:flex gap-1 items-center">
+          <div className="hidden items-center gap-1 sm:flex">
             <ScoreSparkline
               entries={TOURISM_CATEGORY_KEYS.map((key) => ({
                 key,
@@ -83,29 +83,29 @@ export function TourismCountryCard({
               }))}
             />
             {/* Tag quality dots — only shown when tags are selected */}
-            {selectedTags.length > 0 && (
+            {selectedTags.length > 0 ? (
               <>
-                <div className="w-px h-3 bg-border mx-0.5" />
+                <div className="mx-0.5 h-3 w-px bg-border" />
                 {selectedTags.map((tag) => {
                   const baseVal = country.tourismTagScores?.[tag] ?? null;
                   const val =
-                    baseVal !== null
-                      ? applyTagSeasonality(
+                    baseVal === null
+                      ? null
+                      : applyTagSeasonality(
                           baseVal,
                           country.tourismTagSeasonality?.[tag],
                           travelDates,
-                        )
-                      : null;
+                        );
                   const label = t(`tourismTags.${tag}`, tag);
                   return <ScoreDot key={`tag-${tag}`} value={val} label={label} shape="square" />;
                 })}
               </>
-            )}
+            ) : null}
           </div>
 
           {/* Cost + surplus (daily) */}
-          {ranked.budgetMatch && (
-            <div className="hidden sm:flex flex-col items-end shrink-0">
+          {ranked.budgetMatch ? (
+            <div className="hidden shrink-0 flex-col items-end sm:flex">
               <span className="font-mono text-[13px] text-tertiary">
                 ${ranked.budgetMatch.dailyCost}/d
               </span>
@@ -115,12 +115,12 @@ export function TourismCountryCard({
                 {ranked.budgetMatch.surplus >= 0 ? "+" : ""}${ranked.budgetMatch.surplus}/d
               </span>
             </div>
-          )}
+          ) : null}
 
           {/* Final score */}
-          <div className="shrink-0 w-12 text-right">
+          <div className="w-12 shrink-0 text-right">
             <span
-              className={`text-lg md:text-xl font-mono font-bold ${tourismScoreColourClass(tourismScore, "text")}`}
+              className={`font-mono text-lg font-bold md:text-xl ${tourismScoreColourClass(tourismScore, "text")}`}
             >
               {tourismScore.toFixed(0)}
             </span>
@@ -134,7 +134,7 @@ export function TourismCountryCard({
         </div>
 
         {/* Breakdown bar — matches BudgetCountryCard */}
-        {ranked.budgetMatch && (
+        {ranked.budgetMatch ? (
           <div className="mt-2 ml-[60px]">
             <TourismBudgetBar
               breakdown={ranked.budgetMatch.breakdown}
@@ -142,17 +142,17 @@ export function TourismCountryCard({
               dailyBudget={ranked.budgetMatch.dailyCost + ranked.budgetMatch.surplus}
             />
           </div>
-        )}
+        ) : null}
       </button>
 
       {/* Expanded detail */}
-      {expanded && !compareMode && (
+      {expanded && !compareMode ? (
         <TourismCountryCardDetail
           country={country}
           budgetMatch={ranked.budgetMatch}
           borderColor={borderColor}
         />
-      )}
+      ) : null}
     </div>
   );
 }

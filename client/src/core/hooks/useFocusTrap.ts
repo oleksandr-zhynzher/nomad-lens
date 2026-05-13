@@ -58,7 +58,7 @@ export function useFocusTrap({
       }
 
       const first = focusable[0];
-      const last = focusable[focusable.length - 1];
+      const last = focusable.at(-1)!;
 
       if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
@@ -85,7 +85,7 @@ export function useFocusTrap({
 function getFocusableElements(container: HTMLElement | null): HTMLElement[] {
   if (!container) return [];
 
-  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+  return [...container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)].filter(
     (element) =>
       !element.hasAttribute("disabled") && element.getAttribute("aria-hidden") !== "true",
   );
