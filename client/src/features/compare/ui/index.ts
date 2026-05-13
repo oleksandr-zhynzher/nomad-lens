@@ -1,5 +1,6 @@
 export * from "./BudgetComparison";
 export * from "./CompareCheckbox";
+export * from "./ComparePanel";
 export * from "./CompareParametersPanel";
 export * from "./CompareView";
 export * from "./ComparisonAddButton";
@@ -11,5 +12,7 @@ export * from "./CountryComparison";
 export * from "./CountryPickerDropdown";
 export * from "./NomadVisaComparison";
 export * from "./RegionComparison";
+export * from "./RegionIcon";
 export * from "./RegionPill";
 export * from "./TourismComparison";
+export * from "./VisaCellComponents";

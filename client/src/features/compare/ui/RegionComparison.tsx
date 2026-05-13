@@ -1,100 +1,21 @@
 import { useMemo, useState, useRef } from "react";
-import type React from "react";
 import { useTranslation } from "react-i18next";
 import { TrendingUp } from "lucide-react";
 import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
-import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "@core/models";
+import { CATEGORY_LABELS } from "@core/models";
 import { scoreColour } from "@features/country-ranking/utils";
 import { scoreColourClass } from "@core/utils";
 import { regionKey } from "@core/utils";
 import { CATEGORY_ICONS } from "@features/compare/constants";
 import { useSyncScroll } from "@features/compare/hooks";
-import { REGION_COLORS, REGION_ICONS, REGION_COLUMN_WIDTH } from "@features/compare/constants";
-import type { RegionStats } from "@features/compare/constants";
+import { REGION_COLUMN_WIDTH } from "@features/compare/constants";
+import { computeRegionStats } from "@features/compare/utils";
+import { VISIBLE_CATEGORY_KEYS } from "@core/constants";
 import { ComparisonRowShell } from "./ComparisonRowShell";
 import { ComparisonScoreCell } from "./ComparisonScoreCell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";
 import { RegionPill } from "@features/compare/ui";
-
-/** Compute per-category average scores for a set of countries in a region. */
-function computeRegionCategories(regionCountries: CountryData[]): RegionStats["categories"] {
-  const categories = {} as RegionStats["categories"];
-  for (const key of VISIBLE_CATEGORY_KEYS) {
-    const values = regionCountries
-      .map((c) => c.scores[key].value)
-      .filter((v): v is number => v != null);
-    if (values.length === 0) {
-      categories[key] = { avg: null, count: 0 };
-    } else {
-      const avg = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10) / 10;
-      categories[key] = { avg, count: values.length };
-    }
-  }
-  return categories;
-}
-
-/** Compute the weighted overall score for a region given its per-category averages. */
-function computeRegionOverall(categories: RegionStats["categories"], weights: WeightMap): number {
-  let numerator = 0;
-  let denominator = 0;
-  for (const key of VISIBLE_CATEGORY_KEYS) {
-    const w = weights[key];
-    if (w <= 0) continue;
-    const avg = categories[key].avg;
-    if (avg === null) continue;
-    numerator += w * avg;
-    denominator += w;
-  }
-  return denominator === 0 ? 0 : Math.round((numerator / denominator) * 10) / 10;
-}
-
-/** Compute per-region statistics for every visible category key and weighted overall. */
-function computeRegionStats(
-  countries: CountryData[],
-  allRegions: string[],
-  weights: WeightMap,
-): RegionStats[] {
-  const grouped: Partial<Record<string, CountryData[]>> = {};
-  for (const c of countries) {
-    const existing = grouped[c.region];
-    if (existing !== undefined) {
-      existing.push(c);
-    } else {
-      grouped[c.region] = [c];
-    }
-  }
-
-  return allRegions.map((regionName) => {
-    const regionCountries = grouped[regionName] ?? [];
-    const categories = computeRegionCategories(regionCountries);
-    const overall = computeRegionOverall(categories, weights);
-    return {
-      name: regionName,
-      count: regionCountries.length,
-      color: REGION_COLORS[regionName] ?? "#888888",
-      overall,
-      categories,
-    };
-  });
-}
-
-interface RegionIconProps {
-  readonly name: string;
-  readonly active: boolean;
-  readonly color: string;
-}
-
-function RegionIcon({ name, active, color }: RegionIconProps) {
-  const Icon = REGION_ICONS[name];
-  if (Icon == null) return null;
-  return (
-    <Icon
-      size={20}
-      style={{ "--ic": active ? color : "#808080" } as React.CSSProperties}
-      className="text-[var(--ic)]"
-    />
-  );
-}
+import { RegionIcon } from "./RegionIcon";
 
 interface RegionComparisonProps {
   readonly countries: CountryData[];

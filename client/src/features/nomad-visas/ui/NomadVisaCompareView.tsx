@@ -11,41 +11,11 @@ import {
   setCompareCountryCodesParam,
 } from "@features/compare/utils";
 import { localizeCountry } from "@core/utils";
+import { TAX_STATUS_COLORS } from "@core/constants";
 import type { CountryData, NomadVisaDetails } from "@core/models";
-
-const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  exempt: { bg: "#1A4A2A", text: "#44CC66" },
-  standard: { bg: "#2A2A3A", text: "#8888CC" },
-  special: { bg: "#4A3A1A", text: "#DDAA44" },
-};
+import { Row, Cell, VALUE_MONO, VALUE_TEXT } from "./CompareTableParts";
 
 type VisaCountry = CountryData & { nomadVisa: NomadVisaDetails };
-
-const LABEL_STYLE = "text-[11px] font-semibold tracking-[0.8px] uppercase text-dimmest";
-const VALUE_MONO = "font-mono text-sm font-semibold text-white";
-const VALUE_TEXT = "text-[13px] text-tertiary";
-
-function Row({ label, children }: { readonly label: string; readonly children: React.ReactNode }) {
-  return (
-    <div className="grid grid-cols-[160px_1fr] items-stretch border-b border-[#1A1A1A]">
-      <div className={`${LABEL_STYLE} flex shrink-0 items-center bg-[#111113] px-4 py-3.5`}>
-        {label}
-      </div>
-      <div className="flex overflow-hidden">{children}</div>
-    </div>
-  );
-}
-
-function Cell({ children, count }: { readonly children: React.ReactNode; readonly count: number }) {
-  return (
-    <div
-      className="flex min-w-0 shrink-0 grow-0 items-center border-l border-[#1A1A1A] px-4 py-3.5"
-      style={{ flex: `0 0 ${100 / count}%` }}
-    >
-      {children}
-    </div>
-  );
-}
 
 export function NomadVisaComparePage() {
   const { t, i18n } = useTranslation();

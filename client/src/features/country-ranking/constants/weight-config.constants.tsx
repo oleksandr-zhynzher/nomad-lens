@@ -79,3 +79,5 @@ export const WEIGHT_GROUPS: Array<{
     ],
   },
 ];
+
+export const PANEL_KEYS = WEIGHT_GROUPS.flatMap((g) => g.keys);

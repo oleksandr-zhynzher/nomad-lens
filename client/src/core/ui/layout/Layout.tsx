@@ -1,82 +1,28 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { BarChart3, List, Map, Menu, Palmtree, Plane, Wallet, X } from "lucide-react";
-import { Link, useLocation, useNavigate, type NavigateFunction } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import { LogoMark } from "./LogoMark";
 import { LANG_OPTIONS } from "@core/utils";
 import { INFO_PAGES } from "@core/utils";
+import {
+  navigateToView,
+  makeClickOutsideHandler,
+  computeLangSwitchPath,
+  computeActiveView,
+  type NavView,
+} from "./layout.utils";
+import {
+  headerNavBtnClass,
+  headerNavLinkClass,
+  mobileNavBtnClass,
+  mobileNavLinkClass,
+} from "./layout.styles";
 
 interface LayoutProps {
   readonly children: ReactNode;
   readonly activePage?: "data-sources" | "indicators" | "ai-indicators" | "budget-categories";
-}
-
-type NavView = "list" | "map" | "compare";
-
-function navigateToView(
-  view: NavView,
-  langPrefix: string,
-  navigate: NavigateFunction,
-  onNavigate: () => void,
-): void {
-  if (view === "list") {
-    void navigate(langPrefix !== "" ? langPrefix : "/");
-  } else {
-    void navigate(`${langPrefix}/${view}`);
-  }
-  onNavigate();
-}
-
-function makeClickOutsideHandler(
-  ref: React.RefObject<HTMLDivElement | null>,
-  onClose: () => void,
-): (event: MouseEvent) => void {
-  return (event: MouseEvent) => {
-    if (ref.current != null && !ref.current.contains(event.target as Node)) {
-      onClose();
-    }
-  };
-}
-function computeLangSwitchPath(
-  targetLang: string,
-  pathname: string,
-  langPrefix: string,
-  search: string,
-): string {
-  let rest = pathname;
-  if (langPrefix !== "" && rest.startsWith(langPrefix)) {
-    const sliced = rest.slice(langPrefix.length);
-    rest = sliced !== "" ? sliced : "/";
-  }
-  const prefix = targetLang === "en" ? "" : `/${targetLang}`;
-  return `${prefix}${rest}${search}`;
-}
-
-function computeActiveView(
-  pathname: string,
-  isInfoPage: boolean,
-): "list" | "map" | "compare" | null {
-  if (pathname.endsWith("/map")) return "map";
-  if (pathname.endsWith("/compare")) return "compare";
-  if (isInfoPage) return null;
-  return "list";
-}
-
-function headerNavBtnClass(isActive: boolean): string {
-  return `header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`;
-}
-
-function headerNavLinkClass(isActive: boolean): string {
-  return `header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`;
-}
-
-function mobileNavBtnClass(isActive: boolean): string {
-  return `flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`;
-}
-
-function mobileNavLinkClass(isActive: boolean): string {
-  return `flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`;
 }
 
 export function Layout({ children }: LayoutProps) {

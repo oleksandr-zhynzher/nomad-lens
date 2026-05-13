@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import type { RankedCountry, WeightMap } from "@core/models";
-import { WEIGHT_GROUPS } from "@features/country-ranking/constants/weight-config.constants";
+import { PANEL_KEYS } from "@features/country-ranking/constants/weight-config.constants";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "@core/ui";
 import { CATEGORY_LABELS } from "@core/models";
@@ -13,8 +13,6 @@ import { getRowStyles } from "@core/utils";
 import { CountryNameCell } from "@core/ui/country";
 import { ScoreSparkline } from "@core/ui/indicator";
 import { scoreColourClass } from "@core/utils";
-
-const PANEL_KEYS = WEIGHT_GROUPS.flatMap((g) => g.keys);
 
 interface CountryCardProps {
   readonly ranked: RankedCountry;

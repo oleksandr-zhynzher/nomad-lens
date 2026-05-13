@@ -1,15 +1,7 @@
 import { useMemo, useState, useRef, useEffect } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-  Search,
-  ChevronDown,
-  ChevronUp,
-  ExternalLink,
-  ChevronsUpDown,
-  GitCompare,
-  X,
-} from "lucide-react";
+import { Search, ExternalLink, GitCompare, X } from "lucide-react";
 import { Layout } from "@core/ui/layout";
 import { PageHeroBanner } from "@core/ui/page-hero";
 import { useBudgetMatcher } from "@features/budget/hooks";
@@ -18,115 +10,18 @@ import { useCountries } from "@core/hooks";
 import { useLangPrefix } from "@core/hooks";
 import { useWeightState } from "@features/country-ranking/hooks";
 import { localizeCountry } from "@core/utils";
-import { computeClimateScore, computeScore } from "@features/country-ranking/utils";
 import { scoreColourClass } from "@core/utils";
-import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
-
-const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
-  exempt: { bg: "#1A4A2A", text: "#44CC66" },
-  standard: { bg: "#2A2A3A", text: "#8888CC" },
-  special: { bg: "#4A3A1A", text: "#DDAA44" },
-};
-
-type SortField =
-  | "country"
-  | "overallScore"
-  | "monthlyBudget"
-  | "duration"
-  | "cost"
-  | "income"
-  | "tax";
-type SortDirection = "asc" | "desc";
-
-function applyClimate(country: CountryData, climatePrefs: ClimatePreferences): CountryData {
-  if (!country.climateData) return country;
-
-  return {
-    ...country,
-    scores: {
-      ...country.scores,
-      climate: {
-        ...country.scores.climate,
-        value: computeClimateScore(country.climateData, climatePrefs),
-      },
-    },
-  };
-}
-
-function computeOverallScore(country: CountryData, weights: WeightMap) {
-  return computeScore(country, weights);
-}
-
-interface VisaRow {
-  readonly country: CountryData & { nomadVisa: NonNullable<CountryData["nomadVisa"]> };
-  readonly overallScore: number;
-  readonly monthlyBudget: number | null;
-}
-
-function compareVisaRows(a: VisaRow, b: VisaRow, field: SortField, lang: string): number {
-  switch (field) {
-    case "country":
-      return localizeCountry(a.country, lang).name.localeCompare(
-        localizeCountry(b.country, lang).name,
-      );
-    case "overallScore":
-      return a.overallScore - b.overallScore;
-    case "monthlyBudget": {
-      if (a.monthlyBudget == null && b.monthlyBudget == null) return 0;
-      if (a.monthlyBudget == null) return 1;
-      if (b.monthlyBudget == null) return -1;
-      return a.monthlyBudget - b.monthlyBudget;
-    }
-    case "duration":
-      return a.country.nomadVisa.duration.initial - b.country.nomadVisa.duration.initial;
-    case "cost":
-      return a.country.nomadVisa.cost.amount - b.country.nomadVisa.cost.amount;
-    case "income": {
-      const aIncome =
-        a.country.nomadVisa.incomeRequirement.monthly ??
-        a.country.nomadVisa.incomeRequirement.annual ??
-        0;
-      const bIncome =
-        b.country.nomadVisa.incomeRequirement.monthly ??
-        b.country.nomadVisa.incomeRequirement.annual ??
-        0;
-      return aIncome - bIncome;
-    }
-    case "tax":
-      return a.country.nomadVisa.tax.status.localeCompare(b.country.nomadVisa.tax.status);
-  }
-}
-
-function visaRowClass(isSelected: boolean, isHighlighted: boolean): string {
-  const base = "cursor-pointer border-b border-[#1E1E1E] transition-colors";
-  if (isSelected) return `${base} bg-[#1A2A1A]`;
-  if (isHighlighted) return `${base} bg-[#1A1208]`;
-  return `${base} bg-transparent`;
-}
-
-function budgetCellClass(budget: number | null, maxBudget: number): string {
-  if (budget != null && budget <= maxBudget)
-    return "font-mono text-sm font-semibold text-[#44CC66]";
-  if (budget == null) return "font-mono text-sm font-semibold text-dimmest";
-  return "font-mono text-sm font-semibold text-white";
-}
-
-interface SortIconProps {
-  readonly field: SortField;
-  readonly sortField: SortField;
-  readonly sortDirection: SortDirection;
-}
-
-function SortIcon({ field, sortField, sortDirection }: SortIconProps) {
-  if (sortField !== field) {
-    return <ChevronsUpDown size={14} className="ml-1 inline opacity-30" />;
-  }
-  return sortDirection === "asc" ? (
-    <ChevronUp size={14} className="ml-1 inline" />
-  ) : (
-    <ChevronDown size={14} className="ml-1 inline" />
-  );
-}
+import { TAX_STATUS_COLORS } from "@core/constants";
+import type { CountryData } from "@core/models";
+import type { SortField, SortDirection } from "./nomad-visas.types";
+import {
+  applyClimate,
+  computeOverallScore,
+  compareVisaRows,
+  visaRowClass,
+  budgetCellClass,
+} from "./nomad-visas.utils";
+import { VisaSortIcon } from "./VisaSortIcon";
 
 export function NomadVisasPage() {
   const { t, i18n } = useTranslation();
@@ -457,7 +352,7 @@ export function NomadVisasPage() {
                           className="cursor-pointer bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.country", "Country")}{" "}
-                          <SortIcon
+                          <VisaSortIcon
                             field="country"
                             sortField={sortField}
                             sortDirection={sortDirection}
@@ -473,7 +368,7 @@ export function NomadVisasPage() {
                           className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.overallScore", "Overall Score")}{" "}
-                          <SortIcon
+                          <VisaSortIcon
                             field="overallScore"
                             sortField={sortField}
                             sortDirection={sortDirection}
@@ -486,7 +381,7 @@ export function NomadVisasPage() {
                           className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.monthlyBudget", "Monthly Budget")}{" "}
-                          <SortIcon
+                          <VisaSortIcon
                             field="monthlyBudget"
                             sortField={sortField}
                             sortDirection={sortDirection}
@@ -499,7 +394,7 @@ export function NomadVisasPage() {
                           className="cursor-pointer bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.duration", "Duration")}{" "}
-                          <SortIcon
+                          <VisaSortIcon
                             field="duration"
                             sortField={sortField}
                             sortDirection={sortDirection}
@@ -512,7 +407,7 @@ export function NomadVisasPage() {
                           className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.cost", "Cost")}{" "}
-                          <SortIcon
+                          <VisaSortIcon
                             field="cost"
                             sortField={sortField}
                             sortDirection={sortDirection}
@@ -525,7 +420,7 @@ export function NomadVisasPage() {
                           className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.income", "Income Req.")}{" "}
-                          <SortIcon
+                          <VisaSortIcon
                             field="income"
                             sortField={sortField}
                             sortDirection={sortDirection}
@@ -538,7 +433,7 @@ export function NomadVisasPage() {
                           className="cursor-pointer bg-bg px-3 py-4 text-center text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
                         >
                           {t("nomadVisasPage.table.tax", "Tax Status")}{" "}
-                          <SortIcon
+                          <VisaSortIcon
                             field="tax"
                             sortField={sortField}
                             sortDirection={sortDirection}

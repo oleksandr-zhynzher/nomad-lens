@@ -1,14 +1,8 @@
-import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet, Palmtree } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "@core/ui/layout";
-import { BudgetComparison } from "@features/compare/ui";
-import { CountryComparison } from "@features/compare/ui";
-import { NomadVisaComparison } from "@features/compare/ui";
-import { RegionComparison } from "@features/compare/ui";
-import { TourismComparison } from "@features/compare/ui";
 import { PageHeroBanner } from "@core/ui/page-hero";
 import { MobileSheet } from "@core/ui";
 import { useCountries } from "@core/hooks";
@@ -19,8 +13,6 @@ import { useBudgetMatcher } from "@features/budget/hooks";
 import { useBudgetState } from "@features/budget/hooks";
 import { normalizeCountryCodes } from "@features/compare/utils";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "@core/models";
-import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
-import type { BudgetMatch } from "@features/budget/hooks";
 import {
   buildCompareShareParams,
   getRawCompareCountryCodes,
@@ -28,113 +20,15 @@ import {
   parseCompareMode,
   setCompareCountryCodesParam,
   setCompareModeParam,
+  delayedReset,
+  applyPanelHeight,
+  getActionGridClass,
+  getSortIconClass,
 } from "@features/compare/utils";
-import type { CompareMode } from "@features/compare/utils";
+import type { CompareMode, SortDirection } from "@features/compare/utils";
 import { CompareParametersPanel } from "@features/compare/ui";
-
-const SORTABLE_COMPARE_MODES = new Set<CompareMode>(["countries", "budget", "tourism"]);
-const SHOW_WEIGHTS_MODES = new Set<CompareMode>(["budget", "tourism"]);
-
-function delayedReset(setter: (v: false) => void, delayMs: number): void {
-  setTimeout(() => {
-    setter(false);
-  }, delayMs);
-}
-
-function applyPanelHeight(el: HTMLDivElement | null): void {
-  if (el == null) return;
-  const top = el.getBoundingClientRect().top;
-  el.style.height = `${window.innerHeight - Math.max(top, 16) - 16}px`;
-}
-
-function getActionGridClass(showSort: boolean): string {
-  return showSort ? "grid-cols-3" : "grid-cols-2";
-}
-
-type SortDirection = "desc" | "asc" | null;
-
-function getSortIconClass(direction: SortDirection): string {
-  return direction === "asc" ? "rotate-180" : "rotate-0";
-}
-
-interface ComparePanelProps {
-  readonly compareMode: CompareMode;
-  readonly countries: CountryData[];
-  readonly weights: WeightMap;
-  readonly climatePrefs: ClimatePreferences;
-  readonly budgetMatches: BudgetMatch[];
-  readonly selectedCodes: string[];
-  readonly onSelectedCodesChange: (codes: string[]) => void;
-  readonly sortTrigger: number;
-  readonly sortDirection: SortDirection;
-  readonly onSelectionCount: (count: number) => void;
-}
-
-function ComparePanel({
-  compareMode,
-  countries,
-  weights,
-  climatePrefs,
-  budgetMatches,
-  selectedCodes,
-  onSelectedCodesChange,
-  sortTrigger,
-  sortDirection,
-  onSelectionCount,
-}: ComparePanelProps): React.JSX.Element {
-  switch (compareMode) {
-    case "regions":
-      return (
-        <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
-      );
-    case "nomadVisas":
-      return (
-        <NomadVisaComparison
-          countries={countries}
-          weights={weights}
-          climatePrefs={climatePrefs}
-          budgetMatches={budgetMatches}
-          selectedCodes={selectedCodes}
-          onSelectedCodesChange={onSelectedCodesChange}
-        />
-      );
-    case "budget":
-      return (
-        <BudgetComparison
-          countries={countries}
-          matches={budgetMatches}
-          selectedCodes={selectedCodes}
-          onSelectedCodesChange={onSelectedCodesChange}
-          sortTrigger={sortTrigger}
-          sortDirection={sortDirection}
-        />
-      );
-    case "tourism":
-      return (
-        <TourismComparison
-          countries={countries}
-          selectedCodes={selectedCodes}
-          onSelectedCodesChange={onSelectedCodesChange}
-          sortTrigger={sortTrigger}
-          sortDirection={sortDirection}
-          onSelectionCount={onSelectionCount}
-        />
-      );
-    case "countries":
-      return (
-        <CountryComparison
-          countries={countries}
-          weights={weights}
-          climatePrefs={climatePrefs}
-          selectedCodes={selectedCodes}
-          onSelectedCodesChange={onSelectedCodesChange}
-          sortTrigger={sortTrigger}
-          sortDirection={sortDirection}
-          onSelectionCount={onSelectionCount}
-        />
-      );
-  }
-}
+import { ComparePanel } from "./ComparePanel";
+import { SORTABLE_COMPARE_MODES, SHOW_WEIGHTS_MODES } from "@features/compare/constants";
 
 export function ComparePage() {
   const { t } = useTranslation();

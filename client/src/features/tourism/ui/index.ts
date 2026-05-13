@@ -3,5 +3,8 @@ export * from "./TourismBudgetBar";
 export * from "./TourismCountryCard";
 export * from "./TourismCountryCardDetail";
 export * from "./TourismExplorerView";
+export * from "./TourismSearchControls";
 export * from "./TourismWeightPanel";
 export * from "./TourismWeightSlider";
+export * from "./tourism.types";
+export * from "./tourism.utils";

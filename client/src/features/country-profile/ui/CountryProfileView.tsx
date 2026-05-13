@@ -10,17 +10,14 @@ import {
   Bus,
   Calendar,
   Check,
-  CloudSun,
   CreditCard,
   Droplets,
   ExternalLink,
   FileText,
-  Globe,
   Heart,
   Home,
   Laptop,
   MapPin,
-  Plane,
   RefreshCw,
   ShoppingCart,
   Snowflake,
@@ -38,102 +35,20 @@ import { useScoring } from "@features/country-ranking/hooks";
 import { useWeightState } from "@features/country-ranking/hooks";
 import { useLangPrefix } from "@core/hooks";
 import { useTranslation } from "react-i18next";
-import type { NomadVisaDetails, NomadVisaLocalization } from "@core/models";
+import type { NomadVisaDetails } from "@core/models";
 import { CATEGORY_LABELS, TOURISM_GROUPS, VISIBLE_CATEGORY_KEYS } from "@core/models";
 import { useLocalizedCountry, regionKey } from "@core/utils";
 import { computeTourismScore } from "@features/tourism/utils";
 import { tourismScoreColourClass } from "@core/utils";
 import { TOURISM_COLORS } from "@features/tourism/constants";
-
-function getHostname(url: string): string {
-  try {
-    return new URL(url).hostname.replace(/^www\./, "");
-  } catch {
-    return url;
-  }
-}
-
-function localizeVisa<T>(
-  defaultValue: T,
-  visa: NomadVisaDetails,
-  pick: (loc: NomadVisaLocalization) => T | undefined,
-  lang: string,
-): T {
-  if (lang === "ru" || lang === "ua") {
-    const loc = visa.i18n?.[lang];
-    if (loc) {
-      const translated = pick(loc);
-      if (translated !== undefined) return translated;
-    }
-  }
-  return defaultValue;
-}
-
-type TaxStatus = "exempt" | "special" | "standard";
-
-function taxStatusBgClass(status: TaxStatus): string {
-  if (status === "exempt") return "bg-[#0A2010]";
-  if (status === "special") return "bg-[#1A0A1A]";
-  return "bg-[#1A1A0A]";
-}
-
-function taxStatusTextClass(status: TaxStatus): string {
-  if (status === "exempt") return "text-[#44CC66]";
-  if (status === "special") return "text-[#9B8FB4]";
-  return "text-[#C2956A]";
-}
-
-function taxStatusLabelKey(status: TaxStatus): string {
-  if (status === "exempt") return "countryPage.taxExemptLabel";
-  if (status === "special") return "countryPage.specialTaxLabel";
-  return "countryPage.standardTaxLabel";
-}
-
-interface CountryBadgesProps {
-  readonly hasNomadVisa: boolean | undefined;
-  readonly isSchengen: boolean | undefined;
-  readonly touristVisaDays: number | null;
-  readonly seasonLabel: string | null;
-}
-
-function CountryBadges({
-  hasNomadVisa,
-  isSchengen,
-  touristVisaDays,
-  seasonLabel,
-}: CountryBadgesProps) {
-  const { t } = useTranslation();
-  return (
-    <div className="flex flex-wrap gap-2.5">
-      {hasNomadVisa ? (
-        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2810] bg-[rgba(26,26,10,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-          <Plane size={13} color="#8F5A3C" />
-          <span className="text-xs text-[#C2956A]">{t("countryPage.nomadVisaBadge")}</span>
-        </div>
-      ) : null}
-      {isSchengen ? (
-        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#0A2030] bg-[rgba(10,18,24,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-          <Globe size={13} color="#5B8FA8" />
-          <span className="text-xs text-[#7BACC8]">{t("countryPage.schengen")}</span>
-        </div>
-      ) : null}
-      {touristVisaDays == null ? null : (
-        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2010] bg-[rgba(26,20,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-          <Calendar size={13} color="#C2956A" />
-          <span className="text-xs text-[#C2956A]">
-            {t("countryPage.touristVisaBadge", { count: touristVisaDays })}
-          </span>
-        </div>
-      )}
-      {seasonLabel != null ? (
-        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#142014] bg-[rgba(16,22,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-          <CloudSun size={13} color="#7A9B6B" />
-          <span className="text-xs text-[#7A9B6B]">{seasonLabel}</span>
-        </div>
-      ) : null}
-    </div>
-  );
-}
+import { CountryBadges } from "./CountryBadges";
+import {
+  getHostname,
+  localizeVisa,
+  taxStatusBgClass,
+  taxStatusTextClass,
+  taxStatusLabelKey,
+} from "./country-profile.utils";
 
 interface CountryVisaSectionProps {
   readonly visa: NomadVisaDetails;

@@ -1,99 +1,15 @@
-import {
-  House,
-  ShoppingCart,
-  UtensilsCrossed,
-  Bus,
-  Zap,
-  Laptop,
-  HeartPulse,
-  AlertTriangle,
-} from "lucide-react";
-import type { ComponentType, SVGProps } from "react";
+import { AlertTriangle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Layout } from "@core/ui/layout";
 import { HeroSection } from "@core/ui/page-hero";
 import { COST_COLORS } from "@features/budget/constants";
-
-type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
+import { BudgetCategoryCard } from "./BudgetCategoryCard";
+import {
+  CATEGORY_ACCENT_CLASSES,
+  CATEGORY_ROWS,
+} from "@features/budget/constants/budget-categories.constants";
 
 const CATEGORY_COLORS = COST_COLORS;
-
-interface BudgetCategoryCardProps {
-  readonly Icon: IconType;
-  readonly name: string;
-  readonly description: string;
-  readonly source: string;
-  readonly methodology: string;
-  readonly color: string;
-  readonly accentBorderClassName: string;
-  readonly accentTextClassName: string;
-}
-
-function BudgetCategoryCard({
-  Icon,
-  name,
-  description,
-  source,
-  methodology,
-  color,
-  accentBorderClassName,
-  accentTextClassName,
-}: BudgetCategoryCardProps) {
-  return (
-    <div className="flex flex-1 flex-col gap-3.5 rounded-md border border-[#1E1E20] bg-[#141416] p-6">
-      {/* Header row: icon + title */}
-      <div className="flex items-center gap-3">
-        <Icon size={20} color={color} />
-        <span className="text-base font-bold text-[#E8E9EB]">{name}</span>
-      </div>
-
-      {/* Description */}
-      <div className="text-[13px] leading-[1.6] text-[#8A8A8A]">{description}</div>
-
-      {/* Methodology */}
-      <div
-        className={`border-l-2 pl-2.5 text-xs leading-[1.5] text-[#808080] ${accentBorderClassName}`}
-      >
-        {methodology}
-      </div>
-
-      {/* Footer: source badge */}
-      <div className="mt-auto flex items-center gap-2">
-        <span
-          className={`rounded-[4px] border border-[#252525] bg-[#1A1A1A] px-2 py-[3px] text-[10px] ${accentTextClassName}`}
-        >
-          {source}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-const CATEGORY_ACCENT_CLASSES: Record<string, { border: string; text: string }> = {
-  housing: { border: "border-[#8F5A3C]", text: "text-[#8F5A3C]" },
-  groceries: { border: "border-[#6B9E6B]", text: "text-[#6B9E6B]" },
-  dining: { border: "border-[#C2956A]", text: "text-[#C2956A]" },
-  transport: { border: "border-[#5B8FA8]", text: "text-[#5B8FA8]" },
-  utilities: { border: "border-[#7A9B6B]", text: "text-[#7A9B6B]" },
-  coworking: { border: "border-[#8B7BAD]", text: "text-[#8B7BAD]" },
-  healthInsurance: { border: "border-[#C07A9B]", text: "text-[#C07A9B]" },
-};
-
-const CATEGORY_ROWS: Array<Array<[IconType, string]>> = [
-  [
-    [House, "housing"],
-    [ShoppingCart, "groceries"],
-  ],
-  [
-    [UtensilsCrossed, "dining"],
-    [Bus, "transport"],
-  ],
-  [
-    [Zap, "utilities"],
-    [Laptop, "coworking"],
-  ],
-  [[HeartPulse, "healthInsurance"]],
-];
 
 export function BudgetCategoriesPage() {
   const { t } = useTranslation();

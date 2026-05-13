@@ -19,7 +19,7 @@ import { ComparisonSlotCard } from "./ComparisonSlotCard";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";
 import { CountryPickerDropdown } from "./CountryPickerDropdown";
 
-const COMPARISON_COLUMN_WIDTH = "112px";
+import { COMPARISON_COLUMN_WIDTH } from "@features/compare/constants";
 
 interface Props {
   readonly countries: CountryData[];

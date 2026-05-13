@@ -1,3 +1,7 @@
+export * from "./CompareTableParts";
 export * from "./NomadVisaCompareView";
 export * from "./NomadVisaDetails";
 export * from "./NomadVisasView";
+export * from "./VisaSortIcon";
+export * from "./nomad-visas.types";
+export * from "./nomad-visas.utils";

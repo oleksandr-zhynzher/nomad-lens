@@ -1,153 +1,19 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from "react";
-import {
-  Search,
-  SlidersHorizontal,
-  X,
-  ChevronUp,
-  ChevronDown,
-  Filter,
-  List,
-  GitCompare,
-} from "lucide-react";
+import { Search, SlidersHorizontal, X, GitCompare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "@core/ui/layout";
 import { TourismCountryCard } from "@features/tourism/ui";
 import { TourismWeightPanel } from "@features/tourism/ui";
-import { Tooltip } from "@core/ui";
 import { MobileSheet } from "@core/ui";
 import { useCountries } from "@core/hooks";
 import { useLangPrefix } from "@core/hooks";
 import { useTourismScoring } from "@features/tourism/hooks";
 import { ALL_TOURISM_TAGS, useTourismWeightState } from "@features/tourism/hooks";
-import { localizeCountry } from "@core/utils";
 import { TOURISM_CATEGORY_KEYS } from "@core/models";
-import type { TourismRanked } from "@features/tourism/utils";
-
-type SearchMode = "filter" | "highlight";
-
-function findMatchingCodes(
-  ranked: TourismRanked[],
-  query: string,
-  lang: string,
-  searchMode: SearchMode,
-): string[] {
-  if (query === "" || searchMode !== "highlight") return [];
-  const codes: string[] = [];
-  for (const r of ranked) {
-    if (localizeCountry(r.country, lang).name.toLowerCase().includes(query)) {
-      codes.push(r.country.code);
-    }
-  }
-  return codes;
-}
-
-function filterRanked(
-  ranked: TourismRanked[],
-  search: string,
-  searchMode: SearchMode,
-  lang: string,
-): TourismRanked[] {
-  const q = search.trim().toLowerCase();
-  if (q === "" || searchMode === "highlight") return ranked;
-  return ranked.filter((r) => localizeCountry(r.country, lang).name.toLowerCase().includes(q));
-}
-
-function toggleSetItem<T>(set: Set<T>, item: T): Set<T> {
-  const next = new Set(set);
-  if (next.has(item)) next.delete(item);
-  else next.add(item);
-  return next;
-}
-
-function navButtonClass(hasMatches: boolean): string {
-  return `flex h-6 w-6 items-center justify-center rounded-[3px] border-0 bg-[#2A2A2A] ${hasMatches ? "cursor-pointer text-muted" : "cursor-default text-dimmer"}`;
-}
-
-interface TourismSearchControlsProps {
-  readonly searchMode: SearchMode;
-  readonly matchingCodes: readonly string[];
-  readonly matchCursor: number;
-  readonly onPrev: () => void;
-  readonly onNext: () => void;
-  readonly onModeChange: (mode: SearchMode) => void;
-  readonly onCursorReset: () => void;
-}
-
-function TourismSearchControls({
-  searchMode,
-  matchingCodes,
-  matchCursor,
-  onPrev,
-  onNext,
-  onModeChange,
-  onCursorReset,
-}: TourismSearchControlsProps) {
-  const { t } = useTranslation();
-  const hasMatches = matchingCodes.length > 0;
-  return (
-    <div className="flex shrink-0 items-center gap-1">
-      {searchMode === "highlight" && hasMatches ? (
-        <>
-          <span className="font-mono text-[11px] whitespace-nowrap text-dim">
-            {matchCursor + 1}/{matchingCodes.length}
-          </span>
-          <button
-            onClick={onPrev}
-            disabled={!hasMatches}
-            className={navButtonClass(hasMatches)}
-            aria-label={t("tourism.a11y.previousMatch", "Previous match")}
-          >
-            <ChevronUp size={14} />
-          </button>
-          <button
-            onClick={onNext}
-            disabled={!hasMatches}
-            className={navButtonClass(hasMatches)}
-            aria-label={t("tourism.a11y.nextMatch", "Next match")}
-          >
-            <ChevronDown size={14} />
-          </button>
-        </>
-      ) : null}
-      <Tooltip
-        side="bottom"
-        content={
-          searchMode === "filter" ? (
-            <span>
-              {t(
-                "tourism.searchModeScrollTooltip",
-                "Switch to scroll mode - shows all countries and scrolls to each match.",
-              )}
-            </span>
-          ) : (
-            <span>
-              {t(
-                "tourism.searchModeFilterTooltip",
-                "Switch to filter mode - hides non-matching countries.",
-              )}
-            </span>
-          )
-        }
-      >
-        <button
-          onClick={() => {
-            onModeChange(searchMode === "filter" ? "highlight" : "filter");
-            onCursorReset();
-          }}
-          className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-[#2A2A2A] text-on-surface"
-          aria-label={
-            searchMode === "filter"
-              ? t("tourism.a11y.switchToScrollMode", "Switch to scroll mode")
-              : t("tourism.a11y.switchToFilterMode", "Switch to filter mode")
-          }
-        >
-          {searchMode === "filter" ? <List size={13} /> : <Filter size={13} />}
-        </button>
-      </Tooltip>
-    </div>
-  );
-}
+import type { SearchMode } from "./tourism.types";
+import { findMatchingCodes, filterRanked, toggleSetItem } from "./tourism.utils";
+import { TourismSearchControls } from "./TourismSearchControls";
 
 export function TourismPage() {
   const { t, i18n } = useTranslation();
