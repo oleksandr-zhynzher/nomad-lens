@@ -1,12 +1,12 @@
 import type React from "react";
 
 interface Props {
-  value: number | null;
-  colour: string;
-  nullColour?: string;
-  format?: (v: number) => string;
-  fontSize?: string;
-  columnWidth: string;
+  readonly value: number | null;
+  readonly colour: string;
+  readonly nullColour?: string;
+  readonly format?: (v: number) => string;
+  readonly fontSize?: string;
+  readonly columnWidth: string;
 }
 
 export function ComparisonScoreCell({

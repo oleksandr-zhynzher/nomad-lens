@@ -13,22 +13,22 @@ import { WeightSlider } from "@features/country-ranking/ui";
 import { WEIGHT_GROUPS } from "@features/country-ranking/constants";
 
 interface WeightPanelProps {
-  weights: WeightMap;
-  onChange: (key: CategoryKey, value: number) => void;
-  onReset: () => void;
-  weightsAreDefault: boolean;
-  onShare: () => void;
-  climatePrefs: ClimatePreferences;
-  onClimatePrefsChange: (prefs: ClimatePreferences) => void;
-  nomadVisaOnly: boolean;
-  onNomadVisaOnlyChange: (value: boolean) => void;
-  schengenOnly: boolean;
-  onSchengenOnlyChange: (value: boolean) => void;
-  minTouristDays: number | null;
-  onMinTouristDaysChange: (value: number | null) => void;
-  weightMode: WeightMode;
-  onWeightModeChange: (mode: WeightMode) => void;
-  mobile?: boolean;
+  readonly weights: WeightMap;
+  readonly onChange: (key: CategoryKey, value: number) => void;
+  readonly onReset: () => void;
+  readonly weightsAreDefault: boolean;
+  readonly onShare: () => void;
+  readonly climatePrefs: ClimatePreferences;
+  readonly onClimatePrefsChange: (prefs: ClimatePreferences) => void;
+  readonly nomadVisaOnly: boolean;
+  readonly onNomadVisaOnlyChange: (value: boolean) => void;
+  readonly schengenOnly: boolean;
+  readonly onSchengenOnlyChange: (value: boolean) => void;
+  readonly minTouristDays: number | null;
+  readonly onMinTouristDaysChange: (value: number | null) => void;
+  readonly weightMode: WeightMode;
+  readonly onWeightModeChange: (mode: WeightMode) => void;
+  readonly mobile?: boolean;
 }
 
 export function WeightPanel({
@@ -127,7 +127,7 @@ export function WeightPanel({
     >
       {/* ── Weight category groups ──────────────────────────────────────────── */}
       {WEIGHT_GROUPS.map((group) => {
-        const groupTotal = group.keys.reduce((s, k) => s + (weights[k] ?? 0), 0);
+        const groupTotal = group.keys.reduce((s, k) => s + weights[k], 0);
         const badgeText =
           weightMode === "independent"
             ? `${t("weights.averageBadge")} ${Math.round(groupTotal / group.keys.length)}`

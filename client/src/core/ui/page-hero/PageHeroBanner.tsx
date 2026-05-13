@@ -1,9 +1,9 @@
 interface PageHeroBannerProps {
-  backgroundImage: string;
-  eyebrow: string;
-  title: string;
-  subtitle: string;
-  children?: React.ReactNode;
+  readonly backgroundImage: string;
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly children?: React.ReactNode;
 }
 
 export function PageHeroBanner({
@@ -21,19 +21,19 @@ export function PageHeroBanner({
         <div className="absolute inset-0 [background:linear-gradient(to_bottom,transparent_0%,rgba(0,0,0,0.85)_100%)]" />
 
         <div
-          className={`relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 ${children ? "min-h-[160px]" : "min-h-[120px]"}`}
+          className={`relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 ${children != null ? "min-h-[160px]" : "min-h-[120px]"}`}
         >
           <h1 className="mb-2 [font-family:Oswald,_sans-serif] text-3xl leading-[0.95] font-semibold text-white md:text-6xl">
             {title}
           </h1>
 
           <p
-            className={`hidden max-w-[580px] text-[15px] text-dim md:block ${children ? "mb-5" : "mb-0"}`}
+            className={`hidden max-w-[580px] text-[15px] text-dim md:block ${children != null ? "mb-5" : "mb-0"}`}
           >
             {subtitle}
           </p>
 
-          {children ? (
+          {children != null ? (
             <>
               <div className="mb-4 hidden h-0.5 w-32 bg-accent md:block" />
               {children}

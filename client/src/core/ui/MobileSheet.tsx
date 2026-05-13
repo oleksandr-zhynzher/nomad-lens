@@ -4,11 +4,11 @@ import { useBodyScrollLock } from "@core/hooks";
 import { useFocusTrap } from "@core/hooks";
 
 interface MobileSheetProps {
-  open: boolean;
-  title: string;
-  closeLabel: string;
-  children: ReactNode;
-  onClose: () => void;
+  readonly open: boolean;
+  readonly title: string;
+  readonly closeLabel: string;
+  readonly children: ReactNode;
+  readonly onClose: () => void;
 }
 
 export function MobileSheet({ open, title, closeLabel, children, onClose }: MobileSheetProps) {
@@ -28,7 +28,7 @@ export function MobileSheet({ open, title, closeLabel, children, onClose }: Mobi
 
   return (
     <div
-      className="md:hidden fixed inset-0 z-50 flex"
+      className="fixed inset-0 z-50 flex md:hidden"
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
@@ -42,20 +42,20 @@ export function MobileSheet({ open, title, closeLabel, children, onClose }: Mobi
       <div
         ref={sheetRef}
         tabIndex={-1}
-        className="relative mt-auto flex w-full flex-col overflow-hidden min-h-[70vh] max-h-[calc(100dvh-16px)] bg-surface rounded-tl-[24px] rounded-tr-[24px] border-t border-[#2A2A2A] shadow-[0_-18px_42px_rgba(0,0,0,0.45)] overscroll-contain pb-[env(safe-area-inset-bottom,0px)]"
+        className="relative mt-auto flex max-h-[calc(100dvh-16px)] min-h-[70vh] w-full flex-col overflow-hidden overscroll-contain rounded-tl-[24px] rounded-tr-[24px] border-t border-[#2A2A2A] bg-surface pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-18px_42px_rgba(0,0,0,0.45)]"
       >
-        <div className="flex justify-center pt-3 pb-1 shrink-0" aria-hidden="true">
-          <div className="w-9 h-1 rounded-[2px] bg-[#444444]" />
+        <div className="flex shrink-0 justify-center pt-3 pb-1" aria-hidden="true">
+          <div className="h-1 w-9 rounded-[2px] bg-[#444444]" />
         </div>
-        <div className="flex items-center justify-between px-4 pb-2 shrink-0">
-          <h2 id={titleId} className="text-xs font-semibold tracking-[1.5px] uppercase text-muted">
+        <div className="flex shrink-0 items-center justify-between px-4 pb-2">
+          <h2 id={titleId} className="text-xs font-semibold tracking-[1.5px] text-muted uppercase">
             {title}
           </h2>
           <button
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="flex items-center justify-center w-8 h-8 rounded-[4px] bg-border text-muted"
+            className="flex h-8 w-8 items-center justify-center rounded-[4px] bg-border text-muted"
             aria-label={closeLabel}
           >
             <X size={18} aria-hidden="true" />

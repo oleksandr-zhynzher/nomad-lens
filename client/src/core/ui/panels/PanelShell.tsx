@@ -2,20 +2,20 @@ import type { ReactNode, RefObject } from "react";
 import { useTranslation } from "react-i18next";
 
 interface PanelShellProps {
-  title: string;
-  subtitle?: string;
+  readonly title: string;
+  readonly subtitle?: string;
   /** Extra content rendered in the header below the title/subtitle (e.g. a mode toggle). */
-  headerExtra?: ReactNode;
+  readonly headerExtra?: ReactNode;
   /**
    * Footer content rendered above the reset button.
    * Use this for share buttons or other contextual actions.
    */
-  footerExtra?: ReactNode;
-  onReset: () => void;
-  mobile?: boolean;
-  children: ReactNode;
-  scrollRef?: RefObject<HTMLDivElement>;
-  onScroll?: () => void;
+  readonly footerExtra?: ReactNode;
+  readonly onReset: () => void;
+  readonly mobile?: boolean;
+  readonly children: ReactNode;
+  readonly scrollRef?: RefObject<HTMLDivElement>;
+  readonly onScroll?: () => void;
 }
 
 /**
@@ -44,7 +44,7 @@ export function PanelShell({
       {mobile ? null : (
         <div className="flex-shrink-0 border-b border-[#2A2A2A] p-[14px_16px]">
           <h2 className="text-[13px] font-semibold tracking-[2px] text-white uppercase">{title}</h2>
-          {subtitle ? (
+          {subtitle !== undefined ? (
             <p className="mt-1.5 text-[10px] leading-[1.5] text-dim">{subtitle}</p>
           ) : null}
           {headerExtra}

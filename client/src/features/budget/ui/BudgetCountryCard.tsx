@@ -20,13 +20,13 @@ import { getRowStyles } from "@core/utils";
 import { CountryNameCell } from "@core/ui/country";
 
 interface Props {
-  match: BudgetMatch;
-  budget: number;
-  rank: number;
-  expanded?: boolean;
-  onToggle?: () => void;
-  compareMode?: boolean;
-  isSelected?: boolean;
+  readonly match: BudgetMatch;
+  readonly budget: number;
+  readonly rank: number;
+  readonly expanded?: boolean;
+  readonly onToggle?: () => void;
+  readonly compareMode?: boolean;
+  readonly isSelected?: boolean;
 }
 
 export function BudgetCountryCard({

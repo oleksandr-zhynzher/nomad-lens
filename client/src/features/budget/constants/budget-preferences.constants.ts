@@ -30,9 +30,9 @@ export const DEFAULT_CATEGORY_WEIGHTS: BudgetCategoryWeights = {
   healthInsurance: 100,
 };
 
-export const CATEGORY_WEIGHT_KEYS = Object.keys(
-  DEFAULT_CATEGORY_WEIGHTS,
-) as (keyof BudgetCategoryWeights)[];
+export const CATEGORY_WEIGHT_KEYS = Object.keys(DEFAULT_CATEGORY_WEIGHTS) as Array<
+  keyof BudgetCategoryWeights
+>;
 
 export const BEDROOM_OPTIONS = new Set<Bedrooms>([1, 2, 3]);
 export const CATEGORY_WEIGHT_KEY_SET = new Set<keyof BudgetCategoryWeights>(CATEGORY_WEIGHT_KEYS);

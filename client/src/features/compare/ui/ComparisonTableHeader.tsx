@@ -1,18 +1,18 @@
 import type React from "react";
 
 interface ComparisonHeaderColumn {
-  key: string | number;
-  flagUrl?: string;
-  name: string;
-  maxNameWidth?: string;
+  readonly key: string | number;
+  readonly flagUrl?: string;
+  readonly name: string;
+  readonly maxNameWidth?: string;
 }
 
 interface Props {
-  ref?: React.Ref<HTMLDivElement>;
-  label: string;
-  columns: ComparisonHeaderColumn[];
-  columnWidth: string;
-  gap?: string;
+  readonly ref?: React.Ref<HTMLDivElement>;
+  readonly label: string;
+  readonly columns: readonly ComparisonHeaderColumn[];
+  readonly columnWidth: string;
+  readonly gap?: string;
 }
 
 export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }: Props) {
@@ -23,7 +23,11 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
     >
       <div
         className="flex items-center border-b border-[#1C1C1C] py-[14px]"
-        style={gap ? ({ "--th-gap": gap, gap: "var(--th-gap)" } as React.CSSProperties) : undefined}
+        style={
+          gap !== undefined
+            ? ({ "--th-gap": gap, gap: "var(--th-gap)" } as React.CSSProperties)
+            : undefined
+        }
       >
         <div className="w-[160px] shrink-0 md:w-[240px]">
           <span className="text-[10px] font-semibold tracking-[1.5px] text-dimmest uppercase">
@@ -36,7 +40,7 @@ export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }:
             className="flex w-[var(--cw)] shrink-0 items-center justify-center gap-1.5"
             style={{ "--cw": columnWidth } as React.CSSProperties}
           >
-            {col.flagUrl ? (
+            {col.flagUrl !== undefined ? (
               <img
                 src={col.flagUrl}
                 alt={col.name}

@@ -9,9 +9,9 @@ import type { TourismBudgetMatch } from "@features/tourism/utils";
 import type { CountryData } from "@core/models";
 
 interface TourismCountryCardDetailProps {
-  country: CountryData;
-  budgetMatch?: TourismBudgetMatch;
-  borderColor: string;
+  readonly country: CountryData;
+  readonly budgetMatch?: TourismBudgetMatch;
+  readonly borderColor: string;
 }
 
 export function TourismCountryCardDetail({

@@ -85,7 +85,7 @@ export function useTourismWeightState() {
   const [weights, setWeights] = useState<TourismWeightMap>(() => {
     try {
       const stored = localStorage.getItem(LS_WEIGHTS_KEY);
-      if (stored) return JSON.parse(stored);
+      if (stored !== null) return JSON.parse(stored) as TourismWeightMap;
     } catch {
       /* ignore */
     }
@@ -95,7 +95,7 @@ export function useTourismWeightState() {
   const [selectedRegions, setSelectedRegions] = useState<Set<string>>(() => {
     try {
       const stored = localStorage.getItem(LS_REGIONS_KEY);
-      if (stored) return new Set(JSON.parse(stored));
+      if (stored !== null) return new Set(JSON.parse(stored) as string[]);
     } catch {
       /* ignore */
     }
@@ -105,7 +105,8 @@ export function useTourismWeightState() {
   const [toggles, setToggles] = useState<TourismToggles>(() => {
     try {
       const stored = localStorage.getItem(LS_TOGGLES_KEY);
-      if (stored) return { ...DEFAULT_TOGGLES, ...JSON.parse(stored) };
+      if (stored !== null)
+        return { ...DEFAULT_TOGGLES, ...(JSON.parse(stored) as Partial<TourismToggles>) };
     } catch {
       /* ignore */
     }
@@ -115,12 +116,18 @@ export function useTourismWeightState() {
   const [budgetState, setBudgetState] = useState<TourismBudgetState>(() => {
     try {
       const stored = localStorage.getItem(LS_BUDGET_KEY);
-      if (stored) {
-        const parsed = { ...DEFAULT_BUDGET_STATE, ...JSON.parse(stored) };
+      if (stored !== null) {
+        const parsed: TourismBudgetState = {
+          ...DEFAULT_BUDGET_STATE,
+          ...(JSON.parse(stored) as Partial<TourismBudgetState>),
+        };
         // migrate old values
-        if (parsed.accommodation === "hotel") parsed.accommodation = "hotel3";
-        if (parsed.accommodation === "resort") parsed.accommodation = "hotel5";
-        if (parsed.accommodation === "rental") parsed.accommodation = "airbnb";
+        if (parsed.accommodation === ("hotel" as AccommodationType))
+          parsed.accommodation = "hotel3";
+        if (parsed.accommodation === ("resort" as AccommodationType))
+          parsed.accommodation = "hotel5";
+        if (parsed.accommodation === ("rental" as AccommodationType))
+          parsed.accommodation = "airbnb";
         return parsed;
       }
     } catch {
@@ -132,7 +139,8 @@ export function useTourismWeightState() {
   const [travelDates, setTravelDates] = useState<TravelDates>(() => {
     try {
       const stored = localStorage.getItem(LS_DATES_KEY);
-      if (stored) return { ...DEFAULT_TRAVEL_DATES, ...JSON.parse(stored) };
+      if (stored !== null)
+        return { ...DEFAULT_TRAVEL_DATES, ...(JSON.parse(stored) as Partial<TravelDates>) };
     } catch {
       /* ignore */
     }

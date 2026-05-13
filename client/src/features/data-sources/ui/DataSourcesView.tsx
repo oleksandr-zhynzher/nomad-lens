@@ -4,10 +4,10 @@ import { HeroSection } from "@core/ui/page-hero";
 import { DATA_SOURCE_KEYS } from "@features/data-sources/constants";
 
 interface DataSourceCardProps {
-  name: string;
-  category: string;
-  description: string;
-  tags: string[];
+  readonly name: string;
+  readonly category: string;
+  readonly description: string;
+  readonly tags: readonly string[];
 }
 
 function DataSourceCard({ name, category, description, tags }: DataSourceCardProps) {
@@ -54,8 +54,8 @@ export function DataSourcesPage() {
 
       {/* Content zone */}
       <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
-        {DATA_SOURCE_KEYS.map((row, rowIdx) => (
-          <div key={rowIdx} className="flex flex-col md:flex-row gap-4 w-full">
+        {DATA_SOURCE_KEYS.map((row) => (
+          <div key={row.join("-")} className="flex w-full flex-col gap-4 md:flex-row">
             {row.map((key) => (
               <DataSourceCard
                 key={key}

@@ -5,9 +5,9 @@ import { COST_COLORS } from "@features/budget/constants";
 import { BUDGET_CATEGORY_KEYS } from "@features/budget/constants";
 
 interface Props {
-  breakdown: BudgetBreakdown;
-  budget: number;
-  monthlyCost: number;
+  readonly breakdown: BudgetBreakdown;
+  readonly budget: number;
+  readonly monthlyCost: number;
 }
 
 export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) {
@@ -16,7 +16,7 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
   const maxVal = Math.max(monthlyCost, budget) * 1.1;
 
   return (
-    <div className="relative h-5 rounded-[4px] overflow-hidden bg-surface-2">
+    <div className="relative h-5 overflow-hidden rounded-[4px] bg-surface-2">
       {/* Stacked segments */}
       <div
         className="flex h-full w-[var(--bw)]"
@@ -28,11 +28,11 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
             content={
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <div
-                  className="w-2 h-2 rounded-full shrink-0 bg-[var(--seg-c)]"
+                  className="h-2 w-2 shrink-0 rounded-full bg-[var(--seg-c)]"
                   style={{ "--seg-c": COST_COLORS[key] ?? "#555" } as React.CSSProperties}
                 />
                 <span className="text-[11px] text-tertiary">{t(`budget.categories.${key}`)}</span>
-                <span className="text-[11px] font-bold font-mono text-white">
+                <span className="font-mono text-[11px] font-bold text-white">
                   ${breakdown[key]}
                 </span>
               </div>
@@ -45,7 +45,7 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
             }}
           >
             <div
-              className="w-full h-full bg-[var(--seg-c)]"
+              className="h-full w-full bg-[var(--seg-c)]"
               style={{ "--seg-c": COST_COLORS[key] ?? "#555" } as React.CSSProperties}
             />
           </Tooltip>
@@ -53,7 +53,7 @@ export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) 
       </div>
       {/* Budget line */}
       <div
-        className="absolute top-0 bottom-0 w-0.5 bg-white opacity-70 left-[var(--bl)]"
+        className="absolute top-0 bottom-0 left-[var(--bl)] w-0.5 bg-white opacity-70"
         style={{ "--bl": `${(budget / maxVal) * 100}%` } as React.CSSProperties}
       />
     </div>

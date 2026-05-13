@@ -5,14 +5,14 @@ import { CollapsibleSection } from "@core/ui/panels";
 import { ToggleSwitch } from "@features/country-ranking/ui";
 
 interface VisaStaySectionProps {
-  nomadVisaOnly: boolean;
-  onNomadVisaOnlyChange: (v: boolean) => void;
-  schengenOnly: boolean;
-  onSchengenOnlyChange: (v: boolean) => void;
-  minTouristDays: number | null;
-  onMinTouristDaysChange: (v: number | null) => void;
-  isOpen: boolean;
-  onToggle: () => void;
+  readonly nomadVisaOnly: boolean;
+  readonly onNomadVisaOnlyChange: (v: boolean) => void;
+  readonly schengenOnly: boolean;
+  readonly onSchengenOnlyChange: (v: boolean) => void;
+  readonly minTouristDays: number | null;
+  readonly onMinTouristDaysChange: (v: number | null) => void;
+  readonly isOpen: boolean;
+  readonly onToggle: () => void;
 }
 
 export function VisaStaySection({

@@ -1,10 +1,10 @@
 /** +/− stepper for selecting a people count. */
 
 interface PeopleCountStepperProps {
-  value: number;
-  min?: number;
-  max?: number;
-  onChange: (value: number) => void;
+  readonly value: number;
+  readonly min?: number;
+  readonly max?: number;
+  readonly onChange: (value: number) => void;
 }
 
 function btnClass(disabled: boolean) {

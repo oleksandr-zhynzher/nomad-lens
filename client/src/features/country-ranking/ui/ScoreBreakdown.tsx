@@ -4,8 +4,8 @@ import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "@core/models";
 import { scoreColourClass } from "@core/utils";
 
 interface ScoreBreakdownProps {
-  country: CountryData;
-  columns?: 3 | 4;
+  readonly country: CountryData;
+  readonly columns?: 3 | 4;
 }
 
 export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
@@ -19,18 +19,18 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
     <div className={gridClassName}>
       {VISIBLE_CATEGORY_KEYS.map((key) => {
         const category = country.scores[key];
-        const value = category?.value ?? null;
+        const value = category.value ?? null;
 
         // Build detail text from indicators
-        let detailText = "";
-        if (category?.indicators) {
-          const indEntries = Object.entries(category.indicators)
-            .filter(([, ind]) => ind !== undefined)
-            .slice(0, 2); // First 2 indicators
-          detailText = indEntries
-            .map(([, ind]) => `${ind!.raw.toLocaleString()}${ind!.unit} (${ind!.year})`)
-            .join(" · ");
-        }
+        const indEntries = Object.entries(category.indicators)
+          .filter(
+            (entry): entry is [string, NonNullable<(typeof category.indicators)[string]>] =>
+              entry[1] !== undefined,
+          )
+          .slice(0, 2); // First 2 indicators
+        const detailText = indEntries
+          .map(([, ind]) => `${ind.raw.toLocaleString()}${ind.unit} (${ind.year})`)
+          .join(" · ");
 
         return (
           <div key={key} className="flex flex-col gap-1 rounded bg-surface-2 p-2 md:p-3">
@@ -54,7 +54,7 @@ export function ScoreBreakdown({ country, columns = 3 }: ScoreBreakdownProps) {
             </div>
 
             {/* Detail text */}
-            {detailText ? (
+            {detailText !== "" ? (
               <p className="mt-0.5 font-mono text-[10px] text-dim">{detailText}</p>
             ) : null}
           </div>

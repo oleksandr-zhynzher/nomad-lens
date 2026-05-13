@@ -48,10 +48,10 @@ export const CATEGORY_KEYS: CategoryKey[] = [
 ];
 
 /** Tourism subcategory groups — logical groupings of tourism metrics. */
-export const TOURISM_GROUPS: {
+export const TOURISM_GROUPS: Array<{
   labelKey: string;
   keys: CategoryKey[];
-}[] = [
+}> = [
   {
     labelKey: "safetyPeople",
     keys: ["tourismSafety", "touristScamSafety", "localFriendliness", "englishProficiency"],

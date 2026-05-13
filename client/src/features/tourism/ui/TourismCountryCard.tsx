@@ -15,16 +15,16 @@ import { TourismBudgetBar } from "./TourismBudgetBar";
 import { TourismCountryCardDetail } from "./TourismCountryCardDetail";
 
 interface Props {
-  ranked: TourismRanked;
-  index: number;
-  highlighted?: boolean;
-  expanded?: boolean;
-  onToggle?: () => void;
-  onSelect?: () => void;
-  compareMode?: boolean;
-  isSelected?: boolean;
-  selectedTags?: string[];
-  travelDates?: TravelDates;
+  readonly ranked: TourismRanked;
+  readonly index: number;
+  readonly highlighted?: boolean;
+  readonly expanded?: boolean;
+  readonly onToggle?: () => void;
+  readonly onSelect?: () => void;
+  readonly compareMode?: boolean;
+  readonly isSelected?: boolean;
+  readonly selectedTags?: readonly string[];
+  readonly travelDates?: TravelDates;
 }
 
 export function TourismCountryCard({
@@ -78,7 +78,7 @@ export function TourismCountryCard({
             <ScoreSparkline
               entries={TOURISM_CATEGORY_KEYS.map((key) => ({
                 key,
-                value: country.scores[key]?.value ?? null,
+                value: country.scores[key].value ?? null,
                 label: t(`tourism.metrics.${key}`, key),
               }))}
             />

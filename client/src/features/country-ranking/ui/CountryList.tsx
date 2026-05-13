@@ -4,20 +4,20 @@ import { CountryCard } from "./CountryCard";
 import { useInfiniteScroll } from "@features/country-ranking/hooks";
 
 interface CountryListProps {
-  ranked: RankedCountry[];
-  loading: boolean;
-  error: string | null;
-  onRetry: () => void;
-  highlightedCode?: string | null;
-  expandedCode?: string | null;
-  onToggleExpanded?: (code: string) => void;
+  readonly ranked: RankedCountry[];
+  readonly loading: boolean;
+  readonly error: string | null;
+  readonly onRetry: () => void;
+  readonly highlightedCode?: string | null;
+  readonly expandedCode?: string | null;
+  readonly onToggleExpanded?: (code: string) => void;
   /** When true (e.g. active search), all items are rendered without pagination */
-  showAll?: boolean;
-  compareMode?: boolean;
-  selectedCodes?: Set<string>;
-  onToggleSelect?: (code: string) => void;
+  readonly showAll?: boolean;
+  readonly compareMode?: boolean;
+  readonly selectedCodes?: Set<string>;
+  readonly onToggleSelect?: (code: string) => void;
   /** Active weight map — dots are hidden for categories with weight 0. */
-  weights?: WeightMap;
+  readonly weights?: WeightMap;
 }
 
 export function CountryList({
@@ -39,16 +39,17 @@ export function CountryList({
   const { visible, hasMore, sentinelRef } = useInfiniteScroll(ranked, showAll);
 
   if (loading) {
+    const SKELETON_KEYS = ["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7"] as const;
     return (
       <div className="flex flex-col gap-2">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="h-14 animate-pulse border-t border-border bg-surface" />
+        {SKELETON_KEYS.map((k) => (
+          <div key={k} className="h-14 animate-pulse border-t border-border bg-surface" />
         ))}
       </div>
     );
   }
 
-  if (error) {
+  if (error !== null) {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
         <p className="text-danger">{error}</p>

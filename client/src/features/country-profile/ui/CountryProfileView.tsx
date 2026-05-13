@@ -53,31 +53,312 @@ function getHostname(url: string): string {
   }
 }
 
+function localizeVisa<T>(
+  defaultValue: T,
+  visa: NomadVisaDetails,
+  pick: (loc: NomadVisaLocalization) => T | undefined,
+  lang: string,
+): T {
+  if (lang === "ru" || lang === "ua") {
+    const loc = visa.i18n?.[lang];
+    if (loc) {
+      const translated = pick(loc);
+      if (translated !== undefined) return translated;
+    }
+  }
+  return defaultValue;
+}
+
+type TaxStatus = "exempt" | "special" | "standard";
+
+function taxStatusBgClass(status: TaxStatus): string {
+  if (status === "exempt") return "bg-[#0A2010]";
+  if (status === "special") return "bg-[#1A0A1A]";
+  return "bg-[#1A1A0A]";
+}
+
+function taxStatusTextClass(status: TaxStatus): string {
+  if (status === "exempt") return "text-[#44CC66]";
+  if (status === "special") return "text-[#9B8FB4]";
+  return "text-[#C2956A]";
+}
+
+function taxStatusLabelKey(status: TaxStatus): string {
+  if (status === "exempt") return "countryPage.taxExemptLabel";
+  if (status === "special") return "countryPage.specialTaxLabel";
+  return "countryPage.standardTaxLabel";
+}
+
+interface CountryBadgesProps {
+  readonly hasNomadVisa: boolean | undefined;
+  readonly isSchengen: boolean | undefined;
+  readonly touristVisaDays: number | null;
+  readonly seasonLabel: string | null;
+}
+
+function CountryBadges({
+  hasNomadVisa,
+  isSchengen,
+  touristVisaDays,
+  seasonLabel,
+}: CountryBadgesProps) {
+  const { t } = useTranslation();
+  return (
+    <div className="flex flex-wrap gap-2.5">
+      {hasNomadVisa ? (
+        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2810] bg-[rgba(26,26,10,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
+          <Plane size={13} color="#8F5A3C" />
+          <span className="text-xs text-[#C2956A]">{t("countryPage.nomadVisaBadge")}</span>
+        </div>
+      ) : null}
+      {isSchengen ? (
+        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#0A2030] bg-[rgba(10,18,24,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
+          <Globe size={13} color="#5B8FA8" />
+          <span className="text-xs text-[#7BACC8]">{t("countryPage.schengen")}</span>
+        </div>
+      ) : null}
+      {touristVisaDays == null ? null : (
+        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2010] bg-[rgba(26,20,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
+          <Calendar size={13} color="#C2956A" />
+          <span className="text-xs text-[#C2956A]">
+            {t("countryPage.touristVisaBadge", { count: touristVisaDays })}
+          </span>
+        </div>
+      )}
+      {seasonLabel != null ? (
+        <div className="flex items-center gap-1.5 rounded-[20px] border border-[#142014] bg-[rgba(16,22,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
+          <CloudSun size={13} color="#7A9B6B" />
+          <span className="text-xs text-[#7A9B6B]">{seasonLabel}</span>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+interface CountryVisaSectionProps {
+  readonly visa: NomadVisaDetails;
+}
+
+function CountryVisaSection({ visa }: CountryVisaSectionProps) {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
+  return (
+    <div className="flex flex-col gap-8 bg-bg py-8">
+      <div className="flex flex-col gap-3 md:flex-row md:items-center">
+        <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
+          {t("countryPage.nomadVisaSection")}
+        </h2>
+        <div className="flex-1" />
+        <div className="rounded-[20px] bg-[#1A1A0A] px-4 py-1.5">
+          <span className="text-xs text-[#C2956A]">{visa.visaName}</span>
+        </div>
+        <span className="text-[10px] text-dimmer">
+          {t("countryPage.updated", { date: visa.lastUpdated })}
+        </span>
+      </div>
+
+      <div className="flex flex-col gap-5 md:flex-row md:gap-6">
+        {/* Left column – 440px */}
+        <div className="flex w-full flex-col gap-5 md:w-[440px] md:flex-shrink-0">
+          {/* Duration & Cost */}
+          <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+            <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
+              {t("countryPage.durationCost")}
+            </span>
+            <div className="flex items-center gap-2">
+              <Calendar size={16} color="#8F5A3C" />
+              <span className="text-sm text-[#E8E9EB]">
+                {t("countryPage.monthsInitial", { count: visa.duration.initial })}
+              </span>
+              <div className="flex-1" />
+              {visa.duration.maxExtension > 0 ? (
+                <span className="text-[11px] text-[#C2956A]">
+                  {t("countryPage.moExtension", { count: visa.duration.maxExtension })}
+                </span>
+              ) : null}
+            </div>
+            {visa.duration.renewable ? (
+              <div className="flex items-center gap-2">
+                <RefreshCw size={16} color="#6B9E6B" />
+                <span className="text-sm text-[#6B9E6B]">{t("countryPage.renewable")}</span>
+              </div>
+            ) : null}
+            <div className="h-px bg-[#1E1E1E]" />
+            <div className="flex items-center gap-2">
+              <CreditCard size={16} color="#8F5A3C" />
+              <span
+                className={`font-mono text-[22px] font-bold ${visa.cost.amount === 0 ? "text-[#44CC66]" : "text-[#E8E9EB]"}`}
+              >
+                {visa.cost.amount === 0
+                  ? t("countryPage.free")
+                  : `${visa.cost.currency} ${visa.cost.amount.toLocaleString()}`}
+              </span>
+              <span className="text-[11px] text-dim">{t("countryPage.applicationFee")}</span>
+            </div>
+            <div className="flex flex-col gap-1 rounded-lg bg-bg px-4 py-3">
+              <span className="text-[9px] tracking-[1px] text-dimmer uppercase">
+                {t("countryPage.incomeRequirement")}
+              </span>
+              {visa.incomeRequirement.monthly == null ? (
+                visa.incomeRequirement.annual == null ? (
+                  <span className="font-mono text-[18px] font-bold text-[#44CC66]">
+                    {t("countryPage.visa.noMinimum")}
+                  </span>
+                ) : (
+                  <span className="font-mono text-[18px] font-bold text-[#C2956A]">
+                    {visa.incomeRequirement.currency}{" "}
+                    {visa.incomeRequirement.annual.toLocaleString()} {t("countryPage.perYear")}
+                  </span>
+                )
+              ) : (
+                <>
+                  <span className="font-mono text-[18px] font-bold text-[#C2956A]">
+                    {visa.incomeRequirement.currency}{" "}
+                    {visa.incomeRequirement.monthly.toLocaleString()} {t("countryPage.perMonth")}
+                  </span>
+                  <span className="text-[11px] text-dim">
+                    {visa.incomeRequirement.currency}{" "}
+                    {(visa.incomeRequirement.monthly * 12).toLocaleString()}{" "}
+                    {t("countryPage.perYear")}
+                  </span>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Taxation */}
+          <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+            <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
+              {t("countryPage.taxation")}
+            </span>
+            <div
+              className={`flex items-center gap-1 rounded-lg px-4 py-2.5 ${taxStatusBgClass(visa.tax.status)}`}
+            >
+              <span className={`text-[13px] font-semibold ${taxStatusTextClass(visa.tax.status)}`}>
+                {t(taxStatusLabelKey(visa.tax.status))}
+              </span>
+              {visa.tax.rate != null && visa.tax.status !== "exempt" ? (
+                <span className="font-mono text-[13px] text-dim">
+                  {" · "}
+                  {visa.tax.rate}%
+                </span>
+              ) : null}
+            </div>
+            {visa.tax.notes !== "" ? (
+              <p className="m-0 text-xs text-[#808080]">
+                {localizeVisa(visa.tax.notes, visa, (l) => l.tax?.notes, lang)}
+              </p>
+            ) : null}
+          </div>
+
+          {/* Eligibility */}
+          <div className="flex flex-col gap-3 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+            <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
+              {t("countryPage.eligibilitySection")}
+            </span>
+            <div className="flex items-center gap-2">
+              <User size={14} color="#808080" />
+              <span className="text-[13px] text-dim">
+                {t("countryPage.minimumAge", { age: visa.eligibility.minAge })}
+              </span>
+            </div>
+            {localizeVisa(
+              visa.eligibility.requirements,
+              visa,
+              (l) => l.eligibility?.requirements,
+              lang,
+            ).map((req) => (
+              <div key={req} className="flex gap-2 pt-1">
+                <Check size={13} color="#6B9E6B" style={{ flexShrink: 0, marginTop: "2px" }} />
+                <span className="flex-1 text-xs text-on-surface">{req}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right column – flex fill */}
+        <div className="flex min-w-0 flex-1 flex-col gap-5">
+          {/* Visa Benefits */}
+          <div className="flex flex-col gap-3 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+            <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
+              {t("countryPage.visaBenefits")}
+            </span>
+            {localizeVisa(visa.benefits, visa, (l) => l.benefits, lang).map((benefit) => (
+              <div key={benefit} className="flex items-center gap-2.5 rounded-lg bg-bg px-3 py-2.5">
+                <Briefcase size={16} color="#8F5A3C" />
+                <span className="text-[13px] text-muted">{benefit}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Application Process */}
+          <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
+            <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
+              {t("countryPage.applicationProcessSection")}
+            </span>
+            <div className="flex items-center gap-2">
+              <Building2 size={16} color="#C2956A" />
+              <span className="text-sm text-[#E8E9EB]">
+                {visa.applicationProcess.online
+                  ? t("countryPage.onlineApplication")
+                  : t("countryPage.inPersonApplication")}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Timer size={16} color="#8F5A3C" />
+              <span className="text-[13px] text-on-surface">
+                {t("countryPage.processing", {
+                  time: localizeVisa(
+                    visa.applicationProcess.processingTime,
+                    visa,
+                    (l) => l.applicationProcess?.processingTime,
+                    lang,
+                  ),
+                })}
+              </span>
+            </div>
+            <div className="h-px bg-[#1E1E1E]" />
+            <span className="text-[9px] tracking-[1px] text-dimmer uppercase">
+              {t("countryPage.requiredDocsSection")}
+            </span>
+            {localizeVisa(
+              visa.applicationProcess.documents,
+              visa,
+              (l) => l.applicationProcess?.documents,
+              lang,
+            ).map((doc) => (
+              <div key={doc} className="flex items-center gap-2">
+                <FileText size={13} color="#808080" />
+                <span className="text-xs text-dim">{doc}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Official Link */}
+          <a
+            href={visa.officialUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-xl border border-[#2A2018] bg-[#1A1410] p-5 no-underline"
+          >
+            <ExternalLink size={18} color="#8F5A3C" />
+            <span className="text-sm text-[#C2956A]">{t("countryPage.officialVisaWebsite")}</span>
+            <div className="flex-1" />
+            <span className="text-[11px] text-[#808080]">{getHostname(visa.officialUrl)}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function CountryPage() {
-  const { t, i18n: i18nInstance } = useTranslation();
+  const { t } = useTranslation();
   const { code } = useParams<{ code: string }>();
   const navigate = useNavigate();
   const langPrefix = useLangPrefix();
   const { countries, loading, error } = useCountries();
   const { weights, climatePrefs } = useWeightState();
-
-  // Helper: pick the localised string array/value for the active language,
-  // falling back to the English default when a translation is missing.
-  function localize<T>(
-    defaultValue: T,
-    visa: NomadVisaDetails,
-    pick: (loc: NomadVisaLocalization) => T | undefined,
-  ): T {
-    const lang = i18nInstance.language;
-    if (lang === "ru" || lang === "ua") {
-      const loc = visa.i18n?.[lang];
-      if (loc) {
-        const translated = pick(loc);
-        if (translated !== undefined) return translated;
-      }
-    }
-    return defaultValue;
-  }
 
   const ranked = useScoring(countries, weights, new Set(), false, false, null, climatePrefs);
 
@@ -100,7 +381,7 @@ export function CountryPage() {
     );
   }
 
-  if (error || !c) {
+  if (error != null || c == null) {
     return (
       <Layout>
         <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
@@ -121,7 +402,7 @@ export function CountryPage() {
   const tourismGroups = TOURISM_GROUPS.map((group) => ({
     labelKey: group.labelKey,
     metrics: group.keys
-      .map((key) => ({ key, value: c.scores[key]?.value ?? null }))
+      .map((key) => ({ key, value: c.scores[key].value }))
       .filter(
         (metric): metric is { key: (typeof group.keys)[number]; value: number } =>
           metric.value != null,
@@ -136,7 +417,9 @@ export function CountryPage() {
   );
 
   const handleBack = () => {
-    if (globalThis.window != null && globalThis.history.state?.idx > 0) {
+    const histState = globalThis.history.state as { idx?: number } | null;
+    const histIdx = histState?.idx;
+    if (histIdx != null && histIdx > 0) {
       void navigate(-1);
       return;
     }
@@ -203,36 +486,12 @@ export function CountryPage() {
             </div>
 
             {/* Badges row */}
-            <div className="flex flex-wrap gap-2.5">
-              {c.hasNomadVisa ? (
-                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2810] bg-[rgba(26,26,10,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-                  <Plane size={13} color="#8F5A3C" />
-                  <span className="text-xs text-[#C2956A]">{t("countryPage.nomadVisaBadge")}</span>
-                </div>
-              ) : null}
-              {c.isSchengen ? (
-                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#0A2030] bg-[rgba(10,18,24,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-                  <Globe size={13} color="#5B8FA8" />
-                  <span className="text-xs text-[#7BACC8]">{t("countryPage.schengen")}</span>
-                </div>
-              ) : null}
-              {c.touristVisaDays == null ? null : (
-                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#2A2010] bg-[rgba(26,20,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-                  <Calendar size={13} color="#C2956A" />
-                  <span className="text-xs text-[#C2956A]">
-                    {t("countryPage.touristVisaBadge", {
-                      count: c.touristVisaDays,
-                    })}
-                  </span>
-                </div>
-              )}
-              {c.climateData ? (
-                <div className="flex items-center gap-1.5 rounded-[20px] border border-[#142014] bg-[rgba(16,22,16,0.85)] px-[14px] py-1.5 backdrop-blur-[4px]">
-                  <CloudSun size={13} color="#7A9B6B" />
-                  <span className="text-xs text-[#7A9B6B]">{seasonLabel}</span>
-                </div>
-              ) : null}
-            </div>
+            <CountryBadges
+              hasNomadVisa={c.hasNomadVisa}
+              isSchengen={c.isSchengen}
+              touristVisaDays={c.touristVisaDays ?? null}
+              seasonLabel={seasonLabel}
+            />
           </div>
         </div>
 
@@ -241,11 +500,9 @@ export function CountryPage() {
           <div className="flex flex-1 items-center justify-center gap-2.5 rounded-lg border border-[#1E1E1E] bg-[#111111] px-[18px] py-[14px]">
             <TrendingUp size={14} color="#8F5A3C" />
             <div className="flex items-baseline gap-2">
-              {finalScore == null ? null : (
-                <span className="font-mono text-[22px] font-bold text-[#C2956A]">
-                  {finalScore.toFixed(1)}
-                </span>
-              )}
+              <span className="font-mono text-[22px] font-bold text-[#C2956A]">
+                {finalScore.toFixed(1)}
+              </span>
               <span className="font-mono text-xs text-[#808080]">#{rank}</span>
             </div>
           </div>
@@ -268,248 +525,7 @@ export function CountryPage() {
         </div>
 
         {/* ── visa-section ── */}
-        {visa ? (
-          <div className="flex flex-col gap-8 bg-bg py-8">
-            <div className="flex flex-col gap-3 md:flex-row md:items-center">
-              <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
-                {t("countryPage.nomadVisaSection")}
-              </h2>
-              <div className="flex-1" />
-              <div className="rounded-[20px] bg-[#1A1A0A] px-4 py-1.5">
-                <span className="text-xs text-[#C2956A]">{visa.visaName}</span>
-              </div>
-              <span className="text-[10px] text-dimmer">
-                {t("countryPage.updated", { date: visa.lastUpdated })}
-              </span>
-            </div>
-
-            <div className="flex flex-col gap-5 md:flex-row md:gap-6">
-              {/* Left column – 440px */}
-              <div className="flex w-full flex-col gap-5 md:w-[440px] md:flex-shrink-0">
-                {/* Duration & Cost */}
-                <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
-                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
-                    {t("countryPage.durationCost")}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <Calendar size={16} color="#8F5A3C" />
-                    <span className="text-sm text-[#E8E9EB]">
-                      {t("countryPage.monthsInitial", {
-                        count: visa.duration.initial,
-                      })}
-                    </span>
-                    <div className="flex-1" />
-                    {visa.duration.maxExtension > 0 ? (
-                      <span className="text-[11px] text-[#C2956A]">
-                        {t("countryPage.moExtension", {
-                          count: visa.duration.maxExtension,
-                        })}
-                      </span>
-                    ) : null}
-                  </div>
-                  {visa.duration.renewable ? (
-                    <div className="flex items-center gap-2">
-                      <RefreshCw size={16} color="#6B9E6B" />
-                      <span className="text-sm text-[#6B9E6B]">{t("countryPage.renewable")}</span>
-                    </div>
-                  ) : null}
-                  <div className="h-px bg-[#1E1E1E]" />
-                  <div className="flex items-center gap-2">
-                    <CreditCard size={16} color="#8F5A3C" />
-                    <span
-                      className={`font-mono text-[22px] font-bold ${visa.cost.amount === 0 ? "text-[#44CC66]" : "text-[#E8E9EB]"}`}
-                    >
-                      {visa.cost.amount === 0
-                        ? t("countryPage.free")
-                        : `${visa.cost.currency} ${visa.cost.amount.toLocaleString()}`}
-                    </span>
-                    <span className="text-[11px] text-dim">{t("countryPage.applicationFee")}</span>
-                  </div>
-                  <div className="flex flex-col gap-1 rounded-lg bg-bg px-4 py-3">
-                    <span className="text-[9px] tracking-[1px] text-dimmer uppercase">
-                      {t("countryPage.incomeRequirement")}
-                    </span>
-                    {visa.incomeRequirement.monthly == null ? (
-                      visa.incomeRequirement.annual == null ? (
-                        <span className="font-mono text-[18px] font-bold text-[#44CC66]">
-                          {t("countryPage.visa.noMinimum")}
-                        </span>
-                      ) : (
-                        <span className="font-mono text-[18px] font-bold text-[#C2956A]">
-                          {visa.incomeRequirement.currency}{" "}
-                          {visa.incomeRequirement.annual.toLocaleString()}{" "}
-                          {t("countryPage.perYear")}
-                        </span>
-                      )
-                    ) : (
-                      <>
-                        <span className="font-mono text-[18px] font-bold text-[#C2956A]">
-                          {visa.incomeRequirement.currency}{" "}
-                          {visa.incomeRequirement.monthly.toLocaleString()}{" "}
-                          {t("countryPage.perMonth")}
-                        </span>
-                        <span className="text-[11px] text-dim">
-                          {visa.incomeRequirement.currency}{" "}
-                          {(visa.incomeRequirement.monthly * 12).toLocaleString()}{" "}
-                          {t("countryPage.perYear")}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                {/* Taxation */}
-                <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
-                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
-                    {t("countryPage.taxation")}
-                  </span>
-                  <div
-                    className={`flex items-center gap-1 rounded-lg px-4 py-2.5 ${
-                      visa.tax.status === "exempt"
-                        ? "bg-[#0A2010]"
-                        : visa.tax.status === "special"
-                          ? "bg-[#1A0A1A]"
-                          : "bg-[#1A1A0A]"
-                    }`}
-                  >
-                    <span
-                      className={`text-[13px] font-semibold ${
-                        visa.tax.status === "exempt"
-                          ? "text-[#44CC66]"
-                          : visa.tax.status === "special"
-                            ? "text-[#9B8FB4]"
-                            : "text-[#C2956A]"
-                      }`}
-                    >
-                      {visa.tax.status === "exempt"
-                        ? t("countryPage.taxExemptLabel")
-                        : visa.tax.status === "special"
-                          ? t("countryPage.specialTaxLabel")
-                          : t("countryPage.standardTaxLabel")}
-                    </span>
-                    {visa.tax.rate != null && visa.tax.status !== "exempt" ? (
-                      <span className="font-mono text-[13px] text-dim">
-                        {" · "}
-                        {visa.tax.rate}%
-                      </span>
-                    ) : null}
-                  </div>
-                  {visa.tax.notes ? (
-                    <p className="m-0 text-xs text-[#808080]">
-                      {localize(visa.tax.notes, visa, (l) => l.tax?.notes)}
-                    </p>
-                  ) : null}
-                </div>
-
-                {/* Eligibility */}
-                <div className="flex flex-col gap-3 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
-                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
-                    {t("countryPage.eligibilitySection")}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <User size={14} color="#808080" />
-                    <span className="text-[13px] text-dim">
-                      {t("countryPage.minimumAge", {
-                        age: visa.eligibility.minAge,
-                      })}
-                    </span>
-                  </div>
-                  {localize(
-                    visa.eligibility.requirements,
-                    visa,
-                    (l) => l.eligibility?.requirements,
-                  ).map((req, i) => (
-                    <div key={i} className="flex gap-2 pt-1">
-                      <Check
-                        size={13}
-                        color="#6B9E6B"
-                        style={{
-                          flexShrink: 0,
-                          marginTop: "2px",
-                        }}
-                      />
-                      <span className="flex-1 text-xs text-on-surface">{req}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right column – flex fill */}
-              <div className="flex min-w-0 flex-1 flex-col gap-5">
-                {/* Visa Benefits */}
-                <div className="flex flex-col gap-3 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
-                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
-                    {t("countryPage.visaBenefits")}
-                  </span>
-                  {localize(visa.benefits, visa, (l) => l.benefits).map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-2.5 rounded-lg bg-bg px-3 py-2.5">
-                      <Briefcase size={16} color="#8F5A3C" />
-                      <span className="text-[13px] text-muted">{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Application Process */}
-                <div className="flex flex-col gap-4 rounded-xl border border-[#1E1E1E] bg-[#111111] p-6">
-                  <span className="text-[10px] tracking-[1.5px] text-[#808080] uppercase">
-                    {t("countryPage.applicationProcessSection")}
-                  </span>
-                  <div className="flex items-center gap-2">
-                    <Building2 size={16} color="#C2956A" />
-                    <span className="text-sm text-[#E8E9EB]">
-                      {visa.applicationProcess.online
-                        ? t("countryPage.onlineApplication")
-                        : t("countryPage.inPersonApplication")}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Timer size={16} color="#8F5A3C" />
-                    <span className="text-[13px] text-on-surface">
-                      {t("countryPage.processing", {
-                        time: localize(
-                          visa.applicationProcess.processingTime,
-                          visa,
-                          (l) => l.applicationProcess?.processingTime,
-                        ),
-                      })}
-                    </span>
-                  </div>
-                  <div className="h-px bg-[#1E1E1E]" />
-                  <span className="text-[9px] tracking-[1px] text-dimmer uppercase">
-                    {t("countryPage.requiredDocsSection")}
-                  </span>
-                  {localize(
-                    visa.applicationProcess.documents,
-                    visa,
-                    (l) => l.applicationProcess?.documents,
-                  ).map((doc, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <FileText size={13} color="#808080" />
-                      <span className="text-xs text-dim">{doc}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Official Link */}
-                <a
-                  href={visa.officialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-xl border border-[#2A2018] bg-[#1A1410] p-5 no-underline"
-                >
-                  <ExternalLink size={18} color="#8F5A3C" />
-                  <span className="text-sm text-[#C2956A]">
-                    {t("countryPage.officialVisaWebsite")}
-                  </span>
-                  <div className="flex-1" />
-                  <span className="text-[11px] text-[#808080]">
-                    {getHostname(visa.officialUrl)}
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-        ) : null}
+        {visa != null ? <CountryVisaSection visa={visa} /> : null}
 
         {/* ── scores-section + climate ── */}
         <div className="flex flex-col gap-8 bg-bg py-8">
@@ -736,7 +752,7 @@ export function CountryPage() {
                       },
                     ] as const
                   ).map(({ key, icon, label }) => {
-                    const val = c.costOfLiving![key];
+                    const val = c.costOfLiving?.[key] ?? null;
                     if (val == null) return null;
                     return (
                       <div

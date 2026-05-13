@@ -5,9 +5,9 @@ import { TAX_STATUS_COLORS } from "@core/constants";
 import type { NomadVisaDetails as NomadVisaDetailsType } from "@core/models";
 
 interface NomadVisaDetailsProps {
-  visa: NomadVisaDetailsType;
-  expanded: boolean;
-  onToggle: () => void;
+  readonly visa: NomadVisaDetailsType;
+  readonly expanded: boolean;
+  readonly onToggle: () => void;
 }
 
 export function NomadVisaDetails({ visa, expanded, onToggle }: NomadVisaDetailsProps) {
@@ -82,12 +82,12 @@ export function NomadVisaDetails({ visa, expanded, onToggle }: NomadVisaDetailsP
                 <TrendingUp size={12} className="inline" />
                 {t("countryPage.visa.income", "Income")}
               </span>
-              {visa.incomeRequirement.monthly ? (
+              {visa.incomeRequirement.monthly != null ? (
                 <span className="font-mono text-[11px] font-semibold text-white">
                   {visa.incomeRequirement.currency}{" "}
                   {visa.incomeRequirement.monthly.toLocaleString()}/mo
                 </span>
-              ) : visa.incomeRequirement.annual ? (
+              ) : visa.incomeRequirement.annual != null ? (
                 <span className="font-mono text-[10px] font-semibold text-white">
                   {visa.incomeRequirement.currency} {visa.incomeRequirement.annual.toLocaleString()}
                   /yr

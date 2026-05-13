@@ -9,15 +9,15 @@ interface PickerCountry {
 }
 
 interface Props {
-  open: boolean;
-  countries: PickerCountry[];
-  query: string;
-  onQueryChange: (q: string) => void;
-  onSelect: (code: string) => void;
-  position?: { top: number; left: number };
-  inputName: string;
-  searchPlaceholder: string;
-  emptyLabel: string;
+  readonly open: boolean;
+  readonly countries: PickerCountry[];
+  readonly query: string;
+  readonly onQueryChange: (q: string) => void;
+  readonly onSelect: (code: string) => void;
+  readonly position?: { top: number; left: number };
+  readonly inputName: string;
+  readonly searchPlaceholder: string;
+  readonly emptyLabel: string;
 }
 
 export function CountryPickerDropdown({

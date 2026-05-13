@@ -19,14 +19,14 @@ type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 const CATEGORY_COLORS = COST_COLORS;
 
 interface BudgetCategoryCardProps {
-  Icon: IconType;
-  name: string;
-  description: string;
-  source: string;
-  methodology: string;
-  color: string;
-  accentBorderClassName: string;
-  accentTextClassName: string;
+  readonly Icon: IconType;
+  readonly name: string;
+  readonly description: string;
+  readonly source: string;
+  readonly methodology: string;
+  readonly color: string;
+  readonly accentBorderClassName: string;
+  readonly accentTextClassName: string;
 }
 
 function BudgetCategoryCard({
@@ -79,7 +79,7 @@ const CATEGORY_ACCENT_CLASSES: Record<string, { border: string; text: string }> 
   healthInsurance: { border: "border-[#C07A9B]", text: "text-[#C07A9B]" },
 };
 
-const CATEGORY_ROWS: [IconType, string][][] = [
+const CATEGORY_ROWS: Array<Array<[IconType, string]>> = [
   [
     [House, "housing"],
     [ShoppingCart, "groceries"],
@@ -118,8 +118,11 @@ export function BudgetCategoriesPage() {
         </div>
 
         {/* Category cards */}
-        {CATEGORY_ROWS.map((row, rowIdx) => (
-          <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
+        {CATEGORY_ROWS.map((row) => (
+          <div
+            key={row.map(([, k]) => k).join("-")}
+            className="flex w-full flex-col gap-4 md:flex-row md:gap-5"
+          >
             {row.map(([Icon, key]) => {
               const accentClasses = CATEGORY_ACCENT_CLASSES[key] ?? {
                 border: "border-[#555555]",

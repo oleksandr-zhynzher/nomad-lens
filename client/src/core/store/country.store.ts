@@ -51,7 +51,9 @@ export const useCountryStore = createAppStore<CountryStoreState>((set, get) => (
   },
 }));
 
-function requestCountries({ force = false }: { force?: boolean } = {}): Promise<CountryData[]> {
+async function requestCountries({ force = false }: { force?: boolean } = {}): Promise<
+  CountryData[]
+> {
   if (!force && inFlightCountriesRequest) return inFlightCountriesRequest;
 
   inFlightCountriesRequest = getCountries().finally(() => {

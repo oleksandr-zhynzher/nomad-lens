@@ -1,7 +1,7 @@
 interface ToggleSwitchProps {
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-  ariaLabel: string;
+  readonly checked: boolean;
+  readonly onChange: (checked: boolean) => void;
+  readonly ariaLabel: string;
 }
 
 /** Accessible on/off toggle switch. */

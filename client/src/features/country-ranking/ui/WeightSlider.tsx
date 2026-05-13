@@ -13,12 +13,12 @@ import { Tooltip } from "@core/ui";
 import { WeightSliderRow } from "@core/ui/panels";
 
 export interface WeightSliderProps {
-  categoryKey: CategoryKey;
-  value: number;
-  onChange: (key: CategoryKey, value: number) => void;
-  weights: WeightMap;
-  weightMode: WeightMode;
-  langPrefix: string;
+  readonly categoryKey: CategoryKey;
+  readonly value: number;
+  readonly onChange: (key: CategoryKey, value: number) => void;
+  readonly weights: WeightMap;
+  readonly weightMode: WeightMode;
+  readonly langPrefix: string;
 }
 
 export function WeightSlider({

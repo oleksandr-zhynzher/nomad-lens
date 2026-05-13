@@ -4,16 +4,16 @@ import { Tooltip } from "@core/ui";
 import { TOURISM_COST_COLORS } from "@features/budget/constants";
 import type { TourismBudgetBreakdown } from "@features/tourism/utils";
 
-const TOURISM_BUDGET_KEYS: (keyof TourismBudgetBreakdown)[] = [
+const TOURISM_BUDGET_KEYS: Array<keyof TourismBudgetBreakdown> = [
   "accommodation",
   "food",
   "activities",
 ];
 
 interface TourismBudgetBarProps {
-  breakdown: TourismBudgetBreakdown;
-  dailyCost: number;
-  dailyBudget: number;
+  readonly breakdown: TourismBudgetBreakdown;
+  readonly dailyCost: number;
+  readonly dailyBudget: number;
 }
 
 export function TourismBudgetBar({ breakdown, dailyCost, dailyBudget }: TourismBudgetBarProps) {

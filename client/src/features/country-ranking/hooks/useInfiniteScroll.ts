@@ -10,10 +10,11 @@ const PAGE_SIZE = 50;
  *                   immediately and the observer is not attached.
  */
 export function useInfiniteScroll<T>(items: T[], disabled = false) {
-  const [{ prevItems, visibleCount }, setPagination] = useState({
+  const [pagination, setPagination] = useState({
     prevItems: items,
     visibleCount: PAGE_SIZE,
   });
+  const { prevItems, visibleCount } = pagination;
 
   // Reset pagination whenever the items list identity changes (React-recommended
   // pattern for deriving state from props without a useEffect).

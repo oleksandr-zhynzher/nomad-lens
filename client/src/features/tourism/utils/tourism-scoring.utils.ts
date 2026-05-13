@@ -21,7 +21,7 @@ export function computeTourismScore(country: CountryData): number | null {
   let sum = 0;
   let count = 0;
   for (const key of TOURISM_CATEGORY_KEYS) {
-    const v = country.scores[key]?.value;
+    const v = country.scores[key].value;
     if (v != null) {
       sum += v;
       count++;
@@ -73,9 +73,40 @@ function getSeasonalMultiplier(
   return total;
 }
 
+/** Accumulate tag quality scores into the running numerator/denominator totals. */
+function applyTagScores(
+  country: CountryData,
+  selectedTags: string[],
+  blend: number,
+  travelDates: TravelDates | undefined,
+): { numeratorDelta: number; denominatorDelta: number; missingDelta: number } {
+  const tagWeight = blend;
+  const monthWeights =
+    travelDates?.startDate != null && travelDates.endDate != null
+      ? getMonthWeights(travelDates.startDate, travelDates.endDate)
+      : null;
+
+  let numeratorDelta = 0;
+  let denominatorDelta = 0;
+  let missingDelta = 0;
+
+  for (const tag of selectedTags) {
+    let tagScore = country.tourismTagScores?.[tag] ?? null;
+    if (tagScore == null) {
+      missingDelta++;
+    } else {
+      if (monthWeights != null && monthWeights.size > 0) {
+        tagScore = tagScore * getSeasonalMultiplier(country, tag, monthWeights);
+      }
+      numeratorDelta += tagWeight * tagScore;
+      denominatorDelta += tagWeight;
+    }
+  }
+
+  return { numeratorDelta, denominatorDelta, missingDelta };
+}
+
 /**
- * Weighted tourism score using user-defined weights per metric.
- *
  * finalScore = Σ(weight_i × score_i) / Σ(weight_i)  −  (missingActiveMetrics × 2)
  *
  * Metrics with null scores are skipped from the weighted average but apply
@@ -95,7 +126,7 @@ export function computeWeightedTourismScore(
   for (const key of TOURISM_CATEGORY_KEYS) {
     const w = weights[key] ?? 0;
     if (w <= 0) continue;
-    const val = country.scores[key]?.value;
+    const val = country.scores[key].value;
     if (val == null) {
       missingCount++;
       continue;
@@ -105,28 +136,18 @@ export function computeWeightedTourismScore(
   }
 
   // Include selected tag quality scores as additional weighted dimensions
-  if (selectedTags && selectedTags.length > 0) {
+  if (selectedTags != null && selectedTags.length > 0) {
     // Scale tag weight by activityBlend: 0 = tags don't matter, 100 = tags dominate
     const blend = activityBlend ?? 50;
-    const tagWeight = blend;
-    const monthWeights =
-      travelDates?.startDate && travelDates?.endDate
-        ? getMonthWeights(travelDates.startDate, travelDates.endDate)
-        : null;
-
-    for (const tag of selectedTags) {
-      let tagScore = country.tourismTagScores?.[tag] ?? null;
-      if (tagScore == null) {
-        missingCount++;
-      } else {
-        // Apply seasonal multiplier when travel dates are set
-        if (monthWeights && monthWeights.size > 0) {
-          tagScore = tagScore * getSeasonalMultiplier(country, tag, monthWeights);
-        }
-        numerator += tagWeight * tagScore;
-        denominator += tagWeight;
-      }
-    }
+    const { numeratorDelta, denominatorDelta, missingDelta } = applyTagScores(
+      country,
+      selectedTags,
+      blend,
+      travelDates,
+    );
+    numerator += numeratorDelta;
+    denominator += denominatorDelta;
+    missingCount += missingDelta;
   }
 
   if (denominator === 0) return 0;
@@ -158,7 +179,7 @@ export function getWeightedTourismRanking(
 
   const scored = countries
     .map((c) => {
-      const presentCount = activeKeys.filter((k) => c.scores[k]?.value != null).length;
+      const presentCount = activeKeys.filter((k) => c.scores[k].value != null).length;
       return {
         country: c,
         tourismScore: computeWeightedTourismScore(
@@ -203,7 +224,7 @@ export function applyTagSeasonality(
   seasonality: number[] | undefined,
   travelDates: { startDate: string | null; endDate: string | null } | undefined,
 ): number {
-  if (!travelDates?.startDate || !travelDates?.endDate) return baseVal;
+  if (travelDates?.startDate == null || travelDates.endDate == null) return baseVal;
   if (seasonality?.length !== 12) return baseVal;
   const start = new Date(travelDates.startDate + "T00:00:00");
   const end = new Date(travelDates.endDate + "T00:00:00");

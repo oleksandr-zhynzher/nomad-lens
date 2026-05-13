@@ -24,6 +24,130 @@ import { localizeCountry } from "@core/utils";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "@core/models";
 import { DATA_SOURCE_KEYS } from "@features/data-sources/constants";
 
+type SearchMode = "filter" | "highlight";
+
+function getSearchPaddingRight(isEmpty: boolean, mode: SearchMode, hasTrimmed: boolean): string {
+  if (isEmpty) return "16px";
+  if (mode === "highlight" && hasTrimmed) return "164px";
+  return "72px";
+}
+
+function getActiveHighlight(
+  searchMode: SearchMode,
+  search: string,
+  matchingCodes: readonly string[],
+  matchCursor: number,
+  activeNavCursor: number | null,
+  highlightedCode: string | null,
+  allCodes: readonly string[],
+): string | null {
+  if (searchMode === "highlight" && search.trim().length > 0) {
+    return matchingCodes[matchCursor] ?? null;
+  }
+  if (activeNavCursor === null) return highlightedCode;
+  return allCodes[activeNavCursor] ?? null;
+}
+
+function homeNavButtonClass(hasMatches: boolean): string {
+  return `flex h-6 w-6 items-center justify-center rounded-[3px] border-0 bg-surface-4 ${hasMatches ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`;
+}
+
+interface HomeSearchControlsProps {
+  readonly searchMode: SearchMode;
+  readonly search: string;
+  readonly matchingCodes: readonly string[];
+  readonly matchCursor: number;
+  readonly onClear: () => void;
+  readonly onPrev: () => void;
+  readonly onNext: () => void;
+  readonly onModeChange: (mode: SearchMode) => void;
+  readonly onCursorReset: () => void;
+}
+
+function HomeSearchControls({
+  searchMode,
+  search,
+  matchingCodes,
+  matchCursor,
+  onClear,
+  onPrev,
+  onNext,
+  onModeChange,
+  onCursorReset,
+}: HomeSearchControlsProps) {
+  const { t } = useTranslation();
+  const hasMatches = matchingCodes.length > 0;
+  return (
+    <div className="absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1">
+      <button
+        onClick={onClear}
+        className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
+        aria-label={t("a11y.clearSearch", "Clear search")}
+      >
+        <X size={14} />
+      </button>
+      {searchMode === "highlight" && search.trim().length > 0 ? (
+        <>
+          <span className="min-w-9 text-right font-mono text-[11px] text-dim">
+            {hasMatches ? `${matchCursor + 1}/${matchingCodes.length}` : "0/0"}
+          </span>
+          <button
+            onClick={onPrev}
+            disabled={!hasMatches}
+            className={homeNavButtonClass(hasMatches)}
+            aria-label={t("a11y.previousMatch", "Previous match")}
+          >
+            <ChevronUp size={14} />
+          </button>
+          <button
+            onClick={onNext}
+            disabled={!hasMatches}
+            className={homeNavButtonClass(hasMatches)}
+            aria-label={t("a11y.nextMatch", "Next match")}
+          >
+            <ChevronDown size={14} />
+          </button>
+        </>
+      ) : null}
+      <Tooltip
+        side="bottom"
+        content={
+          searchMode === "filter" ? (
+            <span>
+              {t(
+                "a11y.searchModeScrollTooltip",
+                "Switch to scroll mode - shows all countries and scrolls to each match.",
+              )}
+            </span>
+          ) : (
+            <span>
+              {t(
+                "a11y.searchModeFilterTooltip",
+                "Switch to filter mode - hides non-matching countries.",
+              )}
+            </span>
+          )
+        }
+      >
+        <button
+          onClick={() => {
+            onModeChange(searchMode === "filter" ? "highlight" : "filter");
+            onCursorReset();
+          }}
+          className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-muted"
+          aria-label={
+            searchMode === "filter"
+              ? t("a11y.switchToScrollMode", "Switch to scroll mode")
+              : t("a11y.switchToFilterMode", "Switch to filter mode")
+          }
+        >
+          {searchMode === "filter" ? <List size={13} /> : <Filter size={13} />}
+        </button>
+      </Tooltip>
+    </div>
+  );
+}
+
 export default function App() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,7 +160,7 @@ export default function App() {
   const [highlightedCode, setHighlightedCode] = useState<string | null>(null);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
-  const [searchMode, setSearchMode] = useState<"filter" | "highlight">("filter");
+  const [searchMode, setSearchMode] = useState<SearchMode>("filter");
   const [compareMode, setCompareMode] = useState(false);
   const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -83,7 +207,7 @@ export default function App() {
   // Handle ?highlight=XX coming from map page country click
   useEffect(() => {
     const h = initialHighlightRef.current;
-    if (!h) return;
+    if (h == null) return;
     setSearchParams(
       (prev) => {
         const next = new URLSearchParams(prev);
@@ -92,7 +216,7 @@ export default function App() {
       },
       { replace: true },
     );
-    if (highlightTimer.current) clearTimeout(highlightTimer.current);
+    if (highlightTimer.current != null) clearTimeout(highlightTimer.current);
     const scrollTimer = setTimeout(() => {
       setHighlightedCode(h);
       const el = document.querySelector(`[data-country-code="${h}"]`);
@@ -104,7 +228,7 @@ export default function App() {
 
     return () => {
       clearTimeout(scrollTimer);
-      if (highlightTimer.current) {
+      if (highlightTimer.current != null) {
         clearTimeout(highlightTimer.current);
         highlightTimer.current = null;
       }
@@ -146,8 +270,8 @@ export default function App() {
     setMatchCursor(0);
   }, []);
   useEffect(() => {
-    const code = matchingCodes[matchCursor];
-    if (!code) return;
+    if (matchingCodes.length === 0) return;
+    const code = matchingCodes[matchCursor % matchingCodes.length];
     const el = document.querySelector(`[data-country-code="${code}"]`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [matchCursor, matchingCodes]);
@@ -166,9 +290,8 @@ export default function App() {
   const activeNavCursor =
     navCursor !== null && navCursor >= 0 && navCursor < allCodes.length ? navCursor : null;
   useEffect(() => {
-    if (activeNavCursor === null) return;
+    if (activeNavCursor === null || activeNavCursor >= allCodes.length) return;
     const code = allCodes[activeNavCursor];
-    if (!code) return;
     const el = document.querySelector(`[data-country-code="${code}"]`);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
   }, [activeNavCursor, allCodes]);
@@ -185,7 +308,7 @@ export default function App() {
             : activeNavCursor === null
               ? null
               : (allCodes[activeNavCursor] ?? null);
-        if (highlighted) {
+        if (highlighted !== null) {
           e.preventDefault();
           setExpandedCode((c) => (c === highlighted ? null : highlighted));
         }
@@ -210,7 +333,7 @@ export default function App() {
         // Navigate full list (only when not typing in search)
         setNavCursor((c) => {
           const len = allCodes.length;
-          if (!len) return null;
+          if (len === 0) return null;
           if (c === null) return e.key === "ArrowDown" ? 0 : len - 1;
           return e.key === "ArrowDown" ? (c + 1) % len : (c - 1 + len) % len;
         });
@@ -222,12 +345,15 @@ export default function App() {
     };
   }, [search, searchMode, goNext, goPrev, allCodes, matchingCodes, matchCursor, activeNavCursor]);
 
-  const activeHighlight =
-    searchMode === "highlight" && search.trim().length > 0
-      ? (matchingCodes[matchCursor] ?? null)
-      : activeNavCursor === null
-        ? highlightedCode
-        : (allCodes[activeNavCursor] ?? null);
+  const activeHighlight = getActiveHighlight(
+    searchMode,
+    search,
+    matchingCodes,
+    matchCursor,
+    activeNavCursor,
+    highlightedCode,
+    allCodes,
+  );
 
   const toggleSelect = useCallback((code: string) => {
     setSelectedCodes((prev) => {
@@ -345,8 +471,8 @@ export default function App() {
                 <div className="mb-2 flex items-center gap-2 md:mb-3">
                   {t("hero.eyebrow")
                     .split("·")
-                    .map((word, i) => (
-                      <span key={i} className="flex items-center gap-2">
+                    .map((word) => (
+                      <span key={word.trim()} className="flex items-center gap-2">
                         <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
                         <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
                           {word.trim()}
@@ -444,87 +570,30 @@ export default function App() {
                       className="h-10 w-full rounded-md border border-surface bg-[#161616] pr-[var(--pr)] pl-12 text-sm text-white focus:outline-none"
                       style={
                         {
-                          "--pr":
-                            search.length === 0
-                              ? "16px"
-                              : searchMode === "highlight" && search.trim().length > 0
-                                ? "164px"
-                                : "72px",
+                          "--pr": getSearchPaddingRight(
+                            search.length === 0,
+                            searchMode,
+                            search.trim().length > 0,
+                          ),
                         } as React.CSSProperties
                       }
                     />
-                    {search.length > 0 ? (
-                      <div className="absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1">
-                        <button
-                          onClick={() => {
-                            updateSearch("");
-                          }}
-                          className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
-                          aria-label={t("a11y.clearSearch", "Clear search")}
-                        >
-                          <X size={14} />
-                        </button>
-                        {searchMode === "highlight" && search.trim().length > 0 ? (
-                          <>
-                            <span className="min-w-9 text-right font-mono text-[11px] text-dim">
-                              {matchingCodes.length > 0
-                                ? `${matchCursor + 1}/${matchingCodes.length}`
-                                : "0/0"}
-                            </span>
-                            <button
-                              onClick={goPrev}
-                              disabled={matchingCodes.length === 0}
-                              className={`flex h-6 w-6 items-center justify-center rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length > 0 ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
-                              aria-label={t("a11y.previousMatch", "Previous match")}
-                            >
-                              <ChevronUp size={14} />
-                            </button>
-                            <button
-                              onClick={goNext}
-                              disabled={matchingCodes.length === 0}
-                              className={`flex h-6 w-6 items-center justify-center rounded-[3px] border-0 bg-surface-4 ${matchingCodes.length > 0 ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`}
-                              aria-label={t("a11y.nextMatch", "Next match")}
-                            >
-                              <ChevronDown size={14} />
-                            </button>
-                          </>
-                        ) : null}
-                        <Tooltip
-                          side="bottom"
-                          content={
-                            searchMode === "filter" ? (
-                              <span>
-                                {t(
-                                  "a11y.searchModeScrollTooltip",
-                                  "Switch to scroll mode - shows all countries and scrolls to each match.",
-                                )}
-                              </span>
-                            ) : (
-                              <span>
-                                {t(
-                                  "a11y.searchModeFilterTooltip",
-                                  "Switch to filter mode - hides non-matching countries.",
-                                )}
-                              </span>
-                            )
-                          }
-                        >
-                          <button
-                            onClick={() => {
-                              setSearchMode((m) => (m === "filter" ? "highlight" : "filter"));
-                              setMatchCursor(0);
-                            }}
-                            className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-muted"
-                            aria-label={
-                              searchMode === "filter"
-                                ? t("a11y.switchToScrollMode", "Switch to scroll mode")
-                                : t("a11y.switchToFilterMode", "Switch to filter mode")
-                            }
-                          >
-                            {searchMode === "filter" ? <List size={13} /> : <Filter size={13} />}
-                          </button>
-                        </Tooltip>
-                      </div>
+                    {search !== "" ? (
+                      <HomeSearchControls
+                        searchMode={searchMode}
+                        search={search}
+                        matchingCodes={matchingCodes}
+                        matchCursor={matchCursor}
+                        onClear={() => {
+                          updateSearch("");
+                        }}
+                        onPrev={goPrev}
+                        onNext={goNext}
+                        onModeChange={setSearchMode}
+                        onCursorReset={() => {
+                          setMatchCursor(0);
+                        }}
+                      />
                     ) : null}
                   </div>
 

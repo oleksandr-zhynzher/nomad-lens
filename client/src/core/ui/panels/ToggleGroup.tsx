@@ -1,10 +1,10 @@
 /** Segmented button control — choose one value from a fixed set of options. */
 
 interface ToggleGroupProps<T extends string | number> {
-  options: readonly T[];
-  value: T;
-  onChange: (v: T) => void;
-  labelFn: (v: T) => string;
+  readonly options: readonly T[];
+  readonly value: T;
+  readonly onChange: (v: T) => void;
+  readonly labelFn: (v: T) => string;
 }
 
 export function ToggleGroup<T extends string | number>({

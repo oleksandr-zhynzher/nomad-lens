@@ -25,7 +25,7 @@ const LABEL_STYLE = "text-[11px] font-semibold tracking-[0.8px] uppercase text-d
 const VALUE_MONO = "font-mono text-sm font-semibold text-white";
 const VALUE_TEXT = "text-[13px] text-tertiary";
 
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
+function Row({ label, children }: { readonly label: string; readonly children: React.ReactNode }) {
   return (
     <div className="grid grid-cols-[160px_1fr] items-stretch border-b border-[#1A1A1A]">
       <div className={`${LABEL_STYLE} flex shrink-0 items-center bg-[#111113] px-4 py-3.5`}>
@@ -36,7 +36,7 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
   );
 }
 
-function Cell({ children, count }: { children: React.ReactNode; count: number }) {
+function Cell({ children, count }: { readonly children: React.ReactNode; readonly count: number }) {
   return (
     <div
       className="flex min-w-0 shrink-0 grow-0 items-center border-l border-[#1A1A1A] px-4 py-3.5"
@@ -189,7 +189,7 @@ export function NomadVisaComparePage() {
                 const inc = c.nomadVisa.incomeRequirement;
                 return (
                   <Cell key={c.code} count={count}>
-                    {inc.monthly ? (
+                    {inc.monthly != null ? (
                       <>
                         <span className={VALUE_MONO}>
                           {inc.currency} {inc.monthly.toLocaleString()}
@@ -198,7 +198,7 @@ export function NomadVisaComparePage() {
                           /{t("countryPage.visa.mo")}
                         </span>
                       </>
-                    ) : inc.annual ? (
+                    ) : inc.annual != null ? (
                       <>
                         <span className={VALUE_MONO}>
                           {inc.currency} {inc.annual.toLocaleString()}
@@ -288,7 +288,9 @@ export function NomadVisaComparePage() {
               {selected.map((c) => (
                 <Cell key={c.code} count={count}>
                   <span className={VALUE_TEXT}>
-                    {c.nomadVisa.applicationProcess.processingTime || "—"}
+                    {c.nomadVisa.applicationProcess.processingTime !== ""
+                      ? c.nomadVisa.applicationProcess.processingTime
+                      : "—"}
                   </span>
                 </Cell>
               ))}

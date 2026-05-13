@@ -2,9 +2,9 @@ import { Tooltip } from "@core/ui";
 import { scoreColourClass } from "@core/utils";
 
 interface ScoreDotProps {
-  value: number | null;
-  label: string;
-  shape?: "circle" | "square";
+  readonly value: number | null;
+  readonly label: string;
+  readonly shape?: "circle" | "square";
 }
 
 export function ScoreDot({ value, label, shape = "circle" }: ScoreDotProps) {

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, type Dispatch, type SetStateAction } from "react";
 import {
   House,
   ShoppingCart,
@@ -24,15 +24,17 @@ import { useLangPrefix } from "@core/hooks";
 import { Tooltip } from "@core/ui";
 import { BudgetCountryCard } from "@features/budget/ui";
 import { useCountries } from "@core/hooks";
-import { useBudgetMatcher } from "@features/budget/hooks";
+import { useBudgetMatcher, type BudgetMatch } from "@features/budget/hooks";
 import { useBudgetState, type BudgetCategoryWeights } from "@features/budget/hooks";
 import { COST_COLORS } from "@features/budget/constants";
 import { localizeCountry } from "@core/utils";
 
-const BUDGET_CATEGORIES: {
-  key: keyof BudgetCategoryWeights;
-  icon: typeof House;
-}[] = [
+const SKELETON_KEYS = ["sk0", "sk1", "sk2", "sk3", "sk4", "sk5", "sk6", "sk7"] as const;
+
+const BUDGET_CATEGORIES: Array<{
+  readonly key: keyof BudgetCategoryWeights;
+  readonly icon: typeof House;
+}> = [
   { key: "housing", icon: House },
   { key: "groceries", icon: ShoppingCart },
   { key: "dining", icon: UtensilsCrossed },
@@ -49,10 +51,10 @@ function ToggleGroup<T extends string | number>({
   onChange,
   labelFn,
 }: {
-  options: readonly T[];
-  value: T;
-  onChange: (v: T) => void;
-  labelFn: (v: T) => string;
+  readonly options: readonly T[];
+  readonly value: T;
+  readonly onChange: (v: T) => void;
+  readonly labelFn: (v: T) => string;
 }) {
   return (
     <div className="flex gap-1 rounded bg-surface-4 p-1">
@@ -74,71 +76,29 @@ function ToggleGroup<T extends string | number>({
   );
 }
 
-export function BudgetMatcherPage() {
-  const { t, i18n } = useTranslation();
-  const langPrefix = useLangPrefix();
-  const navigate = useNavigate();
-  const { countries, loading } = useCountries();
-  const bs = useBudgetState();
-  const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
-  const [expandedCode, setExpandedCode] = useState<string | null>(null);
-  const [search, setSearch] = useState("");
-  const sentinelRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
+type BudgetState = ReturnType<typeof useBudgetState>;
 
-  // Compare mode
-  const [compareMode, setCompareMode] = useState(false);
-  const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
+interface BudgetSidebarProps {
+  readonly bs: BudgetState;
+  readonly langPrefix: string;
+  readonly collapsed: Record<string, boolean>;
+  readonly toggle: (key: string) => void;
+  readonly budgetPct: number;
+  readonly copied: boolean;
+  readonly setCopied: Dispatch<SetStateAction<boolean>>;
+}
 
-  const toggleSelect = (code: string) => {
-    setSelectedCodes((prev) => {
-      const next = new Set(prev);
-      if (next.has(code)) next.delete(code);
-      else next.add(code);
-      return next;
-    });
-  };
-
-  const exitCompareMode = () => {
-    setCompareMode(false);
-    setSelectedCodes(new Set());
-  };
-
-  const handleCompare = () => {
-    if (selectedCodes.size < 2) return;
-    void navigate(`${langPrefix}/compare?m=budget&c=${[...selectedCodes].join(",")}`);
-  };
-
-  const matches = useBudgetMatcher(
-    countries,
-    bs.budget,
-    bs.housing,
-    bs.bedrooms,
-    bs.peopleCount,
-    bs.categoryWeights,
-    bs.qualityBlend,
-  );
-
-  const query = search.trim().toLowerCase();
-  const filteredMatches = query
-    ? matches.filter((m) =>
-        localizeCountry(m.country, i18n.language).name.toLowerCase().includes(query),
-      )
-    : matches;
-
-  const budgetPct = ((bs.budget - 300) / 9700) * 100;
-
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({
-    lifestyle: false,
-    categories: false,
-  });
-  const [copied, setCopied] = useState(false);
-  const toggle = (key: string) => {
-    setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  /* ── Sidebar content (shared between desktop & mobile) ── */
-  const sidebarContent = (
+function BudgetSidebar({
+  bs,
+  langPrefix,
+  collapsed,
+  toggle,
+  budgetPct,
+  copied,
+  setCopied,
+}: BudgetSidebarProps) {
+  const { t } = useTranslation();
+  return (
     <>
       {/* ── Budget slider (always visible) ────────────────── */}
       <div className="border-b border-[#242424] p-4">
@@ -442,6 +402,150 @@ export function BudgetMatcherPage() {
       </div>
     </>
   );
+}
+
+interface BudgetRowItemProps {
+  readonly match: BudgetMatch;
+  readonly rank: number;
+  readonly compareMode: boolean;
+  readonly isSelected: boolean;
+  readonly expandedCode: string | null;
+  readonly toggleSelect: (code: string) => void;
+  readonly setExpandedCode: Dispatch<SetStateAction<string | null>>;
+  readonly budget: number;
+}
+
+function BudgetRowItem({
+  match,
+  rank,
+  compareMode,
+  isSelected,
+  expandedCode,
+  toggleSelect,
+  setExpandedCode,
+  budget,
+}: BudgetRowItemProps) {
+  return (
+    <div
+      key={match.country.code}
+      onClick={
+        compareMode
+          ? () => {
+              toggleSelect(match.country.code);
+            }
+          : undefined
+      }
+      onKeyDown={
+        compareMode
+          ? (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                toggleSelect(match.country.code);
+              }
+            }
+          : undefined
+      }
+      role={compareMode ? "button" : undefined}
+      tabIndex={compareMode ? 0 : undefined}
+      className={compareMode ? "cursor-pointer" : ""}
+    >
+      <BudgetCountryCard
+        match={match}
+        budget={budget}
+        rank={rank}
+        expanded={compareMode ? undefined : expandedCode === match.country.code}
+        onToggle={
+          compareMode
+            ? undefined
+            : () => {
+                setExpandedCode((prev) =>
+                  prev === match.country.code ? null : match.country.code,
+                );
+              }
+        }
+        compareMode={compareMode}
+        isSelected={isSelected}
+      />
+    </div>
+  );
+}
+
+export function BudgetMatcherPage() {
+  const { t, i18n } = useTranslation();
+  const langPrefix = useLangPrefix();
+  const navigate = useNavigate();
+  const { countries, loading } = useCountries();
+  const bs = useBudgetState();
+  const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
+  const [expandedCode, setExpandedCode] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Compare mode
+  const [compareMode, setCompareMode] = useState(false);
+  const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
+
+  const toggleSelect = (code: string) => {
+    setSelectedCodes((prev) => {
+      const next = new Set(prev);
+      if (next.has(code)) next.delete(code);
+      else next.add(code);
+      return next;
+    });
+  };
+
+  const exitCompareMode = () => {
+    setCompareMode(false);
+    setSelectedCodes(new Set());
+  };
+
+  const handleCompare = () => {
+    if (selectedCodes.size < 2) return;
+    void navigate(`${langPrefix}/compare?m=budget&c=${[...selectedCodes].join(",")}`);
+  };
+
+  const matches = useBudgetMatcher(
+    countries,
+    bs.budget,
+    bs.housing,
+    bs.bedrooms,
+    bs.peopleCount,
+    bs.categoryWeights,
+    bs.qualityBlend,
+  );
+
+  const query = search.trim().toLowerCase();
+  const filteredMatches =
+    query !== ""
+      ? matches.filter((m) =>
+          localizeCountry(m.country, i18n.language).name.toLowerCase().includes(query),
+        )
+      : matches;
+
+  const budgetPct = ((bs.budget - 300) / 9700) * 100;
+
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({
+    lifestyle: false,
+    categories: false,
+  });
+  const [copied, setCopied] = useState(false);
+  const toggle = (key: string) => {
+    setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  /* ── Sidebar content (shared between desktop & mobile) ── */
+  const sidebarContent = (
+    <BudgetSidebar
+      bs={bs}
+      langPrefix={langPrefix}
+      collapsed={collapsed}
+      toggle={toggle}
+      budgetPct={budgetPct}
+      copied={copied}
+      setCopied={setCopied}
+    />
+  );
 
   return (
     <Layout>
@@ -516,7 +620,7 @@ export function BudgetMatcherPage() {
                 <div className="hero-stats-row hero-banner-stats">
                   <div className="min-w-0">
                     <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                      {matches.length || "—"}
+                      {matches.length > 0 ? matches.length : "—"}
                     </div>
                     <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
                       {t("budget.stats.matchedCountries", {
@@ -643,7 +747,7 @@ export function BudgetMatcherPage() {
                   <div key={key} className="flex items-center gap-1.5">
                     <div
                       className="h-2 w-2 shrink-0 rounded-full bg-[var(--c)]"
-                      style={{ "--c": COST_COLORS[key] ?? "#555" } as React.CSSProperties}
+                      style={{ "--c": COST_COLORS[key] } as React.CSSProperties}
                     />
                     <span className="text-[11px] text-dim">{t(`budget.categories.${key}`)}</span>
                   </div>
@@ -654,8 +758,8 @@ export function BudgetMatcherPage() {
             {/* ── Results ───────────────────────────────────── */}
             {loading ? (
               <div className="mt-4 flex flex-col gap-2">
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <div key={i} className="h-14 animate-pulse border-t border-border bg-surface" />
+                {SKELETON_KEYS.map((sk) => (
+                  <div key={sk} className="h-14 animate-pulse border-t border-border bg-surface" />
                 ))}
               </div>
             ) : matches.length === 0 ? (
@@ -675,52 +779,19 @@ export function BudgetMatcherPage() {
                 {filteredMatches.length === 0 ? (
                   <p className="py-20 text-center text-sm text-dim">{t("countryList.noResults")}</p>
                 ) : (
-                  filteredMatches.map((m, i) => {
-                    const isSelected = selectedCodes.has(m.country.code);
-                    return (
-                      <div
-                        key={m.country.code}
-                        onClick={
-                          compareMode
-                            ? () => {
-                                toggleSelect(m.country.code);
-                              }
-                            : undefined
-                        }
-                        onKeyDown={
-                          compareMode
-                            ? (event) => {
-                                if (event.key === "Enter" || event.key === " ") {
-                                  event.preventDefault();
-                                  toggleSelect(m.country.code);
-                                }
-                              }
-                            : undefined
-                        }
-                        role={compareMode ? "button" : undefined}
-                        tabIndex={compareMode ? 0 : undefined}
-                        className={compareMode ? "cursor-pointer" : ""}
-                      >
-                        <BudgetCountryCard
-                          match={m}
-                          budget={bs.budget}
-                          rank={i + 1}
-                          expanded={compareMode ? undefined : expandedCode === m.country.code}
-                          onToggle={
-                            compareMode
-                              ? undefined
-                              : () => {
-                                  setExpandedCode((prev) =>
-                                    prev === m.country.code ? null : m.country.code,
-                                  );
-                                }
-                          }
-                          compareMode={compareMode}
-                          isSelected={isSelected}
-                        />
-                      </div>
-                    );
-                  })
+                  filteredMatches.map((m, i) => (
+                    <BudgetRowItem
+                      key={m.country.code}
+                      match={m}
+                      rank={i + 1}
+                      compareMode={compareMode}
+                      isSelected={selectedCodes.has(m.country.code)}
+                      expandedCode={expandedCode}
+                      toggleSelect={toggleSelect}
+                      setExpandedCode={setExpandedCode}
+                      budget={bs.budget}
+                    />
+                  ))
                 )}
               </div>
             )}

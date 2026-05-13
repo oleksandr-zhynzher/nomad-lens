@@ -30,6 +30,28 @@ export interface LoadedFilters {
   climatePrefs: ClimatePreferences;
 }
 
+function normalizeBalancedWeights(base: WeightMap): WeightMap {
+  const visibleSum = VISIBLE_CATEGORY_KEYS.reduce((s, k) => s + base[k], 0);
+  if (visibleSum === 0 || visibleSum === 100) return base;
+  const scale = 100 / visibleSum;
+  const exactShares = VISIBLE_CATEGORY_KEYS.map((k) => base[k] * scale);
+  const floors = exactShares.map((s) => Math.floor(s));
+  const floorSum = floors.reduce((a, b) => a + b, 0);
+  let leftover = 100 - floorSum;
+  const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
+  remainders.sort((a, b) => b.r - a.r);
+  for (const { i } of remainders) {
+    if (leftover > 0) {
+      floors[i]++;
+      leftover--;
+    }
+  }
+  for (const [i, k] of VISIBLE_CATEGORY_KEYS.entries()) {
+    base[k] = floors[i] ?? 0;
+  }
+  return base;
+}
+
 export function weightsFromSearch(search: string): WeightMap {
   const params = new URLSearchParams(search);
   const mode = params.get("weightMode") === "balanced" ? "balanced" : "independent";
@@ -46,28 +68,7 @@ export function weightsFromSearch(search: string): WeightMap {
     }
   }
   if (!hasParams) return base;
-  if (mode === "balanced") {
-    const visibleSum = VISIBLE_CATEGORY_KEYS.reduce((s, k) => s + base[k], 0);
-    if (visibleSum !== 0 && visibleSum !== 100) {
-      const scale = 100 / visibleSum;
-      const exactShares = VISIBLE_CATEGORY_KEYS.map((k) => base[k] * scale);
-      const floors = exactShares.map((s) => Math.floor(s));
-      const floorSum = floors.reduce((a, b) => a + b, 0);
-      let leftover = 100 - floorSum;
-      const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
-      remainders.sort((a, b) => b.r - a.r);
-      for (const { i } of remainders) {
-        if (leftover > 0) {
-          floors[i]++;
-          leftover--;
-        }
-      }
-      for (const [i, k] of VISIBLE_CATEGORY_KEYS.entries()) {
-        base[k] = floors[i];
-      }
-    }
-  }
-  return base;
+  return mode === "balanced" ? normalizeBalancedWeights(base) : base;
 }
 
 export function weightsToSearch(weights: WeightMap): string {
@@ -130,14 +131,14 @@ export function consumeSharedParams(): URLSearchParams | null {
   globalThis.history.replaceState(
     null,
     "",
-    globalThis.location.pathname + (newSearch ? `?${newSearch}` : ""),
+    globalThis.location.pathname + (newSearch !== "" ? `?${newSearch}` : ""),
   );
   return urlParams;
 }
 
 // Module-level: consumed once on first import, shared across all pages.
 // Guard for non-browser environments (tests / SSR).
-const _sharedParams = globalThis.window == null ? null : consumeSharedParams();
+const _sharedParams = "localStorage" in globalThis ? consumeSharedParams() : null;
 
 export function loadWeightModeFromStorage(): WeightMode {
   if (_sharedParams?.get("weightMode") === "balanced") {
@@ -177,7 +178,7 @@ export function loadWeightsFromStorage(): WeightMap {
   }
   try {
     const raw = localStorage.getItem(LS_WEIGHTS_KEY);
-    if (raw) {
+    if (raw !== null) {
       const parsed = JSON.parse(raw) as Record<string, unknown>;
       const mode = loadWeightModeFromStorage();
       const base = mode === "independent" ? defaultIndependentWeights() : defaultWeights();
@@ -196,32 +197,62 @@ export function loadWeightsFromStorage(): WeightMap {
   return mode === "independent" ? defaultIndependentWeights() : defaultWeights();
 }
 
+function climatePrefsFromSharedParams(
+  p: URLSearchParams,
+  def: ClimatePreferences,
+): ClimatePreferences {
+  return {
+    seasonType: (p.get("climateSeason") ?? def.seasonType) as ClimatePreferences["seasonType"],
+    minTemp:
+      p.has("climateMin") && !Number.isNaN(Number(p.get("climateMin")))
+        ? Number(p.get("climateMin"))
+        : def.minTemp,
+    maxTemp:
+      p.has("climateMax") && !Number.isNaN(Number(p.get("climateMax")))
+        ? Number(p.get("climateMax"))
+        : def.maxTemp,
+  };
+}
+
+function filtersFromSharedParams(p: URLSearchParams, def: ClimatePreferences): LoadedFilters {
+  const minDaysStr = p.get("minDays");
+  const regionsStr = p.get("regions");
+  return {
+    nomadVisaOnly: p.get("nomadVisa") === "1",
+    schengenOnly: p.get("schengen") === "1",
+    minTouristDays:
+      minDaysStr !== null && !Number.isNaN(Number(minDaysStr)) ? Number(minDaysStr) : null,
+    selectedRegions:
+      regionsStr !== null
+        ? new Set(regionsStr.split(",").filter((s): s is string => s !== ""))
+        : new Set<string>(),
+    climatePrefs: climatePrefsFromSharedParams(p, def),
+  };
+}
+
+function filtersFromParsed(p: Record<string, unknown>, def: ClimatePreferences): LoadedFilters {
+  return {
+    nomadVisaOnly: p.nomadVisa === true,
+    schengenOnly: p.schengen === true,
+    minTouristDays: typeof p.minDays === "number" ? p.minDays : null,
+    selectedRegions: Array.isArray(p.regions)
+      ? new Set(p.regions.filter((r): r is string => typeof r === "string"))
+      : new Set<string>(),
+    climatePrefs: {
+      seasonType:
+        typeof p.climateSeason === "string"
+          ? (p.climateSeason as ClimatePreferences["seasonType"])
+          : def.seasonType,
+      minTemp: typeof p.climateMin === "number" ? p.climateMin : def.minTemp,
+      maxTemp: typeof p.climateMax === "number" ? p.climateMax : def.maxTemp,
+    },
+  };
+}
+
 export function loadFiltersFromStorage(): LoadedFilters {
   const def = defaultClimatePreferences();
-  if (_sharedParams) {
-    const minDaysStr = _sharedParams.get("minDays");
-    const regionsStr = _sharedParams.get("regions");
-    const loaded: LoadedFilters = {
-      nomadVisaOnly: _sharedParams.get("nomadVisa") === "1",
-      schengenOnly: _sharedParams.get("schengen") === "1",
-      minTouristDays:
-        minDaysStr !== null && !Number.isNaN(Number(minDaysStr)) ? Number(minDaysStr) : null,
-      selectedRegions: regionsStr
-        ? new Set(regionsStr.split(",").filter(Boolean))
-        : new Set<string>(),
-      climatePrefs: {
-        seasonType: (_sharedParams.get("climateSeason") ??
-          def.seasonType) as ClimatePreferences["seasonType"],
-        minTemp:
-          _sharedParams.has("climateMin") && !Number.isNaN(Number(_sharedParams.get("climateMin")))
-            ? Number(_sharedParams.get("climateMin"))
-            : def.minTemp,
-        maxTemp:
-          _sharedParams.has("climateMax") && !Number.isNaN(Number(_sharedParams.get("climateMax")))
-            ? Number(_sharedParams.get("climateMax"))
-            : def.maxTemp,
-      },
-    };
+  if (_sharedParams !== null) {
+    const loaded = filtersFromSharedParams(_sharedParams, def);
     try {
       localStorage.setItem(LS_FILTERS_KEY, JSON.stringify(filtersToStorable(loaded)));
     } catch {
@@ -231,24 +262,9 @@ export function loadFiltersFromStorage(): LoadedFilters {
   }
   try {
     const raw = localStorage.getItem(LS_FILTERS_KEY);
-    if (raw) {
+    if (raw !== null) {
       const p = JSON.parse(raw) as Record<string, unknown>;
-      return {
-        nomadVisaOnly: p.nomadVisa === true,
-        schengenOnly: p.schengen === true,
-        minTouristDays: typeof p.minDays === "number" ? p.minDays : null,
-        selectedRegions: Array.isArray(p.regions)
-          ? new Set(p.regions.filter((r): r is string => typeof r === "string"))
-          : new Set<string>(),
-        climatePrefs: {
-          seasonType:
-            typeof p.climateSeason === "string"
-              ? (p.climateSeason as ClimatePreferences["seasonType"])
-              : def.seasonType,
-          minTemp: typeof p.climateMin === "number" ? p.climateMin : def.minTemp,
-          maxTemp: typeof p.climateMax === "number" ? p.climateMax : def.maxTemp,
-        },
-      };
+      return filtersFromParsed(p, def);
     }
   } catch {
     /* ignore */

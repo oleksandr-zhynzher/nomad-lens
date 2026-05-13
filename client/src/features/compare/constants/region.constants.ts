@@ -1,7 +1,7 @@
 import { Sun, Mountain, Tent, Castle, Lamp, Waves } from "lucide-react";
 import type { CategoryKey } from "@core/models";
 
-export const REGION_COLORS: Record<string, string> = {
+export const REGION_COLORS: Partial<Record<string, string>> = {
   Africa: "#FF6B6B",
   Americas: "#4ECDC4",
   Asia: "#FFE66D",
@@ -10,7 +10,7 @@ export const REGION_COLORS: Record<string, string> = {
   Oceania: "#00CEC9",
 };
 
-export const REGION_ICONS: Record<string, typeof Sun> = {
+export const REGION_ICONS: Partial<Record<string, typeof Sun>> = {
   Africa: Sun,
   Americas: Mountain,
   Asia: Tent,

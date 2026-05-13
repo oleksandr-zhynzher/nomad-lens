@@ -8,11 +8,11 @@ import { AI_CATEGORY_KEYS } from "@core/models";
 type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
 interface AiIndicatorCardProps {
-  Icon: IconType;
-  name: string;
-  description: string;
-  source: string;
-  subIndicators: string[];
+  readonly Icon: IconType;
+  readonly name: string;
+  readonly description: string;
+  readonly source: string;
+  readonly subIndicators: readonly string[];
 }
 
 function AiIndicatorCard({ Icon, name, description, source, subIndicators }: AiIndicatorCardProps) {
@@ -60,7 +60,7 @@ function AiIndicatorCard({ Icon, name, description, source, subIndicators }: AiI
   );
 }
 
-const AI_INDICATOR_ROWS: [IconType, string][][] = [
+const AI_INDICATOR_ROWS: Array<Array<[IconType, string]>> = [
   [
     [Users, "nomadCommunity"],
     [Globe, "visaFriendliness"],
@@ -99,13 +99,15 @@ export function AiIndicatorsPage() {
         </div>
 
         {/* Indicator cards */}
-        {AI_INDICATOR_ROWS.map((row, rowIdx) => (
-          <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
+        {AI_INDICATOR_ROWS.map((row) => (
+          <div
+            key={row.map(([, k]) => k).join("-")}
+            className="flex w-full flex-col gap-4 md:flex-row md:gap-5"
+          >
             {row.map(([Icon, key]) => {
-              const subIndicators: string[] =
-                (t(`aiIndicatorsPage.indicators.${key}.subIndicators`, {
-                  returnObjects: true,
-                }) as string[]) ?? [];
+              const subIndicators = t(`aiIndicatorsPage.indicators.${key}.subIndicators`, {
+                returnObjects: true,
+              }) as string[];
               return (
                 <AiIndicatorCard
                   key={key}

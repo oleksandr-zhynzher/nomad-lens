@@ -34,7 +34,8 @@ export function useTourismScoring(
 
     const selectedTags = toggles?.requiredTags ?? [];
     const activeTags = selectedTags.length > 0 ? selectedTags : undefined;
-    const activeDates = travelDates?.startDate && travelDates?.endDate ? travelDates : undefined;
+    const activeDates =
+      travelDates?.startDate != null && travelDates.endDate != null ? travelDates : undefined;
     const activityBlend = toggles?.activityBlend;
 
     // When budget is enabled, use budget-blended ranking

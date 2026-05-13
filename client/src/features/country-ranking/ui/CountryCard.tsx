@@ -4,9 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import type { RankedCountry, WeightMap } from "@core/models";
 import { WEIGHT_GROUPS } from "@features/country-ranking/constants/weight-config.constants";
-
-/** Panel-controllable category keys only — tourism/hidden categories excluded. */
-const PANEL_KEYS = WEIGHT_GROUPS.flatMap((g) => g.keys);
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "@core/ui";
 import { CATEGORY_LABELS } from "@core/models";
@@ -17,17 +14,19 @@ import { CountryNameCell } from "@core/ui/country";
 import { ScoreSparkline } from "@core/ui/indicator";
 import { scoreColourClass } from "@core/utils";
 
+const PANEL_KEYS = WEIGHT_GROUPS.flatMap((g) => g.keys);
+
 interface CountryCardProps {
-  ranked: RankedCountry;
-  highlighted?: boolean;
-  index: number;
-  expanded?: boolean;
-  onToggle?: () => void;
-  compareMode?: boolean;
-  selected?: boolean;
-  onSelectToggle?: () => void;
+  readonly ranked: RankedCountry;
+  readonly highlighted?: boolean;
+  readonly index: number;
+  readonly expanded?: boolean;
+  readonly onToggle?: () => void;
+  readonly compareMode?: boolean;
+  readonly selected?: boolean;
+  readonly onSelectToggle?: () => void;
   /** Only show sparkline dots for categories with a non-zero weight. */
-  weights?: WeightMap;
+  readonly weights?: WeightMap;
 }
 
 export function CountryCard({
@@ -48,7 +47,8 @@ export function CountryCard({
   // Alternating backgrounds
   const { bgColor, hoverBg, borderColor } = getRowStyles(index, selected);
 
-  const sparklineKeys = weights ? PANEL_KEYS.filter((k) => (weights[k] ?? 0) > 0) : PANEL_KEYS;
+  const sparklineKeys =
+    weights !== undefined ? PANEL_KEYS.filter((k) => weights[k] > 0) : PANEL_KEYS;
 
   return (
     <div
@@ -106,7 +106,7 @@ export function CountryCard({
         <ScoreSparkline
           entries={sparklineKeys.map((key) => ({
             key,
-            value: country.scores[key]?.value ?? null,
+            value: country.scores[key].value ?? null,
             label: t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key]),
           }))}
         />

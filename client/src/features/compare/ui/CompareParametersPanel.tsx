@@ -7,12 +7,12 @@ import type { useWeightState } from "@features/country-ranking/hooks";
 import type { CompareMode } from "@features/compare/utils";
 
 interface CompareParametersPanelProps {
-  compareMode: CompareMode;
-  rankingState: ReturnType<typeof useWeightState>;
-  tourismState: ReturnType<typeof useTourismWeightState>;
-  budgetState: ReturnType<typeof useBudgetState>;
-  onShare: () => void;
-  mobile?: boolean;
+  readonly compareMode: CompareMode;
+  readonly rankingState: ReturnType<typeof useWeightState>;
+  readonly tourismState: ReturnType<typeof useTourismWeightState>;
+  readonly budgetState: ReturnType<typeof useBudgetState>;
+  readonly onShare: () => void;
+  readonly mobile?: boolean;
 }
 
 function RankingWeightPanel({
@@ -20,9 +20,9 @@ function RankingWeightPanel({
   onShare,
   mobile,
 }: {
-  rankingState: ReturnType<typeof useWeightState>;
-  onShare: () => void;
-  mobile?: boolean;
+  readonly rankingState: ReturnType<typeof useWeightState>;
+  readonly onShare: () => void;
+  readonly mobile?: boolean;
 }) {
   return (
     <WeightPanel

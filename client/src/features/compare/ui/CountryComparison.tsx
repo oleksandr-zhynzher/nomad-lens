@@ -22,14 +22,14 @@ import { CountryPickerDropdown } from "./CountryPickerDropdown";
 const COMPARISON_COLUMN_WIDTH = "112px";
 
 interface Props {
-  countries: CountryData[];
-  weights: WeightMap;
-  climatePrefs: ClimatePreferences;
-  selectedCodes: string[];
-  onSelectedCodesChange: (codes: string[]) => void;
-  sortTrigger?: number;
-  sortDirection?: "desc" | "asc" | null;
-  onSelectionCount?: (count: number) => void;
+  readonly countries: CountryData[];
+  readonly weights: WeightMap;
+  readonly climatePrefs: ClimatePreferences;
+  readonly selectedCodes: string[];
+  readonly onSelectedCodesChange: (codes: string[]) => void;
+  readonly sortTrigger?: number;
+  readonly sortDirection?: "desc" | "asc" | null;
+  readonly onSelectionCount?: (count: number) => void;
 }
 
 export function CountryComparison({
@@ -121,7 +121,7 @@ export function CountryComparison({
                   onRemove={() => {
                     handleRemove(slot.index);
                   }}
-                  onNavigate={() =>
+                  onNavigate={async () =>
                     navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
                   }
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
@@ -235,7 +235,7 @@ export function CountryComparison({
                   label={t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key])}
                 >
                   {selectedCountries.map((slot) => {
-                    const val = slot.country.scores[key]?.value ?? null;
+                    const val = slot.country.scores[key].value ?? null;
                     return (
                       <ComparisonScoreCell
                         key={slot.index}

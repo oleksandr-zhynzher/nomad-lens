@@ -14,10 +14,10 @@ export const BUDGET_CATEGORY_KEYS = [
 
 export type BudgetCategoryKey = (typeof BUDGET_CATEGORY_KEYS)[number];
 
-export const BREAKDOWN_ROWS: {
+export const BREAKDOWN_ROWS: Array<{
   key: keyof BudgetBreakdown;
   icon: typeof House;
-}[] = [
+}> = [
   { key: "housing", icon: House },
   { key: "groceries", icon: ShoppingCart },
   { key: "dining", icon: UtensilsCrossed },

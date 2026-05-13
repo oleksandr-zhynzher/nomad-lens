@@ -27,7 +27,7 @@ export function MapPage() {
 
   const handleCountryClick = useCallback(
     (iso2: string) => {
-      void navigate((langPrefix || "/") + `?highlight=${iso2}`);
+      void navigate((langPrefix !== "" ? langPrefix : "/") + `?highlight=${iso2}`);
     },
     [navigate, langPrefix],
   );

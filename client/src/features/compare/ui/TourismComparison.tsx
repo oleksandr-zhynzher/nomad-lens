@@ -22,12 +22,12 @@ import {
 } from "@features/tourism/constants";
 
 interface Props {
-  countries: CountryData[];
-  selectedCodes: string[];
-  onSelectedCodesChange: (codes: string[]) => void;
-  sortTrigger?: number;
-  sortDirection?: "desc" | "asc" | null;
-  onSelectionCount?: (count: number) => void;
+  readonly countries: CountryData[];
+  readonly selectedCodes: string[];
+  readonly onSelectedCodesChange: (codes: string[]) => void;
+  readonly sortTrigger?: number;
+  readonly sortDirection?: "desc" | "asc" | null;
+  readonly onSelectionCount?: (count: number) => void;
 }
 
 export function TourismComparison({
@@ -109,7 +109,7 @@ export function TourismComparison({
                   onRemove={() => {
                     handleRemove(slot.index);
                   }}
-                  onNavigate={() =>
+                  onNavigate={async () =>
                     navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
                   }
                   regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
@@ -207,7 +207,7 @@ export function TourismComparison({
                   label={t(`tourism.metrics.${key}`, TOURISM_LABELS[key] ?? key)}
                 >
                   {selectedCountries.map((slot) => {
-                    const val = slot.country.scores[key]?.value ?? null;
+                    const val = slot.country.scores[key].value ?? null;
                     return (
                       <ComparisonScoreCell
                         key={slot.index}

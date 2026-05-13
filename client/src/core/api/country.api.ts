@@ -7,11 +7,11 @@ declare global {
   }
 }
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? "";
+const BASE_URL: string = (import.meta.env.VITE_API_URL as string | undefined) ?? "";
 
-export function getCountries(): Promise<CountryData[]> {
+export async function getCountries(): Promise<CountryData[]> {
   if (window.__NOMAD_LENS_DATA__) {
-    return Promise.resolve(window.__NOMAD_LENS_DATA__);
+    return window.__NOMAD_LENS_DATA__;
   }
 
   if (BASE_URL === "") {
@@ -21,6 +21,6 @@ export function getCountries(): Promise<CountryData[]> {
   return getJson<CountryData[]>(`${BASE_URL}/api/countries`);
 }
 
-export function getHealth(): Promise<{ status: string; apis: Record<string, boolean> }> {
+export async function getHealth(): Promise<{ status: string; apis: Record<string, boolean> }> {
   return getJson(`${BASE_URL}/api/health`);
 }

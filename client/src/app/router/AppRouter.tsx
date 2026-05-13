@@ -3,36 +3,38 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RouteLoadingFallback } from "./RouteLoadingFallback";
 import { LangWrapper } from "@core/ui/layout";
 
-const HomePage = lazy(() => import("@features/home/ui/HomeView"));
-const MapPage = lazy(() => import("@features/country-map/ui/MapView").then(routeModule("MapPage")));
-const ComparePage = lazy(() =>
+const HomePage = lazy(async () => import("@features/home/ui/HomeView"));
+const MapPage = lazy(async () =>
+  import("@features/country-map/ui/MapView").then(routeModule("MapPage")),
+);
+const ComparePage = lazy(async () =>
   import("@features/compare/ui/CompareView").then(routeModule("ComparePage")),
 );
-const CountryPage = lazy(() =>
+const CountryPage = lazy(async () =>
   import("@features/country-profile/ui/CountryProfileView").then(routeModule("CountryPage")),
 );
-const NomadVisasPage = lazy(() =>
+const NomadVisasPage = lazy(async () =>
   import("@features/nomad-visas/ui/NomadVisasView").then(routeModule("NomadVisasPage")),
 );
-const NomadVisaComparePage = lazy(() =>
+const NomadVisaComparePage = lazy(async () =>
   import("@features/nomad-visas/ui/NomadVisaCompareView").then(routeModule("NomadVisaComparePage")),
 );
-const BudgetMatcherPage = lazy(() =>
+const BudgetMatcherPage = lazy(async () =>
   import("@features/budget/ui/BudgetMatcherView").then(routeModule("BudgetMatcherPage")),
 );
-const DataSourcesPage = lazy(() =>
+const DataSourcesPage = lazy(async () =>
   import("@features/data-sources/ui/DataSourcesView").then(routeModule("DataSourcesPage")),
 );
-const IndicatorsPage = lazy(() =>
+const IndicatorsPage = lazy(async () =>
   import("@features/indicator-catalog/ui/IndicatorsView").then(routeModule("IndicatorsPage")),
 );
-const AiIndicatorsPage = lazy(() =>
+const AiIndicatorsPage = lazy(async () =>
   import("@features/indicator-catalog/ui/AiIndicatorsView").then(routeModule("AiIndicatorsPage")),
 );
-const BudgetCategoriesPage = lazy(() =>
+const BudgetCategoriesPage = lazy(async () =>
   import("@features/budget/ui/BudgetCategoriesView").then(routeModule("BudgetCategoriesPage")),
 );
-const TourismPage = lazy(() =>
+const TourismPage = lazy(async () =>
   import("@features/tourism/ui/TourismExplorerView").then(routeModule("TourismPage")),
 );
 
@@ -61,6 +63,6 @@ export function AppRouter() {
   );
 }
 
-function routeModule<TModule, TKey extends keyof TModule>(key: TKey) {
+function routeModule<TModule>(key: keyof TModule) {
   return (module: TModule) => ({ default: module[key] as ComponentType });
 }

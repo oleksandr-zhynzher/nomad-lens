@@ -1,3 +1,4 @@
+import type React from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Flag, Globe, ArrowDownWideNarrow, Plane, Wallet, Palmtree } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -18,6 +19,8 @@ import { useBudgetMatcher } from "@features/budget/hooks";
 import { useBudgetState } from "@features/budget/hooks";
 import { normalizeCountryCodes } from "@features/compare/utils";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "@core/models";
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
+import type { BudgetMatch } from "@features/budget/hooks";
 import {
   buildCompareShareParams,
   getRawCompareCountryCodes,
@@ -29,10 +32,114 @@ import {
 import type { CompareMode } from "@features/compare/utils";
 import { CompareParametersPanel } from "@features/compare/ui";
 
+const SORTABLE_COMPARE_MODES = new Set<CompareMode>(["countries", "budget", "tourism"]);
+const SHOW_WEIGHTS_MODES = new Set<CompareMode>(["budget", "tourism"]);
+
+function delayedReset(setter: (v: false) => void, delayMs: number): void {
+  setTimeout(() => {
+    setter(false);
+  }, delayMs);
+}
+
+function applyPanelHeight(el: HTMLDivElement | null): void {
+  if (el == null) return;
+  const top = el.getBoundingClientRect().top;
+  el.style.height = `${window.innerHeight - Math.max(top, 16) - 16}px`;
+}
+
+function getActionGridClass(showSort: boolean): string {
+  return showSort ? "grid-cols-3" : "grid-cols-2";
+}
+
+type SortDirection = "desc" | "asc" | null;
+
+function getSortIconClass(direction: SortDirection): string {
+  return direction === "asc" ? "rotate-180" : "rotate-0";
+}
+
+interface ComparePanelProps {
+  readonly compareMode: CompareMode;
+  readonly countries: CountryData[];
+  readonly weights: WeightMap;
+  readonly climatePrefs: ClimatePreferences;
+  readonly budgetMatches: BudgetMatch[];
+  readonly selectedCodes: string[];
+  readonly onSelectedCodesChange: (codes: string[]) => void;
+  readonly sortTrigger: number;
+  readonly sortDirection: SortDirection;
+  readonly onSelectionCount: (count: number) => void;
+}
+
+function ComparePanel({
+  compareMode,
+  countries,
+  weights,
+  climatePrefs,
+  budgetMatches,
+  selectedCodes,
+  onSelectedCodesChange,
+  sortTrigger,
+  sortDirection,
+  onSelectionCount,
+}: ComparePanelProps): React.JSX.Element {
+  switch (compareMode) {
+    case "regions":
+      return (
+        <RegionComparison countries={countries} weights={weights} climatePrefs={climatePrefs} />
+      );
+    case "nomadVisas":
+      return (
+        <NomadVisaComparison
+          countries={countries}
+          weights={weights}
+          climatePrefs={climatePrefs}
+          budgetMatches={budgetMatches}
+          selectedCodes={selectedCodes}
+          onSelectedCodesChange={onSelectedCodesChange}
+        />
+      );
+    case "budget":
+      return (
+        <BudgetComparison
+          countries={countries}
+          matches={budgetMatches}
+          selectedCodes={selectedCodes}
+          onSelectedCodesChange={onSelectedCodesChange}
+          sortTrigger={sortTrigger}
+          sortDirection={sortDirection}
+        />
+      );
+    case "tourism":
+      return (
+        <TourismComparison
+          countries={countries}
+          selectedCodes={selectedCodes}
+          onSelectedCodesChange={onSelectedCodesChange}
+          sortTrigger={sortTrigger}
+          sortDirection={sortDirection}
+          onSelectionCount={onSelectionCount}
+        />
+      );
+    case "countries":
+      return (
+        <CountryComparison
+          countries={countries}
+          weights={weights}
+          climatePrefs={climatePrefs}
+          selectedCodes={selectedCodes}
+          onSelectedCodesChange={onSelectedCodesChange}
+          sortTrigger={sortTrigger}
+          sortDirection={sortDirection}
+          onSelectionCount={onSelectionCount}
+        />
+      );
+  }
+}
+
 export function ComparePage() {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [sortDirection, setSortDirection] = useState<"desc" | "asc" | null>(null);
+  const [sortDirection, setSortDirection] = useState<SortDirection>(null);
   const compareMode = parseCompareMode(searchParams);
 
   const [showWeights, setShowWeights] = useState(compareMode === "budget");
@@ -78,10 +185,7 @@ export function ComparePage() {
   // Keep the weight panel sized to fit from its current position to the viewport bottom
   const panelRef = useRef<HTMLDivElement>(null);
   const syncPanelHeight = useCallback(() => {
-    const el = panelRef.current;
-    if (!el) return;
-    const top = el.getBoundingClientRect().top;
-    el.style.height = `${window.innerHeight - Math.max(top, 16) - 16}px`;
+    applyPanelHeight(panelRef.current);
   }, []);
 
   useEffect(() => {
@@ -99,80 +203,80 @@ export function ComparePage() {
   useEffect(() => {
     if (countries.length === 0) return;
     if (rawSelectedCodes.join(",") === selectedCodes.join(",")) return;
-    setSearchParams(
-      (prev) => {
-        const next = new URLSearchParams(prev);
-        setCompareCountryCodesParam(next, selectedCodes);
-        return next;
-      },
-      { replace: true },
-    );
-  }, [countries.length, rawSelectedCodes, selectedCodes, setSearchParams]);
+    const syncNext = new URLSearchParams(searchParams);
+    setCompareCountryCodesParam(syncNext, selectedCodes);
+    setSearchParams(syncNext, { replace: true });
+  }, [countries.length, rawSelectedCodes, searchParams, selectedCodes, setSearchParams]);
 
   const setCompareMode = (mode: CompareMode) => {
-    if (mode === "budget") {
+    if (SHOW_WEIGHTS_MODES.has(mode)) {
       setShowWeights(true);
     }
-    if (mode === "tourism") {
-      setShowWeights(true);
-    }
-    setSearchParams(
-      (prev) => {
-        const next = new URLSearchParams(prev);
-        setCompareModeParam(next, mode);
-        return next;
-      },
-      { replace: true },
-    );
+    const modeNext = new URLSearchParams(searchParams);
+    setCompareModeParam(modeNext, mode);
+    setSearchParams(modeNext, { replace: true });
   };
 
   const handleSelectedCodesChange = (codes: string[]) => {
     const nextCodes = normalizeCountryCodes(codes, validCountryCodes);
-    setSearchParams(
-      (prev) => {
-        const next = new URLSearchParams(prev);
-        setCompareCountryCodesParam(next, nextCodes);
-        return next;
-      },
-      { replace: true },
-    );
+    const codesNext = new URLSearchParams(searchParams);
+    setCompareCountryCodesParam(codesNext, nextCodes);
+    setSearchParams(codesNext, { replace: true });
   };
 
   const handleShare = () => {
     ws.handleShare(buildCompareShareParams(compareMode, selectedCodes));
     setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 3000);
+    delayedReset(setCopied, 3000);
   };
 
   const handleSortByScore = () => {
-    setSortDirection((previous) => (previous === "desc" ? "asc" : "desc"));
-    setSortTrigger((previous) => previous + 1);
+    setSortDirection(sortDirection === "desc" ? "asc" : "desc");
+    setSortTrigger(sortTrigger + 1);
     setSortFeedbackActive(true);
-    setTimeout(() => {
-      setSortFeedbackActive(false);
-    }, 1000);
+    delayedReset(setSortFeedbackActive, 1000);
   };
 
-  const showParametersAction = true;
-  const showSortAction =
-    (compareMode === "countries" && countrySelectionCount > 1) ||
-    (compareMode === "budget" && selectedCodes.length > 1) ||
-    (compareMode === "tourism" && countrySelectionCount > 1);
+  const sortableSelectionCount =
+    compareMode === "budget" ? selectedCodes.length : countrySelectionCount;
+  const showSortAction = SORTABLE_COMPARE_MODES.has(compareMode) && sortableSelectionCount > 1;
   const mobileViewportMaxWidth = 1024;
-  const actionGridClassName =
-    showParametersAction && showSortAction
-      ? "grid-cols-3"
-      : showParametersAction || showSortAction
-        ? "grid-cols-2"
-        : "grid-cols-1";
+  const actionGridClassName = getActionGridClass(showSortAction);
+  const sortButtonBaseLabels: Record<CompareMode, string> = {
+    countries: t("compare.sortByScore"),
+    regions: t("compare.sortByScore"),
+    budget: t("compare.sortByBudget"),
+    tourism: t("compare.sortByScore"),
+    nomadVisas: t("compare.sortByScore"),
+  };
   const sortButtonLabel = sortFeedbackActive
     ? t("compare.sorted")
-    : compareMode === "budget"
-      ? t("compare.sortByBudget")
-      : t("compare.sortByScore");
-  const sortButtonIconClassName = sortDirection === "asc" ? "rotate-180" : "rotate-0";
+    : sortButtonBaseLabels[compareMode];
+  const sortButtonIconClassName = getSortIconClass(sortDirection);
+
+  const compareTitles: Record<CompareMode, string> = {
+    countries: t("compare.countryTitle"),
+    regions: t("compare.regionTitle"),
+    budget: t("compare.budgetTitle", "Budget Comparison"),
+    tourism: t("compare.tourismTitle", "Tourism Comparison"),
+    nomadVisas: t("compare.nomadVisaTitle"),
+  };
+  const compareTitle = compareTitles[compareMode];
+
+  const compareSubtitles: Record<CompareMode, string> = {
+    countries: t("compare.countrySubtitle", {
+      coreIndicatorsLabel: compareCoreIndicatorsLabel,
+      aiIndicatorsLabel: compareAiIndicatorsLabel,
+    }),
+    regions: t("compare.regionSubtitle"),
+    budget: t(
+      "compare.budgetSubtitle",
+      "Compare monthly cost of living across countries side by side",
+    ),
+    tourism: t("compare.tourismSubtitle", "Compare tourism appeal across countries side by side"),
+    nomadVisas: t("compare.nomadVisaSubtitle"),
+  };
+  const compareSubtitle = compareSubtitles[compareMode];
 
   return (
     <Layout>
@@ -180,37 +284,8 @@ export function ComparePage() {
         <PageHeroBanner
           backgroundImage="/hero-map.png"
           eyebrow={t("compare.eyebrow")}
-          title={
-            compareMode === "countries"
-              ? t("compare.countryTitle")
-              : compareMode === "regions"
-                ? t("compare.regionTitle")
-                : compareMode === "budget"
-                  ? t("compare.budgetTitle", "Budget Comparison")
-                  : compareMode === "tourism"
-                    ? t("compare.tourismTitle", "Tourism Comparison")
-                    : t("compare.nomadVisaTitle")
-          }
-          subtitle={
-            compareMode === "countries"
-              ? t("compare.countrySubtitle", {
-                  coreIndicatorsLabel: compareCoreIndicatorsLabel,
-                  aiIndicatorsLabel: compareAiIndicatorsLabel,
-                })
-              : compareMode === "regions"
-                ? t("compare.regionSubtitle")
-                : compareMode === "budget"
-                  ? t(
-                      "compare.budgetSubtitle",
-                      "Compare monthly cost of living across countries side by side",
-                    )
-                  : compareMode === "tourism"
-                    ? t(
-                        "compare.tourismSubtitle",
-                        "Compare tourism appeal across countries side by side",
-                      )
-                    : t("compare.nomadVisaSubtitle")
-          }
+          title={compareTitle}
+          subtitle={compareSubtitle}
         >
           <div className="hero-stats-row hero-banner-stats">
             <div className="min-w-0">
@@ -317,33 +392,31 @@ export function ComparePage() {
             <div className="w-full sm:w-auto">
               <div className="w-full rounded-md border border-[#252525] bg-[#1A1A1A] p-1 sm:w-auto">
                 <div className={`grid gap-1 sm:flex sm:w-auto ${actionGridClassName}`}>
-                  {showParametersAction ? (
-                    <button
-                      onClick={() => {
-                        if (window.innerWidth <= mobileViewportMaxWidth) {
-                          setMobileParamsOpen(true);
-                        } else {
-                          setShowWeights((p) => !p);
-                        }
-                      }}
-                      className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs transition-colors sm:flex-initial sm:px-4 sm:py-1.5 ${showWeights && window.innerWidth > mobileViewportMaxWidth ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
+                  <button
+                    onClick={() => {
+                      if (window.innerWidth <= mobileViewportMaxWidth) {
+                        setMobileParamsOpen(true);
+                      } else {
+                        setShowWeights((p) => !p);
+                      }
+                    }}
+                    className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs transition-colors sm:flex-initial sm:px-4 sm:py-1.5 ${showWeights && window.innerWidth > mobileViewportMaxWidth ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
+                  >
+                    <svg
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
                     >
-                      <svg
-                        className="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                        />
-                      </svg>
-                      {t("compare.parameters")}
-                    </button>
-                  ) : null}
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                      />
+                    </svg>
+                    {t("compare.parameters")}
+                  </button>
 
                   {showSortAction ? (
                     <button
@@ -434,51 +507,18 @@ export function ComparePage() {
               </div>
             ) : null}
             <div className="min-w-0">
-              {compareMode === "regions" ? (
-                <RegionComparison
-                  countries={countries}
-                  weights={ws.weights}
-                  climatePrefs={ws.climatePrefs}
-                />
-              ) : compareMode === "nomadVisas" ? (
-                <NomadVisaComparison
-                  countries={countries}
-                  weights={ws.weights}
-                  climatePrefs={ws.climatePrefs}
-                  budgetMatches={budgetMatches}
-                  selectedCodes={selectedCodes}
-                  onSelectedCodesChange={handleSelectedCodesChange}
-                />
-              ) : compareMode === "budget" ? (
-                <BudgetComparison
-                  countries={countries}
-                  matches={budgetMatches}
-                  selectedCodes={selectedCodes}
-                  onSelectedCodesChange={handleSelectedCodesChange}
-                  sortTrigger={sortTrigger}
-                  sortDirection={sortDirection}
-                />
-              ) : compareMode === "tourism" ? (
-                <TourismComparison
-                  countries={countries}
-                  selectedCodes={selectedCodes}
-                  onSelectedCodesChange={handleSelectedCodesChange}
-                  sortTrigger={sortTrigger}
-                  sortDirection={sortDirection}
-                  onSelectionCount={setCountrySelectionCount}
-                />
-              ) : (
-                <CountryComparison
-                  countries={countries}
-                  weights={ws.weights}
-                  climatePrefs={ws.climatePrefs}
-                  selectedCodes={selectedCodes}
-                  onSelectedCodesChange={handleSelectedCodesChange}
-                  sortTrigger={sortTrigger}
-                  sortDirection={sortDirection}
-                  onSelectionCount={setCountrySelectionCount}
-                />
-              )}
+              <ComparePanel
+                compareMode={compareMode}
+                countries={countries}
+                weights={ws.weights}
+                climatePrefs={ws.climatePrefs}
+                budgetMatches={budgetMatches}
+                selectedCodes={selectedCodes}
+                onSelectedCodesChange={handleSelectedCodesChange}
+                sortTrigger={sortTrigger}
+                sortDirection={sortDirection}
+                onSelectionCount={setCountrySelectionCount}
+              />
             </div>
           </div>
         </div>

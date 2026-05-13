@@ -2,19 +2,19 @@ import type React from "react";
 import type { ReactNode } from "react";
 
 interface WeightSliderRowProps {
-  inputName: string;
-  value: number;
-  min?: number;
-  max?: number;
-  step?: number;
-  onChange: (value: number) => void;
-  ariaLabel: string;
+  readonly inputName: string;
+  readonly value: number;
+  readonly min?: number;
+  readonly max?: number;
+  readonly step?: number;
+  readonly onChange: (value: number) => void;
+  readonly ariaLabel: string;
   /** Label node — can be plain text, a link, or anything inline. */
-  label: ReactNode;
+  readonly label: ReactNode;
   /** Optional tooltip icon placed after the label. */
-  tooltipIcon?: ReactNode;
+  readonly tooltipIcon?: ReactNode;
   /** Value text shown on the right. Defaults to the numeric value. */
-  displayValue?: string | number;
+  readonly displayValue?: string | number;
 }
 
 /** A labeled range slider row used throughout the weight/preference panels. */

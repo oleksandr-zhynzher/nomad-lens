@@ -21,20 +21,23 @@ import { getMonthOptions } from "@features/tourism/utils";
 import { useScrollIndicator } from "@features/tourism/hooks";
 
 interface TourismWeightPanelProps {
-  weights: TourismWeightMap;
-  onChange: (key: string, value: number) => void;
-  onReset: () => void;
-  weightsAreDefault: boolean;
-  budgetState?: TourismBudgetState;
-  onBudgetChange?: <K extends keyof TourismBudgetState>(
+  readonly weights: TourismWeightMap;
+  readonly onChange: (key: string, value: number) => void;
+  readonly onReset: () => void;
+  readonly weightsAreDefault: boolean;
+  readonly budgetState?: TourismBudgetState;
+  readonly onBudgetChange?: <K extends keyof TourismBudgetState>(
     key: K,
     value: TourismBudgetState[K],
   ) => void;
-  toggles?: TourismToggles;
-  onToggleFieldChange?: <K extends keyof TourismToggles>(key: K, value: TourismToggles[K]) => void;
-  travelDates?: TravelDates;
-  onTravelDatesChange?: React.Dispatch<React.SetStateAction<TravelDates>>;
-  mobile?: boolean;
+  readonly toggles?: TourismToggles;
+  readonly onToggleFieldChange?: <K extends keyof TourismToggles>(
+    key: K,
+    value: TourismToggles[K],
+  ) => void;
+  readonly travelDates?: TravelDates;
+  readonly onTravelDatesChange?: React.Dispatch<React.SetStateAction<TravelDates>>;
+  readonly mobile?: boolean;
 }
 
 export function TourismWeightPanel({
@@ -285,7 +288,7 @@ export function TourismWeightPanel({
           icon={<Calendar size={16} color="#64B5F6" />}
           label={t("tourismFilters.travelDates", "Travel Dates")}
           badge={
-            travelDates.startDate && travelDates.endDate ? (
+            travelDates.startDate != null && travelDates.endDate != null ? (
               <div className="flex items-center rounded-[3px] bg-[#0a1929] px-2 py-[3px]">
                 <span className="font-mono text-[10px] text-[#64B5F6]">
                   {new Date(travelDates.startDate + "T00:00").toLocaleDateString(undefined, {
@@ -320,12 +323,14 @@ export function TourismWeightPanel({
                     id: "start",
                     dateVal: travelDates.startDate,
                     onChange: (mm: string, dd: string) => {
-                      const newStart = mm ? `2000-${mm}-${dd}` : null;
+                      const newStart = mm !== "" ? `2000-${mm}-${dd}` : null;
                       onTravelDatesChange((prev) => ({
                         ...prev,
                         startDate: newStart,
                         endDate:
-                          newStart && prev.endDate && newStart.slice(5) > prev.endDate.slice(5)
+                          newStart !== null &&
+                          prev.endDate !== null &&
+                          newStart.slice(5) > prev.endDate.slice(5)
                             ? null
                             : prev.endDate,
                       }));
@@ -335,7 +340,7 @@ export function TourismWeightPanel({
                     id: "end",
                     dateVal: travelDates.endDate,
                     onChange: (mm: string, dd: string) => {
-                      const newEnd = mm ? `2000-${mm}-${dd}` : null;
+                      const newEnd = mm !== "" ? `2000-${mm}-${dd}` : null;
                       onTravelDatesChange((prev) => ({
                         ...prev,
                         endDate: newEnd,
@@ -343,25 +348,26 @@ export function TourismWeightPanel({
                     },
                   },
                 ] as const
-              ).map(({ id, dateVal, onChange }) => {
-                const curMM = dateVal ? dateVal.slice(5, 7) : "";
-                const curDD = dateVal ? dateVal.slice(8, 10) : "01";
+              ).map(({ id, dateVal, onChange: onDateChange }) => {
+                const curMM = dateVal !== null ? dateVal.slice(5, 7) : "";
+                const curDD = dateVal !== null ? dateVal.slice(8, 10) : "01";
                 const selectBaseClass =
                   "font-mono text-xs rounded-sm border border-border bg-surface text-[#e0e0e0] [color-scheme:dark] outline-none cursor-pointer appearance-none text-center px-1.5 py-1.5 min-w-0";
-                const daysInMonth = curMM
-                  ? new Date(2000, Number.parseInt(curMM), 0).getDate()
-                  : 31;
+                const daysInMonth =
+                  curMM !== "" ? new Date(2000, Number.parseInt(curMM), 0).getDate() : 31;
                 return (
                   <div key={id} className="flex min-w-0 flex-1 gap-1">
                     <select
                       value={curMM}
                       onChange={(e) => {
                         const mm = e.target.value;
-                        const maxDay = mm ? new Date(2000, Number.parseInt(mm), 0).getDate() : 31;
-                        const safeDD = mm
-                          ? String(Math.min(Number.parseInt(curDD), maxDay)).padStart(2, "0")
-                          : "01";
-                        onChange(mm, mm ? safeDD : "01");
+                        const maxDay =
+                          mm !== "" ? new Date(2000, Number.parseInt(mm), 0).getDate() : 31;
+                        const safeDD =
+                          mm !== ""
+                            ? String(Math.min(Number.parseInt(curDD), maxDay)).padStart(2, "0")
+                            : "01";
+                        onDateChange(mm, mm !== "" ? safeDD : "01");
                       }}
                       className={`${selectBaseClass} [flex:2]`}
                       aria-label={
@@ -378,13 +384,13 @@ export function TourismWeightPanel({
                       ))}
                     </select>
                     <select
-                      value={curMM ? Number.parseInt(curDD).toString() : ""}
-                      disabled={!curMM}
+                      value={curMM !== "" ? Number.parseInt(curDD).toString() : ""}
+                      disabled={curMM === ""}
                       onChange={(e) => {
                         const dd = String(Number.parseInt(e.target.value)).padStart(2, "0");
-                        onChange(curMM, dd);
+                        onDateChange(curMM, dd);
                       }}
-                      className={`${selectBaseClass} [flex:1.2] ${curMM ? "opacity-100" : "opacity-40"}`}
+                      className={`${selectBaseClass} [flex:1.2] ${curMM !== "" ? "opacity-100" : "opacity-40"}`}
                       aria-label={
                         id === "start"
                           ? t("tourismFilters.startDay", "Start day")
@@ -401,9 +407,9 @@ export function TourismWeightPanel({
                 );
               })}
             </div>
-            {travelDates.startDate &&
-            travelDates.endDate &&
-            toggles &&
+            {travelDates.startDate !== null &&
+            travelDates.endDate !== null &&
+            toggles !== undefined &&
             toggles.requiredTags.length > 0 ? (
               <p className="m-0 text-[11px] text-[#666]">
                 {t(

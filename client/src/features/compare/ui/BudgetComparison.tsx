@@ -18,12 +18,12 @@ import { BREAKDOWN_ROWS, BUDGET_COMPARISON_COLUMN_WIDTH } from "@features/budget
 import { costColor } from "@features/budget/utils";
 
 interface Props {
-  countries: CountryData[];
-  matches?: BudgetMatch[];
-  selectedCodes: string[];
-  onSelectedCodesChange: (codes: string[]) => void;
-  sortTrigger?: number;
-  sortDirection?: "desc" | "asc" | null;
+  readonly countries: CountryData[];
+  readonly matches?: BudgetMatch[];
+  readonly selectedCodes: string[];
+  readonly onSelectedCodesChange: (codes: string[]) => void;
+  readonly sortTrigger?: number;
+  readonly sortDirection?: "desc" | "asc" | null;
 }
 
 export function BudgetComparison({

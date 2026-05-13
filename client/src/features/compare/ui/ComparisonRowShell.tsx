@@ -1,14 +1,14 @@
 import type { ComponentType } from "react";
 
 interface Props {
-  icon?: ComponentType<{ size?: number; className?: string }>;
-  iconColor?: string;
-  label: string;
-  labelWeight?: number;
-  labelColor?: string;
-  highlight?: boolean;
-  gap?: string;
-  children: React.ReactNode;
+  readonly icon?: ComponentType<{ size?: number; className?: string }>;
+  readonly iconColor?: string;
+  readonly label: string;
+  readonly labelWeight?: number;
+  readonly labelColor?: string;
+  readonly highlight?: boolean;
+  readonly gap?: string;
+  readonly children: React.ReactNode;
 }
 
 export function ComparisonRowShell({
@@ -23,8 +23,12 @@ export function ComparisonRowShell({
 }: Props) {
   return (
     <div
-      className={`flex items-center border-b border-[#1C1C1C] py-4 ${highlight ? "bg-[#0D0D0F]" : ""}`}
-      style={gap ? ({ "--rs-gap": gap, gap: "var(--rs-gap)" } as React.CSSProperties) : undefined}
+      className={`flex items-center border-b border-[#1C1C1C] py-4 ${highlight === true ? "bg-[#0D0D0F]" : ""}`}
+      style={
+        gap !== undefined
+          ? ({ "--rs-gap": gap, gap: "var(--rs-gap)" } as React.CSSProperties)
+          : undefined
+      }
     >
       <div className="flex w-[160px] shrink-0 items-center gap-2.5 md:w-[240px]">
         {Icon ? (
@@ -36,11 +40,11 @@ export function ComparisonRowShell({
           </span>
         ) : null}
         <span
-          className={`text-[13px] text-dim ${labelWeight ? "[font-weight:var(--fw)]" : ""} ${labelColor ? "text-[var(--lc)]" : ""}`}
+          className={`text-[13px] text-dim ${labelWeight !== undefined ? "[font-weight:var(--fw)]" : ""} ${labelColor !== undefined ? "text-[var(--lc)]" : ""}`}
           style={
             {
-              ...(labelWeight ? { "--fw": labelWeight } : {}),
-              ...(labelColor ? { "--lc": labelColor } : {}),
+              ...(labelWeight !== undefined ? { "--fw": labelWeight } : {}),
+              ...(labelColor !== undefined ? { "--lc": labelColor } : {}),
             } as React.CSSProperties
           }
         >

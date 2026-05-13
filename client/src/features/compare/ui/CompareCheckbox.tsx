@@ -1,9 +1,9 @@
 import type React from "react";
 
 interface CompareCheckboxProps {
-  isSelected: boolean;
+  readonly isSelected: boolean;
   /** Background for unchecked state. Defaults to "transparent". */
-  uncheckedBg?: string;
+  readonly uncheckedBg?: string;
 }
 
 /** Checkbox overlay shown on cards when compare mode is active. */

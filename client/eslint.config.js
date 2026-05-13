@@ -60,39 +60,69 @@ export default defineConfig([
       ],
       "@typescript-eslint/no-import-type-side-effects": "error",
       "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-unnecessary-condition": "warn",
+      "@typescript-eslint/no-unnecessary-condition": "error",
       "@typescript-eslint/no-floating-promises": "error",
       "@typescript-eslint/no-misused-promises": [
         "error",
         { checksVoidReturn: { attributes: false } },
       ],
       "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
-      "@typescript-eslint/no-non-null-assertion": "warn",
+      "@typescript-eslint/no-non-null-assertion": "error",
       "@typescript-eslint/no-unnecessary-type-assertion": "error",
-      "@typescript-eslint/no-unnecessary-type-parameters": "warn",
-      // Unsafe rules: warn (not error) since the codebase is typed, but keep signal
-      "@typescript-eslint/no-unsafe-assignment": "warn",
-      "@typescript-eslint/no-unsafe-member-access": "warn",
-      "@typescript-eslint/no-unsafe-call": "warn",
-      "@typescript-eslint/no-unsafe-return": "warn",
-      "@typescript-eslint/no-unsafe-argument": "warn",
+      "@typescript-eslint/no-unnecessary-type-parameters": "error",
+      // Unsafe rules: all errors — use proper types instead of any
+      "@typescript-eslint/no-unsafe-assignment": "error",
+      "@typescript-eslint/no-unsafe-member-access": "error",
+      "@typescript-eslint/no-unsafe-call": "error",
+      "@typescript-eslint/no-unsafe-return": "error",
+      "@typescript-eslint/no-unsafe-argument": "error",
       "@typescript-eslint/restrict-template-expressions": [
         "error",
         { allowNumber: true, allowBoolean: false },
       ],
       // Arrow shorthand returning void is idiomatic React event handler syntax
       "@typescript-eslint/no-confusing-void-expression": "off",
+      // Require explicit boolean conversions — catches truthy/falsy pitfalls
+      "@typescript-eslint/strict-boolean-expressions": [
+        "error",
+        {
+          allowString: false,
+          allowNumber: false,
+          allowNullableObject: true,
+          allowNullableBoolean: true,
+          allowNullableString: false,
+          allowNullableNumber: false,
+          allowAny: false,
+        },
+      ],
+      // All switch cases must cover union members
+      "@typescript-eslint/switch-exhaustiveness-check": "error",
+      // No variable shadowing — hard bugs in closures
+      "@typescript-eslint/no-shadow": "error",
+      // Prefer readonly for class properties that are never reassigned
+      "@typescript-eslint/prefer-readonly": "error",
+      // Functions returning a Promise must be declared async
+      "@typescript-eslint/promise-function-async": ["error", { allowedPromiseNames: ["Thenable"] }],
+      // Disallow unnecessary namespace qualifiers
+      "@typescript-eslint/no-unnecessary-qualifier": "error",
+      // Consistent array type declarations: T[] over Array<T>
+      "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
+      // Prefer ?? over || for nullish coalescing (strictTypeChecked already enables this)
+      "@typescript-eslint/prefer-nullish-coalescing": [
+        "error",
+        { ignorePrimitives: { boolean: true } },
+      ],
 
       // ── React ─────────────────────────────────────────────────────────
       // Inline component definitions cause remounts on every render
       "react/no-unstable-nested-components": ["error", { allowAsProps: false }],
-      "react/jsx-no-useless-fragment": "warn",
+      "react/jsx-no-useless-fragment": "error",
       // Array index keys hide bugs when list order changes
-      "react/no-array-index-key": "warn",
-      "react/self-closing-comp": ["warn", { component: true, html: true }],
+      "react/no-array-index-key": "error",
+      "react/self-closing-comp": ["error", { component: true, html: true }],
       "react/jsx-pascal-case": "error",
       "react/no-direct-mutation-state": "error",
-      "react/hook-use-state": "warn",
+      "react/hook-use-state": "error",
       // Rendering falsy numbers (0) causes visible bugs — use ternary
       "react/jsx-no-leaked-render": ["error", { validStrategies: ["ternary"] }],
 
@@ -129,22 +159,22 @@ export default defineConfig([
       // prefer .at(-1) over [length - 1]
       "unicorn/prefer-at": "error",
       // prefer spread over Array.from
-      "unicorn/prefer-spread": "warn",
+      "unicorn/prefer-spread": "error",
       // numeric separators (1_000_000) improve readability
-      "unicorn/numeric-separators-style": "warn",
+      "unicorn/numeric-separators-style": "error",
       // nested ternary is a real readability issue
-      "unicorn/no-nested-ternary": "warn",
+      "unicorn/no-nested-ternary": "error",
       // .sort() without compare fn gives wrong order for non-ASCII
       "unicorn/no-array-sort": "off",
 
       // ── SonarJS ───────────────────────────────────────────────────────
-      "sonarjs/cognitive-complexity": ["warn", 20],
+      "sonarjs/cognitive-complexity": ["error", 20],
       // Duplicate string detection has too many false positives for i18n keys
       "sonarjs/no-duplicate-string": "off",
       // Nested ternary already covered by unicorn
       "sonarjs/no-nested-conditional": "off",
-      // Read-only props: good practice but requires gradual adoption
-      "sonarjs/prefer-read-only-props": "warn",
+      // Props must be read-only — prevents accidental mutation
+      "sonarjs/prefer-read-only-props": "error",
       // void operator is the correct pattern for intentionally-ignored promises
       "sonarjs/void-use": "off",
     },

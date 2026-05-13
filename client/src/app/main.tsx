@@ -4,7 +4,9 @@ import "@i18n";
 import "./styles/index.css";
 import { AppRouter } from "./router/AppRouter";
 
-createRoot(document.querySelector("#root")!).render(
+const rootElement = document.querySelector("#root");
+if (!rootElement) throw new Error("Root element #root not found");
+createRoot(rootElement).render(
   <StrictMode>
     <AppRouter />
   </StrictMode>,

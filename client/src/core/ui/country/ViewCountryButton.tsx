@@ -3,7 +3,7 @@ import { User } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface ViewCountryButtonProps {
-  to: string;
+  readonly to: string;
 }
 
 /** "View Country Details" CTA link used at the bottom of country cards and detail panels. */

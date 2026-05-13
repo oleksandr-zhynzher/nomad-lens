@@ -19,10 +19,10 @@ import { scoreColourClass } from "@core/utils";
 const WORLD_TOPOLOGY: object = worldTopology;
 
 interface WorldMapProps {
-  ranked: RankedCountry[];
-  onCountryClick: (iso2: string) => void;
-  onToggleWeights?: () => void;
-  showWeights?: boolean;
+  readonly ranked: RankedCountry[];
+  readonly onCountryClick: (iso2: string) => void;
+  readonly onToggleWeights?: () => void;
+  readonly showWeights?: boolean;
 }
 
 interface HoverInfo {
@@ -138,12 +138,12 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
 
   function handleClick(geo: { id?: unknown; properties: Record<string, unknown> }) {
     const alpha2 = geoNumericToAlpha2(geo);
-    if (!alpha2) return;
+    if (alpha2 === "") return;
     setHover(null);
     setSelectedCode(alpha2);
   }
 
-  const selectedCountry = selectedCode ? (scoreByAlpha2.get(selectedCode) ?? null) : null;
+  const selectedCountry = selectedCode !== null ? (scoreByAlpha2.get(selectedCode) ?? null) : null;
 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>

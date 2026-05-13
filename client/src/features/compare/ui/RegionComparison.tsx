@@ -1,4 +1,5 @@
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useMemo, useState, useRef } from "react";
+import type React from "react";
 import { useTranslation } from "react-i18next";
 import { TrendingUp } from "lucide-react";
 import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
@@ -15,10 +16,90 @@ import { ComparisonScoreCell } from "./ComparisonScoreCell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";
 import { RegionPill } from "@features/compare/ui";
 
+/** Compute per-category average scores for a set of countries in a region. */
+function computeRegionCategories(regionCountries: CountryData[]): RegionStats["categories"] {
+  const categories = {} as RegionStats["categories"];
+  for (const key of VISIBLE_CATEGORY_KEYS) {
+    const values = regionCountries
+      .map((c) => c.scores[key].value)
+      .filter((v): v is number => v != null);
+    if (values.length === 0) {
+      categories[key] = { avg: null, count: 0 };
+    } else {
+      const avg = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10) / 10;
+      categories[key] = { avg, count: values.length };
+    }
+  }
+  return categories;
+}
+
+/** Compute the weighted overall score for a region given its per-category averages. */
+function computeRegionOverall(categories: RegionStats["categories"], weights: WeightMap): number {
+  let numerator = 0;
+  let denominator = 0;
+  for (const key of VISIBLE_CATEGORY_KEYS) {
+    const w = weights[key];
+    if (w <= 0) continue;
+    const avg = categories[key].avg;
+    if (avg === null) continue;
+    numerator += w * avg;
+    denominator += w;
+  }
+  return denominator === 0 ? 0 : Math.round((numerator / denominator) * 10) / 10;
+}
+
+/** Compute per-region statistics for every visible category key and weighted overall. */
+function computeRegionStats(
+  countries: CountryData[],
+  allRegions: string[],
+  weights: WeightMap,
+): RegionStats[] {
+  const grouped: Partial<Record<string, CountryData[]>> = {};
+  for (const c of countries) {
+    const existing = grouped[c.region];
+    if (existing !== undefined) {
+      existing.push(c);
+    } else {
+      grouped[c.region] = [c];
+    }
+  }
+
+  return allRegions.map((regionName) => {
+    const regionCountries = grouped[regionName] ?? [];
+    const categories = computeRegionCategories(regionCountries);
+    const overall = computeRegionOverall(categories, weights);
+    return {
+      name: regionName,
+      count: regionCountries.length,
+      color: REGION_COLORS[regionName] ?? "#888888",
+      overall,
+      categories,
+    };
+  });
+}
+
+interface RegionIconProps {
+  readonly name: string;
+  readonly active: boolean;
+  readonly color: string;
+}
+
+function RegionIcon({ name, active, color }: RegionIconProps) {
+  const Icon = REGION_ICONS[name];
+  if (Icon == null) return null;
+  return (
+    <Icon
+      size={20}
+      style={{ "--ic": active ? color : "#808080" } as React.CSSProperties}
+      className="text-[var(--ic)]"
+    />
+  );
+}
+
 interface RegionComparisonProps {
-  countries: CountryData[];
-  weights: WeightMap;
-  climatePrefs: ClimatePreferences;
+  readonly countries: CountryData[];
+  readonly weights: WeightMap;
+  readonly climatePrefs: ClimatePreferences;
 }
 
 export function RegionComparison({ countries, weights }: RegionComparisonProps) {
@@ -28,69 +109,27 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
     [countries],
   );
 
-  const [enabled, setEnabled] = useState<Set<string>>(() => new Set(allRegions));
+  const [enabled, setEnabled] = useState<Set<string>>(new Set<string>());
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
+  const [prevRegions, setPrevRegions] = useState<string[]>([]);
 
-  // Pre-select all regions once data loads
-  useEffect(() => {
-    if (allRegions.length > 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time init from async data
-      setEnabled((prev) => (prev.size === 0 ? new Set(allRegions) : prev));
+  // React-sanctioned "derive state from props" pattern: call set during render
+  // to synchronously re-render instead of the double-render from useEffect.
+  if (allRegions !== prevRegions) {
+    setPrevRegions(allRegions);
+    if (allRegions.length > 0 && enabled.size === 0) {
+      setEnabled(new Set(allRegions));
     }
-  }, [allRegions]);
+  }
 
   // Sync horizontal scroll between sticky header and body
   useSyncScroll(headerRef, bodyRef);
 
-  const regionStats = useMemo(() => {
-    const grouped: Record<string, CountryData[]> = {};
-    for (const c of countries) {
-      if (!grouped[c.region]) grouped[c.region] = [];
-      grouped[c.region].push(c);
-    }
-
-    const stats: RegionStats[] = [];
-    for (const regionName of allRegions) {
-      const regionCountries = grouped[regionName] || [];
-      const categories = {} as RegionStats["categories"];
-
-      for (const key of VISIBLE_CATEGORY_KEYS) {
-        const values = regionCountries
-          .map((c) => c.scores[key]?.value)
-          .filter((v): v is number => v != null);
-
-        if (values.length === 0) {
-          categories[key] = { avg: null, count: 0 };
-        } else {
-          const avg = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10) / 10;
-          categories[key] = { avg, count: values.length };
-        }
-      }
-
-      let numerator = 0;
-      let denominator = 0;
-      for (const key of VISIBLE_CATEGORY_KEYS) {
-        const w = weights[key];
-        if (w <= 0) continue;
-        const avg = categories[key].avg;
-        if (avg === null) continue;
-        numerator += w * avg;
-        denominator += w;
-      }
-      const overall = denominator === 0 ? 0 : Math.round((numerator / denominator) * 10) / 10;
-
-      stats.push({
-        name: regionName,
-        count: regionCountries.length,
-        color: REGION_COLORS[regionName] || "#888888",
-        overall,
-        categories,
-      });
-    }
-
-    return stats;
-  }, [countries, weights, allRegions]);
+  const regionStats = useMemo(
+    () => computeRegionStats(countries, allRegions, weights),
+    [countries, weights, allRegions],
+  );
 
   const toggleRegion = (name: string) => {
     setEnabled((prev) => {
@@ -120,16 +159,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
                 }}
                 className={`flex w-full cursor-pointer flex-col items-center gap-3 rounded-lg bg-transparent p-4 transition-all ${active ? "border border-[#2E2E30] opacity-100" : "border border-[#1C1C1C] opacity-45"}`}
               >
-                {(() => {
-                  const Icon = REGION_ICONS[r.name];
-                  return Icon ? (
-                    <Icon
-                      size={20}
-                      style={{ "--ic": active ? r.color : "#808080" } as React.CSSProperties}
-                      className="text-[var(--ic)]"
-                    />
-                  ) : null;
-                })()}
+                <RegionIcon name={r.name} active={active} color={r.color} />
                 <span
                   className={`text-center text-[15px] font-semibold ${active ? "text-on-surface" : "text-dimmer"}`}
                 >

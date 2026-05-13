@@ -2,11 +2,11 @@ import { useState, useRef, useEffect, type ReactNode, type CSSProperties } from 
 import { createPortal } from "react-dom";
 
 interface TooltipProps {
-  content: ReactNode;
-  children: ReactNode;
-  side?: "top" | "bottom";
-  triggerStyle?: CSSProperties;
-  delay?: number;
+  readonly content: ReactNode;
+  readonly children: ReactNode;
+  readonly side?: "top" | "bottom";
+  readonly triggerStyle?: CSSProperties;
+  readonly delay?: number;
 }
 
 interface Coords {
@@ -29,8 +29,8 @@ export function Tooltip({
 
   useEffect(
     () => () => {
-      if (hideTimer.current) clearTimeout(hideTimer.current);
-      if (showTimer.current) clearTimeout(showTimer.current);
+      if (hideTimer.current !== null) clearTimeout(hideTimer.current);
+      if (showTimer.current !== null) clearTimeout(showTimer.current);
     },
     [],
   );
@@ -55,8 +55,8 @@ export function Tooltip({
   }
 
   function show() {
-    if (hideTimer.current) clearTimeout(hideTimer.current);
-    if (showTimer.current) clearTimeout(showTimer.current);
+    if (hideTimer.current !== null) clearTimeout(hideTimer.current);
+    if (showTimer.current !== null) clearTimeout(showTimer.current);
 
     if (delay > 0) {
       showTimer.current = setTimeout(displayTooltip, delay);
@@ -66,7 +66,7 @@ export function Tooltip({
   }
 
   function hide() {
-    if (showTimer.current) clearTimeout(showTimer.current);
+    if (showTimer.current !== null) clearTimeout(showTimer.current);
     hideTimer.current = setTimeout(() => {
       setCoords(null);
     }, 120);

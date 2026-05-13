@@ -12,8 +12,9 @@ export interface RowStyles {
  */
 export function getRowStyles(index: number, isSelected = false): RowStyles {
   const isEven = index % 2 === 0;
+  const unselectedBg = isEven ? "#1A1A1C" : "#161618";
   return {
-    bgColor: isSelected ? "#1A2A1A" : isEven ? "#1A1A1C" : "#161618",
+    bgColor: isSelected ? "#1A2A1A" : unselectedBg,
     hoverBg: isEven ? "#232326" : "#202023",
     borderColor: isEven ? "#252527" : "#1F1F21",
   };

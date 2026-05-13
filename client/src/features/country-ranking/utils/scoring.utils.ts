@@ -27,7 +27,7 @@ export function computeScore(country: CountryData, weights: WeightMap): number {
     const w = weights[key];
     if (w <= 0) continue;
 
-    const score = country.scores[key]?.value;
+    const score = country.scores[key].value;
     if (score == null) {
       missingCount++;
       continue;
@@ -83,7 +83,7 @@ export function defaultWeights(): WeightMap {
  */
 export function defaultIndependentWeights(): WeightMap {
   const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
-  for (const k of VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k))) {
+  for (const k of VISIBLE_CATEGORY_KEYS.filter((key) => !AI_CATEGORIES.has(key))) {
     result[k] = 50;
   }
   return result;
@@ -205,7 +205,7 @@ export function computeClimateScore(climateData: ClimateData, prefs: ClimatePref
     seasonScore = 100;
   } else if (prefs.seasonType === seasonType) {
     seasonScore = 100;
-  } else if (ADJACENT[prefs.seasonType]?.includes(seasonType)) {
+  } else if (ADJACENT[prefs.seasonType].includes(seasonType)) {
     seasonScore = 60;
   } else {
     seasonScore = 20;

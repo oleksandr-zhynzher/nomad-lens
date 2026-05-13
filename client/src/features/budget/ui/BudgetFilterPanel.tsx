@@ -14,7 +14,7 @@ import { BUDGET_CATEGORY_KEYS } from "@features/budget/constants";
 type BudgetStateReturn = ReturnType<typeof useBudgetState>;
 
 interface Props {
-  bs: BudgetStateReturn;
+  readonly bs: BudgetStateReturn;
 }
 
 export function BudgetFilterPanel({ bs }: Props) {

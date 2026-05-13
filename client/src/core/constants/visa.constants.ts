@@ -29,7 +29,7 @@ export type VisaField =
   | "processingTime"
   | "benefits";
 
-export const VISA_FIELDS: { key: VisaField; icon: typeof Clock }[] = [
+export const VISA_FIELDS: Array<{ key: VisaField; icon: typeof Clock }> = [
   { key: "visaName", icon: FileCheck },
   { key: "duration", icon: Clock },
   { key: "maxExtension", icon: Clock },

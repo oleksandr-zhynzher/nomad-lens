@@ -8,12 +8,13 @@ import ru from "./locales/ru.json";
 const uaPluralAlias = {
   type: "3rdParty" as const,
   init(instance: typeof i18n) {
-    const pluralResolver = instance.services.pluralResolver;
+    interface PluralResolverLike {
+      getRule: (code: string, options?: Record<string, unknown>) => unknown;
+    }
+    const pluralResolver = instance.services.pluralResolver as PluralResolverLike;
     const originalGetRule = pluralResolver.getRule.bind(pluralResolver);
-    type GetRuleCode = Parameters<typeof originalGetRule>[0];
-    type GetRuleOptions = Parameters<typeof originalGetRule>[1];
 
-    pluralResolver.getRule = (code: GetRuleCode, options?: GetRuleOptions) =>
+    pluralResolver.getRule = (code: string, options?: Record<string, unknown>) =>
       originalGetRule(code === "ua" ? "uk" : code, options);
   },
 };

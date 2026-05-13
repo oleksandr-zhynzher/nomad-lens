@@ -3,14 +3,14 @@ import { ChevronDown } from "lucide-react";
 
 interface CollapsibleSectionProps {
   /** Unique key used for identifying the section (e.g. for aria). */
-  id: string;
-  icon: ReactElement;
-  label: string;
+  readonly id: string;
+  readonly icon: ReactElement;
+  readonly label: string;
   /** Optional badge content shown between label and chevron. */
-  badge?: ReactNode;
-  isOpen: boolean;
-  onToggle: () => void;
-  children: ReactNode;
+  readonly badge?: ReactNode;
+  readonly isOpen: boolean;
+  readonly onToggle: () => void;
+  readonly children: ReactNode;
 }
 
 /**

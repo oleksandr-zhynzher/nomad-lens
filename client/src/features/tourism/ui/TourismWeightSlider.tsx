@@ -4,9 +4,9 @@ import { Tooltip } from "@core/ui";
 import { WeightSliderRow } from "@core/ui/panels";
 
 export interface TourismWeightSliderProps {
-  metricKey: string;
-  value: number;
-  onChange: (key: string, value: number) => void;
+  readonly metricKey: string;
+  readonly value: number;
+  readonly onChange: (key: string, value: number) => void;
 }
 
 export function TourismWeightSlider({ metricKey, value, onChange }: TourismWeightSliderProps) {
@@ -27,7 +27,7 @@ export function TourismWeightSlider({ metricKey, value, onChange }: TourismWeigh
       })}
       label={<span className="text-xs font-normal text-white">{label}</span>}
       tooltipIcon={
-        desc ? (
+        desc !== "" ? (
           <Tooltip
             content={
               <div>

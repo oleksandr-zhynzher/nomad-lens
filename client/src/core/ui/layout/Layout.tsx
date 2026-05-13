@@ -1,6 +1,6 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { BarChart3, List, Map, Menu, Palmtree, Plane, Wallet, X } from "lucide-react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, type NavigateFunction } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import { LogoMark } from "./LogoMark";
@@ -8,8 +8,75 @@ import { LANG_OPTIONS } from "@core/utils";
 import { INFO_PAGES } from "@core/utils";
 
 interface LayoutProps {
-  children: ReactNode;
-  activePage?: "data-sources" | "indicators" | "ai-indicators" | "budget-categories";
+  readonly children: ReactNode;
+  readonly activePage?: "data-sources" | "indicators" | "ai-indicators" | "budget-categories";
+}
+
+type NavView = "list" | "map" | "compare";
+
+function navigateToView(
+  view: NavView,
+  langPrefix: string,
+  navigate: NavigateFunction,
+  onNavigate: () => void,
+): void {
+  if (view === "list") {
+    void navigate(langPrefix !== "" ? langPrefix : "/");
+  } else {
+    void navigate(`${langPrefix}/${view}`);
+  }
+  onNavigate();
+}
+
+function makeClickOutsideHandler(
+  ref: React.RefObject<HTMLDivElement | null>,
+  onClose: () => void,
+): (event: MouseEvent) => void {
+  return (event: MouseEvent) => {
+    if (ref.current != null && !ref.current.contains(event.target as Node)) {
+      onClose();
+    }
+  };
+}
+function computeLangSwitchPath(
+  targetLang: string,
+  pathname: string,
+  langPrefix: string,
+  search: string,
+): string {
+  let rest = pathname;
+  if (langPrefix !== "" && rest.startsWith(langPrefix)) {
+    const sliced = rest.slice(langPrefix.length);
+    rest = sliced !== "" ? sliced : "/";
+  }
+  const prefix = targetLang === "en" ? "" : `/${targetLang}`;
+  return `${prefix}${rest}${search}`;
+}
+
+function computeActiveView(
+  pathname: string,
+  isInfoPage: boolean,
+): "list" | "map" | "compare" | null {
+  if (pathname.endsWith("/map")) return "map";
+  if (pathname.endsWith("/compare")) return "compare";
+  if (isInfoPage) return null;
+  return "list";
+}
+
+function headerNavBtnClass(isActive: boolean): string {
+  return `header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`;
+}
+
+function headerNavLinkClass(isActive: boolean): string {
+  return `header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`;
+}
+
+function mobileNavBtnClass(isActive: boolean): string {
+  return `flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`;
+}
+
+function mobileNavLinkClass(isActive: boolean): string {
+  return `flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${isActive ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`;
 }
 
 export function Layout({ children }: LayoutProps) {
@@ -21,28 +88,17 @@ export function Layout({ children }: LayoutProps) {
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
 
-  const langSwitchPath = (targetLang: string) => {
-    let rest = pathname;
-    if (langPrefix && rest.startsWith(langPrefix)) {
-      rest = rest.slice(langPrefix.length) || "/";
-    }
-    const prefix = targetLang === "en" ? "" : `/${targetLang}`;
-    return `${prefix}${rest}${search}`;
-  };
+  const langSwitchPath = (targetLang: string) =>
+    computeLangSwitchPath(targetLang, pathname, langPrefix, search);
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (langRef.current && !langRef.current.contains(event.target as Node)) {
-        setLangDropdownOpen(false);
-      }
-    }
-
-    if (langDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
+    if (!langDropdownOpen) return;
+    const handler = makeClickOutsideHandler(langRef, () => {
+      setLangDropdownOpen(false);
+    });
+    document.addEventListener("mousedown", handler);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handler);
     };
   }, [langDropdownOpen]);
 
@@ -60,21 +116,12 @@ export function Layout({ children }: LayoutProps) {
 
   const isInfoPage = INFO_PAGES.some((pagePath) => pathname.endsWith(pagePath));
 
-  const activeView: "list" | "map" | "compare" | null = pathname.endsWith("/map")
-    ? "map"
-    : pathname.endsWith("/compare")
-      ? "compare"
-      : isInfoPage
-        ? null
-        : "list";
+  const activeView = computeActiveView(pathname, isInfoPage);
 
-  const handleViewClick = (view: "list" | "map" | "compare") => {
-    if (view === "list") {
-      void navigate(langPrefix || "/");
-    } else {
-      void navigate(`${langPrefix}/${view}`);
-    }
-    setMobileMenuOpen(false);
+  const handleViewClick = (view: NavView) => {
+    navigateToView(view, langPrefix, navigate, () => {
+      setMobileMenuOpen(false);
+    });
   };
 
   return (
@@ -99,7 +146,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   handleViewClick("list");
                 }}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${activeView === "list" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
+                className={headerNavBtnClass(activeView === "list")}
               >
                 <List size={16} />
                 {t("views.list")}
@@ -108,7 +155,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   handleViewClick("map");
                 }}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${activeView === "map" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
+                className={headerNavBtnClass(activeView === "map")}
               >
                 <Map size={16} />
                 {t("views.map")}
@@ -117,28 +164,28 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   handleViewClick("compare");
                 }}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] transition-colors ${activeView === "compare" ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
+                className={headerNavBtnClass(activeView === "compare")}
               >
                 <BarChart3 size={16} />
                 {t("views.compare")}
               </button>
               <Link
                 to={`${langPrefix}/nomad-visas`}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${pathname.endsWith("/nomad-visas") ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
+                className={headerNavLinkClass(pathname.endsWith("/nomad-visas"))}
               >
                 <Plane size={16} />
                 {t("nav.nomadVisas")}
               </Link>
               <Link
                 to={`${langPrefix}/budget-matcher`}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${pathname.endsWith("/budget-matcher") ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
+                className={headerNavLinkClass(pathname.endsWith("/budget-matcher"))}
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
               </Link>
               <Link
                 to={`${langPrefix}/tourism`}
-                className={`header-nav-item flex items-center gap-1.5 rounded px-3 py-1.5 text-[13px] no-underline transition-colors ${pathname.endsWith("/tourism") ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-muted"}`}
+                className={headerNavLinkClass(pathname.endsWith("/tourism"))}
               >
                 <Palmtree size={16} />
                 {t("nav.tourism", "Tourism")}
@@ -228,7 +275,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   handleViewClick("list");
                 }}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${activeView === "list" ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
+                className={mobileNavBtnClass(activeView === "list")}
               >
                 <List size={16} />
                 {t("views.list")}
@@ -237,7 +284,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   handleViewClick("map");
                 }}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${activeView === "map" ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
+                className={mobileNavBtnClass(activeView === "map")}
               >
                 <Map size={16} />
                 {t("views.map")}
@@ -246,7 +293,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   handleViewClick("compare");
                 }}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] transition-colors ${activeView === "compare" ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
+                className={mobileNavBtnClass(activeView === "compare")}
               >
                 <BarChart3 size={16} />
                 {t("views.compare")}
@@ -256,7 +303,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${pathname.endsWith("/nomad-visas") ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
+                className={mobileNavLinkClass(pathname.endsWith("/nomad-visas"))}
               >
                 <Plane size={16} />
                 {t("nav.nomadVisas")}
@@ -266,7 +313,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${pathname.endsWith("/budget-matcher") ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
+                className={mobileNavLinkClass(pathname.endsWith("/budget-matcher"))}
               >
                 <Wallet size={16} />
                 {t("nav.budgetMatcher")}
@@ -276,7 +323,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => {
                   setMobileMenuOpen(false);
                 }}
-                className={`flex items-center justify-center gap-1.5 rounded px-3 py-2 text-[13px] no-underline transition-colors ${pathname.endsWith("/tourism") ? "bg-accent font-medium text-white" : "bg-surface-4 font-normal text-muted"}`}
+                className={mobileNavLinkClass(pathname.endsWith("/tourism"))}
               >
                 <Palmtree size={16} />
                 {t("nav.tourism", "Tourism")}

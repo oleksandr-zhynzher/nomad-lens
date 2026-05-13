@@ -57,15 +57,67 @@ function computeOverallScore(country: CountryData, weights: WeightMap) {
   return computeScore(country, weights);
 }
 
-function SortIcon({
-  field,
-  sortField,
-  sortDirection,
-}: {
-  field: SortField;
-  sortField: SortField;
-  sortDirection: SortDirection;
-}) {
+interface VisaRow {
+  readonly country: CountryData & { nomadVisa: NonNullable<CountryData["nomadVisa"]> };
+  readonly overallScore: number;
+  readonly monthlyBudget: number | null;
+}
+
+function compareVisaRows(a: VisaRow, b: VisaRow, field: SortField, lang: string): number {
+  switch (field) {
+    case "country":
+      return localizeCountry(a.country, lang).name.localeCompare(
+        localizeCountry(b.country, lang).name,
+      );
+    case "overallScore":
+      return a.overallScore - b.overallScore;
+    case "monthlyBudget": {
+      if (a.monthlyBudget == null && b.monthlyBudget == null) return 0;
+      if (a.monthlyBudget == null) return 1;
+      if (b.monthlyBudget == null) return -1;
+      return a.monthlyBudget - b.monthlyBudget;
+    }
+    case "duration":
+      return a.country.nomadVisa.duration.initial - b.country.nomadVisa.duration.initial;
+    case "cost":
+      return a.country.nomadVisa.cost.amount - b.country.nomadVisa.cost.amount;
+    case "income": {
+      const aIncome =
+        a.country.nomadVisa.incomeRequirement.monthly ??
+        a.country.nomadVisa.incomeRequirement.annual ??
+        0;
+      const bIncome =
+        b.country.nomadVisa.incomeRequirement.monthly ??
+        b.country.nomadVisa.incomeRequirement.annual ??
+        0;
+      return aIncome - bIncome;
+    }
+    case "tax":
+      return a.country.nomadVisa.tax.status.localeCompare(b.country.nomadVisa.tax.status);
+  }
+}
+
+function visaRowClass(isSelected: boolean, isHighlighted: boolean): string {
+  const base = "cursor-pointer border-b border-[#1E1E1E] transition-colors";
+  if (isSelected) return `${base} bg-[#1A2A1A]`;
+  if (isHighlighted) return `${base} bg-[#1A1208]`;
+  return `${base} bg-transparent`;
+}
+
+function budgetCellClass(budget: number | null, maxBudget: number): string {
+  if (budget != null && budget <= maxBudget)
+    return "font-mono text-sm font-semibold text-[#44CC66]";
+  if (budget == null) return "font-mono text-sm font-semibold text-dimmest";
+  return "font-mono text-sm font-semibold text-white";
+}
+
+interface SortIconProps {
+  readonly field: SortField;
+  readonly sortField: SortField;
+  readonly sortDirection: SortDirection;
+}
+
+function SortIcon({ field, sortField, sortDirection }: SortIconProps) {
   if (sortField !== field) {
     return <ChevronsUpDown size={14} className="ml-1 inline opacity-30" />;
   }
@@ -189,51 +241,8 @@ export function NomadVisasPage() {
     });
 
     sorted.sort((a, b) => {
-      let comparison = 0;
-
-      switch (sortField) {
-        case "country":
-          comparison = localizeCountry(a.country, lang).name.localeCompare(
-            localizeCountry(b.country, lang).name,
-          );
-          break;
-        case "overallScore":
-          comparison = a.overallScore - b.overallScore;
-          break;
-        case "monthlyBudget":
-          comparison =
-            a.monthlyBudget == null && b.monthlyBudget == null
-              ? 0
-              : a.monthlyBudget == null
-                ? 1
-                : b.monthlyBudget == null
-                  ? -1
-                  : a.monthlyBudget - b.monthlyBudget;
-          break;
-        case "duration":
-          comparison = a.country.nomadVisa.duration.initial - b.country.nomadVisa.duration.initial;
-          break;
-        case "cost":
-          comparison = a.country.nomadVisa.cost.amount - b.country.nomadVisa.cost.amount;
-          break;
-        case "income": {
-          const aIncome =
-            a.country.nomadVisa.incomeRequirement.monthly ??
-            a.country.nomadVisa.incomeRequirement.annual ??
-            0;
-          const bIncome =
-            b.country.nomadVisa.incomeRequirement.monthly ??
-            b.country.nomadVisa.incomeRequirement.annual ??
-            0;
-          comparison = aIncome - bIncome;
-          break;
-        }
-        case "tax":
-          comparison = a.country.nomadVisa.tax.status.localeCompare(b.country.nomadVisa.tax.status);
-          break;
-      }
-
-      return sortDirection === "asc" ? comparison : -comparison;
+      const cmp = compareVisaRows(a, b, sortField, lang);
+      return sortDirection === "asc" ? cmp : -cmp;
     });
 
     return sorted;
@@ -331,9 +340,9 @@ export function NomadVisasPage() {
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                 }}
-                className={`h-10 w-full rounded-md border border-surface bg-[#161616] pl-9 text-sm text-white outline-none ${searchQuery ? "pr-9" : "pr-3"}`}
+                className={`h-10 w-full rounded-md border border-surface bg-[#161616] pl-9 text-sm text-white outline-none ${searchQuery !== "" ? "pr-9" : "pr-3"}`}
               />
-              {searchQuery ? (
+              {searchQuery !== "" ? (
                 <button
                   onClick={() => {
                     setSearchQuery("");
@@ -560,7 +569,7 @@ export function NomadVisasPage() {
                           <tr
                             key={country.code}
                             data-country-code={country.code.toLowerCase()}
-                            className={`cursor-pointer border-b border-[#1E1E1E] transition-colors ${isSelected ? "bg-[#1A2A1A]" : isHighlighted ? "bg-[#1A1208]" : "bg-transparent"}`}
+                            className={visaRowClass(isSelected, isHighlighted)}
                             onClick={() => {
                               if (compareMode) {
                                 toggleSelect(country.code);
@@ -652,9 +661,7 @@ export function NomadVisasPage() {
 
                             {/* Monthly budget */}
                             <td className="px-3 py-4 text-right">
-                              <span
-                                className={`font-mono text-sm font-semibold ${monthlyBudget != null && monthlyBudget <= bs.budget ? "text-[#44CC66]" : monthlyBudget == null ? "text-dimmest" : "text-white"}`}
-                              >
+                              <span className={budgetCellClass(monthlyBudget, bs.budget)}>
                                 {monthlyBudget == null ? "—" : `$${monthlyBudget.toLocaleString()}`}
                               </span>
                             </td>
@@ -687,7 +694,7 @@ export function NomadVisasPage() {
 
                             {/* Income */}
                             <td className="px-3 py-4 text-right">
-                              {visa.incomeRequirement.monthly ? (
+                              {visa.incomeRequirement.monthly != null ? (
                                 <>
                                   <span className="font-mono text-sm font-semibold text-white">
                                     {visa.incomeRequirement.currency}{" "}
@@ -697,7 +704,7 @@ export function NomadVisasPage() {
                                     /{t("countryPage.visa.mo")}
                                   </span>
                                 </>
-                              ) : visa.incomeRequirement.annual ? (
+                              ) : visa.incomeRequirement.annual != null ? (
                                 <>
                                   <span className="font-mono text-[13px] font-semibold text-white">
                                     {visa.incomeRequirement.currency}{" "}

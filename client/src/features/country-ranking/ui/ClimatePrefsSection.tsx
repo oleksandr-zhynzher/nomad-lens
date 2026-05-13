@@ -4,8 +4,8 @@ import type { ClimatePreferences } from "@core/models";
 import { SEASON_ROW1, SEASON_ROW2 } from "@features/country-ranking/constants";
 
 interface ClimatePrefsProps {
-  climatePrefs: ClimatePreferences;
-  onClimatePrefsChange: (prefs: ClimatePreferences) => void;
+  readonly climatePrefs: ClimatePreferences;
+  readonly onClimatePrefsChange: (prefs: ClimatePreferences) => void;
 }
 
 export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: ClimatePrefsProps) {
@@ -13,8 +13,8 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
   return (
     <div className="flex flex-col gap-2 bg-surface-3 px-5 py-[10px]">
       {/* Season rows — 3 equal-width buttons per row */}
-      {[SEASON_ROW1, SEASON_ROW2].map((row, ri) => (
-        <div key={ri} className="flex gap-1">
+      {([SEASON_ROW1, SEASON_ROW2] as const).map((row, ri) => (
+        <div key={ri === 0 ? "row-1" : "row-2"} className="flex gap-1">
           {row.map((opt) => {
             const active = climatePrefs.seasonType === opt.value;
             return (

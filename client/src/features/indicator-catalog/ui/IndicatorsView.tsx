@@ -40,11 +40,11 @@ import {
 } from "@core/models";
 
 interface IndicatorCardProps {
-  Icon: ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
-  name: string;
-  description: string;
-  source: string;
-  weight: string;
+  readonly Icon: ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
+  readonly name: string;
+  readonly description: string;
+  readonly source: string;
+  readonly weight: string;
 }
 
 function IndicatorCard({ Icon, name, description, source, weight }: IndicatorCardProps) {
@@ -73,7 +73,7 @@ function IndicatorCard({ Icon, name, description, source, weight }: IndicatorCar
 type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
 /** Rows of [Icon, translationKey] pairs — strings come from i18n */
-const INDICATOR_ICONS: [IconType, string][][] = [
+const INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
   [
     [TrendingUp, "economy"],
     [Wallet, "affordability"],
@@ -120,7 +120,7 @@ const INDICATOR_ICONS: [IconType, string][][] = [
   ],
 ];
 
-const AI_INDICATOR_ICONS: [IconType, string][][] = [
+const AI_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
   [
     [Users, "nomadCommunity"],
     [Globe, "visaFriendliness"],
@@ -135,7 +135,7 @@ const AI_INDICATOR_ICONS: [IconType, string][][] = [
   ],
 ];
 
-const TOURISM_INDICATOR_ICONS: [IconType, string][][] = [
+const TOURISM_INDICATOR_ICONS: Array<Array<[IconType, string]>> = [
   [
     [Shield, "tourismSafety"],
     [Theater, "culturalAttractions"],
@@ -180,8 +180,11 @@ export function IndicatorsPage() {
 
       {/* Content zone */}
       <div className="flex flex-col gap-4 bg-[#0D0D0F] px-4 py-6 md:px-12 md:py-8">
-        {INDICATOR_ICONS.map((row, rowIdx) => (
-          <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
+        {INDICATOR_ICONS.map((row) => (
+          <div
+            key={row.map(([, k]) => k).join("-")}
+            className="flex w-full flex-col gap-4 md:flex-row md:gap-5"
+          >
             {row.map(([Icon, key]) => (
               <IndicatorCard
                 key={key}
@@ -207,8 +210,11 @@ export function IndicatorsPage() {
             </span>
           </div>
           <div className="flex flex-col gap-4">
-            {AI_INDICATOR_ICONS.map((row, rowIdx) => (
-              <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
+            {AI_INDICATOR_ICONS.map((row) => (
+              <div
+                key={row.map(([, k]) => k).join("-")}
+                className="flex w-full flex-col gap-4 md:flex-row md:gap-5"
+              >
                 {row.map(([Icon, key]) => (
                   <IndicatorCard
                     key={key}
@@ -236,8 +242,11 @@ export function IndicatorsPage() {
             </span>
           </div>
           <div className="flex flex-col gap-4">
-            {TOURISM_INDICATOR_ICONS.map((row, rowIdx) => (
-              <div key={rowIdx} className="flex w-full flex-col gap-4 md:flex-row md:gap-5">
+            {TOURISM_INDICATOR_ICONS.map((row) => (
+              <div
+                key={row.map(([, k]) => k).join("-")}
+                className="flex w-full flex-col gap-4 md:flex-row md:gap-5"
+              >
                 {row.map(([Icon, key]) => (
                   <IndicatorCard
                     key={key}

@@ -123,7 +123,7 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
                   </h3>
                   <div className="flex flex-col gap-3">
                     {TOURISM_GROUPS.map((group) => {
-                      const visibleKeys = group.keys.filter((k) => c.scores[k]?.value != null);
+                      const visibleKeys = group.keys.filter((k) => c.scores[k].value != null);
                       if (visibleKeys.length === 0) return null;
                       return (
                         <div key={group.labelKey}>
@@ -132,7 +132,7 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
                           </div>
                           <div className="flex flex-col gap-1.5">
                             {visibleKeys.map((key) => {
-                              const val = c.scores[key].value!;
+                              const val = c.scores[key].value ?? 0;
                               const color = TOURISM_COLORS[key] ?? "#888";
                               return (
                                 <div key={key} className="flex h-[22px] items-center gap-2">

@@ -4,8 +4,8 @@ import { Tooltip } from "@core/ui";
 import type { WeightMode } from "@core/models";
 
 interface WeightModeToggleProps {
-  weightMode: WeightMode;
-  onWeightModeChange: (mode: WeightMode) => void;
+  readonly weightMode: WeightMode;
+  readonly onWeightModeChange: (mode: WeightMode) => void;
 }
 
 export function WeightModeToggle({ weightMode, onWeightModeChange }: WeightModeToggleProps) {

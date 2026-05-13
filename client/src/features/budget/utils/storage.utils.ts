@@ -19,8 +19,7 @@ interface VersionedStorageOptions<T> {
 }
 
 function getDefaultStorage(): JsonStorage | undefined {
-  if (globalThis.window == null) return undefined;
-  return globalThis.localStorage;
+  return "localStorage" in globalThis ? globalThis.localStorage : undefined;
 }
 
 function isVersionedEnvelope(value: unknown): value is VersionedEnvelope {
@@ -44,7 +43,7 @@ export function readVersionedJson<T>({
 
   try {
     const raw = storage.getItem(key);
-    if (!raw) return fallback();
+    if (raw === null || raw === "") return fallback();
 
     const parsed = JSON.parse(raw) as unknown;
     if (!isVersionedEnvelope(parsed)) {
@@ -62,10 +61,10 @@ export function readVersionedJson<T>({
   }
 }
 
-export function writeVersionedJson<T>(
+export function writeVersionedJson(
   key: string,
   version: number,
-  data: T,
+  data: unknown,
   storage: JsonStorage | undefined = getDefaultStorage(),
 ) {
   if (!storage) return;

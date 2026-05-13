@@ -4,9 +4,9 @@ import { useLocalizedCountry, regionKey } from "@core/utils";
 import type { CountryData } from "@core/models";
 
 interface CountryNameCellProps {
-  country: CountryData;
+  readonly country: CountryData;
   /** Optional element rendered after the region tag (e.g. a Plane icon link). */
-  badge?: ReactNode;
+  readonly badge?: ReactNode;
 }
 
 export function CountryNameCell({ country, badge }: CountryNameCellProps) {
@@ -14,15 +14,15 @@ export function CountryNameCell({ country, badge }: CountryNameCellProps) {
   const locC = useLocalizedCountry(country);
 
   return (
-    <div className="flex-1 min-w-0 flex items-center gap-2">
+    <div className="flex min-w-0 flex-1 items-center gap-2">
       <img
         src={country.flagUrl}
         alt={t("a11y.flagAlt", "{{country}} flag", { country: locC.name })}
-        className="object-cover shrink-0 w-6 h-4 rounded-sm"
+        className="h-4 w-6 shrink-0 rounded-sm object-cover"
         loading="lazy"
       />
       <p className="truncate text-sm font-semibold text-white">{locC.name}</p>
-      <span className="hidden sm:inline shrink-0 text-[11px] text-dimmer">
+      <span className="hidden shrink-0 text-[11px] text-dimmer sm:inline">
         {t(`regions.${regionKey(country.region)}`)}
       </span>
       {badge}

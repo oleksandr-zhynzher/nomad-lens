@@ -3,7 +3,7 @@ export function tokenizeCountryCodesParam(param: string | null): string[] {
 
   for (const code of (param ?? "").split(",")) {
     const normalizedCode = code.trim().toUpperCase();
-    if (normalizedCode) tokens.push(normalizedCode);
+    if (normalizedCode !== "") tokens.push(normalizedCode);
   }
 
   return tokens;
@@ -18,8 +18,8 @@ export function normalizeCountryCodes(
 
   for (const code of codes) {
     const normalizedCode = code.trim().toUpperCase();
-    if (!normalizedCode || seen.has(normalizedCode)) continue;
-    if (validCodes && !validCodes.has(normalizedCode)) continue;
+    if (normalizedCode === "" || seen.has(normalizedCode)) continue;
+    if (validCodes !== undefined && !validCodes.has(normalizedCode)) continue;
     seen.add(normalizedCode);
     normalized.push(normalizedCode);
   }

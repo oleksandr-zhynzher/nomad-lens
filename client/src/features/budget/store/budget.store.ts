@@ -93,7 +93,10 @@ export function sanitizeBudgetPreferences(value: unknown): BudgetPreferencesStat
       typeof parsed.peopleCount === "number" && Number.isFinite(parsed.peopleCount)
         ? clampNumber(Math.round(parsed.peopleCount), MIN_PEOPLE_COUNT, MAX_PEOPLE_COUNT)
         : fallback.peopleCount,
-    bedrooms: BEDROOM_OPTIONS.has(parsed.bedrooms!) ? parsed.bedrooms! : fallback.bedrooms,
+    bedrooms:
+      parsed.bedrooms !== undefined && BEDROOM_OPTIONS.has(parsed.bedrooms)
+        ? parsed.bedrooms
+        : fallback.bedrooms,
     qualityBlend:
       typeof parsed.qualityBlend === "number" && Number.isFinite(parsed.qualityBlend)
         ? clampNumber(Math.round(parsed.qualityBlend), MIN_QUALITY_BLEND, MAX_QUALITY_BLEND)
@@ -110,13 +113,13 @@ function hasBudgetQueryState(search: string): boolean {
 }
 
 function parseCategoryWeightsParam(value: string | null): Partial<BudgetCategoryWeights> {
-  if (!value) return {};
+  if (value === null || value === "") return {};
 
   const weights: Partial<BudgetCategoryWeights> = {};
 
   for (const pair of value.split(",")) {
     const [rawKey, rawWeight] = pair.split(":");
-    if (!rawKey || !rawWeight) continue;
+    if (rawKey === "" || rawWeight === "") continue;
     if (!CATEGORY_WEIGHT_KEY_SET.has(rawKey as keyof BudgetCategoryWeights)) continue;
 
     const parsedWeight = parseClampedInteger(rawWeight, 0, 100);
@@ -169,7 +172,7 @@ export function isDefaultBudgetPreferences(state: BudgetPreferencesState): boole
 }
 
 function getInitialBudgetPreferences(): BudgetPreferencesState {
-  if (globalThis.window != null && hasBudgetQueryState(globalThis.location.search)) {
+  if (hasBudgetQueryState(globalThis.location.search)) {
     return buildBudgetPreferencesFromSearch(globalThis.location.search);
   }
 
