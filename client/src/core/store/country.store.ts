@@ -1,4 +1,4 @@
-import { createAppStore } from "@app/store/createStore";
+import { createAppStore } from "./createStore";
 import { getCountries } from "@core/api";
 import type { CountryData } from "../models/country.models";
 

@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@app": fileURLToPath(new URL("./src/app", import.meta.url)),
       "@core": fileURLToPath(new URL("./src/core", import.meta.url)),
       "@features": fileURLToPath(new URL("./src/features", import.meta.url)),
       "@i18n": fileURLToPath(new URL("./src/i18n", import.meta.url)),

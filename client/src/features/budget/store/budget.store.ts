@@ -1,4 +1,4 @@
-import { createAppStore } from "@app/store/createStore";
+import { createAppStore } from "@core/store";
 import { readVersionedJson, writeVersionedJson } from "@features/budget/utils";
 import {
   BEDROOM_OPTIONS,
