@@ -1,10 +1,10 @@
-import { BudgetFilterPanel } from "../../../components/BudgetFilterPanel";
-import { TourismWeightPanel } from "../../../components/TourismWeightPanel";
-import { WeightPanel } from "../../../components/WeightPanel";
-import type { useBudgetState } from "../../../hooks/useBudgetState";
-import type { useTourismWeightState } from "../../../hooks/useTourismWeightState";
-import type { useWeightState } from "../../../hooks/useWeightState";
-import type { CompareMode } from "../model/compareUrlState";
+import { BudgetFilterPanel } from "@features/budget/ui";
+import { TourismWeightPanel } from "@features/tourism/ui";
+import { WeightPanel } from "@features/country-ranking/ui";
+import type { useBudgetState } from "@features/budget/hooks";
+import type { useTourismWeightState } from "@features/tourism/hooks";
+import type { useWeightState } from "@features/country-ranking/hooks";
+import type { CompareMode } from "@features/compare/utils";
 
 interface CompareParametersPanelProps {
   compareMode: CompareMode;

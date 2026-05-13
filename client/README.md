@@ -17,22 +17,25 @@ npm run doctor:ci
 
 ## Folder ownership
 
-- `src/app`: application shell, providers, router, and app-level store helpers.
-- `src/shared`: reusable UI primitives, hooks, API clients, and framework-agnostic utilities.
-- `src/entities`: domain entities and data access that are not owned by a single feature.
-- `src/features`: feature models, Zustand stores, URL-state helpers, and feature-specific UI.
-- `src/pages`: route coordinators only. Pages should compose feature components and avoid owning domain logic.
+- `src/app`: application bootstrap, router, global styles, and app-level store helpers.
+- `src/core`: reusable `api`, `constants`, `hooks`, `models`, `store`, `ui`, and `utils` with the same role-folder structure used by features. Keep `models` for TypeScript shapes only.
+- `src/i18n`: localization setup and locale files.
+- `src/features`: feature-owned UI, hooks, Zustand stores, models, constants, utilities, data, and APIs.
+- Routes in `src/app/router` lazy-load owning feature/core UI components directly. Do not add thin page adapter files.
 
 ## State ownership
 
 - Use Zustand for shared or persisted app state.
-- Keep shareable state in URL helpers close to the feature model.
+- Keep shareable state in URL helpers close to the owning feature.
 - Keep ephemeral UI state local to the component that owns the interaction.
-- Put derived calculations in selectors or pure model utilities, not JSX.
+- Put derived calculations in selectors, feature hooks, or pure utilities, not JSX.
 
 ## Component rules
 
 - Prefer small single-responsibility files over route-sized components.
 - Use composition or explicit variants instead of boolean-prop mode switches.
 - Shared primitives must own accessibility details such as labels, focus management, Escape handling, and visible focus states.
-- New localStorage usage should go through `shared/lib/storage.ts`; new clipboard usage should go through `shared/hooks/useClipboard.ts`.
+- Use semantic role folders: React hooks in `hooks`, Zustand state in `store`, TypeScript shapes in `models`, static values in `constants`, and pure helpers in `utils`.
+- Avoid redundant role nesting such as `core/ui/layout/ui`; once inside `ui`, place section components directly in that section folder.
+- Keep `core` for multi-feature or app-wide code only. If a file is used by one feature, move it into that feature's matching role folder.
+- New localStorage usage should go through `core/utils/storage.utils.ts`; new clipboard usage should go through `core/hooks/useClipboard.ts`.

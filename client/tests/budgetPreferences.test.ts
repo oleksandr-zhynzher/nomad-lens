@@ -5,7 +5,7 @@ import {
   isDefaultBudgetPreferences,
   sanitizeBudgetCategoryWeights,
   sanitizeBudgetPreferences,
-} from "../src/features/budget/model/budget.store";
+} from "../src/features/budget/store";
 
 describe("budget preference model", () => {
   it("sanitizes persisted values into safe ranges", () => {

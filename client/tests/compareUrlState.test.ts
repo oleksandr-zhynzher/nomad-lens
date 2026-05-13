@@ -6,7 +6,7 @@ import {
   parseCompareMode,
   setCompareCountryCodesParam,
   setCompareModeParam,
-} from "../src/features/compare/model/compareUrlState";
+} from "../src/features/compare/utils";
 
 describe("compare URL state", () => {
   it("parses invalid or missing mode as countries", () => {

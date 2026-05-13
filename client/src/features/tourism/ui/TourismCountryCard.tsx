@@ -1,0 +1,158 @@
+import React from "react";
+import { ChevronRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import type { TourismRanked } from "@features/tourism/utils";
+import { applyTagSeasonality } from "@features/tourism/utils";
+import { tourismScoreColourClass } from "@core/utils";
+import { TOURISM_CATEGORY_KEYS } from "@core/models";
+import type { TravelDates } from "@features/tourism/hooks";
+import { CompareCheckbox } from "@features/compare/ui";
+import { getRowStyles } from "@core/utils";
+import { CountryNameCell } from "@core/ui/country";
+import { ScoreDot } from "@core/ui/indicator";
+import { ScoreSparkline } from "@core/ui/indicator";
+import { TourismBudgetBar } from "./TourismBudgetBar";
+import { TourismCountryCardDetail } from "./TourismCountryCardDetail";
+
+interface Props {
+  ranked: TourismRanked;
+  index: number;
+  highlighted?: boolean;
+  expanded?: boolean;
+  onToggle?: () => void;
+  onSelect?: () => void;
+  compareMode?: boolean;
+  isSelected?: boolean;
+  selectedTags?: string[];
+  travelDates?: TravelDates;
+}
+
+export function TourismCountryCard({
+  ranked,
+  index,
+  highlighted = false,
+  expanded = false,
+  onToggle,
+  onSelect,
+  compareMode = false,
+  isSelected = false,
+  selectedTags = [],
+  travelDates,
+}: Props) {
+  const { country, tourismScore, rank } = ranked;
+  const { t } = useTranslation();
+
+  const { bgColor: rowBg, hoverBg, borderColor } = getRowStyles(index, isSelected);
+
+  return (
+    <div
+      data-country-code={country.code}
+      data-selected={isSelected ? "true" : undefined}
+      className={`country-row overflow-hidden transition-colors duration-150 relative ${compareMode ? "pl-[38px]" : "pl-0"} bg-[var(--row-bg)] border-t border-[var(--row-bt)] ${highlighted ? "outline outline-2 outline-[var(--color-accent)] -outline-offset-1" : ""}`}
+      style={
+        {
+          "--row-bg": rowBg,
+          "--row-bt": highlighted ? "var(--color-accent)" : borderColor,
+          "--row-hover-bg": hoverBg,
+        } as React.CSSProperties
+      }
+    >
+      {compareMode && <CompareCheckbox isSelected={!!isSelected} uncheckedBg={rowBg} />}
+
+      <button
+        className={`w-full text-left flex flex-col transition-colors cursor-pointer bg-transparent border-none min-h-14 ${compareMode ? "pl-[38px] pr-4" : "px-4"} py-3`}
+        onClick={compareMode ? onSelect : onToggle}
+        aria-expanded={expanded}
+      >
+        <div className="flex items-center gap-2 md:gap-4 w-full">
+          {/* Rank */}
+          <span className="text-base md:text-lg font-mono font-bold text-accent w-7 text-center shrink-0">
+            {rank}
+          </span>
+
+          {/* Flag + Name + region */}
+          <CountryNameCell country={country} />
+
+          {/* Sparkline dots — tourism score categories + tag dots */}
+          <div className="hidden sm:flex gap-1 items-center">
+            <ScoreSparkline
+              entries={TOURISM_CATEGORY_KEYS.map((key) => ({
+                key,
+                value: country.scores[key]?.value ?? null,
+                label: t(`tourism.metrics.${key}`, key),
+              }))}
+            />
+            {/* Tag quality dots — only shown when tags are selected */}
+            {selectedTags.length > 0 && (
+              <>
+                <div className="w-px h-3 bg-border mx-0.5" />
+                {selectedTags.map((tag) => {
+                  const baseVal = country.tourismTagScores?.[tag] ?? null;
+                  const val =
+                    baseVal !== null
+                      ? applyTagSeasonality(
+                          baseVal,
+                          country.tourismTagSeasonality?.[tag],
+                          travelDates,
+                        )
+                      : null;
+                  const label = t(`tourismTags.${tag}`, tag);
+                  return <ScoreDot key={`tag-${tag}`} value={val} label={label} shape="square" />;
+                })}
+              </>
+            )}
+          </div>
+
+          {/* Cost + surplus (daily) */}
+          {ranked.budgetMatch && (
+            <div className="hidden sm:flex flex-col items-end shrink-0">
+              <span className="font-mono text-[13px] text-tertiary">
+                ${ranked.budgetMatch.dailyCost}/d
+              </span>
+              <span
+                className={`font-mono text-[11px] ${ranked.budgetMatch.surplus >= 0 ? "text-success" : "text-danger"}`}
+              >
+                {ranked.budgetMatch.surplus >= 0 ? "+" : ""}${ranked.budgetMatch.surplus}/d
+              </span>
+            </div>
+          )}
+
+          {/* Final score */}
+          <div className="shrink-0 w-12 text-right">
+            <span
+              className={`text-lg md:text-xl font-mono font-bold ${tourismScoreColourClass(tourismScore, "text")}`}
+            >
+              {tourismScore.toFixed(0)}
+            </span>
+          </div>
+
+          {/* Chevron */}
+          <ChevronRight
+            size={20}
+            className={`shrink-0 text-dimmest transition-transform duration-200 ${compareMode ? "rotate-0 opacity-[0.35]" : expanded ? "rotate-90" : "rotate-0"}`}
+          />
+        </div>
+
+        {/* Breakdown bar — matches BudgetCountryCard */}
+        {ranked.budgetMatch && (
+          <div className="mt-2 ml-[60px]">
+            <TourismBudgetBar
+              breakdown={ranked.budgetMatch.breakdown}
+              dailyCost={ranked.budgetMatch.dailyCost}
+              dailyBudget={ranked.budgetMatch.dailyCost + ranked.budgetMatch.surplus}
+            />
+          </div>
+        )}
+      </button>
+
+      {/* Expanded detail */}
+      {expanded && !compareMode && (
+        <TourismCountryCardDetail
+          country={country}
+          budgetMatch={ranked.budgetMatch}
+          borderColor={borderColor}
+        />
+      )}
+    </div>
+  );
+}
