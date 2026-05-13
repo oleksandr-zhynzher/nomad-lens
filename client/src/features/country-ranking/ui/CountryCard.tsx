@@ -2,7 +2,7 @@ import { ChevronRight, Plane } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
-import type { RankedCountry } from "@core/models";
+import type { RankedCountry, WeightMap } from "@core/models";
 import { VISIBLE_CATEGORY_KEYS } from "@core/models";
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "@core/ui";
@@ -23,6 +23,8 @@ interface CountryCardProps {
   compareMode?: boolean;
   selected?: boolean;
   onSelectToggle?: () => void;
+  /** Only show sparkline dots for categories with a non-zero weight. */
+  weights?: WeightMap;
 }
 
 export function CountryCard({
@@ -34,6 +36,7 @@ export function CountryCard({
   compareMode = false,
   selected = false,
   onSelectToggle,
+  weights,
 }: CountryCardProps) {
   const { country, finalScore, rank } = ranked;
   const { t } = useTranslation();
@@ -41,6 +44,10 @@ export function CountryCard({
 
   // Alternating backgrounds
   const { bgColor, hoverBg, borderColor } = getRowStyles(index, selected);
+
+  const sparklineKeys = weights
+    ? VISIBLE_CATEGORY_KEYS.filter((k) => (weights[k] ?? 0) > 0)
+    : VISIBLE_CATEGORY_KEYS;
 
   return (
     <div
@@ -96,7 +103,7 @@ export function CountryCard({
 
         {/* Sparkline dots */}
         <ScoreSparkline
-          entries={VISIBLE_CATEGORY_KEYS.map((key) => ({
+          entries={sparklineKeys.map((key) => ({
             key,
             value: country.scores[key]?.value ?? null,
             label: t(`indicatorsPage.indicators.${key}.name`, CATEGORY_LABELS[key]),

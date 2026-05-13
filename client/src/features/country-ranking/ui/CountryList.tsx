@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import type { RankedCountry } from "@core/models";
+import type { RankedCountry, WeightMap } from "@core/models";
 import { CountryCard } from "./CountryCard";
 import { useInfiniteScroll } from "@features/country-ranking/hooks";
 
@@ -16,6 +16,8 @@ interface CountryListProps {
   compareMode?: boolean;
   selectedCodes?: Set<string>;
   onToggleSelect?: (code: string) => void;
+  /** Active weight map — dots are hidden for categories with weight 0. */
+  weights?: WeightMap;
 }
 
 export function CountryList({
@@ -30,6 +32,7 @@ export function CountryList({
   compareMode = false,
   selectedCodes = new Set<string>(),
   onToggleSelect,
+  weights,
 }: CountryListProps) {
   const { t } = useTranslation();
 
@@ -84,6 +87,7 @@ export function CountryList({
           compareMode={compareMode}
           selected={selectedCodes.has(r.country.code)}
           onSelectToggle={() => onToggleSelect?.(r.country.code)}
+          weights={weights}
         />
       ))}
       {/* Invisible sentinel — entering the viewport triggers the next page load */}

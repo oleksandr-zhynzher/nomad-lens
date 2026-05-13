@@ -609,6 +609,7 @@ export default function App() {
               compareMode={compareMode}
               selectedCodes={selectedCodes}
               onToggleSelect={toggleSelect}
+              weights={ws.weights}
             />
           </div>
         </main>
