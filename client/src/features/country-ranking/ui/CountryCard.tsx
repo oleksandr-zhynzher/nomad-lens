@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import type { RankedCountry, WeightMap } from "@core/models";
-import { VISIBLE_CATEGORY_KEYS } from "@core/models";
+import { WEIGHT_GROUPS } from "@features/country-ranking/constants/weight-config.constants";
+
+/** Panel-controllable category keys only — tourism/hidden categories excluded. */
+const PANEL_KEYS = WEIGHT_GROUPS.flatMap((g) => g.keys);
 import { ScoreBreakdown } from "./ScoreBreakdown";
 import { Tooltip } from "@core/ui";
 import { CATEGORY_LABELS } from "@core/models";
@@ -45,9 +48,7 @@ export function CountryCard({
   // Alternating backgrounds
   const { bgColor, hoverBg, borderColor } = getRowStyles(index, selected);
 
-  const sparklineKeys = weights
-    ? VISIBLE_CATEGORY_KEYS.filter((k) => (weights[k] ?? 0) > 0)
-    : VISIBLE_CATEGORY_KEYS;
+  const sparklineKeys = weights ? PANEL_KEYS.filter((k) => (weights[k] ?? 0) > 0) : PANEL_KEYS;
 
   return (
     <div
