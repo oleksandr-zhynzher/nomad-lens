@@ -16,3 +16,6 @@ export * from "./RegionIcon";
 export * from "./RegionPill";
 export * from "./TourismComparison";
 export * from "./VisaCellComponents";
+export * from "./CompareHeroStats";
+export * from "./CompareModeToggle";
+export * from "./CompareActionBar";

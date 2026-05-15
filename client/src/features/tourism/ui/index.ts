@@ -8,3 +8,5 @@ export * from "./TourismWeightPanel";
 export * from "./TourismWeightSlider";
 export * from "./tourism.types";
 export * from "./tourism.utils";
+export * from "./TourismHeroSection";
+export * from "./TourismStickyBar";

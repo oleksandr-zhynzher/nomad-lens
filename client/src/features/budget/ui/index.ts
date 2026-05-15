@@ -5,3 +5,7 @@ export * from "./BudgetCountryCard";
 export * from "./BudgetFilterPanel";
 export * from "./BudgetMatcherView";
 export * from "./BudgetSidebar";
+export * from "./BudgetRowItem";
+export * from "./BudgetHeroSection";
+export * from "./BudgetStickyBar";
+export * from "./BudgetResultsList";

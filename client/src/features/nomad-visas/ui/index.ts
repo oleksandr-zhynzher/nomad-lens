@@ -5,3 +5,5 @@ export * from "./NomadVisasView";
 export * from "./VisaSortIcon";
 export * from "./nomad-visas.types";
 export * from "./nomad-visas.utils";
+export * from "./NomadVisasToolbar";
+export * from "./NomadVisasTableShell";
