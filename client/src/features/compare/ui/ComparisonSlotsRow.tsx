@@ -1,13 +1,8 @@
 import type { Dispatch, RefObject, SetStateAction } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Plane } from "lucide-react";
 import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
-import { localizeCountry, regionKey, scoreColourClass } from "@core/utils";
-import { applyClimate, computeScore } from "@features/country-ranking/utils";
-import { Tooltip } from "@core/ui";
 import { ComparisonAddButton } from "./ComparisonAddButton";
-import { ComparisonSlotCard } from "./ComparisonSlotCard";
+import { ComparisonSlotItem } from "./ComparisonSlotItem";
 
 interface ComparisonSlot {
   readonly country: CountryData;
@@ -41,49 +36,21 @@ export function ComparisonSlotsRow({
   setDropdownPos,
 }: ComparisonSlotsRowProps) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   return (
     <div className="relative">
       <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
-        {sortedCountries.map((slot) => {
-          const score = computeScore(applyClimate(slot.country, climatePrefs), weights);
-          return (
-            <div key={slot.country.code} className="w-[148px] shrink-0 md:w-[180px]">
-              <ComparisonSlotCard
-                flagUrl={slot.country.flagUrl}
-                countryName={localizeCountry(slot.country, lang).name}
-                onRemove={() => {
-                  onRemove(slot.index);
-                }}
-                onNavigate={async () =>
-                  navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
-                }
-                regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
-                nameSuffix={
-                  slot.country.hasNomadVisa ? (
-                    <Tooltip
-                      content={t("countryDetail.nomadVisa", "Nomad Visa Available")}
-                      side="top"
-                    >
-                      <Link
-                        to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
-                        className="inline-flex shrink-0 leading-none text-accent"
-                      >
-                        <Plane size={13} />
-                      </Link>
-                    </Tooltip>
-                  ) : undefined
-                }
-              >
-                <span
-                  className={`[font-family:Oswald,_sans-serif] text-[32px] leading-none font-bold ${scoreColourClass(score, "text")}`}
-                >
-                  {score.toFixed(1)}
-                </span>
-              </ComparisonSlotCard>
-            </div>
-          );
-        })}
+        {sortedCountries.map((slot) => (
+          <ComparisonSlotItem
+            key={slot.country.code}
+            country={slot.country}
+            color={slot.color}
+            weights={weights}
+            climatePrefs={climatePrefs}
+            lang={lang}
+            langPrefix={langPrefix}
+            onRemove={() => onRemove(slot.index)}
+          />
+        ))}
         <div ref={addBtnRef} className="w-[148px] shrink-0 md:w-[180px]">
           <ComparisonAddButton
             label={t("compare.addCountry")}

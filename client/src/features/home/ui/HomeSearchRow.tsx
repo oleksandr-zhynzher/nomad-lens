@@ -1,9 +1,7 @@
-import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { CompareModeActions } from "@core/ui";
 import type { SearchMode } from "./home.types";
-import { getSearchPaddingRight } from "./home.utils";
-import { HomeSearchControls } from "./HomeSearchControls";
+import { HomeSearchInput } from "./HomeSearchInput";
 
 interface HomeSearchRowProps {
   readonly search: string;
@@ -43,46 +41,18 @@ export function HomeSearchRow({
   const { t } = useTranslation();
   return (
     <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-      <div className="relative min-w-0 flex-1">
-        <Search className="absolute top-1/2 left-4 -translate-y-1/2 text-dim" size={18} />
-        <input
-          ref={searchInputRef}
-          name="country-search"
-          type="text"
-          placeholder={t("search.placeholder")}
-          value={search}
-          onChange={(e) => {
-            updateSearch(e.target.value);
-          }}
-          className="h-10 w-full rounded-md border border-surface bg-[#161616] pr-[var(--pr)] pl-12 text-sm text-white focus:outline-none"
-          style={
-            {
-              "--pr": getSearchPaddingRight(
-                search.length === 0,
-                searchMode,
-                search.trim().length > 0,
-              ),
-            } as React.CSSProperties
-          }
-        />
-        {search !== "" ? (
-          <HomeSearchControls
-            searchMode={searchMode}
-            search={search}
-            matchingCodes={matchingCodes}
-            matchCursor={matchCursor}
-            onClear={() => {
-              updateSearch("");
-            }}
-            onPrev={goPrev}
-            onNext={goNext}
-            onModeChange={setSearchMode}
-            onCursorReset={() => {
-              setMatchCursor(0);
-            }}
-          />
-        ) : null}
-      </div>
+      <HomeSearchInput
+        searchInputRef={searchInputRef}
+        search={search}
+        updateSearch={updateSearch}
+        searchMode={searchMode}
+        setSearchMode={setSearchMode}
+        matchingCodes={matchingCodes}
+        matchCursor={matchCursor}
+        setMatchCursor={setMatchCursor}
+        goNext={goNext}
+        goPrev={goPrev}
+      />
       <CompareModeActions
         active={compareMode}
         selectedCount={selectedCodes.size}

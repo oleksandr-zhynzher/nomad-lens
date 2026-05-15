@@ -7,107 +7,66 @@ import { HomeWeightSidebar } from "./HomeWeightSidebar";
 import { useHomePageState } from "./useHomePageState";
 
 export default function App() {
-  const {
-    ws,
-    t,
-    langPrefix,
-    countries,
-    loading,
-    error,
-    refresh,
-    compareMode,
-    setCompareMode,
-    selectedCodes,
-    toggleSelect,
-    exitCompareMode,
-    handleCompare,
-    search,
-    updateSearch,
-    searchMode,
-    setSearchMode,
-    matchingCodes,
-    matchCursor,
-    setMatchCursor,
-    goNext,
-    goPrev,
-    displayedRanked,
-    searchInputRef,
-    expandedCode,
-    setExpandedCode,
-    mobileParamsOpen,
-    setMobileParamsOpen,
-    regions,
-    activeHighlight,
-    highlightedCode,
-  } = useHomePageState();
+  const state = useHomePageState();
+  const { ws } = state;
 
   return (
     <Layout>
       <ResponsiveSidePanelLayout
         sidebar={<HomeWeightSidebar ws={ws} />}
         mobileSheet={{
-          open: mobileParamsOpen,
-          title: t("mobileSheet.weightsAndPreferences"),
-          closeLabel: t("a11y.closeParameters", "Close parameters"),
-          onClose: () => {
-            setMobileParamsOpen(false);
-          },
+          open: state.mobileParamsOpen,
+          title: state.t("mobileSheet.weightsAndPreferences"),
+          closeLabel: state.t("a11y.closeParameters", "Close parameters"),
+          onClose: () => state.setMobileParamsOpen(false),
           children: <HomeWeightSidebar ws={ws} mobile />,
         }}
         mobileFab={{
-          label: t("mobileSheet.parameters"),
-          ariaLabel: t("a11y.openParameters", "Open parameters"),
+          label: state.t("mobileSheet.parameters"),
+          ariaLabel: state.t("a11y.openParameters", "Open parameters"),
           icon: <SlidersHorizontal size={18} aria-hidden />,
-          onClick: () => {
-            setMobileParamsOpen(true);
-          },
+          onClick: () => state.setMobileParamsOpen(true),
         }}
       >
         <div className="px-4 md:px-6">
-          <HomeHeroSection countriesCount={countries.length} langPrefix={langPrefix} />
+          <HomeHeroSection countriesCount={state.countries.length} langPrefix={state.langPrefix} />
           <HomeStickyBar
-            search={search}
-            updateSearch={updateSearch}
-            searchMode={searchMode}
-            setSearchMode={setSearchMode}
-            matchingCodes={matchingCodes}
-            matchCursor={matchCursor}
-            setMatchCursor={setMatchCursor}
-            goNext={goNext}
-            goPrev={goPrev}
-            searchInputRef={searchInputRef}
-            compareMode={compareMode}
-            selectedCodes={selectedCodes}
-            onEnterCompareMode={() => {
-              setCompareMode(true);
-            }}
-            exitCompareMode={exitCompareMode}
-            handleCompare={handleCompare}
-            regions={regions}
+            search={state.search}
+            updateSearch={state.updateSearch}
+            searchMode={state.searchMode}
+            setSearchMode={state.setSearchMode}
+            matchingCodes={state.matchingCodes}
+            matchCursor={state.matchCursor}
+            setMatchCursor={state.setMatchCursor}
+            goNext={state.goNext}
+            goPrev={state.goPrev}
+            searchInputRef={state.searchInputRef}
+            compareMode={state.compareMode}
+            selectedCodes={state.selectedCodes}
+            onEnterCompareMode={() => state.setCompareMode(true)}
+            exitCompareMode={state.exitCompareMode}
+            handleCompare={state.handleCompare}
+            regions={state.regions}
             selectedRegions={ws.selectedRegions}
             setSelectedRegions={ws.setSelectedRegions}
-            onClearRegions={() => {
-              ws.setSelectedRegions(new Set());
-            }}
+            onClearRegions={() => ws.setSelectedRegions(new Set())}
           />
           <CountryList
-            ranked={displayedRanked}
-            loading={loading}
-            error={error}
-            onRetry={refresh}
-            highlightedCode={activeHighlight}
-            expandedCode={compareMode ? null : expandedCode}
+            ranked={state.displayedRanked}
+            loading={state.loading}
+            error={state.error}
+            onRetry={state.refresh}
+            highlightedCode={state.activeHighlight}
+            expandedCode={state.compareMode ? null : state.expandedCode}
             onToggleExpanded={
-              compareMode
+              state.compareMode
                 ? undefined
-                : (code) => {
-                    setExpandedCode((c) => (c === code ? null : code));
-                  }
+                : (code) => state.setExpandedCode((c) => (c === code ? null : code))
             }
-            showAll={search.trim().length > 0 || highlightedCode !== null}
-            compareMode={compareMode}
-            selectedCodes={selectedCodes}
-            onToggleSelect={toggleSelect}
+            showAll={state.search.trim().length > 0 || state.highlightedCode !== null}
+            compareMode={state.compareMode}
+            selectedCodes={state.selectedCodes}
+            onToggleSelect={state.toggleSelect}
             weights={ws.weights}
           />
         </div>

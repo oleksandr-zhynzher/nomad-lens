@@ -1,10 +1,8 @@
-import { useTranslation } from "react-i18next";
 import type { NavigateFunction } from "react-router-dom";
 import type { RefObject, CSSProperties } from "react";
-import { EmptyState } from "@core/ui/states";
 import type { SortField, SortDirection, VisaRow } from "./nomad-visas.types";
 import { NomadVisaTableHeader } from "./NomadVisaTableHeader";
-import { NomadVisaTableRow } from "./NomadVisaTableRow";
+import { NomadVisaTableBody } from "./NomadVisaTableBody";
 
 interface NomadVisaTableContentProps {
   readonly sortedCountries: VisaRow[];
@@ -41,7 +39,6 @@ export function NomadVisaTableContent({
   navigate,
   highlightCode,
 }: NomadVisaTableContentProps) {
-  const { t, i18n } = useTranslation();
   const minW = compareMode ? "1170px" : "1122px";
   const colgroup = (
     <colgroup>
@@ -77,40 +74,19 @@ export function NomadVisaTableContent({
           />
         </table>
       </div>
-      <div ref={bodyRef} className="overflow-x-auto" onScroll={onBodyScroll}>
-        {sortedCountries.length === 0 ? (
-          <EmptyState message={t("nomadVisasPage.noResults", "No countries found")} />
-        ) : (
-          <table
-            className="w-full min-w-[var(--tmin-w)] table-fixed border-separate border-spacing-0"
-            style={{ "--tmin-w": minW } as CSSProperties}
-          >
-            {colgroup}
-            <tbody>
-              {sortedCountries.map(({ country, overallScore, monthlyBudget }) => (
-                <NomadVisaTableRow
-                  key={country.code}
-                  country={country}
-                  overallScore={overallScore}
-                  monthlyBudget={monthlyBudget}
-                  budget={budget}
-                  compareMode={compareMode}
-                  isSelected={selectedCodes.has(country.code)}
-                  isHighlighted={highlightCode === country.code}
-                  onRowClick={(code) =>
-                    compareMode
-                      ? onToggleSelect(code)
-                      : void navigate(`${langPrefix}/country/${code.toLowerCase()}`)
-                  }
-                  onToggleSelect={onToggleSelect}
-                  langPrefix={langPrefix}
-                  lang={i18n.language}
-                />
-              ))}
-            </tbody>
-          </table>
-        )}
-      </div>
+      <NomadVisaTableBody
+        sortedCountries={sortedCountries}
+        compareMode={compareMode}
+        selectedCodes={selectedCodes}
+        onToggleSelect={onToggleSelect}
+        minW={minW}
+        bodyRef={bodyRef}
+        onBodyScroll={onBodyScroll}
+        budget={budget}
+        langPrefix={langPrefix}
+        navigate={navigate}
+        highlightCode={highlightCode}
+      />
     </div>
   );
 }

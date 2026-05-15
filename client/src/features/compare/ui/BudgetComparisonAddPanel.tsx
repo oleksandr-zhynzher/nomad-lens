@@ -7,12 +7,7 @@ import { ComparisonAddButton } from "./ComparisonAddButton";
 import { CountryPickerDropdown } from "./CountryPickerDropdown";
 import { BudgetSlotCards } from "./BudgetSlotCards";
 
-interface ComparisonSlot {
-  readonly country: CountryData;
-  readonly color: string;
-  readonly index: number;
-}
-
+type ComparisonSlot = Readonly<{ country: CountryData; color: string; index: number }>;
 interface BudgetComparisonAddPanelProps {
   readonly sortedSlots: ComparisonSlot[];
   readonly matchMap: Map<string, BudgetMatch>;
