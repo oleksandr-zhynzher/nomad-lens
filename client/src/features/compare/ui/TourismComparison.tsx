@@ -1,25 +1,13 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import type { CountryData } from "@core/models";
-import { TOURISM_CATEGORY_KEYS } from "@core/models";
-import { localizeCountry, regionKey } from "@core/utils";
-import { computeTourismScore, tourismScoreColour } from "@features/tourism/utils";
-import { tourismScoreColourClass } from "@core/utils";
+import { localizeCountry, regionKey, tourismScoreColourClass } from "@core/utils";
+import { computeTourismScore } from "@features/tourism/utils";
 import { useLangPrefix } from "@core/hooks";
-import { useSyncScroll } from "@features/compare/hooks";
-import { useComparisonSelection } from "@features/compare/hooks";
-import { ComparisonAddButton } from "./ComparisonAddButton";
-import { ComparisonRowShell } from "./ComparisonRowShell";
-import { ComparisonScoreCell } from "./ComparisonScoreCell";
-import { ComparisonSlotCard } from "./ComparisonSlotCard";
-import { ComparisonTableHeader } from "./ComparisonTableHeader";
+import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
 import { CountryPickerDropdown } from "./CountryPickerDropdown";
-import {
-  TOURISM_ICONS,
-  TOURISM_LABELS,
-  TOURISM_COMPARISON_COLUMN_WIDTH,
-} from "@features/tourism/constants";
+import { TourismComparisonSlots } from "./TourismComparisonSlots";
+import { TourismComparisonGrid } from "./TourismComparisonGrid";
 
 interface TourismComparisonProps {
   readonly countries: CountryData[];
@@ -38,7 +26,6 @@ export function TourismComparison({
 }: TourismComparisonProps) {
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
-  const navigate = useNavigate();
   const lang = i18n.language;
 
   const {
@@ -63,7 +50,6 @@ export function TourismComparison({
     onSelectionCount,
   });
 
-  // Sync horizontal scroll between sticky header and body
   useSyncScroll(headerRef, bodyRef);
 
   const sortedCountries = useMemo(() => {
@@ -71,68 +57,22 @@ export function TourismComparison({
     return [...selectedCountries].sort((slotA, slotB) => {
       const scoreA = computeTourismScore(slotA.country) ?? 0;
       const scoreB = computeTourismScore(slotB.country) ?? 0;
-      const scoreDelta = scoreB - scoreA;
-      return sortDirection === "desc" ? scoreDelta : -scoreDelta;
+      return sortDirection === "desc" ? scoreB - scoreA : scoreA - scoreB;
     });
   }, [selectedCountries, sortDirection]);
 
   return (
     <div>
-      {/* Country selector — horizontal scroll with fade hint */}
-      <div className="relative">
-        <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
-          {sortedCountries.map((slot) => {
-            const score = computeTourismScore(slot.country);
-            return (
-              <div key={slot.country.code} className="w-[148px] shrink-0 md:w-[180px]">
-                <ComparisonSlotCard
-                  flagUrl={slot.country.flagUrl}
-                  countryName={localizeCountry(slot.country, lang).name}
-                  onRemove={() => {
-                    handleRemove(slot.index);
-                  }}
-                  onNavigate={async () =>
-                    navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
-                  }
-                  regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
-                >
-                  <span
-                    className={`[font-family:Oswald,_sans-serif] text-[32px] leading-none font-bold ${score == null ? "text-[#333333]" : tourismScoreColourClass(score, "text")}`}
-                  >
-                    {score == null ? "—" : score.toFixed(1)}
-                  </span>
-                </ComparisonSlotCard>
-              </div>
-            );
-          })}
-
-          {/* Add button */}
-          <div ref={addBtnRef} className="w-[148px] shrink-0 md:w-[180px]">
-            <ComparisonAddButton
-              label={t("compare.addCountry")}
-              onClick={() => {
-                if (!dropdownOpen && addBtnRef.current) {
-                  const rect = addBtnRef.current.getBoundingClientRect();
-                  const dropdownWidth = 320;
-                  const dropdownMaxHeight = 370;
-                  const left = Math.max(
-                    8,
-                    Math.min(rect.left, window.innerWidth - dropdownWidth - 8),
-                  );
-                  const fitsBelow = rect.bottom + 8 + dropdownMaxHeight <= window.innerHeight;
-                  const top = fitsBelow ? rect.bottom + 8 : rect.top - dropdownMaxHeight - 8;
-                  setDropdownPos({ top, left });
-                }
-                setDropdownOpen((p) => !p);
-              }}
-            />
-          </div>
-        </div>
-        {/* Right-edge fade */}
-        <div className="pointer-events-none absolute top-0 right-0 bottom-0 hidden w-12 [background:linear-gradient(to_right,transparent,#0F1114)] md:block" />
-      </div>
-
-      {/* Dropdown — fixed-positioned under the Add Country card */}
+      <TourismComparisonSlots
+        sortedCountries={sortedCountries}
+        lang={lang}
+        langPrefix={langPrefix}
+        onRemove={handleRemove}
+        addBtnRef={addBtnRef}
+        dropdownOpen={dropdownOpen}
+        setDropdownOpen={setDropdownOpen}
+        setDropdownPos={setDropdownPos}
+      />
       <CountryPickerDropdown
         open={dropdownOpen ? dropdownPos != null : false}
         countries={filtered.map((c) => {
@@ -159,51 +99,13 @@ export function TourismComparison({
         searchPlaceholder={t("compare.searchCountry")}
         emptyLabel={t("compare.noCountriesFound")}
       />
-
-      {/* Indicator grid */}
       {selectedCountries.length > 0 ? (
-        <div className="mt-8">
-          {/* Separator */}
-          <div className="h-px bg-[#1C1C1C]" />
-
-          {/* Sticky column header */}
-          <ComparisonTableHeader
-            ref={headerRef}
-            label={t("compare.indicatorHeader")}
-            columns={sortedCountries.map((slot) => ({
-              key: slot.index,
-              flagUrl: slot.country.flagUrl,
-              name: localizeCountry(slot.country, lang).name,
-            }))}
-            columnWidth={TOURISM_COMPARISON_COLUMN_WIDTH}
-          />
-
-          {/* Scrollable data rows */}
-          <div ref={bodyRef} className="overflow-x-auto">
-            {TOURISM_CATEGORY_KEYS.map((key) => {
-              const Icon = TOURISM_ICONS[key];
-              return (
-                <ComparisonRowShell
-                  key={key}
-                  icon={Icon}
-                  label={t(`tourism.metrics.${key}`, TOURISM_LABELS[key] ?? key)}
-                >
-                  {sortedCountries.map((slot) => {
-                    const val = slot.country.scores[key].value ?? null;
-                    return (
-                      <ComparisonScoreCell
-                        key={slot.index}
-                        value={val}
-                        colour={val == null ? "#333333" : tourismScoreColour(val)}
-                        columnWidth={TOURISM_COMPARISON_COLUMN_WIDTH}
-                      />
-                    );
-                  })}
-                </ComparisonRowShell>
-              );
-            })}
-          </div>
-        </div>
+        <TourismComparisonGrid
+          sortedCountries={sortedCountries}
+          lang={lang}
+          headerRef={headerRef}
+          bodyRef={bodyRef}
+        />
       ) : null}
     </div>
   );
