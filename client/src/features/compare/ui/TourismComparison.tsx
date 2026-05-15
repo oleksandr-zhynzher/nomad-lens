@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import type { CountryData } from "@core/models";
@@ -21,11 +21,10 @@ import {
   TOURISM_COMPARISON_COLUMN_WIDTH,
 } from "@features/tourism/constants";
 
-interface Props {
+interface TourismComparisonProps {
   readonly countries: CountryData[];
   readonly selectedCodes: string[];
   readonly onSelectedCodesChange: (codes: string[]) => void;
-  readonly sortTrigger?: number;
   readonly sortDirection?: "desc" | "asc" | null;
   readonly onSelectionCount?: (count: number) => void;
 }
@@ -34,10 +33,9 @@ export function TourismComparison({
   countries,
   selectedCodes,
   onSelectedCodesChange,
-  sortTrigger = 0,
   sortDirection = null,
   onSelectionCount,
-}: Props) {
+}: TourismComparisonProps) {
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const navigate = useNavigate();
@@ -68,38 +66,22 @@ export function TourismComparison({
   // Sync horizontal scroll between sticky header and body
   useSyncScroll(headerRef, bodyRef);
 
-  // Sort when parent triggers it
-  useEffect(() => {
-    if (sortTrigger <= 0 || sortDirection == null) return;
-
-    const sorted = [...selectedCodes].sort((a, b) => {
-      const countryA = countries.find((c) => c.code === a);
-      const countryB = countries.find((c) => c.code === b);
-      if (!countryA || !countryB) return 0;
-
-      const scoreA = computeTourismScore(countryA) ?? 0;
-      const scoreB = computeTourismScore(countryB) ?? 0;
+  const sortedCountries = useMemo(() => {
+    if (sortDirection == null) return selectedCountries;
+    return [...selectedCountries].sort((slotA, slotB) => {
+      const scoreA = computeTourismScore(slotA.country) ?? 0;
+      const scoreB = computeTourismScore(slotB.country) ?? 0;
       const scoreDelta = scoreB - scoreA;
-
       return sortDirection === "desc" ? scoreDelta : -scoreDelta;
     });
-
-    if (
-      sorted.length === selectedCodes.length &&
-      sorted.every((code, index) => code === selectedCodes[index])
-    ) {
-      return;
-    }
-
-    onSelectedCodesChange(sorted);
-  }, [countries, onSelectedCodesChange, selectedCodes, sortDirection, sortTrigger]);
+  }, [selectedCountries, sortDirection]);
 
   return (
     <div>
       {/* Country selector — horizontal scroll with fade hint */}
       <div className="relative">
         <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
-          {selectedCountries.map((slot) => {
+          {sortedCountries.map((slot) => {
             const score = computeTourismScore(slot.country);
             return (
               <div key={slot.country.code} className="w-[148px] shrink-0 md:w-[180px]">
@@ -188,7 +170,7 @@ export function TourismComparison({
           <ComparisonTableHeader
             ref={headerRef}
             label={t("compare.indicatorHeader")}
-            columns={selectedCountries.map((slot) => ({
+            columns={sortedCountries.map((slot) => ({
               key: slot.index,
               flagUrl: slot.country.flagUrl,
               name: localizeCountry(slot.country, lang).name,
@@ -206,7 +188,7 @@ export function TourismComparison({
                   icon={Icon}
                   label={t(`tourism.metrics.${key}`, TOURISM_LABELS[key] ?? key)}
                 >
-                  {selectedCountries.map((slot) => {
+                  {sortedCountries.map((slot) => {
                     const val = slot.country.scores[key].value ?? null;
                     return (
                       <ComparisonScoreCell

@@ -20,7 +20,7 @@ import {
 } from "@core/constants";
 import type { SelectedSlot } from "@features/compare/utils";
 
-interface Props {
+interface NomadVisaComparisonProps {
   readonly countries: CountryData[];
   readonly weights: WeightMap;
   readonly climatePrefs: ClimatePreferences;
@@ -36,7 +36,7 @@ export function NomadVisaComparison({
   budgetMatches,
   selectedCodes,
   onSelectedCodesChange,
-}: Props) {
+}: NomadVisaComparisonProps) {
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const navigate = useNavigate();

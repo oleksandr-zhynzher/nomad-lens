@@ -4,13 +4,17 @@ import { Tooltip } from "@core/ui";
 import { COST_COLORS } from "@features/budget/constants";
 import { BUDGET_CATEGORY_KEYS } from "@features/budget/constants";
 
-interface Props {
+interface BudgetBreakdownChartProps {
   readonly breakdown: BudgetBreakdown;
   readonly budget: number;
   readonly monthlyCost: number;
 }
 
-export function BudgetBreakdownChart({ breakdown, budget, monthlyCost }: Props) {
+export function BudgetBreakdownChart({
+  breakdown,
+  budget,
+  monthlyCost,
+}: BudgetBreakdownChartProps) {
   const { t } = useTranslation();
   const segments = BUDGET_CATEGORY_KEYS.filter((k) => breakdown[k] > 0);
   const maxVal = Math.max(monthlyCost, budget) * 1.1;

@@ -14,7 +14,7 @@ import { ScoreSparkline } from "@core/ui/indicator";
 import { TourismBudgetBar } from "./TourismBudgetBar";
 import { TourismCountryCardDetail } from "./TourismCountryCardDetail";
 
-interface Props {
+interface TourismCountryCardProps {
   readonly ranked: TourismRanked;
   readonly index: number;
   readonly highlighted?: boolean;
@@ -38,7 +38,7 @@ export function TourismCountryCard({
   isSelected = false,
   selectedTags = [],
   travelDates,
-}: Props) {
+}: TourismCountryCardProps) {
   const { country, tourismScore, rank } = ranked;
   const { t } = useTranslation();
 

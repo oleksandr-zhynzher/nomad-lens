@@ -11,7 +11,7 @@ import { CountryNameCell } from "@core/ui/country";
 import { MetricCard, MetricGrid } from "@core/ui";
 import { getBudgetCountryCardBreakdownItems } from "@features/budget/utils/budget-country-card.utils";
 
-interface Props {
+interface BudgetCountryCardProps {
   readonly match: BudgetMatch;
   readonly budget: number;
   readonly rank: number;
@@ -29,7 +29,7 @@ export function BudgetCountryCard({
   onToggle,
   compareMode = false,
   isSelected = false,
-}: Props) {
+}: BudgetCountryCardProps) {
   const { country, comfortScore, monthlyCost, surplus, breakdown } = match;
   const { t } = useTranslation();
   const langPrefix = useLangPrefix();

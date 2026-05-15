@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import { RegionPill } from "@features/compare/ui";
 
-interface Props {
+interface ComparisonSlotCardProps {
   readonly flagUrl: string;
   readonly countryName: string;
   readonly onRemove: () => void;
@@ -19,7 +19,7 @@ export function ComparisonSlotCard({
   regionLabel,
   nameSuffix,
   children,
-}: Props) {
+}: ComparisonSlotCardProps) {
   return (
     <div
       onClick={onNavigate}

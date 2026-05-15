@@ -2,11 +2,11 @@ import { useTranslation } from "react-i18next";
 import { TOURISM_CATEGORY_KEYS, type CountryData } from "@core/models";
 import { scoreColourClass } from "@core/utils";
 
-interface Props {
+interface TourismBreakdownChartProps {
   readonly country: CountryData;
 }
 
-export function TourismBreakdownChart({ country }: Props) {
+export function TourismBreakdownChart({ country }: TourismBreakdownChartProps) {
   const { t } = useTranslation();
 
   return (

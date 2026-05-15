@@ -17,7 +17,6 @@ export interface ComparePanelProps {
   readonly budgetMatches: BudgetMatch[];
   readonly selectedCodes: string[];
   readonly onSelectedCodesChange: (codes: string[]) => void;
-  readonly sortTrigger: number;
   readonly sortDirection: SortDirection;
   readonly onSelectionCount: (count: number) => void;
 }
@@ -30,7 +29,6 @@ export function ComparePanel({
   budgetMatches,
   selectedCodes,
   onSelectedCodesChange,
-  sortTrigger,
   sortDirection,
   onSelectionCount,
 }: ComparePanelProps): React.JSX.Element {
@@ -57,7 +55,6 @@ export function ComparePanel({
           matches={budgetMatches}
           selectedCodes={selectedCodes}
           onSelectedCodesChange={onSelectedCodesChange}
-          sortTrigger={sortTrigger}
           sortDirection={sortDirection}
         />
       );
@@ -67,7 +64,6 @@ export function ComparePanel({
           countries={countries}
           selectedCodes={selectedCodes}
           onSelectedCodesChange={onSelectedCodesChange}
-          sortTrigger={sortTrigger}
           sortDirection={sortDirection}
           onSelectionCount={onSelectionCount}
         />
@@ -80,7 +76,6 @@ export function ComparePanel({
           climatePrefs={climatePrefs}
           selectedCodes={selectedCodes}
           onSelectedCodesChange={onSelectedCodesChange}
-          sortTrigger={sortTrigger}
           sortDirection={sortDirection}
           onSelectionCount={onSelectionCount}
         />

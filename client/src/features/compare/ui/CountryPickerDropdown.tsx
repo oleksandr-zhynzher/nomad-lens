@@ -8,7 +8,7 @@ interface PickerCountry {
   trailing?: React.ReactNode;
 }
 
-interface Props {
+interface CountryPickerDropdownProps {
   readonly open: boolean;
   readonly countries: PickerCountry[];
   readonly query: string;
@@ -30,7 +30,7 @@ export function CountryPickerDropdown({
   inputName,
   searchPlaceholder,
   emptyLabel,
-}: Props) {
+}: CountryPickerDropdownProps) {
   if (!open) return null;
 
   const inner = (

@@ -1,6 +1,6 @@
 import type React from "react";
 
-interface Props {
+interface ComparisonScoreCellProps {
   readonly value: number | null;
   readonly colour: string;
   readonly nullColour?: string;
@@ -16,7 +16,7 @@ export function ComparisonScoreCell({
   format,
   fontSize,
   columnWidth,
-}: Props) {
+}: ComparisonScoreCellProps) {
   return (
     <div
       className="w-[var(--cw)] shrink-0 text-center"

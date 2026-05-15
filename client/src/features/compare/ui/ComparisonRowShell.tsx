@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 
-interface Props {
+interface ComparisonRowShellProps {
   readonly icon?: ComponentType<{ size?: number; className?: string }>;
   readonly iconColor?: string;
   readonly label: string;
@@ -20,7 +20,7 @@ export function ComparisonRowShell({
   highlight,
   gap,
   children,
-}: Props) {
+}: ComparisonRowShellProps) {
   return (
     <div
       className={`flex items-center border-b border-[#1C1C1C] py-4 ${highlight === true ? "bg-[#0D0D0F]" : ""}`}

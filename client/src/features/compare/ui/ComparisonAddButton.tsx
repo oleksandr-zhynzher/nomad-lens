@@ -1,11 +1,11 @@
 import { CirclePlus } from "lucide-react";
 
-interface Props {
+interface ComparisonAddButtonProps {
   readonly onClick: () => void;
   readonly label: string;
 }
 
-export function ComparisonAddButton({ onClick, label }: Props) {
+export function ComparisonAddButton({ onClick, label }: ComparisonAddButtonProps) {
   return (
     <button
       onClick={onClick}

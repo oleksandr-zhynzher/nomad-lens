@@ -7,7 +7,7 @@ interface ComparisonHeaderColumn {
   readonly maxNameWidth?: string;
 }
 
-interface Props {
+interface ComparisonTableHeaderProps {
   readonly ref?: React.Ref<HTMLDivElement>;
   readonly label: string;
   readonly columns: readonly ComparisonHeaderColumn[];
@@ -15,7 +15,13 @@ interface Props {
   readonly gap?: string;
 }
 
-export function ComparisonTableHeader({ ref, label, columns, columnWidth, gap }: Props) {
+export function ComparisonTableHeader({
+  ref,
+  label,
+  columns,
+  columnWidth,
+  gap,
+}: ComparisonTableHeaderProps) {
   return (
     <div
       ref={ref}

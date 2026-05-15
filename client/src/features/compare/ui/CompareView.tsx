@@ -37,7 +37,6 @@ export function ComparePage() {
   const compareMode = parseCompareMode(searchParams);
 
   const [showWeights, setShowWeights] = useState(compareMode === "budget");
-  const [sortTrigger, setSortTrigger] = useState(0);
   const [countrySelectionCount, setCountrySelectionCount] = useState(0);
   const [copied, setCopied] = useState(false);
   const [sortFeedbackActive, setSortFeedbackActive] = useState(false);
@@ -126,7 +125,6 @@ export function ComparePage() {
 
   const handleSortByScore = () => {
     setSortDirection(sortDirection === "desc" ? "asc" : "desc");
-    setSortTrigger(sortTrigger + 1);
     setSortFeedbackActive(true);
     delayedReset(setSortFeedbackActive, 1000);
   };
@@ -409,7 +407,6 @@ export function ComparePage() {
                 budgetMatches={budgetMatches}
                 selectedCodes={selectedCodes}
                 onSelectedCodesChange={handleSelectedCodesChange}
-                sortTrigger={sortTrigger}
                 sortDirection={sortDirection}
                 onSelectionCount={setCountrySelectionCount}
               />

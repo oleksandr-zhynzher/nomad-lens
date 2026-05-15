@@ -17,11 +17,11 @@ import {
 
 type BudgetStateReturn = ReturnType<typeof useBudgetState>;
 
-interface Props {
+interface BudgetFilterPanelProps {
   readonly bs: BudgetStateReturn;
 }
 
-export function BudgetFilterPanel({ bs }: Props) {
+export function BudgetFilterPanel({ bs }: BudgetFilterPanelProps) {
   const { t } = useTranslation();
   const langPrefix = useLangPrefix();
   const [open, setOpen] = useState({ lifestyle: true, categories: true });

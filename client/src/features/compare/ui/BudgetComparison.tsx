@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Wallet, TrendingUp } from "lucide-react";
 import type { CountryData } from "@core/models";
@@ -17,12 +17,11 @@ import type { BudgetMatch } from "@features/budget/hooks";
 import { BREAKDOWN_ROWS, BUDGET_COMPARISON_COLUMN_WIDTH } from "@features/budget/constants";
 import { costColor } from "@features/budget/utils";
 
-interface Props {
+interface BudgetComparisonProps {
   readonly countries: CountryData[];
   readonly matches?: BudgetMatch[];
   readonly selectedCodes: string[];
   readonly onSelectedCodesChange: (codes: string[]) => void;
-  readonly sortTrigger?: number;
   readonly sortDirection?: "desc" | "asc" | null;
 }
 
@@ -31,9 +30,8 @@ export function BudgetComparison({
   matches = [],
   selectedCodes,
   onSelectedCodesChange,
-  sortTrigger = 0,
   sortDirection = null,
-}: Props) {
+}: BudgetComparisonProps) {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
 
@@ -65,35 +63,22 @@ export function BudgetComparison({
 
   const filtered = hookFiltered.filter((c) => !!c.costOfLiving);
 
-  useEffect(() => {
-    if (sortTrigger <= 0 || sortDirection == null) return;
-
-    const sortedCodes = [...selectedCodes].sort((codeA, codeB) => {
-      const matchA = matchMap.get(codeA);
-      const matchB = matchMap.get(codeB);
-
+  const sortedSlots = useMemo(() => {
+    if (sortDirection == null) return selectedSlots;
+    return [...selectedSlots].sort((slotA, slotB) => {
+      const matchA = matchMap.get(slotA.country.code);
+      const matchB = matchMap.get(slotB.country.code);
       if (!matchA && !matchB) return 0;
       if (!matchA) return sortDirection === "desc" ? 1 : -1;
       if (!matchB) return sortDirection === "desc" ? -1 : 1;
-
       if (matchA.monthlyCost !== matchB.monthlyCost) {
         const costDelta = matchB.monthlyCost - matchA.monthlyCost;
         return sortDirection === "desc" ? costDelta : -costDelta;
       }
-
       const surplusDelta = matchB.surplus - matchA.surplus;
       return sortDirection === "desc" ? surplusDelta : -surplusDelta;
     });
-
-    if (
-      sortedCodes.length === selectedCodes.length &&
-      sortedCodes.every((code, index) => code === selectedCodes[index])
-    ) {
-      return;
-    }
-
-    onSelectedCodesChange(sortedCodes);
-  }, [matchMap, onSelectedCodesChange, selectedCodes, sortDirection, sortTrigger]);
+  }, [selectedSlots, sortDirection, matchMap]);
 
   // Cheapest value per row across selected countries
   const minBreakdown: Record<string, number> = {};
@@ -115,7 +100,7 @@ export function BudgetComparison({
       {/* ── Country selector ─────────────────────────────────── */}
       <div className="relative">
         <div className="grid grid-cols-3 gap-3 pb-2 [scrollbar-width:thin] md:flex md:items-stretch md:overflow-x-auto">
-          {selectedSlots.map((slot) => {
+          {sortedSlots.map((slot) => {
             const match = matchMap.get(slot.country.code);
             const cost = match?.monthlyCost;
             const surplus = match == null ? null : match.surplus;
@@ -212,7 +197,7 @@ export function BudgetComparison({
           <ComparisonTableHeader
             ref={headerRef}
             label={t("compare.indicatorHeader", "Category")}
-            columns={selectedSlots.map((slot) => ({
+            columns={sortedSlots.map((slot) => ({
               key: slot.index,
               flagUrl: slot.country.flagUrl,
               name: localizeCountry(slot.country, lang).name,
@@ -228,7 +213,7 @@ export function BudgetComparison({
               iconColor="#C2956A"
               label={t("budget.totalMonthly", "Monthly Total")}
             >
-              {selectedSlots.map((slot) => {
+              {sortedSlots.map((slot) => {
                 const val = matchMap.get(slot.country.code)?.monthlyCost ?? null;
                 return (
                   <ComparisonScoreCell
@@ -248,7 +233,7 @@ export function BudgetComparison({
               iconColor="#4CAF50"
               label={t("budget.surplus", "Surplus")}
             >
-              {selectedSlots.map((slot) => {
+              {sortedSlots.map((slot) => {
                 const match = matchMap.get(slot.country.code);
                 const val = match === undefined ? null : match.surplus;
                 return (
@@ -275,7 +260,7 @@ export function BudgetComparison({
                   iconColor={dotColor}
                   label={t(`budget.categories.${key}`, key)}
                 >
-                  {selectedSlots.map((slot) => {
+                  {sortedSlots.map((slot) => {
                     const val = matchMap.get(slot.country.code)?.breakdown[key] ?? null;
                     return (
                       <ComparisonScoreCell
