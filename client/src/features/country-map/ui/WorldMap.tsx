@@ -29,11 +29,14 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   ) {
     const alpha2 = geoNumericToAlpha2(geo);
     const r = scoreByAlpha2.get(alpha2);
-    const name = r
-      ? localizeCountry(r.country, i18n.language).name
-      : typeof geo.properties.name === "string"
-        ? geo.properties.name
-        : alpha2;
+    let name: string;
+    if (r) {
+      name = localizeCountry(r.country, i18n.language).name;
+    } else if (typeof geo.properties.name === "string") {
+      name = geo.properties.name;
+    } else {
+      name = alpha2;
+    }
     setHover({
       name,
       score: r?.finalScore ?? null,

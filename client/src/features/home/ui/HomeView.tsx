@@ -171,12 +171,12 @@ export default function App() {
       const isSearchInput = e.target === searchInputRef.current;
 
       if (e.key === "Enter") {
-        const highlighted =
-          search.trim().length > 0
-            ? (matchingCodes[matchCursor] ?? null)
-            : activeNavCursor === null
-              ? null
-              : (allCodes[activeNavCursor] ?? null);
+        let highlighted: string | null = null;
+        if (search.trim().length > 0) {
+          highlighted = matchingCodes[matchCursor] ?? null;
+        } else if (activeNavCursor !== null) {
+          highlighted = allCodes[activeNavCursor] ?? null;
+        }
         if (highlighted !== null) {
           e.preventDefault();
           setExpandedCode((c) => (c === highlighted ? null : highlighted));

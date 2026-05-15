@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp, Clock, DollarSign, TrendingUp, Shield } from "l
 import { useTranslation } from "react-i18next";
 import { TAX_STATUS_COLORS } from "@core/constants";
 import type { NomadVisaDetails as NomadVisaDetailsType } from "@core/models";
+import { getTaxStatusLabel } from "./nomad-visas.utils";
 
 interface NomadVisaDetailsProps {
   readonly visa: NomadVisaDetailsType;
@@ -82,21 +83,23 @@ export function NomadVisaDetails({ visa, expanded, onToggle }: NomadVisaDetailsP
                 <TrendingUp size={12} className="inline" />
                 {t("countryPage.visa.income", "Income")}
               </span>
-              {visa.incomeRequirement.monthly != null ? (
+              {visa.incomeRequirement.monthly !== null ? (
                 <span className="font-mono text-[11px] font-semibold text-white">
                   {visa.incomeRequirement.currency}{" "}
                   {visa.incomeRequirement.monthly.toLocaleString()}/mo
                 </span>
-              ) : visa.incomeRequirement.annual != null ? (
+              ) : null}
+              {visa.incomeRequirement.monthly === null && visa.incomeRequirement.annual !== null ? (
                 <span className="font-mono text-[10px] font-semibold text-white">
                   {visa.incomeRequirement.currency} {visa.incomeRequirement.annual.toLocaleString()}
                   /yr
                 </span>
-              ) : (
+              ) : null}
+              {visa.incomeRequirement.monthly === null && visa.incomeRequirement.annual === null ? (
                 <span className="font-mono text-[11px] font-semibold text-success">
                   {t("countryPage.visa.noMinimum", "None")}
                 </span>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -118,11 +121,7 @@ export function NomadVisaDetails({ visa, expanded, onToggle }: NomadVisaDetailsP
                   } as React.CSSProperties
                 }
               >
-                {visa.tax.status === "exempt"
-                  ? t("countryPage.taxExemptLabel")
-                  : visa.tax.status === "special"
-                    ? t("countryPage.specialTaxLabel")
-                    : t("countryPage.standardTaxLabel")}
+                {getTaxStatusLabel(visa.tax.status, t)}
               </span>
             </div>
           </div>

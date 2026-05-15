@@ -69,3 +69,14 @@ export function budgetCellClass(budget: number | null, maxBudget: number): strin
   if (budget == null) return "font-mono text-sm font-semibold text-dimmest";
   return "font-mono text-sm font-semibold text-white";
 }
+
+type TranslateFn = (key: string) => string;
+
+export function getTaxStatusLabel(
+  status: "exempt" | "standard" | "special",
+  t: TranslateFn,
+): string {
+  if (status === "exempt") return t("countryPage.taxExemptLabel");
+  if (status === "special") return t("countryPage.specialTaxLabel");
+  return t("countryPage.standardTaxLabel");
+}

@@ -31,7 +31,7 @@ export function ComparisonScoreCell({
           } as React.CSSProperties
         }
       >
-        {value == null ? "—" : format ? format(value) : value.toFixed(1)}
+        {value == null ? "—" : (format?.(value) ?? value.toFixed(1))}
       </span>
     </div>
   );

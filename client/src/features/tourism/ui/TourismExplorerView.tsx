@@ -377,21 +377,25 @@ export function TourismPage() {
             </div>
 
             <div className="flex flex-col">
-              {loading ? (
-                <div className="flex flex-col gap-2">
-                  {["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7"].map((k) => (
-                    <div
-                      key={k}
-                      className="h-14 animate-pulse border-t border-[#333333] bg-[#1A1A1A]"
-                    />
-                  ))}
-                </div>
-              ) : displayedRanked.length === 0 ? (
-                <p className="py-20 text-center text-sm text-dim">
-                  {t("tourism.noResults", "No countries match your filters.")}
-                </p>
-              ) : (
-                displayedRanked.map((r, i) => (
+              {(() => {
+                if (loading)
+                  return (
+                    <div className="flex flex-col gap-2">
+                      {["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7"].map((k) => (
+                        <div
+                          key={k}
+                          className="h-14 animate-pulse border-t border-[#333333] bg-[#1A1A1A]"
+                        />
+                      ))}
+                    </div>
+                  );
+                if (displayedRanked.length === 0)
+                  return (
+                    <p className="py-20 text-center text-sm text-dim">
+                      {t("tourism.noResults", "No countries match your filters.")}
+                    </p>
+                  );
+                return displayedRanked.map((r, i) => (
                   <TourismCountryCard
                     key={r.country.code}
                     ranked={r}
@@ -415,8 +419,8 @@ export function TourismPage() {
                     selectedTags={ws.toggles.requiredTags}
                     travelDates={ws.travelDates}
                   />
-                ))
-              )}
+                ));
+              })()}
             </div>
           </div>
         </main>

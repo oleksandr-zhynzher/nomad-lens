@@ -79,6 +79,13 @@ function BudgetRowItem({
   );
 }
 
+function toggleCodeInSet(prev: Set<string>, code: string): Set<string> {
+  const next = new Set(prev);
+  if (next.has(code)) next.delete(code);
+  else next.add(code);
+  return next;
+}
+
 export function BudgetMatcherPage() {
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
@@ -96,12 +103,7 @@ export function BudgetMatcherPage() {
   const [selectedCodes, setSelectedCodes] = useState<Set<string>>(new Set());
 
   const toggleSelect = (code: string) => {
-    setSelectedCodes((prev) => {
-      const next = new Set(prev);
-      if (next.has(code)) next.delete(code);
-      else next.add(code);
-      return next;
-    });
+    setSelectedCodes((prev) => toggleCodeInSet(prev, code));
   };
 
   const exitCompareMode = () => {
@@ -365,45 +367,56 @@ export function BudgetMatcherPage() {
             </div>
 
             {/* ── Results ───────────────────────────────────── */}
-            {loading ? (
-              <div className="mt-4 flex flex-col gap-2">
-                {SKELETON_KEYS.map((sk) => (
-                  <div key={sk} className="h-14 animate-pulse border-t border-border bg-surface" />
-                ))}
-              </div>
-            ) : matches.length === 0 ? (
-              <p className="py-20 text-center text-sm text-dim">
-                {t("budget.noResults", "No countries with cost data available")}
-              </p>
-            ) : (
-              <div className="flex flex-col">
-                <div className="my-4 flex items-center justify-between px-1 text-xs">
-                  <span className="text-muted">
-                    {t("countryList.clickHint", "Click on a country to view details")}
-                  </span>
-                  <span className="text-dim">
-                    {t("countryList.count", { count: filteredMatches.length })}
-                  </span>
+            {(() => {
+              if (loading)
+                return (
+                  <div className="mt-4 flex flex-col gap-2">
+                    {SKELETON_KEYS.map((sk) => (
+                      <div
+                        key={sk}
+                        className="h-14 animate-pulse border-t border-border bg-surface"
+                      />
+                    ))}
+                  </div>
+                );
+              if (matches.length === 0)
+                return (
+                  <p className="py-20 text-center text-sm text-dim">
+                    {t("budget.noResults", "No countries with cost data available")}
+                  </p>
+                );
+              return (
+                <div className="flex flex-col">
+                  <div className="my-4 flex items-center justify-between px-1 text-xs">
+                    <span className="text-muted">
+                      {t("countryList.clickHint", "Click on a country to view details")}
+                    </span>
+                    <span className="text-dim">
+                      {t("countryList.count", { count: filteredMatches.length })}
+                    </span>
+                  </div>
+                  {filteredMatches.length === 0 ? (
+                    <p className="py-20 text-center text-sm text-dim">
+                      {t("countryList.noResults")}
+                    </p>
+                  ) : (
+                    filteredMatches.map((m, i) => (
+                      <BudgetRowItem
+                        key={m.country.code}
+                        match={m}
+                        rank={i + 1}
+                        compareMode={compareMode}
+                        isSelected={selectedCodes.has(m.country.code)}
+                        expandedCode={expandedCode}
+                        toggleSelect={toggleSelect}
+                        setExpandedCode={setExpandedCode}
+                        budget={bs.budget}
+                      />
+                    ))
+                  )}
                 </div>
-                {filteredMatches.length === 0 ? (
-                  <p className="py-20 text-center text-sm text-dim">{t("countryList.noResults")}</p>
-                ) : (
-                  filteredMatches.map((m, i) => (
-                    <BudgetRowItem
-                      key={m.country.code}
-                      match={m}
-                      rank={i + 1}
-                      compareMode={compareMode}
-                      isSelected={selectedCodes.has(m.country.code)}
-                      expandedCode={expandedCode}
-                      toggleSelect={toggleSelect}
-                      setExpandedCode={setExpandedCode}
-                      budget={bs.budget}
-                    />
-                  ))
-                )}
-              </div>
-            )}
+              );
+            })()}
           </div>
         </main>
       </div>

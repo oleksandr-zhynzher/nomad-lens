@@ -43,6 +43,7 @@ export function TourismCountryCard({
   const { t } = useTranslation();
 
   const { bgColor: rowBg, hoverBg, borderColor } = getRowStyles(index, isSelected);
+  const chevronRotation = expanded ? "rotate-90" : "rotate-0";
 
   return (
     <div
@@ -129,7 +130,7 @@ export function TourismCountryCard({
           {/* Chevron */}
           <ChevronRight
             size={20}
-            className={`shrink-0 text-dimmest transition-transform duration-200 ${compareMode ? "rotate-0 opacity-[0.35]" : expanded ? "rotate-90" : "rotate-0"}`}
+            className={`shrink-0 text-dimmest transition-transform duration-200 ${compareMode ? "rotate-0 opacity-[0.35]" : chevronRotation}`}
           />
         </div>
 
