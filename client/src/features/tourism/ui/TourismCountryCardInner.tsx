@@ -26,7 +26,6 @@ export function TourismCountryCardInner({
 }: TourismCountryCardInnerProps) {
   const { country, tourismScore, rank } = ranked;
   const { t } = useTranslation();
-  const chevronRotation = expanded ? "rotate-90" : "rotate-0";
 
   return (
     <>
@@ -45,19 +44,15 @@ export function TourismCountryCardInner({
               label: t(`tourism.metrics.${key}`, key),
             }))}
           />
-          {selectedTags.length > 0 ? (
+          {selectedTags.length > 0 && (
             <>
               <div className="mx-0.5 h-3 w-px bg-border" />
               {selectedTags.map((tag) => {
-                const baseVal = country.tourismTagScores?.[tag] ?? null;
+                const base = country.tourismTagScores?.[tag] ?? null;
                 const val =
-                  baseVal === null
+                  base === null
                     ? null
-                    : applyTagSeasonality(
-                        baseVal,
-                        country.tourismTagSeasonality?.[tag],
-                        travelDates,
-                      );
+                    : applyTagSeasonality(base, country.tourismTagSeasonality?.[tag], travelDates);
                 return (
                   <ScoreDot
                     key={`tag-${tag}`}
@@ -68,7 +63,7 @@ export function TourismCountryCardInner({
                 );
               })}
             </>
-          ) : null}
+          )}
         </div>
 
         {ranked.budgetMatch ? (
@@ -94,7 +89,7 @@ export function TourismCountryCardInner({
 
         <ChevronRight
           size={20}
-          className={`shrink-0 text-dimmest transition-transform duration-200 ${compareMode ? "rotate-0 opacity-[0.35]" : chevronRotation}`}
+          className={`shrink-0 text-dimmest transition-transform duration-200 ${compareMode ? "rotate-0 opacity-[0.35]" : expanded ? "rotate-90" : "rotate-0"}`}
         />
       </div>
 

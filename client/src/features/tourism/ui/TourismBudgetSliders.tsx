@@ -45,7 +45,6 @@ export function TourismBudgetSliders({ budgetState, onBudgetChange }: TourismBud
           <span className="text-[10px] text-dimmer">$500</span>
         </div>
       </div>
-
       {/* Budget blend slider */}
       <div className="flex flex-col gap-[9px]">
         <div className="flex items-center justify-between">

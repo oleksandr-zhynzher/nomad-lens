@@ -60,7 +60,6 @@ export function NomadVisaInfoGrid({ visa }: NomadVisaInfoGridProps) {
       </div>
 
       <NomadVisaIncomeField incomeRequirement={visa.incomeRequirement} />
-
       {/* Tax Status */}
       <div className="flex flex-col gap-1 rounded bg-surface-2 p-3">
         <div className="flex items-center justify-between gap-2">

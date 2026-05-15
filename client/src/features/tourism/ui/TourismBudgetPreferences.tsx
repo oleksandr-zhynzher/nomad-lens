@@ -67,7 +67,6 @@ export function TourismBudgetPreferences({
           </div>
         ) : null}
       </div>
-
       {/* People count */}
       <div className="flex flex-col gap-[6px]">
         <span className="text-xs text-white">{t("tourismBudget.travellers", "Travellers")}</span>
@@ -80,7 +79,6 @@ export function TourismBudgetPreferences({
           }}
         />
       </div>
-
       {/* Dining preference */}
       <div className="flex flex-col gap-[6px]">
         <span className="text-xs text-white">
