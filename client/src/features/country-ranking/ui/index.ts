@@ -5,6 +5,8 @@ export * from "./CountryList";
 export * from "./ScoreBreakdown";
 export * from "./ToggleSwitch";
 export * from "./VisaStaySection";
+export * from "./WeightCategoryGroup";
 export * from "./WeightModeToggle";
 export * from "./WeightPanel";
+export * from "./WeightShareButton";
 export * from "./WeightSlider";
