@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
 import type { BudgetMatch } from "@features/budget/hooks";
-import { BREAKDOWN_ROWS } from "@features/budget/constants";
 import { BudgetComparisonSlots } from "./BudgetComparisonSlots";
 import { BudgetComparisonGrid } from "./BudgetComparisonGrid";
 
@@ -64,15 +63,6 @@ export function BudgetComparison({
         : matchA.surplus - matchB.surplus;
     });
   }, [selectedSlots, sortDirection, matchMap]);
-  const minBreakdown: Record<string, number> = {};
-  for (const { key } of BREAKDOWN_ROWS) {
-    const vals = selectedSlots.map((slot) => matchMap.get(slot.country.code)?.breakdown[key] ?? 0);
-    minBreakdown[key] = vals.length > 0 ? Math.min(...vals) : 0;
-  }
-  const minTotal =
-    selectedSlots.length > 0
-      ? Math.min(...selectedSlots.map((slot) => matchMap.get(slot.country.code)?.monthlyCost ?? 0))
-      : 0;
   return (
     <div>
       <BudgetComparisonSlots
@@ -94,8 +84,6 @@ export function BudgetComparison({
         <BudgetComparisonGrid
           sortedSlots={sortedSlots}
           matchMap={matchMap}
-          minBreakdown={minBreakdown}
-          minTotal={minTotal}
           headerRef={headerRef}
           bodyRef={bodyRef}
           lang={lang}

@@ -24,8 +24,6 @@ interface ComparisonSlot {
 interface BudgetComparisonGridProps {
   readonly sortedSlots: ComparisonSlot[];
   readonly matchMap: Map<string, BudgetMatch>;
-  readonly minBreakdown: Record<string, number>;
-  readonly minTotal: number;
   readonly headerRef: RefObject<HTMLDivElement | null>;
   readonly bodyRef: RefObject<HTMLDivElement | null>;
   readonly lang: string;
@@ -34,13 +32,20 @@ interface BudgetComparisonGridProps {
 export function BudgetComparisonGrid({
   sortedSlots,
   matchMap,
-  minBreakdown,
-  minTotal,
   headerRef,
   bodyRef,
   lang,
 }: BudgetComparisonGridProps) {
   const { t } = useTranslation();
+  const minBreakdown: Record<string, number> = {};
+  for (const { key } of BREAKDOWN_ROWS) {
+    const vals = sortedSlots.map((s) => matchMap.get(s.country.code)?.breakdown[key] ?? 0);
+    minBreakdown[key] = vals.length > 0 ? Math.min(...vals) : 0;
+  }
+  const minTotal =
+    sortedSlots.length > 0
+      ? Math.min(...sortedSlots.map((s) => matchMap.get(s.country.code)?.monthlyCost ?? 0))
+      : 0;
   return (
     <div className="mt-8">
       <div className="h-px bg-[#1C1C1C]" />
