@@ -11,7 +11,7 @@ import {
 import type { SelectedSlot } from "@features/compare/utils";
 import { ComparisonRowShell } from "./ComparisonRowShell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";
-import { VisaCell } from "./VisaCellComponents";
+import { VisaCell } from "./VisaCell";
 
 interface NomadVisaComparisonGridProps {
   readonly selectedCountries: SelectedSlot[];

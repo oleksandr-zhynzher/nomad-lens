@@ -6,8 +6,9 @@ import { localizeCountry } from "@core/utils";
 import { CountryDetailPanel } from "@features/country-ranking/ui";
 import worldTopology from "@features/country-map/data/countries-110m.json";
 import { geoNumericToAlpha2 } from "@features/country-map/utils";
-import { scoreColourClass } from "@core/utils";
 import { MapGeographies } from "./MapGeographies";
+import { MapZoomControls, MapLegend } from "./MapControls";
+import { MapHoverTooltip } from "./MapHoverTooltip";
 import type { WorldMapProps, HoverInfo } from "./country-map.types";
 
 const WORLD_TOPOLOGY: object = worldTopology;
@@ -26,7 +27,6 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
   const [geoLoading, setGeoLoading] = useState(true);
 
-  // Build alpha2 → ranked country map for fast lookup
   const scoreByAlpha2 = useMemo(() => new Map(ranked.map((r) => [r.country.code, r])), [ranked]);
 
   function handleMouseEnter(
@@ -35,28 +35,16 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   ) {
     const alpha2 = geoNumericToAlpha2(geo);
     const r = scoreByAlpha2.get(alpha2);
-    let name: string;
-    if (r) {
-      name = localizeCountry(r.country, i18n.language).name;
-    } else if (typeof geo.properties.name === "string") {
-      name = geo.properties.name;
-    } else {
-      name = alpha2;
-    }
-    setHover({
-      name,
-      score: r?.finalScore ?? null,
-      x: e.clientX,
-      y: e.clientY,
-    });
+    const name = r
+      ? localizeCountry(r.country, i18n.language).name
+      : typeof geo.properties.name === "string"
+        ? geo.properties.name
+        : alpha2;
+    setHover({ name, score: r?.finalScore ?? null, x: e.clientX, y: e.clientY });
   }
 
   function handleMouseMove(e: React.MouseEvent) {
     if (hover) setHover((h) => h && { ...h, x: e.clientX, y: e.clientY });
-  }
-
-  function handleMouseLeave() {
-    setHover(null);
   }
 
   function handleClick(geo: { id?: unknown; properties: Record<string, unknown> }) {
@@ -80,68 +68,18 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
           <div className="h-8 w-8 animate-spin rounded-full border-[3px] border-[#2A2A2A] border-t-accent-dim" />
         </div>
       ) : null}
-      {/* Zoom controls */}
-      <div className="absolute top-2 left-2 z-10 flex flex-col overflow-hidden rounded-[4px] bg-surface md:top-3 md:left-3">
-        <button
-          onClick={() => {
-            setZoom((z) => Math.min(z * 1.5, 12));
-          }}
-          className="flex h-9 w-9 items-center justify-center border-b border-border text-lg leading-none font-bold text-muted transition-colors md:h-10 md:w-10"
-          aria-label={t("a11y.zoomIn", "Zoom in")}
-        >
-          +
-        </button>
-        <button
-          onClick={() => {
-            setZoom((z) => Math.max(z / 1.5, 1));
-          }}
-          className={`flex h-9 w-9 items-center justify-center text-lg leading-none font-bold text-muted transition-colors md:h-10 md:w-10 ${onToggleWeights ? "border-b border-border" : ""}`}
-          aria-label={t("a11y.zoomOut", "Zoom out")}
-        >
-          −
-        </button>
-        {onToggleWeights ? (
-          <button
-            onClick={onToggleWeights}
-            className={`hidden h-10 w-10 items-center justify-center transition-colors md:flex ${showWeights ? "text-accent-dim" : "text-[#999999]"}`}
-            aria-label={t("a11y.toggleParameters", "Toggle parameters")}
-          >
-            <svg
-              width="16"
-              height="16"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              />
-            </svg>
-          </button>
-        ) : null}
-      </div>
-
-      {/* Legend */}
-      <div className="absolute bottom-2 left-2 z-10 hidden rounded-[4px] bg-surface md:bottom-3 md:left-3 md:flex md:flex-col md:gap-1.5 md:px-3 md:py-2">
-        <p className="mb-0.5 text-[9px] font-semibold tracking-[1.5px] text-dim uppercase">
-          {t("map.score")}
-        </p>
-        {legendItems.map(({ color, label, range }) => (
-          <div key={label} className="flex items-center gap-2">
-            <span
-              className="h-3 w-3 shrink-0 rounded-[2px] bg-[var(--legend-c)]"
-              style={{ "--legend-c": color } as React.CSSProperties}
-            />
-            <span className="font-mono text-[10px] text-tertiary">
-              {label} <span className="text-dim">{range}</span>
-            </span>
-          </div>
-        ))}
-      </div>
-
+      <MapZoomControls
+        zoom={zoom}
+        onZoomIn={() => {
+          setZoom((z) => Math.min(z * 1.5, 12));
+        }}
+        onZoomOut={() => {
+          setZoom((z) => Math.max(z / 1.5, 1));
+        }}
+        onToggleWeights={onToggleWeights}
+        showWeights={showWeights}
+      />
+      <MapLegend items={legendItems} scoreLabel={t("map.score")} />
       <ComposableMap
         projection="geoNaturalEarth1"
         projectionConfig={{ scale: 160 }}
@@ -169,7 +107,9 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
                 zoom={zoom}
                 scoreByAlpha2={scoreByAlpha2}
                 handleMouseEnter={handleMouseEnter}
-                handleMouseLeave={handleMouseLeave}
+                handleMouseLeave={() => {
+                  setHover(null);
+                }}
                 handleClick={handleClick}
                 setGeoLoading={setGeoLoading}
               />
@@ -177,34 +117,12 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
           </Geographies>
         </ZoomableGroup>
       </ComposableMap>
-
-      {/* Hover tooltip */}
       {hover ? (
-        <div
-          className="pointer-events-none fixed top-[var(--tt-y)] left-[var(--tt-x)] z-50 rounded-[4px] bg-surface px-3 py-2 shadow-xl"
-          style={
-            { "--tt-x": `${hover.x + 12}px`, "--tt-y": `${hover.y - 10}px` } as React.CSSProperties
-          }
-        >
-          <p className="text-[13px] font-semibold text-white">{hover.name}</p>
-          {hover.score === null ? (
-            <p className="mt-0.5 text-xs text-dim">{t("map.noData")}</p>
-          ) : (
-            <p
-              className={`mt-0.5 font-mono text-[13px] font-semibold ${scoreColourClass(hover.score, "text")}`}
-            >
-              {hover.score.toFixed(1)} <span className="font-normal text-dim">/ 100</span>
-            </p>
-          )}
-        </div>
+        <MapHoverTooltip name={hover.name} score={hover.score} x={hover.x} y={hover.y} />
       ) : null}
-
-      {/* Ranked count */}
       <p className="mt-2 pr-1 text-right text-[11px] text-dimmer">
         {t("map.countriesScored", { count: ranked.length })}
       </p>
-
-      {/* Country detail panel */}
       {selectedCountry ? (
         <CountryDetailPanel
           country={selectedCountry}

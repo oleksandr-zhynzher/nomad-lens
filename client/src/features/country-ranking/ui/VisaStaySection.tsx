@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from "@core/ui";
 import { CollapsibleSection } from "@core/ui/panels";
 import { ToggleSwitch } from "@features/country-ranking/ui";
+import { VisaTouristDaysFilter } from "./VisaTouristDaysFilter";
 
 interface VisaStaySectionProps {
   readonly nomadVisaOnly: boolean;
@@ -27,7 +28,6 @@ export function VisaStaySection({
 }: VisaStaySectionProps) {
   const { t } = useTranslation();
   const hasActiveFilter = nomadVisaOnly || schengenOnly || minTouristDays !== null;
-
   const visaBadge = hasActiveFilter ? (
     <div className="flex items-center rounded-[3px] bg-[#0E1E26] px-2 py-[3px]">
       <span className="font-mono text-[11px] text-[#7AADBD]">ON</span>
@@ -44,7 +44,6 @@ export function VisaStaySection({
       onToggle={onToggle}
     >
       <div className="flex flex-col gap-[10px] bg-surface-3 p-3 px-4">
-        {/* Nomad Visa toggle */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="text-xs text-tertiary">{t("visa.nomadVisaOnly")}</span>
@@ -66,8 +65,6 @@ export function VisaStaySection({
             ariaLabel={t("visa.nomadVisaOnly")}
           />
         </div>
-
-        {/* Schengen toggle */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <span className="text-xs text-tertiary">{t("visa.schengenArea")}</span>
@@ -89,8 +86,6 @@ export function VisaStaySection({
             ariaLabel={t("visa.schengenArea")}
           />
         </div>
-
-        {/* Min Tourist Stay */}
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-1.5">
             <span className="text-xs text-tertiary">{t("visa.minTouristStay")}</span>
@@ -106,23 +101,10 @@ export function VisaStaySection({
               <Info size={14} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-60" />
             </Tooltip>
           </div>
-          <div className="flex gap-1">
-            {([null, 30, 60, 90, 180] as const).map((days) => {
-              const active = minTouristDays === days;
-              const label = days === null ? t("visa.any") : `${days}+`;
-              return (
-                <button
-                  key={label}
-                  onClick={() => {
-                    onMinTouristDaysChange(days);
-                  }}
-                  className={`flex-1 cursor-pointer rounded-[3px] border-0 py-[5px] text-center text-[10px] ${active ? "bg-accent text-white" : "bg-surface-4 text-dim"}`}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
+          <VisaTouristDaysFilter
+            minTouristDays={minTouristDays}
+            onMinTouristDaysChange={onMinTouristDaysChange}
+          />
         </div>
       </div>
     </CollapsibleSection>

@@ -5,6 +5,7 @@ export * from "./BudgetCategoryCard";
 export * from "./BudgetCategoryFilter";
 export * from "./BudgetCategorySection";
 export * from "./BudgetCountryCard";
+export * from "./BudgetExpandedPanel";
 export * from "./BudgetFilterPanel";
 export * from "./BudgetHeroSection";
 export * from "./BudgetLifestyleSection";
