@@ -9,7 +9,11 @@ import { CollapsibleSection } from "@core/ui/panels";
 import { PeopleCountStepper } from "@core/ui/panels";
 import { ToggleGroup } from "@core/ui/panels";
 import { WeightSliderRow } from "@core/ui/panels";
-import { BUDGET_CATEGORY_KEYS } from "@features/budget/constants";
+import {
+  BUDGET_CATEGORY_KEYS,
+  BUDGET_BEDROOM_OPTIONS,
+  BUDGET_HOUSING_OPTIONS,
+} from "@features/budget/constants";
 
 type BudgetStateReturn = ReturnType<typeof useBudgetState>;
 
@@ -117,7 +121,7 @@ export function BudgetFilterPanel({ bs }: Props) {
           <div className="flex flex-col gap-[6px]">
             <span className="text-xs text-white">{t("budget.bedrooms.label")}</span>
             <ToggleGroup
-              options={[1, 2, 3] as const}
+              options={BUDGET_BEDROOM_OPTIONS}
               value={bs.bedrooms}
               onChange={bs.setBedrooms}
               labelFn={(v) => t(`budget.bedrooms.${v}`, `${v} BR`)}
@@ -127,7 +131,7 @@ export function BudgetFilterPanel({ bs }: Props) {
           <div className="flex flex-col gap-[6px]">
             <span className="text-xs text-white">{t("budget.housing.label", "Location")}</span>
             <ToggleGroup
-              options={["majorCity", "smallerCity"] as const}
+              options={BUDGET_HOUSING_OPTIONS}
               value={bs.housing}
               onChange={bs.setHousing}
               labelFn={(v) =>

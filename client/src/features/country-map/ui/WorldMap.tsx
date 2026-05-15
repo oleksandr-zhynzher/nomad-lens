@@ -11,6 +11,12 @@ import { MapGeographies } from "./MapGeographies";
 import type { WorldMapProps, HoverInfo } from "./country-map.types";
 
 const WORLD_TOPOLOGY: object = worldTopology;
+const MAP_SCORE_LEGEND_ITEMS = [
+  { color: "#4CAF50", labelKey: "map.excellent", defaultLabel: "Excellent", range: "(75-100)" },
+  { color: "#FFC107", labelKey: "map.moderate", defaultLabel: "Moderate", range: "(50-74)" },
+  { color: "#FF5722", labelKey: "map.low", defaultLabel: "Low", range: "(0-49)" },
+  { color: "#3A3A3A", labelKey: "map.noData", defaultLabel: "No data", range: "" },
+] as const;
 
 export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights }: WorldMapProps) {
   const { t, i18n } = useTranslation();
@@ -61,6 +67,11 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
   }
 
   const selectedCountry = selectedCode !== null ? (scoreByAlpha2.get(selectedCode) ?? null) : null;
+  const legendItems = MAP_SCORE_LEGEND_ITEMS.map(({ color, labelKey, defaultLabel, range }) => ({
+    color,
+    label: t(labelKey, defaultLabel),
+    range,
+  }));
 
   return (
     <div className="relative w-full" onMouseMove={handleMouseMove}>
@@ -118,16 +129,7 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
         <p className="mb-0.5 text-[9px] font-semibold tracking-[1.5px] text-dim uppercase">
           {t("map.score")}
         </p>
-        {[
-          {
-            color: "#4CAF50",
-            label: t("map.excellent"),
-            range: "(75\u2013100)",
-          },
-          { color: "#FFC107", label: t("map.moderate"), range: "(50\u201374)" },
-          { color: "#FF5722", label: t("map.low"), range: "(0\u201349)" },
-          { color: "#3A3A3A", label: t("map.noData"), range: "" },
-        ].map(({ color, label, range }) => (
+        {legendItems.map(({ color, label, range }) => (
           <div key={label} className="flex items-center gap-2">
             <span
               className="h-3 w-3 shrink-0 rounded-[2px] bg-[var(--legend-c)]"

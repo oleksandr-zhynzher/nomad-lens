@@ -8,6 +8,7 @@ interface PageHeroBannerProps {
 
 export function PageHeroBanner({
   backgroundImage,
+  eyebrow,
   title,
   subtitle,
   children,
@@ -23,6 +24,18 @@ export function PageHeroBanner({
         <div
           className={`relative flex flex-col justify-end px-4 py-4 md:px-12 md:py-12 ${children != null ? "min-h-[160px]" : "min-h-[120px]"}`}
         >
+          {eyebrow !== "" ? (
+            <div className="mb-2 flex items-center gap-2 md:mb-3">
+              {eyebrow.split("·").map((word) => (
+                <span key={word.trim()} className="flex items-center gap-2">
+                  <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                  <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
+                    {word.trim()}
+                  </span>
+                </span>
+              ))}
+            </div>
+          ) : null}
           <h1 className="mb-2 [font-family:Oswald,_sans-serif] text-3xl leading-[0.95] font-semibold text-white md:text-6xl">
             {title}
           </h1>

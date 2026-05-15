@@ -34,5 +34,11 @@ export const CATEGORY_WEIGHT_KEYS = Object.keys(DEFAULT_CATEGORY_WEIGHTS) as Arr
   keyof BudgetCategoryWeights
 >;
 
-export const BEDROOM_OPTIONS = new Set<Bedrooms>([1, 2, 3]);
+export const BUDGET_BEDROOM_OPTIONS = [1, 2, 3] as const satisfies readonly Bedrooms[];
+export const BUDGET_HOUSING_OPTIONS = [
+  "majorCity",
+  "smallerCity",
+] as const satisfies readonly HousingPreference[];
+
+export const BEDROOM_OPTIONS = new Set<Bedrooms>(BUDGET_BEDROOM_OPTIONS);
 export const CATEGORY_WEIGHT_KEY_SET = new Set<keyof BudgetCategoryWeights>(CATEGORY_WEIGHT_KEYS);

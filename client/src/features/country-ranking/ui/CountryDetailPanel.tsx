@@ -25,6 +25,22 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
   const { country: c, finalScore, rank } = country;
   const [visaExpanded, setVisaExpanded] = useState(true);
   const locC = useLocalizedCountry(c);
+  const tourismScore = computeTourismScore(c);
+  const tourismGroupRows = TOURISM_GROUPS.map((group) => ({
+    labelKey: group.labelKey,
+    metrics: group.keys
+      .map((key) => {
+        const value = c.scores[key].value;
+        if (value == null) return null;
+        return {
+          key,
+          label: t(`tourism.metrics.${key}`, CATEGORY_LABELS[key]),
+          value,
+          color: TOURISM_COLORS[key] ?? "#888",
+        };
+      })
+      .filter((metric): metric is NonNullable<typeof metric> => metric !== null),
+  })).filter((group) => group.metrics.length > 0);
 
   return createPortal(
     <div className="fixed inset-0 z-40 flex flex-col md:flex-row">
@@ -108,59 +124,50 @@ export function CountryDetailPanel({ country, onClose, onViewInList }: CountryDe
             <ScoreBreakdown country={c} />
 
             {/* Tourism Scores Section */}
-            {(() => {
-              const tScore = computeTourismScore(c);
-              if (tScore == null) return null;
-              return (
-                <div className="mt-6">
-                  <h3 className="mb-3 text-[11px] font-semibold tracking-[1.5px] text-[#6B9E6B] uppercase">
-                    {t("countryDetail.tourismScores", "Tourism Score")}
-                    <span
-                      className={`ml-2 font-mono text-[13px] font-bold ${tourismScoreColourClass(tScore, "text")}`}
-                    >
-                      {tScore.toFixed(1)}
-                    </span>
-                  </h3>
-                  <div className="flex flex-col gap-3">
-                    {TOURISM_GROUPS.map((group) => {
-                      const visibleKeys = group.keys.filter((k) => c.scores[k].value != null);
-                      if (visibleKeys.length === 0) return null;
-                      return (
-                        <div key={group.labelKey}>
-                          <div className="mb-1.5 text-[9px] font-semibold tracking-[1px] text-[#666] uppercase">
-                            {t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
+            {tourismScore == null ? null : (
+              <div className="mt-6">
+                <h3 className="mb-3 text-[11px] font-semibold tracking-[1.5px] text-[#6B9E6B] uppercase">
+                  {t("countryDetail.tourismScores", "Tourism Score")}
+                  <span
+                    className={`ml-2 font-mono text-[13px] font-bold ${tourismScoreColourClass(tourismScore, "text")}`}
+                  >
+                    {tourismScore.toFixed(1)}
+                  </span>
+                </h3>
+                <div className="flex flex-col gap-3">
+                  {tourismGroupRows.map((group) => (
+                    <div key={group.labelKey}>
+                      <div className="mb-1.5 text-[9px] font-semibold tracking-[1px] text-[#666] uppercase">
+                        {t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
+                      </div>
+                      <div className="flex flex-col gap-1.5">
+                        {group.metrics.map((metric) => (
+                          <div key={metric.key} className="flex h-[22px] items-center gap-2">
+                            <span className="w-[130px] shrink-0 text-[11px] text-muted">
+                              {metric.label}
+                            </span>
+                            <div className="h-[6px] flex-1 overflow-hidden rounded-[3px] bg-surface-4">
+                              <div
+                                className="h-full w-[var(--bw)] rounded-[3px] bg-[var(--bc)]"
+                                style={
+                                  {
+                                    "--bw": `${metric.value}%`,
+                                    "--bc": metric.color,
+                                  } as React.CSSProperties
+                                }
+                              />
+                            </div>
+                            <span className="w-[28px] shrink-0 text-right font-mono text-[11px] font-semibold text-on-surface">
+                              {metric.value.toFixed(0)}
+                            </span>
                           </div>
-                          <div className="flex flex-col gap-1.5">
-                            {visibleKeys.map((key) => {
-                              const val = c.scores[key].value ?? 0;
-                              const color = TOURISM_COLORS[key] ?? "#888";
-                              return (
-                                <div key={key} className="flex h-[22px] items-center gap-2">
-                                  <span className="w-[130px] shrink-0 text-[11px] text-muted">
-                                    {t(`tourism.metrics.${key}`, CATEGORY_LABELS[key])}
-                                  </span>
-                                  <div className="h-[6px] flex-1 overflow-hidden rounded-[3px] bg-surface-4">
-                                    <div
-                                      className="h-full w-[var(--bw)] rounded-[3px] bg-[var(--bc)]"
-                                      style={
-                                        { "--bw": `${val}%`, "--bc": color } as React.CSSProperties
-                                      }
-                                    />
-                                  </div>
-                                  <span className="w-[28px] shrink-0 text-right font-mono text-[11px] font-semibold text-on-surface">
-                                    {val.toFixed(0)}
-                                  </span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              );
-            })()}
+              </div>
+            )}
 
             {/* Nomad Visa Section */}
             {c.nomadVisa ? (

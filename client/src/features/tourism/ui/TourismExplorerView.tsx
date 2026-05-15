@@ -1,11 +1,12 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from "react";
-import { Search, SlidersHorizontal, X, GitCompare } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Layout } from "@core/ui/layout";
+import { ResponsiveSidePanelLayout } from "@core/ui/layout";
+import { CompareModeActions, EmptyState, LoadingRows } from "@core/ui";
 import { TourismCountryCard } from "@features/tourism/ui";
 import { TourismWeightPanel } from "@features/tourism/ui";
-import { MobileSheet } from "@core/ui";
 import { useCountries } from "@core/hooks";
 import { useLangPrefix } from "@core/hooks";
 import { useTourismScoring } from "@features/tourism/hooks";
@@ -103,328 +104,311 @@ export function TourismPage() {
     void navigate(`${langPrefix}/compare?m=tourism&c=${[...selectedCodes].join(",")}`);
   }, [selectedCodes, navigate, langPrefix]);
 
+  let countryListContent: React.ReactNode;
+  if (loading) {
+    countryListContent = (
+      <LoadingRows count={8} rowClassName="h-14 border-t border-[#333333] bg-[#1A1A1A]" />
+    );
+  } else if (displayedRanked.length === 0) {
+    countryListContent = (
+      <EmptyState message={t("tourism.noResults", "No countries match your filters.")} />
+    );
+  } else {
+    countryListContent = displayedRanked.map((r, i) => (
+      <TourismCountryCard
+        key={r.country.code}
+        ranked={r}
+        index={i}
+        highlighted={r.country.code === activeHighlight}
+        expanded={compareMode ? false : expandedCode === r.country.code}
+        onToggle={
+          compareMode
+            ? undefined
+            : () => {
+                setExpandedCode(expandedCode === r.country.code ? null : r.country.code);
+              }
+        }
+        compareMode={compareMode}
+        isSelected={selectedCodes.has(r.country.code)}
+        onSelect={() => {
+          toggleSelect(r.country.code);
+        }}
+        selectedTags={ws.toggles.requiredTags}
+        travelDates={ws.travelDates}
+      />
+    ));
+  }
+
+  const sidebarContent = (
+    <TourismWeightPanel
+      weights={ws.weights}
+      onChange={ws.handleWeightChange}
+      onReset={ws.handleReset}
+      weightsAreDefault={ws.weightsAreDefault}
+      budgetState={ws.budgetState}
+      onBudgetChange={ws.setBudgetField}
+      toggles={ws.toggles}
+      onToggleFieldChange={ws.setToggleField}
+      travelDates={ws.travelDates}
+      onTravelDatesChange={ws.setTravelDates}
+    />
+  );
+
   return (
     <Layout>
-      <div className="flex">
-        {/* Left sidebar - Tourism Weight Panel (hidden on mobile) */}
-        <aside className="sticky top-14 hidden h-[calc(100vh-56px)] w-[340px] self-start md:block">
-          <TourismWeightPanel
-            weights={ws.weights}
-            onChange={ws.handleWeightChange}
-            onReset={ws.handleReset}
-            weightsAreDefault={ws.weightsAreDefault}
-            budgetState={ws.budgetState}
-            onBudgetChange={ws.setBudgetField}
-            toggles={ws.toggles}
-            onToggleFieldChange={ws.setToggleField}
-            travelDates={ws.travelDates}
-            onTravelDatesChange={ws.setTravelDates}
-          />
-        </aside>
-
-        <MobileSheet
-          open={mobileParamsOpen}
-          title={t("tourismWeights.title", "Tourism Weights")}
-          closeLabel={t("tourism.a11y.closeParameters", "Close parameters")}
-          onClose={() => {
+      <ResponsiveSidePanelLayout
+        sidebar={sidebarContent}
+        mobileSheet={{
+          open: mobileParamsOpen,
+          title: t("tourismWeights.title", "Tourism Weights"),
+          closeLabel: t("tourism.a11y.closeParameters", "Close parameters"),
+          onClose: () => {
             setMobileParamsOpen(false);
-          }}
-        >
-          <TourismWeightPanel
-            weights={ws.weights}
-            onChange={ws.handleWeightChange}
-            onReset={ws.handleReset}
-            weightsAreDefault={ws.weightsAreDefault}
-            budgetState={ws.budgetState}
-            onBudgetChange={ws.setBudgetField}
-            toggles={ws.toggles}
-            onToggleFieldChange={ws.setToggleField}
-            travelDates={ws.travelDates}
-            onTravelDatesChange={ws.setTravelDates}
-            mobile
-          />
-        </MobileSheet>
-
-        {/* Mobile FAB - Parameters button */}
-        <button
-          className="fixed right-4 z-40 flex h-12 items-center gap-2 rounded-[24px] bg-accent pr-[18px] pl-4 text-sm font-semibold text-white shadow-lg md:hidden"
-          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)" }}
-          onClick={() => {
+          },
+          children: (
+            <TourismWeightPanel
+              weights={ws.weights}
+              onChange={ws.handleWeightChange}
+              onReset={ws.handleReset}
+              weightsAreDefault={ws.weightsAreDefault}
+              budgetState={ws.budgetState}
+              onBudgetChange={ws.setBudgetField}
+              toggles={ws.toggles}
+              onToggleFieldChange={ws.setToggleField}
+              travelDates={ws.travelDates}
+              onTravelDatesChange={ws.setTravelDates}
+              mobile
+            />
+          ),
+        }}
+        mobileFab={{
+          label: t("mobileSheet.parameters", "Parameters"),
+          ariaLabel: t("tourism.a11y.openParameters", "Open parameters"),
+          icon: <SlidersHorizontal size={18} aria-hidden />,
+          onClick: () => {
             setMobileParamsOpen(true);
-          }}
-          aria-label={t("tourism.a11y.openParameters", "Open parameters")}
-        >
-          <SlidersHorizontal size={18} />
-          {t("mobileSheet.parameters", "Parameters")}
-        </button>
-
-        {/* Right content area */}
-        <main className="min-w-0 flex-1 bg-[#0A0A0F] pb-28 md:pb-0">
-          <div className="px-4 md:px-6">
-            {/* Hero section */}
+          },
+        }}
+      >
+        <div className="px-4 md:px-6">
+          {/* Hero section */}
+          <div
+            className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
+            style={{
+              background: "#0A0A0F",
+              backgroundImage: `url('/hero-map.png')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {/* Gradient overlay */}
             <div
-              className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
+              className="absolute inset-0"
               style={{
-                background: "#0A0A0F",
-                backgroundImage: `url('/hero-map.png')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
+                background: "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
               }}
-            >
-              {/* Gradient overlay */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
-                }}
-              />
+            />
 
-              <div className="relative flex min-h-[160px] flex-col justify-end px-4 py-4 md:px-12 md:py-12">
-                <div className="mb-2 flex items-center gap-2 md:mb-3">
-                  <span className="flex items-center gap-2">
-                    <span className="inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
-                    <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
-                      {t("tourism.eyebrow", "EXPLORE")}
-                    </span>
+            <div className="relative flex min-h-[160px] flex-col justify-end px-4 py-4 md:px-12 md:py-12">
+              <div className="mb-2 flex items-center gap-2 md:mb-3">
+                <span className="flex items-center gap-2">
+                  <span className="inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                  <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
+                    {t("tourism.eyebrow", "EXPLORE")}
                   </span>
-                  <span className="flex items-center gap-2">
-                    <span className="inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
-                    <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
-                      {t("nav.tourism", "TOURISM")}
-                    </span>
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                  <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
+                    {t("nav.tourism", "TOURISM")}
                   </span>
-                </div>
+                </span>
+              </div>
 
-                {/* H1 */}
-                <h1 className="mb-2 font-display text-3xl leading-[0.95] font-semibold text-white md:text-6xl">
-                  {t("tourism.title", "TOURISM EXPLORER")}
-                </h1>
+              {/* H1 */}
+              <h1 className="mb-2 font-display text-3xl leading-[0.95] font-semibold text-white md:text-6xl">
+                {t("tourism.title", "TOURISM EXPLORER")}
+              </h1>
 
-                {/* Tagline */}
-                <p className="mb-5 hidden max-w-[580px] text-[15px] text-dim md:block">
-                  {t("tourism.subtitle")}
-                </p>
+              {/* Tagline */}
+              <p className="mb-5 hidden max-w-[580px] text-[15px] text-dim md:block">
+                {t("tourism.subtitle")}
+              </p>
 
-                {/* Copper rule */}
-                <div className="mb-4 hidden h-0.5 w-32 bg-accent md:block" />
+              {/* Copper rule */}
+              <div className="mb-4 hidden h-0.5 w-32 bg-accent md:block" />
 
-                {/* Stats row */}
-                <div className="hero-stats-row hero-banner-stats">
-                  <div className="min-w-0">
-                    <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
-                      {ranked.length}
-                    </div>
-                    <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
-                      {t("hero.stats.countries", {
-                        count: ranked.length,
-                      })}
-                    </div>
+              {/* Stats row */}
+              <div className="hero-stats-row hero-banner-stats">
+                <div className="min-w-0">
+                  <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
+                    {ranked.length}
                   </div>
-                  <div className="hero-stat-divider" />
-                  <div className="min-w-0">
-                    <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
-                      {TOURISM_CATEGORY_KEYS.length}
-                    </div>
-                    <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
-                      {t("tourismWeights.metricsLabel", "Tourism Metrics")}
-                    </div>
+                  <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
+                    {t("hero.stats.countries", {
+                      count: ranked.length,
+                    })}
+                  </div>
+                </div>
+                <div className="hero-stat-divider" />
+                <div className="min-w-0">
+                  <div className="font-mono text-[18px] leading-none font-semibold text-accent-dim">
+                    {TOURISM_CATEGORY_KEYS.length}
+                  </div>
+                  <div className="mt-1 text-[10px] tracking-[1px] text-dimmer uppercase">
+                    {t("tourismWeights.metricsLabel", "Tourism Metrics")}
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Sentinel for sticky detection */}
-            <div ref={sentinelRef} className="h-px" />
+          {/* Sentinel for sticky detection */}
+          <div ref={sentinelRef} className="h-px" />
 
-            {/* Sticky search bar */}
-            <div className="sticky top-14 z-20 bg-[#0A0A0F] pt-2 pb-3">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
-                <div className="flex min-w-0 flex-1 items-center gap-2">
-                  <div className="flex h-10 flex-1 items-center gap-2 rounded-[6px] border border-[#333333] bg-[#1A1A1C] px-3">
-                    <Search size={16} color="#757575" />
-                    <input
-                      ref={searchInputRef}
-                      name="tourism-search"
-                      type="text"
-                      value={search}
-                      onChange={(e) => {
-                        setSearch(e.target.value);
+          {/* Sticky search bar */}
+          <div className="sticky top-14 z-20 bg-[#0A0A0F] pt-2 pb-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
+              <div className="flex min-w-0 flex-1 items-center gap-2">
+                <div className="flex h-10 flex-1 items-center gap-2 rounded-[6px] border border-[#333333] bg-[#1A1A1C] px-3">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#757575"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden
+                  >
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                  </svg>
+                  <input
+                    ref={searchInputRef}
+                    name="tourism-search"
+                    type="text"
+                    value={search}
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                      setMatchCursor(0);
+                    }}
+                    placeholder={t("tourism.searchPlaceholder", "Search countries…")}
+                    className="flex-1 border-none bg-transparent text-sm text-[#E8E9EB] outline-none"
+                  />
+                  {search !== "" ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSearch("");
+                        setHighlightedCode(null);
                         setMatchCursor(0);
                       }}
-                      placeholder={t("tourism.searchPlaceholder", "Search countries…")}
-                      className="flex-1 border-none bg-transparent text-sm text-[#E8E9EB] outline-none"
-                    />
-                    {search !== "" ? (
-                      <button
-                        onClick={() => {
-                          setSearch("");
-                          setHighlightedCode(null);
-                          setMatchCursor(0);
-                        }}
-                        className="flex cursor-pointer items-center border-0 bg-transparent text-dimmer"
+                      className="flex cursor-pointer items-center border-0 bg-transparent text-dimmer"
+                    >
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
                       >
-                        <X size={14} />
-                      </button>
-                    ) : null}
-                  </div>
-
-                  {/* Search mode controls */}
-                  {search.trim() !== "" ? (
-                    <TourismSearchControls
-                      searchMode={searchMode}
-                      matchingCodes={matchingCodes}
-                      matchCursor={matchCursor}
-                      onPrev={goPrev}
-                      onNext={goNext}
-                      onModeChange={setSearchMode}
-                      onCursorReset={() => {
-                        setMatchCursor(0);
-                      }}
-                    />
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                      </svg>
+                    </button>
                   ) : null}
                 </div>
 
-                <div className="flex w-full shrink-0 items-center justify-end gap-2 sm:w-auto">
-                  {compareMode ? (
-                    <>
-                      <button
-                        onClick={handleCompare}
-                        className={`flex h-10 flex-1 shrink-0 items-center justify-center gap-1.5 rounded-[6px] px-[14px] text-[13px] font-semibold whitespace-nowrap transition-all duration-150 ease-in-out sm:flex-none ${selectedCodes.size < 2 ? "cursor-default border border-accent-dim bg-[#161616] text-accent-dim" : "cursor-pointer border-0 bg-accent text-white"}`}
-                        disabled={selectedCodes.size < 2}
-                      >
-                        <GitCompare size={15} />
-                        {t("compare.compareSelected", "Compare")}
-                        {selectedCodes.size > 0 ? (
-                          <span
-                            className={`rounded-[10px] px-[7px] py-px text-xs ${selectedCodes.size < 2 ? "bg-[rgba(143,90,60,0.2)]" : "bg-[rgba(255,255,255,0.25)]"}`}
-                          >
-                            {selectedCodes.size}
-                          </span>
-                        ) : null}
-                      </button>
-                      <button
-                        onClick={exitCompareMode}
-                        className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-[6px] border border-[#2A2A2A] bg-[#161616] text-dim"
-                        aria-label={t("tourism.a11y.exitCompareMode", "Exit compare mode")}
-                      >
-                        <X size={16} />
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        setCompareMode(true);
-                      }}
-                      className="flex h-10 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-[6px] border border-[#2A2A2A] bg-[#161616] px-[14px] text-[13px] font-medium whitespace-nowrap text-on-surface sm:w-auto"
-                    >
-                      <GitCompare size={15} />
-                      {t("compare.compareMode", "Compare")}
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {compareMode ? (
-                <p className="mt-2 pl-0.5 text-xs text-dim">
-                  {t(
-                    "compare.helperText",
-                    "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
-                  )}
-                </p>
-              ) : null}
-            </div>
-
-            {/* Activity tag chips */}
-            <div className="mb-0">
-              <div className="mb-3 text-[13px] font-bold tracking-[2px] text-on-surface uppercase">
-                {t("tourismFilters.activityTags", "Activities")}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {ALL_TOURISM_TAGS.map((tag) => {
-                  const active = ws.toggles.requiredTags.includes(tag);
-                  return (
-                    <button
-                      key={tag}
-                      onClick={() => {
-                        ws.handleToggleTag(tag);
-                      }}
-                      className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${active ? "bg-[#8F5A3C] text-white" : "bg-[#2A2A2A] text-on-surface"}`}
-                    >
-                      {t(`tourismTags.${tag}`, tag)}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Country list */}
-          <div className="px-4 md:px-6">
-            <div className="my-4 flex items-center justify-between px-1 text-xs">
-              <span className="text-on-surface">
-                {compareMode
-                  ? t(
-                      "compare.tourismSelectionSubtitle",
-                      "Select countries to compare tourism appeal side by side",
-                    )
-                  : t("countryList.clickHint", "Click on a country to view details")}
-              </span>
-              <span className="text-dim">
-                {t("countryList.count", { count: displayedRanked.length })}
-              </span>
-            </div>
-
-            <div className="flex flex-col">
-              {(() => {
-                if (loading)
-                  return (
-                    <div className="flex flex-col gap-2">
-                      {["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7"].map((k) => (
-                        <div
-                          key={k}
-                          className="h-14 animate-pulse border-t border-[#333333] bg-[#1A1A1A]"
-                        />
-                      ))}
-                    </div>
-                  );
-                if (displayedRanked.length === 0)
-                  return (
-                    <p className="py-20 text-center text-sm text-dim">
-                      {t("tourism.noResults", "No countries match your filters.")}
-                    </p>
-                  );
-                return displayedRanked.map((r, i) => (
-                  <TourismCountryCard
-                    key={r.country.code}
-                    ranked={r}
-                    index={i}
-                    highlighted={r.country.code === activeHighlight}
-                    expanded={compareMode ? false : expandedCode === r.country.code}
-                    onToggle={
-                      compareMode
-                        ? undefined
-                        : () => {
-                            setExpandedCode(
-                              expandedCode === r.country.code ? null : r.country.code,
-                            );
-                          }
-                    }
-                    compareMode={compareMode}
-                    isSelected={selectedCodes.has(r.country.code)}
-                    onSelect={() => {
-                      toggleSelect(r.country.code);
+                {/* Search mode controls */}
+                {search.trim() !== "" ? (
+                  <TourismSearchControls
+                    searchMode={searchMode}
+                    matchingCodes={matchingCodes}
+                    matchCursor={matchCursor}
+                    onPrev={goPrev}
+                    onNext={goNext}
+                    onModeChange={setSearchMode}
+                    onCursorReset={() => {
+                      setMatchCursor(0);
                     }}
-                    selectedTags={ws.toggles.requiredTags}
-                    travelDates={ws.travelDates}
                   />
-                ));
-              })()}
+                ) : null}
+              </div>
+
+              <CompareModeActions
+                active={compareMode}
+                selectedCount={selectedCodes.size}
+                enterLabel={t("compare.compareMode", "Compare")}
+                compareLabel={t("compare.compareSelected", "Compare")}
+                exitLabel={t("tourism.a11y.exitCompareMode", "Exit compare mode")}
+                helperText={
+                  compareMode
+                    ? t(
+                        "compare.helperText",
+                        "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+                      )
+                    : undefined
+                }
+                onEnter={() => {
+                  setCompareMode(true);
+                }}
+                onExit={exitCompareMode}
+                onCompare={handleCompare}
+              />
             </div>
           </div>
-        </main>
-      </div>
+
+          {/* Activity tag chips */}
+          <div className="mb-0">
+            <div className="mb-3 text-[13px] font-bold tracking-[2px] text-on-surface uppercase">
+              {t("tourismFilters.activityTags", "Activities")}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {ALL_TOURISM_TAGS.map((tag) => {
+                const active = ws.toggles.requiredTags.includes(tag);
+                return (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => {
+                      ws.handleToggleTag(tag);
+                    }}
+                    className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${active ? "bg-[#8F5A3C] text-white" : "bg-[#2A2A2A] text-on-surface"}`}
+                  >
+                    {t(`tourismTags.${tag}`, tag)}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Country list */}
+        <div className="px-4 md:px-6">
+          <div className="my-4 flex items-center justify-between px-1 text-xs">
+            <span className="text-on-surface">
+              {compareMode
+                ? t(
+                    "compare.tourismSelectionSubtitle",
+                    "Select countries to compare tourism appeal side by side",
+                  )
+                : t("countryList.clickHint", "Click on a country to view details")}
+            </span>
+            <span className="text-dim">
+              {t("countryList.count", { count: displayedRanked.length })}
+            </span>
+          </div>
+
+          <div className="flex flex-col">{countryListContent}</div>
+        </div>
+      </ResponsiveSidePanelLayout>
     </Layout>
   );
 }

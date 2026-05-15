@@ -4,7 +4,11 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ToggleGroup } from "@core/ui/panels";
 import { Tooltip } from "@core/ui";
-import { BUDGET_CATEGORIES } from "@features/budget/constants";
+import {
+  BUDGET_CATEGORIES,
+  BUDGET_BEDROOM_OPTIONS,
+  BUDGET_HOUSING_OPTIONS,
+} from "@features/budget/constants";
 import type { BudgetState } from "@features/budget/types/budget.types";
 
 export interface BudgetSidebarProps {
@@ -142,7 +146,7 @@ export function BudgetSidebar({
             <div className="flex flex-col gap-1.5">
               <span className="text-xs text-white">{t("budget.bedrooms.label")}</span>
               <ToggleGroup
-                options={[1, 2, 3] as const}
+                options={BUDGET_BEDROOM_OPTIONS}
                 value={bs.bedrooms}
                 onChange={bs.setBedrooms}
                 labelFn={(v) => t(`budget.bedrooms.${v}`, `${v} BR`)}
@@ -153,7 +157,7 @@ export function BudgetSidebar({
             <div className="flex flex-col gap-1.5">
               <span className="text-xs text-white">{t("budget.housing.label", "Location")}</span>
               <ToggleGroup
-                options={["majorCity", "smallerCity"] as const}
+                options={BUDGET_HOUSING_OPTIONS}
                 value={bs.housing}
                 onChange={bs.setHousing}
                 labelFn={(v) =>

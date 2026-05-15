@@ -1,28 +1,23 @@
 import { useMemo, useState, useRef, useEffect } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Search, ExternalLink, GitCompare, X } from "lucide-react";
+import { Search, GitCompare, X } from "lucide-react";
 import { Layout } from "@core/ui/layout";
 import { PageHeroBanner } from "@core/ui/page-hero";
+import { LoadingRows } from "@core/ui/states";
+import { EmptyState } from "@core/ui/states";
 import { useBudgetMatcher } from "@features/budget/hooks";
 import { useBudgetState } from "@features/budget/hooks";
 import { useCountries } from "@core/hooks";
 import { useLangPrefix } from "@core/hooks";
 import { useWeightState } from "@features/country-ranking/hooks";
 import { localizeCountry } from "@core/utils";
-import { scoreColourClass } from "@core/utils";
-import { TAX_STATUS_COLORS } from "@core/constants";
 import type { CountryData } from "@core/models";
 import type { SortField, SortDirection } from "./nomad-visas.types";
-import {
-  applyClimate,
-  computeOverallScore,
-  compareVisaRows,
-  visaRowClass,
-  budgetCellClass,
-  getTaxStatusLabel,
-} from "./nomad-visas.utils";
-import { VisaSortIcon } from "./VisaSortIcon";
+import { applyClimate, computeOverallScore, compareVisaRows } from "./nomad-visas.utils";
+import { NomadVisaHeroStats } from "./NomadVisaHeroStats";
+import { NomadVisaTableHeader } from "./NomadVisaTableHeader";
+import { NomadVisaTableRow } from "./NomadVisaTableRow";
 
 function toggleCodeInSet(prev: Set<string>, code: string): Set<string> {
   const next = new Set(prev);
@@ -163,19 +158,40 @@ export function NomadVisasPage() {
     }
   };
 
+  const taxExemptCount = useMemo(
+    () => allVisaCountries.filter((c) => c.nomadVisa.tax.status === "exempt").length,
+    [allVisaCountries],
+  );
+  const freeVisaCount = useMemo(
+    () => allVisaCountries.filter((c) => c.nomadVisa.cost.amount === 0).length,
+    [allVisaCountries],
+  );
   const tableMinWidth = compareMode ? "1170px" : "1122px";
+  const colgroup = (
+    <colgroup>
+      {compareMode ? <col className="w-12" /> : null}
+      <col className="w-[200px]" />
+      <col className="w-[160px]" />
+      <col className="w-[110px]" />
+      <col className="w-[130px]" />
+      <col className="w-[90px]" />
+      <col className="w-[110px]" />
+      <col className="w-[150px]" />
+      <col className="w-[130px]" />
+      <col className="w-[52px]" />
+    </colgroup>
+  );
 
-  let tableNode: React.ReactNode;
   if (loading) {
-    tableNode = <div className="py-16 text-center text-dim">{t("loading", "Loading…")}</div>;
-  } else if (sortedCountries.length === 0) {
-    tableNode = (
-      <div className="px-4 py-16 text-center text-dim">
-        {t("nomadVisasPage.noResults", "No countries found")}
-      </div>
+    return (
+      <Layout>
+        <LoadingRows count={8} />
+      </Layout>
     );
-  } else {
-    tableNode = (
+  }
+
+  return (
+    <Layout>
       <div className="mx-auto box-content w-full max-w-[1200px] px-4 pb-12">
         <PageHeroBanner
           backgroundImage="/hero-map.png"
@@ -187,43 +203,11 @@ export function NomadVisasPage() {
             { count: allVisaCountries.length },
           )}
         >
-          {!loading && allVisaCountries.length > 0 ? (
-            <div className="hero-stats-row hero-banner-stats">
-              <div className="min-w-0">
-                <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                  {allVisaCountries.length}
-                </div>
-                <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
-                  {t("nomadVisasPage.stats.countries", {
-                    count: allVisaCountries.length,
-                  })}
-                </div>
-              </div>
-              <div className="hero-stat-divider" />
-              <div className="min-w-0">
-                <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                  {allVisaCountries.filter((c) => c.nomadVisa.tax.status === "exempt").length}
-                </div>
-                <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
-                  {t("nomadVisasPage.stats.taxExempt", {
-                    count: allVisaCountries.filter((c) => c.nomadVisa.tax.status === "exempt")
-                      .length,
-                  })}
-                </div>
-              </div>
-              <div className="hero-stat-divider" />
-              <div className="min-w-0">
-                <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                  {allVisaCountries.filter((c) => c.nomadVisa.cost.amount === 0).length}
-                </div>
-                <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
-                  {t("nomadVisasPage.stats.freeVisas", {
-                    count: allVisaCountries.filter((c) => c.nomadVisa.cost.amount === 0).length,
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : null}
+          <NomadVisaHeroStats
+            totalCountries={allVisaCountries.length}
+            taxExemptCount={taxExemptCount}
+            freeVisaCount={freeVisaCount}
+          />
         </PageHeroBanner>
 
         {/* Sentinel for sticky detection (not needed for logic here, reserved) */}
@@ -318,375 +302,66 @@ export function NomadVisasPage() {
         </div>
 
         {/* Table */}
-        {(() => {
-          if (loading)
-            return <div className="py-16 text-center text-dim">{t("loading", "Loading…")}</div>;
-          if (sortedCountries.length === 0)
-            return (
-              <div className="px-4 py-16 text-center text-dim">
-                {t("nomadVisasPage.noResults", "No countries found")}
-              </div>
-            );
-          return (
-            <div className="mx-auto box-content w-full max-w-[1200px] px-4 pb-12">
-              {/* Shared colgroup definition */}
-              {(() => {
-                const colgroup = (
-                  <colgroup>
-                    {compareMode ? <col className="w-12" /> : null}
-                    <col className="w-[200px]" />
-                    <col className="w-[160px]" />
-                    <col className="w-[110px]" />
-                    <col className="w-[130px]" />
-                    <col className="w-[90px]" />
-                    <col className="w-[110px]" />
-                    <col className="w-[150px]" />
-                    <col className="w-[130px]" />
-                    <col className="w-[52px]" />
-                  </colgroup>
-                );
+        <div className="mx-auto box-content w-full max-w-[1200px] px-4 pb-12">
+          {/* Sticky header table — hidden scrollbar, synced via JS */}
+          <div
+            ref={headerScrollRef}
+            className="no-scrollbar sticky top-[var(--thead-top)] z-10 overflow-x-scroll bg-bg"
+            style={{ "--thead-top": `${theadTop}px` } as React.CSSProperties}
+          >
+            <table
+              className="w-full min-w-[var(--tmin-w)] table-fixed border-separate border-spacing-0"
+              style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
+            >
+              {colgroup}
+              <NomadVisaTableHeader
+                sortField={sortField}
+                sortDirection={sortDirection}
+                compareMode={compareMode}
+                onSort={handleSort}
+              />
+            </table>
+          </div>
 
-                return (
-                  <>
-                    {/* Sticky header table — hidden scrollbar, synced via JS */}
-                    <div
-                      ref={headerScrollRef}
-                      className="no-scrollbar sticky top-[var(--thead-top)] z-10 overflow-x-scroll bg-bg"
-                      style={{ "--thead-top": `${theadTop}px` } as React.CSSProperties}
-                    >
-                      <table
-                        className="w-full min-w-[var(--tmin-w)] table-fixed border-separate border-spacing-0"
-                        style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
-                      >
-                        {colgroup}
-                        <thead>
-                          <tr className="border-b-2 border-border">
-                            {compareMode ? <th className="bg-bg px-3 py-4" /> : null}
-                            <th
-                              onClick={() => {
-                                handleSort("country");
-                              }}
-                              className="cursor-pointer bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
-                            >
-                              {t("nomadVisasPage.table.country", "Country")}{" "}
-                              <VisaSortIcon
-                                field="country"
-                                sortField={sortField}
-                                sortDirection={sortDirection}
-                              />
-                            </th>
-                            <th className="bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase">
-                              {t("nomadVisasPage.table.visaName", "Visa Name")}
-                            </th>
-                            <th
-                              onClick={() => {
-                                handleSort("overallScore");
-                              }}
-                              className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
-                            >
-                              {t("nomadVisasPage.table.overallScore", "Overall Score")}{" "}
-                              <VisaSortIcon
-                                field="overallScore"
-                                sortField={sortField}
-                                sortDirection={sortDirection}
-                              />
-                            </th>
-                            <th
-                              onClick={() => {
-                                handleSort("monthlyBudget");
-                              }}
-                              className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
-                            >
-                              {t("nomadVisasPage.table.monthlyBudget", "Monthly Budget")}{" "}
-                              <VisaSortIcon
-                                field="monthlyBudget"
-                                sortField={sortField}
-                                sortDirection={sortDirection}
-                              />
-                            </th>
-                            <th
-                              onClick={() => {
-                                handleSort("duration");
-                              }}
-                              className="cursor-pointer bg-bg px-3 py-4 text-left text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
-                            >
-                              {t("nomadVisasPage.table.duration", "Duration")}{" "}
-                              <VisaSortIcon
-                                field="duration"
-                                sortField={sortField}
-                                sortDirection={sortDirection}
-                              />
-                            </th>
-                            <th
-                              onClick={() => {
-                                handleSort("cost");
-                              }}
-                              className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
-                            >
-                              {t("nomadVisasPage.table.cost", "Cost")}{" "}
-                              <VisaSortIcon
-                                field="cost"
-                                sortField={sortField}
-                                sortDirection={sortDirection}
-                              />
-                            </th>
-                            <th
-                              onClick={() => {
-                                handleSort("income");
-                              }}
-                              className="cursor-pointer bg-bg px-3 py-4 text-right text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
-                            >
-                              {t("nomadVisasPage.table.income", "Income Req.")}{" "}
-                              <VisaSortIcon
-                                field="income"
-                                sortField={sortField}
-                                sortDirection={sortDirection}
-                              />
-                            </th>
-                            <th
-                              onClick={() => {
-                                handleSort("tax");
-                              }}
-                              className="cursor-pointer bg-bg px-3 py-4 text-center text-[11px] font-semibold tracking-[1px] whitespace-nowrap text-muted uppercase select-none"
-                            >
-                              {t("nomadVisasPage.table.tax", "Tax Status")}{" "}
-                              <VisaSortIcon
-                                field="tax"
-                                sortField={sortField}
-                                sortDirection={sortDirection}
-                              />
-                            </th>
-                            <th className="bg-bg px-3 py-4" />
-                          </tr>
-                        </thead>
-                      </table>
-                    </div>
-
-                    {/* Scrollable body table */}
-                    <div
-                      ref={bodyScrollRef}
-                      className="overflow-x-auto"
-                      onScroll={syncHeaderScroll}
-                    >
-                      <table
-                        className="w-full min-w-[var(--tmin-w)] table-fixed border-separate border-spacing-0"
-                        style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
-                      >
-                        {colgroup}
-                        <tbody>
-                          {sortedCountries.map(({ country, overallScore, monthlyBudget }) => {
-                            const visa = country.nomadVisa;
-                            const taxColors =
-                              TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard;
-                            const isHighlighted = highlightCode === country.code;
-                            const isSelected = selectedCodes.has(country.code);
-
-                            return (
-                              <tr
-                                key={country.code}
-                                data-country-code={country.code.toLowerCase()}
-                                className={visaRowClass(isSelected, isHighlighted)}
-                                onClick={() => {
-                                  if (compareMode) {
-                                    toggleSelect(country.code);
-                                  } else {
-                                    void navigate(
-                                      `${langPrefix}/country/${country.code.toLowerCase()}`,
-                                    );
-                                  }
-                                }}
-                                onMouseEnter={(e) => {
-                                  if (!isHighlighted && !isSelected) {
-                                    e.currentTarget.style.backgroundColor = "#232326";
-                                  }
-                                }}
-                                onMouseLeave={(e) => {
-                                  if (!isHighlighted && !isSelected) {
-                                    e.currentTarget.style.backgroundColor = "transparent";
-                                  }
-                                }}
-                              >
-                                {/* Checkbox — compare mode only */}
-                                {compareMode ? (
-                                  <td
-                                    className="py-4 pr-1 pl-3"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      toggleSelect(country.code);
-                                    }}
-                                  >
-                                    <div
-                                      aria-label={`Select ${localizeCountry(country, lang).name}`}
-                                      className={`pointer-events-none flex h-4 w-4 shrink-0 items-center justify-center rounded-[3px] transition-all ${isSelected ? "border-2 border-accent bg-accent" : "border-2 border-[#404040] bg-transparent"}`}
-                                    >
-                                      {isSelected ? (
-                                        <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-                                          <path
-                                            d="M1 3.5L3.5 6L8 1"
-                                            stroke="white"
-                                            strokeWidth="1.5"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                          />
-                                        </svg>
-                                      ) : null}
-                                    </div>
-                                  </td>
-                                ) : null}
-
-                                {/* Country */}
-                                <td className="px-3 py-4">
-                                  <Link
-                                    to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-                                    className="flex items-center gap-2.5 no-underline"
-                                    onClick={(e) => {
-                                      if (compareMode) {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        toggleSelect(country.code);
-                                      }
-                                    }}
-                                  >
-                                    <img
-                                      src={country.flagUrl}
-                                      alt={t("a11y.flagAlt", "{{country}} flag", {
-                                        country: localizeCountry(country, lang).name,
-                                      })}
-                                      className="h-[19px] w-7 shrink-0 rounded-[3px] object-cover"
-                                      loading="lazy"
-                                    />
-                                    <span className="text-sm font-medium text-white">
-                                      {localizeCountry(country, lang).name}
-                                    </span>
-                                  </Link>
-                                </td>
-
-                                {/* Visa Name */}
-                                <td className="px-3 py-4">
-                                  <span className="text-[13px] text-tertiary">{visa.visaName}</span>
-                                </td>
-
-                                {/* Overall score */}
-                                <td className="px-3 py-4 text-right">
-                                  <span
-                                    className={`font-mono text-sm font-semibold ${scoreColourClass(overallScore, "text")}`}
-                                  >
-                                    {overallScore.toFixed(1)}
-                                  </span>
-                                </td>
-
-                                {/* Monthly budget */}
-                                <td className="px-3 py-4 text-right">
-                                  <span className={budgetCellClass(monthlyBudget, bs.budget)}>
-                                    {monthlyBudget == null
-                                      ? "—"
-                                      : `$${monthlyBudget.toLocaleString()}`}
-                                  </span>
-                                </td>
-
-                                {/* Duration */}
-                                <td className="px-3 py-4">
-                                  <span className="font-mono text-sm font-semibold text-white">
-                                    {visa.duration.initial}
-                                  </span>
-                                  <span className="ml-[3px] text-xs text-dim">
-                                    {t("countryPage.visa.mo")}
-                                  </span>
-                                  {visa.duration.maxExtension > 0 ? (
-                                    <span className="ml-1 text-[11px] text-dimmer">
-                                      +{visa.duration.maxExtension}
-                                    </span>
-                                  ) : null}
-                                </td>
-
-                                {/* Cost */}
-                                <td className="px-3 py-4 text-right">
-                                  <span
-                                    className={`font-mono text-sm font-semibold ${visa.cost.amount === 0 ? "text-[#44CC66]" : "text-white"}`}
-                                  >
-                                    {visa.cost.amount === 0
-                                      ? t("countryPage.visa.free", "Free")
-                                      : `${visa.cost.currency} ${visa.cost.amount.toLocaleString()}`}
-                                  </span>
-                                </td>
-
-                                {/* Income */}
-                                <td className="px-3 py-4 text-right">
-                                  {visa.incomeRequirement.monthly !== null ? (
-                                    <>
-                                      <span className="font-mono text-sm font-semibold text-white">
-                                        {visa.incomeRequirement.currency}{" "}
-                                        {visa.incomeRequirement.monthly.toLocaleString()}
-                                      </span>
-                                      <span className="ml-0.5 text-xs text-dim">
-                                        /{t("countryPage.visa.mo")}
-                                      </span>
-                                    </>
-                                  ) : null}
-                                  {visa.incomeRequirement.monthly === null &&
-                                  visa.incomeRequirement.annual !== null ? (
-                                    <>
-                                      <span className="font-mono text-[13px] font-semibold text-white">
-                                        {visa.incomeRequirement.currency}{" "}
-                                        {visa.incomeRequirement.annual.toLocaleString()}
-                                      </span>
-                                      <span className="ml-0.5 text-xs text-dim">
-                                        /{t("countryPage.visa.yr")}
-                                      </span>
-                                    </>
-                                  ) : null}
-                                  {visa.incomeRequirement.monthly === null &&
-                                  visa.incomeRequirement.annual === null ? (
-                                    <span className="font-mono text-[13px] font-semibold text-[#44CC66]">
-                                      {t("countryPage.visa.noMinimum", "None")}
-                                    </span>
-                                  ) : null}
-                                </td>
-
-                                {/* Tax */}
-                                <td className="px-3 py-4 text-center">
-                                  <span
-                                    className="inline-flex items-center rounded-full bg-[var(--tax-bg)] px-2 py-1 font-mono text-[11px] font-semibold whitespace-nowrap text-[var(--tax-text)]"
-                                    style={
-                                      {
-                                        "--tax-bg": taxColors.bg,
-                                        "--tax-text": taxColors.text,
-                                      } as React.CSSProperties
-                                    }
-                                  >
-                                    {getTaxStatusLabel(visa.tax.status, t)}
-                                  </span>
-                                </td>
-
-                                {/* Link */}
-                                <td className="px-3 py-4 text-center">
-                                  <a
-                                    href={visa.officialUrl}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                    }}
-                                    className="inline-flex text-accent"
-                                  >
-                                    <ExternalLink size={16} />
-                                  </a>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  </>
-                );
-              })()}
-            </div>
-          );
-        })()}
+          {/* Scrollable body table */}
+          <div ref={bodyScrollRef} className="overflow-x-auto" onScroll={syncHeaderScroll}>
+            {sortedCountries.length === 0 ? (
+              <EmptyState message={t("nomadVisasPage.noResults", "No countries found")} />
+            ) : (
+              <table
+                className="w-full min-w-[var(--tmin-w)] table-fixed border-separate border-spacing-0"
+                style={{ "--tmin-w": tableMinWidth } as React.CSSProperties}
+              >
+                {colgroup}
+                <tbody>
+                  {sortedCountries.map(({ country, overallScore, monthlyBudget }) => (
+                    <NomadVisaTableRow
+                      key={country.code}
+                      country={country}
+                      overallScore={overallScore}
+                      monthlyBudget={monthlyBudget}
+                      budget={bs.budget}
+                      compareMode={compareMode}
+                      isSelected={selectedCodes.has(country.code)}
+                      isHighlighted={highlightCode === country.code}
+                      onRowClick={(code) => {
+                        if (compareMode) {
+                          toggleSelect(code);
+                        } else {
+                          void navigate(`${langPrefix}/country/${code.toLowerCase()}`);
+                        }
+                      }}
+                      onToggleSelect={toggleSelect}
+                      langPrefix={langPrefix}
+                      lang={lang}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
       </div>
-    );
-
-    return <Layout>{tableNode}</Layout>;
-  }
+    </Layout>
+  );
 }

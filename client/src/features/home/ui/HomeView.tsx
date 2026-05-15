@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Search, SlidersHorizontal, GitCompare, X } from "lucide-react";
+import { Search, SlidersHorizontal } from "lucide-react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Layout } from "@core/ui/layout";
+import { Layout, ResponsiveSidePanelLayout } from "@core/ui/layout";
+import { CompareModeActions } from "@core/ui";
 import { CountryList } from "@features/country-ranking/ui";
 import { WeightPanel } from "@features/country-ranking/ui";
-import { MobileSheet } from "@core/ui";
 import { useCountries } from "@core/hooks";
 import { useScoring } from "@features/country-ranking/hooks";
 import { useLangPrefix } from "@core/hooks";
@@ -243,339 +243,280 @@ export default function App() {
     void navigate(`${langPrefix}/compare?c=${[...selectedCodes].join(",")}`);
   }, [selectedCodes, navigate, langPrefix]);
 
+  const weightPanelProps = {
+    weights: ws.weights,
+    onChange: ws.handleWeightChange,
+    onReset: ws.handleReset,
+    weightsAreDefault: ws.weightsAreDefault,
+    onShare: () => {
+      ws.handleShare();
+    },
+    climatePrefs: ws.climatePrefs,
+    onClimatePrefsChange: ws.setClimatePrefs,
+    nomadVisaOnly: ws.nomadVisaOnly,
+    onNomadVisaOnlyChange: ws.setNomadVisaOnly,
+    schengenOnly: ws.schengenOnly,
+    onSchengenOnlyChange: ws.setSchengenOnly,
+    minTouristDays: ws.minTouristDays,
+    onMinTouristDaysChange: ws.setMinTouristDays,
+    weightMode: ws.weightMode,
+    onWeightModeChange: ws.handleWeightModeChange,
+  };
+
   return (
     <Layout>
-      <div className="flex">
-        {/* Left sidebar - Weight Panel (hidden on mobile) */}
-        <aside className="sticky top-14 hidden h-[calc(100vh-56px)] w-[340px] self-start md:block">
-          <WeightPanel
-            weights={ws.weights}
-            onChange={ws.handleWeightChange}
-            onReset={ws.handleReset}
-            weightsAreDefault={ws.weightsAreDefault}
-            onShare={() => {
-              ws.handleShare();
-            }}
-            climatePrefs={ws.climatePrefs}
-            onClimatePrefsChange={ws.setClimatePrefs}
-            nomadVisaOnly={ws.nomadVisaOnly}
-            onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-            schengenOnly={ws.schengenOnly}
-            onSchengenOnlyChange={ws.setSchengenOnly}
-            minTouristDays={ws.minTouristDays}
-            onMinTouristDaysChange={ws.setMinTouristDays}
-            weightMode={ws.weightMode}
-            onWeightModeChange={ws.handleWeightModeChange}
-          />
-        </aside>
-
-        <MobileSheet
-          open={mobileParamsOpen}
-          title={t("mobileSheet.weightsAndPreferences")}
-          closeLabel={t("a11y.closeParameters", "Close parameters")}
-          onClose={() => {
+      <ResponsiveSidePanelLayout
+        sidebar={<WeightPanel {...weightPanelProps} />}
+        mobileSheet={{
+          open: mobileParamsOpen,
+          title: t("mobileSheet.weightsAndPreferences"),
+          closeLabel: t("a11y.closeParameters", "Close parameters"),
+          onClose: () => {
             setMobileParamsOpen(false);
-          }}
-        >
-          <WeightPanel
-            weights={ws.weights}
-            onChange={ws.handleWeightChange}
-            onReset={ws.handleReset}
-            weightsAreDefault={ws.weightsAreDefault}
-            onShare={() => {
-              ws.handleShare();
-            }}
-            climatePrefs={ws.climatePrefs}
-            onClimatePrefsChange={ws.setClimatePrefs}
-            nomadVisaOnly={ws.nomadVisaOnly}
-            onNomadVisaOnlyChange={ws.setNomadVisaOnly}
-            schengenOnly={ws.schengenOnly}
-            onSchengenOnlyChange={ws.setSchengenOnly}
-            minTouristDays={ws.minTouristDays}
-            onMinTouristDaysChange={ws.setMinTouristDays}
-            weightMode={ws.weightMode}
-            onWeightModeChange={ws.handleWeightModeChange}
-            mobile
-          />
-        </MobileSheet>
-
-        {/* Mobile FAB - Parameters button */}
-        <button
-          className="fixed right-4 z-40 flex h-12 items-center gap-2 rounded-[24px] bg-accent pr-[18px] pl-4 text-sm font-semibold text-white shadow-lg md:hidden"
-          style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 20px)" }}
-          onClick={() => {
+          },
+          children: <WeightPanel {...weightPanelProps} mobile />,
+        }}
+        mobileFab={{
+          label: t("mobileSheet.parameters"),
+          ariaLabel: t("a11y.openParameters", "Open parameters"),
+          icon: <SlidersHorizontal size={18} aria-hidden />,
+          onClick: () => {
             setMobileParamsOpen(true);
-          }}
-          aria-label={t("a11y.openParameters", "Open parameters")}
-        >
-          <SlidersHorizontal size={18} />
-          {t("mobileSheet.parameters")}
-        </button>
-
-        {/* Right content area */}
-        <main className="min-w-0 flex-1 bg-bg pb-28 md:pb-0">
-          <div className="px-4 md:px-6">
-            {/* Hero section */}
+          },
+        }}
+      >
+        <div className="px-4 md:px-6">
+          {/* Hero section */}
+          <div
+            className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
+            style={{
+              background: "#0A0A0F",
+              backgroundImage: `url('/hero-map.png')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {/* Gradient overlay - transparent top to black bottom */}
             <div
-              className="relative -mx-4 mb-6 overflow-hidden md:mx-0 md:mb-6 md:rounded-lg"
+              className="absolute inset-0"
               style={{
-                background: "#0A0A0F",
-                backgroundImage: `url('/hero-map.png')`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
+                background: "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
               }}
-            >
-              {/* Gradient overlay - transparent top to black bottom */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%)",
-                }}
-              />
+            />
 
-              <div className="relative flex min-h-[160px] flex-col justify-end px-4 py-4 md:px-12 md:py-12">
-                {/* Eyebrow */}
-                <div className="mb-2 flex items-center gap-2 md:mb-3">
-                  {t("hero.eyebrow")
-                    .split("·")
-                    .map((word) => (
-                      <span key={word.trim()} className="flex items-center gap-2">
-                        <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
-                        <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
-                          {word.trim()}
-                        </span>
+            <div className="relative flex min-h-[160px] flex-col justify-end px-4 py-4 md:px-12 md:py-12">
+              {/* Eyebrow */}
+              <div className="mb-2 flex items-center gap-2 md:mb-3">
+                {t("hero.eyebrow")
+                  .split("·")
+                  .map((word) => (
+                    <span key={word.trim()} className="flex items-center gap-2">
+                      <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                      <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
+                        {word.trim()}
                       </span>
-                    ))}
+                    </span>
+                  ))}
+              </div>
+              {/* H1 — responsive font */}
+              <h1 className="mb-2 font-display text-3xl leading-[0.95] font-bold text-white md:text-6xl">
+                {t("hero.title")}
+              </h1>
+              {/* Tagline */}
+              <p className="mb-5 hidden max-w-[580px] text-[15px] text-dim md:block">
+                {t("hero.tagline")}
+              </p>
+              {/* Copper rule */}
+              <div className="mb-4 hidden h-0.5 w-32 bg-accent md:block" />
+              {/* Stats row */}
+              <div className="hero-stats-row hero-banner-stats">
+                <div className="min-w-0">
+                  <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
+                    {countries.length}
+                  </div>
+                  <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
+                    {t("hero.stats.countries", { count: countries.length })}
+                  </div>
                 </div>
-                {/* H1 — responsive font */}
-                <h1 className="mb-2 font-display text-3xl leading-[0.95] font-bold text-white md:text-6xl">
-                  {t("hero.title")}
-                </h1>
-                {/* Tagline */}
-                <p className="mb-5 hidden max-w-[580px] text-[15px] text-dim md:block">
-                  {t("hero.tagline")}
-                </p>
-                {/* Copper rule */}
-                <div className="mb-4 hidden h-0.5 w-32 bg-accent md:block" />
-                {/* Stats row */}
-                <div className="hero-stats-row hero-banner-stats">
-                  <div className="min-w-0">
+                <div className="hero-stat-divider" />
+                <Link to={`${langPrefix}/indicators`} className="min-w-0 no-underline">
+                  <div>
                     <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                      {countries.length}
+                      {DISPLAYED_CORE_CATEGORY_KEYS.length}
                     </div>
                     <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
-                      {t("hero.stats.countries", { count: countries.length })}
+                      {t("hero.stats.indicators", {
+                        count: DISPLAYED_CORE_CATEGORY_KEYS.length,
+                      })}
                     </div>
                   </div>
-                  <div className="hero-stat-divider" />
-                  <Link to={`${langPrefix}/indicators`} className="min-w-0 no-underline">
-                    <div>
-                      <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                        {DISPLAYED_CORE_CATEGORY_KEYS.length}
-                      </div>
-                      <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
-                        {t("hero.stats.indicators", {
-                          count: DISPLAYED_CORE_CATEGORY_KEYS.length,
-                        })}
-                      </div>
+                </Link>
+                <div className="hero-stat-divider" />
+                <Link to={`${langPrefix}/data-sources`} className="min-w-0 no-underline">
+                  <div>
+                    <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
+                      {DATA_SOURCE_KEYS.flat().length}
                     </div>
-                  </Link>
-                  <div className="hero-stat-divider" />
-                  <Link to={`${langPrefix}/data-sources`} className="min-w-0 no-underline">
-                    <div>
-                      <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                        {DATA_SOURCE_KEYS.flat().length}
-                      </div>
-                      <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
-                        {t("hero.stats.dataSources", {
-                          count: DATA_SOURCE_KEYS.flat().length,
-                        })}
-                      </div>
+                    <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
+                      {t("hero.stats.dataSources", {
+                        count: DATA_SOURCE_KEYS.flat().length,
+                      })}
                     </div>
-                  </Link>
-                  <div className="hero-stat-divider" />
-                  <Link to={`${langPrefix}/ai-indicators`} className="min-w-0 no-underline">
-                    <div>
-                      <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
-                        {AI_CATEGORY_KEYS.length}
-                      </div>
-                      <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
-                        {t("hero.stats.aiIndicators", {
-                          count: AI_CATEGORY_KEYS.length,
-                        })}
-                      </div>
+                  </div>
+                </Link>
+                <div className="hero-stat-divider" />
+                <Link to={`${langPrefix}/ai-indicators`} className="min-w-0 no-underline">
+                  <div>
+                    <div className="font-mono text-lg leading-none font-semibold text-accent-dim">
+                      {AI_CATEGORY_KEYS.length}
                     </div>
-                  </Link>
-                </div>
+                    <div className="mt-1 text-[10px] tracking-[1px] text-dimmest uppercase">
+                      {t("hero.stats.aiIndicators", {
+                        count: AI_CATEGORY_KEYS.length,
+                      })}
+                    </div>
+                  </div>
+                </Link>
               </div>
             </div>
-
-            {/* Sentinel — used by IntersectionObserver to detect sticky state */}
-            <div ref={sentinelRef} className="h-0" />
-
-            {/* Search bar + Region chips — sticky below header */}
-            <div
-              className={`sticky top-14 z-20 -mx-4 border-b border-surface bg-bg px-4 pb-4 md:-mx-6 md:px-6 ${isSticky ? "pt-3" : "pt-0"}`}
-            >
-              {/* Search + compare row */}
-              <div className={isSticky ? "" : "mb-4"}>
-                <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-                  <div className="relative min-w-0 flex-1">
-                    <Search
-                      className="absolute top-1/2 left-4 -translate-y-1/2 text-dim"
-                      size={18}
-                    />
-                    <input
-                      ref={searchInputRef}
-                      name="country-search"
-                      type="text"
-                      placeholder={t("search.placeholder")}
-                      value={search}
-                      onChange={(e) => {
-                        updateSearch(e.target.value);
-                      }}
-                      className="h-10 w-full rounded-md border border-surface bg-[#161616] pr-[var(--pr)] pl-12 text-sm text-white focus:outline-none"
-                      style={
-                        {
-                          "--pr": getSearchPaddingRight(
-                            search.length === 0,
-                            searchMode,
-                            search.trim().length > 0,
-                          ),
-                        } as React.CSSProperties
-                      }
-                    />
-                    {search !== "" ? (
-                      <HomeSearchControls
-                        searchMode={searchMode}
-                        search={search}
-                        matchingCodes={matchingCodes}
-                        matchCursor={matchCursor}
-                        onClear={() => {
-                          updateSearch("");
-                        }}
-                        onPrev={goPrev}
-                        onNext={goNext}
-                        onModeChange={setSearchMode}
-                        onCursorReset={() => {
-                          setMatchCursor(0);
-                        }}
-                      />
-                    ) : null}
-                  </div>
-
-                  <div className="flex w-full shrink-0 items-center justify-end gap-2 sm:w-auto">
-                    {compareMode ? (
-                      <>
-                        <button
-                          onClick={handleCompare}
-                          className={`flex h-10 flex-1 shrink-0 items-center justify-center gap-1.5 rounded-md px-3.5 text-[13px] font-semibold whitespace-nowrap transition-all duration-150 sm:flex-none ${selectedCodes.size < 2 ? "cursor-default border border-accent-dim bg-[#161616] text-accent-dim" : "cursor-pointer border-0 bg-accent text-white"}`}
-                          disabled={selectedCodes.size < 2}
-                        >
-                          <GitCompare size={15} />
-                          {t("compare.compareSelected", "Compare")}
-                          {selectedCodes.size > 0 ? (
-                            <span
-                              className={`rounded-[10px] px-[7px] py-px text-xs ${selectedCodes.size < 2 ? "bg-[rgba(143,90,60,0.2)]" : "bg-[rgba(255,255,255,0.25)]"}`}
-                            >
-                              {selectedCodes.size}
-                            </span>
-                          ) : null}
-                        </button>
-                        <button
-                          onClick={exitCompareMode}
-                          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-[#161616] text-dim"
-                          aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
-                        >
-                          <X size={16} />
-                        </button>
-                      </>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setCompareMode(true);
-                        }}
-                        className="flex h-10 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-surface-4 bg-[#161616] px-3.5 text-[13px] font-medium whitespace-nowrap text-muted sm:w-auto"
-                      >
-                        <GitCompare size={15} />
-                        {t("compare.compareMode", "Compare")}
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                {compareMode ? (
-                  <p className="mt-2 pl-0.5 text-xs text-dim">
-                    {t(
-                      "compare.helperText",
-                      "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
-                    )}
-                  </p>
-                ) : null}
-              </div>
-
-              {/* Region chips — hidden when sticky */}
-              {isSticky ? null : (
-                <div className="mb-0">
-                  <div className="mb-3 text-[13px] font-bold tracking-[2px] text-muted uppercase">
-                    {t("regions.label")}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => {
-                        ws.setSelectedRegions(new Set());
-                      }}
-                      className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${ws.selectedRegions.size === 0 ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
-                    >
-                      {t("regions.all")}
-                    </button>
-                    {regions.map((r) => (
-                      <button
-                        key={r}
-                        onClick={() => {
-                          ws.setSelectedRegions((prev) => {
-                            const next = new Set(prev);
-                            if (next.has(r)) next.delete(r);
-                            else next.add(r);
-                            return next;
-                          });
-                        }}
-                        className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${ws.selectedRegions.has(r) ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
-                      >
-                        {t(`regions.${r.replaceAll(/\s/g, "")}`, r)}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Country list */}
-            <CountryList
-              ranked={displayedRanked}
-              loading={loading}
-              error={error}
-              onRetry={refresh}
-              highlightedCode={activeHighlight}
-              expandedCode={compareMode ? null : expandedCode}
-              onToggleExpanded={
-                compareMode
-                  ? undefined
-                  : (code) => {
-                      setExpandedCode((c) => (c === code ? null : code));
-                    }
-              }
-              showAll={search.trim().length > 0 || highlightedCode !== null}
-              compareMode={compareMode}
-              selectedCodes={selectedCodes}
-              onToggleSelect={toggleSelect}
-              weights={ws.weights}
-            />
           </div>
-        </main>
-      </div>
+
+          {/* Sentinel — used by scroll detection */}
+          <div ref={sentinelRef} className="h-0" />
+
+          {/* Search bar + Region chips — sticky below header */}
+          <div
+            className={`sticky top-14 z-20 -mx-4 border-b border-surface bg-bg px-4 pb-4 md:-mx-6 md:px-6 ${isSticky ? "pt-3" : "pt-0"}`}
+          >
+            {/* Search + compare row */}
+            <div className={isSticky ? "" : "mb-4"}>
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                <div className="relative min-w-0 flex-1">
+                  <Search className="absolute top-1/2 left-4 -translate-y-1/2 text-dim" size={18} />
+                  <input
+                    ref={searchInputRef}
+                    name="country-search"
+                    type="text"
+                    placeholder={t("search.placeholder")}
+                    value={search}
+                    onChange={(e) => {
+                      updateSearch(e.target.value);
+                    }}
+                    className="h-10 w-full rounded-md border border-surface bg-[#161616] pr-[var(--pr)] pl-12 text-sm text-white focus:outline-none"
+                    style={
+                      {
+                        "--pr": getSearchPaddingRight(
+                          search.length === 0,
+                          searchMode,
+                          search.trim().length > 0,
+                        ),
+                      } as React.CSSProperties
+                    }
+                  />
+                  {search !== "" ? (
+                    <HomeSearchControls
+                      searchMode={searchMode}
+                      search={search}
+                      matchingCodes={matchingCodes}
+                      matchCursor={matchCursor}
+                      onClear={() => {
+                        updateSearch("");
+                      }}
+                      onPrev={goPrev}
+                      onNext={goNext}
+                      onModeChange={setSearchMode}
+                      onCursorReset={() => {
+                        setMatchCursor(0);
+                      }}
+                    />
+                  ) : null}
+                </div>
+
+                <CompareModeActions
+                  active={compareMode}
+                  selectedCount={selectedCodes.size}
+                  enterLabel={t("compare.compareMode", "Compare")}
+                  compareLabel={t("compare.compareSelected", "Compare")}
+                  exitLabel={t("a11y.exitCompareMode", "Exit compare mode")}
+                  helperText={
+                    compareMode
+                      ? t(
+                          "compare.helperText",
+                          "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+                        )
+                      : undefined
+                  }
+                  onEnter={() => {
+                    setCompareMode(true);
+                  }}
+                  onExit={exitCompareMode}
+                  onCompare={handleCompare}
+                />
+              </div>
+            </div>
+
+            {/* Region chips — hidden when sticky */}
+            {isSticky ? null : (
+              <div className="mb-0">
+                <div className="mb-3 text-[13px] font-bold tracking-[2px] text-muted uppercase">
+                  {t("regions.label")}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      ws.setSelectedRegions(new Set());
+                    }}
+                    className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${ws.selectedRegions.size === 0 ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
+                  >
+                    {t("regions.all")}
+                  </button>
+                  {regions.map((r) => (
+                    <button
+                      key={r}
+                      type="button"
+                      onClick={() => {
+                        ws.setSelectedRegions((prev) => {
+                          const next = new Set(prev);
+                          if (next.has(r)) next.delete(r);
+                          else next.add(r);
+                          return next;
+                        });
+                      }}
+                      className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${ws.selectedRegions.has(r) ? "bg-accent text-white" : "bg-surface-4 text-muted"}`}
+                    >
+                      {t(`regions.${r.replaceAll(/\s/g, "")}`, r)}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Country list */}
+          <CountryList
+            ranked={displayedRanked}
+            loading={loading}
+            error={error}
+            onRetry={refresh}
+            highlightedCode={activeHighlight}
+            expandedCode={compareMode ? null : expandedCode}
+            onToggleExpanded={
+              compareMode
+                ? undefined
+                : (code) => {
+                    setExpandedCode((c) => (c === code ? null : code));
+                  }
+            }
+            showAll={search.trim().length > 0 || highlightedCode !== null}
+            compareMode={compareMode}
+            selectedCodes={selectedCodes}
+            onToggleSelect={toggleSelect}
+            weights={ws.weights}
+          />
+        </div>
+      </ResponsiveSidePanelLayout>
     </Layout>
   );
 }

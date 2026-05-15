@@ -8,7 +8,13 @@ interface HeroSectionProps {
   readonly children?: React.ReactNode;
 }
 
-export function HeroSection({ backgroundImage, title, subtitle, children }: HeroSectionProps) {
+export function HeroSection({
+  backgroundImage,
+  eyebrow,
+  title,
+  subtitle,
+  children,
+}: HeroSectionProps) {
   return (
     <div
       className={`relative w-full overflow-hidden bg-[#0F1114] ${children != null ? "min-h-[240px] md:min-h-[280px]" : "h-[120px] md:h-[180px]"}`}
@@ -26,6 +32,18 @@ export function HeroSection({ backgroundImage, title, subtitle, children }: Hero
       <div
         className={`absolute inset-0 flex flex-col gap-[10px] px-4 md:px-12 ${children != null ? "justify-end pb-6" : "justify-center"}`}
       >
+        {eyebrow !== "" ? (
+          <div className="mb-2 flex items-center gap-2 md:mb-3">
+            {eyebrow.split("·").map((word) => (
+              <span key={word.trim()} className="flex items-center gap-2">
+                <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
+                  {word.trim()}
+                </span>
+              </span>
+            ))}
+          </div>
+        ) : null}
         <h1 className="m-0 [font-family:Oswald,_sans-serif] text-3xl leading-none font-bold text-on-surface md:text-[56px]">
           {title}
         </h1>
