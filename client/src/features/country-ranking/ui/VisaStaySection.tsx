@@ -1,9 +1,9 @@
-import { Plane, Info } from "lucide-react";
+import { Info, Plane } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "@core/ui";
 import { CollapsibleSection } from "@core/ui/panels";
-import { ToggleSwitch } from "@features/country-ranking/ui";
+import { Tooltip } from "@core/ui";
 import { VisaTouristDaysFilter } from "./VisaTouristDaysFilter";
+import { VisaToggleItem } from "./VisaToggleItem";
 
 interface VisaStaySectionProps {
   readonly nomadVisaOnly: boolean;
@@ -44,48 +44,20 @@ export function VisaStaySection({
       onToggle={onToggle}
     >
       <div className="flex flex-col gap-[10px] bg-surface-3 p-3 px-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs text-tertiary">{t("visa.nomadVisaOnly")}</span>
-            <Tooltip
-              content={
-                <div>
-                  <div className="mb-2 font-semibold text-white">{t("visa.nomadVisaTitle")}</div>
-                  <div>{t("visa.nomadVisaDesc")}</div>
-                </div>
-              }
-              side="top"
-            >
-              <Info size={14} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-60" />
-            </Tooltip>
-          </div>
-          <ToggleSwitch
-            checked={nomadVisaOnly}
-            onChange={onNomadVisaOnlyChange}
-            ariaLabel={t("visa.nomadVisaOnly")}
-          />
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs text-tertiary">{t("visa.schengenArea")}</span>
-            <Tooltip
-              content={
-                <div>
-                  <div className="mb-2 font-semibold text-white">{t("visa.schengenTitle")}</div>
-                  <div>{t("visa.schengenDesc")}</div>
-                </div>
-              }
-              side="top"
-            >
-              <Info size={14} color="#FFFFFF" className="shrink-0 cursor-pointer opacity-60" />
-            </Tooltip>
-          </div>
-          <ToggleSwitch
-            checked={schengenOnly}
-            onChange={onSchengenOnlyChange}
-            ariaLabel={t("visa.schengenArea")}
-          />
-        </div>
+        <VisaToggleItem
+          label={t("visa.nomadVisaOnly")}
+          tooltipTitle={t("visa.nomadVisaTitle")}
+          tooltipDesc={t("visa.nomadVisaDesc")}
+          checked={nomadVisaOnly}
+          onChange={onNomadVisaOnlyChange}
+        />
+        <VisaToggleItem
+          label={t("visa.schengenArea")}
+          tooltipTitle={t("visa.schengenTitle")}
+          tooltipDesc={t("visa.schengenDesc")}
+          checked={schengenOnly}
+          onChange={onSchengenOnlyChange}
+        />
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-1.5">
             <span className="text-xs text-tertiary">{t("visa.minTouristStay")}</span>

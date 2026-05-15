@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Tooltip } from "@core/ui";
 import type { SearchMode } from "./home.types";
 import { homeNavButtonClass } from "./home.utils";
-
 export interface HomeSearchControlsProps {
   readonly searchMode: SearchMode;
   readonly search: string;

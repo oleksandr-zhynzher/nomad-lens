@@ -1,0 +1,78 @@
+import { BarChart3, List, Map, Palmtree, Plane, Wallet } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import type { NavView } from "./layout.utils";
+import { mobileNavBtnClass, mobileNavLinkClass } from "./layout.styles";
+
+interface MobileNavGridProps {
+  readonly activeView: NavView | null;
+  readonly onViewClick: (view: NavView) => void;
+  readonly langPrefix: string;
+  readonly pathname: string;
+  readonly onClose: () => void;
+}
+
+export function MobileNavGrid({
+  activeView,
+  onViewClick,
+  langPrefix,
+  pathname,
+  onClose,
+}: MobileNavGridProps) {
+  const { t } = useTranslation();
+  return (
+    <div className="mb-3 grid grid-cols-2 gap-2">
+      <button
+        onClick={() => {
+          onViewClick("list");
+        }}
+        className={mobileNavBtnClass(activeView === "list")}
+      >
+        <List size={16} />
+        {t("views.list")}
+      </button>
+      <button
+        onClick={() => {
+          onViewClick("map");
+        }}
+        className={mobileNavBtnClass(activeView === "map")}
+      >
+        <Map size={16} />
+        {t("views.map")}
+      </button>
+      <button
+        onClick={() => {
+          onViewClick("compare");
+        }}
+        className={mobileNavBtnClass(activeView === "compare")}
+      >
+        <BarChart3 size={16} />
+        {t("views.compare")}
+      </button>
+      <Link
+        to={`${langPrefix}/nomad-visas`}
+        onClick={onClose}
+        className={mobileNavLinkClass(pathname.endsWith("/nomad-visas"))}
+      >
+        <Plane size={16} />
+        {t("nav.nomadVisas")}
+      </Link>
+      <Link
+        to={`${langPrefix}/budget-matcher`}
+        onClick={onClose}
+        className={mobileNavLinkClass(pathname.endsWith("/budget-matcher"))}
+      >
+        <Wallet size={16} />
+        {t("nav.budgetMatcher")}
+      </Link>
+      <Link
+        to={`${langPrefix}/tourism`}
+        onClick={onClose}
+        className={mobileNavLinkClass(pathname.endsWith("/tourism"))}
+      >
+        <Palmtree size={16} />
+        {t("nav.tourism", "Tourism")}
+      </Link>
+    </div>
+  );
+}

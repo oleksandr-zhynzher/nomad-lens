@@ -1,6 +1,5 @@
 import { ArrowDownWideNarrow } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
 interface CompareActionBarProps {
   readonly showWeights: boolean;
   readonly onToggleWeights: () => void;
@@ -13,7 +12,6 @@ interface CompareActionBarProps {
   readonly onShare: () => void;
   readonly actionGridClassName: string;
 }
-
 const MOBILE_VIEWPORT_MAX_WIDTH = 1024;
 
 export function CompareActionBar({

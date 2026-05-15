@@ -1,13 +1,10 @@
 import { ChevronRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import type { TourismRanked } from "@features/tourism/utils";
-import { applyTagSeasonality } from "@features/tourism/utils";
 import { tourismScoreColourClass } from "@core/utils";
-import { TOURISM_CATEGORY_KEYS } from "@core/models";
 import type { TravelDates } from "@features/tourism/hooks";
 import { CountryNameCell } from "@core/ui/country";
-import { ScoreDot, ScoreSparkline } from "@core/ui/indicator";
 import { TourismBudgetBar } from "./TourismBudgetBar";
+import { TourismCardTagSparkline } from "./TourismCardTagSparkline";
 
 interface TourismCountryCardInnerProps {
   readonly ranked: TourismRanked;
@@ -25,7 +22,6 @@ export function TourismCountryCardInner({
   travelDates,
 }: TourismCountryCardInnerProps) {
   const { country, tourismScore, rank } = ranked;
-  const { t } = useTranslation();
 
   return (
     <>
@@ -36,35 +32,11 @@ export function TourismCountryCardInner({
 
         <CountryNameCell country={country} />
 
-        <div className="hidden items-center gap-1 sm:flex">
-          <ScoreSparkline
-            entries={TOURISM_CATEGORY_KEYS.map((key) => ({
-              key,
-              value: country.scores[key].value ?? null,
-              label: t(`tourism.metrics.${key}`, key),
-            }))}
-          />
-          {selectedTags.length > 0 && (
-            <>
-              <div className="mx-0.5 h-3 w-px bg-border" />
-              {selectedTags.map((tag) => {
-                const base = country.tourismTagScores?.[tag] ?? null;
-                const val =
-                  base === null
-                    ? null
-                    : applyTagSeasonality(base, country.tourismTagSeasonality?.[tag], travelDates);
-                return (
-                  <ScoreDot
-                    key={`tag-${tag}`}
-                    value={val}
-                    label={t(`tourismTags.${tag}`, tag)}
-                    shape="square"
-                  />
-                );
-              })}
-            </>
-          )}
-        </div>
+        <TourismCardTagSparkline
+          country={country}
+          selectedTags={selectedTags}
+          travelDates={travelDates}
+        />
 
         {ranked.budgetMatch ? (
           <div className="hidden shrink-0 flex-col items-end sm:flex">

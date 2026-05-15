@@ -1,19 +1,11 @@
 import type { RefObject } from "react";
 import { useTranslation } from "react-i18next";
-import { Wallet, TrendingUp } from "lucide-react";
 import type { CountryData } from "@core/models";
 import { localizeCountry } from "@core/utils";
-import {
-  COST_COLORS,
-  surplusColour,
-  BREAKDOWN_ROWS,
-  BUDGET_COMPARISON_COLUMN_WIDTH,
-} from "@features/budget/constants";
-import { costColor } from "@features/budget/utils";
+import { BUDGET_COMPARISON_COLUMN_WIDTH } from "@features/budget/constants";
 import type { BudgetMatch } from "@features/budget/hooks";
-import { ComparisonRowShell } from "./ComparisonRowShell";
-import { ComparisonScoreCell } from "./ComparisonScoreCell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";
+import { BudgetComparisonRows } from "./BudgetComparisonRows";
 
 interface ComparisonSlot {
   readonly country: CountryData;
@@ -37,15 +29,6 @@ export function BudgetComparisonGrid({
   lang,
 }: BudgetComparisonGridProps) {
   const { t } = useTranslation();
-  const minBreakdown: Record<string, number> = {};
-  for (const { key } of BREAKDOWN_ROWS) {
-    const vals = sortedSlots.map((s) => matchMap.get(s.country.code)?.breakdown[key] ?? 0);
-    minBreakdown[key] = vals.length > 0 ? Math.min(...vals) : 0;
-  }
-  const minTotal =
-    sortedSlots.length > 0
-      ? Math.min(...sortedSlots.map((s) => matchMap.get(s.country.code)?.monthlyCost ?? 0))
-      : 0;
   return (
     <div className="mt-8">
       <div className="h-px bg-[#1C1C1C]" />
@@ -60,66 +43,7 @@ export function BudgetComparisonGrid({
         columnWidth={BUDGET_COMPARISON_COLUMN_WIDTH}
       />
       <div ref={bodyRef} className="overflow-x-auto">
-        <ComparisonRowShell
-          icon={Wallet}
-          iconColor="#C2956A"
-          label={t("budget.totalMonthly", "Monthly Total")}
-        >
-          {sortedSlots.map((slot) => {
-            const val = matchMap.get(slot.country.code)?.monthlyCost ?? null;
-            return (
-              <ComparisonScoreCell
-                key={slot.index}
-                value={val}
-                colour={val == null ? "#333333" : costColor(val, minTotal)}
-                format={(v) => `$${v.toLocaleString()}`}
-                columnWidth={BUDGET_COMPARISON_COLUMN_WIDTH}
-              />
-            );
-          })}
-        </ComparisonRowShell>
-        <ComparisonRowShell
-          icon={TrendingUp}
-          iconColor="#4CAF50"
-          label={t("budget.surplus", "Surplus")}
-        >
-          {sortedSlots.map((slot) => {
-            const match = matchMap.get(slot.country.code);
-            const val = match === undefined ? null : match.surplus;
-            return (
-              <ComparisonScoreCell
-                key={slot.index}
-                value={val}
-                colour={val == null ? "#333333" : surplusColour(val)}
-                format={(v) =>
-                  v >= 0 ? `+$${v.toLocaleString()}` : `-$${Math.abs(v).toLocaleString()}`
-                }
-                columnWidth={BUDGET_COMPARISON_COLUMN_WIDTH}
-              />
-            );
-          })}
-        </ComparisonRowShell>
-        {BREAKDOWN_ROWS.map(({ key, icon: Icon }) => (
-          <ComparisonRowShell
-            key={key}
-            icon={Icon}
-            iconColor={COST_COLORS[key] ?? "#888"}
-            label={t(`budget.categories.${key}`, key)}
-          >
-            {sortedSlots.map((slot) => {
-              const val = matchMap.get(slot.country.code)?.breakdown[key] ?? null;
-              return (
-                <ComparisonScoreCell
-                  key={slot.index}
-                  value={val}
-                  colour={val == null ? "#333333" : costColor(val, minBreakdown[key])}
-                  format={(v) => `$${v.toLocaleString()}`}
-                  columnWidth={BUDGET_COMPARISON_COLUMN_WIDTH}
-                />
-              );
-            })}
-          </ComparisonRowShell>
-        ))}
+        <BudgetComparisonRows sortedSlots={sortedSlots} matchMap={matchMap} />
       </div>
     </div>
   );

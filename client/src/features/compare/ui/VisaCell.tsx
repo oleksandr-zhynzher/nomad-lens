@@ -1,12 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { CheckCircle2, XCircle } from "lucide-react";
 import { applyClimate, computeScore } from "@features/country-ranking/utils";
 import { scoreColourClass } from "@core/utils";
 import type { VisaCellProps } from "@features/compare/utils";
-import { getCurrencySymbol, getLocalizedVisa } from "@features/compare/utils";
-import { VisaIncomeCell } from "./VisaIncomeCell";
-import { VisaTaxCell } from "./VisaTaxCell";
-import { VisaBenefitsCell } from "./VisaBenefitsCell";
+import { getLocalizedVisa } from "@features/compare/utils";
+import { VisaDetailCell } from "./VisaDetailCell";
 
 export function VisaCell({
   slot,
@@ -17,7 +14,7 @@ export function VisaCell({
   lang,
 }: VisaCellProps) {
   const { t } = useTranslation();
-  const { visa, loc } = getLocalizedVisa(slot.country, lang);
+  const { visa } = getLocalizedVisa(slot.country, lang);
 
   switch (field) {
     case "visaName":
@@ -67,49 +64,13 @@ export function VisaCell({
         </span>
       );
     case "renewable":
-      return visa.duration.renewable ? (
-        <CheckCircle2 size={20} className="text-success" />
-      ) : (
-        <XCircle size={20} className="text-dimmer" />
-      );
     case "cost":
-      return (
-        <span
-          className={`font-mono text-[20px] font-semibold ${visa.cost.amount === 0 ? "text-success" : "text-on-surface"}`}
-        >
-          {visa.cost.amount === 0 ? (
-            t("countryPage.free")
-          ) : (
-            <>
-              {getCurrencySymbol(visa.cost.currency)} {visa.cost.amount.toLocaleString()}
-            </>
-          )}
-        </span>
-      );
     case "income":
-      return <VisaIncomeCell slot={slot} lang={lang} />;
     case "taxStatus":
-      return <VisaTaxCell slot={slot} lang={lang} />;
     case "online":
-      return visa.applicationProcess.online ? (
-        <div className="flex items-center gap-1.5">
-          <CheckCircle2 size={16} className="text-success" />
-          <span className="text-xs text-success">{t("compare.online")}</span>
-        </div>
-      ) : (
-        <div className="flex items-center gap-1.5">
-          <XCircle size={16} className="text-muted" />
-          <span className="text-xs text-muted">{t("compare.inPerson")}</span>
-        </div>
-      );
     case "processingTime":
-      return (
-        <span className="text-[13px] text-on-surface">
-          {loc?.applicationProcess?.processingTime ?? visa.applicationProcess.processingTime}
-        </span>
-      );
     case "benefits":
-      return <VisaBenefitsCell slot={slot} lang={lang} />;
+      return <VisaDetailCell slot={slot} field={field} lang={lang} />;
   }
 }
 

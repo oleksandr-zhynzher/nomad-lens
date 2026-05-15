@@ -1,6 +1,5 @@
 import { Search, GitCompare, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
 interface NomadVisasToolbarProps {
   readonly searchBarRef: React.RefObject<HTMLDivElement | null>;
   readonly searchQuery: string;
@@ -11,7 +10,6 @@ interface NomadVisasToolbarProps {
   readonly onCompare: () => void;
   readonly onExitCompareMode: () => void;
 }
-
 export function NomadVisasToolbar({
   searchBarRef,
   searchQuery,
@@ -38,16 +36,12 @@ export function NomadVisasToolbar({
               type="text"
               placeholder={t("nomadVisasPage.search", "Search countries...")}
               value={searchQuery}
-              onChange={(e) => {
-                onSearchQueryChange(e.target.value);
-              }}
+              onChange={(e) => onSearchQueryChange(e.target.value)}
               className={`h-10 w-full rounded-md border border-surface bg-[#161616] pl-9 text-sm text-white outline-none ${searchQuery !== "" ? "pr-9" : "pr-3"}`}
             />
             {searchQuery !== "" ? (
               <button
-                onClick={() => {
-                  onSearchQueryChange("");
-                }}
+                onClick={() => onSearchQueryChange("")}
                 className="absolute top-1/2 right-2.5 flex h-[22px] w-[22px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
                 aria-label={t("a11y.clearSearch", "Clear search")}
               >

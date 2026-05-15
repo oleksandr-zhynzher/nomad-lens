@@ -1,9 +1,8 @@
-import type React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { TAX_STATUS_COLORS } from "@core/constants";
 import type { CountryData } from "@core/models";
-import { getTaxStatusLabel } from "./nomad-visas.utils";
+
+export { VisaRowIncomeCell, VisaRowTaxCell } from "./NomadVisaIncomeTaxCells";
 
 type VisaType = NonNullable<CountryData["nomadVisa"]>;
 
@@ -85,57 +84,6 @@ export function VisaRowCountryCell({
         />
         <span className="text-sm font-medium text-white">{localizedName}</span>
       </Link>
-    </td>
-  );
-}
-
-interface IncomeCellProps {
-  readonly visa: VisaType;
-}
-
-export function VisaRowIncomeCell({ visa }: IncomeCellProps) {
-  const { t } = useTranslation();
-  const { monthly, annual, currency } = visa.incomeRequirement;
-  return (
-    <td className="px-3 py-4 text-right">
-      {monthly !== null ? (
-        <>
-          <span className="font-mono text-sm font-semibold text-white">
-            {currency} {monthly.toLocaleString()}
-          </span>
-          <span className="ml-0.5 text-xs text-dim">/{t("countryPage.visa.mo")}</span>
-        </>
-      ) : annual !== null ? (
-        <>
-          <span className="font-mono text-[13px] font-semibold text-white">
-            {currency} {annual.toLocaleString()}
-          </span>
-          <span className="ml-0.5 text-xs text-dim">/{t("countryPage.visa.yr")}</span>
-        </>
-      ) : (
-        <span className="font-mono text-[13px] font-semibold text-[#44CC66]">
-          {t("countryPage.visa.noMinimum", "None")}
-        </span>
-      )}
-    </td>
-  );
-}
-
-interface TaxCellProps {
-  readonly visa: VisaType;
-}
-
-export function VisaRowTaxCell({ visa }: TaxCellProps) {
-  const { t } = useTranslation();
-  const taxColors = TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard;
-  return (
-    <td className="px-3 py-4 text-center">
-      <span
-        className="inline-flex items-center rounded-full bg-[var(--tax-bg)] px-2 py-1 font-mono text-[11px] font-semibold whitespace-nowrap text-[var(--tax-text)]"
-        style={{ "--tax-bg": taxColors.bg, "--tax-text": taxColors.text } as React.CSSProperties}
-      >
-        {getTaxStatusLabel(visa.tax.status, t)}
-      </span>
     </td>
   );
 }

@@ -1,8 +1,7 @@
-import { BarChart3, List, Map, Palmtree, Plane, Wallet } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import type { NavView } from "./layout.utils";
-import { mobileNavBtnClass, mobileNavLinkClass } from "./layout.styles";
+import { MobileNavGrid } from "./MobileNavGrid";
 
 interface MobileMenuProps {
   readonly open: boolean;
@@ -40,59 +39,13 @@ export function MobileMenu({
         <p className="mb-1 text-[10px] font-semibold tracking-[1.5px] text-dimmest uppercase">
           {t("views.viewLabel")}
         </p>
-        <div className="mb-3 grid grid-cols-2 gap-2">
-          <button
-            onClick={() => {
-              onViewClick("list");
-            }}
-            className={mobileNavBtnClass(activeView === "list")}
-          >
-            <List size={16} />
-            {t("views.list")}
-          </button>
-          <button
-            onClick={() => {
-              onViewClick("map");
-            }}
-            className={mobileNavBtnClass(activeView === "map")}
-          >
-            <Map size={16} />
-            {t("views.map")}
-          </button>
-          <button
-            onClick={() => {
-              onViewClick("compare");
-            }}
-            className={mobileNavBtnClass(activeView === "compare")}
-          >
-            <BarChart3 size={16} />
-            {t("views.compare")}
-          </button>
-          <Link
-            to={`${langPrefix}/nomad-visas`}
-            onClick={onClose}
-            className={mobileNavLinkClass(pathname.endsWith("/nomad-visas"))}
-          >
-            <Plane size={16} />
-            {t("nav.nomadVisas")}
-          </Link>
-          <Link
-            to={`${langPrefix}/budget-matcher`}
-            onClick={onClose}
-            className={mobileNavLinkClass(pathname.endsWith("/budget-matcher"))}
-          >
-            <Wallet size={16} />
-            {t("nav.budgetMatcher")}
-          </Link>
-          <Link
-            to={`${langPrefix}/tourism`}
-            onClick={onClose}
-            className={mobileNavLinkClass(pathname.endsWith("/tourism"))}
-          >
-            <Palmtree size={16} />
-            {t("nav.tourism", "Tourism")}
-          </Link>
-        </div>
+        <MobileNavGrid
+          activeView={activeView}
+          onViewClick={onViewClick}
+          langPrefix={langPrefix}
+          pathname={pathname}
+          onClose={onClose}
+        />
 
         <div className="flex items-center gap-3 border-b border-[#1E1E1E] py-3">
           {(["en", "ua", "ru"] as const).map((lang) => (

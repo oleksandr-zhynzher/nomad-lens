@@ -5,20 +5,16 @@ import type { useBudgetState } from "@features/budget/hooks";
 import { BudgetCategoryFilter } from "./BudgetCategoryFilter";
 import { BudgetLifestyleSection } from "./BudgetLifestyleSection";
 import { BudgetQualityFilter } from "./BudgetQualityFilter";
-
 type BudgetStateReturn = ReturnType<typeof useBudgetState>;
-
 interface BudgetFilterPanelProps {
   readonly bs: BudgetStateReturn;
 }
-
 export function BudgetFilterPanel({ bs }: BudgetFilterPanelProps) {
   const { t } = useTranslation();
   const [open, setOpen] = useState({ lifestyle: true, categories: true });
   const toggle = (key: keyof typeof open) => {
     setOpen((prev) => ({ ...prev, [key]: !prev[key] }));
   };
-
   const budgetPct = ((bs.budget - 300) / 9700) * 100;
 
   return (
