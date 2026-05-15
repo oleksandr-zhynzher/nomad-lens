@@ -3,10 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
 import { applyClimate, computeScore } from "@features/country-ranking/utils";
-import { scoreColourClass } from "@core/utils";
-import { localizeCountry, regionKey } from "@core/utils";
 import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
-import { CountryPickerDropdown } from "./CountryPickerDropdown";
 import { CountryComparisonSlots } from "./CountryComparisonSlots";
 import { CountryComparisonGrid } from "./CountryComparisonGrid";
 
@@ -29,7 +26,7 @@ export function CountryComparison({
   sortDirection = null,
   onSelectionCount,
 }: CountryComparisonProps) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const langPrefix = useLangPrefix();
   const lang = i18n.language;
 
@@ -80,32 +77,11 @@ export function CountryComparison({
         dropdownOpen={dropdownOpen}
         setDropdownOpen={setDropdownOpen}
         setDropdownPos={setDropdownPos}
-      />
-      <CountryPickerDropdown
-        open={dropdownOpen ? dropdownPos != null : false}
-        countries={filtered.map((c) => {
-          const score = computeScore(applyClimate(c, climatePrefs), weights);
-          return {
-            code: c.code,
-            flagUrl: c.flagUrl,
-            name: localizeCountry(c, lang).name,
-            regionLabel: t(`regions.${regionKey(c.region)}`),
-            trailing: (
-              <span
-                className={`font-mono text-[13px] font-semibold ${scoreColourClass(score, "text")}`}
-              >
-                {score.toFixed(1)}
-              </span>
-            ),
-          };
-        })}
+        dropdownPos={dropdownPos}
+        filteredCandidates={filtered}
         query={query}
-        onQueryChange={setQuery}
-        onSelect={handleAdd}
-        position={dropdownPos ?? undefined}
-        inputName="country-comparison-search"
-        searchPlaceholder={t("compare.searchCountry")}
-        emptyLabel={t("compare.noCountriesFound")}
+        setQuery={setQuery}
+        onAdd={handleAdd}
       />
       {selectedCountries.length > 0 ? (
         <CountryComparisonGrid

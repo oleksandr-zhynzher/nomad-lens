@@ -1,9 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
-import { localizeCountry, regionKey } from "@core/utils";
 import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
-import { CountryPickerDropdown } from "./CountryPickerDropdown";
 import type { BudgetMatch } from "@features/budget/hooks";
 import { BREAKDOWN_ROWS } from "@features/budget/constants";
 import { BudgetComparisonSlots } from "./BudgetComparisonSlots";
@@ -24,7 +22,7 @@ export function BudgetComparison({
   onSelectedCodesChange,
   sortDirection = null,
 }: BudgetComparisonProps) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const lang = i18n.language;
   const matchMap = useMemo(() => new Map(matches.map((m) => [m.country.code, m])), [matches]);
   const {
@@ -86,31 +84,11 @@ export function BudgetComparison({
         dropdownOpen={dropdownOpen}
         setDropdownOpen={setDropdownOpen}
         setDropdownPos={setDropdownPos}
-      />
-      <CountryPickerDropdown
-        open={dropdownOpen ? dropdownPos != null : false}
-        countries={filtered.map((c) => {
-          const match = matchMap.get(c.code);
-          const cost = match?.monthlyCost ?? c.costOfLiving?.totalBasic;
-          return {
-            code: c.code,
-            flagUrl: c.flagUrl,
-            name: localizeCountry(c, lang).name,
-            regionLabel: t(`regions.${regionKey(c.region)}`),
-            trailing: (
-              <span className="font-mono text-[13px] font-semibold text-accent-dim">
-                {cost == null ? "—" : `$${cost.toLocaleString()}`}
-              </span>
-            ),
-          };
-        })}
+        dropdownPos={dropdownPos}
+        filteredCandidates={filtered}
         query={query}
-        onQueryChange={setQuery}
-        onSelect={handleAdd}
-        position={dropdownPos ?? undefined}
-        inputName="budget-comparison-search"
-        searchPlaceholder={t("compare.searchCountry")}
-        emptyLabel={t("compare.noCountriesFound")}
+        setQuery={setQuery}
+        onAdd={handleAdd}
       />
       {selectedSlots.length > 0 ? (
         <BudgetComparisonGrid
