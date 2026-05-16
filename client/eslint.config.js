@@ -14,6 +14,7 @@ import prettier from "eslint-config-prettier";
 import importPlugin from "eslint-plugin-import";
 import unusedImports from "eslint-plugin-unused-imports";
 import eslintComments from "eslint-plugin-eslint-comments";
+import jestDom from "eslint-plugin-jest-dom";
 import security from "eslint-plugin-security";
 import promise from "eslint-plugin-promise";
 import functional from "eslint-plugin-functional";
@@ -24,6 +25,7 @@ import regexp from "eslint-plugin-regexp";
 import perfectionist from "eslint-plugin-perfectionist";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import tailwindcss from "eslint-plugin-tailwindcss";
+import testingLibrary from "eslint-plugin-testing-library";
 
 export default defineConfig([
   globalIgnores(["dist", "node_modules", "coverage", "**/*.d.ts"]),
@@ -354,21 +356,24 @@ export default defineConfig([
   // ── Test files ──────────────────────────────────────────────────────────
   {
     files: ["tests/**/*.{ts,tsx}"],
-    extends: [js.configs.recommended, tseslint.configs.recommendedTypeChecked, prettier],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+      testingLibrary.configs["flat/react"],
+      jestDom.configs["flat/recommended"],
+      prettier,
+    ],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: { ...globals.browser, ...globals.node },
+      globals: { ...globals.browser, ...globals.node, ...globals.vitest },
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-non-null-assertion": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
+      "testing-library/no-debugging-utils": "error",
     },
   },
 ]);

@@ -19,6 +19,7 @@ import prettier from "eslint-config-prettier";
 import importPlugin from "eslint-plugin-import";
 import unusedImports from "eslint-plugin-unused-imports";
 import eslintComments from "eslint-plugin-eslint-comments";
+import jestDom from "eslint-plugin-jest-dom";
 import security from "eslint-plugin-security";
 import promise from "eslint-plugin-promise";
 import functional from "eslint-plugin-functional";
@@ -29,6 +30,7 @@ import regexp from "eslint-plugin-regexp";
 import perfectionist from "eslint-plugin-perfectionist";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import tailwindcss from "eslint-plugin-tailwindcss";
+import testingLibrary from "eslint-plugin-testing-library";
 
 export default defineConfig([
   globalIgnores(["dist", "node_modules", "coverage", "**/*.d.ts"]),
@@ -72,7 +74,7 @@ export default defineConfig([
 
     languageOptions: {
       ecmaVersion: 2020,
-      globals: { ...globals.browser, ...globals.node },
+      globals: { ...globals.browser, ...globals.node, ...globals.vitest },
     },
 
     settings: {
@@ -254,6 +256,15 @@ export default defineConfig([
       "tailwindcss/enforces-shorthand": "off",
       "tailwindcss/no-custom-classname": "off",
       "tailwindcss/no-contradicting-classname": "off",
+    },
+  },
+
+  // ── Test files (non-type-aware pre-commit gate) ──────────────────────────
+  {
+    files: ["tests/**/*.{ts,tsx}"],
+    extends: [testingLibrary.configs["flat/react"], jestDom.configs["flat/recommended"], prettier],
+    rules: {
+      "testing-library/no-debugging-utils": "error",
     },
   },
 ]);
