@@ -18,7 +18,8 @@ export function useTourismSearch(ranked: TourismRanked[], language: string) {
   useEffect(() => {
     const id = setTimeout(() => {
       if (searchMode === "highlight" && matchingCodes.length > 0) {
-        setHighlightedCode(matchingCodes[matchCursor % matchingCodes.length]);
+        const matchingCode = matchingCodes[matchCursor % matchingCodes.length];
+        setHighlightedCode(matchingCode ?? null);
       } else {
         setHighlightedCode(null);
       }

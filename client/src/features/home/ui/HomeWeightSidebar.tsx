@@ -26,7 +26,7 @@ export function HomeWeightSidebar({ ws, mobile }: HomeWeightSidebarProps) {
       onMinTouristDaysChange={ws.setMinTouristDays}
       weightMode={ws.weightMode}
       onWeightModeChange={ws.handleWeightModeChange}
-      mobile={mobile}
+      {...(mobile !== undefined && { mobile })}
     />
   );
 }

@@ -52,8 +52,8 @@ export function TourismComparisonGrid({
           return (
             <ComparisonRowShell
               key={key}
-              icon={Icon}
               label={t(`tourism.metrics.${key}`, TOURISM_LABELS[key] ?? key)}
+              {...(Icon !== undefined && { icon: Icon })}
             >
               {sortedCountries.map((slot) => {
                 const val = slot.country.scores[key].value ?? null;

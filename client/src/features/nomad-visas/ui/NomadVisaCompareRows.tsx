@@ -55,7 +55,7 @@ export function NomadVisaCompareRows({ selected, count }: NomadVisaCompareRowsPr
       <NomadVisaIncomeCompareRow selected={selected} count={count} />
       <Row label={t("nomadVisasPage.table.tax", "Tax Status")}>
         {selected.map((c) => {
-          const taxColors = TAX_STATUS_COLORS[c.nomadVisa.tax.status] ?? TAX_STATUS_COLORS.standard;
+          const taxColors = TAX_STATUS_COLORS[c.nomadVisa.tax.status];
           return (
             <Cell key={c.code} count={count}>
               <span

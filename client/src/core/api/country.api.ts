@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-const BASE_URL: string = (import.meta.env.VITE_API_URL as string | undefined) ?? "";
+const BASE_URL: string = (import.meta.env["VITE_API_URL"] as string | undefined) ?? "";
 
 export async function getCountries(): Promise<CountryData[]> {
   if (window.__NOMAD_LENS_DATA__) {

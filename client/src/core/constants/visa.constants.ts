@@ -8,8 +8,15 @@ import {
   Plane,
   Clock,
 } from "lucide-react";
+import type { NomadVisaTax } from "../models/visa.models";
 
-export const TAX_STATUS_COLORS: Record<string, { bg: string; text: string }> = {
+type TaxStatus = NomadVisaTax["status"];
+interface TaxStatusColor {
+  bg: string;
+  text: string;
+}
+
+export const TAX_STATUS_COLORS: Record<TaxStatus, TaxStatusColor> = {
   exempt: { bg: "#1A4A2A", text: "#44CC66" },
   standard: { bg: "#2A2A3A", text: "#8888CC" },
   special: { bg: "#4A3A1A", text: "#DDAA44" },

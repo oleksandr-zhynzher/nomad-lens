@@ -38,11 +38,14 @@ export function TourismMetricGroupsSection({ weights, onChange }: TourismMetricG
           const subAvg = Math.round(
             group.keys.reduce((s, k) => s + (weights[k] ?? 50), 0) / group.keys.length,
           );
+          const groupIcon = TOURISM_GROUP_ICONS[group.labelKey] ?? (
+            <Sun size={16} color="#D4A843" />
+          );
           return (
             <CollapsibleSection
               key={group.labelKey}
               id={`tourism-subgroup-${group.labelKey}`}
-              icon={TOURISM_GROUP_ICONS[group.labelKey]}
+              icon={groupIcon}
               label={t(`tourismWeights.groups.${group.labelKey}`, group.labelKey)}
               badge={
                 <div className="flex items-center rounded-[3px] bg-[#291608] px-2 py-[3px]">

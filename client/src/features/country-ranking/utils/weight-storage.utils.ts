@@ -38,16 +38,26 @@ function normalizeBalancedWeights(base: WeightMap): WeightMap {
   const floors = exactShares.map((s) => Math.floor(s));
   const floorSum = floors.reduce((a, b) => a + b, 0);
   let leftover = 100 - floorSum;
-  const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
+  const remainders = exactShares.map((s, i) => {
+    const floorVal = floors[i];
+    if (floorVal === undefined) throw new Error("Floor value missing");
+    return { i, r: s - floorVal };
+  });
   remainders.sort((a, b) => b.r - a.r);
   for (const { i } of remainders) {
     if (leftover > 0) {
-      floors[i]++;
+      const currentFloor = floors[i];
+      if (currentFloor !== undefined) {
+        floors[i] = currentFloor + 1;
+      }
       leftover--;
     }
   }
   for (const [i, k] of VISIBLE_CATEGORY_KEYS.entries()) {
-    base[k] = floors[i] ?? 0;
+    const floorVal = floors[i];
+    if (floorVal !== undefined) {
+      base[k] = floorVal;
+    }
   }
   return base;
 }
@@ -232,19 +242,19 @@ function filtersFromSharedParams(p: URLSearchParams, def: ClimatePreferences): L
 
 function filtersFromParsed(p: Record<string, unknown>, def: ClimatePreferences): LoadedFilters {
   return {
-    nomadVisaOnly: p.nomadVisa === true,
-    schengenOnly: p.schengen === true,
-    minTouristDays: typeof p.minDays === "number" ? p.minDays : null,
-    selectedRegions: Array.isArray(p.regions)
-      ? new Set(p.regions.filter((r): r is string => typeof r === "string"))
+    nomadVisaOnly: p["nomadVisa"] === true,
+    schengenOnly: p["schengen"] === true,
+    minTouristDays: typeof p["minDays"] === "number" ? p["minDays"] : null,
+    selectedRegions: Array.isArray(p["regions"])
+      ? new Set(p["regions"].filter((r): r is string => typeof r === "string"))
       : new Set<string>(),
     climatePrefs: {
       seasonType:
-        typeof p.climateSeason === "string"
-          ? (p.climateSeason as ClimatePreferences["seasonType"])
+        typeof p["climateSeason"] === "string"
+          ? (p["climateSeason"] as ClimatePreferences["seasonType"])
           : def.seasonType,
-      minTemp: typeof p.climateMin === "number" ? p.climateMin : def.minTemp,
-      maxTemp: typeof p.climateMax === "number" ? p.climateMax : def.maxTemp,
+      minTemp: typeof p["climateMin"] === "number" ? p["climateMin"] : def.minTemp,
+      maxTemp: typeof p["climateMax"] === "number" ? p["climateMax"] : def.maxTemp,
     },
   };
 }

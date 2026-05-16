@@ -19,7 +19,7 @@ export function TourismWeightSidebar({ ws, mobile }: TourismWeightSidebarProps) 
       onToggleFieldChange={ws.setToggleField}
       travelDates={ws.travelDates}
       onTravelDatesChange={ws.setTravelDates}
-      mobile={mobile}
+      {...(mobile !== undefined && { mobile })}
     />
   );
 }

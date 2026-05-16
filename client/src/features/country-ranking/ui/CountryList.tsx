@@ -81,14 +81,24 @@ export function CountryList({
         <CountryCard
           key={r.country.code}
           ranked={r}
-          highlighted={r.country.code === highlightedCode}
+          {...(highlightedCode !== undefined && {
+            highlighted: r.country.code === highlightedCode,
+          })}
           index={index}
-          expanded={expandedCode === r.country.code}
-          onToggle={() => onToggleExpanded?.(r.country.code)}
+          {...(expandedCode !== undefined && { expanded: expandedCode === r.country.code })}
+          {...(onToggleExpanded !== undefined && {
+            onToggle: () => {
+              onToggleExpanded(r.country.code);
+            },
+          })}
           compareMode={compareMode}
           selected={selectedCodes.has(r.country.code)}
-          onSelectToggle={() => onToggleSelect?.(r.country.code)}
-          weights={weights}
+          {...(onToggleSelect !== undefined && {
+            onSelectToggle: () => {
+              onToggleSelect(r.country.code);
+            },
+          })}
+          {...(weights !== undefined && { weights })}
         />
       ))}
       {/* Invisible sentinel — entering the viewport triggers the next page load */}

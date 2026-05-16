@@ -8,7 +8,7 @@ export function VisaTaxCell({ slot, lang }: VisaSlotLangProps) {
   const { t } = useTranslation();
   const { visa, loc } = getLocalizedVisa(slot.country, lang);
   const status = visa.tax.status;
-  const colors = TAX_STATUS_COLORS[status] ?? { bg: "#2A2A2A", text: "#9E9E9E" };
+  const colors = TAX_STATUS_COLORS[status];
   const taxStatusLabels: Record<typeof status, string> = {
     exempt: t("countryPage.visa.taxExempt"),
     special: t("countryPage.visa.taxSpecial"),

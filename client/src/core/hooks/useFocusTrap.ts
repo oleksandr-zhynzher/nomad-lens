@@ -38,7 +38,8 @@ export function useFocusTrap({
       }
 
       const focusables = getFocusableElements(containerRef.current);
-      if (focusables.length > 0) focusables[0].focus();
+      const firstFocusable = focusables[0];
+      if (firstFocusable) firstFocusable.focus();
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -60,7 +61,7 @@ export function useFocusTrap({
       const first = focusable[0];
       const last = focusable.at(-1);
 
-      if (event.shiftKey && document.activeElement === first) {
+      if (event.shiftKey && first !== undefined && document.activeElement === first) {
         event.preventDefault();
         last?.focus();
         return;
@@ -68,7 +69,7 @@ export function useFocusTrap({
 
       if (!event.shiftKey && last !== undefined && document.activeElement === last) {
         event.preventDefault();
-        first.focus();
+        if (first) first.focus();
       }
     };
 

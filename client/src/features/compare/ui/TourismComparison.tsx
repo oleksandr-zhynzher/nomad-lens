@@ -45,7 +45,7 @@ export function TourismComparison({
     selectedCodes,
     onSelectedCodesChange,
     lang,
-    onSelectionCount,
+    ...(onSelectionCount !== undefined && { onSelectionCount }),
   });
 
   useSyncScroll(headerRef, bodyRef);

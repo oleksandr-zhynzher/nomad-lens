@@ -52,9 +52,9 @@ export function TourismWeightPanel({
         "Adjust the importance of each tourism metric to personalise the ranking.",
       )}
       onReset={onReset}
-      mobile={mobile}
       scrollRef={scrollRef as React.RefObject<HTMLDivElement>}
       onScroll={onScroll}
+      {...(mobile !== undefined && { mobile })}
     >
       {budgetState != null && onBudgetChange != null ? (
         <TourismBudgetSection budgetState={budgetState} onBudgetChange={onBudgetChange} />
@@ -64,7 +64,7 @@ export function TourismWeightPanel({
         <TourismTravelDatesSection
           travelDates={travelDates}
           onTravelDatesChange={onTravelDatesChange}
-          toggles={toggles}
+          {...(toggles !== undefined && { toggles })}
         />
       ) : null}
 

@@ -877,7 +877,9 @@ async function generate(): Promise<void> {
 
     const tourismTags = computeTourismTags(iso2, rc.landlocked ?? false, clim?.hottestMonth);
     const tourismTagScores = computeTourismTagScores(iso2, tourismTags);
-    const tourismTagSeasonality =
+    const nomadVisaDetails = localData.getNomadVisaDetails(iso2);
+    const climateDetails = clim;
+    const tourismTagSeasonalityData =
       tourismTags.length > 0 && clim
         ? computeTourismTagSeasonality(
             iso2,
@@ -900,12 +902,12 @@ async function generate(): Promise<void> {
       hasNomadVisa: localData.hasNomadVisa(iso2),
       isSchengen: localData.isSchengen(iso2),
       touristVisaDays: localData.getTouristVisaDays(iso2),
-      landlocked: rc.landlocked ?? false,
-      tourismTags,
-      tourismTagScores,
-      tourismTagSeasonality,
-      nomadVisa: localData.getNomadVisaDetails(iso2) ?? undefined,
-      climateData: clim ?? undefined,
+      ...(rc.landlocked !== undefined && { landlocked: rc.landlocked }),
+      ...(tourismTags.length > 0 && { tourismTags }),
+      ...(tourismTagScores && Object.keys(tourismTagScores).length > 0 && { tourismTagScores }),
+      ...(tourismTagSeasonalityData && { tourismTagSeasonality: tourismTagSeasonalityData }),
+      ...(nomadVisaDetails && { nomadVisa: nomadVisaDetails }),
+      ...(climateDetails && { climateData: climateDetails }),
       costOfLiving: col ?? null,
       scores,
       ...(Object.keys(countryI18n).length > 0 ? { i18n: countryI18n } : {}),

@@ -70,6 +70,7 @@ export async function fetchWorldBankIndicators(): Promise<WorldBankIndicatorMap>
   for (let i = 0; i < codes.length; i += 1) {
     const code = codes[i];
     const result = results[i];
+    if (!code || !result) continue;
     if (result.status === 'rejected') {
       console.warn(`World Bank fetch failed for ${code}:`, result.reason);
       continue;
@@ -79,11 +80,15 @@ export async function fetchWorldBankIndicators(): Promise<WorldBankIndicatorMap>
       const iso3 = point.countryiso3code?.toUpperCase();
       if (!iso3 || point.value === null) continue;
 
-      if (!map[iso3]) map[iso3] = {};
+      const countryMap = map[iso3];
+      if (!countryMap) {
+        map[iso3] = {};
+      }
       // WB returns rows newest-first; only store the first (most recent) non-null
       // value per country+indicator — subsequent rows are older fallbacks.
-      if (!map[iso3][code]) {
-        map[iso3][code] = { value: point.value, year: parseInt(point.date, 10) };
+      const indicatorMap = map[iso3];
+      if (indicatorMap && !indicatorMap[code]) {
+        indicatorMap[code] = { value: point.value, year: parseInt(point.date, 10) };
       }
     }
   }

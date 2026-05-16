@@ -47,14 +47,12 @@ export function BudgetStickyBar({
             enterLabel={t("compare.compareMode", "Compare")}
             compareLabel={t("nomadVisasPage.compareSelected", "Compare")}
             exitLabel={t("a11y.exitCompareMode", "Exit compare mode")}
-            helperText={
-              compareMode
-                ? t(
-                    "compare.helperText",
-                    "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
-                  )
-                : undefined
-            }
+            {...(compareMode && {
+              helperText: t(
+                "compare.helperText",
+                "Choose countries using the checkboxes in the list, then click Compare to open the comparison view.",
+              ),
+            })}
             onEnter={onEnterCompareMode}
             onExit={onExitCompareMode}
             onCompare={onCompare}

@@ -68,7 +68,9 @@ function getSeasonalMultiplier(
   if (seasonality?.length !== 12) return 1;
   let total = 0;
   for (const [month, weight] of monthWeights) {
-    total += (seasonality[month] / 100) * weight;
+    const monthScore = seasonality[month];
+    if (monthScore === undefined) return 1;
+    total += (monthScore / 100) * weight;
   }
   return total;
 }
@@ -233,7 +235,9 @@ export function applyTagSeasonality(
   let days = 0;
   const cursor = new Date(start);
   while (cursor <= end) {
-    wSum += seasonality[cursor.getMonth()];
+    const monthScore = seasonality[cursor.getMonth()];
+    if (monthScore === undefined) return baseVal;
+    wSum += monthScore;
     days++;
     cursor.setDate(cursor.getDate() + 1);
   }

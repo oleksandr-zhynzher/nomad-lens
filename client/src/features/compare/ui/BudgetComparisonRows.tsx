@@ -87,7 +87,7 @@ export function BudgetComparisonRows({ sortedSlots, matchMap }: BudgetComparison
               <ComparisonScoreCell
                 key={slot.index}
                 value={val}
-                colour={val == null ? "#333333" : costColor(val, minBreakdown[key])}
+                colour={val == null ? "#333333" : costColor(val, minBreakdown[key] ?? 0)}
                 format={(v) => `$${v.toLocaleString()}`}
                 columnWidth={BUDGET_COMPARISON_COLUMN_WIDTH}
               />

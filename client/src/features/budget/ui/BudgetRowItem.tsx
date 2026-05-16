@@ -50,16 +50,12 @@ export function BudgetRowItem({
         match={match}
         budget={budget}
         rank={rank}
-        expanded={compareMode ? undefined : expandedCode === match.country.code}
-        onToggle={
-          compareMode
-            ? undefined
-            : () => {
-                setExpandedCode((prev) =>
-                  prev === match.country.code ? null : match.country.code,
-                );
-              }
-        }
+        {...(!compareMode && { expanded: expandedCode === match.country.code })}
+        {...(!compareMode && {
+          onToggle: () => {
+            setExpandedCode((prev) => (prev === match.country.code ? null : match.country.code));
+          },
+        })}
         compareMode={compareMode}
         isSelected={isSelected}
       />

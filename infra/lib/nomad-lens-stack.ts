@@ -74,7 +74,7 @@ export class NomadLensStack extends cdk.Stack {
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultRootObject: 'index.html',
       defaultBehavior: {
-        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket),
+        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket as s3.IBucket),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
       },
@@ -96,7 +96,7 @@ export class NomadLensStack extends cdk.Stack {
     // ── Deploy client build to S3 + invalidate CloudFront ─────────────────
     new s3deploy.BucketDeployment(this, 'SiteDeploy', {
       sources: [s3deploy.Source.asset(path.join(__dirname, '../../client/dist'))],
-      destinationBucket: siteBucket,
+      destinationBucket: siteBucket as s3.IBucket,
       distribution,
       distributionPaths: ['/*'],
     });

@@ -31,7 +31,7 @@ export function useInfiniteScroll<T>(items: T[], disabled = false) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries.some((entry) => entry.isIntersecting)) {
           setPagination((s) =>
             s.visibleCount < s.prevItems.length
               ? { ...s, visibleCount: s.visibleCount + PAGE_SIZE }

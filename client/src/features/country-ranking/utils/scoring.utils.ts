@@ -135,17 +135,27 @@ export function redistributeWeights(
   const floors = exactShares.map((s) => Math.floor(s));
   const floorSum = floors.reduce((a, b) => a + b, 0);
   let leftover = remaining - floorSum;
-  const remainders = exactShares.map((s, i) => ({ i, r: s - floors[i] }));
+  const remainders = exactShares.map((s, i) => {
+    const floorVal = floors[i];
+    if (floorVal === undefined) throw new Error("Floor value missing");
+    return { i, r: s - floorVal };
+  });
   remainders.sort((a, b) => b.r - a.r);
   for (const { i } of remainders) {
     if (leftover > 0) {
-      floors[i]++;
+      const currentFloor = floors[i];
+      if (currentFloor !== undefined) {
+        floors[i] = currentFloor + 1;
+      }
       leftover--;
     }
   }
 
   for (const [i, k] of others.entries()) {
-    result[k] = floors[i];
+    const floorVal = floors[i];
+    if (floorVal !== undefined) {
+      result[k] = floorVal;
+    }
   }
   return result;
 }

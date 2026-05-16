@@ -61,9 +61,9 @@ export function WeightPanel({
       headerExtra={
         <WeightModeToggle weightMode={weightMode} onWeightModeChange={onWeightModeChange} />
       }
-      footerExtra={weightsAreDefault ? undefined : <WeightShareButton onShare={onShare} />}
       onReset={onReset}
-      mobile={mobile}
+      {...(!weightsAreDefault && { footerExtra: <WeightShareButton onShare={onShare} /> })}
+      {...(mobile !== undefined && { mobile })}
     >
       {WEIGHT_GROUPS.map((group) => (
         <WeightCategoryGroup

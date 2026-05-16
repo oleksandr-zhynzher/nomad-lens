@@ -49,7 +49,7 @@ export function CountryComparison({
     selectedCodes,
     onSelectedCodesChange,
     lang,
-    onSelectionCount,
+    ...(onSelectionCount !== undefined && { onSelectionCount }),
   });
 
   useSyncScroll(headerRef, bodyRef);

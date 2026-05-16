@@ -55,23 +55,24 @@ export function TourismTravelDatesSection({
       id="tourism-dates"
       icon={<Calendar size={16} color="#64B5F6" />}
       label={t("tourismFilters.travelDates", "Travel Dates")}
-      badge={
-        travelDates.startDate != null && travelDates.endDate != null ? (
-          <div className="flex items-center rounded-[3px] bg-[#0a1929] px-2 py-[3px]">
-            <span className="font-mono text-[10px] text-[#64B5F6]">
-              {new Date(travelDates.startDate + "T00:00").toLocaleDateString(undefined, {
-                month: "short",
-                day: "numeric",
-              })}
-              {" → "}
-              {new Date(travelDates.endDate + "T00:00").toLocaleDateString(undefined, {
-                month: "short",
-                day: "numeric",
-              })}
-            </span>
-          </div>
-        ) : undefined
-      }
+      {...(travelDates.startDate != null &&
+        travelDates.endDate != null && {
+          badge: (
+            <div className="flex items-center rounded-[3px] bg-[#0a1929] px-2 py-[3px]">
+              <span className="font-mono text-[10px] text-[#64B5F6]">
+                {new Date(travelDates.startDate + "T00:00").toLocaleDateString(undefined, {
+                  month: "short",
+                  day: "numeric",
+                })}
+                {" → "}
+                {new Date(travelDates.endDate + "T00:00").toLocaleDateString(undefined, {
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+          ),
+        })}
       isOpen={isOpen}
       onToggle={() => {
         setIsOpen((prev) => !prev);

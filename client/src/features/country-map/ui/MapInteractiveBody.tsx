@@ -32,11 +32,9 @@ export function MapInteractiveBody({
   ) => {
     const alpha2 = geoNumericToAlpha2(geo);
     const r = scoreByAlpha2.get(alpha2);
-    const name = r
-      ? localizeCountry(r.country, i18n.language).name
-      : typeof geo.properties.name === "string"
-        ? geo.properties.name
-        : alpha2;
+    const fallbackName =
+      typeof geo.properties["name"] === "string" ? geo.properties["name"] : alpha2;
+    const name = r ? localizeCountry(r.country, i18n.language).name : fallbackName;
     setHover({ name, score: r?.finalScore ?? null, x: e.clientX, y: e.clientY });
   };
   const handleMouseMove = (e: MouseEvent) => {
@@ -57,8 +55,8 @@ export function MapInteractiveBody({
         selectedCode={selectedCode}
         worldTopology={worldTopology}
         legendItems={legendItems}
-        onToggleWeights={onToggleWeights}
-        showWeights={showWeights}
+        {...(onToggleWeights !== undefined && { onToggleWeights })}
+        {...(showWeights !== undefined && { showWeights })}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={() => {
           setHover(null);

@@ -50,7 +50,7 @@ export function ResponsiveSidePanelLayout({
       {/* Mobile FAB */}
       <MobileFabButton
         label={mobileFab.label}
-        ariaLabel={mobileFab.ariaLabel}
+        {...(mobileFab.ariaLabel !== undefined && { ariaLabel: mobileFab.ariaLabel })}
         icon={mobileFab.icon}
         onClick={mobileFab.onClick}
       />

@@ -58,16 +58,15 @@ export default function App() {
             onRetry={state.refresh}
             highlightedCode={state.activeHighlight}
             expandedCode={state.compareMode ? null : state.expandedCode}
-            onToggleExpanded={
-              state.compareMode
-                ? undefined
-                : (code) => state.setExpandedCode((c) => (c === code ? null : code))
-            }
             showAll={state.search.trim().length > 0 || state.highlightedCode !== null}
             compareMode={state.compareMode}
             selectedCodes={state.selectedCodes}
             onToggleSelect={state.toggleSelect}
             weights={ws.weights}
+            {...(!state.compareMode && {
+              onToggleExpanded: (code: string) =>
+                state.setExpandedCode((c) => (c === code ? null : code)),
+            })}
           />
         </div>
       </ResponsiveSidePanelLayout>

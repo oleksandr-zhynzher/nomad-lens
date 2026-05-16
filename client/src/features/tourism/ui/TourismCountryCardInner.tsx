@@ -22,6 +22,13 @@ export function TourismCountryCardInner({
   travelDates,
 }: TourismCountryCardInnerProps) {
   const { country, tourismScore, rank } = ranked;
+  let chevronRotationClass = "rotate-0";
+
+  if (compareMode) {
+    chevronRotationClass = "rotate-0 opacity-[0.35]";
+  } else if (expanded) {
+    chevronRotationClass = "rotate-90";
+  }
 
   return (
     <>
@@ -35,7 +42,7 @@ export function TourismCountryCardInner({
         <TourismCardTagSparkline
           country={country}
           selectedTags={selectedTags}
-          travelDates={travelDates}
+          {...(travelDates !== undefined && { travelDates })}
         />
 
         {ranked.budgetMatch ? (
@@ -61,7 +68,7 @@ export function TourismCountryCardInner({
 
         <ChevronRight
           size={20}
-          className={`shrink-0 text-dimmest transition-transform duration-200 ${compareMode ? "rotate-0 opacity-[0.35]" : expanded ? "rotate-90" : "rotate-0"}`}
+          className={`shrink-0 text-dimmest transition-transform duration-200 ${chevronRotationClass}`}
         />
       </div>
 

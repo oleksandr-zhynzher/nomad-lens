@@ -62,15 +62,15 @@ export function TourismCountryCard({
           expanded={expanded}
           compareMode={compareMode}
           selectedTags={selectedTags}
-          travelDates={travelDates}
+          {...(travelDates !== undefined && { travelDates })}
         />
       </button>
 
       {expanded && !compareMode ? (
         <TourismCountryCardDetail
           country={country}
-          budgetMatch={ranked.budgetMatch}
           borderColor={borderColor}
+          {...(ranked.budgetMatch !== undefined && { budgetMatch: ranked.budgetMatch })}
         />
       ) : null}
     </div>

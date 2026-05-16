@@ -13,29 +13,35 @@ interface IncomeCellProps {
 export function VisaRowIncomeCell({ visa }: IncomeCellProps) {
   const { t } = useTranslation();
   const { monthly, annual, currency } = visa.incomeRequirement;
-  return (
-    <td className="px-3 py-4 text-right">
-      {monthly !== null ? (
-        <>
-          <span className="font-mono text-sm font-semibold text-white">
-            {currency} {monthly.toLocaleString()}
-          </span>
-          <span className="ml-0.5 text-xs text-dim">/{t("countryPage.visa.mo")}</span>
-        </>
-      ) : annual !== null ? (
-        <>
-          <span className="font-mono text-[13px] font-semibold text-white">
-            {currency} {annual.toLocaleString()}
-          </span>
-          <span className="ml-0.5 text-xs text-dim">/{t("countryPage.visa.yr")}</span>
-        </>
-      ) : (
-        <span className="font-mono text-[13px] font-semibold text-[#44CC66]">
-          {t("countryPage.visa.noMinimum", "None")}
+  let incomeContent: React.ReactNode;
+
+  if (monthly !== null) {
+    incomeContent = (
+      <>
+        <span className="font-mono text-sm font-semibold text-white">
+          {currency} {monthly.toLocaleString()}
         </span>
-      )}
-    </td>
-  );
+        <span className="ml-0.5 text-xs text-dim">/{t("countryPage.visa.mo")}</span>
+      </>
+    );
+  } else if (annual !== null) {
+    incomeContent = (
+      <>
+        <span className="font-mono text-[13px] font-semibold text-white">
+          {currency} {annual.toLocaleString()}
+        </span>
+        <span className="ml-0.5 text-xs text-dim">/{t("countryPage.visa.yr")}</span>
+      </>
+    );
+  } else {
+    incomeContent = (
+      <span className="font-mono text-[13px] font-semibold text-[#44CC66]">
+        {t("countryPage.visa.noMinimum", "None")}
+      </span>
+    );
+  }
+
+  return <td className="px-3 py-4 text-right">{incomeContent}</td>;
 }
 
 interface TaxCellProps {
@@ -44,7 +50,7 @@ interface TaxCellProps {
 
 export function VisaRowTaxCell({ visa }: TaxCellProps) {
   const { t } = useTranslation();
-  const taxColors = TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard;
+  const taxColors = TAX_STATUS_COLORS[visa.tax.status];
   return (
     <td className="px-3 py-4 text-center">
       <span

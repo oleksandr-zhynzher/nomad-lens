@@ -34,11 +34,11 @@ export function BudgetCategorySection({
         </span>
         <ChevronDown
           size={14}
-          className={`shrink-0 text-dimmer transition-transform duration-150 ${collapsed.categories ? "-rotate-90" : "rotate-0"}`}
+          className={`shrink-0 text-dimmer transition-transform duration-150 ${collapsed["categories"] ? "-rotate-90" : "rotate-0"}`}
         />
       </button>
 
-      {collapsed.categories ? null : (
+      {collapsed["categories"] ? null : (
         <div className="pt-0.5 pb-0.5">
           {BUDGET_CATEGORIES.map(({ key, icon: Icon }) => (
             <div key={key} className="px-4 py-2.5">

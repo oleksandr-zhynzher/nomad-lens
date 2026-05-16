@@ -12,6 +12,7 @@ interface NomadVisaInfoGridProps {
 
 export function NomadVisaInfoGrid({ visa }: NomadVisaInfoGridProps) {
   const { t } = useTranslation();
+  const taxColors = TAX_STATUS_COLORS[visa.tax.status];
   return (
     <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
       {/* Visa Name */}
@@ -71,8 +72,8 @@ export function NomadVisaInfoGrid({ visa }: NomadVisaInfoGridProps) {
             className="inline-flex items-center rounded-full bg-[var(--tax-bg)] px-2 py-0.5 font-mono text-[10px] font-semibold text-[var(--tax-c)]"
             style={
               {
-                "--tax-bg": (TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard).bg,
-                "--tax-c": (TAX_STATUS_COLORS[visa.tax.status] ?? TAX_STATUS_COLORS.standard).text,
+                "--tax-bg": taxColors.bg,
+                "--tax-c": taxColors.text,
               } as React.CSSProperties
             }
           >

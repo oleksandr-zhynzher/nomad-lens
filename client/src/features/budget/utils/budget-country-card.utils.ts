@@ -21,6 +21,7 @@ export function getBudgetCountryCardBreakdownItems(
   return BUDGET_COUNTRY_CARD_CATEGORY_TEMPLATES.flatMap(({ key, Icon, labelKey }) => {
     const value = breakdown[key];
     if (value <= 0) return [];
-    return [{ key, Icon, color: COST_COLORS[key], label: t(labelKey), value }];
+    const color = COST_COLORS[key] ?? "#666666";
+    return [{ key, Icon, color, label: t(labelKey), value }];
   });
 }

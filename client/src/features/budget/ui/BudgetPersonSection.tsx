@@ -38,11 +38,11 @@ export function BudgetPersonSection({
         <span className="flex-1 text-left text-[10px] font-semibold tracking-[1.5px] text-muted uppercase" />
         <ChevronDown
           size={14}
-          className={`shrink-0 text-dimmer transition-transform duration-150 ${collapsed.lifestyle ? "-rotate-90" : "rotate-0"}`}
+          className={`shrink-0 text-dimmer transition-transform duration-150 ${collapsed["lifestyle"] ? "-rotate-90" : "rotate-0"}`}
         />
       </button>
 
-      {collapsed.lifestyle ? null : (
+      {collapsed["lifestyle"] ? null : (
         <div className="flex flex-col gap-3.5 px-4 py-3">
           <div className="flex flex-col gap-1.5">
             <span className="text-xs text-white">{t("budget.bedrooms.label")}</span>

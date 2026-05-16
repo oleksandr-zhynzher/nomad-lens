@@ -41,7 +41,7 @@ function RankingWeightPanel({
       onMinTouristDaysChange={rankingState.setMinTouristDays}
       weightMode={rankingState.weightMode}
       onWeightModeChange={rankingState.handleWeightModeChange}
-      mobile={mobile}
+      {...(mobile !== undefined && { mobile })}
     />
   );
 }
@@ -63,7 +63,7 @@ export function CompareParametersPanel({
         weightsAreDefault={tourismState.weightsAreDefault}
         budgetState={tourismState.budgetState}
         onBudgetChange={tourismState.setBudgetField}
-        mobile={mobile}
+        {...(mobile !== undefined && { mobile })}
       />
     );
   }
@@ -75,11 +75,21 @@ export function CompareParametersPanel({
   if (compareMode === "nomadVisas") {
     return (
       <div className="flex flex-col gap-4">
-        <RankingWeightPanel rankingState={rankingState} onShare={onShare} mobile={mobile} />
+        <RankingWeightPanel
+          rankingState={rankingState}
+          onShare={onShare}
+          {...(mobile !== undefined && { mobile })}
+        />
         <BudgetFilterPanel bs={budgetState} />
       </div>
     );
   }
 
-  return <RankingWeightPanel rankingState={rankingState} onShare={onShare} mobile={mobile} />;
+  return (
+    <RankingWeightPanel
+      rankingState={rankingState}
+      onShare={onShare}
+      {...(mobile !== undefined && { mobile })}
+    />
+  );
 }

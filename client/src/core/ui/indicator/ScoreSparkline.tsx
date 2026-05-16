@@ -16,7 +16,7 @@ export function ScoreSparkline({ entries }: ScoreSparklineProps) {
   return (
     <div className="hidden items-center gap-1 sm:flex">
       {entries.map(({ key, value, label, shape }) => (
-        <ScoreDot key={key} value={value} label={label} shape={shape} />
+        <ScoreDot key={key} value={value} label={label} {...(shape !== undefined && { shape })} />
       ))}
     </div>
   );

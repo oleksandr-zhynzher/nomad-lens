@@ -77,7 +77,7 @@ export function TourismComparisonSlots({
         query={query}
         onQueryChange={setQuery}
         onSelect={onAdd}
-        position={dropdownPos ?? undefined}
+        {...(dropdownPos !== null && { position: dropdownPos })}
         inputName="tourism-comparison-search"
         searchPlaceholder={t("compare.searchCountry")}
         emptyLabel={t("compare.noCountriesFound")}

@@ -55,8 +55,8 @@ export function MapComposableView({
         onZoomOut={() => {
           setZoom((z) => Math.max(z / 1.5, 1));
         }}
-        onToggleWeights={onToggleWeights}
-        showWeights={showWeights}
+        {...(onToggleWeights !== undefined && { onToggleWeights })}
+        {...(showWeights !== undefined && { showWeights })}
       />
       <MapLegend items={legendItems} scoreLabel={t("map.score")} />
       <ComposableMap

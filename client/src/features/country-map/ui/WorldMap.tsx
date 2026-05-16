@@ -22,8 +22,8 @@ export function WorldMap({ ranked, onCountryClick, onToggleWeights, showWeights 
     <MapInteractiveBody
       ranked={ranked}
       onCountryClick={onCountryClick}
-      onToggleWeights={onToggleWeights}
-      showWeights={showWeights}
+      {...(onToggleWeights !== undefined && { onToggleWeights })}
+      {...(showWeights !== undefined && { showWeights })}
       legendItems={legendItems}
       worldTopology={WORLD_TOPOLOGY}
     />

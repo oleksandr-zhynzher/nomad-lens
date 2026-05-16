@@ -44,13 +44,6 @@ export function TourismCountryList({
           index={i}
           highlighted={r.country.code === activeHighlight}
           expanded={compareMode ? false : expandedCode === r.country.code}
-          onToggle={
-            compareMode
-              ? undefined
-              : () => {
-                  setExpandedCode(expandedCode === r.country.code ? null : r.country.code);
-                }
-          }
           compareMode={compareMode}
           isSelected={selectedCodes.has(r.country.code)}
           onSelect={() => {
@@ -58,6 +51,11 @@ export function TourismCountryList({
           }}
           selectedTags={ws.toggles.requiredTags}
           travelDates={ws.travelDates}
+          {...(!compareMode && {
+            onToggle: () => {
+              setExpandedCode(expandedCode === r.country.code ? null : r.country.code);
+            },
+          })}
         />
       ))}
     </>

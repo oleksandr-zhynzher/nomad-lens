@@ -119,7 +119,7 @@ function parseCategoryWeightsParam(value: string | null): Partial<BudgetCategory
 
   for (const pair of value.split(",")) {
     const [rawKey, rawWeight] = pair.split(":");
-    if (rawKey === "" || rawWeight === "") continue;
+    if (rawKey === "" || rawWeight === "" || rawWeight === undefined) continue;
     if (!CATEGORY_WEIGHT_KEY_SET.has(rawKey as keyof BudgetCategoryWeights)) continue;
 
     const parsedWeight = parseClampedInteger(rawWeight, 0, 100);
@@ -172,8 +172,10 @@ export function isDefaultBudgetPreferences(state: BudgetPreferencesState): boole
 }
 
 function getInitialBudgetPreferences(): BudgetPreferencesState {
-  if (hasBudgetQueryState(globalThis.location.search)) {
-    return buildBudgetPreferencesFromSearch(globalThis.location.search);
+  const { location } = globalThis as { location?: Location };
+  const currentSearch = location?.search ?? "";
+  if (hasBudgetQueryState(currentSearch)) {
+    return buildBudgetPreferencesFromSearch(currentSearch);
   }
 
   return readVersionedJson({

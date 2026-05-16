@@ -15,5 +15,7 @@ export const COMPARISON_SLOT_COLORS = [
 ] as const;
 
 export function getComparisonSlotColor(index: number): string {
-  return COMPARISON_SLOT_COLORS[index % COMPARISON_SLOT_COLORS.length];
+  const length = COMPARISON_SLOT_COLORS.length;
+  const normalizedIndex = ((index % length) + length) % length;
+  return COMPARISON_SLOT_COLORS[normalizedIndex] ?? COMPARISON_SLOT_COLORS[0];
 }

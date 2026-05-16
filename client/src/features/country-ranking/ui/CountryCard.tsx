@@ -54,10 +54,10 @@ export function CountryCard({
         finalScore={finalScore}
         expanded={expanded}
         compareMode={compareMode}
-        weights={weights}
         langPrefix={langPrefix}
-        onToggle={onToggle}
-        onSelectToggle={onSelectToggle}
+        {...(weights !== undefined && { weights })}
+        {...(onToggle !== undefined && { onToggle })}
+        {...(onSelectToggle !== undefined && { onSelectToggle })}
       />
       {expanded && !compareMode ? (
         <div
