@@ -14,31 +14,31 @@
   --font-display: "Oswald", sans-serif;
 
   /* ── Surfaces & Layout ── */
-  --color-bg: #0a0a0f;        /* bg-bg */
-  --color-surface: #1a1a1a;   /* bg-surface */
+  --color-bg: #0a0a0f; /* bg-bg */
+  --color-surface: #1a1a1a; /* bg-surface */
   --color-surface-2: #222222; /* bg-surface-2 */
   --color-surface-3: #141414; /* bg-surface-3 */
   --color-surface-4: #2a2a2a; /* bg-surface-4 */
-  --color-border: #333333;    /* border-border, bg-border */
+  --color-border: #333333; /* border-border, bg-border */
 
   /* ── Text / Neutral ── */
   --color-secondary: #d1d1d1; /* text-secondary */
-  --color-tertiary: #cccccc;  /* text-tertiary */
+  --color-tertiary: #cccccc; /* text-tertiary */
   --color-on-surface: #e8e9eb; /* text-on-surface */
-  --color-muted: #9e9e9e;     /* text-muted */
-  --color-dim: #8a8a8a;       /* text-dim */
-  --color-dimmer: #808080;    /* text-dimmer */
-  --color-dimmest: #757575;   /* text-dimmest */
+  --color-muted: #9e9e9e; /* text-muted */
+  --color-dim: #8a8a8a; /* text-dim */
+  --color-dimmer: #808080; /* text-dimmer */
+  --color-dimmest: #757575; /* text-dimmest */
 
   /* ── Brand ── */
-  --color-accent: #8f5a3c;      /* bg-accent, text-accent */
-  --color-accent-dim: #c2956a;  /* bg-accent-dim, text-accent-dim */
+  --color-accent: #8f5a3c; /* bg-accent, text-accent */
+  --color-accent-dim: #c2956a; /* bg-accent-dim, text-accent-dim */
 
   /* ── Semantic ── */
-  --color-success: #4caf50;        /* bg-success, text-success */
+  --color-success: #4caf50; /* bg-success, text-success */
   --color-success-light: #8bc34a; /* bg-success-light, text-success-light */
-  --color-warn: #ffc107;          /* bg-warn, text-warn */
-  --color-danger: #ff5722;        /* bg-danger, text-danger */
+  --color-warn: #ffc107; /* bg-warn, text-warn */
+  --color-danger: #ff5722; /* bg-danger, text-danger */
 
   /* ── Score neutral ── */
   --color-score-none: #3a3a3a; /* bg-score-none, text-score-none */
