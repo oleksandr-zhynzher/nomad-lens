@@ -8,6 +8,7 @@ import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import * as apigwv2Integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { Construct } from 'constructs';
 import * as path from 'path';
+import { execSync } from 'child_process';
 
 export class NomadLensStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -32,7 +33,6 @@ export class NomadLensStack extends cdk.Stack {
           command: ['bash', '-c', 'echo "Docker fallback"'],
           local: {
             tryBundle(outputDir: string) {
-              const { execSync } = require('child_process');
               const opts = { cwd: serverDir, stdio: 'inherit' as const };
               // server is already built (tsc) by the deploy script; copy artifacts
               execSync(`cp -r dist/ "${outputDir}/dist/"`, opts);

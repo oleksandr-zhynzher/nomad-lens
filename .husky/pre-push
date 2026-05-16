@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# Pre-push: full typed ESLint + TypeScript build check.
-# This runs the slow but thorough strictTypeChecked analysis before pushing.
-echo "Running typed ESLint (strictTypeChecked)..."
-cd client && npx eslint src --config eslint.config.js
+# Pre-push: full typed static analysis, tests, and builds.
+echo "Running strict quality gates..."
+npm run quality:pr

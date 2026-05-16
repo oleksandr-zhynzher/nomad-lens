@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc --project tsconfig.json",
+    "typecheck": "tsc --project tsconfig.json --noEmit --pretty false",
     "start": "node dist/index.js",
     "generate": "tsx src/generate.ts",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src tests --max-warnings=0",
+    "lint:strict": "eslint src tests --max-warnings=0",
     "test": "vitest run"
   },
   "dependencies": {

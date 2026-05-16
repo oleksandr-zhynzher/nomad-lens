@@ -4,6 +4,9 @@
   "description": "AWS CDK infrastructure for Nomad Lens",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit --pretty false",
+    "lint": "eslint bin lib --max-warnings=0",
+    "lint:strict": "eslint bin lib --max-warnings=0",
     "synth": "cdk synth",
     "deploy": "cdk deploy --require-approval never",
     "diff": "cdk diff",

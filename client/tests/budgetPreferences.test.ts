@@ -10,7 +10,7 @@ import {
 describe("budget preference model", () => {
   it("sanitizes persisted values into safe ranges", () => {
     const preferences = sanitizeBudgetPreferences({
-      budget: 100000,
+      budget: 100_000,
       housing: "smallerCity",
       peopleCount: 0,
       bedrooms: 4,
@@ -22,7 +22,7 @@ describe("budget preference model", () => {
     });
 
     expect(preferences).toMatchObject({
-      budget: 10000,
+      budget: 10_000,
       housing: "smallerCity",
       peopleCount: 1,
       bedrooms: 1,

@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fast": "eslint . --config eslint.config.fast.js --max-warnings=0",
+    "lint:strict": "eslint . --config eslint.config.js --max-warnings=0",
+    "typecheck": "tsc -b --pretty false",
     "doctor": "react-doctor . --offline --fail-on none",
     "doctor:ci": "node scripts/react-doctor-ci.mjs",
     "preview": "vite preview",
