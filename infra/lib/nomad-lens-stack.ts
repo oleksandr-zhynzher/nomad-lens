@@ -1,14 +1,16 @@
+import { execFileSync } from 'node:child_process';
+import { cpSync } from 'node:fs';
+import * as path from 'node:path';
+
 import * as cdk from 'aws-cdk-lib';
-import * as s3 from 'aws-cdk-lib/aws-s3';
-import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
+import * as apigwv2Integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
-import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
-import * as apigwv2Integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
-import { Construct } from 'constructs';
-import * as path from 'path';
-import { execSync } from 'child_process';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import type { Construct } from 'constructs';
 
 export class NomadLensStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -20,6 +22,11 @@ export class NomadLensStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
     });
+    const siteBucketReference = s3.Bucket.fromBucketName(
+      this,
+      'SiteBucketReference',
+      siteBucket.bucketName,
+    );
 
     // ── Lambda (Express API) ───────────────────────────────────────────────
     const serverDir = path.join(__dirname, '../../server');
@@ -33,13 +40,19 @@ export class NomadLensStack extends cdk.Stack {
           command: ['bash', '-c', 'echo "Docker fallback"'],
           local: {
             tryBundle(outputDir: string) {
-              const opts = { cwd: serverDir, stdio: 'inherit' as const };
+              const outputDistDir = path.join(outputDir, 'dist');
               // server is already built (tsc) by the deploy script; copy artifacts
-              execSync(`cp -r dist/ "${outputDir}/dist/"`, opts);
-              execSync(`cp -r src/data/ "${outputDir}/dist/data/"`, opts);
-              execSync(`cp package.json "${outputDir}/package.json"`, opts);
+              cpSync(path.join(serverDir, 'dist'), outputDistDir, { recursive: true });
+              cpSync(path.join(serverDir, 'src/data'), path.join(outputDistDir, 'data'), {
+                recursive: true,
+              });
+              cpSync(path.join(serverDir, 'package.json'), path.join(outputDir, 'package.json'));
               // Install production deps into the output dir
-              execSync(`npm install --omit=dev --ignore-scripts --prefix "${outputDir}"`);
+              execFileSync(
+                'npm',
+                ['install', '--omit=dev', '--ignore-scripts', '--prefix', outputDir],
+                { stdio: 'inherit' },
+              );
               return true;
             },
           },
@@ -74,7 +87,7 @@ export class NomadLensStack extends cdk.Stack {
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       defaultRootObject: 'index.html',
       defaultBehavior: {
-        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucket as s3.IBucket),
+        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucketReference),
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
       },
@@ -96,7 +109,7 @@ export class NomadLensStack extends cdk.Stack {
     // ── Deploy client build to S3 + invalidate CloudFront ─────────────────
     new s3deploy.BucketDeployment(this, 'SiteDeploy', {
       sources: [s3deploy.Source.asset(path.join(__dirname, '../../client/dist'))],
-      destinationBucket: siteBucket as s3.IBucket,
+      destinationBucket: siteBucketReference,
       distribution,
       distributionPaths: ['/*'],
     });
