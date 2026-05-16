@@ -94,7 +94,11 @@ export default defineConfig([
         },
         node: true,
       },
-      // Boundaries: core must not import features; features should not import sibling features.
+      // Boundaries mirror client/ARCHITECTURE.md:
+      // - core stays feature-agnostic
+      // - i18n stays standalone
+      // - cross-feature consumers use public role indexes instead of internals
+      "boundaries/legacy-templates": false,
       "boundaries/elements": [
         {
           type: "core",
@@ -102,7 +106,7 @@ export default defineConfig([
         },
         {
           type: "features",
-          pattern: "src/features/**/*",
+          pattern: "src/features/*",
           mode: "folder",
           capture: ["featureName"],
         },
@@ -319,6 +323,18 @@ export default defineConfig([
             {
               from: { type: "i18n" },
               disallow: { to: { type: ["app", "core", "features"] } },
+            },
+            // Cross-feature imports must go through stable public role indexes
+            // such as @features/budget/hooks. Same-feature internals remain allowed.
+            {
+              from: { type: "features" },
+              disallow: {
+                to: {
+                  type: "features",
+                  captured: { featureName: "!{{ from.captured.featureName }}" },
+                },
+                dependency: { source: "@features/*/*/**" },
+              },
             },
           ],
         },
