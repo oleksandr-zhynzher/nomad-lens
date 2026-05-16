@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { BUDGET_CATEGORIES } from "@features/budget/constants";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface BudgetHeroSectionProps {
   readonly matchesCount: number;

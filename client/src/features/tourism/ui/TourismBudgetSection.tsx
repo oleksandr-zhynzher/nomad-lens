@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { DollarSign } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { CollapsibleSection } from "@core/ui/panels";
 import type { TourismBudgetState } from "@features/tourism/hooks";
-import { TourismBudgetSliders } from "./TourismBudgetSliders";
+import { DollarSign } from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { TourismBudgetPreferences } from "./TourismBudgetPreferences";
+import { TourismBudgetSliders } from "./TourismBudgetSliders";
 
 interface TourismBudgetSectionProps {
   readonly budgetState: TourismBudgetState;

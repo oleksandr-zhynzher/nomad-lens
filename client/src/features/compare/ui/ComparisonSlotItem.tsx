@@ -1,10 +1,11 @@
-import { useNavigate, Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Plane } from "lucide-react";
-import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
+import { Tooltip } from "@core/ui";
 import { localizeCountry, regionKey, scoreColourClass } from "@core/utils";
 import { applyClimate, computeScore } from "@features/country-ranking/utils";
-import { Tooltip } from "@core/ui";
+import { Plane } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
+
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
 
 interface ComparisonSlotItemProps {

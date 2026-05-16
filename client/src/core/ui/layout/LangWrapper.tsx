@@ -1,7 +1,7 @@
+import { isSupportedLang } from "@core/utils";
+import i18n from "@i18n";
 import { useEffect } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
-import i18n from "@i18n";
-import { isSupportedLang } from "@core/utils";
 
 export function LangWrapper() {
   const { lang } = useParams<{ lang?: string }>();

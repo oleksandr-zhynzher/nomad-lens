@@ -1,8 +1,7 @@
+import type { CountryData } from "@core/models";
+import { regionKey, scoreColourClass } from "@core/utils";
 import { X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { CountryData } from "@core/models";
-import { scoreColourClass } from "@core/utils";
-import { regionKey } from "@core/utils";
 
 interface CountryDetailPanelHeaderProps {
   readonly rank: number;

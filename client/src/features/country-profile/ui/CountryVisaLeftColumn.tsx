@@ -1,11 +1,12 @@
+import type { NomadVisaDetails } from "@core/models";
 import { Check, User } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { NomadVisaDetails } from "@core/models";
+
 import {
   localizeVisa,
   taxStatusBgClass,
-  taxStatusTextClass,
   taxStatusLabelKey,
+  taxStatusTextClass,
 } from "./country-profile.utils";
 import { CountryVisaDurationCostCard } from "./CountryVisaDurationCostCard";
 

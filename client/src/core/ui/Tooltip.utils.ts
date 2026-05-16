@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, type CSSProperties } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 interface Coords {
   x: number;

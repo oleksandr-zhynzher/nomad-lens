@@ -1,5 +1,5 @@
-import type { ReactElement, ReactNode } from "react";
 import { ChevronDown } from "lucide-react";
+import type { ReactElement, ReactNode } from "react";
 
 interface CollapsibleSectionProps {
   /** Unique key used for identifying the section (e.g. for aria). */

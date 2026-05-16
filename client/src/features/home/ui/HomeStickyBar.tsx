@@ -1,8 +1,9 @@
 import { useRef } from "react";
+
 import type { SearchMode } from "./home.types";
-import { useHomeStickyScroll } from "./useHomeStickyScroll";
-import { HomeSearchRow } from "./HomeSearchRow";
 import { HomeRegionFilters } from "./HomeRegionFilters";
+import { HomeSearchRow } from "./HomeSearchRow";
+import { useHomeStickyScroll } from "./useHomeStickyScroll";
 
 interface HomeStickyBarProps {
   readonly search: string;

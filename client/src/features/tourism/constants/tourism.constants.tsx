@@ -1,18 +1,18 @@
-import type React from "react";
 import {
-  Shield,
-  Theater,
-  TreePine,
   Bed,
-  UtensilsCrossed,
-  Sun,
   Bus,
-  Plane,
-  Wifi,
-  Smile,
   Mountain,
   Music,
+  Plane,
+  Shield,
+  Smile,
+  Sun,
+  Theater,
+  TreePine,
+  UtensilsCrossed,
+  Wifi,
 } from "lucide-react";
+import type React from "react";
 
 // Icon component references for each tourism metric (used in TourismComparison table header)
 export const TOURISM_ICONS: Record<string, typeof Shield> = {

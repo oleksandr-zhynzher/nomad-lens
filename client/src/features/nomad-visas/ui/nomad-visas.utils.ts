@@ -1,6 +1,7 @@
 import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
-import { computeClimateScore, computeScore } from "@features/country-ranking/utils";
 import { localizeCountry } from "@core/utils";
+import { computeClimateScore, computeScore } from "@features/country-ranking/utils";
+
 import type { SortField, VisaRow } from "./nomad-visas.types";
 
 export function applyClimate(country: CountryData, climatePrefs: ClimatePreferences): CountryData {

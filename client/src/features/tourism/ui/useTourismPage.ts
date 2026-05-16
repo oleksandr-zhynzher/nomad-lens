@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useCountries, useLangPrefix } from "@core/hooks";
 import {
-  useTourismScoring,
-  useTourismWeightState,
-  useTourismSearch,
   useTourismCompareMode,
+  useTourismScoring,
+  useTourismSearch,
+  useTourismWeightState,
 } from "@features/tourism/hooks";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export function useTourismPage() {
   const { t, i18n } = useTranslation();

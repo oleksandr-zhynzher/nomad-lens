@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { User } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface ViewCountryButtonProps {
   readonly to: string;

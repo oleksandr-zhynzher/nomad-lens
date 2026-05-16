@@ -1,6 +1,7 @@
+import { LANG_OPTIONS } from "@core/utils";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { LANG_OPTIONS } from "@core/utils";
+
 import { makeClickOutsideHandler } from "./layout.utils";
 
 interface LangDropdownProps {

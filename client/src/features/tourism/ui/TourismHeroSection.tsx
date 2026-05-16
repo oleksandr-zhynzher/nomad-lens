@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import { TOURISM_CATEGORY_KEYS } from "@core/models";
+import { useTranslation } from "react-i18next";
 
 interface TourismHeroSectionProps {
   readonly countriesCount: number;

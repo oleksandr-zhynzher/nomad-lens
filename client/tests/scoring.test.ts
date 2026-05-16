@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
+
 import countries from "../public/countries.json";
-import { computeScore, defaultWeights, rankCountries } from "../src/features/country-ranking/utils";
 import type { CountryData } from "../src/core/models";
+import { computeScore, defaultWeights, rankCountries } from "../src/features/country-ranking/utils";
 
 const sampleCountries = (countries as CountryData[]).slice(0, 5);
 

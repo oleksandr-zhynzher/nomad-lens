@@ -1,11 +1,12 @@
+import { getRowStyles } from "@core/utils";
+import { CompareCheckbox } from "@features/compare/ui";
+import type { TravelDates } from "@features/tourism/hooks";
+import type { TourismRanked } from "@features/tourism/utils";
 import type React from "react";
 import { useTranslation } from "react-i18next";
-import type { TourismRanked } from "@features/tourism/utils";
-import type { TravelDates } from "@features/tourism/hooks";
-import { CompareCheckbox } from "@features/compare/ui";
-import { getRowStyles } from "@core/utils";
-import { TourismCountryCardInner } from "./TourismCountryCardInner";
+
 import { TourismCountryCardDetail } from "./TourismCountryCardDetail";
+import { TourismCountryCardInner } from "./TourismCountryCardInner";
 
 interface TourismCountryCardProps {
   readonly ranked: TourismRanked;

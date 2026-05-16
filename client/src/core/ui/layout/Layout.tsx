@@ -1,16 +1,17 @@
-import { type ReactNode, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import { INFO_PAGES } from "@core/utils";
+import { type ReactNode, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import {
-  navigateToView,
-  computeLangSwitchPath,
   computeActiveView,
+  computeLangSwitchPath,
+  navigateToView,
   type NavView,
 } from "./layout.utils";
-import { MobileMenu } from "./MobileMenu";
 import { LayoutHeader } from "./LayoutHeader";
+import { MobileMenu } from "./MobileMenu";
 
 interface LayoutProps {
   readonly children: ReactNode;

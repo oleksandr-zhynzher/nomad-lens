@@ -1,6 +1,7 @@
+import { TOURISM_INDICATOR_ICONS } from "@features/indicator-catalog/constants";
 import { Palmtree } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { TOURISM_INDICATOR_ICONS } from "@features/indicator-catalog/constants";
+
 import { IndicatorCard } from "./IndicatorCard";
 
 export function IndicatorsTourismSection() {

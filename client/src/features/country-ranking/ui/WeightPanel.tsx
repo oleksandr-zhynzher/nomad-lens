@@ -1,13 +1,15 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
 import type { CategoryKey, ClimatePreferences, WeightMap, WeightMode } from "@core/models";
 import { PanelShell } from "@core/ui/panels";
-import { VisaStaySection } from "@features/country-ranking/ui";
-import { WeightCategoryGroup } from "@features/country-ranking/ui";
-import { WeightModeToggle } from "@features/country-ranking/ui";
-import { WeightShareButton } from "@features/country-ranking/ui";
 import { WEIGHT_GROUPS } from "@features/country-ranking/constants";
+import {
+  VisaStaySection,
+  WeightCategoryGroup,
+  WeightModeToggle,
+  WeightShareButton,
+} from "@features/country-ranking/ui";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface WeightPanelProps {
   readonly weights: WeightMap;

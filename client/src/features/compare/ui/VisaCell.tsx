@@ -1,8 +1,9 @@
-import { useTranslation } from "react-i18next";
-import { applyClimate, computeScore } from "@features/country-ranking/utils";
 import { scoreColourClass } from "@core/utils";
 import type { VisaCellProps } from "@features/compare/utils";
 import { getLocalizedVisa } from "@features/compare/utils";
+import { applyClimate, computeScore } from "@features/country-ranking/utils";
+import { useTranslation } from "react-i18next";
+
 import { VisaDetailCell } from "./VisaDetailCell";
 
 export function VisaCell({
@@ -76,8 +77,8 @@ export function VisaCell({
 
 // Re-export types used by NomadVisaComparison
 export type {
-  VisaCountry,
   SelectedSlot,
   VisaCellProps,
+  VisaCountry,
   VisaSlotLangProps,
 } from "@features/compare/utils";

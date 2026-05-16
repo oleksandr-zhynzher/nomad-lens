@@ -1,10 +1,11 @@
+import { localizeCountry } from "@core/utils";
+import type { useBudgetMatcher, useBudgetState } from "@features/budget/hooks";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { localizeCountry } from "@core/utils";
-import type { useBudgetState, useBudgetMatcher } from "@features/budget/hooks";
+
 import { BudgetHeroSection } from "./BudgetHeroSection";
-import { BudgetStickyBar } from "./BudgetStickyBar";
 import { BudgetResultsList } from "./BudgetResultsList";
+import { BudgetStickyBar } from "./BudgetStickyBar";
 
 type BudgetMatches = ReturnType<typeof useBudgetMatcher>;
 type BudgetState = ReturnType<typeof useBudgetState>;

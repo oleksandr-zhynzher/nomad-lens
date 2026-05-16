@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import { Calendar, CloudSun, Globe, Plane } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export interface CountryBadgesProps {
   readonly hasNomadVisa: boolean | undefined;

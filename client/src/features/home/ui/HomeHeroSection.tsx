@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "@core/models";
 import { DATA_SOURCE_KEYS } from "@features/data-sources/constants";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface HomeHeroSectionProps {
   readonly countriesCount: number;

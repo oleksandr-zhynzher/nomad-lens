@@ -7,7 +7,7 @@ import type {
   SeasonType,
   WeightMap,
 } from "@core/models";
-import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS, AI_CATEGORIES } from "@core/models";
+import { AI_CATEGORIES, CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "@core/models";
 
 /**
  * Compute a weighted composite score for a single country.

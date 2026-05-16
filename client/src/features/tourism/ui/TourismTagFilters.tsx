@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import { ALL_TOURISM_TAGS, type TourismTag } from "@features/tourism/hooks";
+import { useTranslation } from "react-i18next";
 
 interface TourismTagFiltersProps {
   readonly requiredTags: string[];

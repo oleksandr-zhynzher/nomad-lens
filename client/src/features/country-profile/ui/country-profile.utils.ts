@@ -1,4 +1,5 @@
 import type { NomadVisaDetails, NomadVisaLocalization } from "@core/models";
+
 import type { TaxStatus } from "./country-profile.types";
 
 export function getHostname(url: string): string {

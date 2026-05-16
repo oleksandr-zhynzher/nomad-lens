@@ -1,4 +1,5 @@
-import { ChevronDown, ChevronUp, ChevronsUpDown } from "lucide-react";
+import { ChevronDown, ChevronsUpDown, ChevronUp } from "lucide-react";
+
 import type { SortDirection, SortField } from "./nomad-visas.types";
 
 export interface VisaSortIconProps {

@@ -1,6 +1,6 @@
-import { Flag, Globe, Plane, Wallet, Palmtree } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import type { CompareMode } from "@features/compare/utils";
+import { Flag, Globe, Palmtree, Plane, Wallet } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface CompareModeToggleProps {
   readonly compareMode: CompareMode;

@@ -1,4 +1,4 @@
-import { House, ShoppingCart, UtensilsCrossed, Bus, Zap, Laptop, HeartPulse } from "lucide-react";
+import { Bus, HeartPulse, House, Laptop, ShoppingCart, UtensilsCrossed, Zap } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;

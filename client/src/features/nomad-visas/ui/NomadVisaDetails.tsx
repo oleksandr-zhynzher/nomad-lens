@@ -1,6 +1,7 @@
+import type { NomadVisaDetails as NomadVisaDetailsType } from "@core/models";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { NomadVisaDetails as NomadVisaDetailsType } from "@core/models";
+
 import { NomadVisaInfoGrid } from "./NomadVisaInfoGrid";
 
 interface NomadVisaDetailsProps {

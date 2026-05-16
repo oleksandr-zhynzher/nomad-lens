@@ -1,9 +1,10 @@
-import type { Dispatch, RefObject, SetStateAction } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { localizeCountry, regionKey, tourismScoreColourClass } from "@core/utils";
 import { computeTourismScore } from "@features/tourism/utils";
+import type { Dispatch, RefObject, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 import { ComparisonAddButton } from "./ComparisonAddButton";
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
 

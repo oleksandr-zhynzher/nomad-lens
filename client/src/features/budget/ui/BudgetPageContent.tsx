@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { SlidersHorizontal } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { Layout, ResponsiveSidePanelLayout } from "@core/ui/layout";
-import type { useBudgetState, useBudgetMatcher } from "@features/budget/hooks";
-import { BudgetSidebar } from "./BudgetSidebar";
+import type { useBudgetMatcher, useBudgetState } from "@features/budget/hooks";
+import { SlidersHorizontal } from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { BudgetLayoutContent } from "./BudgetLayoutContent";
+import { BudgetSidebar } from "./BudgetSidebar";
 
 type BudgetMatches = ReturnType<typeof useBudgetMatcher>;
 type BudgetState = ReturnType<typeof useBudgetState>;

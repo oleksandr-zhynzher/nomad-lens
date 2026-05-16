@@ -1,7 +1,7 @@
-import { Info } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { Tooltip } from "@core/ui";
 import { WeightSliderRow } from "@core/ui/panels";
+import { Info } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface BudgetQualityFilterProps {
   readonly qualityBlend: number;

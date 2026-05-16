@@ -1,8 +1,8 @@
+import { BUDGET_CATEGORIES } from "@features/budget/constants";
+import type { BudgetCategoryWeights } from "@features/budget/models";
 import { ChevronDown, Sliders } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import type { BudgetCategoryWeights } from "@features/budget/models";
-import { BUDGET_CATEGORIES } from "@features/budget/constants";
 
 interface BudgetCategorySectionProps {
   readonly categoryWeights: BudgetCategoryWeights;

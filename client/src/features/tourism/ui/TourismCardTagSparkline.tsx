@@ -1,9 +1,9 @@
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { TOURISM_CATEGORY_KEYS } from "@core/models";
+import { ScoreDot, ScoreSparkline } from "@core/ui/indicator";
 import type { TravelDates } from "@features/tourism/hooks";
 import { applyTagSeasonality } from "@features/tourism/utils";
-import { ScoreDot, ScoreSparkline } from "@core/ui/indicator";
+import { useTranslation } from "react-i18next";
 
 interface TourismCardTagSparklineProps {
   readonly country: CountryData;

@@ -1,6 +1,7 @@
-import { useTranslation } from "react-i18next";
 import { CompareModeActions } from "@core/ui";
 import type { TourismTag } from "@features/tourism/hooks";
+import { useTranslation } from "react-i18next";
+
 import type { SearchMode } from "./tourism.types";
 import { TourismSearchBar } from "./TourismSearchBar";
 import { TourismTagFilters } from "./TourismTagFilters";

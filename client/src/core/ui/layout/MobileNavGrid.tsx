@@ -1,8 +1,9 @@
 import { BarChart3, List, Map, Palmtree, Plane, Wallet } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import type { NavView } from "./layout.utils";
+import { Link } from "react-router-dom";
+
 import { mobileNavBtnClass, mobileNavLinkClass } from "./layout.styles";
+import type { NavView } from "./layout.utils";
 
 interface MobileNavGridProps {
   readonly activeView: NavView | null;

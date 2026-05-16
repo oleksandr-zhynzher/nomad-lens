@@ -1,5 +1,5 @@
-import { useTranslation } from "react-i18next";
 import { tourismScoreColourClass } from "@core/utils";
+import { useTranslation } from "react-i18next";
 
 interface CountryTourismOverviewCardProps {
   readonly tourismScore: number | null;

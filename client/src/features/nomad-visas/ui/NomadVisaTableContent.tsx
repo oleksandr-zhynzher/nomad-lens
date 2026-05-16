@@ -1,8 +1,9 @@
+import type { CSSProperties, RefObject } from "react";
 import type { NavigateFunction } from "react-router-dom";
-import type { RefObject, CSSProperties } from "react";
-import type { SortField, SortDirection, VisaRow } from "./nomad-visas.types";
-import { NomadVisaTableHeader } from "./NomadVisaTableHeader";
+
+import type { SortDirection, SortField, VisaRow } from "./nomad-visas.types";
 import { NomadVisaTableBody } from "./NomadVisaTableBody";
+import { NomadVisaTableHeader } from "./NomadVisaTableHeader";
 
 interface NomadVisaTableContentProps {
   readonly sortedCountries: VisaRow[];

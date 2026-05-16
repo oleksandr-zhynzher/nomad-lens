@@ -1,11 +1,12 @@
+import { useLangPrefix } from "@core/hooks";
+import type { CountryData } from "@core/models";
+import { useComparisonSelection, useSyncScroll } from "@features/compare/hooks";
+import { computeTourismScore } from "@features/tourism/utils";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import type { CountryData } from "@core/models";
-import { computeTourismScore } from "@features/tourism/utils";
-import { useLangPrefix } from "@core/hooks";
-import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
-import { TourismComparisonSlots } from "./TourismComparisonSlots";
+
 import { TourismComparisonGrid } from "./TourismComparisonGrid";
+import { TourismComparisonSlots } from "./TourismComparisonSlots";
 
 interface TourismComparisonProps {
   readonly countries: CountryData[];

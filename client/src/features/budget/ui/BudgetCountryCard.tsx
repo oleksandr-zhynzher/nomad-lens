@@ -1,11 +1,12 @@
-import type React from "react";
-import { ChevronRight } from "lucide-react";
 import { useLangPrefix } from "@core/hooks";
-import type { BudgetMatch } from "@features/budget/hooks";
-import { BudgetBreakdownChart } from "./BudgetBreakdownChart";
-import { surplusColourClass, comfortScoreColourClass, getRowStyles } from "@core/utils";
-import { CompareCheckbox } from "@features/compare/ui";
 import { CountryNameCell } from "@core/ui/country";
+import { comfortScoreColourClass, getRowStyles, surplusColourClass } from "@core/utils";
+import type { BudgetMatch } from "@features/budget/hooks";
+import { CompareCheckbox } from "@features/compare/ui";
+import { ChevronRight } from "lucide-react";
+import type React from "react";
+
+import { BudgetBreakdownChart } from "./BudgetBreakdownChart";
 import { BudgetExpandedPanel } from "./BudgetExpandedPanel";
 
 interface BudgetCountryCardProps {

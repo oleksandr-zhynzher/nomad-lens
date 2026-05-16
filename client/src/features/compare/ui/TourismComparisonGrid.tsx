@@ -1,14 +1,15 @@
-import type { RefObject } from "react";
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { TOURISM_CATEGORY_KEYS } from "@core/models";
 import { localizeCountry } from "@core/utils";
-import { tourismScoreColour } from "@features/tourism/utils";
 import {
+  TOURISM_COMPARISON_COLUMN_WIDTH,
   TOURISM_ICONS,
   TOURISM_LABELS,
-  TOURISM_COMPARISON_COLUMN_WIDTH,
 } from "@features/tourism/constants";
+import { tourismScoreColour } from "@features/tourism/utils";
+import type { RefObject } from "react";
+import { useTranslation } from "react-i18next";
+
 import { ComparisonRowShell } from "./ComparisonRowShell";
 import { ComparisonScoreCell } from "./ComparisonScoreCell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";

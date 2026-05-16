@@ -1,7 +1,8 @@
+import { LangWrapper } from "@core/ui/layout";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import { RouteLoadingFallback } from "./RouteLoadingFallback";
-import { LangWrapper } from "@core/ui/layout";
 import { routeModule } from "./router.utils";
 
 const HomePage = lazy(async () => import("@features/home/ui/HomeView"));

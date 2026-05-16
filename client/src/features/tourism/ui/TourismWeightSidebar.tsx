@@ -1,4 +1,5 @@
 import type { useTourismWeightState } from "@features/tourism/hooks";
+
 import { TourismWeightPanel } from "./TourismWeightPanel";
 
 interface TourismWeightSidebarProps {

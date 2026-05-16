@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useCountries, useLangPrefix } from "@core/hooks";
 import { useScoring, useWeightState } from "@features/country-ranking/hooks";
-import { useHomeSearch, useHomeCompareMode } from "@features/home/hooks";
+import { useHomeCompareMode, useHomeSearch } from "@features/home/hooks";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 import { getActiveHighlight } from "./home.utils";
 
 export function useHomePageState() {

@@ -1,6 +1,7 @@
+import type { NomadVisaDetails } from "@core/models";
 import { Briefcase, Building2, ExternalLink, FileText, Timer } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { NomadVisaDetails } from "@core/models";
+
 import { getHostname, localizeVisa } from "./country-profile.utils";
 
 interface CountryVisaRightColumnProps {

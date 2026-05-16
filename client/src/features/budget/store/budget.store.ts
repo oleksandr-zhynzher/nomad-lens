@@ -1,5 +1,6 @@
 import { createAppStore } from "@core/store";
 import { readVersionedJson, writeVersionedJson } from "@features/budget/utils";
+
 import {
   BEDROOM_OPTIONS,
   BUDGET_STORAGE_VERSION,
@@ -22,8 +23,8 @@ import {
 import type {
   Bedrooms,
   BudgetCategoryWeights,
-  BudgetPreferenceStore,
   BudgetPreferencesState,
+  BudgetPreferenceStore,
 } from "../models/budget-preferences.models";
 
 export {
@@ -37,8 +38,8 @@ export {
 export type {
   Bedrooms,
   BudgetCategoryWeights,
-  BudgetPreferenceStore,
   BudgetPreferencesState,
+  BudgetPreferenceStore,
   HousingPreference,
 } from "../models/budget-preferences.models";
 

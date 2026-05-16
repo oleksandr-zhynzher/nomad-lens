@@ -1,13 +1,13 @@
-import { ChevronRight, Plane } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import type { CountryData, WeightMap } from "@core/models";
 import { CATEGORY_LABELS } from "@core/models";
-import { PANEL_KEYS } from "@features/country-ranking/constants/weight-config.constants";
 import { Tooltip } from "@core/ui";
-import { scoreColourClass } from "@core/utils";
-import { ScoreSparkline } from "@core/ui/indicator";
 import { CountryNameCell } from "@core/ui/country";
+import { ScoreSparkline } from "@core/ui/indicator";
+import { scoreColourClass } from "@core/utils";
+import { PANEL_KEYS } from "@features/country-ranking/constants/weight-config.constants";
+import { ChevronRight, Plane } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface CountryCardMainButtonProps {
   readonly rank: number;

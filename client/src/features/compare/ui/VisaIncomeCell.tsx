@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
 import type { VisaSlotLangProps } from "@features/compare/utils";
 import { getCurrencySymbol, getLocalizedVisa } from "@features/compare/utils";
+import { useTranslation } from "react-i18next";
 
 export function VisaIncomeCell({ slot, lang }: VisaSlotLangProps) {
   const { t } = useTranslation();

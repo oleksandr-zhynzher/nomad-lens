@@ -1,6 +1,7 @@
-import type { CountryData, CostOfLivingData } from "@core/models";
-import type { BudgetCategoryWeights, Bedrooms, HousingPreference } from "../store/budget.store";
+import type { CostOfLivingData, CountryData } from "@core/models";
+
 import type { BudgetBreakdown, BudgetMatch } from "../models/budget-matcher.models";
+import type { Bedrooms, BudgetCategoryWeights, HousingPreference } from "../store/budget.store";
 
 function scaleForPeople(category: string, base: number, peopleCount: number): number {
   if (peopleCount <= 1) return base;

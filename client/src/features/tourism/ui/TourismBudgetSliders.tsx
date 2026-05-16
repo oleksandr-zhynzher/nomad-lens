@@ -1,8 +1,8 @@
-import { Info } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import type React from "react";
 import { Tooltip } from "@core/ui";
 import type { TourismBudgetState } from "@features/tourism/hooks";
+import { Info } from "lucide-react";
+import type React from "react";
+import { useTranslation } from "react-i18next";
 
 interface TourismBudgetSlidersProps {
   readonly budgetState: TourismBudgetState;

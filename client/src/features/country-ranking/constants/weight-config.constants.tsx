@@ -1,14 +1,14 @@
-import type React from "react";
+import type { CategoryKey, SeasonType } from "@core/models";
 import {
   Briefcase,
-  HeartPulse,
-  ShieldCheck,
-  GraduationCap,
-  Leaf,
   Globe,
+  GraduationCap,
+  HeartPulse,
+  Leaf,
+  ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import type { CategoryKey, SeasonType } from "@core/models";
+import type React from "react";
 
 export const SEASON_ROW1: Array<{ value: SeasonType | "any"; labelKey: string }> = [
   { value: "any", labelKey: "climate.seasons.any" },

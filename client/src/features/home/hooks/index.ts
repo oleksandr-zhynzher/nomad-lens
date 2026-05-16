@@ -1,2 +1,2 @@
-export * from "./useHomeSearch";
 export * from "./useHomeCompareMode";
+export * from "./useHomeSearch";

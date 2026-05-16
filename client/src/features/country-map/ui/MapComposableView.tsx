@@ -1,9 +1,10 @@
-import { useState, type Dispatch, type SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
-import { ComposableMap, Geographies, ZoomableGroup, Sphere, Graticule } from "react-simple-maps";
 import type { RankedCountry } from "@core/models";
+import { type Dispatch, type SetStateAction, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ComposableMap, Geographies, Graticule, Sphere, ZoomableGroup } from "react-simple-maps";
+
+import { MapLegend, MapZoomControls } from "./MapControls";
 import { MapGeographies } from "./MapGeographies";
-import { MapZoomControls, MapLegend } from "./MapControls";
 
 interface GeoObject {
   id?: unknown;

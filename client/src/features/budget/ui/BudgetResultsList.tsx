@@ -1,7 +1,8 @@
+import { EmptyState, LoadingRows } from "@core/ui";
+import type { BudgetMatch } from "@features/budget/hooks";
 import type { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
-import { LoadingRows, EmptyState } from "@core/ui";
-import type { BudgetMatch } from "@features/budget/hooks";
+
 import { BudgetRowItem } from "./BudgetRowItem";
 
 interface BudgetResultsListProps {

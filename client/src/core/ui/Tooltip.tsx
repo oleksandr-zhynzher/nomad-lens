@@ -1,5 +1,6 @@
-import type { ReactNode, CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { createPortal } from "react-dom";
+
 import { useTooltipBehavior } from "./Tooltip.utils";
 
 interface TooltipProps {
@@ -28,6 +29,7 @@ export function Tooltip({
       onMouseLeave={hide}
       onFocus={show}
       onBlur={hide}
+      role="presentation"
     >
       {children}
       {coords === null

@@ -1,16 +1,16 @@
-import { useTranslation } from "react-i18next";
-import { Info } from "lucide-react";
-import { Link } from "react-router-dom";
 import type { CategoryKey, WeightMap, WeightMode } from "@core/models";
 import {
+  AI_CATEGORIES,
   CATEGORY_DATA_SOURCES,
   CATEGORY_DESCRIPTIONS,
   CATEGORY_LABELS,
-  AI_CATEGORIES,
 } from "@core/models";
-import { weightLabel } from "@features/country-ranking/utils";
 import { Tooltip } from "@core/ui";
 import { WeightSliderRow } from "@core/ui/panels";
+import { weightLabel } from "@features/country-ranking/utils";
+import { Info } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export interface WeightSliderProps {
   readonly categoryKey: CategoryKey;

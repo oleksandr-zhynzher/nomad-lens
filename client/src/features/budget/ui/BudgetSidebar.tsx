@@ -1,5 +1,6 @@
-import type { Dispatch, SetStateAction } from "react";
 import type { BudgetState } from "@features/budget/types/budget.types";
+import type { Dispatch, SetStateAction } from "react";
+
 import { BudgetAmountSection } from "./BudgetAmountSection";
 import { BudgetCategorySection } from "./BudgetCategorySection";
 import { BudgetPersonSection } from "./BudgetPersonSection";

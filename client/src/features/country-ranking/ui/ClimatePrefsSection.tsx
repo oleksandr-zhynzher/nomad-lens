@@ -1,7 +1,7 @@
-import type React from "react";
-import { useTranslation } from "react-i18next";
 import type { ClimatePreferences } from "@core/models";
 import { SEASON_ROW1, SEASON_ROW2 } from "@features/country-ranking/constants";
+import type React from "react";
+import { useTranslation } from "react-i18next";
 
 interface ClimatePrefsProps {
   readonly climatePrefs: ClimatePreferences;

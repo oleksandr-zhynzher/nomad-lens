@@ -1,16 +1,17 @@
-import { createPortal } from "react-dom";
-import { Plane } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useLangPrefix } from "@core/hooks";
 import type { RankedCountry } from "@core/models";
 import { useLocalizedCountry } from "@core/utils";
-import { ScoreBreakdown } from "./ScoreBreakdown";
 import { NomadVisaDetails } from "@features/nomad-visas/ui";
+import { Plane } from "lucide-react";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import { CountryDetailPanelFooter } from "./CountryDetailPanelFooter";
 import { CountryDetailPanelHeader } from "./CountryDetailPanelHeader";
 import { CountryDetailTourismScores } from "./CountryDetailTourismScores";
-import { CountryDetailPanelFooter } from "./CountryDetailPanelFooter";
+import { ScoreBreakdown } from "./ScoreBreakdown";
 
 interface CountryDetailPanelProps {
   country: RankedCountry;

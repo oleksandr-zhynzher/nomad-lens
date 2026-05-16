@@ -1,6 +1,6 @@
-import { Info } from "lucide-react";
 import { Tooltip } from "@core/ui";
 import { ToggleSwitch } from "@features/country-ranking/ui";
+import { Info } from "lucide-react";
 
 interface VisaToggleItemProps {
   readonly label: string;

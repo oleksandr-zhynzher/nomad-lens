@@ -1,10 +1,11 @@
-import type { Dispatch, SetStateAction } from "react";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { Plane } from "lucide-react";
 import type { CountryData } from "@core/models";
 import { localizeCountry, regionKey } from "@core/utils";
 import type { SelectedSlot } from "@features/compare/utils";
+import { Plane } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+
 import { ComparisonAddButton } from "./ComparisonAddButton";
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
 import { CountryPickerDropdown } from "./CountryPickerDropdown";

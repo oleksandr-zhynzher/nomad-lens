@@ -1,10 +1,12 @@
+import type { useBudgetState } from "@features/budget/hooks";
 import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { useBudgetState } from "@features/budget/hooks";
+
 import { BudgetCategoryFilter } from "./BudgetCategoryFilter";
 import { BudgetLifestyleSection } from "./BudgetLifestyleSection";
 import { BudgetQualityFilter } from "./BudgetQualityFilter";
+
 type BudgetStateReturn = ReturnType<typeof useBudgetState>;
 interface BudgetFilterPanelProps {
   readonly bs: BudgetStateReturn;

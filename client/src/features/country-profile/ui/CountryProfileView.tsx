@@ -1,18 +1,17 @@
-import { useMemo } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useCountries, useLangPrefix } from "@core/hooks";
 import { Layout } from "@core/ui/layout";
-import { useCountries } from "@core/hooks";
-import { useScoring } from "@features/country-ranking/hooks";
-import { useWeightState } from "@features/country-ranking/hooks";
-import { useLangPrefix } from "@core/hooks";
-import { useTranslation } from "react-i18next";
 import { useLocalizedCountry } from "@core/utils";
-import { CountryVisaSection } from "./CountryVisaSection";
-import { CountryPerformanceSection } from "./CountryPerformanceSection";
-import { CountryCostOfLivingSection } from "./CountryCostOfLivingSection";
+import { useScoring, useWeightState } from "@features/country-ranking/hooks";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 import { CountryClimateSection } from "./CountryClimateSection";
+import { CountryCostOfLivingSection } from "./CountryCostOfLivingSection";
 import { CountryHeroBanner } from "./CountryHeroBanner";
+import { CountryPerformanceSection } from "./CountryPerformanceSection";
 import { CountryStatsRow } from "./CountryStatsRow";
+import { CountryVisaSection } from "./CountryVisaSection";
 
 export function CountryPage() {
   const { t } = useTranslation();

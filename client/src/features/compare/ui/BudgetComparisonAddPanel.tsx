@@ -1,11 +1,12 @@
-import type { Dispatch, RefObject, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { localizeCountry, regionKey } from "@core/utils";
 import type { BudgetMatch } from "@features/budget/hooks";
+import type { Dispatch, RefObject, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
+
+import { BudgetSlotCards } from "./BudgetSlotCards";
 import { ComparisonAddButton } from "./ComparisonAddButton";
 import { CountryPickerDropdown } from "./CountryPickerDropdown";
-import { BudgetSlotCards } from "./BudgetSlotCards";
 
 type ComparisonSlot = Readonly<{ country: CountryData; color: string; index: number }>;
 interface BudgetComparisonAddPanelProps {

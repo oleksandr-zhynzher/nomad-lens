@@ -1,11 +1,12 @@
+import { useLangPrefix } from "@core/hooks";
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
+import { useComparisonSelection, useSyncScroll } from "@features/compare/hooks";
+import { applyClimate, computeScore } from "@features/country-ranking/utils";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { useLangPrefix } from "@core/hooks";
-import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
-import { applyClimate, computeScore } from "@features/country-ranking/utils";
-import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
-import { CountryComparisonSlots } from "./CountryComparisonSlots";
+
 import { CountryComparisonGrid } from "./CountryComparisonGrid";
+import { CountryComparisonSlots } from "./CountryComparisonSlots";
 
 interface CountryComparisonProps {
   readonly countries: CountryData[];

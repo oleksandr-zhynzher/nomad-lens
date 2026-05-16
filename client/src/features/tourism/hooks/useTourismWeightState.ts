@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { TOURISM_CATEGORY_KEYS } from "@core/models";
 import type { TourismWeightMap } from "@features/tourism/utils";
 import { defaultTourismWeights } from "@features/tourism/utils";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const LS_WEIGHTS_KEY = "tourism-weights";
 const LS_REGIONS_KEY = "tourism-regions";

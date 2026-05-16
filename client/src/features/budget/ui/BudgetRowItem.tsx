@@ -1,6 +1,6 @@
-import type { Dispatch, SetStateAction } from "react";
-import { BudgetCountryCard } from "@features/budget/ui";
 import type { BudgetMatch } from "@features/budget/hooks";
+import { BudgetCountryCard } from "@features/budget/ui";
+import type { Dispatch, SetStateAction } from "react";
 
 interface BudgetRowItemProps {
   readonly match: BudgetMatch;
@@ -25,25 +25,21 @@ export function BudgetRowItem({
 }: BudgetRowItemProps) {
   return (
     <div
-      onClick={
-        compareMode
-          ? () => {
+      {...(compareMode
+        ? {
+            onClick: () => {
               toggleSelect(match.country.code);
-            }
-          : undefined
-      }
-      onKeyDown={
-        compareMode
-          ? (event) => {
+            },
+            onKeyDown: (event: React.KeyboardEvent) => {
               if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
                 toggleSelect(match.country.code);
               }
-            }
-          : undefined
-      }
-      role={compareMode ? "button" : undefined}
-      tabIndex={compareMode ? 0 : undefined}
+            },
+            role: "button" as const,
+            tabIndex: 0,
+          }
+        : {})}
       className={compareMode ? "cursor-pointer" : ""}
     >
       <BudgetCountryCard

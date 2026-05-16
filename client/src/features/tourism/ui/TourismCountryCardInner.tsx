@@ -1,8 +1,9 @@
-import { ChevronRight } from "lucide-react";
-import type { TourismRanked } from "@features/tourism/utils";
+import { CountryNameCell } from "@core/ui/country";
 import { tourismScoreColourClass } from "@core/utils";
 import type { TravelDates } from "@features/tourism/hooks";
-import { CountryNameCell } from "@core/ui/country";
+import type { TourismRanked } from "@features/tourism/utils";
+import { ChevronRight } from "lucide-react";
+
 import { TourismBudgetBar } from "./TourismBudgetBar";
 import { TourismCardTagSparkline } from "./TourismCardTagSparkline";
 

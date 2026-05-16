@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import type { CountryData } from "@core/models";
 import { localizeCountry } from "@core/utils";
 import { getComparisonSlotColor } from "@features/compare/constants";
-import type { CountryData } from "@core/models";
+import { useEffect, useRef, useState } from "react";
 
 interface UseComparisonSelectionOptions {
   allCandidates: CountryData[];

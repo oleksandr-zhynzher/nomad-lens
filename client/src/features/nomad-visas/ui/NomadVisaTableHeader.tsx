@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import type { SortField, SortDirection } from "./nomad-visas.types";
+
+import type { SortDirection, SortField } from "./nomad-visas.types";
 import { VisaSortIcon } from "./VisaSortIcon";
 
 interface NomadVisaTableHeaderProps {

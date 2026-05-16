@@ -1,6 +1,6 @@
+import { toggleSetItem } from "@features/tourism/ui/tourism.utils";
 import { useCallback, useState } from "react";
 import type { NavigateFunction } from "react-router-dom";
-import { toggleSetItem } from "@features/tourism/ui/tourism.utils";
 
 export function useTourismCompareMode(langPrefix: string, navigate: NavigateFunction) {
   const [compareMode, setCompareMode] = useState(false);

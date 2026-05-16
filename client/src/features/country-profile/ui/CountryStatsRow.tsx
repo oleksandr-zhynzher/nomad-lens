@@ -1,7 +1,7 @@
-import type { ReactNode } from "react";
-import { Building, MapPin, TrendingUp, Users } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { regionKey } from "@core/utils";
+import { Building, MapPin, TrendingUp, Users } from "lucide-react";
+import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 
 interface CountryStatsRowProps {
   readonly finalScore: number | null;

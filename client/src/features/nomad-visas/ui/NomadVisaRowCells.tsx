@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 export { VisaRowIncomeCell, VisaRowTaxCell } from "./NomadVisaIncomeTaxCells";
 

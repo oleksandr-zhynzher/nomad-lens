@@ -1,7 +1,8 @@
-import type React from "react";
-import { useTranslation } from "react-i18next";
 import { TAX_STATUS_COLORS } from "@core/constants";
 import type { CountryData } from "@core/models";
+import type React from "react";
+import { useTranslation } from "react-i18next";
+
 import { getTaxStatusLabel } from "./nomad-visas.utils";
 
 type VisaType = NonNullable<CountryData["nomadVisa"]>;

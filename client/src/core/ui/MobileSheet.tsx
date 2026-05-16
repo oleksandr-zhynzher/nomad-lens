@@ -1,7 +1,6 @@
+import { useBodyScrollLock, useFocusTrap } from "@core/hooks";
 import { X } from "lucide-react";
-import { useId, useRef, type ReactNode } from "react";
-import { useBodyScrollLock } from "@core/hooks";
-import { useFocusTrap } from "@core/hooks";
+import { type ReactNode, useId, useRef } from "react";
 
 interface MobileSheetProps {
   readonly open: boolean;

@@ -1,8 +1,7 @@
+import { useCountries, useLangPrefix } from "@core/hooks";
+import { useBudgetMatcher, useBudgetState } from "@features/budget/hooks";
 import { useTranslation } from "react-i18next";
-import { useLangPrefix } from "@core/hooks";
-import { useCountries } from "@core/hooks";
-import { useBudgetMatcher } from "@features/budget/hooks";
-import { useBudgetState } from "@features/budget/hooks";
+
 import { BudgetPageContent } from "./BudgetPageContent";
 
 export function BudgetMatcherPage() {

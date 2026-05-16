@@ -1,9 +1,10 @@
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { NavView } from "./layout.utils";
-import { LogoMark } from "./LogoMark";
+
 import { DesktopNav } from "./DesktopNav";
 import { LangDropdown } from "./LangDropdown";
+import type { NavView } from "./layout.utils";
+import { LogoMark } from "./LogoMark";
 
 interface LayoutHeaderProps {
   readonly activeView: NavView | null;

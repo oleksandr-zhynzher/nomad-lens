@@ -1,9 +1,10 @@
-import { AlertTriangle } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { AI_CATEGORY_KEYS } from "@core/models";
 import { Layout } from "@core/ui/layout";
 import { HeroSection } from "@core/ui/page-hero";
-import { AI_CATEGORY_KEYS } from "@core/models";
 import { AI_INDICATOR_ROWS } from "@features/indicator-catalog/constants";
+import { AlertTriangle } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 import { AiIndicatorCard } from "./AiIndicatorCard";
 
 export function AiIndicatorsPage() {

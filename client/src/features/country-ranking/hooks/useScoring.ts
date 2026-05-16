@@ -1,6 +1,6 @@
-import { useMemo } from "react";
-import { computeClimateScore, rankCountries } from "@features/country-ranking/utils";
 import type { ClimatePreferences, CountryData, RankedCountry, WeightMap } from "@core/models";
+import { computeClimateScore, rankCountries } from "@features/country-ranking/utils";
+import { useMemo } from "react";
 
 export function useScoring(
   countries: CountryData[],

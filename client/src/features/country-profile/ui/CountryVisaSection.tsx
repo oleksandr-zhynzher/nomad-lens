@@ -1,5 +1,6 @@
-import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails } from "@core/models";
+import { useTranslation } from "react-i18next";
+
 import { CountryVisaLeftColumn } from "./CountryVisaLeftColumn";
 import { CountryVisaRightColumn } from "./CountryVisaRightColumn";
 

@@ -1,6 +1,7 @@
+import { AI_INDICATOR_ICONS } from "@features/indicator-catalog/constants";
 import { Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { AI_INDICATOR_ICONS } from "@features/indicator-catalog/constants";
+
 import { IndicatorCard } from "./IndicatorCard";
 
 export function IndicatorsAiSection() {

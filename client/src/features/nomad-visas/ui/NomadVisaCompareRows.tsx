@@ -1,11 +1,12 @@
+import { TAX_STATUS_COLORS } from "@core/constants";
+import type { CountryData, NomadVisaDetails } from "@core/models";
 import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
-import type { CountryData, NomadVisaDetails } from "@core/models";
-import { TAX_STATUS_COLORS } from "@core/constants";
-import { Row, Cell, VALUE_MONO, VALUE_TEXT } from "./CompareTableParts";
+
+import { Cell, Row, VALUE_MONO, VALUE_TEXT } from "./CompareTableParts";
 import { getTaxStatusLabel } from "./nomad-visas.utils";
-import { NomadVisaIncomeCompareRow } from "./NomadVisaIncomeCompareRow";
 import { NomadVisaApplicationCompareRows } from "./NomadVisaApplicationCompareRows";
+import { NomadVisaIncomeCompareRow } from "./NomadVisaIncomeCompareRow";
 
 type VisaCountry = CountryData & { nomadVisa: NomadVisaDetails };
 

@@ -1,9 +1,9 @@
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
-import { TOURISM_GROUPS, CATEGORY_LABELS } from "@core/models";
+import { CATEGORY_LABELS, TOURISM_GROUPS } from "@core/models";
 import { tourismScoreColourClass } from "@core/utils";
 import { TOURISM_COLORS } from "@features/tourism/constants";
 import { computeTourismScore } from "@features/tourism/utils";
+import { useTranslation } from "react-i18next";
 
 interface CountryDetailTourismScoresProps {
   readonly c: CountryData;

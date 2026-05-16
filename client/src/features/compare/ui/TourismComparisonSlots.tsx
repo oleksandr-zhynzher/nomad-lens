@@ -1,8 +1,9 @@
-import type { Dispatch, RefObject, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { localizeCountry, regionKey, tourismScoreColourClass } from "@core/utils";
 import { computeTourismScore } from "@features/tourism/utils";
+import type { Dispatch, RefObject, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
+
 import { CountryPickerDropdown } from "./CountryPickerDropdown";
 import { TourismComparisonPanel } from "./TourismComparisonPanel";
 

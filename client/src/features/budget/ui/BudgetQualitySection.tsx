@@ -1,6 +1,6 @@
+import { Tooltip } from "@core/ui";
 import { Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "@core/ui";
 
 interface BudgetQualitySectionProps {
   readonly qualityBlend: number;

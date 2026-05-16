@@ -1,7 +1,7 @@
+import type { CountryData } from "@core/models";
+import { regionKey, useLocalizedCountry } from "@core/utils";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocalizedCountry, regionKey } from "@core/utils";
-import type { CountryData } from "@core/models";
 
 interface CountryNameCellProps {
   readonly country: CountryData;

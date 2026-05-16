@@ -1,8 +1,9 @@
-import { useTranslation } from "react-i18next";
-import type { RegionStats } from "@features/compare/constants";
 import { regionKey, scoreColourClass } from "@core/utils";
-import { RegionIcon } from "./RegionIcon";
+import type { RegionStats } from "@features/compare/constants";
 import { RegionPill } from "@features/compare/ui";
+import { useTranslation } from "react-i18next";
+
+import { RegionIcon } from "./RegionIcon";
 
 interface RegionCardListProps {
   readonly regionStats: RegionStats[];

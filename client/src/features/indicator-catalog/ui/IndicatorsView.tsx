@@ -1,12 +1,13 @@
-import { useTranslation } from "react-i18next";
-import { Layout } from "@core/ui/layout";
-import { HeroSection } from "@core/ui/page-hero";
 import {
   AI_CATEGORY_KEYS,
   DISPLAYED_CORE_CATEGORY_KEYS,
   TOURISM_CATEGORY_KEYS,
 } from "@core/models";
+import { Layout } from "@core/ui/layout";
+import { HeroSection } from "@core/ui/page-hero";
 import { INDICATOR_ICONS } from "@features/indicator-catalog/constants";
+import { useTranslation } from "react-i18next";
+
 import { IndicatorCard } from "./IndicatorCard";
 import { IndicatorsAiSection } from "./IndicatorsAiSection";
 import { IndicatorsTourismSection } from "./IndicatorsTourismSection";

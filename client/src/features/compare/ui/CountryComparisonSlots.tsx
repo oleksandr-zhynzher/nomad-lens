@@ -1,7 +1,8 @@
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
 import type { Dispatch, RefObject, SetStateAction } from "react";
-import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
-import { ComparisonSlotsRow } from "./ComparisonSlotsRow";
+
 import { ComparisonAddPanel } from "./ComparisonAddPanel";
+import { ComparisonSlotsRow } from "./ComparisonSlotsRow";
 
 interface ComparisonSlot {
   readonly country: CountryData;

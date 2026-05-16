@@ -1,6 +1,7 @@
+import { Tooltip } from "@core/ui";
 import { ChevronDown, ChevronUp, Filter, List } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Tooltip } from "@core/ui";
+
 import type { SearchMode } from "./tourism.types";
 import { navButtonClass } from "./tourism.utils";
 

@@ -1,11 +1,12 @@
-import { useTranslation } from "react-i18next";
-import { CheckCircle2, XCircle } from "lucide-react";
 import type { VisaField } from "@core/constants";
 import type { VisaSlotLangProps } from "@features/compare/utils";
 import { getCurrencySymbol, getLocalizedVisa } from "@features/compare/utils";
+import { CheckCircle2, XCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import { VisaBenefitsCell } from "./VisaBenefitsCell";
 import { VisaIncomeCell } from "./VisaIncomeCell";
 import { VisaTaxCell } from "./VisaTaxCell";
-import { VisaBenefitsCell } from "./VisaBenefitsCell";
 
 type DetailField = Extract<
   VisaField,

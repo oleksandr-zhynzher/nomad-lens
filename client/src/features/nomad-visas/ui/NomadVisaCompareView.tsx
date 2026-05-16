@@ -1,15 +1,15 @@
-import { useEffect, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { useCountries, useLangPrefix } from "@core/hooks";
+import type { CountryData, NomadVisaDetails } from "@core/models";
 import { Layout } from "@core/ui/layout";
-import { useCountries } from "@core/hooks";
-import { useLangPrefix } from "@core/hooks";
 import {
   getRawCompareCountryCodes,
   parseCompareCountryCodes,
   setCompareCountryCodesParam,
 } from "@features/compare/utils";
-import type { CountryData, NomadVisaDetails } from "@core/models";
+import { useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
+
 import { NomadVisaCompareHeader } from "./NomadVisaCompareHeader";
 import { NomadVisaCompareRows } from "./NomadVisaCompareRows";
 

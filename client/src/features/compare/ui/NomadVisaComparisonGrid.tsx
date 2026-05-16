@@ -1,14 +1,15 @@
-import type { CSSProperties, RefObject } from "react";
-import { useTranslation } from "react-i18next";
-import type { WeightMap, ClimatePreferences } from "@core/models";
+import {
+  VISA_COMPARISON_COLUMN_GAP,
+  VISA_COMPARISON_COLUMN_WIDTH,
+  VISA_FIELDS,
+} from "@core/constants";
+import type { ClimatePreferences, WeightMap } from "@core/models";
 import { localizeCountry } from "@core/utils";
 import type { BudgetMatch } from "@features/budget/hooks";
-import {
-  VISA_FIELDS,
-  VISA_COMPARISON_COLUMN_WIDTH,
-  VISA_COMPARISON_COLUMN_GAP,
-} from "@core/constants";
 import type { SelectedSlot } from "@features/compare/utils";
+import type { CSSProperties, RefObject } from "react";
+import { useTranslation } from "react-i18next";
+
 import { ComparisonRowShell } from "./ComparisonRowShell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";
 import { VisaCell } from "./VisaCell";

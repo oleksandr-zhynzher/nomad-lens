@@ -1,8 +1,7 @@
-import { useTranslation } from "react-i18next";
-import type { BudgetBreakdown } from "@features/budget/hooks";
 import { Tooltip } from "@core/ui";
-import { COST_COLORS } from "@features/budget/constants";
-import { BUDGET_CATEGORY_KEYS } from "@features/budget/constants";
+import { BUDGET_CATEGORY_KEYS, COST_COLORS } from "@features/budget/constants";
+import type { BudgetBreakdown } from "@features/budget/hooks";
+import { useTranslation } from "react-i18next";
 
 interface BudgetBreakdownChartProps {
   readonly breakdown: BudgetBreakdown;

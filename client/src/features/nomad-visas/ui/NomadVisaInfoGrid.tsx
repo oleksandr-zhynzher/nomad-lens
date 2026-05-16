@@ -1,8 +1,9 @@
-import type React from "react";
-import { Clock, DollarSign, Shield } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { TAX_STATUS_COLORS } from "@core/constants";
 import type { NomadVisaDetails as NomadVisaDetailsType } from "@core/models";
+import { Clock, DollarSign, Shield } from "lucide-react";
+import type React from "react";
+import { useTranslation } from "react-i18next";
+
 import { getTaxStatusLabel } from "./nomad-visas.utils";
 import { NomadVisaIncomeField } from "./NomadVisaIncomeField";
 

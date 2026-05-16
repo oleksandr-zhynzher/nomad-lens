@@ -1,5 +1,5 @@
-import type React from "react";
 import { REGION_ICONS } from "@features/compare/constants";
+import type React from "react";
 
 export interface RegionIconProps {
   readonly name: string;

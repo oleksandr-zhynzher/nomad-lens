@@ -1,7 +1,8 @@
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { localizeCountry, regionKey, surplusColourClass } from "@core/utils";
 import type { BudgetMatch } from "@features/budget/hooks";
+import { useTranslation } from "react-i18next";
+
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
 
 interface ComparisonSlot {

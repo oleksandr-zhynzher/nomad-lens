@@ -1,13 +1,14 @@
-import { useTranslation } from "react-i18next";
-import { Wallet, TrendingUp } from "lucide-react";
 import {
-  COST_COLORS,
-  surplusColour,
   BREAKDOWN_ROWS,
   BUDGET_COMPARISON_COLUMN_WIDTH,
+  COST_COLORS,
+  surplusColour,
 } from "@features/budget/constants";
-import { costColor } from "@features/budget/utils";
 import type { BudgetMatch } from "@features/budget/hooks";
+import { costColor } from "@features/budget/utils";
+import { TrendingUp, Wallet } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 import { ComparisonRowShell } from "./ComparisonRowShell";
 import { ComparisonScoreCell } from "./ComparisonScoreCell";
 

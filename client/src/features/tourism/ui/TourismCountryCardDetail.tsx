@@ -1,10 +1,11 @@
-import type React from "react";
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
-import { TourismBreakdownChart } from "./TourismBreakdownChart";
-import type { TourismBudgetMatch } from "@features/tourism/utils";
 import type { CountryData } from "@core/models";
+import type { TourismBudgetMatch } from "@features/tourism/utils";
+import type React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
+import { TourismBreakdownChart } from "./TourismBreakdownChart";
 import { TourismBudgetBreakdownGrid } from "./TourismBudgetBreakdownGrid";
 
 interface TourismCountryCardDetailProps {

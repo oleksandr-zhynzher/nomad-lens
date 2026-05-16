@@ -1,5 +1,6 @@
-import { useTranslation } from "react-i18next";
 import { PageHeroBanner } from "@core/ui/page-hero";
+import { useTranslation } from "react-i18next";
+
 import { NomadVisaHeroStats } from "./NomadVisaHeroStats";
 
 interface NomadVisaPageBannerProps {

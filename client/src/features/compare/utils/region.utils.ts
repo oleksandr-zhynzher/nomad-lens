@@ -1,7 +1,7 @@
 import type { CountryData, WeightMap } from "@core/models";
 import { VISIBLE_CATEGORY_KEYS } from "@core/models";
-import { REGION_COLORS } from "@features/compare/constants";
 import type { RegionStats } from "@features/compare/constants";
+import { REGION_COLORS } from "@features/compare/constants";
 
 /** Compute per-category average scores for a set of countries in a region. */
 export function computeRegionCategories(regionCountries: CountryData[]): RegionStats["categories"] {

@@ -1,13 +1,13 @@
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
+import type { BudgetMatch } from "@features/budget/hooks";
+import type { CompareMode, SortDirection } from "@features/compare/utils";
 import type React from "react";
+
 import { BudgetComparison } from "./BudgetComparison";
 import { CountryComparison } from "./CountryComparison";
 import { NomadVisaComparison } from "./NomadVisaComparison";
 import { RegionComparison } from "./RegionComparison";
 import { TourismComparison } from "./TourismComparison";
-import type { CompareMode } from "@features/compare/utils";
-import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
-import type { BudgetMatch } from "@features/budget/hooks";
-import type { SortDirection } from "@features/compare/utils";
 
 export interface ComparePanelProps {
   readonly compareMode: CompareMode;

@@ -1,7 +1,8 @@
+import { EmptyState } from "@core/ui/states";
 import type { CSSProperties, RefObject } from "react";
 import { useTranslation } from "react-i18next";
 import type { NavigateFunction } from "react-router-dom";
-import { EmptyState } from "@core/ui/states";
+
 import type { VisaRow } from "./nomad-visas.types";
 import { NomadVisaTableRow } from "./NomadVisaTableRow";
 

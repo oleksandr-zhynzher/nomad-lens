@@ -1,6 +1,7 @@
-import { useTranslation } from "react-i18next";
-import { scoreColourClass } from "@core/utils";
 import type { CountryData } from "@core/models";
+import { scoreColourClass } from "@core/utils";
+import { useTranslation } from "react-i18next";
+
 import { budgetCellClass } from "./nomad-visas.utils";
 
 type VisaType = NonNullable<CountryData["nomadVisa"]>;

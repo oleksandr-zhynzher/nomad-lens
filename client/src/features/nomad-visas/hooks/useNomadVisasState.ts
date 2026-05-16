@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import type { NavigateFunction } from "react-router-dom";
 import type { CountryData } from "@core/models";
 import { localizeCountry } from "@core/utils";
-import type { useWeightState } from "@features/country-ranking/hooks";
 import type { BudgetMatch } from "@features/budget/hooks";
-import type { SortField, SortDirection } from "@features/nomad-visas/ui/nomad-visas.types";
+import type { useWeightState } from "@features/country-ranking/hooks";
+import type { SortDirection, SortField } from "@features/nomad-visas/ui/nomad-visas.types";
 import {
   applyClimate,
-  computeOverallScore,
   compareVisaRows,
+  computeOverallScore,
 } from "@features/nomad-visas/ui/nomad-visas.utils";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import type { NavigateFunction } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function toggleCodeInSet(prev: Set<string>, code: string): Set<string> {
   const next = new Set(prev);

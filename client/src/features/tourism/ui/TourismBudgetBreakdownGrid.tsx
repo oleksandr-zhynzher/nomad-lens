@@ -1,9 +1,10 @@
-import type React from "react";
-import { House, ShoppingCart, Compass } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { TOURISM_COST_COLORS } from "@features/budget/constants";
 import type { TourismBudgetMatch } from "@features/tourism/utils";
-import { TourismTotalCard, TourismSurplusCard } from "./TourismBudgetSummaryCards";
+import { Compass, House, ShoppingCart } from "lucide-react";
+import type React from "react";
+import { useTranslation } from "react-i18next";
+
+import { TourismSurplusCard, TourismTotalCard } from "./TourismBudgetSummaryCards";
 
 interface TourismBudgetBreakdownGridProps {
   readonly budgetMatch: TourismBudgetMatch;

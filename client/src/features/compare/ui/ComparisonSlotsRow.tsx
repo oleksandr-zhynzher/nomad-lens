@@ -1,6 +1,7 @@
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
-import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
+
 import { ComparisonAddButton } from "./ComparisonAddButton";
 import { ComparisonSlotItem } from "./ComparisonSlotItem";
 

@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
 import { PeopleCountStepper, ToggleGroup } from "@core/ui/panels";
-import type { TourismBudgetState, AccommodationType } from "@features/tourism/hooks";
+import type { AccommodationType, TourismBudgetState } from "@features/tourism/hooks";
+import { useTranslation } from "react-i18next";
 
 interface TourismBudgetPreferencesProps {
   readonly budgetState: TourismBudgetState;

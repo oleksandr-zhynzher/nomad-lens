@@ -1,12 +1,11 @@
-import React from "react";
-import { ExternalLink } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import type { CategoryKey, ClimatePreferences, WeightMap, WeightMode } from "@core/models";
 import { CollapsibleSection } from "@core/ui/panels";
-import { ClimatePrefsSection } from "@features/country-ranking/ui";
-import { WeightSlider } from "@features/country-ranking/ui";
 import type { WEIGHT_GROUPS } from "@features/country-ranking/constants";
+import { ClimatePrefsSection, WeightSlider } from "@features/country-ranking/ui";
+import { ExternalLink } from "lucide-react";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 type WeightGroupConfig = (typeof WEIGHT_GROUPS)[number];
 

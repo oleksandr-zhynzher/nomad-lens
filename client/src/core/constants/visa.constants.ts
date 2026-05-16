@@ -1,13 +1,14 @@
 import {
-  FileCheck,
   Banknote,
-  Wallet,
-  Receipt,
-  Globe,
   CheckCircle2,
-  Plane,
   Clock,
+  FileCheck,
+  Globe,
+  Plane,
+  Receipt,
+  Wallet,
 } from "lucide-react";
+
 import type { NomadVisaTax } from "../models/visa.models";
 
 type TaxStatus = NomadVisaTax["status"];

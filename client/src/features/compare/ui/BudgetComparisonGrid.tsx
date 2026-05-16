@@ -1,11 +1,12 @@
-import type { RefObject } from "react";
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { localizeCountry } from "@core/utils";
 import { BUDGET_COMPARISON_COLUMN_WIDTH } from "@features/budget/constants";
 import type { BudgetMatch } from "@features/budget/hooks";
-import { ComparisonTableHeader } from "./ComparisonTableHeader";
+import type { RefObject } from "react";
+import { useTranslation } from "react-i18next";
+
 import { BudgetComparisonRows } from "./BudgetComparisonRows";
+import { ComparisonTableHeader } from "./ComparisonTableHeader";
 
 interface ComparisonSlot {
   readonly country: CountryData;

@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { ArrowLeft } from "lucide-react";
 import type { CountryData, NomadVisaDetails } from "@core/models";
 import { localizeCountry } from "@core/utils";
+import { ArrowLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 type VisaCountry = CountryData & { nomadVisa: NomadVisaDetails };
 

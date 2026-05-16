@@ -1,5 +1,6 @@
-import { useTranslation } from "react-i18next";
 import worldTopology from "@features/country-map/data/countries-110m.json";
+import { useTranslation } from "react-i18next";
+
 import type { WorldMapProps } from "./country-map.types";
 import { MapInteractiveBody } from "./MapInteractiveBody";
 

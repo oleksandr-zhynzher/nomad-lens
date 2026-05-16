@@ -1,6 +1,7 @@
-import { useTranslation } from "react-i18next";
 import type { NomadVisaDetails } from "@core/models";
-import { Row, Cell, VALUE_MONO } from "./CompareTableParts";
+import { useTranslation } from "react-i18next";
+
+import { Cell, Row, VALUE_MONO } from "./CompareTableParts";
 
 interface VisaCountry {
   code: string;

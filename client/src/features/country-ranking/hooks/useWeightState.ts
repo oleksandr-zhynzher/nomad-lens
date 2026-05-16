@@ -1,23 +1,21 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { copyTextToClipboard } from "@core/hooks";
+import type { CategoryKey, ClimatePreferences, WeightMap, WeightMode } from "@core/models";
+import { CATEGORY_KEYS } from "@core/models";
 import {
   defaultClimatePreferences,
   defaultIndependentWeights,
   defaultWeights,
-  redistributeWeights,
-} from "@features/country-ranking/utils";
-import type { CategoryKey, ClimatePreferences, WeightMap, WeightMode } from "@core/models";
-import { CATEGORY_KEYS } from "@core/models";
-import {
   filtersToStorable,
-  LS_FILTERS_KEY,
-  LS_WEIGHT_MODE_KEY,
-  LS_WEIGHTS_KEY,
   loadFiltersFromStorage,
   loadWeightModeFromStorage,
   loadWeightsFromStorage,
+  LS_FILTERS_KEY,
+  LS_WEIGHT_MODE_KEY,
+  LS_WEIGHTS_KEY,
+  redistributeWeights,
   weightsToSearch,
 } from "@features/country-ranking/utils";
-import { copyTextToClipboard } from "@core/hooks";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 /** Encapsulates all weight/filter/mode state that is shared across list, map, and compare pages. */
 export function useWeightState() {

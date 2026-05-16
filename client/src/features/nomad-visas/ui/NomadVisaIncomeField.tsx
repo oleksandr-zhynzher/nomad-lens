@@ -1,6 +1,6 @@
+import type { NomadVisaDetails as NomadVisaDetailsType } from "@core/models";
 import { TrendingUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { NomadVisaDetails as NomadVisaDetailsType } from "@core/models";
 
 interface NomadVisaIncomeFieldProps {
   readonly incomeRequirement: NomadVisaDetailsType["incomeRequirement"];

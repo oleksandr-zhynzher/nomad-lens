@@ -1,6 +1,6 @@
+import { scoreColourClass } from "@core/utils";
 import type React from "react";
 import { useTranslation } from "react-i18next";
-import { scoreColourClass } from "@core/utils";
 
 interface MapHoverTooltipProps {
   readonly name: string;

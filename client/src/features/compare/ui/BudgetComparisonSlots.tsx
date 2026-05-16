@@ -1,6 +1,7 @@
-import type { Dispatch, RefObject, SetStateAction } from "react";
 import type { CountryData } from "@core/models";
 import type { BudgetMatch } from "@features/budget/hooks";
+import type { Dispatch, RefObject, SetStateAction } from "react";
+
 import { BudgetComparisonAddPanel } from "./BudgetComparisonAddPanel";
 
 interface ComparisonSlot {

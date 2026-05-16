@@ -1,5 +1,6 @@
-import { useTranslation } from "react-i18next";
 import { CompareModeActions } from "@core/ui";
+import { useTranslation } from "react-i18next";
+
 import type { SearchMode } from "./home.types";
 import { HomeSearchInput } from "./HomeSearchInput";
 

@@ -1,6 +1,13 @@
 // Barrel – import from this file or directly from the sub-model files.
 
-export type { IndicatorValue } from "./indicator.models";
+// ─── Country ──────────────────────────────────────────────────────────────────
+
+import type { CategoryKey, CategoryScore } from "./category.models";
+import type { ClimateData } from "./climate.models";
+import type { CostOfLivingData } from "./cost-of-living.models";
+import type { NomadVisaDetails } from "./visa.models";
+
+export type { ApiHealthResponse } from "./api.models";
 export type { CategoryKey, CategoryScore } from "./category.models";
 export {
   AI_CATEGORIES,
@@ -14,6 +21,10 @@ export {
   TOURISM_GROUPS,
   VISIBLE_CATEGORY_KEYS,
 } from "./category.models";
+export type { ClimateData, ClimatePreferences, SeasonType } from "./climate.models";
+export type { CostOfLivingData } from "./cost-of-living.models";
+export type { IndicatorValue } from "./indicator.models";
+export type { RankedCountry, WeightMap, WeightMode } from "./scoring.models";
 export type {
   NomadVisaApplicationProcess,
   NomadVisaCost,
@@ -24,17 +35,6 @@ export type {
   NomadVisaLocalization,
   NomadVisaTax,
 } from "./visa.models";
-export type { ClimateData, ClimatePreferences, SeasonType } from "./climate.models";
-export type { CostOfLivingData } from "./cost-of-living.models";
-export type { ApiHealthResponse } from "./api.models";
-export type { RankedCountry, WeightMap, WeightMode } from "./scoring.models";
-
-// ─── Country ──────────────────────────────────────────────────────────────────
-
-import type { CategoryKey, CategoryScore } from "./category.models";
-import type { ClimateData } from "./climate.models";
-import type { CostOfLivingData } from "./cost-of-living.models";
-import type { NomadVisaDetails } from "./visa.models";
 
 export interface CountryData {
   code: string; // ISO 3166-1 alpha-2

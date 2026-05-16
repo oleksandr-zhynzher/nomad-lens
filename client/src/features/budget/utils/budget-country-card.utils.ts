@@ -1,10 +1,10 @@
-import type { TFunction } from "i18next";
 import { COST_COLORS } from "@features/budget/constants";
 import {
   BUDGET_COUNTRY_CARD_CATEGORY_TEMPLATES,
   type BudgetCountryCardCategoryTemplate,
 } from "@features/budget/constants/budget-country-card.constants";
 import type { BudgetBreakdown } from "@features/budget/models";
+import type { TFunction } from "i18next";
 
 interface BudgetCountryCardBreakdownItem {
   readonly key: BudgetCountryCardCategoryTemplate["key"];

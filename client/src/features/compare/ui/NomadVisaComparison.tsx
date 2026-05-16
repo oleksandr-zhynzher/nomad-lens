@@ -1,11 +1,12 @@
-import { useTranslation } from "react-i18next";
 import { useLangPrefix } from "@core/hooks";
-import type { BudgetMatch } from "@features/budget/hooks";
 import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
-import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
+import type { BudgetMatch } from "@features/budget/hooks";
+import { useComparisonSelection, useSyncScroll } from "@features/compare/hooks";
 import type { SelectedSlot } from "@features/compare/utils";
-import { NomadVisaComparisonSlots } from "./NomadVisaComparisonSlots";
+import { useTranslation } from "react-i18next";
+
 import { NomadVisaComparisonGrid } from "./NomadVisaComparisonGrid";
+import { NomadVisaComparisonSlots } from "./NomadVisaComparisonSlots";
 
 interface NomadVisaComparisonProps {
   readonly countries: CountryData[];

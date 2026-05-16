@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
-import { Info } from "lucide-react";
 import { Tooltip } from "@core/ui";
 import { WeightSliderRow } from "@core/ui/panels";
+import { Info } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export interface TourismWeightSliderProps {
   readonly metricKey: string;

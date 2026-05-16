@@ -1,13 +1,14 @@
-import { AlertTriangle } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { Layout } from "@core/ui/layout";
 import { HeroSection } from "@core/ui/page-hero";
 import { COST_COLORS } from "@features/budget/constants";
-import { BudgetCategoryCard } from "./BudgetCategoryCard";
 import {
   CATEGORY_ACCENT_CLASSES,
   CATEGORY_ROWS,
 } from "@features/budget/constants/budget-categories.constants";
+import { AlertTriangle } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import { BudgetCategoryCard } from "./BudgetCategoryCard";
 
 const CATEGORY_COLORS = COST_COLORS;
 

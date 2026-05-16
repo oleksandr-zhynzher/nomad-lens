@@ -1,12 +1,13 @@
+import { VISIBLE_CATEGORY_KEYS } from "@core/constants";
+import { CATEGORY_LABELS } from "@core/models";
+import { regionKey } from "@core/utils";
+import type { RegionStats } from "@features/compare/constants";
+import { CATEGORY_ICONS, REGION_COLUMN_WIDTH } from "@features/compare/constants";
+import { scoreColour } from "@features/country-ranking/utils";
+import { TrendingUp } from "lucide-react";
 import type { RefObject } from "react";
 import { useTranslation } from "react-i18next";
-import { TrendingUp } from "lucide-react";
-import { CATEGORY_LABELS } from "@core/models";
-import { scoreColour } from "@features/country-ranking/utils";
-import { CATEGORY_ICONS, REGION_COLUMN_WIDTH } from "@features/compare/constants";
-import type { RegionStats } from "@features/compare/constants";
-import { VISIBLE_CATEGORY_KEYS } from "@core/constants";
-import { regionKey } from "@core/utils";
+
 import { ComparisonRowShell } from "./ComparisonRowShell";
 import { ComparisonScoreCell } from "./ComparisonScoreCell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";

@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
-import { useMemo } from "react";
 import type { CountryData } from "@core/models";
+import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 /**
  * Returns localized name, capital, and region for a country

@@ -1,6 +1,6 @@
-import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
-import type { BudgetMatch } from "@features/budget/hooks";
 import type { VisaField } from "@core/constants";
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
+import type { BudgetMatch } from "@features/budget/hooks";
 
 export type VisaCountry = CountryData & { nomadVisa: NonNullable<CountryData["nomadVisa"]> };
 

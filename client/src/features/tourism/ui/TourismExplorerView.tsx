@@ -1,9 +1,10 @@
-import { SlidersHorizontal } from "lucide-react";
 import { Layout, ResponsiveSidePanelLayout } from "@core/ui/layout";
+import { SlidersHorizontal } from "lucide-react";
+
+import { TourismCountryList } from "./TourismCountryList";
 import { TourismHeroSection } from "./TourismHeroSection";
 import { TourismStickyBar } from "./TourismStickyBar";
 import { TourismWeightSidebar } from "./TourismWeightSidebar";
-import { TourismCountryList } from "./TourismCountryList";
 import { useTourismPage } from "./useTourismPage";
 
 export function TourismPage() {

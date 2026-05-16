@@ -1,12 +1,10 @@
+import { useCountries, useLangPrefix } from "@core/hooks";
+import { Layout } from "@core/ui/layout";
+import { WorldMap } from "@features/country-map/ui";
+import { useScoring, useWeightState } from "@features/country-ranking/hooks";
+import { WeightPanel } from "@features/country-ranking/ui";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Layout } from "@core/ui/layout";
-import { WeightPanel } from "@features/country-ranking/ui";
-import { WorldMap } from "@features/country-map/ui";
-import { useCountries } from "@core/hooks";
-import { useScoring } from "@features/country-ranking/hooks";
-import { useLangPrefix } from "@core/hooks";
-import { useWeightState } from "@features/country-ranking/hooks";
 
 export function MapPage() {
   const navigate = useNavigate();

@@ -2,8 +2,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import en from "./locales/en.json";
-import ua from "./locales/ua.json";
 import ru from "./locales/ru.json";
+import ua from "./locales/ua.json";
 
 const uaPluralAlias = {
   type: "3rdParty" as const,

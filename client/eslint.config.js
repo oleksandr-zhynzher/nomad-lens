@@ -10,6 +10,21 @@ import unicorn from "eslint-plugin-unicorn";
 import sonarjs from "eslint-plugin-sonarjs";
 import prettier from "eslint-config-prettier";
 
+// Phase 3 strict source gate plugins
+import importPlugin from "eslint-plugin-import";
+import unusedImports from "eslint-plugin-unused-imports";
+import eslintComments from "eslint-plugin-eslint-comments";
+import security from "eslint-plugin-security";
+import promise from "eslint-plugin-promise";
+import functional from "eslint-plugin-functional";
+import boundaries from "eslint-plugin-boundaries";
+import deprecation from "eslint-plugin-deprecation";
+import noSecrets from "eslint-plugin-no-secrets";
+import regexp from "eslint-plugin-regexp";
+import perfectionist from "eslint-plugin-perfectionist";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import tailwindcss from "eslint-plugin-tailwindcss";
+
 export default defineConfig([
   globalIgnores(["dist", "node_modules", "coverage", "**/*.d.ts"]),
 
@@ -28,16 +43,35 @@ export default defineConfig([
       react.configs.flat.recommended,
       react.configs.flat["jsx-runtime"],
 
-      // Accessibility
-      jsxA11y.flatConfigs.recommended,
+      // Accessibility (upgrade to errors for Phase 3)
+      jsxA11y.flatConfigs.strict,
 
       // Code quality
       unicorn.configs.recommended,
       sonarjs.configs.recommended,
 
+      // Phase 3 strict source gate
+      importPlugin.flatConfigs.recommended,
+      importPlugin.flatConfigs.typescript,
+      promise.configs["flat/recommended"],
+      security.configs.recommended,
+      regexp.configs["flat/recommended"],
+
       // Prettier must be last — disables formatting rules
       prettier,
     ],
+
+    plugins: {
+      "unused-imports": unusedImports,
+      "eslint-comments": eslintComments,
+      functional,
+      boundaries,
+      deprecation,
+      "no-secrets": noSecrets,
+      perfectionist,
+      "simple-import-sort": simpleImportSort,
+      tailwindcss,
+    },
 
     languageOptions: {
       ecmaVersion: 2020,
@@ -50,6 +84,35 @@ export default defineConfig([
 
     settings: {
       react: { version: "detect" },
+      // Import resolution for TS aliases
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+          project: "./tsconfig.app.json",
+        },
+        node: true,
+      },
+      // Boundaries: core must not import features; features should not import sibling features.
+      "boundaries/elements": [
+        {
+          type: "core",
+          pattern: "src/core/**/*",
+        },
+        {
+          type: "features",
+          pattern: "src/features/**/*",
+          mode: "folder",
+          capture: ["featureName"],
+        },
+        {
+          type: "i18n",
+          pattern: "src/i18n/**/*",
+        },
+        {
+          type: "app",
+          pattern: "src/app/**/*",
+        },
+      ],
     },
 
     rules: {
@@ -126,10 +189,8 @@ export default defineConfig([
       // Rendering falsy numbers (0) causes visible bugs — use ternary
       "react/jsx-no-leaked-render": ["error", { validStrategies: ["ternary"] }],
 
-      // ── Accessibility ─────────────────────────────────────────────────
-      // Interactive elements with no accessible role
-      "jsx-a11y/click-events-have-key-events": "warn",
-      "jsx-a11y/no-static-element-interactions": "warn",
+      // ── Accessibility (upgraded to errors for Phase 3) ────────────────
+      // All a11y rules from jsxA11y.flatConfigs.strict are now errors
 
       // ── Unicorn ───────────────────────────────────────────────────────
       // File naming is a project convention, not enforced by linter
@@ -177,6 +238,116 @@ export default defineConfig([
       "sonarjs/prefer-read-only-props": "error",
       // void operator is the correct pattern for intentionally-ignored promises
       "sonarjs/void-use": "off",
+
+      // ── Phase 3: Import & Unused Imports ──────────────────────────────
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+      "import/first": "error",
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
+      "import/no-unresolved": "error",
+      "import/default": "off", // React 19 uses named exports
+      "import/no-named-as-default": "off", // i18next uses default + named exports
+      "import/no-named-as-default-member": "off", // i18next uses default + named exports
+      "import/no-cycle": "off", // Too many false positives in feature boundaries
+      "import/no-self-import": "error",
+      "import/no-useless-path-segments": "error",
+      "import/no-mutable-exports": "error",
+      "import/no-default-export": "off", // React components use default exports
+      "import/no-deprecated": "error",
+      "import/export": "off", // False positives with re-exports
+      "unused-imports/no-unused-imports": "error",
+      "unused-imports/no-unused-vars": [
+        "error",
+        {
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
+        },
+      ],
+
+      // ── Phase 3: ESLint Comments ──────────────────────────────────────
+      "eslint-comments/disable-enable-pair": ["error", { allowWholeFile: true }],
+      "eslint-comments/no-aggregating-enable": "error",
+      "eslint-comments/no-duplicate-disable": "error",
+      "eslint-comments/no-unlimited-disable": "error",
+      "eslint-comments/no-unused-disable": "error",
+      "eslint-comments/no-unused-enable": "error",
+      "eslint-comments/require-description": "off", // Too noisy for inline disables
+
+      // ── Phase 3: Security ─────────────────────────────────────────────
+      "security/detect-object-injection": "off", // Too many false positives with TS
+      "security/detect-non-literal-regexp": "off", // Legitimate use case
+      "security/detect-unsafe-regex": "error",
+
+      // ── Phase 3: Promise ──────────────────────────────────────────────
+      "promise/prefer-await-to-then": "off", // .then() is valid for non-async contexts
+      "promise/prefer-await-to-callbacks": "off", // React APIs use callbacks
+      "promise/no-nesting": "error",
+      "promise/no-return-wrap": "error",
+      "promise/param-names": "error",
+      "promise/no-new-statics": "error",
+
+      // ── Phase 3: Functional (React-compatible immutability rules) ─────
+      "functional/no-classes": "error",
+      "functional/no-class-inheritance": "error",
+      "functional/no-this-expressions": "error",
+      "functional/no-promise-reject": "off", // Promise rejection is required for fetch/error APIs.
+      // Disabled: these force immutable programming patterns that fight React state.
+      "functional/immutable-data": "off",
+      "functional/no-let": "off",
+      "functional/prefer-immutable-types": "off",
+      "functional/no-conditional-statements": "off",
+      "functional/no-expression-statements": "off",
+      "functional/functional-parameters": "off",
+
+      // ── Phase 3: Boundaries ───────────────────────────────────────────
+      "boundaries/dependencies": [
+        "error",
+        {
+          default: "allow",
+          rules: [
+            // Core must not depend on feature-layer code.
+            {
+              from: { type: "core" },
+              disallow: { to: { type: "features" } },
+            },
+            // i18n is standalone and must not pull UI/business feature code.
+            {
+              from: { type: "i18n" },
+              disallow: { to: { type: ["app", "core", "features"] } },
+            },
+          ],
+        },
+      ],
+
+      // ── Phase 3: No Secrets ───────────────────────────────────────────
+      "no-secrets/no-secrets": ["error", { tolerance: 4.5 }],
+
+      // ── Phase 3: Deprecation ───────────────────────────────────────────
+      // Disabled until eslint-plugin-deprecation supports ESLint 9 context APIs.
+      "deprecation/deprecation": "off",
+
+      // ── Phase 3: Regexp ───────────────────────────────────────────────
+      "regexp/no-unused-capturing-group": "error",
+      "regexp/no-useless-flag": "error",
+      "regexp/prefer-regexp-exec": "error",
+      "regexp/prefer-regexp-test": "error",
+
+      // ── Phase 3: Perfectionist (deterministic ordering) ───────────────
+      // Disabled: conflicts with existing import style and prettier
+      "perfectionist/sort-imports": "off",
+      "perfectionist/sort-named-imports": "off",
+      "perfectionist/sort-exports": "off",
+
+      // ── Phase 3: Tailwind CSS v4 Compatible ───────────────────────────
+      // Disabled: Tailwind v4 doesn't need config file
+      "tailwindcss/classnames-order": "off",
+      "tailwindcss/enforces-negative-arbitrary-values": "off",
+      "tailwindcss/enforces-shorthand": "off",
+      "tailwindcss/no-custom-classname": "off",
+      "tailwindcss/no-contradicting-classname": "off",
     },
   },
 

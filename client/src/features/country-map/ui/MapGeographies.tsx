@@ -1,9 +1,9 @@
-import type React from "react";
-import { useEffect } from "react";
-import { Geography } from "react-simple-maps";
-import type { Geography as GeographyType } from "react-simple-maps";
 import type { RankedCountry } from "@core/models";
 import { geoNumericToAlpha2, mapScoreToColour } from "@features/country-map/utils";
+import type React from "react";
+import { useEffect } from "react";
+import type { Geography as GeographyType } from "react-simple-maps";
+import { Geography } from "react-simple-maps";
 
 export interface MapGeographiesProps {
   geographies: GeographyType[];

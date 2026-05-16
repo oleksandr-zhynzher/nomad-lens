@@ -1,10 +1,11 @@
+import type { ClimatePreferences, WeightMap, WeightMode } from "@core/models";
+import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "@core/models";
+
 import {
   defaultClimatePreferences,
   defaultIndependentWeights,
   defaultWeights,
 } from "./scoring.utils";
-import type { ClimatePreferences, WeightMap, WeightMode } from "@core/models";
-import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "@core/models";
 
 export const LS_WEIGHTS_KEY = "nomad-lens:weights";
 export const LS_WEIGHT_MODE_KEY = "nomad-lens:weight-mode";

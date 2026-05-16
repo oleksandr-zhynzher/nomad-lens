@@ -1,10 +1,11 @@
+import type { CountryData } from "@core/models";
+import { CATEGORY_LABELS, VISIBLE_CATEGORY_KEYS } from "@core/models";
+import { localizeCountry } from "@core/utils";
+import { CATEGORY_ICONS, COMPARISON_COLUMN_WIDTH } from "@features/compare/constants";
+import { scoreColour } from "@features/country-ranking/utils";
 import type { RefObject } from "react";
 import { useTranslation } from "react-i18next";
-import type { CountryData } from "@core/models";
-import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "@core/models";
-import { localizeCountry } from "@core/utils";
-import { scoreColour } from "@features/country-ranking/utils";
-import { CATEGORY_ICONS, COMPARISON_COLUMN_WIDTH } from "@features/compare/constants";
+
 import { ComparisonRowShell } from "./ComparisonRowShell";
 import { ComparisonScoreCell } from "./ComparisonScoreCell";
 import { ComparisonTableHeader } from "./ComparisonTableHeader";

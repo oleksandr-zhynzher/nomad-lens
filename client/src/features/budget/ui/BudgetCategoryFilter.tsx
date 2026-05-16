@@ -1,10 +1,10 @@
+import { useLangPrefix } from "@core/hooks";
+import { CollapsibleSection, WeightSliderRow } from "@core/ui/panels";
+import { BUDGET_CATEGORY_KEYS } from "@features/budget/constants";
+import type { BudgetCategoryWeights } from "@features/budget/models";
 import { Sliders } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useLangPrefix } from "@core/hooks";
-import { CollapsibleSection, WeightSliderRow } from "@core/ui/panels";
-import type { BudgetCategoryWeights } from "@features/budget/models";
-import { BUDGET_CATEGORY_KEYS } from "@features/budget/constants";
 
 interface BudgetCategoryFilterProps {
   readonly categoryWeights: BudgetCategoryWeights;

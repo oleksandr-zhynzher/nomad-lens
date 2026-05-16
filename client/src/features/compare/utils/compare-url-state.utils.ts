@@ -1,5 +1,8 @@
-import { setOptionalSearchParam } from "@features/compare/utils";
-import { normalizeCountryCodes, tokenizeCountryCodesParam } from "@features/compare/utils";
+import {
+  normalizeCountryCodes,
+  setOptionalSearchParam,
+  tokenizeCountryCodesParam,
+} from "@features/compare/utils";
 
 export const COMPARE_MODES = ["countries", "regions", "nomadVisas", "budget", "tourism"] as const;
 

@@ -1,6 +1,7 @@
-import type { NavigateFunction } from "react-router-dom";
 import { LoadingRows } from "@core/ui/states";
-import type { SortField, SortDirection, VisaRow } from "./nomad-visas.types";
+import type { NavigateFunction } from "react-router-dom";
+
+import type { SortDirection, SortField, VisaRow } from "./nomad-visas.types";
 import { NomadVisaTableContent } from "./NomadVisaTableContent";
 
 interface NomadVisasTableShellProps {

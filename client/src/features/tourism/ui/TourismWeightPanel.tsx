@@ -1,12 +1,13 @@
-import { useTranslation } from "react-i18next";
-import type React from "react";
 import { PanelShell } from "@core/ui/panels";
-import type { TourismWeightMap } from "@features/tourism/utils";
 import type { TourismBudgetState, TourismToggles, TravelDates } from "@features/tourism/hooks";
 import { useScrollIndicator } from "@features/tourism/hooks";
+import type { TourismWeightMap } from "@features/tourism/utils";
+import type React from "react";
+import { useTranslation } from "react-i18next";
+
 import { TourismBudgetSection } from "./TourismBudgetSection";
-import { TourismTravelDatesSection } from "./TourismTravelDatesSection";
 import { TourismMetricGroupsSection } from "./TourismMetricGroupsSection";
+import { TourismTravelDatesSection } from "./TourismTravelDatesSection";
 
 interface TourismWeightPanelProps {
   readonly weights: TourismWeightMap;

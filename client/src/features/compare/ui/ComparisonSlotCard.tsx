@@ -1,5 +1,5 @@
-import { X } from "lucide-react";
 import { RegionPill } from "@features/compare/ui";
+import { X } from "lucide-react";
 
 interface ComparisonSlotCardProps {
   readonly flagUrl: string;
@@ -22,19 +22,19 @@ export function ComparisonSlotCard({
 }: ComparisonSlotCardProps) {
   return (
     <div
-      onClick={onNavigate}
-      onKeyDown={
-        onNavigate
-          ? (e) => {
+      {...(onNavigate
+        ? {
+            onClick: onNavigate,
+            onKeyDown: (e: React.KeyboardEvent) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 onNavigate();
               }
-            }
-          : undefined
-      }
-      role={onNavigate ? "link" : undefined}
-      tabIndex={onNavigate ? 0 : undefined}
+            },
+            role: "link" as const,
+            tabIndex: 0,
+          }
+        : {})}
       className={onNavigate ? "cursor-pointer" : ""}
     >
       <div className="relative flex h-full flex-col items-center gap-3 rounded-lg border border-[#2E2E30] bg-surface p-4">

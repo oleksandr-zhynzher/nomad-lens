@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
-import { Droplets, Snowflake, Sun, Thermometer } from "lucide-react";
 import type { CountryData } from "@core/models";
+import { Droplets, Snowflake, Sun, Thermometer } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface CountryClimateSectionProps {
   readonly country: CountryData;

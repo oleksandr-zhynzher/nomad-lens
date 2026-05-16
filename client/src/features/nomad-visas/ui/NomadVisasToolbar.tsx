@@ -1,5 +1,6 @@
-import { Search, GitCompare, X } from "lucide-react";
+import { GitCompare, Search, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
 interface NomadVisasToolbarProps {
   readonly searchBarRef: React.RefObject<HTMLDivElement | null>;
   readonly searchQuery: string;

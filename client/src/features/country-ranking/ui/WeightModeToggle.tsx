@@ -1,7 +1,7 @@
-import { Sliders, Scale } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { Tooltip } from "@core/ui";
 import type { WeightMode } from "@core/models";
+import { Tooltip } from "@core/ui";
+import { Scale, Sliders } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface WeightModeToggleProps {
   readonly weightMode: WeightMode;

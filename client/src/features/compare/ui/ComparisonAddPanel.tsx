@@ -1,8 +1,9 @@
-import type { Dispatch, SetStateAction } from "react";
-import { useTranslation } from "react-i18next";
-import type { CountryData, WeightMap, ClimatePreferences } from "@core/models";
+import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
 import { localizeCountry, regionKey, scoreColourClass } from "@core/utils";
 import { applyClimate, computeScore } from "@features/country-ranking/utils";
+import type { Dispatch, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
+
 import { CountryPickerDropdown } from "./CountryPickerDropdown";
 
 interface ComparisonAddPanelProps {

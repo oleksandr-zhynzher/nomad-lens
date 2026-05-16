@@ -1,7 +1,8 @@
-import { useTranslation } from "react-i18next";
-import { ExternalLink } from "lucide-react";
 import type { NomadVisaDetails } from "@core/models";
-import { Row, Cell, VALUE_TEXT } from "./CompareTableParts";
+import { ExternalLink } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
+import { Cell, Row, VALUE_TEXT } from "./CompareTableParts";
 
 interface VisaCountry {
   code: string;

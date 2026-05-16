@@ -1,15 +1,15 @@
+import type { RankedCountry } from "@core/models";
+import { localizeCountry } from "@core/utils";
+import type { SearchMode } from "@features/home/ui/home.types";
 import {
+  type Dispatch,
+  type SetStateAction,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
-  type Dispatch,
-  type SetStateAction,
 } from "react";
-import type { RankedCountry } from "@core/models";
-import { localizeCountry } from "@core/utils";
-import type { SearchMode } from "@features/home/ui/home.types";
 
 export function useHomeSearch(
   ranked: RankedCountry[],

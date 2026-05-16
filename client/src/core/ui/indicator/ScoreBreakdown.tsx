@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
-import { VISIBLE_CATEGORY_KEYS, CATEGORY_LABELS } from "@core/models";
+import { CATEGORY_LABELS, VISIBLE_CATEGORY_KEYS } from "@core/models";
 import { scoreColourClass } from "@core/utils";
+import { useTranslation } from "react-i18next";
 
 interface ScoreBreakdownProps {
   readonly country: CountryData;

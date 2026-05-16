@@ -1,9 +1,10 @@
-import { useTranslation } from "react-i18next";
 import { Layout } from "@core/ui/layout";
 import { PageHeroBanner } from "@core/ui/page-hero";
 import { useCompareView } from "@features/compare/hooks";
-import { CompareHeroStats } from "./CompareHeroStats";
+import { useTranslation } from "react-i18next";
+
 import { CompareActionSection } from "./CompareActionSection";
+import { CompareHeroStats } from "./CompareHeroStats";
 import { ComparePanelGrid } from "./ComparePanelGrid";
 
 export function ComparePage() {

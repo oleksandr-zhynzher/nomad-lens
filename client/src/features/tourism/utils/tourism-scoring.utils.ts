@@ -1,4 +1,4 @@
-import type { CountryData, CostOfLivingData } from "@core/models";
+import type { CostOfLivingData, CountryData } from "@core/models";
 import { TOURISM_CATEGORY_KEYS } from "@core/models";
 import type {
   AccommodationType,

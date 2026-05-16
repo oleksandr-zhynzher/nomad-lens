@@ -1,9 +1,10 @@
+import { Tooltip } from "@core/ui";
+import { CollapsibleSection } from "@core/ui/panels";
 import { Info, Plane } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { CollapsibleSection } from "@core/ui/panels";
-import { Tooltip } from "@core/ui";
-import { VisaTouristDaysFilter } from "./VisaTouristDaysFilter";
+
 import { VisaToggleItem } from "./VisaToggleItem";
+import { VisaTouristDaysFilter } from "./VisaTouristDaysFilter";
 
 interface VisaStaySectionProps {
   readonly nomadVisaOnly: boolean;

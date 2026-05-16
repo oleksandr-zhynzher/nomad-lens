@@ -1,10 +1,11 @@
+import type { CountryData } from "@core/models";
+import { CATEGORY_LABELS, TOURISM_GROUPS } from "@core/models";
+import { useLocalizedCountry } from "@core/utils";
+import { TOURISM_COLORS } from "@features/tourism/constants";
+import { computeTourismScore } from "@features/tourism/utils";
 import type React from "react";
 import { useTranslation } from "react-i18next";
-import type { CountryData } from "@core/models";
-import { TOURISM_GROUPS, CATEGORY_LABELS } from "@core/models";
-import { useLocalizedCountry } from "@core/utils";
-import { computeTourismScore } from "@features/tourism/utils";
-import { TOURISM_COLORS } from "@features/tourism/constants";
+
 import { CountryTourismOverviewCard } from "./CountryTourismOverviewCard";
 
 interface CountryTourismSectionProps {

@@ -1,6 +1,7 @@
-import { createAppStore } from "./createStore";
 import { getCountries } from "@core/api";
+
 import type { CountryData } from "../models/country.models";
+import { createAppStore } from "./createStore";
 
 export type CountryLoadStatus = "idle" | "loading" | "success" | "error";
 

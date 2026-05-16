@@ -1,7 +1,8 @@
-import { useMemo, useState, useRef } from "react";
 import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
 import { useSyncScroll } from "@features/compare/hooks";
 import { computeRegionStats } from "@features/compare/utils";
+import { useMemo, useRef, useState } from "react";
+
 import { RegionCardList } from "./RegionCardList";
 import { RegionComparisonGrid } from "./RegionComparisonGrid";
 

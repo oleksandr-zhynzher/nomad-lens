@@ -1,5 +1,6 @@
 import { Bus, Heart, House, Laptop, ShoppingCart, UtensilsCrossed, Zap } from "lucide-react";
 import type { ComponentType, SVGProps } from "react";
+
 import type { BudgetCategoryKey } from "./budget.constants";
 
 type BudgetCategoryIcon = ComponentType<

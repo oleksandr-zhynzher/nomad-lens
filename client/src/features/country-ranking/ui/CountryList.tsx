@@ -1,7 +1,8 @@
-import { useTranslation } from "react-i18next";
 import type { RankedCountry, WeightMap } from "@core/models";
-import { CountryCard } from "./CountryCard";
 import { useInfiniteScroll } from "@features/country-ranking/hooks";
+import { useTranslation } from "react-i18next";
+
+import { CountryCard } from "./CountryCard";
 
 interface CountryListProps {
   readonly ranked: RankedCountry[];

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import type { SearchMode } from "./tourism.types";
 import { TourismSearchControls } from "./TourismSearchControls";
 

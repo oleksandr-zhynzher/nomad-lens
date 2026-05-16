@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import type { RefObject } from "react";
-import { SearchInput, CompareModeActions } from "@core/ui";
+import { CompareModeActions, SearchInput } from "@core/ui";
 import { BUDGET_CATEGORIES, COST_COLORS } from "@features/budget/constants";
+import type { RefObject } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface BudgetStickyBarProps {
   readonly searchInputRef: RefObject<HTMLInputElement | null>;

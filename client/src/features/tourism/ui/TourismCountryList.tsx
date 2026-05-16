@@ -1,7 +1,8 @@
-import { useTranslation } from "react-i18next";
 import { EmptyState, LoadingRows } from "@core/ui";
-import { TourismCountryCard } from "./TourismCountryCard";
 import type { useTourismScoring, useTourismWeightState } from "@features/tourism/hooks";
+import { useTranslation } from "react-i18next";
+
+import { TourismCountryCard } from "./TourismCountryCard";
 
 type TourismRankedCountry = ReturnType<typeof useTourismScoring>[number];
 

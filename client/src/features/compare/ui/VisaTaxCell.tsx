@@ -1,8 +1,8 @@
-import type React from "react";
-import { useTranslation } from "react-i18next";
 import { TAX_STATUS_COLORS } from "@core/constants";
 import type { VisaSlotLangProps } from "@features/compare/utils";
 import { getLocalizedVisa } from "@features/compare/utils";
+import type React from "react";
+import { useTranslation } from "react-i18next";
 
 export function VisaTaxCell({ slot, lang }: VisaSlotLangProps) {
   const { t } = useTranslation();

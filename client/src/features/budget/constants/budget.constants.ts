@@ -1,4 +1,5 @@
-import { House, ShoppingCart, UtensilsCrossed, Bus, Wifi, Laptop, HeartPulse } from "lucide-react";
+import { Bus, HeartPulse, House, Laptop, ShoppingCart, UtensilsCrossed, Wifi } from "lucide-react";
+
 import type { BudgetBreakdown } from "../models/budget-matcher.models";
 
 /** Ordered budget category keys — used across breakdown chart, comparison table, and filter panel */

@@ -1,8 +1,9 @@
-import { useTranslation } from "react-i18next";
 import type { CountryData } from "@core/models";
 import { VISIBLE_CATEGORY_KEYS } from "@core/models";
-import { useLocalizedCountry } from "@core/utils";
 import { ScoreBreakdown } from "@core/ui/indicator";
+import { useLocalizedCountry } from "@core/utils";
+import { useTranslation } from "react-i18next";
+
 import { CountryTourismSection } from "./CountryTourismSection";
 
 interface CountryPerformanceSectionProps {

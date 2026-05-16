@@ -1,5 +1,6 @@
 import { localizeCountry } from "@core/utils";
 import type { TourismRanked } from "@features/tourism/utils";
+
 import type { SearchMode } from "./tourism.types";
 
 export function findMatchingCodes(

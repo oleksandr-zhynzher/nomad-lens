@@ -1,11 +1,12 @@
-import { useMemo } from "react";
 import type { CountryData } from "@core/models";
 import type { TourismRanked, TourismWeightMap } from "@features/tourism/utils";
 import {
-  getWeightedTourismRanking,
   getWeightedTourismBudgetRanking,
+  getWeightedTourismRanking,
 } from "@features/tourism/utils";
-import type { TourismToggles, TourismBudgetState, TravelDates } from "./useTourismWeightState";
+import { useMemo } from "react";
+
+import type { TourismBudgetState, TourismToggles, TravelDates } from "./useTourismWeightState";
 
 export type { TourismBudgetMatch } from "@features/tourism/utils";
 

@@ -1,3 +1,5 @@
+import type { CountryData } from "@core/models";
+import { MetricCard, MetricGrid } from "@core/ui";
 import {
   Building2,
   Bus,
@@ -9,8 +11,6 @@ import {
   Zap,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { CountryData } from "@core/models";
-import { MetricCard, MetricGrid } from "@core/ui";
 
 type CostOfLivingData = NonNullable<CountryData["costOfLiving"]>;
 

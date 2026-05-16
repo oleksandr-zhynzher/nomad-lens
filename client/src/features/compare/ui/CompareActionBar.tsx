@@ -1,5 +1,6 @@
 import { ArrowDownWideNarrow } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
 interface CompareActionBarProps {
   readonly showWeights: boolean;
   readonly onToggleWeights: () => void;

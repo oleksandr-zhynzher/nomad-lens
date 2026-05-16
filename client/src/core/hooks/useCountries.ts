@@ -1,4 +1,6 @@
 import { useCallback, useEffect } from "react";
+
+import type { CountryData } from "../models/country.models";
 import {
   selectCountries,
   selectCountryError,
@@ -7,7 +9,6 @@ import {
   selectRefreshCountries,
 } from "../store/country.selectors";
 import { useCountryStore } from "../store/country.store";
-import type { CountryData } from "../models/country.models";
 
 interface UseCountriesResult {
   countries: CountryData[];

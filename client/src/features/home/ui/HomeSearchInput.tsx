@@ -1,5 +1,6 @@
 import { Search } from "lucide-react";
 import { useTranslation } from "react-i18next";
+
 import type { SearchMode } from "./home.types";
 import { getSearchPaddingRight } from "./home.utils";
 import { HomeSearchControls } from "./HomeSearchControls";

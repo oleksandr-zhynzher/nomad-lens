@@ -1,4 +1,7 @@
+import { copyTextToClipboard } from "@core/hooks";
 import { useCallback, useMemo } from "react";
+
+import type { BudgetPreferencesState } from "../store/budget.store";
 import {
   CATEGORY_WEIGHT_KEYS,
   DEFAULT_BEDROOMS,
@@ -9,8 +12,6 @@ import {
   isDefaultBudgetPreferences,
   useBudgetPreferenceStore,
 } from "../store/budget.store";
-import type { BudgetPreferencesState } from "../store/budget.store";
-import { copyTextToClipboard } from "@core/hooks";
 
 function buildBudgetShareUrl(state: BudgetPreferencesState): string {
   const params = new URLSearchParams();

@@ -1,2 +1,2 @@
-export * from "./tourism-colors.constants";
 export * from "./tourism.constants";
+export * from "./tourism-colors.constants";

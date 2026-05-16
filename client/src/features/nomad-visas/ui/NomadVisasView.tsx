@@ -1,12 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useCountries, useLangPrefix } from "@core/hooks";
 import { Layout } from "@core/ui/layout";
 import { useBudgetMatcher, useBudgetState } from "@features/budget/hooks";
-import { useCountries, useLangPrefix } from "@core/hooks";
 import { useWeightState } from "@features/country-ranking/hooks";
 import { useNomadVisasState } from "@features/nomad-visas/hooks";
+import { useNavigate } from "react-router-dom";
+
 import { NomadVisaPageBanner } from "./NomadVisaPageBanner";
-import { NomadVisasToolbar } from "./NomadVisasToolbar";
 import { NomadVisasTableShell } from "./NomadVisasTableShell";
+import { NomadVisasToolbar } from "./NomadVisasToolbar";
 
 export function NomadVisasPage() {
   const { countries, loading } = useCountries();

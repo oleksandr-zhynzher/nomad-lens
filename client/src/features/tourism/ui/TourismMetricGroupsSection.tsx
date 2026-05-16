@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Sun } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { CollapsibleSection } from "@core/ui/panels";
 import { TOURISM_GROUPS } from "@core/models";
-import { TourismWeightSlider } from "./TourismWeightSlider";
+import { CollapsibleSection } from "@core/ui/panels";
 import { TOURISM_GROUP_ICONS } from "@features/tourism/constants";
 import type { TourismWeightMap } from "@features/tourism/utils";
+import { Sun } from "lucide-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { TourismWeightSlider } from "./TourismWeightSlider";
 
 interface TourismMetricGroupsSectionProps {
   readonly weights: TourismWeightMap;

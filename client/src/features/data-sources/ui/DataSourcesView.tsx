@@ -1,7 +1,7 @@
-import { useTranslation } from "react-i18next";
 import { Layout } from "@core/ui/layout";
 import { HeroSection } from "@core/ui/page-hero";
 import { DATA_SOURCE_KEYS } from "@features/data-sources/constants";
+import { useTranslation } from "react-i18next";
 
 interface DataSourceCardProps {
   readonly name: string;

@@ -1,11 +1,12 @@
-import { useMemo, useState, type MouseEvent } from "react";
-import { useTranslation } from "react-i18next";
 import { localizeCountry } from "@core/utils";
-import { CountryDetailPanel } from "@features/country-ranking/ui";
 import { geoNumericToAlpha2 } from "@features/country-map/utils";
-import { MapHoverTooltip } from "./MapHoverTooltip";
+import { CountryDetailPanel } from "@features/country-ranking/ui";
+import { type MouseEvent, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import type { HoverInfo, WorldMapProps } from "./country-map.types";
 import { MapComposableView } from "./MapComposableView";
-import type { WorldMapProps, HoverInfo } from "./country-map.types";
+import { MapHoverTooltip } from "./MapHoverTooltip";
 
 interface MapInteractiveBodyProps extends WorldMapProps {
   readonly legendItems: Array<{ color: string; label: string; range: string }>;
@@ -49,7 +50,7 @@ export function MapInteractiveBody({
   const selectedCountry = selectedCode !== null ? (scoreByAlpha2.get(selectedCode) ?? null) : null;
 
   return (
-    <div className="relative w-full" onMouseMove={handleMouseMove}>
+    <div className="relative w-full" onMouseMove={handleMouseMove} role="presentation">
       <MapComposableView
         scoreByAlpha2={scoreByAlpha2}
         selectedCode={selectedCode}

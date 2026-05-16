@@ -1,12 +1,12 @@
-import type { RefObject } from "react";
-import type { CompareMode, SortDirection } from "@features/compare/utils";
 import type { CountryData } from "@core/models";
-import type { BudgetMatch } from "@features/budget/hooks";
+import type { BudgetMatch, useBudgetState } from "@features/budget/hooks";
+import type { CompareMode, SortDirection } from "@features/compare/utils";
 import type { useWeightState } from "@features/country-ranking/hooks";
 import type { useTourismWeightState } from "@features/tourism/hooks";
-import type { useBudgetState } from "@features/budget/hooks";
-import { CompareParametersPanel } from "./CompareParametersPanel";
+import type { RefObject } from "react";
+
 import { ComparePanel } from "./ComparePanel";
+import { CompareParametersPanel } from "./CompareParametersPanel";
 
 interface ComparePanelGridProps {
   readonly showWeights: boolean;

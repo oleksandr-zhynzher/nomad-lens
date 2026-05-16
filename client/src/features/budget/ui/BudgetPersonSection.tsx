@@ -1,8 +1,8 @@
+import { ToggleGroup } from "@core/ui/panels";
+import { BUDGET_BEDROOM_OPTIONS, BUDGET_HOUSING_OPTIONS } from "@features/budget/constants";
+import type { Bedrooms, HousingPreference } from "@features/budget/models";
 import { ChevronDown, UserRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { ToggleGroup } from "@core/ui/panels";
-import type { Bedrooms, HousingPreference } from "@features/budget/models";
-import { BUDGET_BEDROOM_OPTIONS, BUDGET_HOUSING_OPTIONS } from "@features/budget/constants";
 
 interface BudgetPersonSectionProps {
   readonly bedrooms: Bedrooms;

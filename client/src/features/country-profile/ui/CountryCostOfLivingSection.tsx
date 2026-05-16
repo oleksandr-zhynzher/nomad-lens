@@ -1,7 +1,8 @@
-import { useTranslation } from "react-i18next";
-import { TrendingUp } from "lucide-react";
 import type { CountryData } from "@core/models";
 import { SectionHeader } from "@core/ui";
+import { TrendingUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 import { CountryCostBreakdownGrid } from "./CountryCostBreakdownGrid";
 
 interface CountryCostOfLivingSectionProps {

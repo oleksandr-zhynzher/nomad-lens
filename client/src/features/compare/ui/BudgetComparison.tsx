@@ -1,10 +1,11 @@
+import type { CountryData } from "@core/models";
+import type { BudgetMatch } from "@features/budget/hooks";
+import { useComparisonSelection, useSyncScroll } from "@features/compare/hooks";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import type { CountryData } from "@core/models";
-import { useSyncScroll, useComparisonSelection } from "@features/compare/hooks";
-import type { BudgetMatch } from "@features/budget/hooks";
-import { BudgetComparisonSlots } from "./BudgetComparisonSlots";
+
 import { BudgetComparisonGrid } from "./BudgetComparisonGrid";
+import { BudgetComparisonSlots } from "./BudgetComparisonSlots";
 
 interface BudgetComparisonProps {
   readonly countries: CountryData[];

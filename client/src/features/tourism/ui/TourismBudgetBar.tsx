@@ -1,8 +1,8 @@
-import type React from "react";
-import { useTranslation } from "react-i18next";
 import { Tooltip } from "@core/ui";
 import { TOURISM_COST_COLORS } from "@features/budget/constants";
 import type { TourismBudgetBreakdown } from "@features/tourism/utils";
+import type React from "react";
+import { useTranslation } from "react-i18next";
 
 const TOURISM_BUDGET_KEYS: Array<keyof TourismBudgetBreakdown> = [
   "accommodation",

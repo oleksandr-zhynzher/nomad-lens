@@ -1,6 +1,7 @@
-import { SlidersHorizontal } from "lucide-react";
 import { Layout, ResponsiveSidePanelLayout } from "@core/ui/layout";
 import { CountryList } from "@features/country-ranking/ui";
+import { SlidersHorizontal } from "lucide-react";
+
 import { HomeHeroSection } from "./HomeHeroSection";
 import { HomeStickyBar } from "./HomeStickyBar";
 import { HomeWeightSidebar } from "./HomeWeightSidebar";

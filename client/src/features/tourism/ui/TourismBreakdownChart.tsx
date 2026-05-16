@@ -1,6 +1,6 @@
-import { useTranslation } from "react-i18next";
-import { TOURISM_CATEGORY_KEYS, type CountryData } from "@core/models";
+import { type CountryData, TOURISM_CATEGORY_KEYS } from "@core/models";
 import { scoreColourClass } from "@core/utils";
+import { useTranslation } from "react-i18next";
 
 interface TourismBreakdownChartProps {
   readonly country: CountryData;

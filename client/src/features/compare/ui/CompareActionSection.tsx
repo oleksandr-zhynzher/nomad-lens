@@ -1,11 +1,12 @@
-import { useTranslation } from "react-i18next";
-import type { CompareMode } from "@features/compare/utils";
 import { MobileSheet } from "@core/ui";
+import type { useBudgetState } from "@features/budget/hooks";
+import type { CompareMode } from "@features/compare/utils";
 import type { useWeightState } from "@features/country-ranking/hooks";
 import type { useTourismWeightState } from "@features/tourism/hooks";
-import type { useBudgetState } from "@features/budget/hooks";
-import { CompareModeToggle } from "./CompareModeToggle";
+import { useTranslation } from "react-i18next";
+
 import { CompareActionBar } from "./CompareActionBar";
+import { CompareModeToggle } from "./CompareModeToggle";
 import { CompareParametersPanel } from "./CompareParametersPanel";
 
 interface CompareActionSectionProps {

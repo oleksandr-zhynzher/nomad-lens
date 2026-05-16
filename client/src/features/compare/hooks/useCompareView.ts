@@ -1,28 +1,26 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useCountries } from "@core/hooks";
-import { useLangPrefix } from "@core/hooks";
+import { useCountries, useLangPrefix } from "@core/hooks";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "@core/models";
-import { useWeightState } from "@features/country-ranking/hooks";
-import { useTourismWeightState } from "@features/tourism/hooks";
-import { useBudgetMatcher } from "@features/budget/hooks";
-import { useBudgetState } from "@features/budget/hooks";
-import { normalizeCountryCodes } from "@features/compare/utils";
+import { useBudgetMatcher, useBudgetState } from "@features/budget/hooks";
+import { SHOW_WEIGHTS_MODES, SORTABLE_COMPARE_MODES } from "@features/compare/constants";
+import type { CompareMode, SortDirection } from "@features/compare/utils";
 import {
+  applyPanelHeight,
   buildCompareShareParams,
+  delayedReset,
+  getActionGridClass,
   getRawCompareCountryCodes,
+  getSortIconClass,
+  normalizeCountryCodes,
   parseCompareCountryCodes,
   parseCompareMode,
   setCompareCountryCodesParam,
   setCompareModeParam,
-  delayedReset,
-  applyPanelHeight,
-  getActionGridClass,
-  getSortIconClass,
 } from "@features/compare/utils";
-import type { CompareMode, SortDirection } from "@features/compare/utils";
-import { SORTABLE_COMPARE_MODES, SHOW_WEIGHTS_MODES } from "@features/compare/constants";
+import { useWeightState } from "@features/country-ranking/hooks";
+import { useTourismWeightState } from "@features/tourism/hooks";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
 
 const MOBILE_VIEWPORT_MAX_WIDTH = 1024;
 

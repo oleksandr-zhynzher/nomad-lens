@@ -1,6 +1,6 @@
+import type { NomadVisaDetails } from "@core/models";
 import { Calendar, CreditCard, RefreshCw } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import type { NomadVisaDetails } from "@core/models";
 
 interface CountryVisaDurationCostCardProps {
   readonly visa: NomadVisaDetails;

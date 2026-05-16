@@ -1,14 +1,15 @@
-import { ExternalLink } from "lucide-react";
-import { localizeCountry } from "@core/utils";
 import type { CountryData } from "@core/models";
+import { localizeCountry } from "@core/utils";
+import { ExternalLink } from "lucide-react";
+
 import { visaRowClass } from "./nomad-visas.utils";
+import { NomadVisaRowBodyCells } from "./NomadVisaRowBodyCells";
 import {
   VisaRowCheckboxCell,
   VisaRowCountryCell,
   VisaRowIncomeCell,
   VisaRowTaxCell,
 } from "./NomadVisaRowCells";
-import { NomadVisaRowBodyCells } from "./NomadVisaRowBodyCells";
 
 type VisaCountry = CountryData & { nomadVisa: NonNullable<CountryData["nomadVisa"]> };
 
