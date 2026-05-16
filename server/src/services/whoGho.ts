@@ -15,12 +15,12 @@ export async function fetchWhoLifeExpectancy(): Promise<Map<string, number>> {
   if (!res.ok) throw new Error(`WHO GHO returned ${res.status}`);
 
   const json = (await res.json()) as { value: WhoIndicatorValue[] };
-  const rows = json.value ?? [];
+  const rows = json.value;
 
   // Keep most recent value per country (rows are already ordered DESC)
   const byCountry = new Map<string, number>();
   for (const row of rows) {
-    const iso3 = row.SpatialDim?.toUpperCase();
+    const iso3 = row.SpatialDim.toUpperCase();
     if (!iso3 || row.NumericValue === null) continue;
     if (!byCountry.has(iso3)) {
       byCountry.set(iso3, row.NumericValue);

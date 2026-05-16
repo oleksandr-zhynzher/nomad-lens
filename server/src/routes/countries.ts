@@ -1,11 +1,12 @@
+import * as fs from 'node:fs';
+import path from 'node:path';
+
 import { Router } from 'express';
-import * as fs from 'fs';
-import * as path from 'path';
 
 export const countriesRouter = Router();
 
 const dataPath = path.join(__dirname, '..', 'data', 'countries.json');
-const countriesData = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+const countriesData = JSON.parse(fs.readFileSync(dataPath, 'utf8')) as unknown;
 
 countriesRouter.get('/', (_req, res) => {
   res.json(countriesData);

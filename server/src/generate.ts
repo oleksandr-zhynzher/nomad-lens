@@ -4,27 +4,28 @@
  *
  * Usage: npx tsx src/generate.ts
  */
-import * as fs from 'fs';
-import * as path from 'path';
-import type { CountryData, CategoryScore, ClimateData, RestCountry } from './utils/types';
-import { fetchRestCountries } from './services/restCountries';
-import { fetchWorldBankIndicators, WB_INDICATORS } from './services/worldBank';
-import { fetchWhoLifeExpectancy } from './services/whoGho';
-import { fetchClimate } from './services/openMeteo';
+import * as fs from 'node:fs';
+import path from 'node:path';
+
 import { localData } from './services/localData';
+import { fetchClimate } from './services/openMeteo';
+import { fetchRestCountries } from './services/restCountries';
+import { fetchWhoLifeExpectancy } from './services/whoGho';
+import { fetchWorldBankIndicators, WB_INDICATORS } from './services/worldBank';
 import {
-  minMax,
-  logMinMax,
-  invertMinMax,
-  invertLogMinMax,
   average,
   climateScore,
+  invertLogMinMax,
+  invertMinMax,
+  logMinMax,
+  minMax,
 } from './utils/normalize';
 import {
   computeTourismTags,
   computeTourismTagScores,
   computeTourismTagSeasonality,
 } from './utils/tourismTags';
+import type { CategoryScore, ClimateData, CountryData, RestCountry } from './utils/types';
 
 // Country name + capital translations (Ukrainian / Russian) from Wikidata
 const countriesI18n: Record<
@@ -33,7 +34,15 @@ const countriesI18n: Record<
     name: { en: string; ua?: string; ru?: string };
     capital?: { en: string; ua?: string; ru?: string };
   }
-> = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'countries-i18n.json'), 'utf-8'));
+> = JSON.parse(
+  fs.readFileSync(path.join(__dirname, 'data', 'countries-i18n.json'), 'utf8'),
+) as Record<
+  string,
+  {
+    name: { en: string; ua?: string; ru?: string };
+    capital?: { en: string; ua?: string; ru?: string };
+  }
+>;
 
 function ind(value: number, unit: string, year: number) {
   return { raw: value, unit, year };
@@ -59,7 +68,7 @@ async function generate(): Promise<void> {
 
   // Build ISO3 → ISO2 mapping
   const iso3ToIso2 = new Map<string, string>();
-  for (const c of countries as (RestCountry & { cca3?: string })[]) {
+  for (const c of countries as Array<RestCountry & { cca3?: string }>) {
     if (c.cca3 && c.cca2) iso3ToIso2.set(c.cca3.toUpperCase(), c.cca2.toUpperCase());
   }
 
@@ -79,7 +88,7 @@ async function generate(): Promise<void> {
       }),
     );
     if (i + CLIMATE_BATCH < countries.length) {
-      await new Promise((r) => setTimeout(r, CLIMATE_DELAY));
+      await new Promise((resolve) => setTimeout(resolve, CLIMATE_DELAY));
     }
     // Progress indicator every 30 countries
     if ((i + CLIMATE_BATCH) % 30 === 0) {
@@ -93,9 +102,8 @@ async function generate(): Promise<void> {
   // ── Score every country ────────────────────────────────────────────────
   const data: CountryData[] = [];
 
-  for (const rc of countries as (RestCountry & { cca3?: string })[]) {
-    const iso2 = rc.cca2?.toUpperCase();
-    if (!iso2) continue;
+  for (const rc of countries as Array<RestCountry & { cca3?: string }>) {
+    const iso2 = rc.cca2.toUpperCase();
 
     const iso3 = rc.cca3?.toUpperCase();
     const wb = iso3 ? wbData[iso3] : undefined;
@@ -112,9 +120,9 @@ async function generate(): Promise<void> {
         invertMinMax(gini?.value ?? null, 20, 65),
       ]),
       indicators: {
-        ...(gdp?.value != null ? { gdpPerCapita: ind(gdp.value, 'USD', gdp.year) } : {}),
-        ...(unemp?.value != null ? { unemployment: ind(unemp.value, '%', unemp.year) } : {}),
-        ...(gini?.value != null ? { gini: ind(gini.value, 'index', gini.year) } : {}),
+        ...(gdp?.value == null ? {} : { gdpPerCapita: ind(gdp.value, 'USD', gdp.year) }),
+        ...(unemp?.value == null ? {} : { unemployment: ind(unemp.value, '%', unemp.year) }),
+        ...(gini?.value == null ? {} : { gini: ind(gini.value, 'index', gini.year) }),
       },
     };
 
@@ -149,15 +157,15 @@ async function generate(): Promise<void> {
     const affordability: CategoryScore = {
       value: affordScore,
       indicators: {
-        ...(plrRaw != null
-          ? {
-              priceLevelRatio: ind(Math.round(plrRaw * 100) / 100, 'vs intl avg', gdp!.year),
-            }
-          : {}),
-        ...(gdpPpp?.value != null
-          ? { gdpPerCapitaPPP: ind(gdpPpp.value, 'PPP $', gdpPpp.year) }
-          : {}),
-        ...(gdp?.value != null ? { gdpPerCapita: ind(gdp.value, 'USD', gdp.year) } : {}),
+        ...(plrRaw == null || gdp === undefined
+          ? {}
+          : {
+              priceLevelRatio: ind(Math.round(plrRaw * 100) / 100, 'vs intl avg', gdp.year),
+            }),
+        ...(gdpPpp?.value == null
+          ? {}
+          : { gdpPerCapitaPPP: ind(gdpPpp.value, 'PPP $', gdpPpp.year) }),
+        ...(gdp?.value == null ? {} : { gdpPerCapita: ind(gdp.value, 'USD', gdp.year) }),
       },
     };
 
@@ -167,9 +175,9 @@ async function generate(): Promise<void> {
     const foodSecurity: CategoryScore = {
       value: invertMinMax(undrnrsh?.value ?? null, 0, 55),
       indicators: {
-        ...(undrnrsh?.value != null
-          ? { undernourishment: ind(undrnrsh.value, '%', undrnrsh.year) }
-          : {}),
+        ...(undrnrsh?.value == null
+          ? {}
+          : { undernourishment: ind(undrnrsh.value, '%', undrnrsh.year) }),
       },
     };
 
@@ -188,9 +196,9 @@ async function generate(): Promise<void> {
         minMax(phys?.value ?? null, 0, 7),
       ]),
       indicators: {
-        ...(lifeExp != null ? { lifeExpectancy: ind(lifeExp, 'years', lifeExpYear) } : {}),
-        ...(beds?.value != null ? { hospitalBeds: ind(beds.value, 'per 1k', beds.year) } : {}),
-        ...(phys?.value != null ? { physicians: ind(phys.value, 'per 1k', phys.year) } : {}),
+        ...(lifeExp == null ? {} : { lifeExpectancy: ind(lifeExp, 'years', lifeExpYear) }),
+        ...(beds?.value == null ? {} : { hospitalBeds: ind(beds.value, 'per 1k', beds.year) }),
+        ...(phys?.value == null ? {} : { physicians: ind(phys.value, 'per 1k', phys.year) }),
       },
     };
 
@@ -206,13 +214,13 @@ async function generate(): Promise<void> {
         minMax(tertiary?.value ?? null, 0, 100),
       ]),
       indicators: {
-        ...(lit?.value != null ? { literacy: ind(lit.value, '%', lit.year) } : {}),
-        ...(enroll?.value != null
-          ? { secondaryEnrollment: ind(enroll.value, '%', enroll.year) }
-          : {}),
-        ...(tertiary?.value != null
-          ? { tertiaryEnrollment: ind(tertiary.value, '%', tertiary.year) }
-          : {}),
+        ...(lit?.value == null ? {} : { literacy: ind(lit.value, '%', lit.year) }),
+        ...(enroll?.value == null
+          ? {}
+          : { secondaryEnrollment: ind(enroll.value, '%', enroll.year) }),
+        ...(tertiary?.value == null
+          ? {}
+          : { tertiaryEnrollment: ind(tertiary.value, '%', tertiary.year) }),
       },
     };
 
@@ -222,7 +230,7 @@ async function generate(): Promise<void> {
     const environment: CategoryScore = {
       value: invertMinMax(pm25?.value ?? null, 0, 100),
       indicators: {
-        ...(pm25?.value != null ? { pm25: ind(pm25.value, 'μg/m³', pm25.year) } : {}),
+        ...(pm25?.value == null ? {} : { pm25: ind(pm25.value, 'μg/m³', pm25.year) }),
       },
     };
 
@@ -269,11 +277,11 @@ async function generate(): Promise<void> {
         minMax(bb?.value ?? null, 0, 50),
       ]),
       indicators: {
-        ...(internet?.value != null
-          ? { internetUsers: ind(internet.value, '%', internet.year) }
-          : {}),
-        ...(elec?.value != null ? { electricityAccess: ind(elec.value, '%', elec.year) } : {}),
-        ...(bb?.value != null ? { broadband: ind(bb.value, 'subs/100', bb.year) } : {}),
+        ...(internet?.value == null
+          ? {}
+          : { internetUsers: ind(internet.value, '%', internet.year) }),
+        ...(elec?.value == null ? {} : { electricityAccess: ind(elec.value, '%', elec.year) }),
+        ...(bb?.value == null ? {} : { broadband: ind(bb.value, 'subs/100', bb.year) }),
       },
     };
 
@@ -291,7 +299,7 @@ async function generate(): Promise<void> {
     const hdi = localData.getHdi(iso2);
 
     const humanDevelopment: CategoryScore = {
-      value: minMax(hdi?.hdi ?? null, 0.4, 1.0),
+      value: minMax(hdi?.hdi ?? null, 0.4, 1),
       indicators: {
         ...(hdi ? { hdi: ind(hdi.hdi, 'index', hdi.year) } : {}),
       },
@@ -394,24 +402,24 @@ async function generate(): Promise<void> {
         minMax(cpi?.score ?? null, 0, 100),
       ]),
       indicators: {
-        ...(corruption?.value != null
-          ? {
+        ...(corruption?.value == null
+          ? {}
+          : {
               controlOfCorruption: ind(corruption.value, 'WGI', corruption.year),
-            }
-          : {}),
-        ...(ruleLaw?.value != null ? { ruleOfLaw: ind(ruleLaw.value, 'WGI', ruleLaw.year) } : {}),
-        ...(polStab?.value != null
-          ? { politicalStability: ind(polStab.value, 'WGI', polStab.year) }
-          : {}),
-        ...(govEff?.value != null
-          ? { govEffectiveness: ind(govEff.value, 'WGI', govEff.year) }
-          : {}),
-        ...(regQual?.value != null
-          ? { regulatoryQuality: ind(regQual.value, 'WGI', regQual.year) }
-          : {}),
-        ...(voiceAcc?.value != null
-          ? { voiceAccountability: ind(voiceAcc.value, 'WGI', voiceAcc.year) }
-          : {}),
+            }),
+        ...(ruleLaw?.value == null ? {} : { ruleOfLaw: ind(ruleLaw.value, 'WGI', ruleLaw.year) }),
+        ...(polStab?.value == null
+          ? {}
+          : { politicalStability: ind(polStab.value, 'WGI', polStab.year) }),
+        ...(govEff?.value == null
+          ? {}
+          : { govEffectiveness: ind(govEff.value, 'WGI', govEff.year) }),
+        ...(regQual?.value == null
+          ? {}
+          : { regulatoryQuality: ind(regQual.value, 'WGI', regQual.year) }),
+        ...(voiceAcc?.value == null
+          ? {}
+          : { voiceAccountability: ind(voiceAcc.value, 'WGI', voiceAcc.year) }),
         ...(cpi ? { cpiScore: ind(cpi.score, 'score', cpi.year) } : {}),
       },
     };
@@ -442,7 +450,7 @@ async function generate(): Promise<void> {
     const logistics: CategoryScore = {
       value: minMax(lpi?.value ?? null, 1, 5),
       indicators: {
-        ...(lpi?.value != null ? { lpiScore: ind(lpi.value, 'score', lpi.year) } : {}),
+        ...(lpi?.value == null ? {} : { lpiScore: ind(lpi.value, 'score', lpi.year) }),
       },
     };
 
@@ -454,9 +462,9 @@ async function generate(): Promise<void> {
       value: average([minMax(nbi?.nbi ?? null, 0, 1), minMax(protLand?.value ?? null, 0, 50)]),
       indicators: {
         ...(nbi ? { nationalBiodiversityIndex: ind(nbi.nbi, 'index', nbi.year) } : {}),
-        ...(protLand?.value != null
-          ? { protectedLand: ind(protLand.value, '%', protLand.year) }
-          : {}),
+        ...(protLand?.value == null
+          ? {}
+          : { protectedLand: ind(protLand.value, '%', protLand.year) }),
       },
     };
 
@@ -480,9 +488,9 @@ async function generate(): Promise<void> {
         minMax(taxBurden?.score ?? null, 0, 100),
       ]),
       indicators: {
-        ...(taxRev?.value != null
-          ? { taxRevenueGDP: ind(taxRev.value, '% GDP', taxRev.year) }
-          : {}),
+        ...(taxRev?.value == null
+          ? {}
+          : { taxRevenueGDP: ind(taxRev.value, '% GDP', taxRev.year) }),
         ...(taxBurden ? { taxBurdenScore: ind(taxBurden.score, 'score', taxBurden.year) } : {}),
       },
     };
@@ -507,9 +515,9 @@ async function generate(): Promise<void> {
         logMinMax(airport?.destinationCountries ?? null, 5, 110),
       ]),
       indicators: {
-        ...(airPax?.value != null
-          ? { airPassengers: ind(airPax.value, 'passengers', airPax.year) }
-          : {}),
+        ...(airPax?.value == null
+          ? {}
+          : { airPassengers: ind(airPax.value, 'passengers', airPax.year) }),
         ...(airport
           ? {
               destinationCountries: ind(airport.destinationCountries, 'countries', airport.year),
@@ -536,11 +544,11 @@ async function generate(): Promise<void> {
               intangibleHeritage: ind(intangible.elements, 'elements', intangible.year),
             }
           : {}),
-        ...(tourismArr?.value != null
-          ? {
+        ...(tourismArr?.value == null
+          ? {}
+          : {
               tourismArrivals: ind(tourismArr.value, 'arrivals', tourismArr.year),
-            }
-          : {}),
+            }),
       },
     };
 
@@ -550,11 +558,11 @@ async function generate(): Promise<void> {
     const healthcareCost: CategoryScore = {
       value: invertMinMax(oopExp?.value ?? null, 0, 80),
       indicators: {
-        ...(oopExp?.value != null
-          ? {
+        ...(oopExp?.value == null
+          ? {}
+          : {
               outOfPocketExpend: ind(oopExp.value, '% health exp', oopExp.year),
-            }
-          : {}),
+            }),
       },
     };
 
@@ -569,9 +577,9 @@ async function generate(): Promise<void> {
       indicators: {
         ...(crime ? { homicideRate: ind(crime.homicideRate, 'per 100k', crime.year) } : {}),
         ...(peace ? { peaceIndex: ind(peace.score, 'index', peace.year) } : {}),
-        ...(polStab?.value != null
-          ? { politicalStability: ind(polStab.value, 'WGI', polStab.year) }
-          : {}),
+        ...(polStab?.value == null
+          ? {}
+          : { politicalStability: ind(polStab.value, 'WGI', polStab.year) }),
       },
     };
 
@@ -584,12 +592,12 @@ async function generate(): Promise<void> {
         invertMinMax(col?.rentSmallerCity ?? null, 100, 2000),
       ]),
       indicators: {
-        ...(col?.rentMajorCity != null
-          ? { rentMajorCity: ind(col.rentMajorCity, 'USD/mo', 2025) }
-          : {}),
-        ...(col?.rentSmallerCity != null
-          ? { rentSmallerCity: ind(col.rentSmallerCity, 'USD/mo', 2025) }
-          : {}),
+        ...(col?.rentMajorCity == null
+          ? {}
+          : { rentMajorCity: ind(col.rentMajorCity, 'USD/mo', 2025) }),
+        ...(col?.rentSmallerCity == null
+          ? {}
+          : { rentSmallerCity: ind(col.rentSmallerCity, 'USD/mo', 2025) }),
       },
     };
 
@@ -601,8 +609,8 @@ async function generate(): Promise<void> {
         invertMinMax(col?.utilities ?? null, 20, 300),
       ]),
       indicators: {
-        ...(col?.transport != null ? { transportCost: ind(col.transport, 'USD/mo', 2025) } : {}),
-        ...(col?.utilities != null ? { utilitiesCost: ind(col.utilities, 'USD/mo', 2025) } : {}),
+        ...(col?.transport == null ? {} : { transportCost: ind(col.transport, 'USD/mo', 2025) }),
+        ...(col?.utilities == null ? {} : { utilitiesCost: ind(col.utilities, 'USD/mo', 2025) }),
       },
     };
 
@@ -615,11 +623,11 @@ async function generate(): Promise<void> {
         invertMinMax(col?.coworking ?? null, 20, 400),
       ]),
       indicators: {
-        ...(internet?.value != null
-          ? { internetUsers: ind(internet.value, '%', internet.year) }
-          : {}),
-        ...(elec?.value != null ? { electricityAccess: ind(elec.value, '%', elec.year) } : {}),
-        ...(col?.coworking != null ? { coworkingCost: ind(col.coworking, 'USD/mo', 2025) } : {}),
+        ...(internet?.value == null
+          ? {}
+          : { internetUsers: ind(internet.value, '%', internet.year) }),
+        ...(elec?.value == null ? {} : { electricityAccess: ind(elec.value, '%', elec.year) }),
+        ...(col?.coworking == null ? {} : { coworkingCost: ind(col.coworking, 'USD/mo', 2025) }),
       },
     };
 
@@ -650,52 +658,52 @@ async function generate(): Promise<void> {
     const nomadCommunity: CategoryScore = {
       value: ai?.nomadCommunity ?? null,
       indicators: {
-        ...(ai?.nomadCommunity != null
-          ? { aiComposite: ind(ai.nomadCommunity, 'AI score', 2025) }
-          : {}),
+        ...(ai?.nomadCommunity == null
+          ? {}
+          : { aiComposite: ind(ai.nomadCommunity, 'AI score', 2025) }),
       },
     };
 
     const visaFriendliness: CategoryScore = {
       value: ai?.visaFriendliness ?? null,
       indicators: {
-        ...(ai?.visaFriendliness != null
-          ? { aiComposite: ind(ai.visaFriendliness, 'AI score', 2025) }
-          : {}),
+        ...(ai?.visaFriendliness == null
+          ? {}
+          : { aiComposite: ind(ai.visaFriendliness, 'AI score', 2025) }),
       },
     };
 
     const costEfficiency: CategoryScore = {
       value: ai?.costEfficiency ?? null,
       indicators: {
-        ...(ai?.costEfficiency != null
-          ? { aiComposite: ind(ai.costEfficiency, 'AI score', 2025) }
-          : {}),
+        ...(ai?.costEfficiency == null
+          ? {}
+          : { aiComposite: ind(ai.costEfficiency, 'AI score', 2025) }),
       },
     };
 
     const workLifeBalance: CategoryScore = {
       value: ai?.workLifeBalance ?? null,
       indicators: {
-        ...(ai?.workLifeBalance != null
-          ? { aiComposite: ind(ai.workLifeBalance, 'AI score', 2025) }
-          : {}),
+        ...(ai?.workLifeBalance == null
+          ? {}
+          : { aiComposite: ind(ai.workLifeBalance, 'AI score', 2025) }),
       },
     };
 
     const digitalReadiness: CategoryScore = {
       value: ai?.digitalReadiness ?? null,
       indicators: {
-        ...(ai?.digitalReadiness != null
-          ? { aiComposite: ind(ai.digitalReadiness, 'AI score', 2025) }
-          : {}),
+        ...(ai?.digitalReadiness == null
+          ? {}
+          : { aiComposite: ind(ai.digitalReadiness, 'AI score', 2025) }),
       },
     };
 
     const culturalFit: CategoryScore = {
       value: ai?.culturalFit ?? null,
       indicators: {
-        ...(ai?.culturalFit != null ? { aiComposite: ind(ai.culturalFit, 'AI score', 2025) } : {}),
+        ...(ai?.culturalFit == null ? {} : { aiComposite: ind(ai.culturalFit, 'AI score', 2025) }),
       },
     };
 
@@ -703,94 +711,94 @@ async function generate(): Promise<void> {
     const nightlifeEntertainment: CategoryScore = {
       value: tourismAi?.nightlifeEntertainment ?? null,
       indicators: {
-        ...(tourismAi?.nightlifeEntertainment != null
-          ? {
+        ...(tourismAi?.nightlifeEntertainment == null
+          ? {}
+          : {
               aiComposite: ind(tourismAi.nightlifeEntertainment, 'AI score', 2026),
-            }
-          : {}),
+            }),
       },
     };
 
     const touristScamSafety: CategoryScore = {
       value: tourismAi?.touristScamSafety ?? null,
       indicators: {
-        ...(tourismAi?.touristScamSafety != null
-          ? { aiComposite: ind(tourismAi.touristScamSafety, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.touristScamSafety == null
+          ? {}
+          : { aiComposite: ind(tourismAi.touristScamSafety, 'AI score', 2026) }),
       },
     };
 
     const streetFoodCuisine: CategoryScore = {
       value: tourismAi?.streetFoodCuisine ?? null,
       indicators: {
-        ...(tourismAi?.streetFoodCuisine != null
-          ? { aiComposite: ind(tourismAi.streetFoodCuisine, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.streetFoodCuisine == null
+          ? {}
+          : { aiComposite: ind(tourismAi.streetFoodCuisine, 'AI score', 2026) }),
       },
     };
 
     const beachWaterQuality: CategoryScore = {
       value: tourismAi?.beachWaterQuality ?? null,
       indicators: {
-        ...(tourismAi?.beachWaterQuality != null
-          ? { aiComposite: ind(tourismAi.beachWaterQuality, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.beachWaterQuality == null
+          ? {}
+          : { aiComposite: ind(tourismAi.beachWaterQuality, 'AI score', 2026) }),
       },
     };
 
     const walkabilityScenicBeauty: CategoryScore = {
       value: tourismAi?.walkabilityScenicBeauty ?? null,
       indicators: {
-        ...(tourismAi?.walkabilityScenicBeauty != null
-          ? {
+        ...(tourismAi?.walkabilityScenicBeauty == null
+          ? {}
+          : {
               aiComposite: ind(tourismAi.walkabilityScenicBeauty, 'AI score', 2026),
-            }
-          : {}),
+            }),
       },
     };
 
     const shoppingMarkets: CategoryScore = {
       value: tourismAi?.shoppingMarkets ?? null,
       indicators: {
-        ...(tourismAi?.shoppingMarkets != null
-          ? { aiComposite: ind(tourismAi.shoppingMarkets, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.shoppingMarkets == null
+          ? {}
+          : { aiComposite: ind(tourismAi.shoppingMarkets, 'AI score', 2026) }),
       },
     };
 
     const photographySpots: CategoryScore = {
       value: tourismAi?.photographySpots ?? null,
       indicators: {
-        ...(tourismAi?.photographySpots != null
-          ? { aiComposite: ind(tourismAi.photographySpots, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.photographySpots == null
+          ? {}
+          : { aiComposite: ind(tourismAi.photographySpots, 'AI score', 2026) }),
       },
     };
 
     const familyFriendliness: CategoryScore = {
       value: tourismAi?.familyFriendliness ?? null,
       indicators: {
-        ...(tourismAi?.familyFriendliness != null
-          ? { aiComposite: ind(tourismAi.familyFriendliness, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.familyFriendliness == null
+          ? {}
+          : { aiComposite: ind(tourismAi.familyFriendliness, 'AI score', 2026) }),
       },
     };
 
     const adventureSports: CategoryScore = {
       value: tourismAi?.adventureSports ?? null,
       indicators: {
-        ...(tourismAi?.adventureSports != null
-          ? { aiComposite: ind(tourismAi.adventureSports, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.adventureSports == null
+          ? {}
+          : { aiComposite: ind(tourismAi.adventureSports, 'AI score', 2026) }),
       },
     };
 
     const historicalSites: CategoryScore = {
       value: tourismAi?.historicalSites ?? null,
       indicators: {
-        ...(tourismAi?.historicalSites != null
-          ? { aiComposite: ind(tourismAi.historicalSites, 'AI score', 2026) }
-          : {}),
+        ...(tourismAi?.historicalSites == null
+          ? {}
+          : { aiComposite: ind(tourismAi.historicalSites, 'AI score', 2026) }),
       },
     };
 
@@ -857,8 +865,8 @@ async function generate(): Promise<void> {
 
     // Build country-level i18n (name + capital)
     const ci = countriesI18n[iso2];
-    const nameRu = ci?.name?.ru;
-    const nameUa = ci?.name?.ua;
+    const nameRu = ci?.name.ru;
+    const nameUa = ci?.name.ua;
     const capRu = ci?.capital?.ru;
     const capUa = ci?.capital?.ua;
     const countryI18n: CountryData['i18n'] = {};
@@ -904,7 +912,7 @@ async function generate(): Promise<void> {
       touristVisaDays: localData.getTouristVisaDays(iso2),
       ...(rc.landlocked !== undefined && { landlocked: rc.landlocked }),
       ...(tourismTags.length > 0 && { tourismTags }),
-      ...(tourismTagScores && Object.keys(tourismTagScores).length > 0 && { tourismTagScores }),
+      ...(Object.keys(tourismTagScores).length > 0 ? { tourismTagScores } : {}),
       ...(tourismTagSeasonalityData && { tourismTagSeasonality: tourismTagSeasonalityData }),
       ...(nomadVisaDetails && { nomadVisa: nomadVisaDetails }),
       ...(climateDetails && { climateData: climateDetails }),
@@ -920,7 +928,7 @@ async function generate(): Promise<void> {
   console.log(`\n✅ Wrote ${data.length} countries to ${path.relative(process.cwd(), outPath)}`);
 }
 
-generate().catch((err) => {
-  console.error('❌ Generate failed:', err);
+generate().catch((error: unknown) => {
+  console.error('❌ Generate failed:', error);
   process.exit(1);
 });

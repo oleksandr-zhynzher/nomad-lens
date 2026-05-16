@@ -5,26 +5,26 @@ const CACHE_NS = 'openmeteo:climate:';
 
 interface ArchiveResponse {
   daily?: {
-    temperature_2m_mean?: (number | null)[];
-    precipitation_sum?: (number | null)[];
+    temperature_2m_mean?: Array<number | null>;
+    precipitation_sum?: Array<number | null>;
   };
 }
 
-function meanOf(values: (number | null)[]): number | null {
-  const valid = values.filter((v): v is number => v !== null && !isNaN(v));
+function meanOf(values: Array<number | null>): number | null {
+  const valid = values.filter((v): v is number => v !== null && !Number.isNaN(v));
   if (valid.length === 0) return null;
   return valid.reduce((a, b) => a + b, 0) / valid.length;
 }
 
 const DAYS_PER_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 2023 non-leap
 
-function monthlyMeansOf(values: (number | null)[]): number[] {
+function monthlyMeansOf(values: Array<number | null>): number[] {
   const means: number[] = [];
   let dayIdx = 0;
   for (const daysInMonth of DAYS_PER_MONTH) {
     const slice = values.slice(dayIdx, dayIdx + daysInMonth);
-    const valid = slice.filter((v): v is number => v !== null && !isNaN(v));
-    means.push(valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : NaN);
+    const valid = slice.filter((v): v is number => v !== null && !Number.isNaN(v));
+    means.push(valid.length > 0 ? valid.reduce((a, b) => a + b, 0) / valid.length : Number.NaN);
     dayIdx += daysInMonth;
   }
   return means;
@@ -59,7 +59,7 @@ export async function fetchClimate(lat: number, lng: number): Promise<OpenMeteoC
     daily: 'temperature_2m_mean,precipitation_sum',
     timezone: 'GMT',
   });
-  const url = `https://archive-api.open-meteo.com/v1/archive?${params}`;
+  const url = `https://archive-api.open-meteo.com/v1/archive?${params.toString()}`;
 
   let res: Response | null = null;
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -67,13 +67,13 @@ export async function fetchClimate(lat: number, lng: number): Promise<OpenMeteoC
     if (res.ok) break;
     // Retry on rate-limit (429) or server errors (5xx)
     if (res.status === 429 || res.status >= 500) {
-      await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
+      await new Promise((resolve) => setTimeout(resolve, 500 * (attempt + 1)));
       res = null;
       continue;
     }
     return null; // Non-retryable error
   }
-  if (!res || !res.ok) return null;
+  if (!res?.ok) return null;
 
   const json = (await res.json()) as ArchiveResponse;
   const daily = json.daily;
@@ -82,10 +82,10 @@ export async function fetchClimate(lat: number, lng: number): Promise<OpenMeteoC
   const tempRaw = daily.temperature_2m_mean ?? [];
   const annualMeanTemp = meanOf(tempRaw);
   const monthlyMeans = monthlyMeansOf(tempRaw);
-  const validMonthly = monthlyMeans.filter((v) => !isNaN(v));
+  const validMonthly = monthlyMeans.filter((v) => !Number.isNaN(v));
 
   const precipValues = (daily.precipitation_sum ?? []).filter(
-    (v): v is number => v !== null && !isNaN(v),
+    (v): v is number => v !== null && !Number.isNaN(v),
   );
   const annualPrecipitation =
     precipValues.length > 0 ? precipValues.reduce((a, b) => a + b, 0) : null;

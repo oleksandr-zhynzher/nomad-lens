@@ -1,47 +1,49 @@
-import hdiJson from '../data/hdi.json';
-import happinessJson from '../data/happiness.json';
-import peaceJson from '../data/peace.json';
-import crimeJson from '../data/crime.json';
+import aiMetricsJson from '../data/ai-metrics.json';
+import airportsJson from '../data/airports.json';
+import biodiversityJson from '../data/biodiversity.json';
+import costOfLivingJson from '../data/costOfLiving.json';
 import cpiJson from '../data/cpi.json';
+import crimeJson from '../data/crime.json';
+import culturalHeritageJson from '../data/culturalHeritage.json';
+import digitalFreedomJson from '../data/digitalFreedom.json';
 import epiJson from '../data/epi.json';
+import happinessJson from '../data/happiness.json';
+import hdiJson from '../data/hdi.json';
+import intangibleHeritageJson from '../data/intangibleHeritage.json';
 import nomadVisaJson from '../data/nomadVisa.json';
 import nomadVisaDetailsJson from '../data/nomadVisaDetails.json';
-import visasJson from '../data/visas.json';
-import digitalFreedomJson from '../data/digitalFreedom.json';
+import peaceJson from '../data/peace.json';
 import personalFreedomJson from '../data/personalFreedom.json';
 import socialToleranceJson from '../data/socialTolerance.json';
-import taxBurdenJson from '../data/taxBurden.json';
 import startupEnvironmentJson from '../data/startupEnvironment.json';
-import airportsJson from '../data/airports.json';
-import culturalHeritageJson from '../data/culturalHeritage.json';
-import intangibleHeritageJson from '../data/intangibleHeritage.json';
-import biodiversityJson from '../data/biodiversity.json';
-import aiMetricsJson from '../data/ai-metrics.json';
+import taxBurdenJson from '../data/taxBurden.json';
 import tourismAiMetricsJson from '../data/tourism-ai-metrics.json';
-import costOfLivingJson from '../data/costOfLiving.json';
+import visasJson from '../data/visas.json';
 import type {
-  HdiEntry,
-  HappinessEntry,
-  PeaceEntry,
-  CrimeEntry,
-  CpiEntry,
-  EpiEntry,
-  DigitalFreedomEntry,
-  PersonalFreedomEntry,
-  SocialToleranceEntry,
-  TaxBurdenEntry,
-  StartupEntry,
+  AiMetricsEntry,
   AirportEntry,
+  BiodiversityEntry,
+  CostOfLivingEntry,
+  CpiEntry,
+  CrimeEntry,
+  DigitalFreedomEntry,
+  EpiEntry,
+  HappinessEntry,
+  HdiEntry,
   HeritageEntry,
   IntangibleHeritageEntry,
-  BiodiversityEntry,
   NomadVisaDetails,
-  AiMetricsEntry,
+  PeaceEntry,
+  PersonalFreedomEntry,
+  SocialToleranceEntry,
+  StartupEntry,
+  TaxBurdenEntry,
   TourismAiMetricsEntry,
-  CostOfLivingEntry,
 } from '../utils/types';
 
-type JsonFile<T> = { data: T[] };
+interface JsonFile<T> {
+  data: T[];
+}
 
 const hdiMap = new Map<string, HdiEntry>();
 const happinessMap = new Map<string, HappinessEntry>();
@@ -64,54 +66,41 @@ const costOfLivingMap = new Map<string, CostOfLivingEntry>();
 
 const nomadVisaSet = new Set<string>(nomadVisaJson.countries);
 const nomadVisaDetailsMap = new Map<string, NomadVisaDetails>();
-(nomadVisaDetailsJson as unknown as NomadVisaDetails[]).forEach((e) =>
-  nomadVisaDetailsMap.set(e.code.toUpperCase(), e),
-);
+for (const e of nomadVisaDetailsJson as unknown as NomadVisaDetails[])
+  nomadVisaDetailsMap.set(e.code.toUpperCase(), e);
 const schengenSet = new Set<string>(visasJson.schengen);
 const touristVisaDaysMap = visasJson.touristVisaDays as Record<string, number | null>;
 
-(hdiJson as unknown as JsonFile<HdiEntry>).data.forEach((e) => hdiMap.set(e.code, e));
-(happinessJson as unknown as JsonFile<HappinessEntry>).data.forEach((e) =>
-  happinessMap.set(e.code, e),
-);
-(peaceJson as unknown as JsonFile<PeaceEntry>).data.forEach((e) => peaceMap.set(e.code, e));
-(crimeJson as unknown as JsonFile<CrimeEntry>).data.forEach((e) => crimeMap.set(e.code, e));
-(cpiJson as unknown as JsonFile<CpiEntry>).data.forEach((e) => cpiMap.set(e.code, e));
-(epiJson as unknown as JsonFile<EpiEntry>).data.forEach((e) => epiMap.set(e.code, e));
-(digitalFreedomJson as unknown as JsonFile<DigitalFreedomEntry>).data.forEach((e) =>
-  digitalFreedomMap.set(e.code, e),
-);
-(personalFreedomJson as unknown as JsonFile<PersonalFreedomEntry>).data.forEach((e) =>
-  personalFreedomMap.set(e.code, e),
-);
-(socialToleranceJson as unknown as JsonFile<SocialToleranceEntry>).data.forEach((e) =>
-  socialToleranceMap.set(e.code, e),
-);
-(taxBurdenJson as unknown as JsonFile<TaxBurdenEntry>).data.forEach((e) =>
-  taxBurdenMap.set(e.code, e),
-);
-(startupEnvironmentJson as unknown as JsonFile<StartupEntry>).data.forEach((e) =>
-  startupMap.set(e.code, e),
-);
-(airportsJson as unknown as JsonFile<AirportEntry>).data.forEach((e) => airportMap.set(e.code, e));
-(culturalHeritageJson as unknown as JsonFile<HeritageEntry>).data.forEach((e) =>
-  heritageMap.set(e.code, e),
-);
-(intangibleHeritageJson as unknown as JsonFile<IntangibleHeritageEntry>).data.forEach((e) =>
-  intangibleHeritageMap.set(e.code, e),
-);
-(biodiversityJson as unknown as JsonFile<BiodiversityEntry>).data.forEach((e) =>
-  biodiversityMap.set(e.code, e),
-);
-(aiMetricsJson as unknown as JsonFile<AiMetricsEntry>).data.forEach((e) =>
-  aiMetricsMap.set(e.code.toUpperCase(), e),
-);
-(tourismAiMetricsJson as unknown as JsonFile<TourismAiMetricsEntry>).data.forEach((e) =>
-  tourismAiMetricsMap.set(e.code.toUpperCase(), e),
-);
-(costOfLivingJson as unknown as JsonFile<CostOfLivingEntry>).data.forEach((e) =>
-  costOfLivingMap.set(e.code.toUpperCase(), e),
-);
+for (const e of (hdiJson as unknown as JsonFile<HdiEntry>).data) hdiMap.set(e.code, e);
+for (const e of (happinessJson as unknown as JsonFile<HappinessEntry>).data)
+  happinessMap.set(e.code, e);
+for (const e of (peaceJson as unknown as JsonFile<PeaceEntry>).data) peaceMap.set(e.code, e);
+for (const e of (crimeJson as unknown as JsonFile<CrimeEntry>).data) crimeMap.set(e.code, e);
+for (const e of (cpiJson as unknown as JsonFile<CpiEntry>).data) cpiMap.set(e.code, e);
+for (const e of (epiJson as unknown as JsonFile<EpiEntry>).data) epiMap.set(e.code, e);
+for (const e of (digitalFreedomJson as unknown as JsonFile<DigitalFreedomEntry>).data)
+  digitalFreedomMap.set(e.code, e);
+for (const e of (personalFreedomJson as unknown as JsonFile<PersonalFreedomEntry>).data)
+  personalFreedomMap.set(e.code, e);
+for (const e of (socialToleranceJson as unknown as JsonFile<SocialToleranceEntry>).data)
+  socialToleranceMap.set(e.code, e);
+for (const e of (taxBurdenJson as unknown as JsonFile<TaxBurdenEntry>).data)
+  taxBurdenMap.set(e.code, e);
+for (const e of (startupEnvironmentJson as unknown as JsonFile<StartupEntry>).data)
+  startupMap.set(e.code, e);
+for (const e of (airportsJson as unknown as JsonFile<AirportEntry>).data) airportMap.set(e.code, e);
+for (const e of (culturalHeritageJson as unknown as JsonFile<HeritageEntry>).data)
+  heritageMap.set(e.code, e);
+for (const e of (intangibleHeritageJson as unknown as JsonFile<IntangibleHeritageEntry>).data)
+  intangibleHeritageMap.set(e.code, e);
+for (const e of (biodiversityJson as unknown as JsonFile<BiodiversityEntry>).data)
+  biodiversityMap.set(e.code, e);
+for (const e of (aiMetricsJson as unknown as JsonFile<AiMetricsEntry>).data)
+  aiMetricsMap.set(e.code.toUpperCase(), e);
+for (const e of (tourismAiMetricsJson as unknown as JsonFile<TourismAiMetricsEntry>).data)
+  tourismAiMetricsMap.set(e.code.toUpperCase(), e);
+for (const e of (costOfLivingJson as unknown as JsonFile<CostOfLivingEntry>).data)
+  costOfLivingMap.set(e.code.toUpperCase(), e);
 
 export const localData = {
   getHdi: (code: string): HdiEntry | undefined => hdiMap.get(code),

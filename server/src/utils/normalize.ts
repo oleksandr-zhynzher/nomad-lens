@@ -3,7 +3,7 @@
  * Returns null if value is null/NaN or if max === min.
  */
 export function minMax(value: number | null, min: number, max: number): number | null {
-  if (value === null || isNaN(value)) return null;
+  if (value === null || Number.isNaN(value)) return null;
   if (max === min) return null;
   const clamped = Math.max(min, Math.min(max, value));
   return Math.round(((clamped - min) / (max - min)) * 1000) / 10;
@@ -13,7 +13,7 @@ export function minMax(value: number | null, min: number, max: number): number |
  * Log-scale min-max normalization — good for GDP where distribution is skewed.
  */
 export function logMinMax(value: number | null, min: number, max: number): number | null {
-  if (value === null || isNaN(value) || value <= 0 || min <= 0 || max <= 0) return null;
+  if (value === null || Number.isNaN(value) || value <= 0 || min <= 0 || max <= 0) return null;
   return minMax(Math.log(value), Math.log(min), Math.log(max));
 }
 
@@ -40,7 +40,7 @@ export function invertLogMinMax(value: number | null, min: number, max: number):
  * Average an array of 0–100 scores, ignoring nulls.
  * Returns null if all values are null.
  */
-export function average(scores: (number | null)[]): number | null {
+export function average(scores: Array<number | null>): number | null {
   const valid = scores.filter((s): s is number => s !== null);
   if (valid.length === 0) return null;
   const sum = valid.reduce((a, b) => a + b, 0);

@@ -1,5 +1,5 @@
-import type { RestCountry } from '../utils/types';
 import { cache } from '../middleware/cache';
+import type { RestCountry } from '../utils/types';
 
 const CACHE_KEY = 'restcountries:all';
 const API_URL =

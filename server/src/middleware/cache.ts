@@ -3,7 +3,7 @@
  * Stores serialized data keyed by a string, expires after `ttlMs`.
  */
 export class MemoryCache {
-  private store = new Map<string, { data: unknown; expiresAt: number }>();
+  private readonly store = new Map<string, { data: unknown; expiresAt: number }>();
   private readonly ttlMs: number;
 
   constructor(ttlHours = 24) {

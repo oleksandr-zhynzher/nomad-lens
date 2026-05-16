@@ -328,11 +328,10 @@ export type OpenMeteoClimate = ClimateData;
 
 // ─── World Bank ───────────────────────────────────────────────────────────────
 
-export interface WorldBankIndicatorMap {
-  [countryCode: string]: {
-    [indicatorCode: string]: { value: number | null; year: number };
-  };
-}
+export type WorldBankIndicatorMap = Record<
+  string,
+  Record<string, { value: number | null; year: number }>
+>;
 
 // ─── REST Countries ───────────────────────────────────────────────────────────
 

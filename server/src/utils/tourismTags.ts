@@ -11,7 +11,7 @@
 // ──────────────────────────────────────────────────────────────────────────────
 
 // Countries universally known as beach destinations, regardless of what data says
-const BEACH_OVERRIDE: Set<string> = new Set([
+const BEACH_OVERRIDE = new Set<string>([
   'MV', // Maldives
   'SC', // Seychelles
   'MU', // Mauritius
@@ -145,7 +145,7 @@ export function isBeachDestination(
 // Tag: islandNation
 // ──────────────────────────────────────────────────────────────────────────────
 
-const ISLAND_NATIONS: Set<string> = new Set([
+const ISLAND_NATIONS = new Set<string>([
   'MV',
   'SC',
   'MU',
@@ -224,7 +224,7 @@ export function isIslandNation(iso2: string): boolean {
 // Tag: skiResorts
 // ──────────────────────────────────────────────────────────────────────────────
 
-const SKI_COUNTRIES: Set<string> = new Set([
+const SKI_COUNTRIES = new Set<string>([
   'AT',
   'CH',
   'FR',
@@ -280,7 +280,7 @@ export function hasSkiResorts(iso2: string): boolean {
 // Tag: mountaineering — significant mountains / trekking
 // ──────────────────────────────────────────────────────────────────────────────
 
-const MOUNTAIN_COUNTRIES: Set<string> = new Set([
+const MOUNTAIN_COUNTRIES = new Set<string>([
   'NP', // Himalayas, Everest, Annapurna
   'PE', // Andes, Machu Picchu trails
   'BO', // Andes, Huayna Potosí
@@ -358,7 +358,7 @@ export function hasMountaineering(iso2: string): boolean {
 // Tag: historicCities — rich urban historical heritage
 // ──────────────────────────────────────────────────────────────────────────────
 
-const HISTORIC_CITIES_COUNTRIES: Set<string> = new Set([
+const HISTORIC_CITIES_COUNTRIES = new Set<string>([
   'IT',
   'FR',
   'ES',
@@ -469,7 +469,7 @@ export function hasHistoricCities(iso2: string): boolean {
 // Tag: wildlifeSafari — notable wildlife / safari tourism
 // ──────────────────────────────────────────────────────────────────────────────
 
-const WILDLIFE_COUNTRIES: Set<string> = new Set([
+const WILDLIFE_COUNTRIES = new Set<string>([
   'KE',
   'TZ',
   'ZA',
@@ -529,7 +529,7 @@ export function hasWildlifeSafari(iso2: string): boolean {
 // Tag: divingSnorkeling — renowned diving/snorkeling spots
 // ──────────────────────────────────────────────────────────────────────────────
 
-const DIVING_COUNTRIES: Set<string> = new Set([
+const DIVING_COUNTRIES = new Set<string>([
   'EG', // Red Sea
   'MV', // Maldives
   'TH', // Similan, Koh Tao
@@ -612,7 +612,7 @@ export function hasDivingSnorkeling(iso2: string): boolean {
 // Tag: desertAdventure — desert landscapes and adventure tourism
 // ──────────────────────────────────────────────────────────────────────────────
 
-const DESERT_COUNTRIES: Set<string> = new Set([
+const DESERT_COUNTRIES = new Set<string>([
   'EG', // Sahara, White Desert
   'MA', // Sahara, Merzouga
   'TN', // Grand Erg Oriental

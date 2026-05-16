@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { average, invertLogMinMax, invertMinMax, logMinMax, minMax } from '../src/utils/normalize';
 
 describe('normalization utilities', () => {
