@@ -1,23 +1,51 @@
-import type { DateRange } from "react-day-picker";
-import { DayPicker } from "react-day-picker";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-/** Year used internally to store month-day values year-agnostically. */
 const STORAGE_YEAR = 2000;
+const WEEK_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-const CURRENT_YEAR = new Date().getFullYear();
-
-function toDisplayDate(stored: string | null): Date | undefined {
-  if (stored === null) return undefined;
-  const mm = Number.parseInt(stored.slice(5, 7), 10) - 1;
-  const dd = Number.parseInt(stored.slice(8, 10), 10);
-  return new Date(CURRENT_YEAR, mm, dd);
+function parseStored(stored: string | null): { month: number; day: number } | null {
+  if (stored === null) return null;
+  return {
+    month: Number.parseInt(stored.slice(5, 7), 10) - 1,
+    day: Number.parseInt(stored.slice(8, 10), 10),
+  };
 }
 
-function toStoredString(date: Date): string {
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  const dd = String(date.getDate()).padStart(2, "0");
-  return `${STORAGE_YEAR}-${mm}-${dd}`;
+function toStoredString(month: number, day: number): string {
+  return `${STORAGE_YEAR}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+function getDaysInMonth(month: number): number {
+  return new Date(2000, month + 1, 0).getDate();
+}
+
+function getFirstDayOfWeek(month: number): number {
+  return new Date(2000, month, 1).getDay();
+}
+
+function compareDates(
+  a: { month: number; day: number },
+  b: { month: number; day: number },
+): number {
+  if (a.month !== b.month) return a.month < b.month ? -1 : 1;
+  if (a.day !== b.day) return a.day < b.day ? -1 : 1;
+  return 0;
 }
 
 interface TourismCalendarPickerProps {
@@ -26,75 +54,133 @@ interface TourismCalendarPickerProps {
   readonly onChange: (start: string | null, end: string | null) => void;
 }
 
-const CAL_CLASSES = {
-  root: "w-full",
-  months: "w-full",
-  month: "w-full",
-  month_caption: "flex items-center justify-between px-1 mb-2",
-  caption_label: "text-[12px] font-semibold text-white uppercase tracking-widest",
-  nav: "flex items-center gap-1",
-  button_previous:
-    "flex h-6 w-6 items-center justify-center rounded text-dimmer hover:text-white hover:bg-surface-3 transition-colors",
-  button_next:
-    "flex h-6 w-6 items-center justify-center rounded text-dimmer hover:text-white hover:bg-surface-3 transition-colors",
-  weekdays: "grid grid-cols-7 mb-1",
-  weekday: "text-center text-[10px] text-dimmer uppercase pb-1",
-  weeks: "flex flex-col gap-0.5",
-  week: "grid grid-cols-7",
-  day: "flex items-center justify-center p-0",
-  day_button:
-    "h-8 w-full text-[12px] text-on-surface rounded cursor-pointer transition-colors hover:bg-surface-3 focus:outline-none",
-  selected: "bg-[#1a2a1a] text-white",
-  today: "font-bold text-accent",
-  range_start: "rounded-l-md !bg-accent !text-black font-semibold",
-  range_end: "rounded-r-md !bg-accent !text-black font-semibold",
-  range_middle: "rounded-none bg-[#1e2b1e] text-on-surface",
-  outside: "opacity-25",
-  disabled: "opacity-20 cursor-not-allowed",
-};
-
 export function TourismCalendarPicker({
   startDate,
   endDate,
   onChange,
 }: TourismCalendarPickerProps) {
   const { t } = useTranslation();
+  const today = new Date();
+  const [viewMonth, setViewMonth] = useState(parseStored(startDate)?.month ?? today.getMonth());
 
-  const selected: DateRange = {
-    from: toDisplayDate(startDate),
-    to: toDisplayDate(endDate),
-  };
+  const start = parseStored(startDate);
+  const end = parseStored(endDate);
 
-  const defaultMonth = selected.from ?? new Date(CURRENT_YEAR, new Date().getMonth(), 1);
+  function handleDayClick(month: number, day: number) {
+    const clicked = { month, day };
 
-  function handleSelect(range: DateRange | undefined) {
-    if (range == null) {
-      onChange(null, null);
+    if (start === null || end !== null) {
+      onChange(toStoredString(month, day), null);
       return;
     }
-    onChange(
-      range.from != null ? toStoredString(range.from) : null,
-      range.to != null ? toStoredString(range.to) : null,
-    );
+
+    if (compareDates(clicked, start) < 0) {
+      onChange(toStoredString(month, day), toStoredString(start.month, start.day));
+    } else {
+      onChange(toStoredString(start.month, start.day), toStoredString(month, day));
+    }
+  }
+
+  const daysInMonth = getDaysInMonth(viewMonth);
+  const firstDow = getFirstDayOfWeek(viewMonth);
+
+  const cells: Array<number | null> = [
+    ...Array.from<null>({ length: firstDow }).fill(null),
+    ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
+  ];
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const rows: Array<Array<number | null>> = [];
+  for (let i = 0; i < cells.length; i += 7) {
+    rows.push(cells.slice(i, i + 7));
+  }
+
+  function dayClasses(day: number): string {
+    const d = { month: viewMonth, day };
+    const isStart = start !== null && compareDates(d, start) === 0;
+    const isEnd = end !== null && compareDates(d, end) === 0;
+    const inRange =
+      start !== null && end !== null && compareDates(d, start) > 0 && compareDates(d, end) < 0;
+    const isToday = viewMonth === today.getMonth() && day === today.getDate();
+
+    if (isStart || isEnd) {
+      return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none bg-accent text-black font-semibold rounded";
+    }
+    if (inRange) {
+      return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none bg-[#1e2b1e] text-on-surface";
+    }
+    if (isToday) {
+      return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none font-bold text-accent hover:bg-surface-3 rounded";
+    }
+    return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none text-on-surface hover:bg-surface-3 rounded";
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <DayPicker
-        mode="range"
-        selected={selected}
-        onSelect={handleSelect}
-        defaultMonth={defaultMonth}
-        classNames={CAL_CLASSES}
-        showOutsideDays
-      />
+    <div className="flex flex-col gap-2 select-none">
+      <div className="mb-1 flex items-center justify-between px-1">
+        <button
+          type="button"
+          onClick={() => {
+            setViewMonth((m) => (m === 0 ? 11 : m - 1));
+          }}
+          className="flex h-6 w-6 items-center justify-center rounded text-dimmer transition-colors hover:bg-surface-3 hover:text-white"
+          aria-label="Previous month"
+        >
+          <ChevronLeft size={14} />
+        </button>
+        <span className="text-[12px] font-semibold tracking-widest text-white uppercase">
+          {MONTH_NAMES[viewMonth]}
+        </span>
+        <button
+          type="button"
+          onClick={() => {
+            setViewMonth((m) => (m === 11 ? 0 : m + 1));
+          }}
+          className="flex h-6 w-6 items-center justify-center rounded text-dimmer transition-colors hover:bg-surface-3 hover:text-white"
+          aria-label="Next month"
+        >
+          <ChevronRight size={14} />
+        </button>
+      </div>
+
+      <div className="mb-1 grid grid-cols-7">
+        {WEEK_DAYS.map((wd) => (
+          <div key={wd} className="pb-1 text-center text-[10px] text-dimmer uppercase">
+            {wd}
+          </div>
+        ))}
+      </div>
+
+      <div className="flex flex-col gap-0.5">
+        {rows.map((row, ri) => (
+          <div key={`row-${viewMonth}-${String(ri)}`} className="grid grid-cols-7">
+            {row.map((day, ci) =>
+              day === null ? (
+                <div key={`empty-${viewMonth}-${String(ri)}-${String(ci)}`} />
+              ) : (
+                <button
+                  key={`${viewMonth}-${day}`}
+                  type="button"
+                  onClick={() => {
+                    handleDayClick(viewMonth, day);
+                  }}
+                  className={dayClasses(day)}
+                >
+                  {day}
+                </button>
+              ),
+            )}
+          </div>
+        ))}
+      </div>
+
       {startDate !== null || endDate !== null ? (
         <button
           type="button"
           onClick={() => {
             onChange(null, null);
           }}
-          className="w-full text-center text-[11px] text-dimmer transition-colors hover:text-on-surface"
+          className="mt-1 w-full text-center text-[11px] text-dimmer transition-colors hover:text-on-surface"
         >
           {t("tourismFilters.clearDates", "Clear dates")}
         </button>
