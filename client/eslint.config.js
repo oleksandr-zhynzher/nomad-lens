@@ -112,7 +112,7 @@ export default defineConfig([
         },
         {
           type: "i18n",
-          pattern: "src/i18n/**/*",
+          pattern: "src/core/i18n/**/*",
         },
         {
           type: "app",
