@@ -1,5 +1,5 @@
+import { CompareCheckbox } from "@core/ui/selection";
 import { getRowStyles } from "@core/utils";
-import { CompareCheckbox } from "@features/compare/ui";
 import type { TravelDates } from "@features/tourism/hooks";
 import type { TourismRanked } from "@features/tourism/utils";
 import type React from "react";

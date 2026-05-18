@@ -1,5 +1,6 @@
 import { useLangPrefix } from "@core/hooks";
 import type { RankedCountry } from "@core/models";
+import { ScoreBreakdown } from "@core/ui/indicator";
 import { useLocalizedCountry } from "@core/utils";
 import { NomadVisaDetails } from "@features/nomad-visas/ui";
 import { Plane } from "lucide-react";
@@ -11,7 +12,6 @@ import { Link } from "react-router-dom";
 import { CountryDetailPanelFooter } from "./CountryDetailPanelFooter";
 import { CountryDetailPanelHeader } from "./CountryDetailPanelHeader";
 import { CountryDetailTourismScores } from "./CountryDetailTourismScores";
-import { ScoreBreakdown } from "./ScoreBreakdown";
 
 interface CountryDetailPanelProps {
   country: RankedCountry;

@@ -1,8 +1,8 @@
 import { useLangPrefix } from "@core/hooks";
 import { CountryNameCell } from "@core/ui/country";
+import { CompareCheckbox } from "@core/ui/selection";
 import { comfortScoreColourClass, getRowStyles, surplusColourClass } from "@core/utils";
 import type { BudgetMatch } from "@features/budget/hooks";
-import { CompareCheckbox } from "@features/compare/ui";
 import { ChevronRight } from "lucide-react";
 import type React from "react";
 

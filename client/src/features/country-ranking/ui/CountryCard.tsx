@@ -1,12 +1,12 @@
 import { useLangPrefix } from "@core/hooks";
 import type { RankedCountry, WeightMap } from "@core/models";
 import { ViewCountryButton } from "@core/ui/country";
+import { ScoreBreakdown } from "@core/ui/indicator";
+import { CompareCheckbox } from "@core/ui/selection";
 import { getRowStyles } from "@core/utils";
-import { CompareCheckbox } from "@features/compare/ui";
 import type React from "react";
 
 import { CountryCardMainButton } from "./CountryCardMainButton";
-import { ScoreBreakdown } from "./ScoreBreakdown";
 
 interface CountryCardProps {
   readonly ranked: RankedCountry;

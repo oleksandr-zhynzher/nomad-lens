@@ -1,3 +1,4 @@
+import { FilterChipGroup } from "@core/ui/forms/FilterChipGroup";
 import { ALL_TOURISM_TAGS, type TourismTag } from "@features/tourism/hooks";
 import { useTranslation } from "react-i18next";
 
@@ -10,26 +11,16 @@ export function TourismTagFilters({ requiredTags, onToggleTag }: TourismTagFilte
   const { t } = useTranslation();
   return (
     <div className="mb-0">
-      <div className="mb-3 text-[13px] font-bold tracking-[2px] text-on-surface uppercase">
-        {t("tourismFilters.activityTags", "Activities")}
-      </div>
-      <div className="flex flex-wrap gap-2">
-        {ALL_TOURISM_TAGS.map((tag) => {
-          const active = requiredTags.includes(tag);
-          return (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => {
-                onToggleTag(tag);
-              }}
-              className={`cursor-pointer rounded-[3px] border-0 px-[18px] py-2 text-[13px] font-semibold ${active ? "bg-[#8F5A3C] text-white" : "bg-[#2A2A2A] text-on-surface"}`}
-            >
-              {t(`tourismTags.${tag}`, tag)}
-            </button>
-          );
-        })}
-      </div>
+      <FilterChipGroup
+        label={t("tourismFilters.activityTags", "Activities")}
+        items={ALL_TOURISM_TAGS.map((tag) => ({ id: tag, label: t(`tourismTags.${tag}`, tag) }))}
+        selectedIds={new Set(requiredTags)}
+        onToggle={(id) => {
+          onToggleTag(id as TourismTag);
+        }}
+        activeClassName="bg-[#8F5A3C] text-white"
+        inactiveClassName="bg-[#2A2A2A] text-on-surface"
+      />
     </div>
   );
 }

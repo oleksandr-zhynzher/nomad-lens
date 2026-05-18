@@ -1,6 +1,5 @@
 export * from "./BudgetComparison";
 export * from "./CompareActionBar";
-export * from "./CompareCheckbox";
 export * from "./CompareHeroStats";
 export * from "./CompareModeToggle";
 export * from "./ComparePanel";

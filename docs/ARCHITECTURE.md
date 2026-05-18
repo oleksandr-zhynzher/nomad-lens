@@ -20,7 +20,7 @@ Keep dependencies simple:
 app -> core/features
 features -> core
 core -> app
-core/features -> i18n
+core/features -> core/i18n
 features -/-> unrelated feature internals
 ```
 
@@ -37,7 +37,7 @@ Feature-to-feature imports are allowed only for intentional cross-feature compos
 - `src/core/ui`: reusable primitives and app-wide UI sections.
 - `src/core/utils`: domain-neutral pure helpers.
 - `src/features/<feature>`: feature-owned `ui`, `hooks`, `store`, `models`, `constants`, `utils`, `api`, and `data`.
-- `src/i18n`: i18next setup and locale files.
+- `src/core/i18n`: i18next setup and locale files.
 - Do not nest another `ui` folder inside an existing `ui` role folder; put section components directly under the section folder.
 - Keep code in `core` only when it is reused by multiple features or is genuinely app-wide. Single-feature code belongs in that feature's matching role folder.
 

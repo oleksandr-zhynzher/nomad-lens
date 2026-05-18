@@ -1,4 +1,4 @@
-import { toggleSetItem } from "@features/tourism/ui/tourism.utils";
+import { toggleSetItem } from "@features/tourism/utils/search.utils";
 import { useCallback, useState } from "react";
 import type { NavigateFunction } from "react-router-dom";
 

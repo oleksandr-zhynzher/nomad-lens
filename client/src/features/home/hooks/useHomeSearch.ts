@@ -1,6 +1,6 @@
 import type { RankedCountry } from "@core/models";
 import { localizeCountry } from "@core/utils";
-import type { SearchMode } from "@features/home/ui/home.types";
+import type { SearchMode } from "@features/home/models/search.models";
 import {
   type Dispatch,
   type SetStateAction,

@@ -1,6 +1,6 @@
-import type { SearchMode } from "@features/tourism/ui/tourism.types";
-import { filterRanked, findMatchingCodes } from "@features/tourism/ui/tourism.utils";
+import type { SearchMode } from "@features/tourism/models/search.models";
 import type { TourismRanked } from "@features/tourism/utils";
+import { filterRanked, findMatchingCodes } from "@features/tourism/utils/search.utils";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export function useTourismSearch(ranked: TourismRanked[], language: string) {

@@ -19,7 +19,7 @@ npm run doctor:ci
 
 - `src/app`: application bootstrap, router, global styles, and app-level store helpers.
 - `src/core`: reusable `api`, `constants`, `hooks`, `models`, `store`, `ui`, and `utils` with the same role-folder structure used by features. Keep `models` for TypeScript shapes only.
-- `src/i18n`: localization setup and locale files.
+- `src/core/i18n`: localization setup and locale files.
 - `src/features`: feature-owned UI, hooks, Zustand stores, models, constants, utilities, data, and APIs.
 - Routes in `src/app/router` lazy-load owning feature/core UI components directly. Do not add thin page adapter files.
 
