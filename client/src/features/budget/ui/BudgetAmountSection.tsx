@@ -30,7 +30,7 @@ export function BudgetAmountSection({ budget, setBudget, budgetPct }: BudgetAmou
     >
       <div className="px-4 py-3">
         <div className="mb-3 flex items-end gap-2">
-          <span className="font-mono text-[28px] leading-none font-bold text-on-surface">
+          <span className="font-mono text-2xl leading-none font-bold text-on-surface">
             ${budget.toLocaleString()}
           </span>
           <span className="pb-0.5 text-xs text-dimmer">{t("budget.perMonth", "/month")}</span>
