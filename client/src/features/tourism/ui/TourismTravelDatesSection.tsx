@@ -1,13 +1,11 @@
 import { CollapsibleSection } from "@core/ui/panels";
 import type { TourismToggles, TravelDates } from "@features/tourism/hooks";
-import { getMonthOptions } from "@features/tourism/utils";
 import { Calendar } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { TravelDateFieldModel } from "./TourismDatePickerPair";
-import { TourismDatePickerPair } from "./TourismDatePickerPair";
+import { TourismCalendarPicker } from "./TourismCalendarPicker";
 
 interface TourismTravelDatesSectionProps {
   readonly travelDates: TravelDates;
@@ -20,36 +18,8 @@ export function TourismTravelDatesSection({
   onTravelDatesChange,
   toggles,
 }: TourismTravelDatesSectionProps) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(true);
-  const monthOptions = getMonthOptions(i18n.language);
-  const travelDateFields: TravelDateFieldModel[] = [
-    {
-      id: "start",
-      dateVal: travelDates.startDate,
-      setDate: (month, day) => {
-        const next = month !== "" ? `2000-${month}-${day}` : null;
-        onTravelDatesChange((p) => ({
-          ...p,
-          startDate: next,
-          endDate:
-            next === null || p.endDate === null || next.slice(5) <= p.endDate.slice(5)
-              ? p.endDate
-              : null,
-        }));
-      },
-    },
-    {
-      id: "end",
-      dateVal: travelDates.endDate,
-      setDate: (month, day) => {
-        onTravelDatesChange((p) => ({
-          ...p,
-          endDate: month !== "" ? `2000-${month}-${day}` : null,
-        }));
-      },
-    },
-  ];
 
   return (
     <CollapsibleSection
@@ -79,17 +49,19 @@ export function TourismTravelDatesSection({
         setIsOpen((prev) => !prev);
       }}
     >
-      <div className="flex flex-col gap-2 px-4 py-3">
-        <div className="flex gap-2">
-          <span className="flex-1 text-xs text-dimmer">{t("tourismFilters.from", "From")}</span>
-          <span className="flex-1 text-xs text-dimmer">{t("tourismFilters.to", "To")}</span>
-        </div>
-        <TourismDatePickerPair travelDateFields={travelDateFields} monthOptions={monthOptions} />
+      <div className="px-4 py-3">
+        <TourismCalendarPicker
+          startDate={travelDates.startDate}
+          endDate={travelDates.endDate}
+          onChange={(start, end) => {
+            onTravelDatesChange((p) => ({ ...p, startDate: start, endDate: end }));
+          }}
+        />
         {travelDates.startDate !== null &&
         travelDates.endDate !== null &&
         toggles !== undefined &&
         toggles.requiredTags.length > 0 ? (
-          <p className="m-0 text-[11px] text-[#666]">
+          <p className="m-0 mt-2 text-[11px] text-[#666]">
             {t(
               "tourismFilters.seasonalHint",
               "Rankings are adjusted for seasonal quality during your travel dates.",
