@@ -1056,5 +1056,9 @@
     },
     "total": "Total",
     "surplus": "surplus"
+  },
+  "budgetSettings": {
+    "title": "Budget Settings",
+    "hint": "Set your monthly budget and lifestyle preferences to find matching countries."
   }
 }

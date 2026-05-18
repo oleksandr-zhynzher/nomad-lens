@@ -1,5 +1,6 @@
 import type { BudgetState } from "@features/budget/types/budget.types";
 import type { Dispatch, SetStateAction } from "react";
+import { useTranslation } from "react-i18next";
 
 import { BudgetAmountSection } from "./BudgetAmountSection";
 import { BudgetCategorySection } from "./BudgetCategorySection";
@@ -26,8 +27,21 @@ export function BudgetSidebar({
   copied,
   setCopied,
 }: BudgetSidebarProps) {
+  const { t } = useTranslation();
   return (
     <>
+      <div className="flex-shrink-0 border-b border-[#2A2A2A] p-[14px_16px]">
+        <h2 className="text-[13px] font-semibold tracking-[2px] text-white uppercase">
+          {t("budgetSettings.title", "Budget Settings")}
+        </h2>
+        <p className="mt-1.5 text-[10px] leading-[1.5] text-dim">
+          {t(
+            "budgetSettings.hint",
+            "Set your monthly budget and lifestyle preferences to find matching countries.",
+          )}
+        </p>
+      </div>
+
       <BudgetAmountSection budget={bs.budget} setBudget={bs.setBudget} budgetPct={budgetPct} />
 
       <BudgetQualitySection qualityBlend={bs.qualityBlend} setQualityBlend={bs.setQualityBlend} />
