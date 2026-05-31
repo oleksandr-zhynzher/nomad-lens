@@ -1,4 +1,5 @@
 import { cache } from '../middleware/cache';
+import { fetchWithTimeout } from '../shared/http';
 import type { WhoIndicatorValue } from '../utils/types';
 
 const CACHE_KEY = 'who:lifeExpectancy';
@@ -11,7 +12,7 @@ export async function fetchWhoLifeExpectancy(): Promise<Map<string, number>> {
   const cached = cache.get<Map<string, number>>(CACHE_KEY);
   if (cached) return cached;
 
-  const res = await fetch(API_URL);
+  const res = await fetchWithTimeout(API_URL);
   if (!res.ok) throw new Error(`WHO GHO returned ${res.status}`);
 
   const json = (await res.json()) as { value: WhoIndicatorValue[] };

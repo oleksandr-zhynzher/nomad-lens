@@ -9,7 +9,6 @@ import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
-import * as dynamodb from 'aws-cdk-lib/aws-dynamodb';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as logs from 'aws-cdk-lib/aws-logs';
@@ -26,21 +25,41 @@ const defaultCertificateArn =
   'arn:aws:acm:us-east-1:881081146494:certificate/3e7ab294-d1a5-41b1-bc86-5297fedce409';
 const defaultHostedZoneId = 'Z0189551QJ0Z9ZRWEXO8';
 
-interface ApiFunctionOptions {
-  readonly environment?: Record<string, string>;
-  readonly memorySize?: number;
-  readonly timeout?: cdk.Duration;
-}
-
 const getContextString = (scope: Construct, key: string): string | undefined => {
   const value: unknown = scope.node.tryGetContext(key);
 
   return typeof value === 'string' && value.length > 0 ? value : undefined;
 };
 
+const DEFAULT_CORS_ORIGINS = ['https://nomad-lens.org', 'https://www.nomad-lens.org'];
+
+function getCorsOrigins(): readonly string[] {
+  const raw = process.env['CORS_ORIGINS'];
+  if (raw === undefined || raw.trim() === '') {
+    return DEFAULT_CORS_ORIGINS;
+  }
+
+  const parsedOrigins = raw
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter((origin) => origin.length > 0);
+
+  if (parsedOrigins.length === 0) {
+    throw new Error('CORS_ORIGINS must contain at least one origin when provided.');
+  }
+
+  if (parsedOrigins.includes('*')) {
+    throw new Error('CORS_ORIGINS cannot include "*".');
+  }
+
+  return parsedOrigins;
+}
+
 export class NomadLensStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+    const corsOrigins = [...getCorsOrigins()];
 
     // ── Custom domain ───────────────────────────────────────────────────────
     const hostedZone = route53.HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
@@ -86,151 +105,93 @@ export class NomadLensStack extends cdk.Stack {
     // ── S3 bucket (SPA static assets) ─────────────────────────────────────
     const siteBucket = new s3.Bucket(this, 'SiteBucket', {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-      autoDeleteObjects: true,
-    });
-    const siteBucketReference = s3.Bucket.fromBucketName(
-      this,
-      'SiteBucketReference',
-      siteBucket.bucketName,
-    );
-
-    // ── DynamoDB production data ───────────────────────────────────────────
-    const dataTable = new dynamodb.Table(this, 'DataTable', {
-      partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
-      sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
-      pointInTimeRecoverySpecification: { pointInTimeRecoveryEnabled: true },
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      enforceSSL: true,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
+      versioned: true,
+    });
+    // CDK's Bucket type is structurally compatible; this avoids an exactOptionalPropertyTypes mismatch.
+    const siteBucketForConsumers = siteBucket as s3.IBucket;
+
+    // ── Lambda (Express API) ───────────────────────────────────────────────
+    const serverDir = path.join(__dirname, '../../server');
+    const apiLogGroup = new logs.LogGroup(this, 'ApiFunctionLogGroup', {
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+      retention: logs.RetentionDays.ONE_MONTH,
     });
 
-    // ── Route-specific Lambda API handlers ─────────────────────────────────
-    const serverDir = path.join(__dirname, '../../server');
-    const apiCode = lambda.Code.fromAsset(serverDir, {
-      bundling: {
-        image: lambda.Runtime.NODEJS_22_X.bundlingImage,
-        command: ['bash', '-c', 'echo "Docker fallback"'],
-        local: {
-          tryBundle(outputDir: string) {
-            const outputDistDir = path.join(outputDir, 'dist');
-            cpSync(path.join(serverDir, 'dist'), outputDistDir, { recursive: true });
-            cpSync(path.join(serverDir, 'package.json'), path.join(outputDir, 'package.json'));
-            execFileSync(
-              'npm',
-              [
-                'install',
-                '--omit=dev',
-                '--legacy-peer-deps',
-                '--ignore-scripts',
-                '--prefix',
-                outputDir,
-              ],
-              { stdio: 'inherit' },
-            );
-            return true;
+    const apiFn = new lambda.Function(this, 'ApiFunction', {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: 'dist/lambda.handler',
+      code: lambda.Code.fromAsset(serverDir, {
+        bundling: {
+          image: lambda.Runtime.NODEJS_22_X.bundlingImage,
+          command: [
+            'bash',
+            '-c',
+            [
+              'cp -R /asset-input/. /tmp/server',
+              'cd /tmp/server',
+              'npm install',
+              'npm run build',
+              'cp -R dist /asset-output/dist',
+              'cp -R src/data /asset-output/dist/data',
+              'cp package.json /asset-output/package.json',
+              'cd /asset-output',
+              'npm install --omit=dev --ignore-scripts',
+            ].join(' && '),
+          ],
+          local: {
+            tryBundle(outputDir: string) {
+              const outputDistDir = path.join(outputDir, 'dist');
+              execFileSync('npm', ['run', 'build', '--prefix', serverDir], { stdio: 'inherit' });
+              cpSync(path.join(serverDir, 'dist'), outputDistDir, { recursive: true });
+              cpSync(path.join(serverDir, 'src/data'), path.join(outputDistDir, 'data'), {
+                recursive: true,
+              });
+              cpSync(path.join(serverDir, 'package.json'), path.join(outputDir, 'package.json'));
+              execFileSync(
+                'npm',
+                ['install', '--omit=dev', '--ignore-scripts', '--prefix', outputDir],
+                { stdio: 'inherit' },
+              );
+              return true;
+            },
           },
         },
+      }),
+      architecture: lambda.Architecture.ARM_64,
+      environment: {
+        CORS_ORIGINS: corsOrigins.join(','),
+        NODE_ENV: 'production',
       },
-    });
-    const createApiFunction = (
-      functionId: string,
-      handler: string,
-      options: ApiFunctionOptions = {},
-    ): lambda.Function =>
-      new lambda.Function(this, functionId, {
-        runtime: lambda.Runtime.NODEJS_22_X,
-        handler,
-        code: apiCode,
-        memorySize: options.memorySize ?? 128,
-        timeout: options.timeout ?? cdk.Duration.seconds(5),
-        logGroup: new logs.LogGroup(this, `${functionId}LogGroup`, {
-          retention: logs.RetentionDays.TWO_WEEKS,
-          removalPolicy: cdk.RemovalPolicy.DESTROY,
-        }),
-        environment: { NODE_ENV: 'production', ...options.environment },
-      });
-
-    const healthFunction = createApiFunction('HealthFunction', 'dist/handlers/health.handler');
-    const countriesListFunction = createApiFunction(
-      'CountriesListFunction',
-      'dist/handlers/countries.listHandler',
-      {
-        environment: { DATA_TABLE_NAME: dataTable.tableName },
-        memorySize: 512,
-        timeout: cdk.Duration.seconds(15),
-      },
-    );
-    const countryDetailFunction = createApiFunction(
-      'CountryDetailFunction',
-      'dist/handlers/countries.getHandler',
-      {
-        environment: { DATA_TABLE_NAME: dataTable.tableName },
-        memorySize: 256,
-      },
-    );
-    const metaFunction = createApiFunction('MetaFunction', 'dist/handlers/meta.handler', {
-      environment: { DATA_TABLE_NAME: dataTable.tableName },
+      logGroup: apiLogGroup,
+      memorySize: 256,
+      timeout: cdk.Duration.seconds(10),
     });
 
-    dataTable.grantReadData(countriesListFunction);
-    dataTable.grantReadData(countryDetailFunction);
-    dataTable.grantReadData(metaFunction);
     const alarmPeriod = cdk.Duration.minutes(5);
 
-    for (const apiFunction of [
-      { id: 'HealthFunctionErrorAlarm', value: healthFunction },
-      { id: 'CountriesListFunctionErrorAlarm', value: countriesListFunction },
-      { id: 'CountryDetailFunctionErrorAlarm', value: countryDetailFunction },
-      { id: 'MetaFunctionErrorAlarm', value: metaFunction },
-    ]) {
-      new cloudwatch.Alarm(this, apiFunction.id, {
-        metric: apiFunction.value.metricErrors({ period: alarmPeriod, statistic: 'sum' }),
-        threshold: 1,
-        evaluationPeriods: 1,
-        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-      });
-    }
+    new cloudwatch.Alarm(this, 'ApiFunctionErrorAlarm', {
+      metric: apiFn.metricErrors({ period: alarmPeriod, statistic: 'sum' }),
+      threshold: 1,
+      evaluationPeriods: 1,
+      comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
+    });
 
     // ── HTTP API Gateway ───────────────────────────────────────────────────
     const httpApi = new apigwv2.HttpApi(this, 'HttpApi', {
       corsPreflight: {
-        allowOrigins: ['*'],
-        allowMethods: [apigwv2.CorsHttpMethod.ANY],
-        allowHeaders: ['Content-Type', 'Authorization'],
+        allowHeaders: ['Authorization', 'Content-Type', 'X-Request-Id'],
+        allowMethods: [apigwv2.CorsHttpMethod.GET, apigwv2.CorsHttpMethod.OPTIONS],
+        allowOrigins: corsOrigins,
       },
     });
 
     httpApi.addRoutes({
-      path: '/api/health',
+      path: '/api/{proxy+}',
       methods: [apigwv2.HttpMethod.GET],
-      integration: new apigwv2Integrations.HttpLambdaIntegration(
-        'HealthIntegration',
-        healthFunction,
-      ),
-    });
-
-    httpApi.addRoutes({
-      path: '/api/countries',
-      methods: [apigwv2.HttpMethod.GET],
-      integration: new apigwv2Integrations.HttpLambdaIntegration(
-        'CountriesListIntegration',
-        countriesListFunction,
-      ),
-    });
-
-    httpApi.addRoutes({
-      path: '/api/countries/{code}',
-      methods: [apigwv2.HttpMethod.GET],
-      integration: new apigwv2Integrations.HttpLambdaIntegration(
-        'CountryDetailIntegration',
-        countryDetailFunction,
-      ),
-    });
-
-    httpApi.addRoutes({
-      path: '/api/meta',
-      methods: [apigwv2.HttpMethod.GET],
-      integration: new apigwv2Integrations.HttpLambdaIntegration('MetaIntegration', metaFunction),
+      integration: new apigwv2Integrations.HttpLambdaIntegration('ApiIntegration', apiFn),
     });
 
     new cloudwatch.Alarm(this, 'HttpApiServerErrorAlarm', {
@@ -239,22 +200,6 @@ export class NomadLensStack extends cdk.Stack {
       evaluationPeriods: 1,
       comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
     });
-
-    for (const dataTableThrottleMetric of [
-      { id: 'DataTableGetThrottleAlarm', operation: 'GetItem' },
-      { id: 'DataTableQueryThrottleAlarm', operation: 'Query' },
-      { id: 'DataTablePutThrottleAlarm', operation: 'PutItem' },
-    ]) {
-      new cloudwatch.Alarm(this, dataTableThrottleMetric.id, {
-        metric: dataTable.metricThrottledRequestsForOperation(dataTableThrottleMetric.operation, {
-          period: alarmPeriod,
-          statistic: 'sum',
-        }),
-        threshold: 1,
-        evaluationPeriods: 1,
-        comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
-      });
-    }
 
     // ── CloudFront distribution ────────────────────────────────────────────
     const apiOrigin = new origins.HttpOrigin(
@@ -266,18 +211,22 @@ export class NomadLensStack extends cdk.Stack {
       certificate,
       domainNames: [hostedZoneName, siteDomainName],
       defaultRootObject: 'index.html',
+      httpVersion: cloudfront.HttpVersion.HTTP2_AND_3,
+      minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
       defaultBehavior: {
-        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucketReference),
-        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucketForConsumers),
         cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
+        responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS,
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       additionalBehaviors: {
         '/api/*': {
           origin: apiOrigin,
-          viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-          cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
-          allowedMethods: cloudfront.AllowedMethods.ALLOW_ALL,
+          allowedMethods: cloudfront.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
           originRequestPolicy: cloudfront.OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
+          cachePolicy: cloudfront.CachePolicy.CACHING_DISABLED,
+          responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS,
+          viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         },
       },
       errorResponses: [
@@ -324,7 +273,7 @@ export class NomadLensStack extends cdk.Stack {
     // ── Deploy client build to S3 + invalidate CloudFront ─────────────────
     new s3deploy.BucketDeployment(this, 'SiteDeploy', {
       sources: [s3deploy.Source.asset(path.join(__dirname, '../../client/dist'))],
-      destinationBucket: siteBucketReference,
+      destinationBucket: siteBucketForConsumers,
       distribution,
       distributionPaths: ['/*'],
     });
@@ -348,11 +297,6 @@ export class NomadLensStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'ApiUrl', {
       value: httpApi.apiEndpoint,
       description: 'API Gateway endpoint URL',
-    });
-
-    new cdk.CfnOutput(this, 'DataTableName', {
-      value: dataTable.tableName,
-      description: 'DynamoDB table for production country data',
     });
 
     new cdk.CfnOutput(this, 'GitHubActionsDeployRoleArn', {

@@ -1,4 +1,5 @@
 import { cache } from '../middleware/cache';
+import { fetchWithTimeout } from '../shared/http';
 import type { WorldBankIndicatorMap } from '../utils/types';
 
 const CACHE_KEY = 'worldbank:indicators';
@@ -51,7 +52,7 @@ async function fetchIndicator(code: IndicatorCode): Promise<WbDataPoint[]> {
   // climate proxies) still resolve to the most recently available non-null year.
   // per_page=2000 covers 250+ countries × 5 years in a single request.
   const url = `https://api.worldbank.org/v2/country/all/indicator/${code}?format=json&mrv=5&per_page=2000`;
-  const res = await fetch(url);
+  const res = await fetchWithTimeout(url);
   if (!res.ok) throw new Error(`World Bank ${code} returned ${res.status}`);
 
   const json = (await res.json()) as [unknown, WbDataPoint[] | null];
