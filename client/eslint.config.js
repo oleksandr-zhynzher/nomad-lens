@@ -19,7 +19,6 @@ import security from "eslint-plugin-security";
 import promise from "eslint-plugin-promise";
 import functional from "eslint-plugin-functional";
 import boundaries from "eslint-plugin-boundaries";
-import deprecation from "eslint-plugin-deprecation";
 import noSecrets from "eslint-plugin-no-secrets";
 import regexp from "eslint-plugin-regexp";
 import perfectionist from "eslint-plugin-perfectionist";
@@ -68,7 +67,6 @@ export default defineConfig([
       "eslint-comments": eslintComments,
       functional,
       boundaries,
-      deprecation,
       "no-secrets": noSecrets,
       perfectionist,
       "simple-import-sort": simpleImportSort,
@@ -344,8 +342,7 @@ export default defineConfig([
       "no-secrets/no-secrets": ["error", { tolerance: 4.5 }],
 
       // ── Phase 3: Deprecation ───────────────────────────────────────────
-      // Disabled until eslint-plugin-deprecation supports ESLint 9 context APIs.
-      "deprecation/deprecation": "off",
+      "@typescript-eslint/no-deprecated": "off",
 
       // ── Phase 3: Regexp ───────────────────────────────────────────────
       "regexp/no-unused-capturing-group": "error",

@@ -1,7 +1,6 @@
 const js = require("@eslint/js");
 const { defineConfig, globalIgnores } = require("eslint/config");
 const prettier = require("eslint-config-prettier");
-const deprecation = require("eslint-plugin-deprecation");
 const eslintComments = require("eslint-plugin-eslint-comments");
 const functionalModule = require("eslint-plugin-functional");
 const importPlugin = require("eslint-plugin-import");
@@ -52,7 +51,6 @@ module.exports = defineConfig([
       reportUnusedInlineConfigs: "error",
     },
     plugins: {
-      deprecation,
       "eslint-comments": eslintComments,
       functional,
       import: importPlugin,
@@ -72,12 +70,7 @@ module.exports = defineConfig([
       ...importPlugin.configs.recommended.rules,
       ...importPlugin.configs.typescript.rules,
       ...eslintComments.configs.recommended.rules,
-      // eslint-plugin-deprecation 3.x still calls the removed ESLint 9
-      // context.getAncestors() API, so keep the plugin wired but do not enable
-      // its rule until the plugin ships ESLint 9-compatible rule internals.
-
       "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
-      "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
       "@typescript-eslint/consistent-type-imports": [
         "error",
         { fixStyle: "inline-type-imports", prefer: "type-imports" },

@@ -1,5 +1,4 @@
 const js = require("@eslint/js");
-const deprecation = require("eslint-plugin-deprecation");
 const eslintComments = require("eslint-plugin-eslint-comments");
 const functional = require("eslint-plugin-functional").default;
 const globals = require("globals");
@@ -43,7 +42,6 @@ module.exports = defineConfig([
       sourceType: "module",
     },
     plugins: {
-      deprecation,
       "eslint-comments": eslintComments,
       functional,
       "no-secrets": noSecrets,
@@ -107,11 +105,7 @@ module.exports = defineConfig([
       "simple-import-sort/imports": "error",
       "unused-imports/no-unused-imports": "error",
 
-      // ── Comments and deprecations ────────────────────────────────────────
-      // eslint-plugin-deprecation currently calls context.getAncestors(),
-      // which is not available under ESLint 9 flat config. Keep the plugin
-      // wired here so the rule can be enabled once the plugin is compatible.
-      "deprecation/deprecation": "off",
+      // ── Comments ────────────────────────────────────────────────────────
       "eslint-comments/disable-enable-pair": "error",
       "eslint-comments/no-aggregating-enable": "error",
       "eslint-comments/no-duplicate-disable": "error",
