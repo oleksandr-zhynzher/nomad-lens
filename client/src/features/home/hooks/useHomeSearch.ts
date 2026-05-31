@@ -1,3 +1,4 @@
+import { useLatestRef } from "@core/hooks";
 import type { RankedCountry } from "@core/models";
 import { localizeCountry } from "@core/utils";
 import type { SearchMode } from "@features/home/models/search.models";
@@ -11,6 +12,11 @@ import {
   useState,
 } from "react";
 
+function scrollCountryIntoView(code: string) {
+  const el = document.querySelector(`[data-country-code="${code}"]`);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
 export function useHomeSearch(
   ranked: RankedCountry[],
   lang: string,
@@ -22,11 +28,7 @@ export function useHomeSearch(
   const [navCursor, setNavCursor] = useState<number | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // "Latest ref" pattern so keydown handler never captures stale closures
-  const setExpandedCodeRef = useRef(setExpandedCode);
-  useEffect(() => {
-    setExpandedCodeRef.current = setExpandedCode;
-  }, [setExpandedCode]);
+  const setExpandedCodeRef = useLatestRef(setExpandedCode);
 
   const matchingCodes = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -48,8 +50,7 @@ export function useHomeSearch(
   useEffect(() => {
     if (matchingCodes.length === 0) return;
     const code = matchingCodes[matchCursor % matchingCodes.length];
-    const el = document.querySelector(`[data-country-code="${code}"]`);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (code !== undefined) scrollCountryIntoView(code);
   }, [matchCursor, matchingCodes]);
 
   const goNext = useCallback(() => {
@@ -69,43 +70,17 @@ export function useHomeSearch(
   useEffect(() => {
     if (activeNavCursor === null || activeNavCursor >= allCodes.length) return;
     const code = allCodes[activeNavCursor];
-    const el = document.querySelector(`[data-country-code="${code}"]`);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (code !== undefined) scrollCountryIntoView(code);
   }, [activeNavCursor, allCodes]);
 
-  // Stable refs so keydown listener has no stale captures
-  const searchRef = useRef(search);
-  useEffect(() => {
-    searchRef.current = search;
-  }, [search]);
-  const searchModeRef = useRef(searchMode);
-  useEffect(() => {
-    searchModeRef.current = searchMode;
-  }, [searchMode]);
-  const matchingCodesRef = useRef(matchingCodes);
-  useEffect(() => {
-    matchingCodesRef.current = matchingCodes;
-  }, [matchingCodes]);
-  const matchCursorRef = useRef(matchCursor);
-  useEffect(() => {
-    matchCursorRef.current = matchCursor;
-  }, [matchCursor]);
-  const activeNavCursorRef = useRef(activeNavCursor);
-  useEffect(() => {
-    activeNavCursorRef.current = activeNavCursor;
-  }, [activeNavCursor]);
-  const allCodesRef = useRef(allCodes);
-  useEffect(() => {
-    allCodesRef.current = allCodes;
-  }, [allCodes]);
-  const goNextRef = useRef(goNext);
-  useEffect(() => {
-    goNextRef.current = goNext;
-  }, [goNext]);
-  const goPrevRef = useRef(goPrev);
-  useEffect(() => {
-    goPrevRef.current = goPrev;
-  }, [goPrev]);
+  const searchRef = useLatestRef(search);
+  const searchModeRef = useLatestRef(searchMode);
+  const matchingCodesRef = useLatestRef(matchingCodes);
+  const matchCursorRef = useLatestRef(matchCursor);
+  const activeNavCursorRef = useLatestRef(activeNavCursor);
+  const allCodesRef = useLatestRef(allCodes);
+  const goNextRef = useLatestRef(goNext);
+  const goPrevRef = useLatestRef(goPrev);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -157,6 +132,7 @@ export function useHomeSearch(
     return () => {
       globalThis.removeEventListener("keydown", onKeyDown);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- all deps are stable refs; including them would cause listener re-registration on every render
   }, []);
 
   const displayedRanked = useMemo(() => {
