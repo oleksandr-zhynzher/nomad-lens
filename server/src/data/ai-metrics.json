@@ -7,7 +7,7 @@
     {
       "code": "AD",
       "nomadCommunity": 12,
-      "visaFriendliness": 50,
+      "visaFriendliness": 58,
       "costEfficiency": 18,
       "workLifeBalance": 42,
       "digitalReadiness": 55,
@@ -16,7 +16,7 @@
     {
       "code": "AE",
       "nomadCommunity": 65,
-      "visaFriendliness": 78,
+      "visaFriendliness": 72,
       "costEfficiency": 28,
       "workLifeBalance": 62,
       "digitalReadiness": 82,
@@ -25,7 +25,7 @@
     {
       "code": "AF",
       "nomadCommunity": 2,
-      "visaFriendliness": 5,
+      "visaFriendliness": 8,
       "costEfficiency": 30,
       "workLifeBalance": 5,
       "digitalReadiness": 8,
@@ -34,7 +34,7 @@
     {
       "code": "AG",
       "nomadCommunity": 18,
-      "visaFriendliness": 72,
+      "visaFriendliness": 81,
       "costEfficiency": 22,
       "workLifeBalance": 55,
       "digitalReadiness": 42,
@@ -43,7 +43,7 @@
     {
       "code": "AL",
       "nomadCommunity": 48,
-      "visaFriendliness": 78,
+      "visaFriendliness": 81,
       "costEfficiency": 88,
       "workLifeBalance": 62,
       "digitalReadiness": 45,
@@ -52,7 +52,7 @@
     {
       "code": "AM",
       "nomadCommunity": 35,
-      "visaFriendliness": 78,
+      "visaFriendliness": 85,
       "costEfficiency": 82,
       "workLifeBalance": 48,
       "digitalReadiness": 48,
@@ -61,7 +61,7 @@
     {
       "code": "AO",
       "nomadCommunity": 5,
-      "visaFriendliness": 22,
+      "visaFriendliness": 29,
       "costEfficiency": 28,
       "workLifeBalance": 15,
       "digitalReadiness": 15,
@@ -70,7 +70,7 @@
     {
       "code": "AR",
       "nomadCommunity": 58,
-      "visaFriendliness": 72,
+      "visaFriendliness": 77,
       "costEfficiency": 82,
       "workLifeBalance": 72,
       "digitalReadiness": 58,
@@ -88,7 +88,7 @@
     {
       "code": "AT",
       "nomadCommunity": 45,
-      "visaFriendliness": 58,
+      "visaFriendliness": 64,
       "costEfficiency": 30,
       "workLifeBalance": 70,
       "digitalReadiness": 75,
@@ -97,7 +97,7 @@
     {
       "code": "AU",
       "nomadCommunity": 62,
-      "visaFriendliness": 52,
+      "visaFriendliness": 59,
       "costEfficiency": 22,
       "workLifeBalance": 82,
       "digitalReadiness": 82,
@@ -115,7 +115,7 @@
     {
       "code": "AZ",
       "nomadCommunity": 18,
-      "visaFriendliness": 55,
+      "visaFriendliness": 54,
       "costEfficiency": 68,
       "workLifeBalance": 38,
       "digitalReadiness": 45,
@@ -124,7 +124,7 @@
     {
       "code": "BA",
       "nomadCommunity": 22,
-      "visaFriendliness": 60,
+      "visaFriendliness": 65,
       "costEfficiency": 80,
       "workLifeBalance": 48,
       "digitalReadiness": 42,
@@ -133,7 +133,7 @@
     {
       "code": "BB",
       "nomadCommunity": 32,
-      "visaFriendliness": 82,
+      "visaFriendliness": 86,
       "costEfficiency": 25,
       "workLifeBalance": 62,
       "digitalReadiness": 55,
@@ -142,7 +142,7 @@
     {
       "code": "BD",
       "nomadCommunity": 8,
-      "visaFriendliness": 30,
+      "visaFriendliness": 35,
       "costEfficiency": 65,
       "workLifeBalance": 18,
       "digitalReadiness": 22,
@@ -151,7 +151,7 @@
     {
       "code": "BE",
       "nomadCommunity": 48,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 32,
       "workLifeBalance": 68,
       "digitalReadiness": 78,
@@ -160,7 +160,7 @@
     {
       "code": "BF",
       "nomadCommunity": 3,
-      "visaFriendliness": 25,
+      "visaFriendliness": 23,
       "costEfficiency": 55,
       "workLifeBalance": 12,
       "digitalReadiness": 10,
@@ -169,7 +169,7 @@
     {
       "code": "BG",
       "nomadCommunity": 52,
-      "visaFriendliness": 62,
+      "visaFriendliness": 67,
       "costEfficiency": 85,
       "workLifeBalance": 58,
       "digitalReadiness": 58,
@@ -178,7 +178,7 @@
     {
       "code": "BH",
       "nomadCommunity": 22,
-      "visaFriendliness": 60,
+      "visaFriendliness": 58,
       "costEfficiency": 38,
       "workLifeBalance": 40,
       "digitalReadiness": 68,
@@ -187,7 +187,7 @@
     {
       "code": "BI",
       "nomadCommunity": 2,
-      "visaFriendliness": 22,
+      "visaFriendliness": 20,
       "costEfficiency": 55,
       "workLifeBalance": 8,
       "digitalReadiness": 8,
@@ -196,7 +196,7 @@
     {
       "code": "BJ",
       "nomadCommunity": 5,
-      "visaFriendliness": 42,
+      "visaFriendliness": 44,
       "costEfficiency": 62,
       "workLifeBalance": 18,
       "digitalReadiness": 12,
@@ -214,7 +214,7 @@
     {
       "code": "BN",
       "nomadCommunity": 5,
-      "visaFriendliness": 45,
+      "visaFriendliness": 54,
       "costEfficiency": 38,
       "workLifeBalance": 30,
       "digitalReadiness": 52,
@@ -223,7 +223,7 @@
     {
       "code": "BO",
       "nomadCommunity": 15,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 82,
       "workLifeBalance": 38,
       "digitalReadiness": 25,
@@ -232,7 +232,7 @@
     {
       "code": "BR",
       "nomadCommunity": 55,
-      "visaFriendliness": 62,
+      "visaFriendliness": 72,
       "costEfficiency": 68,
       "workLifeBalance": 72,
       "digitalReadiness": 55,
@@ -241,7 +241,7 @@
     {
       "code": "BS",
       "nomadCommunity": 12,
-      "visaFriendliness": 62,
+      "visaFriendliness": 74,
       "costEfficiency": 15,
       "workLifeBalance": 52,
       "digitalReadiness": 52,
@@ -250,7 +250,7 @@
     {
       "code": "BT",
       "nomadCommunity": 5,
-      "visaFriendliness": 18,
+      "visaFriendliness": 17,
       "costEfficiency": 35,
       "workLifeBalance": 35,
       "digitalReadiness": 22,
@@ -259,7 +259,7 @@
     {
       "code": "BW",
       "nomadCommunity": 8,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 42,
       "workLifeBalance": 28,
       "digitalReadiness": 28,
@@ -268,7 +268,7 @@
     {
       "code": "BY",
       "nomadCommunity": 12,
-      "visaFriendliness": 30,
+      "visaFriendliness": 35,
       "costEfficiency": 72,
       "workLifeBalance": 32,
       "digitalReadiness": 40,
@@ -277,7 +277,7 @@
     {
       "code": "BZ",
       "nomadCommunity": 22,
-      "visaFriendliness": 72,
+      "visaFriendliness": 67,
       "costEfficiency": 55,
       "workLifeBalance": 55,
       "digitalReadiness": 32,
@@ -286,7 +286,7 @@
     {
       "code": "CA",
       "nomadCommunity": 60,
-      "visaFriendliness": 48,
+      "visaFriendliness": 60,
       "costEfficiency": 28,
       "workLifeBalance": 72,
       "digitalReadiness": 82,
@@ -304,7 +304,7 @@
     {
       "code": "CF",
       "nomadCommunity": 1,
-      "visaFriendliness": 10,
+      "visaFriendliness": 11,
       "costEfficiency": 25,
       "workLifeBalance": 3,
       "digitalReadiness": 3,
@@ -313,7 +313,7 @@
     {
       "code": "CG",
       "nomadCommunity": 3,
-      "visaFriendliness": 20,
+      "visaFriendliness": 19,
       "costEfficiency": 32,
       "workLifeBalance": 10,
       "digitalReadiness": 10,
@@ -322,7 +322,7 @@
     {
       "code": "CH",
       "nomadCommunity": 45,
-      "visaFriendliness": 45,
+      "visaFriendliness": 54,
       "costEfficiency": 8,
       "workLifeBalance": 72,
       "digitalReadiness": 85,
@@ -331,7 +331,7 @@
     {
       "code": "CI",
       "nomadCommunity": 8,
-      "visaFriendliness": 32,
+      "visaFriendliness": 28,
       "costEfficiency": 52,
       "workLifeBalance": 18,
       "digitalReadiness": 18,
@@ -340,7 +340,7 @@
     {
       "code": "CL",
       "nomadCommunity": 38,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 52,
       "workLifeBalance": 62,
       "digitalReadiness": 62,
@@ -349,7 +349,7 @@
     {
       "code": "CM",
       "nomadCommunity": 5,
-      "visaFriendliness": 28,
+      "visaFriendliness": 25,
       "costEfficiency": 52,
       "workLifeBalance": 15,
       "digitalReadiness": 12,
@@ -367,7 +367,7 @@
     {
       "code": "CO",
       "nomadCommunity": 78,
-      "visaFriendliness": 72,
+      "visaFriendliness": 77,
       "costEfficiency": 85,
       "workLifeBalance": 78,
       "digitalReadiness": 55,
@@ -376,7 +376,7 @@
     {
       "code": "CR",
       "nomadCommunity": 62,
-      "visaFriendliness": 75,
+      "visaFriendliness": 78,
       "costEfficiency": 52,
       "workLifeBalance": 82,
       "digitalReadiness": 52,
@@ -385,7 +385,7 @@
     {
       "code": "CU",
       "nomadCommunity": 5,
-      "visaFriendliness": 32,
+      "visaFriendliness": 37,
       "costEfficiency": 38,
       "workLifeBalance": 28,
       "digitalReadiness": 8,
@@ -394,7 +394,7 @@
     {
       "code": "CV",
       "nomadCommunity": 22,
-      "visaFriendliness": 62,
+      "visaFriendliness": 63,
       "costEfficiency": 55,
       "workLifeBalance": 58,
       "digitalReadiness": 35,
@@ -403,7 +403,7 @@
     {
       "code": "CW",
       "nomadCommunity": 12,
-      "visaFriendliness": 60,
+      "visaFriendliness": 66,
       "costEfficiency": 28,
       "workLifeBalance": 52,
       "digitalReadiness": 52,
@@ -412,7 +412,7 @@
     {
       "code": "CY",
       "nomadCommunity": 42,
-      "visaFriendliness": 60,
+      "visaFriendliness": 72,
       "costEfficiency": 50,
       "workLifeBalance": 68,
       "digitalReadiness": 62,
@@ -421,7 +421,7 @@
     {
       "code": "CZ",
       "nomadCommunity": 62,
-      "visaFriendliness": 58,
+      "visaFriendliness": 72,
       "costEfficiency": 70,
       "workLifeBalance": 68,
       "digitalReadiness": 72,
@@ -430,7 +430,7 @@
     {
       "code": "DE",
       "nomadCommunity": 72,
-      "visaFriendliness": 55,
+      "visaFriendliness": 70,
       "costEfficiency": 42,
       "workLifeBalance": 72,
       "digitalReadiness": 80,
@@ -439,7 +439,7 @@
     {
       "code": "DJ",
       "nomadCommunity": 3,
-      "visaFriendliness": 35,
+      "visaFriendliness": 39,
       "costEfficiency": 32,
       "workLifeBalance": 12,
       "digitalReadiness": 15,
@@ -448,7 +448,7 @@
     {
       "code": "DK",
       "nomadCommunity": 45,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 18,
       "workLifeBalance": 72,
       "digitalReadiness": 88,
@@ -457,7 +457,7 @@
     {
       "code": "DM",
       "nomadCommunity": 10,
-      "visaFriendliness": 68,
+      "visaFriendliness": 66,
       "costEfficiency": 42,
       "workLifeBalance": 45,
       "digitalReadiness": 32,
@@ -466,7 +466,7 @@
     {
       "code": "DO",
       "nomadCommunity": 35,
-      "visaFriendliness": 68,
+      "visaFriendliness": 64,
       "costEfficiency": 65,
       "workLifeBalance": 62,
       "digitalReadiness": 42,
@@ -475,7 +475,7 @@
     {
       "code": "DZ",
       "nomadCommunity": 8,
-      "visaFriendliness": 25,
+      "visaFriendliness": 23,
       "costEfficiency": 58,
       "workLifeBalance": 28,
       "digitalReadiness": 28,
@@ -484,7 +484,7 @@
     {
       "code": "EC",
       "nomadCommunity": 42,
-      "visaFriendliness": 68,
+      "visaFriendliness": 76,
       "costEfficiency": 82,
       "workLifeBalance": 62,
       "digitalReadiness": 42,
@@ -493,7 +493,7 @@
     {
       "code": "EE",
       "nomadCommunity": 55,
-      "visaFriendliness": 82,
+      "visaFriendliness": 80,
       "costEfficiency": 65,
       "workLifeBalance": 60,
       "digitalReadiness": 88,
@@ -502,7 +502,7 @@
     {
       "code": "EG",
       "nomadCommunity": 35,
-      "visaFriendliness": 62,
+      "visaFriendliness": 59,
       "costEfficiency": 75,
       "workLifeBalance": 52,
       "digitalReadiness": 40,
@@ -511,7 +511,7 @@
     {
       "code": "ER",
       "nomadCommunity": 1,
-      "visaFriendliness": 8,
+      "visaFriendliness": 10,
       "costEfficiency": 35,
       "workLifeBalance": 5,
       "digitalReadiness": 5,
@@ -520,7 +520,7 @@
     {
       "code": "ES",
       "nomadCommunity": 82,
-      "visaFriendliness": 72,
+      "visaFriendliness": 78,
       "costEfficiency": 62,
       "workLifeBalance": 88,
       "digitalReadiness": 72,
@@ -529,7 +529,7 @@
     {
       "code": "ET",
       "nomadCommunity": 10,
-      "visaFriendliness": 42,
+      "visaFriendliness": 44,
       "costEfficiency": 68,
       "workLifeBalance": 22,
       "digitalReadiness": 15,
@@ -538,7 +538,7 @@
     {
       "code": "FI",
       "nomadCommunity": 35,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 22,
       "workLifeBalance": 68,
       "digitalReadiness": 88,
@@ -547,7 +547,7 @@
     {
       "code": "FJ",
       "nomadCommunity": 15,
-      "visaFriendliness": 62,
+      "visaFriendliness": 69,
       "costEfficiency": 48,
       "workLifeBalance": 55,
       "digitalReadiness": 28,
@@ -556,7 +556,7 @@
     {
       "code": "FM",
       "nomadCommunity": 2,
-      "visaFriendliness": 42,
+      "visaFriendliness": 44,
       "costEfficiency": 35,
       "workLifeBalance": 18,
       "digitalReadiness": 10,
@@ -574,7 +574,7 @@
     {
       "code": "FR",
       "nomadCommunity": 60,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 38,
       "workLifeBalance": 78,
       "digitalReadiness": 75,
@@ -583,7 +583,7 @@
     {
       "code": "GA",
       "nomadCommunity": 5,
-      "visaFriendliness": 28,
+      "visaFriendliness": 34,
       "costEfficiency": 28,
       "workLifeBalance": 15,
       "digitalReadiness": 18,
@@ -592,7 +592,7 @@
     {
       "code": "GB",
       "nomadCommunity": 70,
-      "visaFriendliness": 50,
+      "visaFriendliness": 61,
       "costEfficiency": 28,
       "workLifeBalance": 72,
       "digitalReadiness": 82,
@@ -601,7 +601,7 @@
     {
       "code": "GD",
       "nomadCommunity": 8,
-      "visaFriendliness": 62,
+      "visaFriendliness": 72,
       "costEfficiency": 35,
       "workLifeBalance": 48,
       "digitalReadiness": 32,
@@ -610,7 +610,7 @@
     {
       "code": "GE",
       "nomadCommunity": 72,
-      "visaFriendliness": 90,
+      "visaFriendliness": 91,
       "costEfficiency": 90,
       "workLifeBalance": 68,
       "digitalReadiness": 55,
@@ -619,7 +619,7 @@
     {
       "code": "GH",
       "nomadCommunity": 15,
-      "visaFriendliness": 42,
+      "visaFriendliness": 44,
       "costEfficiency": 62,
       "workLifeBalance": 28,
       "digitalReadiness": 25,
@@ -646,7 +646,7 @@
     {
       "code": "GM",
       "nomadCommunity": 8,
-      "visaFriendliness": 48,
+      "visaFriendliness": 56,
       "costEfficiency": 68,
       "workLifeBalance": 22,
       "digitalReadiness": 15,
@@ -655,7 +655,7 @@
     {
       "code": "GN",
       "nomadCommunity": 3,
-      "visaFriendliness": 28,
+      "visaFriendliness": 25,
       "costEfficiency": 55,
       "workLifeBalance": 10,
       "digitalReadiness": 8,
@@ -664,7 +664,7 @@
     {
       "code": "GQ",
       "nomadCommunity": 2,
-      "visaFriendliness": 18,
+      "visaFriendliness": 17,
       "costEfficiency": 22,
       "workLifeBalance": 8,
       "digitalReadiness": 10,
@@ -673,7 +673,7 @@
     {
       "code": "GR",
       "nomadCommunity": 62,
-      "visaFriendliness": 68,
+      "visaFriendliness": 76,
       "costEfficiency": 68,
       "workLifeBalance": 82,
       "digitalReadiness": 62,
@@ -682,7 +682,7 @@
     {
       "code": "GT",
       "nomadCommunity": 32,
-      "visaFriendliness": 68,
+      "visaFriendliness": 71,
       "costEfficiency": 82,
       "workLifeBalance": 52,
       "digitalReadiness": 35,
@@ -700,7 +700,7 @@
     {
       "code": "GW",
       "nomadCommunity": 2,
-      "visaFriendliness": 30,
+      "visaFriendliness": 26,
       "costEfficiency": 55,
       "workLifeBalance": 10,
       "digitalReadiness": 5,
@@ -709,7 +709,7 @@
     {
       "code": "GY",
       "nomadCommunity": 5,
-      "visaFriendliness": 48,
+      "visaFriendliness": 49,
       "costEfficiency": 48,
       "workLifeBalance": 18,
       "digitalReadiness": 18,
@@ -727,7 +727,7 @@
     {
       "code": "HN",
       "nomadCommunity": 15,
-      "visaFriendliness": 62,
+      "visaFriendliness": 67,
       "costEfficiency": 75,
       "workLifeBalance": 38,
       "digitalReadiness": 28,
@@ -745,7 +745,7 @@
     {
       "code": "HT",
       "nomadCommunity": 3,
-      "visaFriendliness": 25,
+      "visaFriendliness": 39,
       "costEfficiency": 38,
       "workLifeBalance": 8,
       "digitalReadiness": 8,
@@ -754,7 +754,7 @@
     {
       "code": "HU",
       "nomadCommunity": 52,
-      "visaFriendliness": 58,
+      "visaFriendliness": 70,
       "costEfficiency": 72,
       "workLifeBalance": 62,
       "digitalReadiness": 68,
@@ -763,7 +763,7 @@
     {
       "code": "ID",
       "nomadCommunity": 88,
-      "visaFriendliness": 70,
+      "visaFriendliness": 68,
       "costEfficiency": 90,
       "workLifeBalance": 88,
       "digitalReadiness": 62,
@@ -772,7 +772,7 @@
     {
       "code": "IE",
       "nomadCommunity": 45,
-      "visaFriendliness": 52,
+      "visaFriendliness": 59,
       "costEfficiency": 22,
       "workLifeBalance": 68,
       "digitalReadiness": 78,
@@ -781,7 +781,7 @@
     {
       "code": "IL",
       "nomadCommunity": 42,
-      "visaFriendliness": 52,
+      "visaFriendliness": 59,
       "costEfficiency": 22,
       "workLifeBalance": 62,
       "digitalReadiness": 82,
@@ -799,7 +799,7 @@
     {
       "code": "IN",
       "nomadCommunity": 52,
-      "visaFriendliness": 42,
+      "visaFriendliness": 35,
       "costEfficiency": 72,
       "workLifeBalance": 52,
       "digitalReadiness": 48,
@@ -817,7 +817,7 @@
     {
       "code": "IR",
       "nomadCommunity": 5,
-      "visaFriendliness": 18,
+      "visaFriendliness": 17,
       "costEfficiency": 55,
       "workLifeBalance": 25,
       "digitalReadiness": 22,
@@ -826,7 +826,7 @@
     {
       "code": "IS",
       "nomadCommunity": 25,
-      "visaFriendliness": 58,
+      "visaFriendliness": 68,
       "costEfficiency": 10,
       "workLifeBalance": 65,
       "digitalReadiness": 82,
@@ -835,7 +835,7 @@
     {
       "code": "IT",
       "nomadCommunity": 58,
-      "visaFriendliness": 62,
+      "visaFriendliness": 72,
       "costEfficiency": 48,
       "workLifeBalance": 82,
       "digitalReadiness": 68,
@@ -844,7 +844,7 @@
     {
       "code": "JM",
       "nomadCommunity": 20,
-      "visaFriendliness": 62,
+      "visaFriendliness": 67,
       "costEfficiency": 42,
       "workLifeBalance": 52,
       "digitalReadiness": 38,
@@ -853,7 +853,7 @@
     {
       "code": "JO",
       "nomadCommunity": 18,
-      "visaFriendliness": 55,
+      "visaFriendliness": 54,
       "costEfficiency": 55,
       "workLifeBalance": 42,
       "digitalReadiness": 48,
@@ -862,7 +862,7 @@
     {
       "code": "JP",
       "nomadCommunity": 55,
-      "visaFriendliness": 58,
+      "visaFriendliness": 64,
       "costEfficiency": 45,
       "workLifeBalance": 72,
       "digitalReadiness": 82,
@@ -871,7 +871,7 @@
     {
       "code": "KE",
       "nomadCommunity": 35,
-      "visaFriendliness": 55,
+      "visaFriendliness": 68,
       "costEfficiency": 68,
       "workLifeBalance": 40,
       "digitalReadiness": 38,
@@ -880,7 +880,7 @@
     {
       "code": "KG",
       "nomadCommunity": 18,
-      "visaFriendliness": 72,
+      "visaFriendliness": 67,
       "costEfficiency": 85,
       "workLifeBalance": 42,
       "digitalReadiness": 30,
@@ -889,7 +889,7 @@
     {
       "code": "KH",
       "nomadCommunity": 55,
-      "visaFriendliness": 72,
+      "visaFriendliness": 67,
       "costEfficiency": 85,
       "workLifeBalance": 58,
       "digitalReadiness": 38,
@@ -898,7 +898,7 @@
     {
       "code": "KI",
       "nomadCommunity": 1,
-      "visaFriendliness": 38,
+      "visaFriendliness": 41,
       "costEfficiency": 35,
       "workLifeBalance": 12,
       "digitalReadiness": 5,
@@ -907,7 +907,7 @@
     {
       "code": "KM",
       "nomadCommunity": 2,
-      "visaFriendliness": 42,
+      "visaFriendliness": 47,
       "costEfficiency": 48,
       "workLifeBalance": 15,
       "digitalReadiness": 8,
@@ -916,7 +916,7 @@
     {
       "code": "KN",
       "nomadCommunity": 8,
-      "visaFriendliness": 62,
+      "visaFriendliness": 67,
       "costEfficiency": 28,
       "workLifeBalance": 45,
       "digitalReadiness": 38,
@@ -934,7 +934,7 @@
     {
       "code": "KR",
       "nomadCommunity": 52,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 42,
       "workLifeBalance": 68,
       "digitalReadiness": 92,
@@ -943,7 +943,7 @@
     {
       "code": "KW",
       "nomadCommunity": 15,
-      "visaFriendliness": 35,
+      "visaFriendliness": 30,
       "costEfficiency": 28,
       "workLifeBalance": 28,
       "digitalReadiness": 65,
@@ -961,7 +961,7 @@
     {
       "code": "KZ",
       "nomadCommunity": 18,
-      "visaFriendliness": 62,
+      "visaFriendliness": 59,
       "costEfficiency": 72,
       "workLifeBalance": 35,
       "digitalReadiness": 45,
@@ -970,7 +970,7 @@
     {
       "code": "LA",
       "nomadCommunity": 22,
-      "visaFriendliness": 60,
+      "visaFriendliness": 58,
       "costEfficiency": 82,
       "workLifeBalance": 48,
       "digitalReadiness": 28,
@@ -979,7 +979,7 @@
     {
       "code": "LB",
       "nomadCommunity": 20,
-      "visaFriendliness": 42,
+      "visaFriendliness": 35,
       "costEfficiency": 48,
       "workLifeBalance": 45,
       "digitalReadiness": 40,
@@ -988,7 +988,7 @@
     {
       "code": "LC",
       "nomadCommunity": 12,
-      "visaFriendliness": 68,
+      "visaFriendliness": 70,
       "costEfficiency": 32,
       "workLifeBalance": 52,
       "digitalReadiness": 38,
@@ -997,7 +997,7 @@
     {
       "code": "LI",
       "nomadCommunity": 5,
-      "visaFriendliness": 45,
+      "visaFriendliness": 54,
       "costEfficiency": 8,
       "workLifeBalance": 42,
       "digitalReadiness": 72,
@@ -1006,7 +1006,7 @@
     {
       "code": "LK",
       "nomadCommunity": 42,
-      "visaFriendliness": 60,
+      "visaFriendliness": 63,
       "costEfficiency": 78,
       "workLifeBalance": 65,
       "digitalReadiness": 42,
@@ -1015,7 +1015,7 @@
     {
       "code": "LR",
       "nomadCommunity": 3,
-      "visaFriendliness": 28,
+      "visaFriendliness": 25,
       "costEfficiency": 48,
       "workLifeBalance": 8,
       "digitalReadiness": 8,
@@ -1024,7 +1024,7 @@
     {
       "code": "LS",
       "nomadCommunity": 2,
-      "visaFriendliness": 42,
+      "visaFriendliness": 44,
       "costEfficiency": 58,
       "workLifeBalance": 15,
       "digitalReadiness": 12,
@@ -1033,7 +1033,7 @@
     {
       "code": "LT",
       "nomadCommunity": 38,
-      "visaFriendliness": 58,
+      "visaFriendliness": 71,
       "costEfficiency": 68,
       "workLifeBalance": 55,
       "digitalReadiness": 72,
@@ -1042,7 +1042,7 @@
     {
       "code": "LU",
       "nomadCommunity": 25,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 15,
       "workLifeBalance": 58,
       "digitalReadiness": 82,
@@ -1051,7 +1051,7 @@
     {
       "code": "LV",
       "nomadCommunity": 35,
-      "visaFriendliness": 58,
+      "visaFriendliness": 70,
       "costEfficiency": 68,
       "workLifeBalance": 52,
       "digitalReadiness": 70,
@@ -1060,7 +1060,7 @@
     {
       "code": "LY",
       "nomadCommunity": 2,
-      "visaFriendliness": 10,
+      "visaFriendliness": 11,
       "costEfficiency": 35,
       "workLifeBalance": 8,
       "digitalReadiness": 15,
@@ -1069,7 +1069,7 @@
     {
       "code": "MA",
       "nomadCommunity": 55,
-      "visaFriendliness": 68,
+      "visaFriendliness": 71,
       "costEfficiency": 78,
       "workLifeBalance": 68,
       "digitalReadiness": 48,
@@ -1078,7 +1078,7 @@
     {
       "code": "MC",
       "nomadCommunity": 15,
-      "visaFriendliness": 45,
+      "visaFriendliness": 54,
       "costEfficiency": 5,
       "workLifeBalance": 55,
       "digitalReadiness": 72,
@@ -1087,7 +1087,7 @@
     {
       "code": "MD",
       "nomadCommunity": 15,
-      "visaFriendliness": 62,
+      "visaFriendliness": 67,
       "costEfficiency": 85,
       "workLifeBalance": 35,
       "digitalReadiness": 38,
@@ -1096,7 +1096,7 @@
     {
       "code": "ME",
       "nomadCommunity": 45,
-      "visaFriendliness": 72,
+      "visaFriendliness": 78,
       "costEfficiency": 72,
       "workLifeBalance": 68,
       "digitalReadiness": 50,
@@ -1114,7 +1114,7 @@
     {
       "code": "MG",
       "nomadCommunity": 8,
-      "visaFriendliness": 52,
+      "visaFriendliness": 59,
       "costEfficiency": 78,
       "workLifeBalance": 35,
       "digitalReadiness": 12,
@@ -1123,7 +1123,7 @@
     {
       "code": "MH",
       "nomadCommunity": 1,
-      "visaFriendliness": 38,
+      "visaFriendliness": 49,
       "costEfficiency": 32,
       "workLifeBalance": 12,
       "digitalReadiness": 8,
@@ -1141,7 +1141,7 @@
     {
       "code": "ML",
       "nomadCommunity": 3,
-      "visaFriendliness": 22,
+      "visaFriendliness": 20,
       "costEfficiency": 52,
       "workLifeBalance": 10,
       "digitalReadiness": 8,
@@ -1150,7 +1150,7 @@
     {
       "code": "MM",
       "nomadCommunity": 8,
-      "visaFriendliness": 22,
+      "visaFriendliness": 29,
       "costEfficiency": 62,
       "workLifeBalance": 25,
       "digitalReadiness": 18,
@@ -1159,7 +1159,7 @@
     {
       "code": "MN",
       "nomadCommunity": 12,
-      "visaFriendliness": 62,
+      "visaFriendliness": 59,
       "costEfficiency": 72,
       "workLifeBalance": 38,
       "digitalReadiness": 32,
@@ -1186,7 +1186,7 @@
     {
       "code": "MR",
       "nomadCommunity": 2,
-      "visaFriendliness": 32,
+      "visaFriendliness": 44,
       "costEfficiency": 48,
       "workLifeBalance": 10,
       "digitalReadiness": 10,
@@ -1195,7 +1195,7 @@
     {
       "code": "MT",
       "nomadCommunity": 40,
-      "visaFriendliness": 65,
+      "visaFriendliness": 75,
       "costEfficiency": 40,
       "workLifeBalance": 68,
       "digitalReadiness": 70,
@@ -1204,7 +1204,7 @@
     {
       "code": "MU",
       "nomadCommunity": 28,
-      "visaFriendliness": 72,
+      "visaFriendliness": 74,
       "costEfficiency": 52,
       "workLifeBalance": 62,
       "digitalReadiness": 52,
@@ -1213,7 +1213,7 @@
     {
       "code": "MV",
       "nomadCommunity": 15,
-      "visaFriendliness": 68,
+      "visaFriendliness": 64,
       "costEfficiency": 18,
       "workLifeBalance": 62,
       "digitalReadiness": 45,
@@ -1222,7 +1222,7 @@
     {
       "code": "MW",
       "nomadCommunity": 5,
-      "visaFriendliness": 42,
+      "visaFriendliness": 44,
       "costEfficiency": 65,
       "workLifeBalance": 15,
       "digitalReadiness": 10,
@@ -1231,7 +1231,7 @@
     {
       "code": "MX",
       "nomadCommunity": 88,
-      "visaFriendliness": 82,
+      "visaFriendliness": 85,
       "costEfficiency": 85,
       "workLifeBalance": 82,
       "digitalReadiness": 58,
@@ -1240,7 +1240,7 @@
     {
       "code": "MY",
       "nomadCommunity": 68,
-      "visaFriendliness": 68,
+      "visaFriendliness": 75,
       "costEfficiency": 82,
       "workLifeBalance": 72,
       "digitalReadiness": 72,
@@ -1249,7 +1249,7 @@
     {
       "code": "MZ",
       "nomadCommunity": 5,
-      "visaFriendliness": 35,
+      "visaFriendliness": 39,
       "costEfficiency": 55,
       "workLifeBalance": 18,
       "digitalReadiness": 10,
@@ -1258,7 +1258,7 @@
     {
       "code": "NA",
       "nomadCommunity": 15,
-      "visaFriendliness": 55,
+      "visaFriendliness": 66,
       "costEfficiency": 48,
       "workLifeBalance": 38,
       "digitalReadiness": 28,
@@ -1276,7 +1276,7 @@
     {
       "code": "NE",
       "nomadCommunity": 2,
-      "visaFriendliness": 22,
+      "visaFriendliness": 20,
       "costEfficiency": 52,
       "workLifeBalance": 8,
       "digitalReadiness": 5,
@@ -1285,7 +1285,7 @@
     {
       "code": "NG",
       "nomadCommunity": 15,
-      "visaFriendliness": 32,
+      "visaFriendliness": 28,
       "costEfficiency": 55,
       "workLifeBalance": 22,
       "digitalReadiness": 28,
@@ -1294,7 +1294,7 @@
     {
       "code": "NI",
       "nomadCommunity": 18,
-      "visaFriendliness": 62,
+      "visaFriendliness": 67,
       "costEfficiency": 82,
       "workLifeBalance": 42,
       "digitalReadiness": 25,
@@ -1303,7 +1303,7 @@
     {
       "code": "NL",
       "nomadCommunity": 62,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 28,
       "workLifeBalance": 75,
       "digitalReadiness": 85,
@@ -1312,7 +1312,7 @@
     {
       "code": "NO",
       "nomadCommunity": 35,
-      "visaFriendliness": 55,
+      "visaFriendliness": 67,
       "costEfficiency": 12,
       "workLifeBalance": 70,
       "digitalReadiness": 88,
@@ -1321,7 +1321,7 @@
     {
       "code": "NP",
       "nomadCommunity": 32,
-      "visaFriendliness": 58,
+      "visaFriendliness": 64,
       "costEfficiency": 85,
       "workLifeBalance": 52,
       "digitalReadiness": 28,
@@ -1330,7 +1330,7 @@
     {
       "code": "NR",
       "nomadCommunity": 1,
-      "visaFriendliness": 32,
+      "visaFriendliness": 37,
       "costEfficiency": 22,
       "workLifeBalance": 8,
       "digitalReadiness": 8,
@@ -1339,7 +1339,7 @@
     {
       "code": "NZ",
       "nomadCommunity": 48,
-      "visaFriendliness": 52,
+      "visaFriendliness": 59,
       "costEfficiency": 25,
       "workLifeBalance": 78,
       "digitalReadiness": 78,
@@ -1357,7 +1357,7 @@
     {
       "code": "PA",
       "nomadCommunity": 38,
-      "visaFriendliness": 72,
+      "visaFriendliness": 80,
       "costEfficiency": 48,
       "workLifeBalance": 58,
       "digitalReadiness": 52,
@@ -1366,7 +1366,7 @@
     {
       "code": "PE",
       "nomadCommunity": 42,
-      "visaFriendliness": 62,
+      "visaFriendliness": 67,
       "costEfficiency": 78,
       "workLifeBalance": 60,
       "digitalReadiness": 42,
@@ -1384,7 +1384,7 @@
     {
       "code": "PG",
       "nomadCommunity": 3,
-      "visaFriendliness": 32,
+      "visaFriendliness": 41,
       "costEfficiency": 38,
       "workLifeBalance": 12,
       "digitalReadiness": 8,
@@ -1393,7 +1393,7 @@
     {
       "code": "PH",
       "nomadCommunity": 52,
-      "visaFriendliness": 55,
+      "visaFriendliness": 54,
       "costEfficiency": 78,
       "workLifeBalance": 65,
       "digitalReadiness": 48,
@@ -1402,7 +1402,7 @@
     {
       "code": "PK",
       "nomadCommunity": 8,
-      "visaFriendliness": 25,
+      "visaFriendliness": 23,
       "costEfficiency": 62,
       "workLifeBalance": 15,
       "digitalReadiness": 22,
@@ -1411,7 +1411,7 @@
     {
       "code": "PL",
       "nomadCommunity": 55,
-      "visaFriendliness": 58,
+      "visaFriendliness": 64,
       "costEfficiency": 72,
       "workLifeBalance": 60,
       "digitalReadiness": 72,
@@ -1438,7 +1438,7 @@
     {
       "code": "PT",
       "nomadCommunity": 90,
-      "visaFriendliness": 82,
+      "visaFriendliness": 83,
       "costEfficiency": 72,
       "workLifeBalance": 88,
       "digitalReadiness": 72,
@@ -1447,7 +1447,7 @@
     {
       "code": "PW",
       "nomadCommunity": 2,
-      "visaFriendliness": 55,
+      "visaFriendliness": 54,
       "costEfficiency": 22,
       "workLifeBalance": 22,
       "digitalReadiness": 15,
@@ -1456,7 +1456,7 @@
     {
       "code": "PY",
       "nomadCommunity": 10,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 75,
       "workLifeBalance": 30,
       "digitalReadiness": 28,
@@ -1465,7 +1465,7 @@
     {
       "code": "QA",
       "nomadCommunity": 22,
-      "visaFriendliness": 55,
+      "visaFriendliness": 54,
       "costEfficiency": 22,
       "workLifeBalance": 38,
       "digitalReadiness": 72,
@@ -1474,7 +1474,7 @@
     {
       "code": "RO",
       "nomadCommunity": 48,
-      "visaFriendliness": 58,
+      "visaFriendliness": 70,
       "costEfficiency": 78,
       "workLifeBalance": 55,
       "digitalReadiness": 62,
@@ -1483,7 +1483,7 @@
     {
       "code": "RS",
       "nomadCommunity": 40,
-      "visaFriendliness": 72,
+      "visaFriendliness": 78,
       "costEfficiency": 78,
       "workLifeBalance": 55,
       "digitalReadiness": 55,
@@ -1501,7 +1501,7 @@
     {
       "code": "RW",
       "nomadCommunity": 12,
-      "visaFriendliness": 62,
+      "visaFriendliness": 59,
       "costEfficiency": 62,
       "workLifeBalance": 25,
       "digitalReadiness": 28,
@@ -1510,7 +1510,7 @@
     {
       "code": "SA",
       "nomadCommunity": 15,
-      "visaFriendliness": 42,
+      "visaFriendliness": 52,
       "costEfficiency": 35,
       "workLifeBalance": 32,
       "digitalReadiness": 68,
@@ -1519,7 +1519,7 @@
     {
       "code": "SB",
       "nomadCommunity": 2,
-      "visaFriendliness": 38,
+      "visaFriendliness": 49,
       "costEfficiency": 35,
       "workLifeBalance": 12,
       "digitalReadiness": 5,
@@ -1528,7 +1528,7 @@
     {
       "code": "SC",
       "nomadCommunity": 12,
-      "visaFriendliness": 72,
+      "visaFriendliness": 71,
       "costEfficiency": 18,
       "workLifeBalance": 58,
       "digitalReadiness": 42,
@@ -1537,7 +1537,7 @@
     {
       "code": "SD",
       "nomadCommunity": 1,
-      "visaFriendliness": 10,
+      "visaFriendliness": 11,
       "costEfficiency": 35,
       "workLifeBalance": 5,
       "digitalReadiness": 8,
@@ -1546,7 +1546,7 @@
     {
       "code": "SE",
       "nomadCommunity": 42,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 18,
       "workLifeBalance": 72,
       "digitalReadiness": 88,
@@ -1564,7 +1564,7 @@
     {
       "code": "SI",
       "nomadCommunity": 30,
-      "visaFriendliness": 58,
+      "visaFriendliness": 64,
       "costEfficiency": 55,
       "workLifeBalance": 68,
       "digitalReadiness": 68,
@@ -1573,7 +1573,7 @@
     {
       "code": "SK",
       "nomadCommunity": 28,
-      "visaFriendliness": 58,
+      "visaFriendliness": 64,
       "costEfficiency": 68,
       "workLifeBalance": 55,
       "digitalReadiness": 65,
@@ -1582,7 +1582,7 @@
     {
       "code": "SL",
       "nomadCommunity": 3,
-      "visaFriendliness": 28,
+      "visaFriendliness": 25,
       "costEfficiency": 52,
       "workLifeBalance": 10,
       "digitalReadiness": 8,
@@ -1591,7 +1591,7 @@
     {
       "code": "SM",
       "nomadCommunity": 5,
-      "visaFriendliness": 45,
+      "visaFriendliness": 54,
       "costEfficiency": 20,
       "workLifeBalance": 42,
       "digitalReadiness": 55,
@@ -1600,7 +1600,7 @@
     {
       "code": "SN",
       "nomadCommunity": 15,
-      "visaFriendliness": 42,
+      "visaFriendliness": 52,
       "costEfficiency": 62,
       "workLifeBalance": 25,
       "digitalReadiness": 20,
@@ -1609,7 +1609,7 @@
     {
       "code": "SO",
       "nomadCommunity": 1,
-      "visaFriendliness": 8,
+      "visaFriendliness": 10,
       "costEfficiency": 28,
       "workLifeBalance": 3,
       "digitalReadiness": 5,
@@ -1618,7 +1618,7 @@
     {
       "code": "SR",
       "nomadCommunity": 3,
-      "visaFriendliness": 32,
+      "visaFriendliness": 44,
       "costEfficiency": 42,
       "workLifeBalance": 18,
       "digitalReadiness": 18,
@@ -1627,7 +1627,7 @@
     {
       "code": "SS",
       "nomadCommunity": 1,
-      "visaFriendliness": 8,
+      "visaFriendliness": 10,
       "costEfficiency": 25,
       "workLifeBalance": 3,
       "digitalReadiness": 3,
@@ -1636,7 +1636,7 @@
     {
       "code": "ST",
       "nomadCommunity": 3,
-      "visaFriendliness": 48,
+      "visaFriendliness": 56,
       "costEfficiency": 45,
       "workLifeBalance": 22,
       "digitalReadiness": 10,
@@ -1645,7 +1645,7 @@
     {
       "code": "SV",
       "nomadCommunity": 22,
-      "visaFriendliness": 62,
+      "visaFriendliness": 73,
       "costEfficiency": 72,
       "workLifeBalance": 42,
       "digitalReadiness": 35,
@@ -1663,7 +1663,7 @@
     {
       "code": "SY",
       "nomadCommunity": 1,
-      "visaFriendliness": 5,
+      "visaFriendliness": 8,
       "costEfficiency": 25,
       "workLifeBalance": 5,
       "digitalReadiness": 8,
@@ -1672,7 +1672,7 @@
     {
       "code": "SZ",
       "nomadCommunity": 3,
-      "visaFriendliness": 42,
+      "visaFriendliness": 44,
       "costEfficiency": 52,
       "workLifeBalance": 15,
       "digitalReadiness": 15,
@@ -1699,7 +1699,7 @@
     {
       "code": "TG",
       "nomadCommunity": 3,
-      "visaFriendliness": 35,
+      "visaFriendliness": 30,
       "costEfficiency": 58,
       "workLifeBalance": 12,
       "digitalReadiness": 10,
@@ -1708,7 +1708,7 @@
     {
       "code": "TH",
       "nomadCommunity": 92,
-      "visaFriendliness": 75,
+      "visaFriendliness": 78,
       "costEfficiency": 92,
       "workLifeBalance": 85,
       "digitalReadiness": 72,
@@ -1726,7 +1726,7 @@
     {
       "code": "TL",
       "nomadCommunity": 5,
-      "visaFriendliness": 55,
+      "visaFriendliness": 54,
       "costEfficiency": 58,
       "workLifeBalance": 28,
       "digitalReadiness": 15,
@@ -1735,7 +1735,7 @@
     {
       "code": "TM",
       "nomadCommunity": 2,
-      "visaFriendliness": 8,
+      "visaFriendliness": 10,
       "costEfficiency": 45,
       "workLifeBalance": 12,
       "digitalReadiness": 10,
@@ -1744,7 +1744,7 @@
     {
       "code": "TN",
       "nomadCommunity": 22,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 72,
       "workLifeBalance": 48,
       "digitalReadiness": 38,
@@ -1753,7 +1753,7 @@
     {
       "code": "TO",
       "nomadCommunity": 2,
-      "visaFriendliness": 42,
+      "visaFriendliness": 47,
       "costEfficiency": 35,
       "workLifeBalance": 18,
       "digitalReadiness": 12,
@@ -1762,7 +1762,7 @@
     {
       "code": "TR",
       "nomadCommunity": 60,
-      "visaFriendliness": 65,
+      "visaFriendliness": 69,
       "costEfficiency": 78,
       "workLifeBalance": 72,
       "digitalReadiness": 62,
@@ -1771,7 +1771,7 @@
     {
       "code": "TT",
       "nomadCommunity": 10,
-      "visaFriendliness": 52,
+      "visaFriendliness": 59,
       "costEfficiency": 38,
       "workLifeBalance": 35,
       "digitalReadiness": 42,
@@ -1780,7 +1780,7 @@
     {
       "code": "TV",
       "nomadCommunity": 1,
-      "visaFriendliness": 35,
+      "visaFriendliness": 39,
       "costEfficiency": 28,
       "workLifeBalance": 8,
       "digitalReadiness": 5,
@@ -1789,7 +1789,7 @@
     {
       "code": "TW",
       "nomadCommunity": 52,
-      "visaFriendliness": 58,
+      "visaFriendliness": 71,
       "costEfficiency": 55,
       "workLifeBalance": 72,
       "digitalReadiness": 85,
@@ -1798,7 +1798,7 @@
     {
       "code": "TZ",
       "nomadCommunity": 15,
-      "visaFriendliness": 52,
+      "visaFriendliness": 59,
       "costEfficiency": 65,
       "workLifeBalance": 38,
       "digitalReadiness": 20,
@@ -1807,7 +1807,7 @@
     {
       "code": "UA",
       "nomadCommunity": 30,
-      "visaFriendliness": 55,
+      "visaFriendliness": 61,
       "costEfficiency": 82,
       "workLifeBalance": 40,
       "digitalReadiness": 52,
@@ -1816,7 +1816,7 @@
     {
       "code": "UG",
       "nomadCommunity": 10,
-      "visaFriendliness": 48,
+      "visaFriendliness": 56,
       "costEfficiency": 65,
       "workLifeBalance": 22,
       "digitalReadiness": 18,
@@ -1825,7 +1825,7 @@
     {
       "code": "US",
       "nomadCommunity": 75,
-      "visaFriendliness": 42,
+      "visaFriendliness": 52,
       "costEfficiency": 22,
       "workLifeBalance": 72,
       "digitalReadiness": 88,
@@ -1834,7 +1834,7 @@
     {
       "code": "UY",
       "nomadCommunity": 28,
-      "visaFriendliness": 68,
+      "visaFriendliness": 75,
       "costEfficiency": 45,
       "workLifeBalance": 62,
       "digitalReadiness": 58,
@@ -1843,7 +1843,7 @@
     {
       "code": "UZ",
       "nomadCommunity": 12,
-      "visaFriendliness": 58,
+      "visaFriendliness": 56,
       "costEfficiency": 78,
       "workLifeBalance": 30,
       "digitalReadiness": 32,
@@ -1852,7 +1852,7 @@
     {
       "code": "VC",
       "nomadCommunity": 5,
-      "visaFriendliness": 58,
+      "visaFriendliness": 56,
       "costEfficiency": 38,
       "workLifeBalance": 42,
       "digitalReadiness": 28,
@@ -1861,7 +1861,7 @@
     {
       "code": "VE",
       "nomadCommunity": 5,
-      "visaFriendliness": 18,
+      "visaFriendliness": 34,
       "costEfficiency": 52,
       "workLifeBalance": 15,
       "digitalReadiness": 15,
@@ -1897,7 +1897,7 @@
     {
       "code": "VU",
       "nomadCommunity": 5,
-      "visaFriendliness": 55,
+      "visaFriendliness": 54,
       "costEfficiency": 38,
       "workLifeBalance": 28,
       "digitalReadiness": 12,
@@ -1906,7 +1906,7 @@
     {
       "code": "WS",
       "nomadCommunity": 3,
-      "visaFriendliness": 48,
+      "visaFriendliness": 53,
       "costEfficiency": 38,
       "workLifeBalance": 22,
       "digitalReadiness": 15,
@@ -1915,7 +1915,7 @@
     {
       "code": "YE",
       "nomadCommunity": 1,
-      "visaFriendliness": 5,
+      "visaFriendliness": 8,
       "costEfficiency": 30,
       "workLifeBalance": 3,
       "digitalReadiness": 5,
@@ -1924,7 +1924,7 @@
     {
       "code": "ZA",
       "nomadCommunity": 48,
-      "visaFriendliness": 52,
+      "visaFriendliness": 67,
       "costEfficiency": 62,
       "workLifeBalance": 62,
       "digitalReadiness": 52,
@@ -1933,7 +1933,7 @@
     {
       "code": "ZM",
       "nomadCommunity": 5,
-      "visaFriendliness": 45,
+      "visaFriendliness": 54,
       "costEfficiency": 55,
       "workLifeBalance": 18,
       "digitalReadiness": 15,
@@ -1942,11 +1942,12 @@
     {
       "code": "ZW",
       "nomadCommunity": 5,
-      "visaFriendliness": 32,
+      "visaFriendliness": 44,
       "costEfficiency": 42,
       "workLifeBalance": 15,
       "digitalReadiness": 12,
       "culturalFit": 28
     }
-  ]
+  ],
+  "_visaFriendlinessRecalibrated": "2026-05-31 — visaFriendliness re-anchored to visas.json (tourist-visa length) + nomadVisa.json/nomadVisaDetails.json (program presence & quality) via scripts/recalibrate-visa-friendliness.ts. Soft sub-indicators (visa-run, e-visa, residency) retained from prior AI scores. Other metrics unchanged."
 }
