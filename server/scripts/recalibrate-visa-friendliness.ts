@@ -33,8 +33,12 @@ const METRICS_FILE = path.join(DATA, 'ai-metrics.json');
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const metrics: any = JSON.parse(fs.readFileSync(path.join(DATA, 'ai-metrics.json'), 'utf8'));
 const visas: any = JSON.parse(fs.readFileSync(path.join(DATA, 'visas.json'), 'utf8'));
-const visaList: string[] = JSON.parse(fs.readFileSync(path.join(DATA, 'nomadVisa.json'), 'utf8')).countries;
-const details: any[] = JSON.parse(fs.readFileSync(path.join(DATA, 'nomadVisaDetails.json'), 'utf8'));
+const visaList: string[] = JSON.parse(
+  fs.readFileSync(path.join(DATA, 'nomadVisa.json'), 'utf8'),
+).countries;
+const details: any[] = JSON.parse(
+  fs.readFileSync(path.join(DATA, 'nomadVisaDetails.json'), 'utf8'),
+);
 
 const detailByCode = Object.fromEntries(details.map((d) => [d.code, d]));
 const hasProgram = new Set(visaList);
@@ -92,4 +96,7 @@ fs.writeFileSync(METRICS_FILE, JSON.stringify(metrics, null, 2) + '\n', 'utf8');
 changes.sort((a, b) => Math.abs(b.to - b.from) - Math.abs(a.to - a.from));
 console.log(`✓ visaFriendliness updated for ${changes.length} countries`);
 console.log('Biggest movers:');
-for (const c of changes.slice(0, 18)) console.log(`  ${c.code}: ${c.from} → ${c.to} (${c.to - c.from >= 0 ? '+' : ''}${c.to - c.from})`);
+for (const c of changes.slice(0, 18))
+  console.log(
+    `  ${c.code}: ${c.from} → ${c.to} (${c.to - c.from >= 0 ? '+' : ''}${c.to - c.from})`,
+  );

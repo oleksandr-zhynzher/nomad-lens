@@ -57,9 +57,17 @@ function arrReplace(e: Entry, field: 'benefits' | 'requirements', match: Tri, re
   } else {
     e.eligibility.requirements = apply(e.eligibility.requirements, match.en, repl.en);
     if (e.i18n.ru.eligibility?.requirements)
-      e.i18n.ru.eligibility.requirements = apply(e.i18n.ru.eligibility.requirements, match.ru, repl.ru);
+      e.i18n.ru.eligibility.requirements = apply(
+        e.i18n.ru.eligibility.requirements,
+        match.ru,
+        repl.ru,
+      );
     if (e.i18n.ua.eligibility?.requirements)
-      e.i18n.ua.eligibility.requirements = apply(e.i18n.ua.eligibility.requirements, match.ua, repl.ua);
+      e.i18n.ua.eligibility.requirements = apply(
+        e.i18n.ua.eligibility.requirements,
+        match.ua,
+        repl.ua,
+      );
   }
 }
 
@@ -375,13 +383,7 @@ const patches: Record<string, (e: Entry) => void> = {
 
   // ── Namibia: correct USD conversion (~$180) ────────────────────────────
   NA: (e) => {
-    note(
-      e,
-      'cost',
-      'NAD 3,300 (≈ US$180).',
-      '3 300 NAD (≈ $180).',
-      '3 300 NAD (≈ $180).',
-    );
+    note(e, 'cost', 'NAD 3,300 (≈ US$180).', '3 300 NAD (≈ $180).', '3 300 NAD (≈ $180).');
   },
 
   // ── Seychelles: no official income minimum ─────────────────────────────
@@ -507,7 +509,11 @@ const patches: Record<string, (e: Entry) => void> = {
     arrReplace(
       e,
       'requirements',
-      { en: 'Proof of income ≥$684/month', ru: 'Подтверждение дохода ≥$684/мес.', ua: 'Підтвердження доходу ≥$684/міс.' },
+      {
+        en: 'Proof of income ≥$684/month',
+        ru: 'Подтверждение дохода ≥$684/мес.',
+        ua: 'Підтвердження доходу ≥$684/міс.',
+      },
       {
         en: 'Proof of income ≥$1,400/month (3× minimum wage)',
         ru: 'Подтверждение дохода ≥$1 400/мес. (3× МРОТ)',
@@ -539,7 +545,11 @@ const patches: Record<string, (e: Entry) => void> = {
     arrReplace(
       e,
       'requirements',
-      { en: 'Proof of income ≥$1,500/month', ru: 'Подтверждение дохода ≥$1 500/мес.', ua: 'Підтвердження доходу ≥$1 500/міс.' },
+      {
+        en: 'Proof of income ≥$1,500/month',
+        ru: 'Подтверждение дохода ≥$1 500/мес.',
+        ua: 'Підтвердження доходу ≥$1 500/міс.',
+      },
       {
         en: 'Proof of remote work activity (contract or income receipts)',
         ru: 'Подтверждение удалённой деятельности (контракт или поступления дохода)',
@@ -628,7 +638,8 @@ const patches: Record<string, (e: Entry) => void> = {
     e.cost = {
       currency: 'THB',
       amount: 10000,
-      notes: '~$280–300; varies by embassy. Each 180-day stay can be extended once (+180 days) for ฿1,900.',
+      notes:
+        '~$280–300; varies by embassy. Each 180-day stay can be extended once (+180 days) for ฿1,900.',
     };
     e.incomeRequirement = {
       currency: 'THB',
@@ -671,9 +682,12 @@ const patches: Record<string, (e: Entry) => void> = {
     e.i18n = {
       ru: {
         cost: {
-          notes: '~$280–300; зависит от посольства. Каждое пребывание 180 дней можно продлить один раз (+180 дней) за ฿1 900.',
+          notes:
+            '~$280–300; зависит от посольства. Каждое пребывание 180 дней можно продлить один раз (+180 дней) за ฿1 900.',
         },
-        incomeRequirement: { notes: 'Требований к доходу нет; нужно показать ฿500 000 (~$14 000) сбережений.' },
+        incomeRequirement: {
+          notes: 'Требований к доходу нет; нужно показать ฿500 000 (~$14 000) сбережений.',
+        },
         tax: {
           notes:
             'Иностранный доход от удалённой работы обычно не облагается, если вы не стали налоговым резидентом (183+ дней) и не перевели его в том же году. Разрешение на работу не выдаётся.',
@@ -705,9 +719,12 @@ const patches: Record<string, (e: Entry) => void> = {
       },
       ua: {
         cost: {
-          notes: '~$280–300; залежить від посольства. Кожне перебування 180 днів можна продовжити один раз (+180 днів) за ฿1 900.',
+          notes:
+            '~$280–300; залежить від посольства. Кожне перебування 180 днів можна продовжити один раз (+180 днів) за ฿1 900.',
         },
-        incomeRequirement: { notes: 'Вимог до доходу немає; потрібно показати ฿500 000 (~$14 000) заощаджень.' },
+        incomeRequirement: {
+          notes: 'Вимог до доходу немає; потрібно показати ฿500 000 (~$14 000) заощаджень.',
+        },
         tax: {
           notes:
             'Іноземний дохід від віддаленої роботи зазвичай не оподатковується, якщо ви не стали податковим резидентом (183+ днів) і не переказали його того ж року. Дозвіл на роботу не видається.',

@@ -93,10 +93,46 @@ const whsCurve = (s: number) => clamp(13.5 * Math.sqrt(s) + 6);
 // Street-food-aware mapping of the TasteAtlas leaderboard to a 0..100 anchor.
 // Source: tasteatlas.com/best/cuisines (2025/26) + World Food Awards 2025.
 const TASTEATLAS: Record<string, number> = {
-  GR: 96, IT: 96, MX: 95, JP: 95, TH: 95, IN: 94, CN: 93, VN: 92, TW: 92, ES: 92,
-  TR: 92, FR: 92, SG: 92, PE: 91, HK: 90, KR: 90, PT: 90, MY: 88, ID: 88, MA: 84,
-  LB: 85, GE: 82, US: 80, PL: 80, DE: 78, HU: 78, BR: 78, AR: 78, PH: 74, RO: 72,
-  HR: 72, CO: 72, RS: 70, IR: 72, LK: 76, PK: 72, BD: 65, DZ: 60, EG: 66, IL: 76,
+  GR: 96,
+  IT: 96,
+  MX: 95,
+  JP: 95,
+  TH: 95,
+  IN: 94,
+  CN: 93,
+  VN: 92,
+  TW: 92,
+  ES: 92,
+  TR: 92,
+  FR: 92,
+  SG: 92,
+  PE: 91,
+  HK: 90,
+  KR: 90,
+  PT: 90,
+  MY: 88,
+  ID: 88,
+  MA: 84,
+  LB: 85,
+  GE: 82,
+  US: 80,
+  PL: 80,
+  DE: 78,
+  HU: 78,
+  BR: 78,
+  AR: 78,
+  PH: 74,
+  RO: 72,
+  HR: 72,
+  CO: 72,
+  RS: 70,
+  IR: 72,
+  LK: 76,
+  PK: 72,
+  BD: 65,
+  DZ: 60,
+  EG: 66,
+  IL: 76,
 };
 
 // ── beachWaterQuality anchor: Blue Flag 2026 programme leaders (FEE) ───────
@@ -105,7 +141,16 @@ const TASTEATLAS: Record<string, number> = {
 // the expert baseline and barely participate in the programme, so we never
 // lower them. Values below are minimum floors.
 const BLUE_FLAG_FLOOR: Record<string, number> = {
-  ES: 90, GR: 94, TR: 80, IT: 84, FR: 80, PT: 90, HR: 92, DK: 60, DE: 48, NL: 50,
+  ES: 90,
+  GR: 94,
+  TR: 80,
+  IT: 84,
+  FR: 80,
+  PT: 90,
+  HR: 92,
+  DK: 60,
+  DE: 48,
+  NL: 50,
 };
 
 // ── explicit corrections (highest priority) ───────────────────────────────
@@ -162,7 +207,9 @@ const out: TourismEntry[] = existing.map((e) => {
   // 4) beachWaterQuality — preserve null (landlocked); apply Blue Flag floor.
   if (e.beachWaterQuality !== null) {
     const floor = BLUE_FLAG_FLOOR[code];
-    next.beachWaterQuality = r(floor !== undefined ? Math.max(e.beachWaterQuality, floor) : e.beachWaterQuality);
+    next.beachWaterQuality = r(
+      floor !== undefined ? Math.max(e.beachWaterQuality, floor) : e.beachWaterQuality,
+    );
   }
 
   // 5) explicit corrections win.
@@ -184,18 +231,21 @@ const header = {
   _version: '2.0.0',
   _generatedDate: new Date().toISOString().slice(0, 10),
   _generator: 'scripts/build-tourism-metrics.ts',
-  _note: 'Each value is a 0–100 composite score. null = data unavailable or concept inapplicable (e.g. beach for landlocked). historicalSites is UNESCO-grounded but boosted for archaeological icons; touristScamSafety blends peace/crime data with petty-scam reputation; streetFoodCuisine blends the TasteAtlas leaderboard with street-food reputation; beachWaterQuality uses Blue Flag for the Mediterranean leaders while preserving tropical water-quality reputation.',
+  _note:
+    'Each value is a 0–100 composite score. null = data unavailable or concept inapplicable (e.g. beach for landlocked). historicalSites is UNESCO-grounded but boosted for archaeological icons; touristScamSafety blends peace/crime data with petty-scam reputation; streetFoodCuisine blends the TasteAtlas leaderboard with street-food reputation; beachWaterQuality uses Blue Flag for the Mediterranean leaders while preserving tropical water-quality reputation.',
   _metrics: {
     nightlifeEntertainment: 'Bars, clubs, live music, festivals, cultural events quality',
     touristScamSafety: 'Safety from tourist scams, overcharging, fraud (higher = safer)',
     streetFoodCuisine: 'Quality & variety of street food, food markets, local cuisine reputation',
-    beachWaterQuality: 'Beach quality, water clarity, Blue Flag status. null for landlocked countries',
+    beachWaterQuality:
+      'Beach quality, water clarity, Blue Flag status. null for landlocked countries',
     walkabilityScenicBeauty: 'Pedestrian-friendly cities, scenic old towns, viewpoints, promenades',
     shoppingMarkets: 'Bazaars, malls, luxury outlets, local crafts, souvenir shopping',
     photographySpots: 'Iconic landmarks, photogenic landscapes, unique architecture',
     familyFriendliness: 'Kid-friendly attractions, theme parks, safety, family accommodation',
     adventureSports: 'Paragliding, bungee, surfing, rafting, zip-lines, trekking, diving',
-    historicalSites: 'Ruins, castles, ancient cities, UNESCO heritage density, archaeological richness',
+    historicalSites:
+      'Ruins, castles, ancient cities, UNESCO heritage density, archaeological richness',
   },
 };
 

@@ -89,7 +89,7 @@ const patches: Record<string, (e: Entry) => void> = {
     note(
       e,
       'incomeRequirement',
-      "The 365-day visa-free stay has no income requirement. The former \"Remotely from Georgia\" program (which asked $2,000/mo) is no longer active.",
+      'The 365-day visa-free stay has no income requirement. The former "Remotely from Georgia" program (which asked $2,000/mo) is no longer active.',
       'Безвизовое пребывание на 365 дней не имеет требования к доходу. Прежняя программа «Remotely from Georgia» (требовала $2 000/мес.) больше не действует.',
       'Безвізове перебування на 365 днів не має вимоги до доходу. Колишня програма «Remotely from Georgia» (вимагала $2 000/міс.) більше не діє.',
     );
