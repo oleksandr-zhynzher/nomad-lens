@@ -3,7 +3,6 @@ import { setOptionalSearchParam } from "@core/utils/url-search.utils";
 
 export {
   getRawCompareCountryCodes,
-  normalizeCountryCodes,
   parseCompareCountryCodes,
   setCompareCountryCodesParam,
 } from "@core/utils/country-code-url.utils";
