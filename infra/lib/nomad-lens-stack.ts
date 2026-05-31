@@ -82,8 +82,10 @@ export class NomadLensStack extends cdk.Stack {
           'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
         },
         StringLike: {
-          'token.actions.githubusercontent.com:sub':
+          'token.actions.githubusercontent.com:sub': [
             'repo:oleksandr-zhynzher/nomad-lens:ref:refs/heads/main',
+            'repo:oleksandr-zhynzher/nomad-lens:environment:production',
+          ],
         },
       }),
     });
