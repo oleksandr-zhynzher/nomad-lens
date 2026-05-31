@@ -39,7 +39,7 @@ export function NomadVisaComparisonSlots({
   const navigate = useNavigate();
   return (
     <>
-      <div className="grid grid-cols-3 gap-3 pb-2 [scrollbar-width:thin] md:flex md:items-stretch md:overflow-x-auto">
+      <div className="grid [scrollbar-width:thin] grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto">
         {selectedCountries.map((slot) => (
           <div key={slot.country.code} className="w-full min-w-0 md:w-[180px] md:shrink-0">
             <ComparisonSlotCard

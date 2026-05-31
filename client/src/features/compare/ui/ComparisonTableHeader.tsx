@@ -25,7 +25,7 @@ export function ComparisonTableHeader({
   return (
     <div
       ref={ref}
-      className="sticky top-14 z-10 overflow-x-auto bg-[#0F1114] [scrollbar-width:none] sm:top-[112px]"
+      className="sticky top-14 z-10 [scrollbar-width:none] overflow-x-auto bg-[#0F1114] sm:top-[112px]"
     >
       <div
         className="flex items-center border-b border-[#1C1C1C] py-[14px]"

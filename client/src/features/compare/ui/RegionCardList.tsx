@@ -14,7 +14,7 @@ interface RegionCardListProps {
 export function RegionCardList({ regionStats, enabled, onToggle }: RegionCardListProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
+    <div className="flex [scrollbar-width:thin] gap-3 overflow-x-auto pb-2">
       {regionStats.map((r) => {
         const active = enabled.has(r.name);
         return (
