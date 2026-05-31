@@ -1,23 +1,8 @@
-import type { ClimatePreferences, CountryData, WeightMap } from "@core/models";
+import type { CountryData, WeightMap } from "@core/models";
 import { localizeCountry } from "@core/utils";
-import { computeClimateScore, computeScore } from "@features/country-ranking/utils";
+import { computeScore } from "@core/utils/scoring.utils";
 
 import type { SortField, VisaRow } from "./nomad-visas.types";
-
-export function applyClimate(country: CountryData, climatePrefs: ClimatePreferences): CountryData {
-  if (!country.climateData) return country;
-
-  return {
-    ...country,
-    scores: {
-      ...country.scores,
-      climate: {
-        ...country.scores.climate,
-        value: computeClimateScore(country.climateData, climatePrefs),
-      },
-    },
-  };
-}
 
 export function computeOverallScore(country: CountryData, weights: WeightMap) {
   return computeScore(country, weights);
@@ -71,13 +56,5 @@ export function budgetCellClass(budget: number | null, maxBudget: number): strin
   return "font-mono text-sm font-semibold text-white";
 }
 
-type TranslateFn = (key: string) => string;
-
-export function getTaxStatusLabel(
-  status: "exempt" | "standard" | "special",
-  t: TranslateFn,
-): string {
-  if (status === "exempt") return t("countryPage.taxExemptLabel");
-  if (status === "special") return t("countryPage.specialTaxLabel");
-  return t("countryPage.standardTaxLabel");
-}
+export { applyClimate } from "@core/utils/scoring.utils";
+export { getTaxStatusLabel } from "@core/utils/visa-label.utils";
