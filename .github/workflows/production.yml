@@ -1,0 +1,48 @@
+name: Production deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy production
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run production quality gates
+        run: npm run quality:pr
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: eu-north-1
+          role-to-assume: arn:aws:iam::881081146494:role/nomad-lens-github-deploy
+
+      - name: Deploy CDK stack
+        run: npm run deploy
+
+      - name: Smoke test production
+        run: |
+          curl --fail --silent --show-error --retry 6 --retry-delay 10 https://www.nomad-lens.org/
+          curl --fail --silent --show-error --retry 6 --retry-delay 10 https://www.nomad-lens.org/api/health
+          curl --fail --silent --show-error --retry 6 --retry-delay 10 https://www.nomad-lens.org/api/meta

@@ -24,7 +24,8 @@
     "quality:pr": "npm run format:check && npm run lint:strict && npm run typecheck && npm run test:unit && npm run build",
     "quality:main": "npm run quality:pr && npm run test:e2e && npm run doctor",
     "quality:release": "npm run quality:main",
-    "deploy": "[ -f server/src/data/countries.json ] || npm run generate -w server && npm run build -w server && npm run build -w client && cd infra && npx cdk deploy --require-approval never",
+    "deploy": "([ -f server/src/data/countries.json ] || npm run generate -w server) && npm run build -w server && npm run build -w client && npm run build -w infra && npm run deploy -w infra && npm run deploy:import",
+    "deploy:import": "DATA_TABLE_NAME=$(aws cloudformation describe-stacks --region eu-north-1 --stack-name NomadLensStack --query \"Stacks[0].Outputs[?OutputKey=='DataTableName'].OutputValue | [0]\" --output text) && DATA_TABLE_NAME=\"$DATA_TABLE_NAME\" npm run import:countries -w server",
     "prepare": "husky",
     "commit": "cz"
   },

@@ -20,8 +20,8 @@ Compare countries across 9 dimensions — Economy, Healthcare, Education, Enviro
 ## Tech Stack
 
 - **Frontend:** React 18 + Vite + TypeScript + Tailwind CSS + Headless UI
-- **Backend:** Node.js + Express + TypeScript (runs on AWS Lambda)
-- **Infrastructure:** AWS CDK — Lambda + API Gateway + S3 + CloudFront
+- **Backend:** Node.js + TypeScript route-specific AWS Lambda handlers
+- **Infrastructure:** AWS CDK — Lambda + API Gateway + DynamoDB + S3 + CloudFront
 - **Local dev:** Docker Compose
 
 ## Getting Started
@@ -45,13 +45,32 @@ docker compose up
 - Backend API: http://localhost:3001
 - Health check: http://localhost:3001/api/health
 
-### Updating Local Data
+### Updating Data
 
-The files in `server/src/data/` are manually maintained JSON files. To update them:
+The files in `server/src/data/` are source fixtures for the production DynamoDB import. To update
+them:
 
 1. Download the latest data from the source (links in each JSON file's `_source` field)
 2. Update the JSON file following the existing schema
-3. Commit with: `git commit -m "chore(data): update <dataset> to <year>"`
+3. Run `npm run deploy` to build the app, deploy infrastructure, and import the country dataset
+4. Commit with: `git commit -m "chore(data): update <dataset> to <year>"`
+
+### Deployment
+
+Production is deployed with AWS CDK:
+
+```bash
+npm run deploy
+```
+
+The deploy script builds the server/client/infra workspaces, deploys CDK, and imports country data
+into DynamoDB. The CDK stack publishes the site at `https://www.nomad-lens.org` and
+`https://nomad-lens.org` through CloudFront. It imports the existing Route 53 hosted zone and
+CloudFront certificate; override them from `infra/` with
+`npx cdk deploy -c hostedZoneId=<zone-id> -c certificateArn=<certificate-arn>`.
+
+Production also deploys automatically on pushes to `main` through GitHub Actions OIDC using the
+`nomad-lens-github-deploy` IAM role managed by CDK.
 
 ## Contributing
 
