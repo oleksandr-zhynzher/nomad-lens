@@ -1,4 +1,5 @@
 import { cache } from '../middleware/cache';
+import { fetchWithTimeout } from '../shared/http';
 import type { OpenMeteoClimate, SeasonType } from '../utils/types';
 
 const CACHE_NS = 'openmeteo:climate:';
@@ -63,7 +64,7 @@ export async function fetchClimate(lat: number, lng: number): Promise<OpenMeteoC
 
   let res: Response | null = null;
   for (let attempt = 0; attempt < 3; attempt++) {
-    res = await fetch(url);
+    res = await fetchWithTimeout(url);
     if (res.ok) break;
     // Retry on rate-limit (429) or server errors (5xx)
     if (res.status === 429 || res.status >= 500) {
