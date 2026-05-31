@@ -44,7 +44,7 @@ export function BudgetComparisonAddPanel({
   return (
     <>
       <div className="relative">
-        <div className="grid grid-cols-3 gap-3 pb-2 [scrollbar-width:thin] md:flex md:items-stretch md:overflow-x-auto">
+        <div className="grid [scrollbar-width:thin] grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto">
           <BudgetSlotCards
             sortedSlots={sortedSlots}
             matchMap={matchMap}

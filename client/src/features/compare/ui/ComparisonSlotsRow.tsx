@@ -39,7 +39,7 @@ export function ComparisonSlotsRow({
   const { t } = useTranslation();
   return (
     <div className="relative">
-      <div className="flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
+      <div className="flex [scrollbar-width:thin] gap-3 overflow-x-auto pb-2">
         {sortedCountries.map((slot) => (
           <ComparisonSlotItem
             key={slot.country.code}
