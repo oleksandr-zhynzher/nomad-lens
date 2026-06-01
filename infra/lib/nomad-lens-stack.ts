@@ -210,7 +210,6 @@ export class NomadLensStack extends cdk.Stack {
       retention: logs.RetentionDays.ONE_MONTH,
     });
     const httpApi = new apigwv2.HttpApi(this, 'HttpApi', {
-      createDefaultStage: false,
       corsPreflight: {
         allowHeaders: ['Authorization', 'Content-Type', 'X-Request-Id'],
         allowMethods: [apigwv2.CorsHttpMethod.GET, apigwv2.CorsHttpMethod.OPTIONS],
@@ -224,15 +223,18 @@ export class NomadLensStack extends cdk.Stack {
       integration: new apigwv2Integrations.HttpLambdaIntegration('ApiIntegration', apiFn),
     });
 
-    new apigwv2.CfnStage(this, 'HttpApiDefaultStage', {
-      apiId: httpApi.apiId,
-      stageName: '$default',
-      autoDeploy: true,
-      accessLogSettings: {
-        destinationArn: apiAccessLogGroup.logGroupArn,
-        format: API_ACCESS_LOG_FORMAT,
-      },
-    });
+    // Configure access logging on the auto-created default stage via the L1 escape hatch.
+    // Using createDefaultStage: true (the default) preserves the CDK-generated CloudFormation
+    // logical ID, so CloudFormation updates the existing stage rather than trying to create a
+    // new $default stage that would conflict with the one already deployed.
+    if (httpApi.defaultStage === undefined) {
+      throw new Error('HttpApi default stage was not created');
+    }
+    const cfnDefaultStage = httpApi.defaultStage.node.defaultChild as apigwv2.CfnStage;
+    cfnDefaultStage.accessLogSettings = {
+      destinationArn: apiAccessLogGroup.logGroupArn,
+      format: API_ACCESS_LOG_FORMAT,
+    };
 
     const httpApiServerErrorAlarm = new cloudwatch.Alarm(this, 'HttpApiServerErrorAlarm', {
       metric: httpApi.metricServerError({ period: alarmPeriod, statistic: 'sum' }),
