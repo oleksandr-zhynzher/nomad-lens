@@ -1,5 +1,5 @@
 // Supported non-English locale segments in the URL path
-export const SUPPORTED_LANGS = ["ua", "ru"] as const;
+const SUPPORTED_LANGS = ["ua", "ru"] as const;
 export type SupportedLang = (typeof SUPPORTED_LANGS)[number];
 
 export function isSupportedLang(lang: string): lang is SupportedLang {

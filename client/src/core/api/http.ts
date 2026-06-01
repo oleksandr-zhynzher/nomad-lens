@@ -103,15 +103,6 @@ function isApiNetworkError(error: unknown): error is ApiNetworkError {
   return error instanceof Error && error.name === "ApiNetworkError";
 }
 
-export function isApiError(error: unknown): error is ApiError {
-  return (
-    isApiHttpError(error) ||
-    isApiContentTypeError(error) ||
-    isApiValidationError(error) ||
-    isApiNetworkError(error)
-  );
-}
-
 export function getUserFacingErrorMessage(error: unknown): string {
   if (isApiHttpError(error)) {
     if (error.status === 404) return "The requested data was not found.";

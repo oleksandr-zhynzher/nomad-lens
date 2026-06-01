@@ -16,15 +16,13 @@ export function CountryTourismSection({ country }: CountryTourismSectionProps) {
   const { t } = useTranslation();
   const locC = useLocalizedCountry(country);
   const tourismScore = computeTourismScore(country);
-  const tourismGroups = TOURISM_GROUPS.map((group) => ({
-    labelKey: group.labelKey,
-    metrics: group.keys
-      .map((key) => ({ key, value: country.scores[key].value }))
-      .filter(
-        (metric): metric is { key: (typeof group.keys)[number]; value: number } =>
-          metric.value != null,
-      ),
-  })).filter((group) => group.metrics.length > 0);
+  const tourismGroups = TOURISM_GROUPS.flatMap((group) => {
+    const metrics = group.keys.flatMap((key) => {
+      const value = country.scores[key].value;
+      return value != null ? [{ key, value }] : [];
+    });
+    return metrics.length > 0 ? [{ labelKey: group.labelKey, metrics }] : [];
+  });
   const tourismMetricCount = tourismGroups.reduce(
     (count, group) => count + group.metrics.length,
     0,

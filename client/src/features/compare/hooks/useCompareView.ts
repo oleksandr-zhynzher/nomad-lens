@@ -1,4 +1,4 @@
-import { useCountries, useLangPrefix } from "@core/hooks";
+import { useCountries, useLangPrefix, useLatestRef } from "@core/hooks";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "@core/models";
 import { useBudgetMatcher, useBudgetState } from "@features/budget/hooks";
 import { SHOW_WEIGHTS_MODES, SORTABLE_COMPARE_MODES } from "@features/compare/constants";
@@ -76,16 +76,19 @@ export function useCompareView() {
     applyPanelHeight(panelRef.current);
   }, []);
 
+  const syncPanelHeightRef = useLatestRef(syncPanelHeight);
+
   useEffect(() => {
     if (!showWeights) return;
-    requestAnimationFrame(syncPanelHeight);
-    window.addEventListener("scroll", syncPanelHeight, { passive: true });
-    window.addEventListener("resize", syncPanelHeight, { passive: true });
+    const handler = () => syncPanelHeightRef.current();
+    requestAnimationFrame(syncPanelHeightRef.current);
+    window.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("resize", handler, { passive: true });
     return () => {
-      window.removeEventListener("scroll", syncPanelHeight);
-      window.removeEventListener("resize", syncPanelHeight);
+      window.removeEventListener("scroll", handler);
+      window.removeEventListener("resize", handler);
     };
-  }, [showWeights, syncPanelHeight]);
+  }, [showWeights, syncPanelHeightRef]);
 
   useEffect(() => {
     if (countries.length === 0) return;

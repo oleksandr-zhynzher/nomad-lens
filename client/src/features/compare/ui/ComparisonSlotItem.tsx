@@ -3,6 +3,7 @@ import { Tooltip } from "@core/ui";
 import { localizeCountry, regionKey, scoreColourClass } from "@core/utils";
 import { applyClimate, computeScore } from "@features/country-ranking/utils";
 import { Plane } from "lucide-react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
@@ -29,6 +30,18 @@ export function ComparisonSlotItem({
   const score = computeScore(applyClimate(country, climatePrefs), weights);
   const countryName = localizeCountry(country, lang).name;
   const countryPath = `${langPrefix}/country/${country.code.toLowerCase()}`;
+  const nomadVisaBadge = useMemo(
+    () =>
+      country.hasNomadVisa ? (
+        <Tooltip content={t("countryDetail.nomadVisa", "Nomad Visa Available")} side="top">
+          <span className="inline-flex shrink-0 leading-none text-accent">
+            <Plane size={13} aria-hidden="true" />
+          </span>
+        </Tooltip>
+      ) : undefined,
+    [country.hasNomadVisa, t],
+  );
+
   return (
     <div className="w-[148px] shrink-0 md:w-[180px]">
       <ComparisonSlotCard
@@ -41,15 +54,7 @@ export function ComparisonSlotItem({
         })}
         to={countryPath}
         regionLabel={t(`regions.${regionKey(country.region)}`)}
-        nameSuffix={
-          country.hasNomadVisa ? (
-            <Tooltip content={t("countryDetail.nomadVisa", "Nomad Visa Available")} side="top">
-              <span className="inline-flex shrink-0 leading-none text-accent">
-                <Plane size={13} aria-hidden="true" />
-              </span>
-            </Tooltip>
-          ) : undefined
-        }
+        nameSuffix={nomadVisaBadge}
       >
         <span
           className={`[font-family:Oswald,_sans-serif] text-[32px] leading-none font-bold ${scoreColourClass(score, "text")}`}

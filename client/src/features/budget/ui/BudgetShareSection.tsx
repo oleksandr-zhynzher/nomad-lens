@@ -22,6 +22,7 @@ export function BudgetShareSection({
       <div className="flex flex-col gap-2 px-4 py-3">
         {isDefault ? null : (
           <button
+            type="button"
             onClick={() => {
               handleShare();
               setCopied(true);
@@ -70,6 +71,7 @@ export function BudgetShareSection({
           </button>
         )}
         <button
+          type="button"
           onClick={handleReset}
           className="flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded rounded-md border border-border bg-transparent text-[13px] font-medium text-accent-dim transition-colors"
         >

@@ -39,9 +39,11 @@ export function NomadVisasToolbar({
               value={searchQuery}
               onChange={(e) => onSearchQueryChange(e.target.value)}
               className={`h-10 w-full rounded-md border border-surface bg-[#161616] pl-9 text-sm text-white outline-none ${searchQuery !== "" ? "pr-9" : "pr-3"}`}
+              aria-label={t("nomadVisasPage.search", "Search countries...")}
             />
             {searchQuery !== "" ? (
               <button
+                type="button"
                 onClick={() => onSearchQueryChange("")}
                 className="absolute top-1/2 right-2.5 flex size-[22px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
                 aria-label={t("a11y.clearSearch", "Clear search")}
@@ -53,6 +55,7 @@ export function NomadVisasToolbar({
           {compareMode ? (
             <div className="flex w-full shrink-0 items-center justify-end gap-2 sm:w-auto">
               <button
+                type="button"
                 onClick={onCompare}
                 disabled={selectedCodes.size < 2}
                 className={`flex h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-3.5 text-[13px] font-semibold whitespace-nowrap transition-all sm:flex-none cursor-${selectedCodes.size < 2 ? "default" : "pointer"} ${selectedCodes.size < 2 ? "border border-accent-dim bg-transparent text-accent-dim" : "border-0 bg-accent text-white"}`}
@@ -68,6 +71,7 @@ export function NomadVisasToolbar({
                 ) : null}
               </button>
               <button
+                type="button"
                 onClick={onExitCompareMode}
                 className="flex size-10 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-transparent text-dim"
                 aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
@@ -77,6 +81,7 @@ export function NomadVisasToolbar({
             </div>
           ) : (
             <button
+              type="button"
               onClick={onEnterCompareMode}
               className="flex h-10 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-md border border-surface-4 bg-transparent px-3.5 text-[13px] font-medium whitespace-nowrap text-muted sm:w-auto"
             >

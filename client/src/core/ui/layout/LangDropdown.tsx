@@ -27,6 +27,7 @@ export function LangDropdown({ currentLangCode, langSwitchPath }: LangDropdownPr
   return (
     <div ref={ref} className="relative flex items-center">
       <button
+        type="button"
         onClick={() => {
           setOpen((previous) => !previous);
         }}
@@ -37,18 +38,22 @@ export function LangDropdown({ currentLangCode, langSwitchPath }: LangDropdownPr
 
       {open ? (
         <div className="absolute top-[calc(100%+6px)] left-1/2 z-50 -translate-x-1/2 overflow-hidden rounded-lg border border-[#252525] bg-[#111111] shadow-[0_8px_24px_rgba(0,0,0,0.6)]">
-          {LANG_OPTIONS.filter((option) => option.code !== currentLangCode).map((option, index) => (
-            <Link
-              key={option.code}
-              to={langSwitchPath(option.code)}
-              onClick={() => {
-                setOpen(false);
-              }}
-              className={`flex h-8 min-w-14 items-center justify-center px-4 text-xs leading-none font-semibold tracking-[1px] text-muted no-underline ${index === 0 ? "" : "border-t border-[#1E1E1E]"}`}
-            >
-              {option.code.toUpperCase()}
-            </Link>
-          ))}
+          {LANG_OPTIONS.flatMap((option) =>
+            option.code !== currentLangCode
+              ? [
+                  <Link
+                    key={option.code}
+                    to={langSwitchPath(option.code)}
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                    className="flex h-8 min-w-14 items-center justify-center border-t border-[#1E1E1E] px-4 text-xs leading-none font-semibold tracking-[1px] text-muted no-underline first:border-t-0"
+                  >
+                    {option.code.toUpperCase()}
+                  </Link>,
+                ]
+              : [],
+          )}
         </div>
       ) : null}
     </div>

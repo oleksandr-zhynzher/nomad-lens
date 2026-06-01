@@ -4,7 +4,7 @@ import { useCallback } from "react";
 
 import type { CountryData } from "../models/country.models";
 
-export const countryQueryKey = ["countries"] as const;
+const countryQueryKey = ["countries"] as const;
 
 interface UseCountriesResult {
   countries: CountryData[];

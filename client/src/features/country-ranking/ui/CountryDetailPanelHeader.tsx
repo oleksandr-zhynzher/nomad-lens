@@ -47,6 +47,7 @@ export function CountryDetailPanelHeader({
       </span>
 
       <button
+        type="button"
         onClick={onClose}
         className="flex size-8 shrink-0 items-center justify-center rounded bg-border text-muted transition-colors"
         aria-label={t("a11y.closePanel", "Close panel")}

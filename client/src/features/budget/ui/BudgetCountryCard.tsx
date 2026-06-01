@@ -40,6 +40,7 @@ export function BudgetCountryCard({
     >
       {compareMode ? <CompareCheckbox isSelected={isSelected} uncheckedBg={rowBg} /> : null}
       <button
+        type="button"
         className={`flex w-full cursor-pointer flex-col border-none bg-transparent text-left transition-colors ${compareMode ? "pr-4 pl-[38px]" : "px-4"} py-3`}
         onClick={onToggle}
         aria-expanded={expanded}

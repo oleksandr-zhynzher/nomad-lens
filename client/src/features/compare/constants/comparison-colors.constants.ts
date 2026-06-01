@@ -1,5 +1,5 @@
 /** 12 distinct muted accent colours for comparison slots (country cards). */
-export const COMPARISON_SLOT_COLORS = [
+const COMPARISON_SLOT_COLORS = [
   "#8F5A3C",
   "#5B8FA8",
   "#6B9E6B",

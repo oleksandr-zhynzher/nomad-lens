@@ -33,6 +33,7 @@ export function CompareActionBar({
       <div className="w-full rounded-md border border-[#252525] bg-[#1A1A1A] p-1 sm:w-auto">
         <div className={`grid gap-1 sm:flex sm:w-auto ${actionGridClassName}`}>
           <button
+            type="button"
             onClick={onToggleWeights}
             className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs transition-colors sm:flex-initial sm:px-4 sm:py-1.5 ${showWeights && window.innerWidth > MOBILE_VIEWPORT_MAX_WIDTH ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
           >
@@ -53,6 +54,7 @@ export function CompareActionBar({
           </button>
           {showSortAction ? (
             <button
+              type="button"
               onClick={onSortByScore}
               className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs leading-tight transition-all duration-150 ease-in-out sm:flex-initial sm:px-4 sm:py-1.5 ${sortFeedbackActive ? "bg-[#2A4A2A] font-medium text-[#88CC88]" : "bg-transparent font-normal text-dim"}`}
             >
@@ -64,6 +66,7 @@ export function CompareActionBar({
             </button>
           ) : null}
           <button
+            type="button"
             onClick={onShare}
             className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs transition-all duration-150 ease-in-out sm:flex-initial sm:px-4 sm:py-1.5 ${copied ? "bg-[#2A4A2A] font-medium text-[#88CC88]" : "bg-transparent font-normal text-dim"}`}
           >

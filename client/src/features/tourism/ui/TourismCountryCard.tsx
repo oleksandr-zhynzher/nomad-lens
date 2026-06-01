@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 import { TourismCountryCardDetail } from "./TourismCountryCardDetail";
 import { TourismCountryCardInner } from "./TourismCountryCardInner";
 
+const EMPTY_SELECTED_TAGS: readonly string[] = [];
+
 interface TourismCountryCardProps {
   readonly ranked: TourismRanked;
   readonly index: number;
@@ -30,7 +32,7 @@ export function TourismCountryCard({
   onSelect,
   compareMode = false,
   isSelected = false,
-  selectedTags = [],
+  selectedTags = EMPTY_SELECTED_TAGS,
   travelDates,
 }: TourismCountryCardProps) {
   const { country } = ranked;
@@ -53,6 +55,7 @@ export function TourismCountryCard({
       {compareMode ? <CompareCheckbox isSelected={isSelected} uncheckedBg={rowBg} /> : null}
 
       <button
+        type="button"
         className={`flex min-h-14 w-full cursor-pointer flex-col border-none bg-transparent text-left transition-colors ${compareMode ? "pr-4 pl-[38px]" : "px-4"} py-3`}
         onClick={compareMode ? onSelect : onToggle}
         aria-expanded={expanded}

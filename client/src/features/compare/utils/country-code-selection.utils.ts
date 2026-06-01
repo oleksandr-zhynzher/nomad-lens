@@ -1,14 +1,3 @@
-export function tokenizeCountryCodesParam(param: string | null): string[] {
-  const tokens: string[] = [];
-
-  for (const code of (param ?? "").split(",")) {
-    const normalizedCode = code.trim().toUpperCase();
-    if (normalizedCode !== "") tokens.push(normalizedCode);
-  }
-
-  return tokens;
-}
-
 export function normalizeCountryCodes(
   codes: Iterable<string>,
   validCodes?: ReadonlySet<string>,
@@ -25,11 +14,4 @@ export function normalizeCountryCodes(
   }
 
   return normalized;
-}
-
-export function parseCountryCodesParam(
-  param: string | null,
-  validCodes?: ReadonlySet<string>,
-): string[] {
-  return normalizeCountryCodes(tokenizeCountryCodesParam(param), validCodes);
 }

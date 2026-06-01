@@ -29,6 +29,7 @@ export function BudgetPersonSection({
   return (
     <div className="border-b border-[#242424]">
       <button
+        type="button"
         className="flex h-10 w-full items-center gap-2 bg-transparent px-3.5"
         onClick={() => {
           toggle("lifestyle");
@@ -70,6 +71,7 @@ export function BudgetPersonSection({
             <span className="text-xs text-white">{t("budget.people.label", "People")}</span>
             <div className="inline-flex h-9 items-center gap-1 rounded-md">
               <button
+                type="button"
                 onClick={() => {
                   setPeopleCount(Math.max(1, peopleCount - 1));
                 }}
@@ -82,6 +84,7 @@ export function BudgetPersonSection({
                 {peopleCount}
               </span>
               <button
+                type="button"
                 onClick={() => {
                   setPeopleCount(Math.min(20, peopleCount + 1));
                 }}

@@ -74,7 +74,6 @@ export function useNomadVisasState({
     const update = () => {
       setTheadTop(56 + el.offsetHeight);
     };
-    update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => {

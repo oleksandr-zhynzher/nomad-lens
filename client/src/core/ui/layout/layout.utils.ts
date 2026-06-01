@@ -1,19 +1,7 @@
-import type { NavigateFunction } from "react-router-dom";
-
 export type NavView = "list" | "map" | "compare";
 
 export function viewPath(view: NavView, langPrefix: string): string {
   return view === "list" ? (langPrefix !== "" ? langPrefix : "/") : `${langPrefix}/${view}`;
-}
-
-export function navigateToView(
-  view: NavView,
-  langPrefix: string,
-  navigate: NavigateFunction,
-  onNavigate: () => void,
-): void {
-  void navigate(viewPath(view, langPrefix));
-  onNavigate();
 }
 
 export function makeClickOutsideHandler(

@@ -9,6 +9,9 @@ import { ComparisonAddButton } from "./ComparisonAddButton";
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
 import { CountryPickerDropdown } from "./CountryPickerDropdown";
 
+const PLANE_NAME_SUFFIX = <Plane size={13} className="shrink-0 text-accent" aria-hidden="true" />;
+const PLANE_TRAILING = <Plane size={14} className="text-accent" />;
+
 interface NomadVisaComparisonSlotsProps {
   readonly selectedCountries: SelectedSlot[];
   readonly filteredCandidates: CountryData[];
@@ -54,7 +57,7 @@ export function NomadVisaComparisonSlots({
                 })}
                 to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
                 regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
-                nameSuffix={<Plane size={13} className="shrink-0 text-accent" aria-hidden="true" />}
+                nameSuffix={PLANE_NAME_SUFFIX}
               >
                 <span className="text-center text-[11px] leading-[1.3] text-muted">
                   {slot.country.nomadVisa.visaName}
@@ -79,7 +82,7 @@ export function NomadVisaComparisonSlots({
           flagUrl: c.flagUrl,
           name: localizeCountry(c, lang).name,
           regionLabel: t(`regions.${regionKey(c.region)}`),
-          trailing: <Plane size={14} className="text-accent" />,
+          trailing: PLANE_TRAILING,
         }))}
         query={query}
         onQueryChange={setQuery}

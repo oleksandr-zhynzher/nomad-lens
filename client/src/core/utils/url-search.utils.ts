@@ -10,7 +10,3 @@ export function setOptionalSearchParam(
 
   params.set(key, value);
 }
-
-export function cloneSearchParams(params: URLSearchParams): URLSearchParams {
-  return new URLSearchParams(params);
-}

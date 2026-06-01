@@ -2,7 +2,7 @@ import { setOptionalSearchParam } from "./url-search.utils";
 
 const COUNTRY_CODES_PARAM = "c";
 
-export function tokenizeCountryCodesParam(param: string | null): string[] {
+function tokenizeCountryCodesParam(param: string | null): string[] {
   const tokens: string[] = [];
 
   for (const code of (param ?? "").split(",")) {
@@ -13,7 +13,7 @@ export function tokenizeCountryCodesParam(param: string | null): string[] {
   return tokens;
 }
 
-export function normalizeCountryCodes(
+function normalizeCountryCodes(
   codes: Iterable<string>,
   validCodes?: ReadonlySet<string>,
 ): string[] {
@@ -29,13 +29,6 @@ export function normalizeCountryCodes(
   }
 
   return normalized;
-}
-
-export function parseCountryCodesParam(
-  param: string | null,
-  validCodes?: ReadonlySet<string>,
-): string[] {
-  return normalizeCountryCodes(tokenizeCountryCodesParam(param), validCodes);
 }
 
 export function getRawCompareCountryCodes(params: URLSearchParams): string[] {

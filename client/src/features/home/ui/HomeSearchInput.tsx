@@ -43,6 +43,7 @@ export function HomeSearchInput({
         onChange={(e) => {
           updateSearch(e.target.value);
         }}
+        aria-label={t("search.placeholder")}
         className="h-10 w-full rounded-md border border-surface bg-[#161616] pr-[var(--pr)] pl-12 text-sm text-white focus:outline-none"
         style={
           {

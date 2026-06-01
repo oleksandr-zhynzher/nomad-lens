@@ -19,6 +19,7 @@ export function CountryDetailPanelFooter({
   return (
     <div className="flex shrink-0 flex-col gap-2 border-t border-border px-5 py-4">
       <button
+        type="button"
         onClick={() => {
           onViewInList();
           onClose();

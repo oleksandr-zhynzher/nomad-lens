@@ -44,6 +44,7 @@ export function SearchMatchControls({
             {hasMatches ? `${cursor + 1}/${matchCount}` : "0/0"}
           </span>
           <button
+            type="button"
             onClick={onPrev}
             disabled={!hasMatches}
             className={navButtonClassName}
@@ -52,6 +53,7 @@ export function SearchMatchControls({
             <ChevronUp size={14} />
           </button>
           <button
+            type="button"
             onClick={onNext}
             disabled={!hasMatches}
             className={navButtonClassName}
@@ -66,6 +68,7 @@ export function SearchMatchControls({
         content={<span>{mode === "filter" ? scrollModeTooltip : filterModeTooltip}</span>}
       >
         <button
+          type="button"
           onClick={() => {
             onModeChange(mode === "filter" ? "highlight" : "filter");
           }}

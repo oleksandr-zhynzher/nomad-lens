@@ -23,6 +23,7 @@ export function BudgetCategorySection({
   return (
     <div className="border-b border-[#242424]">
       <button
+        type="button"
         className="flex h-10 w-full items-center gap-2 bg-transparent px-3.5"
         onClick={() => {
           toggle("categories");

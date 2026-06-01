@@ -31,6 +31,7 @@ export function HomeSearchControls({
   return (
     <div className="absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1">
       <button
+        type="button"
         onClick={onClear}
         className="flex size-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
         aria-label={t("a11y.clearSearch", "Clear search")}

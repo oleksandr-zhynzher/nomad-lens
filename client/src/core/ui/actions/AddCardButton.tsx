@@ -8,6 +8,7 @@ export interface AddCardButtonProps {
 export function AddCardButton({ onClick, label }: AddCardButtonProps) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className="flex min-h-[160px] w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-[#252525] bg-[#141416] p-4 transition-colors hover:border-[#3A3A3A] md:min-h-[180px]"
     >

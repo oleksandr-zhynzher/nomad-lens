@@ -1,13 +1,11 @@
 import type {
-  CategoryKey,
   ClimateData,
   ClimatePreferences,
   CountryData,
-  RankedCountry,
   SeasonType,
   WeightMap,
 } from "@core/models";
-import { AI_CATEGORIES, CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "@core/models";
+import { CATEGORY_KEYS } from "@core/models";
 
 /**
  * Compute a weighted composite score for a single country.
@@ -42,146 +40,6 @@ export function computeScore(country: CountryData, weights: WeightMap): number {
   return Math.round(Math.max(0, base) * 10) / 10;
 }
 
-/**
- * Rank all countries by their weighted composite score.
- * Returns a sorted array with 1-based rank attached.
- */
-export function rankCountries(countries: CountryData[], weights: WeightMap): RankedCountry[] {
-  const scored = countries.map((country) => ({
-    country,
-    finalScore: computeScore(country, weights),
-    rank: 0,
-  }));
-
-  scored.sort((a, b) => b.finalScore - a.finalScore);
-
-  for (const [i, entry] of scored.entries()) {
-    entry.rank = i + 1;
-  }
-
-  return scored;
-}
-
-/**
- * Default equal weights for all visible non-AI categories, summing to exactly 100.
- * AI metrics default to 0 (opt-in only).
- */
-export function defaultWeights(): WeightMap {
-  const visible = VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k));
-  const base = Math.floor(100 / visible.length);
-  const leftover = 100 - base * visible.length;
-  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
-  for (const [i, k] of visible.entries()) {
-    result[k] = base + (i < leftover ? 1 : 0);
-  }
-  return result;
-}
-
-/**
- * Default weights for independent mode: every visible non-AI category set to 50.
- * AI metrics default to 0 (opt-in only).
- */
-export function defaultIndependentWeights(): WeightMap {
-  const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
-  for (const k of VISIBLE_CATEGORY_KEYS.filter((key) => !AI_CATEGORIES.has(key))) {
-    result[k] = 50;
-  }
-  return result;
-}
-
-/**
- * Redistribute weights so all visible categories sum to exactly 100,
- * after the user changes one slider to a new value.
- * Others are scaled proportionally using the largest-remainder method.
- */
-export function redistributeWeights(
-  changedKey: CategoryKey,
-  newValue: number,
-  weights: WeightMap,
-): WeightMap {
-  const clamped = Math.max(0, Math.min(100, Math.round(newValue)));
-  const result = { ...weights, [changedKey]: clamped };
-
-  const others = VISIBLE_CATEGORY_KEYS.filter((k) => k !== changedKey);
-  const remaining = 100 - clamped;
-
-  if (others.length === 0) return result;
-
-  if (remaining === 0) {
-    for (const k of others) {
-      result[k] = 0;
-    }
-    return result;
-  }
-
-  const currentOthersSum = others.reduce((s, k) => s + weights[k], 0);
-  const freed = remaining - currentOthersSum; // positive = freed, negative = taken
-
-  let exactShares: number[];
-  if (freed >= 0) {
-    // Decreasing: spread the freed budget equally across every other slider
-    const equalDelta = freed / others.length;
-    exactShares = others.map((k) => weights[k] + equalDelta);
-  } else {
-    // Increasing: take proportionally from others (biggest give back the most)
-    exactShares = others.map((k) =>
-      currentOthersSum > 0
-        ? (weights[k] / currentOthersSum) * remaining
-        : remaining / others.length,
-    );
-  }
-
-  // Largest-remainder method for integer allocation
-  const floors = exactShares.map((s) => Math.floor(s));
-  const floorSum = floors.reduce((a, b) => a + b, 0);
-  let leftover = remaining - floorSum;
-  const remainders = exactShares.map((s, i) => {
-    const floorVal = floors[i];
-    if (floorVal === undefined) throw new Error("Floor value missing");
-    return { i, r: s - floorVal };
-  });
-  remainders.sort((a, b) => b.r - a.r);
-  for (const { i } of remainders) {
-    if (leftover > 0) {
-      const currentFloor = floors[i];
-      if (currentFloor !== undefined) {
-        floors[i] = currentFloor + 1;
-      }
-      leftover--;
-    }
-  }
-
-  for (const [i, k] of others.entries()) {
-    const floorVal = floors[i];
-    if (floorVal !== undefined) {
-      result[k] = floorVal;
-    }
-  }
-  return result;
-}
-
-/**
- * Determine a colour for a 0–100 score value.
- * Returns hex color string for the 4-tier system.
- */
-export function scoreColour(value: number | null): string {
-  if (value === null) return "#3A3A3A";
-  if (value >= 75) return "#4CAF50"; // Excellent - green
-  if (value >= 60) return "#8BC34A"; // Good - light green
-  if (value >= 50) return "#FFC107"; // Moderate - amber
-  return "#FF5722"; // Low - red-orange
-}
-
-/**
- * Return a human-readable label for a slider value.
- * Shows "Off" when weight is 0, otherwise the percentage contribution.
- */
-export function weightLabel(key: CategoryKey, weights: WeightMap): string {
-  const v = weights[key];
-  if (v === 0) return "Off";
-  return `${v}%`;
-}
-
 // ─── Climate Preferences Scoring ──────────────────────────────────────────────
 
 const ADJACENT: Record<SeasonType, SeasonType[]> = {
@@ -196,7 +54,7 @@ const ADJACENT: Record<SeasonType, SeasonType[]> = {
  * Compute a preference-based climate score (0–100).
  * 70% temperature match + 30% season type match.
  */
-export function computeClimateScore(climateData: ClimateData, prefs: ClimatePreferences): number {
+function computeClimateScore(climateData: ClimateData, prefs: ClimatePreferences): number {
   const { annualMeanTemp, seasonType } = climateData;
 
   let tempScore: number;
@@ -222,10 +80,6 @@ export function computeClimateScore(climateData: ClimateData, prefs: ClimatePref
   }
 
   return Math.round((tempScore * 0.7 + seasonScore * 0.3) * 10) / 10;
-}
-
-export function defaultClimatePreferences(): ClimatePreferences {
-  return { seasonType: "any", minTemp: 15, maxTemp: 25 };
 }
 
 /** Apply climate preferences to a country's climate score (immutably). */

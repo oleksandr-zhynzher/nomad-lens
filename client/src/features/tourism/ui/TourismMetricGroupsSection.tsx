@@ -15,7 +15,7 @@ interface TourismMetricGroupsSectionProps {
 
 export function TourismMetricGroupsSection({ weights, onChange }: TourismMetricGroupsSectionProps) {
   const { t } = useTranslation();
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>(
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(TOURISM_GROUPS.map((g) => [g.labelKey, false])),
   );
   const [isOpen, setIsOpen] = useState(true);
