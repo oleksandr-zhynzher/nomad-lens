@@ -104,7 +104,7 @@ function CalendarDayButton({ day, month, start, end, today, onSelect }: Calendar
     start !== null && end !== null && compareDates(d, start) > 0 && compareDates(d, end) < 0;
 
   return (
-    <td>
+    <div role="gridcell" aria-selected={isStart || isEnd || inRange}>
       <button
         type="button"
         aria-current={month === today.getMonth() && day === today.getDate() ? "date" : undefined}
@@ -116,7 +116,7 @@ function CalendarDayButton({ day, month, start, end, today, onSelect }: Calendar
       >
         {day}
       </button>
-    </td>
+    </div>
   );
 }
 
@@ -192,31 +192,32 @@ export function TourismCalendarPicker({
         </button>
       </div>
 
-      <table
-        className="w-full border-collapse"
+      <div
+        role="grid"
+        className="w-full"
         aria-label={t("tourismFilters.dateRangeCalendar", "Travel date range calendar")}
       >
-        <thead>
-          <tr className="mb-1 grid grid-cols-7">
+        <div role="rowgroup">
+          <div role="row" className="mb-1 grid grid-cols-7">
             {WEEK_DAYS.map((wd) => (
-              <th
+              <div
                 key={wd}
-                scope="col"
+                role="columnheader"
                 className="pb-1 text-center text-[10px] text-dimmer uppercase"
                 aria-label={wd}
               >
                 {wd}
-              </th>
+              </div>
             ))}
-          </tr>
-        </thead>
+          </div>
+        </div>
 
-        <tbody className="flex flex-col gap-0.5">
+        <div role="rowgroup" className="flex flex-col gap-0.5">
           {rows.map((row, ri) => (
-            <tr key={`row-${viewMonth}-${String(ri)}`} className="grid grid-cols-7">
+            <div key={`row-${viewMonth}-${String(ri)}`} role="row" className="grid grid-cols-7">
               {row.map((day, ci) =>
                 day === null ? (
-                  <td key={`empty-${viewMonth}-${String(ri)}-${String(ci)}`} />
+                  <div key={`empty-${viewMonth}-${String(ri)}-${String(ci)}`} role="gridcell" />
                 ) : (
                   <CalendarDayButton
                     key={`${viewMonth}-${day}`}
@@ -229,10 +230,10 @@ export function TourismCalendarPicker({
                   />
                 ),
               )}
-            </tr>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
 
       {startDate !== null || endDate !== null ? (
         <button
