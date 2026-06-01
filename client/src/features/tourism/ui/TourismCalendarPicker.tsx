@@ -108,7 +108,6 @@ function CalendarDayButton({ day, month, start, end, today, onSelect }: Calendar
       <button
         type="button"
         aria-current={month === today.getMonth() && day === today.getDate() ? "date" : undefined}
-        aria-selected={isStart || isEnd || inRange}
         aria-label={buildDayLabel(month, day, isStart || isEnd, inRange)}
         onClick={() => {
           onSelect(month, day);

@@ -1,4 +1,4 @@
-import { useCountries, useLangPrefix } from "@core/hooks";
+import { useCountries, useLangPrefix, useLatestRef } from "@core/hooks";
 import { AI_CATEGORY_KEYS, DISPLAYED_CORE_CATEGORY_KEYS } from "@core/models";
 import { useBudgetMatcher, useBudgetState } from "@features/budget/hooks";
 import { SHOW_WEIGHTS_MODES, SORTABLE_COMPARE_MODES } from "@features/compare/constants";
@@ -21,8 +21,6 @@ import { useTourismWeightState } from "@features/tourism/hooks";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
-
-import { useLatestRef } from "@core/hooks";
 
 const MOBILE_VIEWPORT_MAX_WIDTH = 1024;
 
