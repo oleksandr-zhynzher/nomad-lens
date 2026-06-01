@@ -45,7 +45,7 @@ export function MapComposableView({
     <>
       {geoLoading ? (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-bg">
-          <div className="h-8 w-8 animate-spin rounded-full border-[3px] border-[#2A2A2A] border-t-accent-dim" />
+          <div className="size-8 animate-spin rounded-full border-[3px] border-[#2A2A2A] border-t-accent-dim" />
         </div>
       ) : null}
       <MapZoomControls
@@ -66,6 +66,8 @@ export function MapComposableView({
         width={900}
         height={460}
         className="h-auto w-full bg-[#0A0A0F]"
+        role="img"
+        aria-label={t("map.ariaLabel", "Interactive world map")}
       >
         <ZoomableGroup
           zoom={zoom}

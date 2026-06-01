@@ -48,14 +48,22 @@ export function MapGeographies({
         fill={mapScoreToColour(scoreByAlpha2.get(alpha2)?.finalScore)}
         stroke={isSelected ? "var(--color-accent)" : "#0F1114"}
         strokeWidth={isSelected ? 1.5 / zoom : 0.4}
+        className="focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        tabIndex={0}
+        role="button"
+        aria-label={
+          typeof geo.properties["name"] === "string"
+            ? `View ${geo.properties["name"]}`
+            : "View country"
+        }
         style={{
-          default: { outline: "none" },
+          default: { outline: "1px solid transparent" },
           hover: {
-            outline: "none",
+            outline: "2px solid var(--color-accent)",
             filter: "brightness(1.25)",
             cursor: "pointer",
           },
-          pressed: { outline: "none" },
+          pressed: { outline: "2px solid var(--color-accent)" },
         }}
         onMouseEnter={(e: React.MouseEvent) => {
           handleMouseEnter(geo, e);
@@ -65,6 +73,12 @@ export function MapGeographies({
         }}
         onClick={() => {
           handleClick(geo);
+        }}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleClick(geo);
+          }
         }}
       />
     );

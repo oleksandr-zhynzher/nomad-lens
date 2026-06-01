@@ -52,19 +52,21 @@ export function TourismSearchBar({
           ref={searchInputRef}
           name="tourism-search"
           type="text"
+          aria-label={t("tourism.searchLabel", "Search tourism countries")}
           value={search}
           onChange={(e) => {
             updateSearch(e.target.value);
             setMatchCursor(0);
           }}
           placeholder={t("tourism.searchPlaceholder", "Search countries…")}
-          className="flex-1 border-none bg-transparent text-sm text-[#E8E9EB] outline-none"
+          className="flex-1 rounded-sm border-none bg-transparent text-sm text-[#E8E9EB] outline-none focus-visible:ring-2 focus-visible:ring-accent"
         />
         {search !== "" ? (
           <button
             type="button"
+            aria-label={t("tourism.clearSearch", "Clear tourism search")}
             onClick={clearSearch}
-            className="flex cursor-pointer items-center border-0 bg-transparent text-dimmer"
+            className="flex cursor-pointer items-center rounded-sm border-0 bg-transparent text-dimmer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <svg
               width="14"

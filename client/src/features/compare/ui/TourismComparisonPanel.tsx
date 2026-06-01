@@ -3,7 +3,6 @@ import { localizeCountry, regionKey, tourismScoreColourClass } from "@core/utils
 import { computeTourismScore } from "@features/tourism/utils";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import { ComparisonAddButton } from "./ComparisonAddButton";
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
@@ -36,23 +35,25 @@ export function TourismComparisonPanel({
   setDropdownPos,
 }: TourismComparisonPanelProps) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   return (
     <div className="relative">
       <div className="flex [scrollbar-width:thin] gap-3 overflow-x-auto pb-2">
         {sortedCountries.map((slot) => {
           const score = computeTourismScore(slot.country);
+          const countryName = localizeCountry(slot.country, lang).name;
           return (
             <div key={slot.country.code} className="w-[148px] shrink-0 md:w-[180px]">
               <ComparisonSlotCard
                 flagUrl={slot.country.flagUrl}
-                countryName={localizeCountry(slot.country, lang).name}
+                countryName={countryName}
                 onRemove={() => {
                   onRemove(slot.index);
                 }}
-                onNavigate={async () =>
-                  navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
-                }
+                removeLabel={t("compare.removeCountry", {
+                  country: countryName,
+                  defaultValue: `Remove ${countryName}`,
+                })}
+                to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
                 regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
               >
                 <span

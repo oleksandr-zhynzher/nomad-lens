@@ -29,7 +29,7 @@ export function NomadVisaCompareHeader({
         <ArrowLeft size={14} />
         {t("nomadVisasPage.backToVisas", "Back to Nomad")}
       </Link>
-      <h1 className="mb-8 font-display text-[28px] font-bold tracking-[1px] text-white uppercase">
+      <h1 className="mb-8 font-display text-[28px] font-semibold tracking-[1px] text-white uppercase">
         {t("nomadVisasPage.compareTitle", "Nomad Visa Comparison")}
       </h1>
       <div className="grid grid-cols-[160px_1fr] border-b-2 border-[#2A2A2A] bg-[#111113]">

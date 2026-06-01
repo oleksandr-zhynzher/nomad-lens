@@ -5,14 +5,14 @@ test("loads the app shell and navigates primary views", async ({ page }) => {
 
   const header = page.getByRole("banner");
 
-  await expect(page.getByRole("button", { name: /nomad lens/i })).toBeVisible();
-  await expect(header.getByRole("button", { name: /^list$/i })).toBeVisible();
-  await expect(header.getByRole("button", { name: /^map$/i })).toBeVisible();
-  await expect(header.getByRole("button", { name: /^compare$/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /nomad lens/i })).toBeVisible();
+  await expect(header.getByRole("link", { name: /^list$/i })).toBeVisible();
+  await expect(header.getByRole("link", { name: /^map$/i })).toBeVisible();
+  await expect(header.getByRole("link", { name: /^compare$/i })).toBeVisible();
 
-  await header.getByRole("button", { name: /^map$/i }).click();
+  await header.getByRole("link", { name: /^map$/i }).click();
   await expect(page).toHaveURL(/\/map$/);
 
-  await header.getByRole("button", { name: /^compare$/i }).click();
+  await header.getByRole("link", { name: /^compare$/i }).click();
   await expect(page).toHaveURL(/\/compare$/);
 });

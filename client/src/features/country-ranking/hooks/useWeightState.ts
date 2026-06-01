@@ -1,6 +1,7 @@
 import { copyTextToClipboard } from "@core/hooks";
 import type { CategoryKey, ClimatePreferences, WeightMap, WeightMode } from "@core/models";
 import { CATEGORY_KEYS } from "@core/models";
+import { writeVersionedJson } from "@core/utils";
 import {
   defaultClimatePreferences,
   defaultIndependentWeights,
@@ -13,12 +14,19 @@ import {
   LS_WEIGHT_MODE_KEY,
   LS_WEIGHTS_KEY,
   redistributeWeights,
+  WEIGHT_SHARE_KEYS,
   weightsToSearch,
 } from "@features/country-ranking/utils";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
+const WEIGHT_STORAGE_VERSION = 1;
+const WEIGHT_MODE_STORAGE_VERSION = 1;
+const FILTER_STORAGE_VERSION = 1;
 
 /** Encapsulates all weight/filter/mode state that is shared across list, map, and compare pages. */
 export function useWeightState() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [weights, setWeights] = useState<WeightMap>(loadWeightsFromStorage);
   const [weightMode, setWeightMode] = useState<WeightMode>(loadWeightModeFromStorage);
   const [nomadVisaOnly, setNomadVisaOnly] = useState(() => loadFiltersFromStorage().nomadVisaOnly);
@@ -35,31 +43,63 @@ export function useWeightState() {
 
   // Persist weights to localStorage
   useEffect(() => {
-    localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(weights));
+    writeVersionedJson(LS_WEIGHTS_KEY, WEIGHT_STORAGE_VERSION, weights);
   }, [weights]);
   useEffect(() => {
-    localStorage.setItem(LS_WEIGHT_MODE_KEY, weightMode);
+    writeVersionedJson(LS_WEIGHT_MODE_KEY, WEIGHT_MODE_STORAGE_VERSION, weightMode);
   }, [weightMode]);
 
   // Persist filters to localStorage
   useEffect(() => {
-    try {
-      localStorage.setItem(
-        LS_FILTERS_KEY,
-        JSON.stringify(
-          filtersToStorable({
-            nomadVisaOnly,
-            schengenOnly,
-            minTouristDays,
-            selectedRegions,
-            climatePrefs,
-          }),
-        ),
-      );
-    } catch {
-      /* ignore */
-    }
+    writeVersionedJson(
+      LS_FILTERS_KEY,
+      FILTER_STORAGE_VERSION,
+      filtersToStorable({
+        nomadVisaOnly,
+        schengenOnly,
+        minTouristDays,
+        selectedRegions,
+        climatePrefs,
+      }),
+    );
   }, [nomadVisaOnly, schengenOnly, minTouristDays, selectedRegions, climatePrefs]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+    for (const key of WEIGHT_SHARE_KEYS) params.delete(key);
+    for (const [key, value] of new URLSearchParams(weightsToSearch(weights))) {
+      params.set(key, value);
+    }
+    if (weightMode !== "independent") params.set("weightMode", weightMode);
+    if (nomadVisaOnly) params.set("nomadVisa", "1");
+    if (schengenOnly) params.set("schengen", "1");
+    if (minTouristDays !== null) params.set("minDays", String(minTouristDays));
+    if (selectedRegions.size > 0) params.set("regions", [...selectedRegions].join(","));
+    const defClimate = defaultClimatePreferences();
+    if (climatePrefs.seasonType !== defClimate.seasonType) {
+      params.set("climateSeason", climatePrefs.seasonType);
+    }
+    if (climatePrefs.minTemp !== defClimate.minTemp) {
+      params.set("climateMin", String(climatePrefs.minTemp));
+    }
+    if (climatePrefs.maxTemp !== defClimate.maxTemp) {
+      params.set("climateMax", String(climatePrefs.maxTemp));
+    }
+
+    if (params.toString() !== searchParams.toString()) {
+      setSearchParams(params, { replace: true });
+    }
+  }, [
+    searchParams,
+    setSearchParams,
+    weights,
+    weightMode,
+    nomadVisaOnly,
+    schengenOnly,
+    minTouristDays,
+    selectedRegions,
+    climatePrefs,
+  ]);
 
   const handleWeightChange = useCallback(
     (key: CategoryKey, value: number) => {

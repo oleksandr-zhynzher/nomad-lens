@@ -53,7 +53,7 @@ export function TourismComparison({
 
   const sortedCountries = useMemo(() => {
     if (sortDirection == null) return selectedCountries;
-    return [...selectedCountries].sort((slotA, slotB) => {
+    return selectedCountries.toSorted((slotA, slotB) => {
       const scoreA = computeTourismScore(slotA.country) ?? 0;
       const scoreB = computeTourismScore(slotB.country) ?? 0;
       return sortDirection === "desc" ? scoreB - scoreA : scoreA - scoreB;

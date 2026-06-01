@@ -2,14 +2,9 @@ import { useLangPrefix } from "@core/hooks";
 import { INFO_PAGES } from "@core/utils";
 import { type ReactNode, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-import {
-  computeActiveView,
-  computeLangSwitchPath,
-  navigateToView,
-  type NavView,
-} from "./layout.utils";
+import { computeActiveView, computeLangSwitchPath } from "./layout.utils";
 import { LayoutHeader } from "./LayoutHeader";
 import { MobileMenu } from "./MobileMenu";
 
@@ -19,7 +14,6 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
-  const navigate = useNavigate();
   const { pathname, search } = useLocation();
   const { t, i18n } = useTranslation();
   const langPrefix = useLangPrefix();
@@ -40,25 +34,15 @@ export function Layout({ children }: LayoutProps) {
   const isInfoPage = INFO_PAGES.some((pagePath) => pathname.endsWith(pagePath));
   const activeView = computeActiveView(pathname, isInfoPage);
 
-  const handleViewClick = (view: NavView) => {
-    navigateToView(view, langPrefix, navigate, () => {
-      setMobileMenuOpen(false);
-    });
-  };
-
   return (
     <div className="flex min-h-screen flex-col bg-bg text-slate-100">
       <LayoutHeader
         activeView={activeView}
-        onViewClick={handleViewClick}
         langPrefix={langPrefix}
         pathname={pathname}
         currentLangCode={i18n.language}
         langSwitchPath={langSwitchPath}
         mobileMenuOpen={mobileMenuOpen}
-        onLogoClick={() => {
-          handleViewClick("list");
-        }}
         onToggleMobileMenu={() => {
           setMobileMenuOpen((previous) => !previous);
         }}
@@ -70,7 +54,6 @@ export function Layout({ children }: LayoutProps) {
           setMobileMenuOpen(false);
         }}
         activeView={activeView}
-        onViewClick={handleViewClick}
         langPrefix={langPrefix}
         pathname={pathname}
         langSwitchPath={langSwitchPath}

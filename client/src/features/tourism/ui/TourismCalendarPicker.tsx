@@ -19,6 +19,13 @@ const MONTH_NAMES = [
   "December",
 ];
 
+function buildDayLabel(month: number, day: number, selected: boolean, inRange: boolean): string {
+  const dateLabel = `${MONTH_NAMES[month]} ${day}`;
+  if (selected) return `${dateLabel}, selected`;
+  if (inRange) return `${dateLabel}, in selected range`;
+  return dateLabel;
+}
+
 function parseStored(stored: string | null): { month: number; day: number } | null {
   if (stored === null) return null;
   return {
@@ -52,6 +59,65 @@ interface TourismCalendarPickerProps {
   readonly startDate: string | null;
   readonly endDate: string | null;
   readonly onChange: (start: string | null, end: string | null) => void;
+}
+
+interface CalendarDayButtonProps {
+  readonly day: number;
+  readonly month: number;
+  readonly start: { month: number; day: number } | null;
+  readonly end: { month: number; day: number } | null;
+  readonly today: Date;
+  readonly onSelect: (month: number, day: number) => void;
+}
+
+function getDayClasses(
+  month: number,
+  day: number,
+  start: { month: number; day: number } | null,
+  end: { month: number; day: number } | null,
+  today: Date,
+): string {
+  const d = { month, day };
+  const isStart = start !== null && compareDates(d, start) === 0;
+  const isEnd = end !== null && compareDates(d, end) === 0;
+  const inRange =
+    start !== null && end !== null && compareDates(d, start) > 0 && compareDates(d, end) < 0;
+  const isToday = month === today.getMonth() && day === today.getDate();
+
+  if (isStart || isEnd) {
+    return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-accent text-black font-semibold rounded";
+  }
+  if (inRange) {
+    return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-[#1e2b1e] text-on-surface";
+  }
+  if (isToday) {
+    return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background font-bold text-accent hover:bg-surface-3 rounded";
+  }
+  return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background text-on-surface hover:bg-surface-3 rounded";
+}
+
+function CalendarDayButton({ day, month, start, end, today, onSelect }: CalendarDayButtonProps) {
+  const d = { month, day };
+  const isStart = start !== null && compareDates(d, start) === 0;
+  const isEnd = end !== null && compareDates(d, end) === 0;
+  const inRange =
+    start !== null && end !== null && compareDates(d, start) > 0 && compareDates(d, end) < 0;
+
+  return (
+    <div role="gridcell" aria-selected={isStart || isEnd || inRange}>
+      <button
+        type="button"
+        aria-current={month === today.getMonth() && day === today.getDate() ? "date" : undefined}
+        aria-label={buildDayLabel(month, day, isStart || isEnd, inRange)}
+        onClick={() => {
+          onSelect(month, day);
+        }}
+        className={getDayClasses(month, day, start, end, today)}
+      >
+        {day}
+      </button>
+    </div>
+  );
 }
 
 export function TourismCalendarPicker({
@@ -95,26 +161,6 @@ export function TourismCalendarPicker({
     rows.push(cells.slice(i, i + 7));
   }
 
-  function dayClasses(day: number): string {
-    const d = { month: viewMonth, day };
-    const isStart = start !== null && compareDates(d, start) === 0;
-    const isEnd = end !== null && compareDates(d, end) === 0;
-    const inRange =
-      start !== null && end !== null && compareDates(d, start) > 0 && compareDates(d, end) < 0;
-    const isToday = viewMonth === today.getMonth() && day === today.getDate();
-
-    if (isStart || isEnd) {
-      return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none bg-accent text-black font-semibold rounded";
-    }
-    if (inRange) {
-      return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none bg-[#1e2b1e] text-on-surface";
-    }
-    if (isToday) {
-      return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none font-bold text-accent hover:bg-surface-3 rounded";
-    }
-    return "h-8 w-full text-[12px] cursor-pointer transition-colors focus:outline-none text-on-surface hover:bg-surface-3 rounded";
-  }
-
   return (
     <div className="flex flex-col gap-2 select-none">
       <div className="mb-1 flex items-center justify-between px-1">
@@ -123,12 +169,15 @@ export function TourismCalendarPicker({
           onClick={() => {
             setViewMonth((m) => (m === 0 ? 11 : m - 1));
           }}
-          className="flex h-6 w-6 items-center justify-center rounded text-dimmer transition-colors hover:bg-surface-3 hover:text-white"
+          className="flex size-6 items-center justify-center rounded text-dimmer transition-colors hover:bg-surface-3 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Previous month"
         >
           <ChevronLeft size={14} />
         </button>
-        <span className="text-[12px] font-semibold tracking-widest text-white uppercase">
+        <span
+          className="text-[12px] font-semibold tracking-widest text-white uppercase"
+          aria-live="polite"
+        >
           {MONTH_NAMES[viewMonth]}
         </span>
         <button
@@ -136,38 +185,50 @@ export function TourismCalendarPicker({
           onClick={() => {
             setViewMonth((m) => (m === 11 ? 0 : m + 1));
           }}
-          className="flex h-6 w-6 items-center justify-center rounded text-dimmer transition-colors hover:bg-surface-3 hover:text-white"
+          className="flex size-6 items-center justify-center rounded text-dimmer transition-colors hover:bg-surface-3 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Next month"
         >
           <ChevronRight size={14} />
         </button>
       </div>
 
-      <div className="mb-1 grid grid-cols-7">
-        {WEEK_DAYS.map((wd) => (
-          <div key={wd} className="pb-1 text-center text-[10px] text-dimmer uppercase">
-            {wd}
-          </div>
-        ))}
-      </div>
+      <div
+        className="flex flex-col gap-0.5"
+        role="grid"
+        aria-label={t("tourismFilters.dateRangeCalendar", "Travel date range calendar")}
+      >
+        <div className="mb-1 grid grid-cols-7" role="row">
+          {WEEK_DAYS.map((wd) => (
+            <div
+              key={wd}
+              className="pb-1 text-center text-[10px] text-dimmer uppercase"
+              role="columnheader"
+              aria-label={wd}
+            >
+              {wd}
+            </div>
+          ))}
+        </div>
 
-      <div className="flex flex-col gap-0.5">
         {rows.map((row, ri) => (
-          <div key={`row-${viewMonth}-${String(ri)}`} className="grid grid-cols-7">
+          <div key={`row-${viewMonth}-${String(ri)}`} className="grid grid-cols-7" role="row">
             {row.map((day, ci) =>
               day === null ? (
-                <div key={`empty-${viewMonth}-${String(ri)}-${String(ci)}`} />
+                <div
+                  key={`empty-${viewMonth}-${String(ri)}-${String(ci)}`}
+                  role="gridcell"
+                  aria-hidden
+                />
               ) : (
-                <button
+                <CalendarDayButton
                   key={`${viewMonth}-${day}`}
-                  type="button"
-                  onClick={() => {
-                    handleDayClick(viewMonth, day);
-                  }}
-                  className={dayClasses(day)}
-                >
-                  {day}
-                </button>
+                  day={day}
+                  month={viewMonth}
+                  start={start}
+                  end={end}
+                  today={today}
+                  onSelect={handleDayClick}
+                />
               ),
             )}
           </div>
@@ -180,7 +241,7 @@ export function TourismCalendarPicker({
           onClick={() => {
             onChange(null, null);
           }}
-          className="mt-1 w-full text-center text-[11px] text-dimmer transition-colors hover:text-on-surface"
+          className="mt-1 w-full rounded text-center text-[11px] text-dimmer transition-colors hover:text-on-surface focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           {t("tourismFilters.clearDates", "Clear dates")}
         </button>

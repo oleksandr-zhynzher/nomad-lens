@@ -15,18 +15,25 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "generate": "npm run generate -w server",
+    "audit:prod": "npm audit --omit=dev --audit-level=high",
     "doctor": "react-doctor client --offline --fail-on none --full",
     "test": "npm run test:unit",
-    "test:unit": "npm run test -w client && npm run test -w server",
+    "test:unit": "npm run test -w client && npm run test -w server && npm run test -w infra",
     "typecheck": "npm run typecheck -w client && npm run typecheck -w server && npm run typecheck -w infra",
     "test:e2e": "npm run build -w client && playwright test",
     "test:e2e:headed": "npm run build -w client && playwright test --headed",
-    "quality:pr": "npm run format:check && npm run lint:strict && npm run typecheck && npm run test:unit && npm run build",
+    "quality:pr": "npm run format:check && npm run audit:prod && npm run lint:strict && npm run typecheck && npm run test:unit && npm run build",
     "quality:main": "npm run quality:pr && npm run test:e2e && npm run doctor",
     "quality:release": "npm run quality:main",
     "deploy": "([ -f server/src/data/countries.json ] || npm run generate -w server) && npm run build -w server && npm run build -w client && npm run build -w infra && npm run deploy -w infra",
     "prepare": "husky",
     "commit": "cz"
+  },
+  "overrides": {
+    "d3-color": "^3.1.0",
+    "d3-interpolate": "^3.0.1",
+    "d3-transition": "^3.0.1",
+    "d3-zoom": "^3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",

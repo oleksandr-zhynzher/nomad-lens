@@ -24,7 +24,6 @@ import security from "eslint-plugin-security";
 import promise from "eslint-plugin-promise";
 import functional from "eslint-plugin-functional";
 import boundaries from "eslint-plugin-boundaries";
-import deprecation from "eslint-plugin-deprecation";
 import noSecrets from "eslint-plugin-no-secrets";
 import regexp from "eslint-plugin-regexp";
 import perfectionist from "eslint-plugin-perfectionist";
@@ -65,7 +64,6 @@ export default defineConfig([
       "eslint-comments": eslintComments,
       functional,
       boundaries,
-      deprecation,
       "no-secrets": noSecrets,
       perfectionist,
       "simple-import-sort": simpleImportSort,

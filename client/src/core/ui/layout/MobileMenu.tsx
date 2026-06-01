@@ -1,3 +1,4 @@
+import { MobileSheet } from "@core/ui/MobileSheet";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
@@ -8,7 +9,6 @@ interface MobileMenuProps {
   readonly open: boolean;
   readonly onClose: () => void;
   readonly activeView: NavView | null;
-  readonly onViewClick: (view: NavView) => void;
   readonly langPrefix: string;
   readonly pathname: string;
   readonly langSwitchPath: (lang: string) => string;
@@ -19,7 +19,6 @@ export function MobileMenu({
   open,
   onClose,
   activeView,
-  onViewClick,
   langPrefix,
   pathname,
   langSwitchPath,
@@ -29,20 +28,18 @@ export function MobileMenu({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-x-0 top-14 bottom-0 z-40 bg-[#0D0E10] px-3 pb-3 md:hidden">
-      <button
-        type="button"
-        aria-label={t("a11y.closeMenu", "Close menu")}
-        className="absolute inset-0"
-        onClick={onClose}
-      />
-      <div className="relative flex max-h-full flex-col gap-1 overflow-y-auto rounded-2xl border border-[#252525] px-4 py-4 shadow-[0_20px_48px_rgba(0,0,0,0.45)] [background:linear-gradient(180deg,rgba(20,20,22,0.98)_0%,rgba(13,14,16,0.98)_100%)]">
+    <MobileSheet
+      open={open}
+      title={t("views.viewLabel")}
+      closeLabel={t("a11y.closeMenu", "Close menu")}
+      onClose={onClose}
+    >
+      <div className="flex max-h-full flex-col gap-1 overflow-y-auto p-4">
         <p className="mb-1 text-[10px] font-semibold tracking-[1.5px] text-dimmest uppercase">
           {t("views.viewLabel")}
         </p>
         <MobileNavGrid
           activeView={activeView}
-          onViewClick={onViewClick}
           langPrefix={langPrefix}
           pathname={pathname}
           onClose={onClose}
@@ -62,7 +59,7 @@ export function MobileMenu({
         </div>
 
         <a
-          href="https:/github.com/oleksandr-zhynzher/nomad-lens"
+          href="https://github.com/oleksandr-zhynzher/nomad-lens"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 py-3 text-sm text-muted no-underline"
@@ -72,7 +69,7 @@ export function MobileMenu({
             height="16"
             viewBox="0 0 16 16"
             fill="currentColor"
-            xmlns="http:/www.w3.org/2000/svg"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               fillRule="evenodd"
@@ -82,6 +79,6 @@ export function MobileMenu({
           {t("nav.github")}
         </a>
       </div>
-    </div>
+    </MobileSheet>
   );
 }

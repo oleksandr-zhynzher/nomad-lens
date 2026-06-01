@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import type { JsonStorage } from "../src/features/budget/utils";
-import { readVersionedJson, writeVersionedJson } from "../src/features/budget/utils";
+import type { JsonStorage } from "../src/core/utils";
+import { readVersionedJson, writeVersionedJson } from "../src/core/utils";
 
 function createMemoryStorage(initial: Record<string, string> = {}): JsonStorage {
   const entries = new Map(Object.entries(initial));

@@ -33,7 +33,7 @@ export function SearchMatchControls({
   nextLabel,
   switchToScrollLabel,
   switchToFilterLabel,
-  navButtonClassName = "flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary disabled:opacity-40",
+  navButtonClassName = "flex size-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary disabled:opacity-40",
 }: SearchMatchControlsProps) {
   const hasMatches = matchCount > 0;
   return (
@@ -69,7 +69,7 @@ export function SearchMatchControls({
           onClick={() => {
             onModeChange(mode === "filter" ? "highlight" : "filter");
           }}
-          className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-muted"
+          className="flex size-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-muted"
           aria-label={mode === "filter" ? switchToScrollLabel : switchToFilterLabel}
         >
           {mode === "filter" ? <List size={13} /> : <Filter size={13} />}

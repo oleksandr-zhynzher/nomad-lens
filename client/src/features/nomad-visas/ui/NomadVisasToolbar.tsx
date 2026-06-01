@@ -43,7 +43,7 @@ export function NomadVisasToolbar({
             {searchQuery !== "" ? (
               <button
                 onClick={() => onSearchQueryChange("")}
-                className="absolute top-1/2 right-2.5 flex h-[22px] w-[22px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
+                className="absolute top-1/2 right-2.5 flex size-[22px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
                 aria-label={t("a11y.clearSearch", "Clear search")}
               >
                 <X size={12} />
@@ -69,7 +69,7 @@ export function NomadVisasToolbar({
               </button>
               <button
                 onClick={onExitCompareMode}
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-transparent text-dim"
+                className="flex size-10 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-transparent text-dim"
                 aria-label={t("a11y.exitCompareMode", "Exit compare mode")}
               >
                 <X size={16} />

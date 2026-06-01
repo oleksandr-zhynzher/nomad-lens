@@ -1,4 +1,5 @@
 import { TOURISM_CATEGORY_KEYS } from "@core/models";
+import { readVersionedJson, writeVersionedJson } from "@core/utils";
 import type { TourismWeightMap } from "@features/tourism/utils";
 import { defaultTourismWeights } from "@features/tourism/utils";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -8,6 +9,7 @@ const LS_REGIONS_KEY = "tourism-regions";
 const LS_TOGGLES_KEY = "tourism-toggles";
 const LS_BUDGET_KEY = "tourism-budget";
 const LS_DATES_KEY = "tourism-dates";
+const TOURISM_STORAGE_VERSION = 1;
 
 export type TourismTag =
   | "beach"
@@ -81,106 +83,183 @@ const DEFAULT_TRAVEL_DATES: TravelDates = {
   endDate: null,
 };
 
-export function useTourismWeightState() {
-  const [weights, setWeights] = useState<TourismWeightMap>(() => {
-    try {
-      const stored = localStorage.getItem(LS_WEIGHTS_KEY);
-      if (stored !== null) return JSON.parse(stored) as TourismWeightMap;
-    } catch {
-      /* ignore */
-    }
-    return defaultTourismWeights();
-  });
+const ACCOMMODATION_TYPES = new Set<AccommodationType>([
+  "hotel5",
+  "hotel4",
+  "hotel3",
+  "hotel2",
+  "hotel1",
+  "hostel",
+  "airbnb",
+]);
+const DINING_PREFERENCES = new Set<DiningPreference>(["market", "casual", "restaurants"]);
+const STORAGE_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
-  const [selectedRegions, setSelectedRegions] = useState<Set<string>>(() => {
-    try {
-      const stored = localStorage.getItem(LS_REGIONS_KEY);
-      if (stored !== null) return new Set(JSON.parse(stored) as string[]);
-    } catch {
-      /* ignore */
-    }
-    return new Set();
-  });
+function clampPercent(value: unknown, fallback: number): number {
+  return typeof value === "number" && Number.isFinite(value)
+    ? Math.max(0, Math.min(100, Math.round(value)))
+    : fallback;
+}
 
-  const [toggles, setToggles] = useState<TourismToggles>(() => {
-    try {
-      const stored = localStorage.getItem(LS_TOGGLES_KEY);
-      if (stored !== null)
-        return { ...DEFAULT_TOGGLES, ...(JSON.parse(stored) as Partial<TourismToggles>) };
-    } catch {
-      /* ignore */
-    }
-    return DEFAULT_TOGGLES;
-  });
+function sanitizeTourismWeights(value: unknown): TourismWeightMap {
+  const next = defaultTourismWeights();
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return next;
 
-  const [budgetState, setBudgetState] = useState<TourismBudgetState>(() => {
-    try {
-      const stored = localStorage.getItem(LS_BUDGET_KEY);
-      if (stored !== null) {
-        const parsed: TourismBudgetState = {
-          ...DEFAULT_BUDGET_STATE,
-          ...(JSON.parse(stored) as Partial<TourismBudgetState>),
-        };
-        // migrate old values
-        if (parsed.accommodation === ("hotel" as AccommodationType))
-          parsed.accommodation = "hotel3";
-        if (parsed.accommodation === ("resort" as AccommodationType))
-          parsed.accommodation = "hotel5";
-        if (parsed.accommodation === ("rental" as AccommodationType))
-          parsed.accommodation = "airbnb";
-        return parsed;
-      }
-    } catch {
-      /* ignore */
-    }
+  for (const key of TOURISM_CATEGORY_KEYS) {
+    next[key] = clampPercent((value as Record<string, unknown>)[key], next[key] ?? 50);
+  }
+
+  return next;
+}
+
+function sanitizeRegions(value: unknown): Set<string> {
+  return Array.isArray(value)
+    ? new Set(value.filter((region): region is string => typeof region === "string"))
+    : new Set<string>();
+}
+
+function sanitizeToggles(value: unknown): TourismToggles {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return DEFAULT_TOGGLES;
+  const record = value as Record<string, unknown>;
+  const requiredTags = Array.isArray(record["requiredTags"])
+    ? record["requiredTags"].filter((tag): tag is TourismTag =>
+        ALL_TOURISM_TAGS.includes(tag as TourismTag),
+      )
+    : DEFAULT_TOGGLES.requiredTags;
+
+  return {
+    visaFreeOnly:
+      typeof record["visaFreeOnly"] === "boolean"
+        ? record["visaFreeOnly"]
+        : DEFAULT_TOGGLES.visaFreeOnly,
+    requiredTags,
+    activityBlend: clampPercent(record["activityBlend"], DEFAULT_TOGGLES.activityBlend),
+  };
+}
+
+function sanitizeBudgetState(value: unknown): TourismBudgetState {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
     return DEFAULT_BUDGET_STATE;
-  });
+  }
+  const record = value as Record<string, unknown>;
+  let accommodation = record["accommodation"];
+  if (accommodation === "hotel") accommodation = "hotel3";
+  if (accommodation === "resort") accommodation = "hotel5";
+  if (accommodation === "rental") accommodation = "airbnb";
 
-  const [travelDates, setTravelDates] = useState<TravelDates>(() => {
-    try {
-      const stored = localStorage.getItem(LS_DATES_KEY);
-      if (stored !== null)
-        return { ...DEFAULT_TRAVEL_DATES, ...(JSON.parse(stored) as Partial<TravelDates>) };
-    } catch {
-      /* ignore */
-    }
+  return {
+    dailyBudget:
+      typeof record["dailyBudget"] === "number" && Number.isFinite(record["dailyBudget"])
+        ? Math.max(1, Math.round(record["dailyBudget"]))
+        : DEFAULT_BUDGET_STATE.dailyBudget,
+    accommodation:
+      typeof accommodation === "string" &&
+      ACCOMMODATION_TYPES.has(accommodation as AccommodationType)
+        ? (accommodation as AccommodationType)
+        : DEFAULT_BUDGET_STATE.accommodation,
+    dining:
+      typeof record["dining"] === "string" &&
+      DINING_PREFERENCES.has(record["dining"] as DiningPreference)
+        ? (record["dining"] as DiningPreference)
+        : DEFAULT_BUDGET_STATE.dining,
+    peopleCount:
+      typeof record["peopleCount"] === "number" && Number.isFinite(record["peopleCount"])
+        ? Math.max(1, Math.min(12, Math.round(record["peopleCount"])))
+        : DEFAULT_BUDGET_STATE.peopleCount,
+    budgetBlend: clampPercent(record["budgetBlend"], DEFAULT_BUDGET_STATE.budgetBlend),
+    budgetEnabled:
+      typeof record["budgetEnabled"] === "boolean"
+        ? record["budgetEnabled"]
+        : DEFAULT_BUDGET_STATE.budgetEnabled,
+  };
+}
+
+function sanitizeTravelDates(value: unknown): TravelDates {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
     return DEFAULT_TRAVEL_DATES;
-  });
+  }
+  const record = value as Record<string, unknown>;
+  const startDate =
+    typeof record["startDate"] === "string" && STORAGE_DATE_PATTERN.test(record["startDate"])
+      ? record["startDate"]
+      : null;
+  const endDate =
+    typeof record["endDate"] === "string" && STORAGE_DATE_PATTERN.test(record["endDate"])
+      ? record["endDate"]
+      : null;
+
+  return { startDate, endDate };
+}
+
+export function useTourismWeightState() {
+  const [weights, setWeights] = useState<TourismWeightMap>(() =>
+    readVersionedJson({
+      key: LS_WEIGHTS_KEY,
+      version: TOURISM_STORAGE_VERSION,
+      fallback: defaultTourismWeights,
+      sanitize: sanitizeTourismWeights,
+      migrate: sanitizeTourismWeights,
+    }),
+  );
+
+  const [selectedRegions, setSelectedRegions] = useState<Set<string>>(() =>
+    readVersionedJson({
+      key: LS_REGIONS_KEY,
+      version: TOURISM_STORAGE_VERSION,
+      fallback: () => new Set<string>(),
+      sanitize: sanitizeRegions,
+      migrate: sanitizeRegions,
+    }),
+  );
+
+  const [toggles, setToggles] = useState<TourismToggles>(() =>
+    readVersionedJson({
+      key: LS_TOGGLES_KEY,
+      version: TOURISM_STORAGE_VERSION,
+      fallback: () => DEFAULT_TOGGLES,
+      sanitize: sanitizeToggles,
+      migrate: sanitizeToggles,
+    }),
+  );
+
+  const [budgetState, setBudgetState] = useState<TourismBudgetState>(() =>
+    readVersionedJson({
+      key: LS_BUDGET_KEY,
+      version: TOURISM_STORAGE_VERSION,
+      fallback: () => DEFAULT_BUDGET_STATE,
+      sanitize: sanitizeBudgetState,
+      migrate: sanitizeBudgetState,
+    }),
+  );
+
+  const [travelDates, setTravelDates] = useState<TravelDates>(() =>
+    readVersionedJson({
+      key: LS_DATES_KEY,
+      version: TOURISM_STORAGE_VERSION,
+      fallback: () => DEFAULT_TRAVEL_DATES,
+      sanitize: sanitizeTravelDates,
+      migrate: sanitizeTravelDates,
+    }),
+  );
 
   useEffect(() => {
-    localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(weights));
+    writeVersionedJson(LS_WEIGHTS_KEY, TOURISM_STORAGE_VERSION, weights);
   }, [weights]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(LS_REGIONS_KEY, JSON.stringify([...selectedRegions]));
-    } catch {
-      /* ignore */
-    }
+    writeVersionedJson(LS_REGIONS_KEY, TOURISM_STORAGE_VERSION, [...selectedRegions]);
   }, [selectedRegions]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(LS_TOGGLES_KEY, JSON.stringify(toggles));
-    } catch {
-      /* ignore */
-    }
+    writeVersionedJson(LS_TOGGLES_KEY, TOURISM_STORAGE_VERSION, toggles);
   }, [toggles]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(LS_BUDGET_KEY, JSON.stringify(budgetState));
-    } catch {
-      /* ignore */
-    }
+    writeVersionedJson(LS_BUDGET_KEY, TOURISM_STORAGE_VERSION, budgetState);
   }, [budgetState]);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(LS_DATES_KEY, JSON.stringify(travelDates));
-    } catch {
-      /* ignore */
-    }
+    writeVersionedJson(LS_DATES_KEY, TOURISM_STORAGE_VERSION, travelDates);
   }, [travelDates]);
 
   const handleWeightChange = useCallback((key: string, value: number) => {

@@ -16,13 +16,13 @@ function getNumericProperty(value: unknown, key: string): number | null {
   return typeof property === 'number' && Number.isInteger(property) ? property : null;
 }
 
-function getBooleanProperty(value: unknown, key: string): boolean | null {
+function getBooleanProperty(value: unknown, key: string): boolean | undefined {
   if (!isRecord(value)) {
-    return null;
+    return undefined;
   }
 
   const property = value[key];
-  return typeof property === 'boolean' ? property : null;
+  return typeof property === 'boolean' ? property : undefined;
 }
 
 function getErrorMessage(error: unknown): string {

@@ -62,7 +62,7 @@ export function CountryCard({
       />
       {expanded && !compareMode ? (
         <div
-          className="border-t border-[var(--exp-bc)] bg-[#111113] px-4 py-4"
+          className="border-t border-[var(--exp-bc)] bg-[#111113] p-4"
           style={{ "--exp-bc": borderColor } as React.CSSProperties}
         >
           <ScoreBreakdown country={country} />

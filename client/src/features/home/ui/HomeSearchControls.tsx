@@ -32,7 +32,7 @@ export function HomeSearchControls({
     <div className="absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-1">
       <button
         onClick={onClear}
-        className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
+        className="flex size-6 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
         aria-label={t("a11y.clearSearch", "Clear search")}
       >
         <X size={14} />

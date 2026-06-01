@@ -1,14 +1,10 @@
-import { useCallback, useEffect } from "react";
+import { getCountries, getUserFacingErrorMessage } from "@core/api";
+import { useQuery } from "@tanstack/react-query";
+import { useCallback } from "react";
 
 import type { CountryData } from "../models/country.models";
-import {
-  selectCountries,
-  selectCountryError,
-  selectCountryStatus,
-  selectLoadCountries,
-  selectRefreshCountries,
-} from "../store/country.selectors";
-import { useCountryStore } from "../store/country.store";
+
+export const countryQueryKey = ["countries"] as const;
 
 interface UseCountriesResult {
   countries: CountryData[];
@@ -18,24 +14,19 @@ interface UseCountriesResult {
 }
 
 export function useCountries(): UseCountriesResult {
-  const countries = useCountryStore(selectCountries);
-  const status = useCountryStore(selectCountryStatus);
-  const error = useCountryStore(selectCountryError);
-  const loadCountries = useCountryStore(selectLoadCountries);
-  const refreshCountries = useCountryStore(selectRefreshCountries);
-
-  useEffect(() => {
-    void loadCountries();
-  }, [loadCountries]);
+  const countriesQuery = useQuery({
+    queryKey: countryQueryKey,
+    queryFn: async ({ signal }) => getCountries({ signal }),
+  });
 
   const refresh = useCallback(() => {
-    void refreshCountries();
-  }, [refreshCountries]);
+    void countriesQuery.refetch();
+  }, [countriesQuery]);
 
   return {
-    countries,
-    loading: status === "idle" || status === "loading",
-    error,
+    countries: countriesQuery.data ?? [],
+    loading: countriesQuery.isLoading || countriesQuery.isFetching,
+    error: countriesQuery.error === null ? null : getUserFacingErrorMessage(countriesQuery.error),
     refresh,
   };
 }

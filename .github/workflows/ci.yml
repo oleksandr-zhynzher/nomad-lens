@@ -28,6 +28,9 @@ jobs:
       - name: Run blocking PR gates
         run: npm run quality:pr
 
+      - name: Run fast client lint gate
+        run: npm run lint:fast -w client
+
   commitlint:
     name: Blocking commit message gate
     runs-on: ubuntu-latest

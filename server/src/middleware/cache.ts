@@ -10,12 +10,12 @@ export class MemoryCache {
     this.ttlMs = ttlHours * 60 * 60 * 1000;
   }
 
-  get<T>(key: string): T | null {
+  get<T>(key: string): T | undefined {
     const entry = this.store.get(key);
-    if (!entry) return null;
+    if (!entry) return undefined;
     if (Date.now() > entry.expiresAt) {
       this.store.delete(key);
-      return null;
+      return undefined;
     }
     return entry.data as T;
   }
@@ -25,7 +25,7 @@ export class MemoryCache {
   }
 
   has(key: string): boolean {
-    return this.get(key) !== null;
+    return this.get(key) !== undefined;
   }
 
   invalidate(key: string): void {

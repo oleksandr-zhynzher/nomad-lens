@@ -3,47 +3,37 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { headerNavBtnClass, headerNavLinkClass } from "./layout.styles";
-import type { NavView } from "./layout.utils";
+import { type NavView, viewPath } from "./layout.utils";
 
 interface DesktopNavProps {
   readonly activeView: NavView | null;
-  readonly onViewClick: (view: NavView) => void;
   readonly langPrefix: string;
   readonly pathname: string;
 }
 
-export function DesktopNav({ activeView, onViewClick, langPrefix, pathname }: DesktopNavProps) {
+export function DesktopNav({ activeView, langPrefix, pathname }: DesktopNavProps) {
   const { t } = useTranslation();
   return (
     <>
       <div className="flex gap-1 rounded-md bg-surface-4 p-1">
-        <button
-          onClick={() => {
-            onViewClick("list");
-          }}
+        <Link
+          to={viewPath("list", langPrefix)}
           className={headerNavBtnClass(activeView === "list")}
         >
           <List size={16} />
           {t("views.list")}
-        </button>
-        <button
-          onClick={() => {
-            onViewClick("map");
-          }}
-          className={headerNavBtnClass(activeView === "map")}
-        >
+        </Link>
+        <Link to={viewPath("map", langPrefix)} className={headerNavBtnClass(activeView === "map")}>
           <Map size={16} />
           {t("views.map")}
-        </button>
-        <button
-          onClick={() => {
-            onViewClick("compare");
-          }}
+        </Link>
+        <Link
+          to={viewPath("compare", langPrefix)}
           className={headerNavBtnClass(activeView === "compare")}
         >
           <BarChart3 size={16} />
           {t("views.compare")}
-        </button>
+        </Link>
         <Link
           to={`${langPrefix}/nomad-visas`}
           className={headerNavLinkClass(pathname.endsWith("/nomad-visas"))}
@@ -68,7 +58,7 @@ export function DesktopNav({ activeView, onViewClick, langPrefix, pathname }: De
       </div>
 
       <a
-        href="https:/github.com/oleksandr-zhynzher/nomad-lens"
+        href="https://github.com/oleksandr-zhynzher/nomad-lens"
         target="_blank"
         rel="noreferrer"
         className="flex items-center gap-1.5 text-[13px] text-muted transition-colors hover:text-slate-200"
@@ -78,7 +68,7 @@ export function DesktopNav({ activeView, onViewClick, langPrefix, pathname }: De
           height="16"
           viewBox="0 0 16 16"
           fill="currentColor"
-          xmlns="http:/www.w3.org/2000/svg"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <path
             fillRule="evenodd"

@@ -35,7 +35,7 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
       <div className="flex items-center justify-between">
         <span className="text-xs text-secondary">{t("climate.temperatureRange")}</span>
         <span className="font-mono text-xs text-accent-dim">
-          {climatePrefs.minTemp}°C — {climatePrefs.maxTemp}°C
+          {climatePrefs.minTemp}°C to {climatePrefs.maxTemp}°C
         </span>
       </div>
       {/* Min/Max sliders */}

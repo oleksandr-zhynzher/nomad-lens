@@ -18,6 +18,6 @@
     "rootDir": ".",
     "declaration": true
   },
-  "include": ["bin", "lib"],
+  "include": ["bin", "lib", "tests"],
   "exclude": ["node_modules", "dist", "cdk.out"]
 }

@@ -54,7 +54,7 @@ export function MobileSheet({ open, title, closeLabel, children, onClose }: Mobi
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-[4px] bg-border text-muted"
+            className="flex size-8 items-center justify-center rounded-[4px] bg-border text-muted"
             aria-label={closeLabel}
           >
             <X size={18} aria-hidden="true" />

@@ -36,7 +36,7 @@ export function HeroSection({
           <div className="mb-2 flex items-center gap-2 md:mb-3">
             {eyebrow.split("·").map((word) => (
               <span key={word.trim()} className="flex items-center gap-2">
-                <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                <span className="relative inline-block size-1 shrink-0 rounded-full bg-accent-dim" />
                 <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
                   {word.trim()}
                 </span>
@@ -44,7 +44,7 @@ export function HeroSection({
             ))}
           </div>
         ) : null}
-        <h1 className="m-0 [font-family:Oswald,_sans-serif] text-3xl leading-none font-bold text-on-surface md:text-[56px]">
+        <h1 className="m-0 [font-family:Oswald,_sans-serif] text-3xl leading-none font-semibold text-on-surface md:text-[56px]">
           {title}
         </h1>
         <p className="m-0 hidden text-[15px] text-muted md:block">{subtitle}</p>

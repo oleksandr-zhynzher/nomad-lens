@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { BudgetComparisonGrid } from "./BudgetComparisonGrid";
 import { BudgetComparisonSlots } from "./BudgetComparisonSlots";
 
+const EMPTY_BUDGET_MATCHES: BudgetMatch[] = [];
+
 interface BudgetComparisonProps {
   readonly countries: CountryData[];
   readonly matches?: BudgetMatch[];
@@ -17,7 +19,7 @@ interface BudgetComparisonProps {
 
 export function BudgetComparison({
   countries,
-  matches = [],
+  matches = EMPTY_BUDGET_MATCHES,
   selectedCodes,
   onSelectedCodesChange,
   sortDirection = null,
@@ -49,7 +51,7 @@ export function BudgetComparison({
   const filtered = hookFiltered.filter((c) => !!c.costOfLiving);
   const sortedSlots = useMemo(() => {
     if (sortDirection == null) return selectedSlots;
-    return [...selectedSlots].sort((slotA, slotB) => {
+    return selectedSlots.toSorted((slotA, slotB) => {
       const matchA = matchMap.get(slotA.country.code);
       const matchB = matchMap.get(slotB.country.code);
       if (!matchA && !matchB) return 0;

@@ -34,6 +34,10 @@ export function BudgetSlotCards({ sortedSlots, matchMap, lang, onRemove }: Budge
               onRemove={() => {
                 onRemove(slot.index);
               }}
+              removeLabel={t("compare.removeCountry", {
+                country: localizeCountry(slot.country, lang).name,
+                defaultValue: `Remove ${localizeCountry(slot.country, lang).name}`,
+              })}
               regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
             >
               <span

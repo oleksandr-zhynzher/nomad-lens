@@ -2,12 +2,13 @@ import type { CountryData } from "@core/models";
 import { localizeCountry } from "@core/utils";
 import type { BudgetMatch } from "@features/budget/hooks";
 import type { useWeightState } from "@features/country-ranking/hooks";
-import type { SortDirection, SortField } from "@features/nomad-visas/ui/nomad-visas.types";
 import {
   applyClimate,
   compareVisaRows,
   computeOverallScore,
-} from "@features/nomad-visas/ui/nomad-visas.utils";
+  type SortDirection,
+  type SortField,
+} from "@features/nomad-visas/model";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { NavigateFunction } from "react-router-dom";

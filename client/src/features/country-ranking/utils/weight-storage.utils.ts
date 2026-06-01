@@ -1,5 +1,6 @@
 import type { ClimatePreferences, WeightMap, WeightMode } from "@core/models";
 import { CATEGORY_KEYS, VISIBLE_CATEGORY_KEYS } from "@core/models";
+import { readVersionedJson, writeVersionedJson } from "@core/utils";
 
 import {
   defaultClimatePreferences,
@@ -10,6 +11,9 @@ import {
 export const LS_WEIGHTS_KEY = "nomad-lens:weights";
 export const LS_WEIGHT_MODE_KEY = "nomad-lens:weight-mode";
 export const LS_FILTERS_KEY = "nomad-lens:filters";
+const WEIGHT_STORAGE_VERSION = 1;
+const WEIGHT_MODE_STORAGE_VERSION = 1;
+const FILTER_STORAGE_VERSION = 1;
 
 export const WEIGHT_SHARE_KEYS = [
   "nomadVisa",
@@ -102,12 +106,33 @@ export function filtersToStorable(f: LoadedFilters) {
   };
 }
 
+function clampWeight(value: number): number {
+  return Math.max(0, Math.min(100, Math.round(value)));
+}
+
+function sanitizeWeightMode(value: unknown): WeightMode {
+  return value === "balanced" || value === "independent" ? value : "independent";
+}
+
+function sanitizeWeights(value: unknown, mode: WeightMode): WeightMap {
+  const base = mode === "independent" ? defaultIndependentWeights() : defaultWeights();
+  if (typeof value !== "object" || value === null || Array.isArray(value)) return base;
+
+  for (const key of CATEGORY_KEYS) {
+    const raw = (value as Record<string, unknown>)[key];
+    if (typeof raw === "number" && Number.isFinite(raw)) {
+      base[key] = clampWeight(raw);
+    }
+  }
+
+  return mode === "balanced" ? normalizeBalancedWeights(base) : base;
+}
+
 /**
- * Read and consume weight/filter share params from the URL once.
- * Non-weight params (c, m, view, etc.) are preserved in the URL.
+ * Read weight/filter params from the URL once.
  * Returns null if no weight share params were found.
  */
-export function consumeSharedParams(): URLSearchParams | null {
+export function readSharedParams(): URLSearchParams | null {
   const urlParams = new URLSearchParams(globalThis.location.search);
   const hasShared =
     CATEGORY_KEYS.some((k) => urlParams.has(k)) ||
@@ -123,89 +148,42 @@ export function consumeSharedParams(): URLSearchParams | null {
     ].some((k) => urlParams.has(k));
   if (!hasShared) return null;
 
-  // Strip only weight/filter params, preserve others (c, m, etc.)
-  const cleaned = new URLSearchParams(globalThis.location.search);
-  for (const k of [
-    ...CATEGORY_KEYS,
-    "nomadVisa",
-    "schengen",
-    "minDays",
-    "regions",
-    "climateSeason",
-    "climateMin",
-    "climateMax",
-    "weightMode",
-  ]) {
-    cleaned.delete(k);
-  }
-  const newSearch = cleaned.toString();
-  globalThis.history.replaceState(
-    null,
-    "",
-    globalThis.location.pathname + (newSearch !== "" ? `?${newSearch}` : ""),
-  );
   return urlParams;
 }
 
-// Module-level: consumed once on first import, shared across all pages.
-// Guard for non-browser environments (tests / SSR).
-const _sharedParams = "localStorage" in globalThis ? consumeSharedParams() : null;
-
 export function loadWeightModeFromStorage(): WeightMode {
-  if (_sharedParams?.get("weightMode") === "balanced") {
-    try {
-      localStorage.setItem(LS_WEIGHT_MODE_KEY, "balanced");
-    } catch {
-      /* ignore */
-    }
-    return "balanced";
+  const sharedParams = readSharedParams();
+  const sharedMode = sharedParams?.get("weightMode");
+  if (sharedMode === "balanced" || sharedMode === "independent") {
+    writeVersionedJson(LS_WEIGHT_MODE_KEY, WEIGHT_MODE_STORAGE_VERSION, sharedMode);
+    return sharedMode;
   }
-  if (_sharedParams?.get("weightMode") === "independent") {
-    try {
-      localStorage.setItem(LS_WEIGHT_MODE_KEY, "independent");
-    } catch {
-      /* ignore */
-    }
-    return "independent";
-  }
-  try {
-    const raw = localStorage.getItem(LS_WEIGHT_MODE_KEY);
-    if (raw === "balanced" || raw === "independent") return raw;
-  } catch {
-    /* ignore */
-  }
-  return "independent";
+
+  return readVersionedJson({
+    key: LS_WEIGHT_MODE_KEY,
+    version: WEIGHT_MODE_STORAGE_VERSION,
+    fallback: () => "independent",
+    sanitize: sanitizeWeightMode,
+    migrate: sanitizeWeightMode,
+  });
 }
 
 export function loadWeightsFromStorage(): WeightMap {
-  if (_sharedParams && CATEGORY_KEYS.some((k) => _sharedParams.has(k))) {
-    const imported = weightsFromSearch(_sharedParams.toString());
-    try {
-      localStorage.setItem(LS_WEIGHTS_KEY, JSON.stringify(imported));
-    } catch {
-      /* ignore */
-    }
+  const sharedParams = readSharedParams();
+  if (sharedParams && CATEGORY_KEYS.some((k) => sharedParams.has(k))) {
+    const imported = weightsFromSearch(sharedParams.toString());
+    writeVersionedJson(LS_WEIGHTS_KEY, WEIGHT_STORAGE_VERSION, imported);
     return imported;
   }
-  try {
-    const raw = localStorage.getItem(LS_WEIGHTS_KEY);
-    if (raw !== null) {
-      const parsed = JSON.parse(raw) as Record<string, unknown>;
-      const mode = loadWeightModeFromStorage();
-      const base = mode === "independent" ? defaultIndependentWeights() : defaultWeights();
-      for (const key of CATEGORY_KEYS) {
-        const v = parsed[key];
-        if (typeof v === "number" && !Number.isNaN(v)) {
-          base[key] = Math.max(0, Math.min(100, Math.round(v)));
-        }
-      }
-      return base;
-    }
-  } catch {
-    /* ignore */
-  }
+
   const mode = loadWeightModeFromStorage();
-  return mode === "independent" ? defaultIndependentWeights() : defaultWeights();
+  return readVersionedJson({
+    key: LS_WEIGHTS_KEY,
+    version: WEIGHT_STORAGE_VERSION,
+    fallback: () => (mode === "independent" ? defaultIndependentWeights() : defaultWeights()),
+    sanitize: (value) => sanitizeWeights(value, mode),
+    migrate: (value) => sanitizeWeights(value, mode),
+  });
 }
 
 function climatePrefsFromSharedParams(
@@ -262,29 +240,42 @@ function filtersFromParsed(p: Record<string, unknown>, def: ClimatePreferences):
 
 export function loadFiltersFromStorage(): LoadedFilters {
   const def = defaultClimatePreferences();
-  if (_sharedParams !== null) {
-    const loaded = filtersFromSharedParams(_sharedParams, def);
-    try {
-      localStorage.setItem(LS_FILTERS_KEY, JSON.stringify(filtersToStorable(loaded)));
-    } catch {
-      /* ignore */
-    }
+  const sharedParams = readSharedParams();
+  if (sharedParams !== null) {
+    const loaded = filtersFromSharedParams(sharedParams, def);
+    writeVersionedJson(LS_FILTERS_KEY, FILTER_STORAGE_VERSION, filtersToStorable(loaded));
     return loaded;
   }
-  try {
-    const raw = localStorage.getItem(LS_FILTERS_KEY);
-    if (raw !== null) {
-      const p = JSON.parse(raw) as Record<string, unknown>;
-      return filtersFromParsed(p, def);
-    }
-  } catch {
-    /* ignore */
-  }
-  return {
-    nomadVisaOnly: false,
-    schengenOnly: false,
-    minTouristDays: null,
-    selectedRegions: new Set<string>(),
-    climatePrefs: def,
-  };
+
+  return readVersionedJson({
+    key: LS_FILTERS_KEY,
+    version: FILTER_STORAGE_VERSION,
+    fallback: () => ({
+      nomadVisaOnly: false,
+      schengenOnly: false,
+      minTouristDays: null,
+      selectedRegions: new Set<string>(),
+      climatePrefs: def,
+    }),
+    sanitize: (value) =>
+      typeof value === "object" && value !== null && !Array.isArray(value)
+        ? filtersFromParsed(value as Record<string, unknown>, def)
+        : {
+            nomadVisaOnly: false,
+            schengenOnly: false,
+            minTouristDays: null,
+            selectedRegions: new Set<string>(),
+            climatePrefs: def,
+          },
+    migrate: (value) =>
+      typeof value === "object" && value !== null && !Array.isArray(value)
+        ? filtersFromParsed(value as Record<string, unknown>, def)
+        : {
+            nomadVisaOnly: false,
+            schengenOnly: false,
+            minTouristDays: null,
+            selectedRegions: new Set<string>(),
+            climatePrefs: def,
+          },
+  });
 }

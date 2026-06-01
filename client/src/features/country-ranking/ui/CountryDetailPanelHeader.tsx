@@ -33,7 +33,7 @@ export function CountryDetailPanelHeader({
           loading="eager"
         />
         <div className="flex min-w-0 items-baseline gap-2">
-          <h2 className="[font-family:Oswald,_sans-serif] leading-[1.2] font-bold whitespace-nowrap text-white">
+          <h2 className="[font-family:Oswald,_sans-serif] leading-[1.2] font-semibold whitespace-nowrap text-white">
             {locC.name}
           </h2>
           <span className="text-xs text-muted">{t(`regions.${regionKey(c.region)}`)}</span>
@@ -48,7 +48,7 @@ export function CountryDetailPanelHeader({
 
       <button
         onClick={onClose}
-        className="flex h-8 w-8 shrink-0 items-center justify-center rounded bg-border text-muted transition-colors"
+        className="flex size-8 shrink-0 items-center justify-center rounded bg-border text-muted transition-colors"
         aria-label={t("a11y.closePanel", "Close panel")}
       >
         <X size={18} />

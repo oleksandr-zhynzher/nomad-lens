@@ -48,7 +48,7 @@ export function TourismBudgetBreakdownGrid({ budgetMatch }: TourismBudgetBreakdo
             >
               <div className="flex items-center justify-between gap-2">
                 <span
-                  className="inline-flex h-7 w-7 items-center justify-center rounded-[8px] border border-[var(--acc-b)] bg-[#161A20]"
+                  className="inline-flex size-7 items-center justify-center rounded-[8px] border border-[var(--acc-b)] bg-[#161A20]"
                   style={{ "--acc-b": `${meta.accent}44` } as React.CSSProperties}
                 >
                   {meta.icon}

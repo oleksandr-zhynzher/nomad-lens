@@ -68,7 +68,7 @@ export function CompareModeActions({
         <button
           type="button"
           onClick={onExit}
-          className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-[#161616] text-dim"
+          className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md border border-surface-4 bg-[#161616] text-dim"
           aria-label={exitLabel}
         >
           <X size={16} aria-hidden />

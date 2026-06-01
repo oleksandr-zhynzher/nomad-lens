@@ -18,7 +18,7 @@ export function BudgetExpandedPanel({ match, borderColor, langPrefix }: BudgetEx
   const breakdownCards = getBudgetCountryCardBreakdownItems(breakdown, t);
   return (
     <div
-      className="border-t border-[var(--bc)] bg-[#0A0A0A] px-4 py-4"
+      className="border-t border-[var(--bc)] bg-[#0A0A0A] p-4"
       style={{ "--bc": borderColor } as React.CSSProperties}
     >
       <div className="mb-3 flex items-center justify-between">
