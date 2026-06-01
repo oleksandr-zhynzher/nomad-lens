@@ -6,6 +6,12 @@ import { useTranslation } from "react-i18next";
 
 import { TourismSurplusCard, TourismTotalCard } from "./TourismBudgetSummaryCards";
 
+const CARD_META = {
+  accommodation: { icon: <House size={17} color="#C88B56" />, accent: "#C88B56" },
+  food: { icon: <ShoppingCart size={17} color="#7EA66E" />, accent: "#7EA66E" },
+  activities: { icon: <Compass size={17} color="#5F92B8" />, accent: "#5F92B8" },
+} satisfies Record<string, { icon: React.ReactNode; accent: string }>;
+
 interface TourismBudgetBreakdownGridProps {
   readonly budgetMatch: TourismBudgetMatch;
 }
@@ -22,11 +28,6 @@ export function TourismBudgetBreakdownGrid({ budgetMatch }: TourismBudgetBreakdo
         ? Math.max(8, Math.min(100, (budgetMatch.breakdown[cat] / totalDaily) * 100))
         : 0,
   }));
-  const cardMeta = {
-    accommodation: { icon: <House size={17} color="#C88B56" />, accent: "#C88B56" },
-    food: { icon: <ShoppingCart size={17} color="#7EA66E" />, accent: "#7EA66E" },
-    activities: { icon: <Compass size={17} color="#5F92B8" />, accent: "#5F92B8" },
-  } satisfies Record<string, { icon: React.ReactNode; accent: string }>;
 
   return (
     <div className="mt-4 rounded-[10px] border border-[#2A2D33] p-[14px] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] [background:linear-gradient(180deg,rgba(18,19,22,0.96)_0%,rgba(11,12,14,0.98)_100%)]">
@@ -40,7 +41,7 @@ export function TourismBudgetBreakdownGrid({ budgetMatch }: TourismBudgetBreakdo
       </div>
       <div className="grid grid-cols-2 gap-[10px] md:grid-cols-5">
         {rows.map(({ cat, amount, color, width }) => {
-          const meta = cardMeta[cat];
+          const meta = CARD_META[cat];
           return (
             <div
               key={cat}

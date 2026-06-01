@@ -21,7 +21,9 @@ export function NomadVisaTableHeader({
   return (
     <thead>
       <tr className="border-b-2 border-border">
-        {compareMode ? <th className="bg-bg px-3 py-4" /> : null}
+        {compareMode ? (
+          <th className="bg-bg px-3 py-4" aria-label={t("a11y.selectColumn", "Select")} />
+        ) : null}
         <th
           onClick={() => {
             onSort("country");
@@ -88,7 +90,7 @@ export function NomadVisaTableHeader({
           {t("nomadVisasPage.table.tax", "Tax Status")}{" "}
           <VisaSortIcon field="tax" sortField={sortField} sortDirection={sortDirection} />
         </th>
-        <th className="bg-bg px-3 py-4" />
+        <th className="bg-bg px-3 py-4" aria-label={t("a11y.actionsColumn", "Actions")} />
       </tr>
     </thead>
   );

@@ -115,7 +115,7 @@ function applyTagScores(
  * a −2 pt penalty each, so countries with sparse data rank lower than
  * data-rich countries with similar weighted averages.
  */
-export function computeWeightedTourismScore(
+function computeWeightedTourismScore(
   country: CountryData,
   weights: TourismWeightMap,
   selectedTags?: string[],
@@ -157,17 +157,6 @@ export function computeWeightedTourismScore(
   return Math.round(Math.max(0, base) * 10) / 10;
 }
 
-/** Rank countries by composite tourism score, filtering out nulls. */
-export function getTourismRanking(countries: CountryData[]): TourismRanked[] {
-  const scored = countries
-    .map((c) => ({ country: c, tourismScore: computeTourismScore(c) }))
-    .filter((x): x is { country: CountryData; tourismScore: number } => x.tourismScore != null);
-
-  scored.sort((a, b) => b.tourismScore - a.tourismScore);
-
-  return scored.map((s, i) => ({ ...s, rank: i + 1 }));
-}
-
 /** Rank countries using user-defined tourism weights. */
 export function getWeightedTourismRanking(
   countries: CountryData[],
@@ -179,22 +168,17 @@ export function getWeightedTourismRanking(
   const activeKeys = TOURISM_CATEGORY_KEYS.filter((k) => (weights[k] ?? 0) > 0);
   const totalActive = activeKeys.length;
 
-  const scored = countries
-    .map((c) => {
-      const presentCount = activeKeys.filter((k) => c.scores[k].value != null).length;
-      return {
-        country: c,
-        tourismScore: computeWeightedTourismScore(
-          c,
-          weights,
-          selectedTags,
-          travelDates,
-          activityBlend,
-        ),
-        presentCount,
-      };
-    })
-    .filter((x) => x.tourismScore > 0);
+  const scored = countries.flatMap((c) => {
+    const presentCount = activeKeys.filter((k) => c.scores[k].value != null).length;
+    const tourismScore = computeWeightedTourismScore(
+      c,
+      weights,
+      selectedTags,
+      travelDates,
+      activityBlend,
+    );
+    return tourismScore > 0 ? [{ country: c, tourismScore, presentCount }] : [];
+  });
 
   // Primary: countries with all active metrics first
   // Secondary: higher score first

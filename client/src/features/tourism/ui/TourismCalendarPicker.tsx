@@ -104,10 +104,11 @@ function CalendarDayButton({ day, month, start, end, today, onSelect }: Calendar
     start !== null && end !== null && compareDates(d, start) > 0 && compareDates(d, end) < 0;
 
   return (
-    <div role="gridcell" aria-selected={isStart || isEnd || inRange}>
+    <td>
       <button
         type="button"
         aria-current={month === today.getMonth() && day === today.getDate() ? "date" : undefined}
+        aria-selected={isStart || isEnd || inRange}
         aria-label={buildDayLabel(month, day, isStart || isEnd, inRange)}
         onClick={() => {
           onSelect(month, day);
@@ -116,7 +117,7 @@ function CalendarDayButton({ day, month, start, end, today, onSelect }: Calendar
       >
         {day}
       </button>
-    </div>
+    </td>
   );
 }
 
@@ -192,48 +193,47 @@ export function TourismCalendarPicker({
         </button>
       </div>
 
-      <div
-        className="flex flex-col gap-0.5"
-        role="grid"
+      <table
+        className="w-full border-collapse"
         aria-label={t("tourismFilters.dateRangeCalendar", "Travel date range calendar")}
       >
-        <div className="mb-1 grid grid-cols-7" role="row">
-          {WEEK_DAYS.map((wd) => (
-            <div
-              key={wd}
-              className="pb-1 text-center text-[10px] text-dimmer uppercase"
-              role="columnheader"
-              aria-label={wd}
-            >
-              {wd}
-            </div>
-          ))}
-        </div>
+        <thead>
+          <tr className="mb-1 grid grid-cols-7">
+            {WEEK_DAYS.map((wd) => (
+              <th
+                key={wd}
+                scope="col"
+                className="pb-1 text-center text-[10px] text-dimmer uppercase"
+                aria-label={wd}
+              >
+                {wd}
+              </th>
+            ))}
+          </tr>
+        </thead>
 
-        {rows.map((row, ri) => (
-          <div key={`row-${viewMonth}-${String(ri)}`} className="grid grid-cols-7" role="row">
-            {row.map((day, ci) =>
-              day === null ? (
-                <div
-                  key={`empty-${viewMonth}-${String(ri)}-${String(ci)}`}
-                  role="gridcell"
-                  aria-hidden
-                />
-              ) : (
-                <CalendarDayButton
-                  key={`${viewMonth}-${day}`}
-                  day={day}
-                  month={viewMonth}
-                  start={start}
-                  end={end}
-                  today={today}
-                  onSelect={handleDayClick}
-                />
-              ),
-            )}
-          </div>
-        ))}
-      </div>
+        <tbody className="flex flex-col gap-0.5">
+          {rows.map((row, ri) => (
+            <tr key={`row-${viewMonth}-${String(ri)}`} className="grid grid-cols-7">
+              {row.map((day, ci) =>
+                day === null ? (
+                  <td key={`empty-${viewMonth}-${String(ri)}-${String(ci)}`} />
+                ) : (
+                  <CalendarDayButton
+                    key={`${viewMonth}-${day}`}
+                    day={day}
+                    month={viewMonth}
+                    start={start}
+                    end={end}
+                    today={today}
+                    onSelect={handleDayClick}
+                  />
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
       {startDate !== null || endDate !== null ? (
         <button

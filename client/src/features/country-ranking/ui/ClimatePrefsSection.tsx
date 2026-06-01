@@ -20,6 +20,7 @@ export function ClimatePrefsSection({ climatePrefs, onClimatePrefsChange }: Clim
             return (
               <button
                 key={opt.value}
+                type="button"
                 onClick={() => {
                   onClimatePrefsChange({ ...climatePrefs, seasonType: opt.value });
                 }}

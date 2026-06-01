@@ -19,6 +19,7 @@ export function MapZoomControls({
   return (
     <div className="absolute top-2 left-2 z-10 flex flex-col overflow-hidden rounded-[4px] bg-surface md:top-3 md:left-3">
       <button
+        type="button"
         onClick={onZoomIn}
         className="flex h-9 w-9 items-center justify-center border-b border-border text-lg leading-none font-bold text-muted transition-colors md:h-10 md:w-10"
         aria-label={t("a11y.zoomIn", "Zoom in")}
@@ -26,6 +27,7 @@ export function MapZoomControls({
         +
       </button>
       <button
+        type="button"
         onClick={onZoomOut}
         className={`flex h-9 w-9 items-center justify-center text-lg leading-none font-bold text-muted transition-colors md:h-10 md:w-10 ${onToggleWeights ? "border-b border-border" : ""}`}
         aria-label={t("a11y.zoomOut", "Zoom out")}
@@ -34,6 +36,7 @@ export function MapZoomControls({
       </button>
       {onToggleWeights ? (
         <button
+          type="button"
           onClick={onToggleWeights}
           className={`hidden size-10 items-center justify-center transition-colors md:flex ${showWeights ? "text-accent-dim" : "text-[#999999]"}`}
           aria-label={t("a11y.toggleParameters", "Toggle parameters")}

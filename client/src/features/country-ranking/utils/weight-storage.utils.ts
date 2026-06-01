@@ -67,7 +67,7 @@ function normalizeBalancedWeights(base: WeightMap): WeightMap {
   return base;
 }
 
-export function weightsFromSearch(search: string): WeightMap {
+function weightsFromSearch(search: string): WeightMap {
   const params = new URLSearchParams(search);
   const mode = params.get("weightMode") === "balanced" ? "balanced" : "independent";
   const base = mode === "independent" ? defaultIndependentWeights() : defaultWeights();
@@ -132,7 +132,7 @@ function sanitizeWeights(value: unknown, mode: WeightMode): WeightMap {
  * Read weight/filter params from the URL once.
  * Returns null if no weight share params were found.
  */
-export function readSharedParams(): URLSearchParams | null {
+function readSharedParams(): URLSearchParams | null {
   const urlParams = new URLSearchParams(globalThis.location.search);
   const hasShared =
     CATEGORY_KEYS.some((k) => urlParams.has(k)) ||

@@ -46,6 +46,7 @@ export function LayoutHeader({
         </div>
 
         <button
+          type="button"
           className="flex size-10 items-center justify-center text-muted md:hidden"
           onClick={onToggleMobileMenu}
           aria-label={t("a11y.toggleMenu", "Toggle menu")}

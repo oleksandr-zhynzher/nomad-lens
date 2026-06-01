@@ -15,15 +15,54 @@ import { NomadVisaCompareRows } from "./NomadVisaCompareRows";
 
 type VisaCountry = CountryData & { nomadVisa: NomadVisaDetails };
 
+interface NomadVisaCompareContentProps {
+  readonly loading: boolean;
+  readonly count: number;
+  readonly langPrefix: string;
+  readonly lang: string;
+  readonly selected: VisaCountry[];
+}
+
+function NomadVisaCompareContent({
+  loading,
+  count,
+  langPrefix,
+  lang,
+  selected,
+}: NomadVisaCompareContentProps) {
+  const { t } = useTranslation();
+  if (loading) return <div className="py-16 text-center text-dim">{t("loading", "Loading…")}</div>;
+  if (count < 2)
+    return (
+      <div className="px-4 py-16 text-center text-dim">
+        {t(
+          "nomadVisasPage.noCountriesSelected",
+          "No countries selected. Go back and pick at least 2.",
+        )}
+      </div>
+    );
+  return (
+    <div className="overflow-hidden rounded-lg border border-[#1E1E1E]">
+      <NomadVisaCompareHeader
+        langPrefix={langPrefix}
+        lang={lang}
+        selected={selected}
+        count={count}
+      />
+      <NomadVisaCompareRows selected={selected} count={count} />
+    </div>
+  );
+}
+
 export function NomadVisaComparePage() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const { countries, loading } = useCountries();
   const [searchParams, setSearchParams] = useSearchParams();
   const langPrefix = useLangPrefix();
   const lang = i18n.language;
 
   const validVisaCodes = useMemo(
-    () => new Set(countries.filter((c) => Boolean(c.nomadVisa)).map((c) => c.code.toUpperCase())),
+    () => new Set(countries.flatMap((c) => (c.nomadVisa ? [c.code.toUpperCase()] : []))),
     [countries],
   );
   const rawCodes = useMemo(() => getRawCompareCountryCodes(searchParams), [searchParams]);
@@ -55,34 +94,17 @@ export function NomadVisaComparePage() {
 
   const count = selected.length;
 
-  function renderContent() {
-    if (loading)
-      return <div className="py-16 text-center text-dim">{t("loading", "Loading…")}</div>;
-    if (count < 2)
-      return (
-        <div className="px-4 py-16 text-center text-dim">
-          {t(
-            "nomadVisasPage.noCountriesSelected",
-            "No countries selected. Go back and pick at least 2.",
-          )}
-        </div>
-      );
-    return (
-      <div className="overflow-hidden rounded-lg border border-[#1E1E1E]">
-        <NomadVisaCompareHeader
+  return (
+    <Layout>
+      <div className="mx-auto max-w-[1100px] px-4 py-8 pb-16">
+        <NomadVisaCompareContent
+          loading={loading}
+          count={count}
           langPrefix={langPrefix}
           lang={lang}
           selected={selected}
-          count={count}
         />
-        <NomadVisaCompareRows selected={selected} count={count} />
       </div>
-    );
-  }
-
-  return (
-    <Layout>
-      <div className="mx-auto max-w-[1100px] px-4 py-8 pb-16">{renderContent()}</div>
     </Layout>
   );
 }

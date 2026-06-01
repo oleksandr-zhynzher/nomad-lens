@@ -15,6 +15,7 @@ export function NomadVisaDetails({ visa, expanded, onToggle }: NomadVisaDetailsP
   return (
     <div className="mt-6">
       <button
+        type="button"
         onClick={onToggle}
         className={`flex w-full cursor-pointer items-center justify-between border-none bg-transparent py-2 ${expanded ? "mb-3" : "mb-0"}`}
       >

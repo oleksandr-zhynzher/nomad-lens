@@ -8,7 +8,7 @@ import {
   WeightModeToggle,
   WeightShareButton,
 } from "@features/country-ranking/ui";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface WeightPanelProps {
@@ -56,15 +56,21 @@ export function WeightPanel({
   const toggleGroup = (label: string) =>
     setCollapsed((prev) => ({ ...prev, [label]: !prev[label] }));
 
+  const weightModeToggle = useMemo(
+    () => <WeightModeToggle weightMode={weightMode} onWeightModeChange={onWeightModeChange} />,
+    [weightMode, onWeightModeChange],
+  );
+  const weightShareButton = !weightsAreDefault ? (
+    <WeightShareButton onShare={onShare} />
+  ) : undefined;
+
   return (
     <PanelShell
       title={t("weights.title")}
       subtitle={t("weights.hint")}
-      headerExtra={
-        <WeightModeToggle weightMode={weightMode} onWeightModeChange={onWeightModeChange} />
-      }
+      headerExtra={weightModeToggle}
       onReset={onReset}
-      {...(!weightsAreDefault && { footerExtra: <WeightShareButton onShare={onShare} /> })}
+      {...(!weightsAreDefault && { footerExtra: weightShareButton })}
       {...(mobile !== undefined && { mobile })}
     >
       {WEIGHT_GROUPS.map((group) => (

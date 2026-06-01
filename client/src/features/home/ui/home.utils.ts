@@ -25,7 +25,3 @@ export function getActiveHighlight(
   if (activeNavCursor === null) return highlightedCode;
   return allCodes[activeNavCursor] ?? null;
 }
-
-export function homeNavButtonClass(hasMatches: boolean): string {
-  return `flex h-6 w-6 items-center justify-center rounded-[3px] border-0 bg-surface-4 ${hasMatches ? "cursor-pointer text-tertiary" : "cursor-default text-dimmest"}`;
-}

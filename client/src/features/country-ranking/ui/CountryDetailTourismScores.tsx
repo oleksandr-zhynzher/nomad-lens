@@ -12,21 +12,21 @@ interface CountryDetailTourismScoresProps {
 export function CountryDetailTourismScores({ c }: CountryDetailTourismScoresProps) {
   const { t } = useTranslation();
   const tourismScore = computeTourismScore(c);
-  const tourismGroupRows = TOURISM_GROUPS.map((group) => ({
-    labelKey: group.labelKey,
-    metrics: group.keys
-      .map((key) => {
-        const value = c.scores[key].value;
-        if (value == null) return null;
-        return {
+  const tourismGroupRows = TOURISM_GROUPS.flatMap((group) => {
+    const metrics = group.keys.flatMap((key) => {
+      const value = c.scores[key].value;
+      if (value == null) return [];
+      return [
+        {
           key,
           label: t(`tourism.metrics.${key}`, CATEGORY_LABELS[key]),
           value,
           color: TOURISM_COLORS[key] ?? "#888",
-        };
-      })
-      .filter((metric): metric is NonNullable<typeof metric> => metric !== null),
-  })).filter((group) => group.metrics.length > 0);
+        },
+      ];
+    });
+    return metrics.length > 0 ? [{ labelKey: group.labelKey, metrics }] : [];
+  });
 
   if (tourismScore == null) return null;
 

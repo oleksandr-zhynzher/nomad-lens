@@ -22,6 +22,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 
+import { useLatestRef } from "@core/hooks";
+
 const MOBILE_VIEWPORT_MAX_WIDTH = 1024;
 
 export function useCompareView() {
@@ -76,16 +78,19 @@ export function useCompareView() {
     applyPanelHeight(panelRef.current);
   }, []);
 
+  const syncPanelHeightRef = useLatestRef(syncPanelHeight);
+
   useEffect(() => {
     if (!showWeights) return;
-    requestAnimationFrame(syncPanelHeight);
-    window.addEventListener("scroll", syncPanelHeight, { passive: true });
-    window.addEventListener("resize", syncPanelHeight, { passive: true });
+    const handler = () => syncPanelHeightRef.current();
+    requestAnimationFrame(syncPanelHeightRef.current);
+    window.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("resize", handler, { passive: true });
     return () => {
-      window.removeEventListener("scroll", syncPanelHeight);
-      window.removeEventListener("resize", syncPanelHeight);
+      window.removeEventListener("scroll", handler);
+      window.removeEventListener("resize", handler);
     };
-  }, [showWeights, syncPanelHeight]);
+  }, [showWeights, syncPanelHeightRef]);
 
   useEffect(() => {
     if (countries.length === 0) return;

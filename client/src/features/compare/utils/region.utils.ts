@@ -4,7 +4,7 @@ import type { RegionStats } from "@features/compare/constants";
 import { REGION_COLORS } from "@features/compare/constants";
 
 /** Compute per-category average scores for a set of countries in a region. */
-export function computeRegionCategories(regionCountries: CountryData[]): RegionStats["categories"] {
+function computeRegionCategories(regionCountries: CountryData[]): RegionStats["categories"] {
   const categories = {} as RegionStats["categories"];
   for (const key of VISIBLE_CATEGORY_KEYS) {
     const values = regionCountries
@@ -21,10 +21,7 @@ export function computeRegionCategories(regionCountries: CountryData[]): RegionS
 }
 
 /** Compute the weighted overall score for a region given its per-category averages. */
-export function computeRegionOverall(
-  categories: RegionStats["categories"],
-  weights: WeightMap,
-): number {
+function computeRegionOverall(categories: RegionStats["categories"], weights: WeightMap): number {
   let numerator = 0;
   let denominator = 0;
   for (const key of VISIBLE_CATEGORY_KEYS) {

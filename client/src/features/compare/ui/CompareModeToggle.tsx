@@ -11,6 +11,7 @@ export function CompareModeToggle({ compareMode, onCompareMode }: CompareModeTog
   const { t } = useTranslation();
   const pill = (mode: CompareMode, icon: React.ReactNode, label: string) => (
     <button
+      type="button"
       onClick={() => {
         onCompareMode(mode);
       }}

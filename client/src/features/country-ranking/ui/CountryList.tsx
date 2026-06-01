@@ -21,6 +21,8 @@ interface CountryListProps {
   readonly weights?: WeightMap;
 }
 
+const SKELETON_KEYS = ["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7"] as const;
+
 export function CountryList({
   ranked,
   loading,
@@ -40,7 +42,6 @@ export function CountryList({
   const { visible, hasMore, sentinelRef } = useInfiniteScroll(ranked, showAll);
 
   if (loading) {
-    const SKELETON_KEYS = ["s0", "s1", "s2", "s3", "s4", "s5", "s6", "s7"] as const;
     return (
       <div className="flex flex-col gap-2">
         {SKELETON_KEYS.map((k) => (
@@ -55,6 +56,7 @@ export function CountryList({
       <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
         <p className="text-danger">{error}</p>
         <button
+          type="button"
           onClick={onRetry}
           className="rounded bg-accent px-4 py-2 text-sm font-medium text-white transition-colors"
         >

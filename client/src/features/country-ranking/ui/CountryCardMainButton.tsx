@@ -38,6 +38,7 @@ export function CountryCardMainButton({
 
   return (
     <button
+      type="button"
       className={`relative flex min-h-14 w-full cursor-pointer items-center gap-2 border-none bg-transparent px-3 py-2.5 text-left transition-all md:gap-4 md:px-4 md:py-3 ${compareMode ? "z-0" : "z-[1]"}`}
       onClick={compareMode ? onSelectToggle : onToggle}
       aria-expanded={expanded}

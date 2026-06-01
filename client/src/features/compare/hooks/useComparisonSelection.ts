@@ -47,12 +47,10 @@ export function useComparisonSelection({
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
-  const selectedSlots = selectedCodes
-    .map((code, i) => {
-      const country = allCandidates.find((c) => c.code === code);
-      return country ? { country, color: getComparisonSlotColor(i), index: i } : null;
-    })
-    .filter(Boolean) as SelectedSlot[];
+  const selectedSlots: SelectedSlot[] = selectedCodes.flatMap((code, i) => {
+    const country = allCandidates.find((c) => c.code === code);
+    return country ? [{ country, color: getComparisonSlotColor(i), index: i }] : [];
+  });
 
   const handleRemove = (index: number) => {
     onSelectedCodesChange(selectedCodes.filter((_, i) => i !== index));

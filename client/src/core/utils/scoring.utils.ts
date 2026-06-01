@@ -46,7 +46,7 @@ export function computeScore(country: CountryData, weights: WeightMap): number {
  * Rank all countries by their weighted composite score.
  * Returns a sorted array with 1-based rank attached.
  */
-export function rankCountries(countries: CountryData[], weights: WeightMap): RankedCountry[] {
+function rankCountries(countries: CountryData[], weights: WeightMap): RankedCountry[] {
   const scored = countries.map((country) => ({
     country,
     finalScore: computeScore(country, weights),
@@ -66,7 +66,7 @@ export function rankCountries(countries: CountryData[], weights: WeightMap): Ran
  * Default equal weights for all visible non-AI categories, summing to exactly 100.
  * AI metrics default to 0 (opt-in only).
  */
-export function defaultWeights(): WeightMap {
+function defaultWeights(): WeightMap {
   const visible = VISIBLE_CATEGORY_KEYS.filter((k) => !AI_CATEGORIES.has(k));
   const base = Math.floor(100 / visible.length);
   const leftover = 100 - base * visible.length;
@@ -81,7 +81,7 @@ export function defaultWeights(): WeightMap {
  * Default weights for independent mode: every visible non-AI category set to 50.
  * AI metrics default to 0 (opt-in only).
  */
-export function defaultIndependentWeights(): WeightMap {
+function defaultIndependentWeights(): WeightMap {
   const result = Object.fromEntries(CATEGORY_KEYS.map((k) => [k, 0])) as WeightMap;
   for (const k of VISIBLE_CATEGORY_KEYS.filter((key) => !AI_CATEGORIES.has(key))) {
     result[k] = 50;
@@ -94,7 +94,7 @@ export function defaultIndependentWeights(): WeightMap {
  * after the user changes one slider to a new value.
  * Others are scaled proportionally using the largest-remainder method.
  */
-export function redistributeWeights(
+function redistributeWeights(
   changedKey: CategoryKey,
   newValue: number,
   weights: WeightMap,
@@ -164,7 +164,7 @@ export function redistributeWeights(
  * Determine a colour for a 0–100 score value.
  * Returns hex color string for the 4-tier system.
  */
-export function scoreColour(value: number | null): string {
+function scoreColour(value: number | null): string {
   if (value === null) return "#3A3A3A";
   if (value >= 75) return "#4CAF50"; // Excellent - green
   if (value >= 60) return "#8BC34A"; // Good - light green
@@ -176,7 +176,7 @@ export function scoreColour(value: number | null): string {
  * Return a human-readable label for a slider value.
  * Shows "Off" when weight is 0, otherwise the percentage contribution.
  */
-export function weightLabel(key: CategoryKey, weights: WeightMap): string {
+function weightLabel(key: CategoryKey, weights: WeightMap): string {
   const v = weights[key];
   if (v === 0) return "Off";
   return `${v}%`;
@@ -196,7 +196,7 @@ const ADJACENT: Record<SeasonType, SeasonType[]> = {
  * Compute a preference-based climate score (0–100).
  * 70% temperature match + 30% season type match.
  */
-export function computeClimateScore(climateData: ClimateData, prefs: ClimatePreferences): number {
+function computeClimateScore(climateData: ClimateData, prefs: ClimatePreferences): number {
   const { annualMeanTemp, seasonType } = climateData;
 
   let tempScore: number;
@@ -224,7 +224,7 @@ export function computeClimateScore(climateData: ClimateData, prefs: ClimatePref
   return Math.round((tempScore * 0.7 + seasonScore * 0.3) * 10) / 10;
 }
 
-export function defaultClimatePreferences(): ClimatePreferences {
+function defaultClimatePreferences(): ClimatePreferences {
   return { seasonType: "any", minTemp: 15, maxTemp: 25 };
 }
 

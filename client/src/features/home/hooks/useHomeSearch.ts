@@ -33,13 +33,12 @@ export function useHomeSearch(
   const matchingCodes = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (q.length === 0) return [];
-    return ranked
-      .filter(
-        (r) =>
-          localizeCountry(r.country, lang).name.toLowerCase().includes(q) ||
-          r.country.code.toLowerCase() === q,
-      )
-      .map((r) => r.country.code);
+    return ranked.flatMap((r) =>
+      localizeCountry(r.country, lang).name.toLowerCase().includes(q) ||
+      r.country.code.toLowerCase() === q
+        ? [r.country.code]
+        : [],
+    );
   }, [ranked, search, lang]);
 
   const updateSearch = useCallback((value: string) => {

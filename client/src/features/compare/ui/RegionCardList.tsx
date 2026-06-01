@@ -20,6 +20,7 @@ export function RegionCardList({ regionStats, enabled, onToggle }: RegionCardLis
         return (
           <div key={r.name} className="w-[148px] shrink-0 md:w-[180px]">
             <button
+              type="button"
               onClick={() => {
                 onToggle(r.name);
               }}

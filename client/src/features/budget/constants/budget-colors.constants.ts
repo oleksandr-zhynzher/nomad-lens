@@ -1,14 +1,3 @@
-/**
- * Color scale for a 0–100 comfort/fit score (different thresholds than the
- * general scoreColour — budget comfort uses 70/50/30 bands).
- */
-export function comfortScoreColour(score: number): string {
-  if (score >= 70) return "#4CAF50";
-  if (score >= 50) return "#8BC34A";
-  if (score >= 30) return "#FFC107";
-  return "#FF5722";
-}
-
 /** Color scale for a budget surplus/deficit value (in USD/month). */
 export function surplusColour(surplus: number): string {
   if (surplus > 200) return "#4CAF50";

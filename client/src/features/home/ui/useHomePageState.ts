@@ -19,7 +19,10 @@ export function useHomePageState() {
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const [expandedCode, setExpandedCode] = useState<string | null>(null);
   const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const initialHighlightRef = useRef(searchParams.get("highlight"));
+  const initialHighlightRef = useRef<string | null | undefined>(undefined);
+  if (initialHighlightRef.current === undefined) {
+    initialHighlightRef.current = searchParams.get("highlight");
+  }
 
   const { countries, loading, error, refresh } = useCountries();
   const ranked = useScoring(

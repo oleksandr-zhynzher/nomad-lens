@@ -1,7 +1,7 @@
 /* eslint-disable functional/no-classes, functional/no-class-inheritance, functional/no-this-expressions -- React Error Boundaries require a class component */
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
-import { reportClientError } from "../../utils";
+import { reportClientError } from "../../utils/error-reporting.utils";
 
 interface AppErrorBoundaryProps {
   readonly children: ReactNode;

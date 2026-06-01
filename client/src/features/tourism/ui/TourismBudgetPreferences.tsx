@@ -31,6 +31,7 @@ export function TourismBudgetPreferences({
             return (
               <button
                 key={opt}
+                type="button"
                 onClick={() => {
                   if (isHotel) {
                     if (!budgetState.accommodation.startsWith("hotel")) {
@@ -55,6 +56,7 @@ export function TourismBudgetPreferences({
               return (
                 <button
                   key={stars}
+                  type="button"
                   onClick={() => {
                     onBudgetChange("accommodation", key);
                   }}

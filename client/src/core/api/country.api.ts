@@ -1,5 +1,5 @@
 import { getJson } from "@core/api";
-import type { ApiHealthResponse, CountryData } from "@core/models";
+import type { CountryData } from "@core/models";
 import { parseCountryDataArray } from "@core/utils";
 
 declare global {
@@ -22,10 +22,6 @@ function countryRequestInit(options: CountryRequestOptions) {
   };
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
 function isCountryDataArray(value: unknown): value is CountryData[] {
   try {
     parseCountryDataArray(value);
@@ -33,15 +29,6 @@ function isCountryDataArray(value: unknown): value is CountryData[] {
   } catch {
     return false;
   }
-}
-
-function isApiHealthResponse(value: unknown): value is ApiHealthResponse {
-  return (
-    isRecord(value) &&
-    (value["status"] === "ok" || value["status"] === "degraded") &&
-    isRecord(value["apis"]) &&
-    typeof value["timestamp"] === "string"
-  );
 }
 
 export async function getCountries(options: CountryRequestOptions = {}): Promise<CountryData[]> {
@@ -58,11 +45,4 @@ export async function getCountries(options: CountryRequestOptions = {}): Promise
   }
 
   return getJson<CountryData[]>(`${BASE_URL}/api/countries`, countryRequestInit(options));
-}
-
-export async function getHealth(): Promise<ApiHealthResponse> {
-  return getJson<ApiHealthResponse>(`${BASE_URL}/api/health`, {
-    label: "health",
-    validate: isApiHealthResponse,
-  });
 }

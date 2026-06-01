@@ -43,6 +43,7 @@ export function CountryHeroBanner({
         }}
       />
       <button
+        type="button"
         onClick={onBack}
         className="absolute top-5 left-4 z-10 flex cursor-pointer items-center gap-1.5 rounded-lg border border-[#2A2A2A] bg-[rgba(17,17,17,0.75)] px-[14px] py-[7px] text-[13px] text-[#AAAAAA] backdrop-blur-[8px] md:left-8"
       >

@@ -20,6 +20,7 @@ export function VisaTouristDaysFilter({
         return (
           <button
             key={label}
+            type="button"
             onClick={() => {
               onMinTouristDaysChange(days);
             }}

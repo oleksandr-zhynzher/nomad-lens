@@ -1,6 +1,6 @@
 import type React from "react";
 
-export const LABEL_STYLE = "text-[11px] font-semibold tracking-[0.8px] uppercase text-dimmest";
+const LABEL_STYLE = "text-[11px] font-semibold tracking-[0.8px] uppercase text-dimmest";
 export const VALUE_MONO = "font-mono text-sm font-semibold text-white";
 export const VALUE_TEXT = "text-[13px] text-tertiary";
 
