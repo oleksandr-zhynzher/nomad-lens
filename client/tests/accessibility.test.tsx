@@ -3,8 +3,8 @@
 import "../src/core/i18n";
 import "@testing-library/jest-dom/vitest";
 
-import { MobileSheet } from "@core/ui/MobileSheet";
 import { SearchInput } from "@core/ui/forms/SearchInput";
+import { MobileSheet } from "@core/ui/MobileSheet";
 import { CountryPickerDropdown } from "@features/compare/ui/CountryPickerDropdown";
 import { TourismCalendarPicker } from "@features/tourism/ui/TourismCalendarPicker";
 import { render, screen, within } from "@testing-library/react";
