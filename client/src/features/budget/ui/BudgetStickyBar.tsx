@@ -65,7 +65,7 @@ export function BudgetStickyBar({
           {BUDGET_CATEGORIES.map(({ key }) => (
             <div key={key} className="flex items-center gap-1.5">
               <div
-                className="h-2 w-2 shrink-0 rounded-full bg-[var(--c)]"
+                className="size-2 shrink-0 rounded-full bg-[var(--c)]"
                 style={{ "--c": COST_COLORS[key] } as React.CSSProperties}
               />
               <span className="text-[11px] text-dim">{t(`budget.categories.${key}`)}</span>

@@ -29,10 +29,12 @@ services:
       - ./client/src:/app/src:ro
       - ./client/public:/app/public:ro
       - ./client/index.html:/app/index.html:ro
+      - ./client/package.json:/app/package.json:ro
       - ./client/vite.config.ts:/app/vite.config.ts:ro
     environment:
       - NODE_ENV=development
       - API_TARGET=http://server:3001
+    command: sh -c "npm install --no-fund --no-audit && npm run dev -- --host 0.0.0.0"
     depends_on:
       server:
         condition: service_healthy

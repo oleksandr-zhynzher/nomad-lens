@@ -5,6 +5,7 @@ interface SearchInputProps {
   readonly name: string;
   readonly value: string;
   readonly onValueChange: (value: string) => void;
+  readonly ariaLabel?: string;
   readonly placeholder?: string;
   readonly clearLabel?: string;
   readonly inputRef?: Ref<HTMLInputElement>;
@@ -15,6 +16,7 @@ export function SearchInput({
   name,
   value,
   onValueChange,
+  ariaLabel,
   placeholder,
   clearLabel = "Clear search",
   inputRef,
@@ -31,12 +33,13 @@ export function SearchInput({
         ref={inputRef}
         name={name}
         type="text"
+        aria-label={ariaLabel ?? placeholder ?? name}
         placeholder={placeholder}
         value={value}
         onChange={(e) => {
           onValueChange(e.target.value);
         }}
-        className="h-10 w-full rounded-md border border-surface bg-[#161616] pr-9 pl-9 text-sm text-white focus:outline-none"
+        className="focus-visible:ring-offset-background h-10 w-full rounded-md border border-surface bg-[#161616] pr-9 pl-9 text-sm text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
       />
       {value !== "" ? (
         <button
@@ -44,7 +47,7 @@ export function SearchInput({
           onClick={() => {
             onValueChange("");
           }}
-          className="absolute top-1/2 right-3 flex h-[22px] w-[22px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary"
+          className="focus-visible:ring-offset-background absolute top-1/2 right-3 flex size-[22px] -translate-y-1/2 cursor-pointer items-center justify-center rounded-[3px] border-0 bg-surface-4 text-tertiary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           aria-label={clearLabel}
         >
           <X size={13} aria-hidden />

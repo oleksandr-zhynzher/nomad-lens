@@ -1,5 +1,5 @@
-const PRODUCTION_CORS_ORIGINS = ['https://nomad-lens.org', 'https://www.nomad-lens.org'];
-const DEVELOPMENT_CORS_ORIGINS = [
+const PRODUCTION_CORS_ORIGINS: string[] = ['https://nomad-lens.org', 'https://www.nomad-lens.org'];
+const DEVELOPMENT_CORS_ORIGINS: string[] = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:5173',
@@ -27,12 +27,17 @@ function readNodeEnvironment(): NodeEnvironment {
 
 function readPositiveInteger(name: string, fallback: number): number {
   const raw = process.env[name];
-  if (raw === undefined || raw.trim() === '') {
+  if (raw === undefined) {
     return fallback;
   }
 
-  const value = Number.parseInt(raw, 10);
-  if (!Number.isInteger(value) || value <= 0 || String(value) !== raw.trim()) {
+  const trimmed = raw.trim();
+  if (trimmed === '') {
+    return fallback;
+  }
+
+  const value = Number.parseInt(trimmed, 10);
+  if (!Number.isInteger(value) || value <= 0 || String(value) !== trimmed) {
     throw new Error(`${name} must be a positive integer.`);
   }
 
@@ -41,20 +46,29 @@ function readPositiveInteger(name: string, fallback: number): number {
 
 function readCorsOrigins(nodeEnv: NodeEnvironment): string[] {
   const raw = process.env['CORS_ORIGINS'];
-  if (raw === undefined || raw.trim() === '') {
+  if (raw === undefined) {
     return nodeEnv === 'production' ? PRODUCTION_CORS_ORIGINS : DEVELOPMENT_CORS_ORIGINS;
   }
 
-  const origins = raw
-    .split(',')
-    .map((origin) => origin.trim())
-    .filter((origin) => origin.length > 0);
+  const trimmed = raw.trim();
+  if (trimmed === '') {
+    return nodeEnv === 'production' ? PRODUCTION_CORS_ORIGINS : DEVELOPMENT_CORS_ORIGINS;
+  }
+
+  const origins: string[] = [];
+  for (const origin of trimmed.split(',')) {
+    const normalizedOrigin = origin.trim();
+    if (normalizedOrigin.length > 0) {
+      origins.push(normalizedOrigin);
+    }
+  }
 
   if (origins.length === 0) {
     throw new Error('CORS_ORIGINS must contain at least one origin when provided.');
   }
 
-  if (nodeEnv === 'production' && origins.includes('*')) {
+  const originSet = new Set(origins);
+  if (nodeEnv === 'production' && originSet.has('*')) {
     throw new Error('CORS_ORIGINS cannot include "*" in production.');
   }
 

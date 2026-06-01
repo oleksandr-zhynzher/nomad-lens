@@ -19,10 +19,10 @@ Compare countries across 9 dimensions — Economy, Healthcare, Education, Enviro
 
 ## Tech Stack
 
-- **Frontend:** React 18 + Vite + TypeScript + Tailwind CSS + Headless UI
-- **Backend:** Node.js + TypeScript route-specific AWS Lambda handlers
-- **Infrastructure:** AWS CDK — Lambda + API Gateway + DynamoDB + S3 + CloudFront
-- **Local dev:** Docker Compose
+- **Frontend:** React 19 + Vite + TypeScript + Tailwind CSS + React Router + i18next + Zustand
+- **Backend:** Node.js + TypeScript + Express, packaged for AWS Lambda with serverless Express
+- **Infrastructure:** AWS CDK — Lambda + API Gateway HTTP API + S3 + CloudFront + Route 53
+- **Local dev:** npm workspaces; Docker Compose remains available for containerized local runs
 
 ## Getting Started
 
@@ -47,13 +47,15 @@ docker compose up
 
 ### Updating Data
 
-The files in `server/src/data/` are source fixtures for the production DynamoDB import. To update
-them:
+The files in `server/src/data/` are the checked-in source datasets bundled with the server and
+static client build. To update them:
 
 1. Download the latest data from the source (links in each JSON file's `_source` field)
 2. Update the JSON file following the existing schema
-3. Run `npm run deploy` to build the app, deploy infrastructure, and import the country dataset
-4. Commit with: `git commit -m "chore(data): update <dataset> to <year>"`
+3. Run `npm run generate` when source inputs change and review the generated `countries.json`
+4. Run `npm run quality:pr` before merging
+5. Run `npm run deploy` to build and deploy the app
+6. Commit with: `git commit -m "chore(data): update <dataset> to <year>"`
 
 ### Deployment
 
@@ -63,8 +65,8 @@ Production is deployed with AWS CDK:
 npm run deploy
 ```
 
-The deploy script builds the server/client/infra workspaces, deploys CDK, and imports country data
-into DynamoDB. The CDK stack publishes the site at `https://www.nomad-lens.org` and
+The deploy script builds the server/client/infra workspaces and deploys CDK. The CDK stack
+publishes the site at `https://www.nomad-lens.org` and
 `https://nomad-lens.org` through CloudFront. It imports the existing Route 53 hosted zone and
 CloudFront certificate; override them from `infra/` with
 `npx cdk deploy -c hostedZoneId=<zone-id> -c certificateArn=<certificate-arn>`.

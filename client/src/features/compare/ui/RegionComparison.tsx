@@ -14,18 +14,12 @@ interface RegionComparisonProps {
 
 export function RegionComparison({ countries, weights }: RegionComparisonProps) {
   const allRegions = useMemo(
-    () => [...new Set(countries.map((c) => c.region))].sort((a, b) => a.localeCompare(b)),
+    () => [...new Set(countries.map((c) => c.region))].toSorted((a, b) => a.localeCompare(b)),
     [countries],
   );
-  const [enabled, setEnabled] = useState<Set<string>>(new Set<string>());
+  const [disabledRegions, setDisabledRegions] = useState<Set<string>>(new Set<string>());
   const headerRef = useRef<HTMLDivElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
-  const [prevRegions, setPrevRegions] = useState<string[]>([]);
-
-  if (allRegions !== prevRegions) {
-    setPrevRegions(allRegions);
-    if (allRegions.length > 0 && enabled.size === 0) setEnabled(new Set(allRegions));
-  }
 
   useSyncScroll(headerRef, bodyRef);
 
@@ -35,7 +29,7 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
   );
 
   const toggleRegion = (name: string) => {
-    setEnabled((prev) => {
+    setDisabledRegions((prev) => {
       const next = new Set(prev);
       if (next.has(name)) {
         next.delete(name);
@@ -46,6 +40,10 @@ export function RegionComparison({ countries, weights }: RegionComparisonProps) 
     });
   };
 
+  const enabled = useMemo(
+    () => new Set(allRegions.filter((regionName) => !disabledRegions.has(regionName))),
+    [allRegions, disabledRegions],
+  );
   const activeRegions = regionStats.filter((r) => enabled.has(r.name));
 
   return (

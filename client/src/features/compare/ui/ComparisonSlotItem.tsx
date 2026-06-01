@@ -4,7 +4,6 @@ import { localizeCountry, regionKey, scoreColourClass } from "@core/utils";
 import { applyClimate, computeScore } from "@features/country-ranking/utils";
 import { Plane } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
 
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
 
@@ -27,25 +26,27 @@ export function ComparisonSlotItem({
   onRemove,
 }: ComparisonSlotItemProps) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const score = computeScore(applyClimate(country, climatePrefs), weights);
+  const countryName = localizeCountry(country, lang).name;
+  const countryPath = `${langPrefix}/country/${country.code.toLowerCase()}`;
   return (
     <div className="w-[148px] shrink-0 md:w-[180px]">
       <ComparisonSlotCard
         flagUrl={country.flagUrl}
-        countryName={localizeCountry(country, lang).name}
+        countryName={countryName}
         onRemove={onRemove}
-        onNavigate={async () => navigate(`${langPrefix}/country/${country.code.toLowerCase()}`)}
+        removeLabel={t("compare.removeCountry", {
+          country: countryName,
+          defaultValue: `Remove ${countryName}`,
+        })}
+        to={countryPath}
         regionLabel={t(`regions.${regionKey(country.region)}`)}
         nameSuffix={
           country.hasNomadVisa ? (
             <Tooltip content={t("countryDetail.nomadVisa", "Nomad Visa Available")} side="top">
-              <Link
-                to={`${langPrefix}/country/${country.code.toLowerCase()}`}
-                className="inline-flex shrink-0 leading-none text-accent"
-              >
-                <Plane size={13} />
-              </Link>
+              <span className="inline-flex shrink-0 leading-none text-accent">
+                <Plane size={13} aria-hidden="true" />
+              </span>
             </Tooltip>
           ) : undefined
         }

@@ -50,7 +50,7 @@ export function ComparisonTableHeader({
               <img
                 src={col.flagUrl}
                 alt={col.name}
-                className="h-[18px] w-[18px] rounded-full object-cover"
+                className="size-[18px] rounded-full object-cover"
               />
             ) : null}
             <span

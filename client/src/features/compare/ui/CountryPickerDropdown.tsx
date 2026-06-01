@@ -38,23 +38,27 @@ export function CountryPickerDropdown({
       <input
         name={inputName}
         type="text"
+        aria-label={searchPlaceholder}
         placeholder={searchPlaceholder}
         value={query}
         onChange={(e) => {
           onQueryChange(e.target.value);
         }}
-        className="w-full border-b border-[#252525] bg-surface-3 px-3 py-2.5 text-[13px] text-white focus:outline-none"
+        className="w-full border-b border-[#252525] bg-surface-3 px-3 py-2.5 text-[13px] text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
       />
-      <div className="max-h-[320px] overflow-y-auto">
+      <div className="max-h-[320px] overflow-y-auto" role="listbox" aria-label={searchPlaceholder}>
         {countries.map((c) => (
           <button
             key={c.code}
-            className="flex w-full items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-white/5"
+            type="button"
+            role="option"
+            aria-selected="false"
+            className="flex w-full items-center gap-3 px-3 py-2.5 text-left transition-colors hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
             onClick={() => {
               onSelect(c.code);
             }}
           >
-            <img src={c.flagUrl} alt={c.name} className="h-6 w-6 rounded-full object-cover" />
+            <img src={c.flagUrl} alt={c.name} className="size-6 rounded-full object-cover" />
             <span className="flex-1 truncate text-[13px] text-on-surface">{c.name}</span>
             <span className="text-[11px] text-dimmer">{c.regionLabel}</span>
             {c.trailing}

@@ -9,7 +9,7 @@ export function TourismTotalCard({ totalDaily }: TourismTotalCardProps) {
   return (
     <div className="flex min-h-[102px] flex-col justify-between rounded-[10px] border border-[#2B313A] bg-[#0C0F13] p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)]">
       <div className="flex items-center justify-between gap-2">
-        <span className="inline-flex h-7 w-7 items-center justify-center rounded-[8px] border border-[#3C4F3F] bg-[#161A20] font-mono text-xs font-bold text-[#58C26D]">
+        <span className="inline-flex size-7 items-center justify-center rounded-[8px] border border-[#3C4F3F] bg-[#161A20] font-mono text-xs font-bold text-[#58C26D]">
           Σ
         </span>
         <span className="font-mono text-[17px] leading-none font-bold text-[#58C26D]">
@@ -39,7 +39,7 @@ export function TourismSurplusCard({ surplus }: TourismSurplusCardProps) {
     >
       <div className="flex items-center justify-between gap-2">
         <span
-          className={`inline-flex h-7 w-7 items-center justify-center rounded-[8px] font-mono text-xs font-bold ${pos ? "border border-[#2D6E3A] bg-[#17301D] text-[#58C26D]" : "border border-[#6C3A2D] bg-[#321A16] text-[#FF7A59]"}`}
+          className={`inline-flex size-7 items-center justify-center rounded-[8px] font-mono text-xs font-bold ${pos ? "border border-[#2D6E3A] bg-[#17301D] text-[#58C26D]" : "border border-[#6C3A2D] bg-[#321A16] text-[#FF7A59]"}`}
         >
           {pos ? "+" : "-"}
         </span>

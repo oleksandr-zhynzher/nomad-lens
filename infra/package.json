@@ -7,6 +7,7 @@
     "typecheck": "tsc --noEmit --pretty false",
     "lint": "eslint bin lib --max-warnings=0",
     "lint:strict": "eslint bin lib --max-warnings=0",
+    "test": "vitest run",
     "synth": "cdk synth",
     "deploy": "cdk deploy --all --require-approval never",
     "diff": "cdk diff",
@@ -17,7 +18,8 @@
   "devDependencies": {
     "@types/node": "^25.5.0",
     "aws-cdk": "^2.1114.1",
-    "typescript": "^6.0.2"
+    "typescript": "^6.0.2",
+    "vitest": "^4.0.15"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.245.0",

@@ -34,7 +34,7 @@ export function TourismBudgetBar({ breakdown, dailyCost, dailyBudget }: TourismB
             content={
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <div
-                  className="h-2 w-2 shrink-0 rounded-full bg-[var(--sc)]"
+                  className="size-2 shrink-0 rounded-full bg-[var(--sc)]"
                   style={{ "--sc": TOURISM_COST_COLORS[key] ?? "#555" } as React.CSSProperties}
                 />
                 <span className="text-[11px] text-tertiary">

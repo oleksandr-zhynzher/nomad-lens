@@ -18,7 +18,7 @@ export function CountryClimateSection({ country }: CountryClimateSectionProps) {
       <div className="h-px bg-[#1E1E1E]" />
       <div className="flex flex-col gap-6 bg-bg py-8">
         <div className="flex flex-col gap-3 md:flex-row md:items-center">
-          <h2 className="m-0 font-display font-bold text-[#E8E9EB]">
+          <h2 className="m-0 font-display font-semibold text-[#E8E9EB]">
             {t("countryPage.climateDataSection")}
           </h2>
           <span className="flex-1 text-right text-xs text-dimmer">

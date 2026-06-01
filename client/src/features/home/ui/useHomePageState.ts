@@ -85,7 +85,7 @@ export function useHomePageState() {
   }, [setSearchParams]);
 
   const regions = useMemo(
-    () => [...new Set(countries.map((c) => c.region))].sort((a, b) => a.localeCompare(b)),
+    () => [...new Set(countries.map((c) => c.region))].toSorted((a, b) => a.localeCompare(b)),
     [countries],
   );
   const activeHighlight = getActiveHighlight(

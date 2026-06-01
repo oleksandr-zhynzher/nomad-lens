@@ -31,7 +31,7 @@ export function BudgetBreakdownChart({
             content={
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <div
-                  className="h-2 w-2 shrink-0 rounded-full bg-[var(--seg-c)]"
+                  className="size-2 shrink-0 rounded-full bg-[var(--seg-c)]"
                   style={{ "--seg-c": COST_COLORS[key] ?? "#555" } as React.CSSProperties}
                 />
                 <span className="text-[11px] text-tertiary">{t(`budget.categories.${key}`)}</span>

@@ -9,13 +9,16 @@ import * as acm from 'aws-cdk-lib/aws-certificatemanager';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
 import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
+import * as cloudwatchActions from 'aws-cdk-lib/aws-cloudwatch-actions';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as kms from 'aws-cdk-lib/aws-kms';
 import * as lambda from 'aws-cdk-lib/aws-lambda';
 import * as logs from 'aws-cdk-lib/aws-logs';
 import * as route53 from 'aws-cdk-lib/aws-route53';
 import * as targets from 'aws-cdk-lib/aws-route53-targets';
 import * as s3 from 'aws-cdk-lib/aws-s3';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import * as sns from 'aws-cdk-lib/aws-sns';
 import type { Construct } from 'constructs';
 
 const hostedZoneName = 'nomad-lens.org';
@@ -32,6 +35,31 @@ const getContextString = (scope: Construct, key: string): string | undefined => 
 };
 
 const DEFAULT_CORS_ORIGINS = ['https://nomad-lens.org', 'https://www.nomad-lens.org'];
+
+export const SERVER_BUNDLING_COMMANDS = [
+  'cp -R /asset-input/. /tmp/server',
+  'cd /tmp/server',
+  'npm ci',
+  'npm run build',
+  'cp -R dist /asset-output/dist',
+  'cp -R src/data /asset-output/dist/data',
+  'cp package.json /asset-output/package.json',
+  'cp package-lock.json /asset-output/package-lock.json',
+  'cd /asset-output',
+  'npm ci --omit=dev --ignore-scripts',
+] as const;
+
+export const API_ACCESS_LOG_FORMAT = JSON.stringify({
+  error: '$context.integrationErrorMessage',
+  httpMethod: '$context.httpMethod',
+  ip: '$context.identity.sourceIp',
+  protocol: '$context.protocol',
+  requestId: '$context.requestId',
+  requestTime: '$context.requestTime',
+  responseLength: '$context.responseLength',
+  routeKey: '$context.routeKey',
+  status: '$context.status',
+});
 
 function getCorsOrigins(): readonly string[] {
   const raw = process.env['CORS_ORIGINS'];
@@ -60,6 +88,11 @@ export class NomadLensStack extends cdk.Stack {
     super(scope, id, props);
 
     const corsOrigins = [...getCorsOrigins()];
+    const snsManagedKey = kms.Alias.fromAliasName(this, 'SnsManagedKey', 'alias/aws/sns');
+    const alarmTopic = new sns.Topic(this, 'OperationsAlarmTopic', {
+      displayName: 'Nomad Lens production alarms',
+      masterKey: snsManagedKey,
+    });
 
     // ── Custom domain ───────────────────────────────────────────────────────
     const hostedZone = route53.HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
@@ -128,35 +161,24 @@ export class NomadLensStack extends cdk.Stack {
       code: lambda.Code.fromAsset(serverDir, {
         bundling: {
           image: lambda.Runtime.NODEJS_22_X.bundlingImage,
-          command: [
-            'bash',
-            '-c',
-            [
-              'cp -R /asset-input/. /tmp/server',
-              'cd /tmp/server',
-              'npm install',
-              'npm run build',
-              'cp -R dist /asset-output/dist',
-              'cp -R src/data /asset-output/dist/data',
-              'cp package.json /asset-output/package.json',
-              'cd /asset-output',
-              'npm install --omit=dev --ignore-scripts',
-            ].join(' && '),
-          ],
+          command: ['bash', '-c', SERVER_BUNDLING_COMMANDS.join(' && ')],
           local: {
             tryBundle(outputDir: string) {
               const outputDistDir = path.join(outputDir, 'dist');
+              execFileSync('npm', ['ci', '--prefix', serverDir], { stdio: 'inherit' });
               execFileSync('npm', ['run', 'build', '--prefix', serverDir], { stdio: 'inherit' });
               cpSync(path.join(serverDir, 'dist'), outputDistDir, { recursive: true });
               cpSync(path.join(serverDir, 'src/data'), path.join(outputDistDir, 'data'), {
                 recursive: true,
               });
               cpSync(path.join(serverDir, 'package.json'), path.join(outputDir, 'package.json'));
-              execFileSync(
-                'npm',
-                ['install', '--omit=dev', '--ignore-scripts', '--prefix', outputDir],
-                { stdio: 'inherit' },
+              cpSync(
+                path.join(serverDir, 'package-lock.json'),
+                path.join(outputDir, 'package-lock.json'),
               );
+              execFileSync('npm', ['ci', '--omit=dev', '--ignore-scripts', '--prefix', outputDir], {
+                stdio: 'inherit',
+              });
               return true;
             },
           },
@@ -174,15 +196,21 @@ export class NomadLensStack extends cdk.Stack {
 
     const alarmPeriod = cdk.Duration.minutes(5);
 
-    new cloudwatch.Alarm(this, 'ApiFunctionErrorAlarm', {
+    const apiFunctionErrorAlarm = new cloudwatch.Alarm(this, 'ApiFunctionErrorAlarm', {
       metric: apiFn.metricErrors({ period: alarmPeriod, statistic: 'sum' }),
       threshold: 1,
       evaluationPeriods: 1,
       comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
     });
+    apiFunctionErrorAlarm.addAlarmAction(new cloudwatchActions.SnsAction(alarmTopic));
 
     // ── HTTP API Gateway ───────────────────────────────────────────────────
+    const apiAccessLogGroup = new logs.LogGroup(this, 'HttpApiAccessLogGroup', {
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+      retention: logs.RetentionDays.ONE_MONTH,
+    });
     const httpApi = new apigwv2.HttpApi(this, 'HttpApi', {
+      createDefaultStage: false,
       corsPreflight: {
         allowHeaders: ['Authorization', 'Content-Type', 'X-Request-Id'],
         allowMethods: [apigwv2.CorsHttpMethod.GET, apigwv2.CorsHttpMethod.OPTIONS],
@@ -196,18 +224,45 @@ export class NomadLensStack extends cdk.Stack {
       integration: new apigwv2Integrations.HttpLambdaIntegration('ApiIntegration', apiFn),
     });
 
-    new cloudwatch.Alarm(this, 'HttpApiServerErrorAlarm', {
+    new apigwv2.CfnStage(this, 'HttpApiDefaultStage', {
+      apiId: httpApi.apiId,
+      stageName: '$default',
+      autoDeploy: true,
+      accessLogSettings: {
+        destinationArn: apiAccessLogGroup.logGroupArn,
+        format: API_ACCESS_LOG_FORMAT,
+      },
+    });
+
+    const httpApiServerErrorAlarm = new cloudwatch.Alarm(this, 'HttpApiServerErrorAlarm', {
       metric: httpApi.metricServerError({ period: alarmPeriod, statistic: 'sum' }),
       threshold: 1,
       evaluationPeriods: 1,
       comparisonOperator: cloudwatch.ComparisonOperator.GREATER_THAN_OR_EQUAL_TO_THRESHOLD,
     });
+    httpApiServerErrorAlarm.addAlarmAction(new cloudwatchActions.SnsAction(alarmTopic));
 
     // ── CloudFront distribution ────────────────────────────────────────────
     const apiOrigin = new origins.HttpOrigin(
       `${httpApi.httpApiId}.execute-api.${this.region}.amazonaws.com`,
       { protocolPolicy: cloudfront.OriginProtocolPolicy.HTTPS_ONLY },
     );
+
+    const spaRewriteFunction = new cloudfront.Function(this, 'SpaRewriteFunction', {
+      code: cloudfront.FunctionCode.fromInline(`
+function handler(event) {
+  var request = event.request;
+  var uri = request.uri;
+
+  if (uri.indexOf('/api/') === 0 || uri.indexOf('.') !== -1) {
+    return request;
+  }
+
+  request.uri = '/index.html';
+  return request;
+}
+`),
+    });
 
     const distribution = new cloudfront.Distribution(this, 'Distribution', {
       certificate,
@@ -218,6 +273,12 @@ export class NomadLensStack extends cdk.Stack {
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(siteBucketForConsumers),
         cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
+        functionAssociations: [
+          {
+            eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
+            function: spaRewriteFunction,
+          },
+        ],
         responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS,
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
@@ -231,10 +292,6 @@ export class NomadLensStack extends cdk.Stack {
           viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         },
       },
-      errorResponses: [
-        { httpStatus: 403, responseHttpStatus: 200, responsePagePath: '/index.html' },
-        { httpStatus: 404, responseHttpStatus: 200, responsePagePath: '/index.html' },
-      ],
     });
 
     siteBucket.addToResourcePolicy(
@@ -304,6 +361,11 @@ export class NomadLensStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'GitHubActionsDeployRoleArn', {
       value: githubDeployRole.roleArn,
       description: 'OIDC role used by GitHub Actions production deployment',
+    });
+
+    new cdk.CfnOutput(this, 'OperationsAlarmTopicArn', {
+      value: alarmTopic.topicArn,
+      description: 'SNS topic for production alarm notifications',
     });
   }
 }

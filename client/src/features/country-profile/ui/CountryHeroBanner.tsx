@@ -62,7 +62,7 @@ export function CountryHeroBanner({
             <span className="text-[11px] font-semibold tracking-[2px] text-[#8F5A3C] uppercase">
               {t("countryPage.countryDetailLabel")}
             </span>
-            <h1 className="m-0 font-display text-2xl leading-none font-bold text-[#E8E9EB] md:text-4xl">
+            <h1 className="m-0 font-display text-2xl leading-none font-semibold text-[#E8E9EB] md:text-4xl">
               {name}
             </h1>
           </div>

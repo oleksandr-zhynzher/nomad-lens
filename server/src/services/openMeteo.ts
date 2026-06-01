@@ -48,13 +48,15 @@ function classifySeasonType(
  * Uses 2023 as the reference year. Results are cached for 24 h.
  */
 export async function fetchClimate(lat: number, lng: number): Promise<OpenMeteoClimate | null> {
-  const key = `${CACHE_NS}${lat.toFixed(2)},${lng.toFixed(2)}`;
+  const latitude = lat;
+  const longitude = lng;
+  const key = `${CACHE_NS}${latitude.toFixed(2)},${longitude.toFixed(2)}`;
   const cached = cache.get<OpenMeteoClimate>(key);
   if (cached) return cached;
 
   const params = new URLSearchParams({
-    latitude: lat.toFixed(4),
-    longitude: lng.toFixed(4),
+    latitude: latitude.toFixed(4),
+    longitude: longitude.toFixed(4),
     start_date: '2023-01-01',
     end_date: '2023-12-31',
     daily: 'temperature_2m_mean,precipitation_sum',

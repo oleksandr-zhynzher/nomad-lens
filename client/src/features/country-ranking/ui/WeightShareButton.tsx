@@ -9,7 +9,7 @@ export function WeightShareButton({ onShare }: WeightShareButtonProps) {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
 
-  const handleClick = () => {
+  const shareWeights = () => {
     onShare();
     setCopied(true);
     setTimeout(() => {
@@ -19,7 +19,7 @@ export function WeightShareButton({ onShare }: WeightShareButtonProps) {
 
   return (
     <button
-      onClick={handleClick}
+      onClick={shareWeights}
       aria-live="polite"
       className={`button-hover-exempt weight-panel-share-button flex h-10 w-full items-center justify-center gap-2 rounded rounded-[6px] border text-[13px] font-medium transition-all duration-[150ms] ease-[ease] ${copied ? "border-[#4A8A4A] bg-[#2A4A2A] text-[#88CC88]" : "border-[#2A4A2A] bg-[#1A2A1A] text-[#6B9E6B]"}`}
     >

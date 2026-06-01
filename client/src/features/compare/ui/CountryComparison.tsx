@@ -57,7 +57,7 @@ export function CountryComparison({
 
   const sortedCountries = useMemo(() => {
     if (sortDirection == null) return selectedCountries;
-    return [...selectedCountries].sort((slotA, slotB) => {
+    return selectedCountries.toSorted((slotA, slotB) => {
       const scoreA = computeScore(applyClimate(slotA.country, climatePrefs), weights);
       const scoreB = computeScore(applyClimate(slotB.country, climatePrefs), weights);
       const scoreDelta = scoreB - scoreA;

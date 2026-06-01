@@ -2,17 +2,17 @@ import type { NavigateFunction } from "react-router-dom";
 
 export type NavView = "list" | "map" | "compare";
 
+export function viewPath(view: NavView, langPrefix: string): string {
+  return view === "list" ? (langPrefix !== "" ? langPrefix : "/") : `${langPrefix}/${view}`;
+}
+
 export function navigateToView(
   view: NavView,
   langPrefix: string,
   navigate: NavigateFunction,
   onNavigate: () => void,
 ): void {
-  if (view === "list") {
-    void navigate(langPrefix !== "" ? langPrefix : "/");
-  } else {
-    void navigate(`${langPrefix}/${view}`);
-  }
+  void navigate(viewPath(view, langPrefix));
   onNavigate();
 }
 

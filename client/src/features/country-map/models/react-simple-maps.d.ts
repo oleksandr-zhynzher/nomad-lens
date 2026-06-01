@@ -9,6 +9,8 @@ declare module "react-simple-maps" {
     style?: CSSProperties;
     className?: string;
     children?: ReactNode;
+    role?: string;
+    "aria-label"?: string;
   }
   export function ComposableMap(props: ComposableMapProps): JSX.Element;
 
@@ -49,7 +51,11 @@ declare module "react-simple-maps" {
     onClick?: (e: React.MouseEvent<Element>) => void;
     onMouseEnter?: (e: React.MouseEvent<Element>) => void;
     onMouseLeave?: (e: React.MouseEvent<Element>) => void;
+    onKeyDown?: (e: React.KeyboardEvent<Element>) => void;
     className?: string;
+    role?: string;
+    tabIndex?: number;
+    "aria-label"?: string;
     [key: string]: unknown;
   }
   export function Geography(props: GeographyProps): JSX.Element;

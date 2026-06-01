@@ -28,7 +28,7 @@ export function PageHeroBanner({
             <div className="mb-2 flex items-center gap-2 md:mb-3">
               {eyebrow.split("·").map((word) => (
                 <span key={word.trim()} className="flex items-center gap-2">
-                  <span className="relative inline-block h-1 w-1 shrink-0 rounded-full bg-accent-dim" />
+                  <span className="relative inline-block size-1 shrink-0 rounded-full bg-accent-dim" />
                   <span className="text-[11px] leading-none font-medium tracking-[2.5px] text-accent-dim uppercase">
                     {word.trim()}
                   </span>

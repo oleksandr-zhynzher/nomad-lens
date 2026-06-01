@@ -35,7 +35,7 @@ export function MapZoomControls({
       {onToggleWeights ? (
         <button
           onClick={onToggleWeights}
-          className={`hidden h-10 w-10 items-center justify-center transition-colors md:flex ${showWeights ? "text-accent-dim" : "text-[#999999]"}`}
+          className={`hidden size-10 items-center justify-center transition-colors md:flex ${showWeights ? "text-accent-dim" : "text-[#999999]"}`}
           aria-label={t("a11y.toggleParameters", "Toggle parameters")}
         >
           <svg
@@ -78,7 +78,7 @@ export function MapLegend({ items, scoreLabel }: MapLegendProps) {
       {items.map(({ color, label, range }) => (
         <div key={label} className="flex items-center gap-2">
           <span
-            className="h-3 w-3 shrink-0 rounded-[2px] bg-[var(--legend-c)]"
+            className="size-3 shrink-0 rounded-[2px] bg-[var(--legend-c)]"
             style={{ "--legend-c": color } as React.CSSProperties}
           />
           <span className="font-mono text-[10px] text-tertiary">

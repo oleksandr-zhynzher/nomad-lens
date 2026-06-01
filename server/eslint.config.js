@@ -143,6 +143,8 @@ module.exports = defineConfig([
 
       "sonarjs/cognitive-complexity": ["error", 25],
       "sonarjs/cors": "off",
+      "sonarjs/function-return-type": "off",
+      "sonarjs/null-dereference": "off",
       "sonarjs/no-duplicate-string": "off",
       "sonarjs/no-nested-conditional": "off",
       "sonarjs/todo-tag": "off",

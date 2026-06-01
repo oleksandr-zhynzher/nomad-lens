@@ -41,7 +41,7 @@ export function MapInteractiveBody({
   const handleMouseMove = (e: MouseEvent) => {
     if (hover) setHover((h) => h && { ...h, x: e.clientX, y: e.clientY });
   };
-  const handleClick = (geo: { id?: unknown; properties: Record<string, unknown> }) => {
+  const selectCountryFromMap = (geo: { id?: unknown; properties: Record<string, unknown> }) => {
     const alpha2 = geoNumericToAlpha2(geo);
     if (alpha2 === "") return;
     setHover(null);
@@ -62,7 +62,7 @@ export function MapInteractiveBody({
         onMouseLeave={() => {
           setHover(null);
         }}
-        onClick={handleClick}
+        onClick={selectCountryFromMap}
         geoLoading={geoLoading}
         setGeoLoading={setGeoLoading}
       />

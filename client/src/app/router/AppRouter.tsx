@@ -2,6 +2,7 @@ import { LangWrapper } from "@core/ui/layout";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { NotFoundPage } from "./NotFoundPage";
 import { RouteLoadingFallback } from "./RouteLoadingFallback";
 import { routeModule } from "./router.utils";
 
@@ -58,6 +59,7 @@ export function AppRouter() {
             <Route path="ai-indicators" element={<AiIndicatorsPage />} />
             <Route path="budget-categories" element={<BudgetCategoriesPage />} />
             <Route path="tourism" element={<TourismPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </Suspense>

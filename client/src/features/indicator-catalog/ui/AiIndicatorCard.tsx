@@ -53,7 +53,7 @@ export function AiIndicatorCard({
         <span className="rounded-[4px] border border-[#252525] bg-[#1A1A1A] px-2 py-[3px] text-[10px] text-[#C084FC]">
           {source}
         </span>
-        <span className="text-[11px] text-[#3A3A3A]">AI metric — off by default</span>
+        <span className="text-[11px] text-[#3A3A3A]">AI metric, off by default</span>
       </div>
     </div>
   );

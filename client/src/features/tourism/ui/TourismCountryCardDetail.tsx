@@ -24,7 +24,7 @@ export function TourismCountryCardDetail({
 
   return (
     <div
-      className="border-t border-[var(--bt-c)] bg-[#111113] px-4 py-4"
+      className="border-t border-[var(--bt-c)] bg-[#111113] p-4"
       style={{ "--bt-c": borderColor } as React.CSSProperties}
     >
       <TourismBreakdownChart country={country} />

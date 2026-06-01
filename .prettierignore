@@ -12,3 +12,4 @@ infra/cdk.out/
 images/
 *.tsbuildinfo
 *.pen
+.github/CODEOWNERS

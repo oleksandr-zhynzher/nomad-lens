@@ -4,7 +4,6 @@ import type { SelectedSlot } from "@features/compare/utils";
 import { Plane } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
 import { ComparisonAddButton } from "./ComparisonAddButton";
 import { ComparisonSlotCard } from "./ComparisonSlotCard";
@@ -36,30 +35,34 @@ export function NomadVisaComparisonSlots({
   onAdd,
 }: NomadVisaComparisonSlotsProps) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   return (
     <>
       <div className="grid [scrollbar-width:thin] grid-cols-3 gap-3 pb-2 md:flex md:items-stretch md:overflow-x-auto">
-        {selectedCountries.map((slot) => (
-          <div key={slot.country.code} className="w-full min-w-0 md:w-[180px] md:shrink-0">
-            <ComparisonSlotCard
-              flagUrl={slot.country.flagUrl}
-              countryName={localizeCountry(slot.country, lang).name}
-              onRemove={() => {
-                onRemove(slot.index);
-              }}
-              onNavigate={async () =>
-                navigate(`${langPrefix}/country/${slot.country.code.toLowerCase()}`)
-              }
-              regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
-              nameSuffix={<Plane size={13} className="shrink-0 text-accent" />}
-            >
-              <span className="text-center text-[11px] leading-[1.3] text-muted">
-                {slot.country.nomadVisa.visaName}
-              </span>
-            </ComparisonSlotCard>
-          </div>
-        ))}
+        {selectedCountries.map((slot) => {
+          const countryName = localizeCountry(slot.country, lang).name;
+          return (
+            <div key={slot.country.code} className="w-full min-w-0 md:w-[180px] md:shrink-0">
+              <ComparisonSlotCard
+                flagUrl={slot.country.flagUrl}
+                countryName={countryName}
+                onRemove={() => {
+                  onRemove(slot.index);
+                }}
+                removeLabel={t("compare.removeCountry", {
+                  country: countryName,
+                  defaultValue: `Remove ${countryName}`,
+                })}
+                to={`${langPrefix}/country/${slot.country.code.toLowerCase()}`}
+                regionLabel={t(`regions.${regionKey(slot.country.region)}`)}
+                nameSuffix={<Plane size={13} className="shrink-0 text-accent" aria-hidden="true" />}
+              >
+                <span className="text-center text-[11px] leading-[1.3] text-muted">
+                  {slot.country.nomadVisa.visaName}
+                </span>
+              </ComparisonSlotCard>
+            </div>
+          );
+        })}
         <div className="w-full min-w-0 md:w-[180px] md:shrink-0">
           <ComparisonAddButton
             label={t("compare.addCountry")}

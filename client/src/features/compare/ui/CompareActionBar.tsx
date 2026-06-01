@@ -37,7 +37,7 @@ export function CompareActionBar({
             className={`flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded px-3 py-2 text-center text-xs transition-colors sm:flex-initial sm:px-4 sm:py-1.5 ${showWeights && window.innerWidth > MOBILE_VIEWPORT_MAX_WIDTH ? "bg-accent font-medium text-white" : "bg-transparent font-normal text-dim"}`}
           >
             <svg
-              className="h-4 w-4"
+              className="size-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -69,7 +69,7 @@ export function CompareActionBar({
           >
             {copied ? (
               <svg
-                className="h-4 w-4"
+                className="size-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -79,7 +79,7 @@ export function CompareActionBar({
               </svg>
             ) : (
               <svg
-                className="h-4 w-4"
+                className="size-4"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
