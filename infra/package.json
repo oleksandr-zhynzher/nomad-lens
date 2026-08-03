@@ -16,10 +16,10 @@
   "keywords": [],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^25.5.0",
-    "aws-cdk": "^2.1114.1",
-    "typescript": "^6.0.2",
-    "vitest": "^4.0.15"
+    "@types/node": "^26.1.2",
+    "aws-cdk": "^2.1134.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.258.0",
